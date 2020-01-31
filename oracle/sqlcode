@@ -18,7 +18,9 @@ name varchar2(21) not null,
 nick varchar2(30) not null,
 email varchar2(100) not null,
 phone varchar2(11) not null,
-addr varchar2(110),
+post varchar2(6),
+basic_addr varchar2(150),
+extra_addr varchar2(150),
 point number default 0,
 grade varchar2(9) check(grade in ('admin', 'member', 'petsitter')) not null,
 pets varchar2(9) check (pets in('예','아니오')) not null,
@@ -51,161 +53,26 @@ create sequence pet_sitter_no_seq;
 
 
 ---------------------------------------------------------------
--- pet 테이블
--- 회원의 반려동물 등록 테이블
+-- location 테이블
+-- pet_sitter 케어 가능 지역 ( 검색 가능지역 )
+-- 1군대 이상으로 저장 예정
+-- 일단 광역시 기준으로 진행
 ---------------------------------------------------------------
 
 -- 테이블 삭제
-drop table pet;
+drop table location;
 -- 테이블 생성
-create table pet(
-pet_no number primary key,
-member_id constraint fk_member_pet references member(id) on delete cascade,
-name varchar2(300) not null,
-age number,
-type varchar2(100),
-ect varchar2(4000)
+create table location (
+location_no number primary key,
+location_sitter_no constraint fk_pet_sitter_location references pet_sitter(pet_sitter_no) on delete cascade,
+city varchar2(60) not null,
+area varchar2(60)
 );
 
 -- 시퀀스 번호 삭제
-drop sequence pet_no_seq;
+drop sequence location_no_seq;
 -- 시퀀스 번호 생성
-create sequence pet_no_seq;
-
-
----------------------------------------------------------------
--- FAQ 테이블
--- 회원탈퇴시 질문에 대한 내용을 남길지 체크 (남기는 걸로)
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table faq;
--- 테이블 생성
-create table FAQ(
-faq_no number primary key,
-member_id constraint fk_member_FAQ references member(id) on delete set null,
-faq_title varchar2(20) not null,
-faq_content varchar2(4000)
-);
-
--- 시퀀스 번호 삭제
-drop sequence faq_no_seq;
--- 시퀀스 번호 생성
-create sequence faq_no_seq;
-
-
----------------------------------------------------------------
--- QnA 테이블
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table QnA;
--- 테이블 생성
-create table QnA(
-qna_no number primary key,
-qna_writer constraint fk_member_QnA references member(id) on delete set null,
-qna_title varchar2(20) not null,
-qna_content varchar2(4000) not null
-);
-
--- 시퀀스 번호 삭제
-drop sequence qna_no_seq;
--- 시퀀스 번호 생성
-create sequence qna_no_seq;
-
-
----------------------------------------------------------------
--- QnA_reply 테이블
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table QnA_reply;
--- 테이블 생성
-create table QnA_reply(
-reply_no number primary key,
-origin constraint fk_qna_qna_reply references qna(qna_no) on delete cascade,
-reply_writer constraint fk_member_QnA_reply references member(id) on delete set null,
-content varchar2(4000) not null,
-wdate date default sysdate
-);
-
--- 시퀀스 번호 삭제
-drop sequence reply_no_seq;
--- 시퀀스 번호 생성
-create sequence reply_no_seq;
-
-
----------------------------------------------------------------
--- review 테이블
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table review; 
--- 테이블 생성
-create table review(
-review_no number primary key,
-review_writer constraint fk_member_review references member(id) on delete set null,
-review_sitter_no constraint fk_pet_sitter_review references pet_sitter(pet_sitter_no) on delete set null,
-review_title varchar2(300) not null,
-review_content varchar2(4000) not null
-);
-
--- 시퀀스 번호 삭제
-drop sequence review_no_seq;
--- 시퀀스 번호 생성
-create sequence review_no_seq;
-
-
----------------------------------------------------------------
--- final project 
----------------------------------------------------------------
-
-
----------------------------------------------------------------
--- member 테이블
--- primary key = id
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table member;
--- 테이블 생성
-create table member(
-id varchar2(12) primary key,
-pw varchar2(20) not null,
-name varchar2(21) not null,
-nick varchar2(30) not null,
-email varchar2(100) not null,
-phone varchar2(11) not null,
-addr varchar2(110),
-point number default 0,
-grade varchar2(9) check(grade in ('admin', 'member', 'petsitter')) not null,
-pets varchar2(9) check (pets in('예','아니오')) not null,
-joindate date default sysdate,
-lastlogin date default sysdate
-);
-
-
----------------------------------------------------------------
--- petsitter 테이블
--- 회원가입 후 펫시터 추가 내용 테이블
----------------------------------------------------------------
-
--- 테이블 삭제
-drop table pet_sitter;
--- 테이블 생성
-create table pet_sitter(
-pet_sitter_no number primary key,
-sitter_id constraint fk_member_pet_sitter references member(id) on delete cascade,
-info varchar2(4000) not null,
-sitter_pets varchar2(9) check (sitter_pets in ('예','아니오')) not null,
-care_condition varchar2(80)not null,
-sitter_status varchar2(6) check (sitter_status in('정상','휴면')) not null
-);
-
--- 시퀀스 번호 삭제
-drop sequence pet_sitter_no_seq;
--- 시퀀스 번호 생성
-create sequence pet_sitter_no_seq;
+create sequence location_no_seq;
 
 
 ---------------------------------------------------------------
@@ -480,9 +347,9 @@ filesize number
 );
 
 --소개이미지 시퀀스 삭제
-drop sequence info_image_seq;
+drop sequence info_image_no_seq;
 --소개이미지 시퀀스 생성
-create sequence info_image_seq;
+create sequence info_image_no_seq;
 
 
 ---------------------------------------------------------------
@@ -502,9 +369,9 @@ filesize number
 );
 
 --신분증 파일 시퀀스 삭제
-drop sequence id_card_file_seq;
+drop sequence d_image_no_seq;
 --신분증 파일 시퀀스 생성
-create sequence id_card_file_seq;
+create sequence d_image_no_seq;
 
 
 ---------------------------------------------------------------
@@ -524,9 +391,9 @@ filesize number
 );
 
 --증빙서류 시퀀스 삭제
-drop sequence license_file_seq;
+drop sequence license_image_no_seq;
 --증빙서류 시퀀스 생성
-create sequence license_file_seq;
+create sequence license_image_no_seq;
 
 
 ---------------------------------------------------------------
@@ -542,9 +409,9 @@ skill_name varchar2(30)
 );
 
 --스킬 시퀀스 생성
-create sequence skill_name_seq;
+create sequence skill_no_seq;
 --스킬 시퀀스 삭제
-drop sequence skill_name_seq;
+drop sequence skill_no_seq;
 
 
 ---------------------------------------------------------------
@@ -560,11 +427,6 @@ skills_name constraint fk_skill_name_skills references skill_name(skill_no) on d
 skills_sitter_no constraint fk_pet_sitter_no_skills references pet_sitter(pet_sitter_no) on delete cascade
 );
 
---팻시터 스킬 시퀀스 생성
-create sequence skills_seq;
---팻시터 스킬 시퀀스 삭제
-drop sequence skills_seq; 
-
 
 ---------------------------------------------------------------
 -- care_pet_type_name 테이블
@@ -579,9 +441,9 @@ care_type varchar2(100)
 );
 
 --돌봄가능동물 시퀀스 생성
-create sequence care_pet_type_name_seq;
+create sequence care_type_no_seq;
 --돌봄가능동물 시퀀스 삭제
-drop sequence care_pet_type_name_seq;
+drop sequence care_type_no_seq;
 
 
 ---------------------------------------------------------------
@@ -596,11 +458,5 @@ create table care_pet_type(
 care_name constraint fk_carepettypename_carepettype references skill_name(skill_no) on delete cascade,
 care_sitter_no constraint fk_pet_sitter_no_care_pet_type references pet_sitter(pet_sitter_no) on delete cascade
 );
-
---펫시터 돌봄 가능 동물 시퀀스 생성
-create sequence care_pet_type_seq;
---펫시터 돌봄 가능 동물 시퀀스 삭제
-drop sequence care_pet_type_seq;
-
 
 
