@@ -544,7 +544,7 @@ skill_name varchar2(30)
 --스킬 시퀀스 생성
 create sequence skill_name_seq;
 --스킬 시퀀스 삭제
-drop table skill_name_seq;
+drop sequence skill_name_seq;
 
 
 ---------------------------------------------------------------
