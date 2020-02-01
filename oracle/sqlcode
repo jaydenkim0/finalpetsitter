@@ -28,6 +28,8 @@ joindate date default sysdate,
 lastlogin date default sysdate
 );
 
+-- 비밀번호 영문varchar2(60)으로 수정
+alter table member modify pw varchar2(60);
 
 ---------------------------------------------------------------
 -- petsitter 테이블
@@ -304,7 +306,7 @@ drop table care_image;
 -- 테이블 생성
 create table care_image(
 care_image_no number primary key,
-care_board_no constraint fk_care_reply_image  references care_reply(care_reply_no ) on delete cascade,
+care_reply_no constraint fk_care_reply_image  references care_reply(care_reply_no ) on delete cascade,
 savename varchar2(100),
 filetype varchar2(15),
 filesize number
