@@ -377,7 +377,7 @@ create sequence d_image_no_seq;
 
 
 ---------------------------------------------------------------
--- id_card_file 테이블 (파일업로드용)
+-- license_file 테이블 (파일업로드용)
 ---------------------------------------------------------------
 
 -- 증빙서류 테이블 삭제
@@ -399,31 +399,31 @@ create sequence license_image_no_seq;
 
 
 ---------------------------------------------------------------
--- skill_name테이블
+-- skill_name테이블 (스킬 이름)
 ---------------------------------------------------------------
 
---스킬 테이블 삭제
+-- 테이블 삭제
 drop table skill_name;
---스킬 테이블 생성
+-- 테이블 생성
 create table skill_name(
 skill_no number primary key,
 skill_name varchar2(30)
 );
 
---스킬 시퀀스 생성
+--시퀀스 생성
 create sequence skill_no_seq;
---스킬 시퀀스 삭제
+--시퀀스 삭제
 drop sequence skill_no_seq;
 
 
 ---------------------------------------------------------------
--- skills 테이블
+-- skills 테이블 ( 팻시터 스킬 )
 -- pet_sitter 와 skill_name을 연결해주는 테이블
 ---------------------------------------------------------------
 
---팻시터 스킬 테이블 삭제
+-- 테이블 삭제
 drop table skills; 
---팻시터 스킬 테이블 생성
+-- 테이블 생성
 create table skills(
 skills_name constraint fk_skill_name_skills references skill_name(skill_no) on delete cascade,
 skills_sitter_no constraint fk_pet_sitter_no_skills references pet_sitter(pet_sitter_no) on delete cascade
@@ -431,33 +431,33 @@ skills_sitter_no constraint fk_pet_sitter_no_skills references pet_sitter(pet_si
 
 
 ---------------------------------------------------------------
--- care_pet_type_name 테이블
+-- care_pet_type_name 테이블 ( 돌봄가능동물 )
 ---------------------------------------------------------------
 
---돌봄가능동물 테이블 삭제
+-- 테이블 삭제
 drop table care_pet_type_name;
---돌봄가능동물 테이블 생성
+-- 테이블 생성
 create table care_pet_type_name(
 care_type_no number primary key,
 care_type varchar2(100)
 );
 
---돌봄가능동물 시퀀스 생성
+-- 시퀀스 생성
 create sequence care_type_no_seq;
---돌봄가능동물 시퀀스 삭제
+-- 시퀀스 삭제
 drop sequence care_type_no_seq;
 
 
 ---------------------------------------------------------------
--- skills 테이블
+-- skills 테이블 ( 펫시터 돌봄 가능 동물 )
 -- pet_sitter 와 care_pet_type_name을 연결해주는 테이블
 ---------------------------------------------------------------
 
---펫시터 돌봄 가능 동물 테이블 삭제
+-- 테이블 삭제
 drop table care_pet_type;
---펫시터 돌봄 가능 동물 테이블 생성
+-- 테이블 생성
 create table care_pet_type(
-care_name constraint fk_carepettypename_carepettype references skill_name(skill_no) on delete cascade,
+care_name constraint fk_carePettypeName_CarePetYype references skill_name(skill_no) on delete cascade,
 care_sitter_no constraint fk_pet_sitter_no_care_pet_type references pet_sitter(pet_sitter_no) on delete cascade
 );
 
