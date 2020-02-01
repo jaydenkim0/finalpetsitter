@@ -449,7 +449,7 @@ drop sequence care_type_no_seq;
 
 
 ---------------------------------------------------------------
--- skills 테이블 ( 펫시터 돌봄 가능 동물 )
+-- care_pet_type 테이블 ( 펫시터 돌봄 가능 동물 )
 -- pet_sitter 와 care_pet_type_name을 연결해주는 테이블
 ---------------------------------------------------------------
 
@@ -457,7 +457,7 @@ drop sequence care_type_no_seq;
 drop table care_pet_type;
 -- 테이블 생성
 create table care_pet_type(
-care_name constraint fk_carePettypeName_CarePetYype references skill_name(skill_no) on delete cascade,
+care_name constraint fk_carePettypeName_CarePetYype references care_pet_type_name(care_type_no) on delete cascade,
 care_sitter_no constraint fk_pet_sitter_no_care_pet_type references pet_sitter(pet_sitter_no) on delete cascade
 );
 
