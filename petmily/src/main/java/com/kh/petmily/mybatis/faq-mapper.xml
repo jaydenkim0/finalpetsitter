@@ -31,11 +31,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	faq_content )
 	values (
 	faq_no_seq.nextval,
-	#{member_id},
-	#{faq_title},
-	#{faq_head},
-	#{faq_content}
-	);
+	'admin_han',
+	'test',
+	'test',
+	'testtest'
+	)
 	</insert>
 	
 	

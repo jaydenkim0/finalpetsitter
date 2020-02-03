@@ -27,7 +27,7 @@ public class FaqController {
 	public String write(FaqDto faqDto) throws Exception {
 		log.info("write");
 		faqService.write(faqDto);
-		return "redirect:/";
+		return "redirect:/list";
 	}
 	
 	//목록
