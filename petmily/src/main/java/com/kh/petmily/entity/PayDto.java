@@ -22,6 +22,6 @@ public class PayDto {
 	private int tax_free_amount;
 	private String process_time; // 준비, 완료, 취소 시간
 	private String status; // 준비', '완료', '취소' 만 입력가능
-	private String aid; 
+	private String aid; // 결제 이후에 발급되는 정보
 
 }
