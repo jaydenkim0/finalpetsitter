@@ -59,6 +59,10 @@ sitter_status varchar2(6) check (sitter_status in('정상','휴면')) not null
 alter table pet_sitter add sitter_terms_agree varchar2(4) check (sitter_terms_agree in ('true'));
 alter table pet_sitter modify sitter_terms_agree not null;
 
+-- care_condition 속성 변경
+alter table pet_sitter modify care_condition varchar2(80)
+check (care_condition in ('아파트', '빌라', '원룸', '주택', '아기있음', '흡연자', '기타', '해당사항없음'));
+
 -- 시퀀스 번호 삭제
 drop sequence pet_sitter_no_seq;
 -- 시퀀스 번호 생성
@@ -122,6 +126,7 @@ create table FAQ(
 faq_no number primary key,
 member_id constraint fk_member_FAQ references member(id) on delete set null,
 faq_title varchar2(20) not null,
+faq_head varchar2(200) not null ,
 faq_content varchar2(4000)
 );
 
@@ -143,7 +148,8 @@ create table QnA(
 qna_no number primary key,
 qna_writer constraint fk_member_QnA references member(id) on delete set null,
 qna_title varchar2(20) not null,
-qna_content varchar2(4000) not null
+qna_haed varchar2(200) not null,
+qna_content varchar2(4000) 
 );
 
 -- 시퀀스 번호 삭제
