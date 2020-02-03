@@ -23,6 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="admin">
 	
+	<!--  회원관리 -->
+	<select id="memberList"></select>
+	
+	
+	
+		<!--  펫시터관리 -->
+	<select id="petsitterList"></select>
+	
 	
 	
 </mapper>

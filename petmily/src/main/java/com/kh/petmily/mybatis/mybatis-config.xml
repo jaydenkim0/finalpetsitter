@@ -14,7 +14,27 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 별칭 -->
 	<typeAliases>
-
+		<typeAlias type="com.kh.petmily.entity.AccountDto" alias="accountDto"/>
+		<typeAlias type="com.kh.petmily.entity.CareBoardDto" alias="careBoardDto"/>
+		<typeAlias type="com.kh.petmily.entity.CareImageDto" alias="careImageDto"/>
+		<typeAlias type="com.kh.petmily.entity.CarePetTypeDto" alias="carePetTypeDto"/>
+		<typeAlias type="com.kh.petmily.entity.CarePetTypeNameDto" alias="carePetTypeNameDto"/>
+		<typeAlias type="com.kh.petmily.entity.CareReplyDto" alias="careReplyDto"/>
+		<typeAlias type="com.kh.petmily.entity.FaqDto" alias="faqDto"/>
+		<typeAlias type="com.kh.petmily.entity.IdCardFileDto" alias="idCardFileDto"/>
+		<typeAlias type="com.kh.petmily.entity.InfoImageDto" alias="infoImageDto"/>
+		<typeAlias type="com.kh.petmily.entity.LicenseFileDto" alias="licenseFileDto"/>
+		<typeAlias type="com.kh.petmily.entity.LocationDto" alias="locationDto"/>
+		<typeAlias type="com.kh.petmily.entity.MemberDto" alias="memberDto"/>
+		<typeAlias type="com.kh.petmily.entity.PayDto" alias="payDto"/>
+		<typeAlias type="com.kh.petmily.entity.PetDto" alias="petDto"/>
+		<typeAlias type="com.kh.petmily.entity.PetsitterDto" alias="petsitterDto"/>
+		<typeAlias type="com.kh.petmily.entity.QnaDto" alias="qnaDto"/>
+		<typeAlias type="com.kh.petmily.entity.QnaReplyDto" alias="qnaReplyDto"/>
+		<typeAlias type="com.kh.petmily.entity.ReservationDto" alias="reservationDto"/>
+		<typeAlias type="com.kh.petmily.entity.ReviewDto" alias="reviewDto"/>
+		<typeAlias type="com.kh.petmily.entity.SkillNameDto" alias="skillNameDto"/>
+		<typeAlias type="com.kh.petmily.entity.SkillsDto" alias="skillsDto"/>			
 	</typeAliases>
 	
 </configuration>
