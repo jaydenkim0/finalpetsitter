@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	namespace : 영역을 부르는 별칭
+	parameterType : 이 명령을 실행하기 위해 필요한 데이터의 형태
+	resultType : 기대되는 결과물의 형태(목록이든 아니든 dto 형태로 표기)
+	
+	태그때문에 못쓰게 되는 기호들은 다음의 영역으로 해결이 가능
+
+	<![CDATA[
+		SQL 구문
+	]]>
+	
+	형태에 따라 파라미터를 다르게 설정할 수 있다
+	- # 은 형태를 추론하여 자동으로 따옴표 설정 및 인코딩 처리를 수행
+	- $ 는 값을 있는 그대로 출력하는 명령이므로 주로 "항목"에 사용
+		- $ 는 SQL Injection 이라는 해킹공격에 매우 취약하므로 사용에 주의 
+ -->
+
+<mapper namespace="admin">
+	
+	<!-- 메인화면에 보여줄 내용 -->
+	
+		<!-- 전체 맴버 회원수 -->
+		<select id="membercount" resultType="int">
+			select count(*) from member
+		</select>
+		
+		<!-- 전체 펫시터수 -->
+		<select id="petsittercount" resultType="int">
+			select count(*) from petsitter
+		</select>
+		
+		<!-- 전체 관리자수 -->
+		<select id="admincount" resultType="int">
+			select count(*) from member where grade = 'admin'
+		</select>
+	
+	
+	
+	<!--  회원관리 -->	
+		<!-- 회원리시트 불러오가 -->
+		<select id="memberList"  resultType="memberDto">
+			select * from member order by id asc
+		</select>
+		
+		<!-- 
+			회원리스트 검색
+			일단 이름 검색으로	
+		 -->
+		<select id="memberSearchList"  parameterType="String"  resultType="memberDto">
+			select * from member where id like  '%'||#{id}||'%' order by id asc
+		</select>
+		
+	
+	
+	
+	<!--  펫시터관리 -->	
+		<!-- 
+			펫시터리스트 불러오가
+			member 와 pet_sitter inner join으로 view 만들어 놓음 
+			
+		-->
+		<select id="petsitterList"  resultType="petsitterDto">
+			<!--	select * from 
+			member M
+			inner join pet_sitter P on M.id = P.sitter_id
+			order by pet_sitter_no desc -->
+			select * from petsitter order by pet_sitter_no desc
+		</select>
+		
+		<!-- 펫시터리스트 검색 -->
+		<select id="petsitterSearchList" parameterType="String" resultType="petsitterDto">
+			select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
+		</select>
+	
+	
+	<!-- 정산관리 -->
+		<select id="account" resultType="accountDto"></select>
+	
+</mapper>
+
+
+
+
+
