@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{phone},
 			#{post},
 			#{basic_addr},
-			#{exrtra_addr},
+			#{extra_addr},
 			0,
 			'member',
 			#{pets},

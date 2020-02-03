@@ -7,5 +7,5 @@ import com.kh.petmily.entity.MemberDto;
 
 public interface MemberDao {	
 	
-	void reist(MemberDto memberDto);
+	void regist(MemberDto memberDto);
 }

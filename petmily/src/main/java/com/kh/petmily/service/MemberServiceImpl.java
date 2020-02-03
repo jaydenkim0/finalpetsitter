@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void regist(MemberDto memberDto) {
-		memberDao.reist(memberDto);
+		memberDao.regist(memberDto);
 	}
 
 }

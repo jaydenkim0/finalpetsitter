@@ -14,7 +14,7 @@ public class MemberDaoImpl implements MemberDao {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void reist(MemberDto memberDto) {
+	public void regist(MemberDto memberDto) {
 		sqlSession.insert("member.regist", memberDto);		
 	}
 
