@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -67,7 +68,10 @@ public class AdminController {
 	
 	// 펫시터관리 페이지 연결
 	@GetMapping("/petsitter")
-	public String petsitter() {
+	public String petsitter(PetsitterDto petsitterDto,
+										Model model) {		
+		List<PetsitterDto> list = adminService.petsitterList(petsitterDto);	
+		model.addAttribute("petsitterList", list);
 		return "admin/petsitter";		
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetsitterDto;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -33,6 +34,11 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<MemberDto> getMemberList(MemberDto memberDto) {		
 		return sqlSession.selectList("admin.memberList", memberDto);
+	}
+
+	@Override
+	public List<PetsitterDto> getPetsitterList(PetsitterDto petsitterDto) {		
+		return sqlSession.selectList("admin.petsitterList", petsitterDto); 
 	}
 
 
