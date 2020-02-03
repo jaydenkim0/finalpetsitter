@@ -8,4 +8,6 @@ import com.kh.petmily.entity.MemberDto;
 public interface MemberDao {	
 	
 	void regist(MemberDto memberDto);
+	
+	MemberDto login(MemberDto memberDto);
 }
