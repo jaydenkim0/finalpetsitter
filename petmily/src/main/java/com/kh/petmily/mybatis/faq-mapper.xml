@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
 
 <mapper namespace="faq">
+<!-- 게시글 작성 -->
 	<insert id="insert" parameterType="FaqDto">
 	insert into faq (
 	faq_no,
@@ -34,10 +35,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	'admin_han',
 	'test',
 	'test',
-	'testtest'
+	'test03'
 	)
 	</insert>
+	<!-- 게시글 전체 목록 조회 -->
+	<select id="listAll" resultType="FaqDto">
+	select
+	faq_no,faq_title,faq_head,faq_content,member_id
+	from
+	FAQ
+	order by
+	faq_no asc,
+	faq_title asc
+	</select>
 	
+	<!-- 게시글 상세보기 조회 -->
+	<select id = "view">
+	select*from FAQ where faq_no= #{faq_no}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="update">
+	update FAQ set
+	faq_title = #{faq_title},
+	faq_content = #{faq_content}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+	delete from FAQ where faq_no = #{faq_no}
+	</delete>
 	
 </mapper>
 
