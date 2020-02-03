@@ -15,7 +15,8 @@ public class QnaDto {
 	// 펫시터오 QnA 관계도 1대다
 	private int qna_no;
 	private String qna_writer; // member 테이블의 id
-	private String qna_title; //질문 게시판 제목
+	private String qna_title; //질문 게시판 타이틀
+	private String qna_head;//질문 게시판 제목
 	private String qna_content; // 질문 게시판 내용
 	
 }
