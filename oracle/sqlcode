@@ -31,6 +31,13 @@ lastlogin date default sysdate
 -- 비밀번호 영문varchar2(60)으로 수정
 alter table member modify pw varchar2(60);
 
+-- 회원가입 개인정보 동의 컬럼 추가 생성
+alter table member add Privacy_agree varchar2(4) check (Privacy_agree in ('true'));
+alter table member modify Privacy_agree not null;
+-- 회원 이용약관 동의 컬럼 추가 생성
+alter table member add terms_agree varchar2(4) check (terms_agree in ('true'));
+alter table member modify terms_agree not null;
+
 ---------------------------------------------------------------
 -- petsitter 테이블
 -- 회원가입 후 펫시터 추가 내용 테이블
@@ -47,6 +54,10 @@ sitter_pets varchar2(9) check (sitter_pets in ('예','아니오')) not null,
 care_condition varchar2(80)not null,
 sitter_status varchar2(6) check (sitter_status in('정상','휴면')) not null
 );
+
+-- 펫시터 이용약관 동의 컬럼 추가 생성
+alter table pet_sitter add sitter_terms_agree varchar2(4) check (sitter_terms_agree in ('true'));
+alter table pet_sitter modify sitter_terms_agree not null;
 
 -- 시퀀스 번호 삭제
 drop sequence pet_sitter_no_seq;
@@ -102,7 +113,6 @@ create sequence pet_no_seq;
 
 ---------------------------------------------------------------
 -- FAQ 테이블
--- 회원탈퇴시 질문에 대한 내용을 남길지 체크 (남기는 걸로)
 ---------------------------------------------------------------
 
 -- 테이블 삭제
@@ -123,6 +133,7 @@ create sequence faq_no_seq;
 
 ---------------------------------------------------------------
 -- QnA 테이블
+-- 회원탈퇴시 질문에 대한 내용을 남길지 체크 (남기는 걸로)
 ---------------------------------------------------------------
 
 -- 테이블 삭제
@@ -457,7 +468,7 @@ drop sequence care_type_no_seq;
 drop table care_pet_type;
 -- 테이블 생성
 create table care_pet_type(
-care_name constraint fk_carePettypeName_CarePetYype references care_pet_type_name(care_type_no) on delete cascade,
+care_name constraint fk_CarePettypeName_CarePetYype references care_pet_type_name(care_type_no) on delete cascade,
 care_sitter_no constraint fk_pet_sitter_no_care_pet_type references pet_sitter(pet_sitter_no) on delete cascade
 );
 
