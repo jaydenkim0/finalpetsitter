@@ -22,7 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
 
 <mapper namespace="petsitter">
-	
+	<insert id="regist" parameterType="petsitterDto">
+		insert into pet_sitter values(
+		pet_sitter_no_seq.nextval,
+		#{sitter_id},
+		#{info},
+		#{sitter_pets},
+		#{care_condition},
+		'정상',
+		'true');
+	</insert>
 	
 	
 </mapper>
