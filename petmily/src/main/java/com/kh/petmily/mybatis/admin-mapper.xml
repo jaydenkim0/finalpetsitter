@@ -23,42 +23,64 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="admin">
 	
+	<!-- 메인화면에 보여줄 내용 -->
+	
+		<!-- 전체 맴버 회원수 -->
+		<select id="membercount" resultType="int">
+			select count(*) from member
+		</select>
+		
+		<!-- 전체 펫시터수 -->
+		<select id="petsittercount" resultType="int">
+			select count(*) from petsitter
+		</select>
+		
+		<!-- 전체 관리자수 -->
+		<select id="admincount" resultType="int">
+			select count(*) from member where grade = 'admin'
+		</select>
+	
+	
+	
 	<!--  회원관리 -->	
-	<!-- 회원리시트 불러오가 -->
-	<select id="memberList"  resultType="memberDto">
-		select * from member order by id asc
-	</select>
-	
-	<!-- 
-		회원리스트 검색
-		일단 이름 검색으로	
-	 -->
-	<select id="memberSearchList"  parameterType="String"  resultType="memberDto">
-		select * from member where id like  '%'||#{id}||'%' order by id asc
-	</select>
-	
+		<!-- 회원리시트 불러오가 -->
+		<select id="memberList"  resultType="memberDto">
+			select * from member order by id asc
+		</select>
+		
+		<!-- 
+			회원리스트 검색
+			일단 이름 검색으로	
+		 -->
+		<select id="memberSearchList"  parameterType="String"  resultType="memberDto">
+			select * from member where id like  '%'||#{id}||'%' order by id asc
+		</select>
+		
 	
 	
 	
 	<!--  펫시터관리 -->	
-	<!-- 
-		펫시터리스트 불러오가
-		member 와 pet_sitter inner join으로 view 만들어 놓음 
+		<!-- 
+			펫시터리스트 불러오가
+			member 와 pet_sitter inner join으로 view 만들어 놓음 
+			
+		-->
+		<select id="petsitterList"  resultType="petsitterDto">
+			<!--	select * from 
+			member M
+			inner join pet_sitter P on M.id = P.sitter_id
+			order by pet_sitter_no desc -->
+			select * from petsitter order by pet_sitter_no desc
+		</select>
 		
-	-->
-	<select id="petsitterList"  resultType="petsitterDto">
-		<!--	select * from 
-		member M
-		inner join pet_sitter P on M.id = P.sitter_id
-		order by pet_sitter_no desc -->
-		select * from petsitter order by pet_sitter_no desc
-	</select>
+		<!-- 펫시터리스트 검색 -->
+		<select id="petsitterSearchList" parameterType="String" resultType="petsitterDto">
+			select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
+		</select>
 	
-	<!-- 펫시터리스트 검색 -->
-	<select id="petsitterSearchList" parameterType="String" resultType="petsitterDto">
-		select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
-	</select>
 	
+	<!-- 정산관리 -->
+		<select id="account" resultType="accountDto"></select>
 	
 </mapper>
 
