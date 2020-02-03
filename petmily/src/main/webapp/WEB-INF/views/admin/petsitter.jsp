@@ -10,7 +10,7 @@
 	<h2> 펫시터 리스트 </h2>
 	
 	<c:forEach var="petsitter" items="${petsitterList}">
-					<h3>${pesitter}</h3>
+					<h3>${petsitter}</h3>
 	</c:forEach>
 	
 	
