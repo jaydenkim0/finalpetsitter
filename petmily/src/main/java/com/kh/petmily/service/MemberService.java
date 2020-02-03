@@ -5,5 +5,9 @@ import com.kh.petmily.entity.MemberDto;
 public interface MemberService {
 	
 	void regist(MemberDto memberDto);
+	
+	MemberDto login(MemberDto memberDto);
+
+
 
 }

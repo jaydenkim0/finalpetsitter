@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    <!-- <form action="/home/member/login.do" method="post"> -->
+
 <form action="login" method="post">
 
 <!-- 새로운 형태로 디자인 -->
