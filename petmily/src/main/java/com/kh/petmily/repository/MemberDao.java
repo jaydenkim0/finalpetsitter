@@ -17,4 +17,6 @@ public interface MemberDao {
 	MemberDto mylist(String id);
 
 	List<PetDto> mylistpet(String id);
+
+	void updatelastlogin(String id);
 }

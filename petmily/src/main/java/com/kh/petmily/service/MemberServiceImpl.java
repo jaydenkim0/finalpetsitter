@@ -38,5 +38,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.mylistpet(id);
 	}
 	
+	//로그인 시 최종로그인 업데이트
+	@Override
+	public void updatelastlogin(String id) {
+		memberDao.updatelastlogin(id);
+	}
+	
 	}
 

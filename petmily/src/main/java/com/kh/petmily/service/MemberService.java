@@ -15,6 +15,8 @@ public interface MemberService {
 
 	List<PetDto> mylistpet(String id);
 
+	void updatelastlogin(String id);
+
 
 
 }

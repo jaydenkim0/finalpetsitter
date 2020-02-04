@@ -3,6 +3,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>mylist.jsp</h1>
 <h1>아이디 : ${mylist.id }</h1><br>
+<a></a>
 <h3>이름 : ${mylist.name }</h3>
 <h3>닉네임 : ${mylist.nick }</h3>
 <h3>전화번호 : ${mylist.phone }</h3>

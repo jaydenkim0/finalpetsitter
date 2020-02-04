@@ -62,6 +62,8 @@ public class MemberController {
 		else { //로그인 성공
 		session.setAttribute("id", find.getId());
 		session.setAttribute("grade", find.getGrade());
+		String id = find.getId();
+		memberService.updatelastlogin(id);
 		return "redirect:/";
 		}
 	}

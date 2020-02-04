@@ -59,6 +59,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from pet where member_id=#{id}
 	</select>
 	
+	<!-- 최종로그인 일시 업데이트 -->
+	<update id="updatelastlogin" parameterType="String" >
+		update member set lastlogin=sysdate where id=#{id}
+	</update>
+	
 	
 </mapper>
 

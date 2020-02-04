@@ -41,6 +41,13 @@ public class MemberDaoImpl implements MemberDao {
 	public List<PetDto> mylistpet(String id){
 		return sqlSession.selectList("member.mylistpet",id);
 	}
+
+	//최종로그인일시 업데이트
+	@Override
+	public void updatelastlogin(String id) {
+		sqlSession.update("member.updatelastlogin",id);
+		
+	}
 	
 	
 
