@@ -17,4 +17,5 @@ public class CareReplyDto {
 	private String care_member_id; // member 테이블의 id
 	private int care_sitter_no; // // pet_sitter 테이블의 pet_sitter_no
 	private String care_reply_content; // 댓글 내용
+	private String wdate; // 댓글 작성 시간
 }
