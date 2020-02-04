@@ -53,12 +53,14 @@
 	<h1>펫시터 관리페이지</h1>
 	
 	<br><br>
+	<hr>
+	<br><br>
 	
 	<h2> 펫시터 리스트 </h2>
 	
-	<c:forEach var="petsitter" items="${petsitterList}">
-	
-					<h3>${petsitter}</h3>
+	<c:forEach var="petsitter" items="${petsitterList}">			
+			<h3>${petsitter}</h3>
+					
 			<!-- 펫시터 상태 변경 버튼 -->
 			<form action="" method="post">			
 					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
@@ -70,19 +72,22 @@
 			</form>
 				
 			<!-- 펫시터 차단 버튼 -->	
-			<form action="" method="post">			
+			<form action="blacklist_content" method="post">			
 					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
 					<input type="hidden" name="sitter_status" value="휴면">
 					<button type="submit" >차단 펫시터 등록</button>						
 			</form>					
 	</c:forEach>	
 	
+	
+	<br><br>
+	<hr>
 	<br><br>
 	
 	<h2> 페시터 신청 회원 </h2>	
 		
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
-					<h3>${petsitterapply}</h3>						
+			<h3>${petsitterapply}</h3>						
 			
 			<!-- 펫시터 승인 버튼 -->			
 			<form action="apply" method="post">
