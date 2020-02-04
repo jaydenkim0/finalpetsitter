@@ -3,6 +3,7 @@ package com.kh.petmily.service;
 import java.util.List;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 
 public interface MemberService {
 	
@@ -10,7 +11,9 @@ public interface MemberService {
 	
 	MemberDto login(MemberDto memberDto);
 
-	List<MemberDto> mylist(String id);
+	MemberDto mylist(String id);
+
+	List<PetDto> mylistpet(String id);
 
 
 

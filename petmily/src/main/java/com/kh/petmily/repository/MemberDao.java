@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 
 public interface MemberDao {	
 	
@@ -13,5 +14,7 @@ public interface MemberDao {
 	
 	MemberDto login(MemberDto memberDto);
 
-	List<MemberDto> mylist(String id);
+	MemberDto mylist(String id);
+
+	List<PetDto> mylistpet(String id);
 }

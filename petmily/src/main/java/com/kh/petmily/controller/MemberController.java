@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private MemberDao memberDao;
 	
 	//  회원가입
 	//  regist로 이동
@@ -78,8 +81,11 @@ public class MemberController {
 			HttpSession session,
 			Model model) {
 		String id = (String) session.getAttribute("id");
-		List<MemberDto> list = memberService.mylist(id);
+		MemberDto list = memberService.mylist(id);
 		model.addAttribute("mylist",list);
+		List<PetDto> petlist = memberService.mylistpet(id);
+		model.addAttribute("mylistpet",petlist);
+		
 		return "member/mylist";
 	}
 	
