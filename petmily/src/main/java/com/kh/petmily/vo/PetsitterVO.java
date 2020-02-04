@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class petsitterVO {
+public class PetsitterVO {
 
 	// member
 	private String id; 

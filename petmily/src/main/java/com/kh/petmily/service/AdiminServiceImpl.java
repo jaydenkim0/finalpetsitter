@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.PetsitterVO;
 
 @Service
 public class AdiminServiceImpl implements AdminService {
@@ -41,14 +42,14 @@ public class AdiminServiceImpl implements AdminService {
 
 	// petsitter 리스트
 	@Override
-	public List<PetsitterDto> petsitterList(PetsitterDto petsitterDto) {		
-		return adminDao.getPetsitterList(petsitterDto);
+	public List<PetsitterVO> petsitterList( ) {		
+		return adminDao.getPetsitterList();
 	}
 	
 	// 펫시터 신청 리스트
 	@Override
-	public List<PetsitterDto> petsitterApplyList(PetsitterDto petsitterDto) {		
-		return adminDao.getPetsitterApplyList(petsitterDto);
+	public List<PetsitterVO> petsitterApplyList( ) {		
+		return adminDao.getPetsitterApplyList();
 	}
 	
 	// 펫시터 승인
@@ -56,6 +57,20 @@ public class AdiminServiceImpl implements AdminService {
 	public void petsitterapply(String sitter_id) {
 		adminDao.petsitterApply(sitter_id);		
 	}
+
+	// 펫시터 거부(삭제)
+	@Override
+	public void petsitterNegative(String sitter_id) {
+		adminDao.petsitterNegative(sitter_id);
+		
+	}
+
+	// 펫시터 단일 검색
+	@Override
+	public List<PetsitterVO>PetsitterSearchOne(String sitter_id) {
+		return adminDao.petsitterSearchOne(sitter_id);
+	}
+
 
 
 

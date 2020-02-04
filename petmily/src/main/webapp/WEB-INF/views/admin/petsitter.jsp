@@ -12,15 +12,13 @@
 	<c:forEach var="petsitter" items="${petsitterList}">
 					<h3>${petsitter}</h3>
 			
-			<form action="" method="post">
-				<div>
+			<form action="" method="post">			
 					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
 						<select name="sitter_status">
 							<option>정상</option>
 							<option>휴면</option>
 						</select>	
-					<button type="submit">펫시터 상태 변경</button>
-				</div>			
+					<button type="submit">펫시터 상태 변경</button>						
 			</form>
 					
 		
@@ -40,6 +38,11 @@
 		<form action="apply" method="post">
 					<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
 					<button type="submit" > 펫시터 승인</button>
+		</form>
+		
+		<form action="negative" method="post">
+					<input type="hidden" name="sitter_id" value="${petsitterapply}">	
+					<button type="submit" > 펫시터 거부</button>
 		</form>
 		
 	</c:forEach>
