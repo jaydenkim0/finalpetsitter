@@ -68,6 +68,16 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.", sitter_id);
 	}
 
+	// 펫시터 차단 (블랙리스트 등록)
+	@Override
+	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO) {
+		// 펫시터 상태 휴면으로 변경
+		sqlSession.update("admin.sitter_status", petsitterDto);
+		// 블랙리스트 테이블에 등록
+		sqlSession.insert("admin.blackList", petsitterVO);
+		
+	}
+
 
 
 	

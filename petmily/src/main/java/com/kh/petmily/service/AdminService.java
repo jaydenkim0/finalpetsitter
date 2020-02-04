@@ -33,4 +33,7 @@ public interface AdminService {
 	// 펫시터 단일 검색
 	List<PetsitterVO> PetsitterSearchOne(String sitter_id);
 	
+	// 펫시터 차단
+	void blackSitter(PetsitterDto petsitterDto, String blacklist_centent);
+	
 }
