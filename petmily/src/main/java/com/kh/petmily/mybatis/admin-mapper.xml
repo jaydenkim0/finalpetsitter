@@ -62,21 +62,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  펫시터관리 -->	
 		<!-- 
 			펫시터리스트 불러오가
-			member 와 pet_sitter inner join으로 view 만들어 놓음 
-			
+			member 와 pet_sitter inner join으로 view 만들어 놓음 			
 		-->
-		<select id="petsitterList"  resultType="petsitterDto">
+		<select id="petsitterList"  resultType="petsitterVO">
 			<!--	select * from 
 			member M
 			inner join pet_sitter P on M.id = P.sitter_id
 			order by pet_sitter_no desc -->
-			select * from petsitter order by pet_sitter_no desc
+			select * from petsitter where grade = 'petsitter' order by pet_sitter_no desc
 		</select>
+		
+		<!-- 펫시터 신청한 회원 검색 -->
+		<select id="petsitterApplyList"  resultType="petsitterVO">	
+			select * from petsitter where grade = 'member' order by pet_sitter_no desc
+		</select>
+		
+		<!-- 펫시터 승인 -->
+		<update id="petsitterApply" parameterType="String">
+			update member set grade = 'petsitter' where id = #{sitter_id}
+		</update>
+		
+		<!-- 펫시터 거부 테이블에서 삭제  -->		
+		<delete id="petsitterNegative" parameterType="String">
+			delete pet_sitter where sitter_id = #{sitter_id}
+		</delete>		
+		
+		<!-- 펫시터 단일 검색  -->
+		<select id="petsitterSearchOne"  parameterType="String" resultType="petsitterVO">
+			select * from petsitter where grade = 'member' and sitter_id =#{sitter_id} 	
+		</select>
+		
 		
 		<!-- 펫시터리스트 검색 -->
 		<select id="petsitterSearchList" parameterType="String" resultType="petsitterDto">
 			select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
 		</select>
+		
 	
 	
 	<!-- 정산관리 -->
