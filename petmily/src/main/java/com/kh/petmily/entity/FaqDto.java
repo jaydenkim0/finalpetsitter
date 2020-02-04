@@ -16,5 +16,6 @@ public class FaqDto {
 	private String faq_title; // 공지사항 타이틀
 	private String faq_head;//공지사항 제목
 	private String faq_content; // 관리자에게 문의 하는 내용
+	private String wdate;
 
 }

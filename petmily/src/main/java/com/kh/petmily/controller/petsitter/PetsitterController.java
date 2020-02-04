@@ -24,7 +24,7 @@ public class PetsitterController {
 	@PostMapping("/regist")
 	public String regist(@ModelAttribute PetsitterDto petsitterDto) {
 		petsitterDao.regist(petsitterDto);
-		return "petsitter/regist";
+		return "redirect:../";
 	}
 	
 }

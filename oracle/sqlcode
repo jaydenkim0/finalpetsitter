@@ -63,6 +63,19 @@ alter table pet_sitter modify sitter_terms_agree not null;
 alter table pet_sitter modify care_condition varchar2(80)
 check (care_condition in ('아파트', '빌라', '원룸', '주택', '아기있음', '흡연자', '기타', '해당사항없음'));
 
+-- 펫시터 매칭 타입 컬럼 추가 생성
+alter table pet_sitter add sitter_matching_type varchar2(15);
+-- sitter_matching_type 속성 변경
+alter table pet_sitter modify check (sitter_matching_type in ('방문서비스', '위탁서비스', '둘다'));
+
+-- 펫시터 가입일 컬럼 추가
+alter table pet_sitter add sitter_joindate date;
+-- 펫시터 가입일 속성 변경
+alter table pet_sitter modify sitter_joindate default sysdate;
+
+-- sitter_id 조건 unique 조건 적용
+alter table pet_sitter modify sitter_id unique;
+
 -- 시퀀스 번호 삭제
 drop sequence pet_sitter_no_seq;
 -- 시퀀스 번호 생성
@@ -135,6 +148,8 @@ drop sequence faq_no_seq;
 -- 시퀀스 번호 생성
 create sequence faq_no_seq;
 
+-- 등록일 컬럼 추가
+alter table FAQ add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- QnA 테이블
@@ -157,6 +172,8 @@ drop sequence qna_no_seq;
 -- 시퀀스 번호 생성
 create sequence qna_no_seq;
 
+-- 등록일 컬럼 추가
+alter table QnA add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- QnA_reply 테이블
@@ -292,6 +309,8 @@ drop sequence care_board_no_seq;
 -- 시퀀스 번호 생성
 create sequence care_board_no_seq;
 
+-- 등록일 컬럼 추가
+alter table care_board add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- care_reply 테이블 
@@ -312,6 +331,8 @@ drop sequence care_reply_no_seq;
 -- 시퀀스 번호 생성
 create sequence care_reply_no_seq;
 
+-- 등록일 컬럼 추가
+alter table care_reply add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- care_image 테이블 
@@ -335,17 +356,45 @@ drop sequence care_image_no_seq;
 create sequence care_image_no_seq;
 
 
+---------------------------------------------------------------
+-- blackList 테이블 
+-- 차단 회원
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table blacklist;
+-- 테이블 생성
+create table blacklist(
+black_no number primary key,
+black_id constraint fk_member_blacklist references member(id) on delete set null,
+black_name varchar2(21),
+black_phone varchar2(11),
+black_grade varchar2(9),
+black_content varchar2(4000),
+black_wdate date default sysdate
+);
+
+-- 시퀀스 번호 삭제
+drop sequence black_no_seq;
+-- 시퀀스 번호 생성
+create sequence black_no_seq;
 
 
+---------------------------------------------------------------
+-- blackList 테이블 
+-- 차단 회원
+---------------------------------------------------------------
+
+create table member_cert(
+email varchar2(128) primary key,
+cert_no varchar2(128) not null,
+when date default sysdate
+);
 
 
 
 
 ----------------------------------------------------------------------------------------------------------------------
-
-
-
-
 
 
 

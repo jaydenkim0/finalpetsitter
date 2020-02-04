@@ -30,7 +30,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{sitter_pets},
 		#{care_condition},
 		'정상',
-		'true')
+		'true',
+		#{sitter_matching_type},
+		sysdate)
 	</insert>
 	
 	

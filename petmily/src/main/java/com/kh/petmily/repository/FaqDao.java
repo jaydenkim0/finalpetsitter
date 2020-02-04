@@ -6,18 +6,18 @@ import com.kh.petmily.entity.FaqDto;
 import com.kh.petmily.vo.FaqVO;
 
 public interface FaqDao {
-	//게시글 작성
-	public void create(FaqVO faqVO)throws Exception;
+	//게시글 목록 보기
+	public List<FaqDto>list()throws Exception;
 	
-	//게시글 전체 조회
-	public List<FaqVO> listAll()throws Exception;
+	//게시글 작성 실행
+	public void write(FaqDto faqDto)throws Exception;
 	
 	//게시글 상세보기
-	public FaqDto read(int faq_no)throws Exception;
+	public FaqDto view(int faq_no)throws Exception;
 	
-	//게시글 수정
-	public void update(FaqVO faqVO)throws Exception;
+	//게시글 수정 실행
+	public void update(FaqDto faqDto) throws Exception;
 	
-	//게시글 삭제
-	public void delete(int faq_no)throws Exception;
+	//게시글 삭제 실행
+	public void delete(int faq_no) throws Exception;
 }
