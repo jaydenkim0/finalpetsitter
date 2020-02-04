@@ -135,6 +135,8 @@ drop sequence faq_no_seq;
 -- 시퀀스 번호 생성
 create sequence faq_no_seq;
 
+-- 등록일 컬럼 추가
+alter table FAQ add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- QnA 테이블
@@ -157,6 +159,8 @@ drop sequence qna_no_seq;
 -- 시퀀스 번호 생성
 create sequence qna_no_seq;
 
+-- 등록일 컬럼 추가
+alter table QnA add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- QnA_reply 테이블
@@ -292,6 +296,8 @@ drop sequence care_board_no_seq;
 -- 시퀀스 번호 생성
 create sequence care_board_no_seq;
 
+-- 등록일 컬럼 추가
+alter table care_board add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- care_reply 테이블 
@@ -312,6 +318,8 @@ drop sequence care_reply_no_seq;
 -- 시퀀스 번호 생성
 create sequence care_reply_no_seq;
 
+-- 등록일 컬럼 추가
+alter table care_reply add wdate date default sysdate;
 
 ---------------------------------------------------------------
 -- care_image 테이블 
@@ -335,11 +343,28 @@ drop sequence care_image_no_seq;
 create sequence care_image_no_seq;
 
 
+---------------------------------------------------------------
+-- blackList 테이블 
+-- 차단 회원
+---------------------------------------------------------------
 
+-- 테이블 삭제
+drop table blacklist;
+-- 테이블 생성
+create table blacklist(
+black_no number primary key,
+black_id constraint fk_member_blacklist references member(id) on delete set null,
+black_name varchar2(21),
+black_phone varchar2(11),
+black_grade varchar2(9),
+black_content varchar2(4000),
+black_wdate date default sysdate
+);
 
-
-
-
+-- 시퀀스 번호 삭제
+drop sequence black_no_seq;
+-- 시퀀스 번호 생성
+create sequence black_no_seq;
 
 ----------------------------------------------------------------------------------------------------------------------
 
