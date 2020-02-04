@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.MemberDto;
-import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.proxy.annotation.GetProxy;
 
 @Slf4j
 @Controller
@@ -24,8 +21,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
-	
+
+    
+
 	//  회원가입
 	//  regist로 이동
 	@GetMapping("/regist")
@@ -52,7 +50,7 @@ public class MemberController {
 		MemberDto find = memberService.login(memberDto);
 		
 		if(find == null) { //로그인 실패
-		return"redirect:member/login?error";
+		return"redirect:/login?error"; 
 		
 		}
 		else { //로그인 성공
@@ -70,9 +68,8 @@ public class MemberController {
 		session.removeAttribute("grade");
 		return "redirect:/";		
 	}
-	
-	
-	
+
+		
 }
 
 	
