@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override	
 		public MemberDto login(MemberDto memberDto) {					 
 			return memberDao.login(memberDto);	
-
+  
 		}
 	
 	}
