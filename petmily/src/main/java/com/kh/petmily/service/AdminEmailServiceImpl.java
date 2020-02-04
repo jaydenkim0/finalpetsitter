@@ -3,12 +3,15 @@ package com.kh.petmily.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminEmailServiceImpl implements AdminEmailService{
 
 	@Autowired
 	private JavaMailSender sender;	
 	
+	// 펫시터 승인 반려 이메일 전송
 	@Override
 	public String  sendCancel(String email) {
 		try {

@@ -33,8 +33,10 @@ public class AdminController {
 	// 관리자 메인페이지 연결
 	@GetMapping("/")
 	public String admin(Model model) {				
-		// 총 회원수 (회원 + 펫시터 + 관리자)
-		model.addAttribute("mtotal", adminService.memberTotal());				
+		// 총 등록수 (회원 + 펫시터 + 관리자)
+		model.addAttribute("mtotal", adminService.memberTotal());	
+		// 총 회원수
+		
 		// 총 펫시터 수
 		model.addAttribute("ptotal", adminService.petsitterTotal());		
 		// 총 관리자 수
