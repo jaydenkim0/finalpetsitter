@@ -17,6 +17,13 @@ public interface AdminService {
 	// 회원 리스트
 	List<MemberDto> memberList(MemberDto memberDto);
 	
+	// 펫시터 리스트
 	List<PetsitterDto> petsitterList(PetsitterDto petsitterDto);
+	
+	// 펫시터 신청 리스트
+	List<PetsitterDto> petsitterApplyList(PetsitterDto petsitterDto);
+	
+	// 펫시터 승인
+	void petsitterapply(String sitter_id);
 	
 }

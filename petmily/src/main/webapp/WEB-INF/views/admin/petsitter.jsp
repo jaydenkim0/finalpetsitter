@@ -16,7 +16,17 @@
 	
 	<br><br>
 	
-	<h2> 페시터 신청 회원 </h2>
+	<h2> 페시터 신청 회원 </h2>	
+		
+	<c:forEach var="petsitterapply" items="${petsitterApplyList}">
+					<h3>${petsitterapply}</h3>
+					
+		<form action="apply" method="post">
+					<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
+					<input type="submit" value="펫시터 승인">
+		</form>
+		
+	</c:forEach>
 	
 	
 	

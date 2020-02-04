@@ -44,6 +44,18 @@ public class AdiminServiceImpl implements AdminService {
 	public List<PetsitterDto> petsitterList(PetsitterDto petsitterDto) {		
 		return adminDao.getPetsitterList(petsitterDto);
 	}
+	
+	// 펫시터 신청 리스트
+	@Override
+	public List<PetsitterDto> petsitterApplyList(PetsitterDto petsitterDto) {		
+		return adminDao.getPetsitterApplyList(petsitterDto);
+	}
+	
+	// 펫시터 승인
+	@Override
+	public void petsitterapply(String sitter_id) {
+		adminDao.petsitterApply(sitter_id);		
+	}
 
 
 

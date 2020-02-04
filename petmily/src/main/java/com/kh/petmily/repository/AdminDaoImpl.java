@@ -36,10 +36,26 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.memberList", memberDto);
 	}
 
+	// 펫시터 리스트
 	@Override
 	public List<PetsitterDto> getPetsitterList(PetsitterDto petsitterDto) {		
 		return sqlSession.selectList("admin.petsitterList", petsitterDto); 
 	}
 
+	// 펫시터 신청한 회원 검색
+	@Override
+	public List<PetsitterDto> getPetsitterApplyList(PetsitterDto petsitterDto) {
+		return sqlSession.selectList("admin.petsitterApplyList", petsitterDto); 
+	}
+
+	// 펫시터 승인
+	@Override
+	public void petsitterApply(String sitter_id) {
+		sqlSession.update("admin.petsitterApply", sitter_id);
+		
+	}
+
+
+	
 
 }

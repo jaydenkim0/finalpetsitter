@@ -30,18 +30,13 @@ public class AdminController {
 		
 		// 총 회원수 (회원 + 펫시터 + 관리자)
 		model.addAttribute("mtotal", adminService.memberTotal());		
-			// 확인용
-			log.info("m = {}"+ adminService.memberTotal());
 		
 		// 총 펫시터 수
 		model.addAttribute("ptotal", adminService.petsitterTotal());
-			// 확인용
-			log.info("p = {}"+ adminService.petsitterTotal());
 		
 		// 총 관리자 수
 		model.addAttribute("atotal", adminService.admimTotal());
-			// 확인용
-			log.info("a = {}"+ adminService.admimTotal());
+	
 		
 		return "admin/main";		
 	}
@@ -70,10 +65,26 @@ public class AdminController {
 	@GetMapping("/petsitter")
 	public String petsitter(PetsitterDto petsitterDto,
 										Model model) {		
-		List<PetsitterDto> list = adminService.petsitterList(petsitterDto);	
-		model.addAttribute("petsitterList", list);
+		// 펫시터 리스트
+		List<PetsitterDto> Plist = adminService.petsitterList(petsitterDto);
+		// 펫시터 
+		List<PetsitterDto> PAlist = adminService.petsitterApplyList(petsitterDto);
+		
+		// 펫시터 리스트 전달
+		model.addAttribute("petsitterList", Plist);
+		// 펫시터 신청 리스트 전달
+		model.addAttribute("petsitterApplyList", PAlist);
+		
 		return "admin/petsitter";		
 	}
+	
+				// 펫시터 신청한 회원 승인 기능
+				@PostMapping("/apply")
+				public String petsitterapply(@RequestParam String sitter_id) {
+					System.out.println(sitter_id);
+					adminService.petsitterapply(sitter_id);
+					return "redirect:petsitter";					
+				}
 	
 	
 	// 정산관리 페이지 연결
@@ -87,7 +98,8 @@ public class AdminController {
 	// 회원은 강제탈퇴( 강제 탈퇴전 해당 내용 이메일 전송 )
 	// 펫시터는 검색 노출 차단
 	@GetMapping("/blackList")
-	public String blackList() {
+	public String blackList(String sitter_id) {
+		adminService.petsitterapply(sitter_id);
 		return "admin/blackList";		
 	}
 	

@@ -13,11 +13,17 @@ public interface AdminDao {
 	
 	int getAtotal();
 	
+	// 회원 리스트
 	List<MemberDto> getMemberList(MemberDto memberDto);
 
+	// 펫시터 리스트
 	List<PetsitterDto> getPetsitterList(PetsitterDto petsitterDto);
 
+	// 펫시터 신청 리스트
+	List<PetsitterDto> getPetsitterApplyList(PetsitterDto petsitterDto);
 	
+	// 펫시터 승인
+	void petsitterApply(String sitter_id);
 	
 
 }
