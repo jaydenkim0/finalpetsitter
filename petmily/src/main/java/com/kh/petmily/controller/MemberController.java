@@ -34,7 +34,7 @@ public class MemberController {
 	@PostMapping("/regist")
 	public String regist(@ModelAttribute MemberDto memberDto) {
 		memberService.regist(memberDto);
-		return "redirect:member/login";		
+		return "redirect:login";		
 	}
 	
 	//로그인
