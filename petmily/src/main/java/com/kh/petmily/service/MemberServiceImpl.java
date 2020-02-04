@@ -1,5 +1,7 @@
 package com.kh.petmily.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,12 @@ public class MemberServiceImpl implements MemberService {
 			return memberDao.login(memberDto);	
 
 		}
+	
+	//내정보조회
+	@Override
+	public List<MemberDto> mylist(String id) {		
+		return memberDao.mylist(id);
+	}
 	
 	}
 

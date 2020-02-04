@@ -49,6 +49,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where id=#{id} and pw=#{pw}
 	</select>
 	
+	<!-- 내정보조회 -->
+	<select id="mylist" parameterType="String"  resultType="memberDto">
+		select * from member where id=#{id}
+	</select>
+	
 	
 </mapper>
 

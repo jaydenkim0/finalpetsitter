@@ -2,6 +2,7 @@ package com.kh.petmily.repository;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -29,5 +30,13 @@ public class MemberDaoImpl implements MemberDao {
 		
 		return sqlSession.selectOne("member.login", memberDto);		
 	}
+
+	//내정보조회
+	@Override
+	public List<MemberDto> mylist(String id) {
+		return sqlSession.selectList("member.mylist",id);
+	}
+	
+	
 
 }

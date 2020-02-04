@@ -5,6 +5,6 @@
     
 	<h1>회원 관리페이지</h1>
 	
-	<c:forEach var="member" items="${memberList}">
+	<c:forEach var="member"  items="${memberList}">
 					<h3>${member}</h3>
 	</c:forEach>

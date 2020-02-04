@@ -1,9 +1,12 @@
 package com.kh.petmily.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.MemberDto;
-import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
-import oracle.jdbc.proxy.annotation.GetProxy;
 
 @Slf4j
 @Controller
@@ -70,6 +71,23 @@ public class MemberController {
 		session.removeAttribute("grade");
 		return "redirect:/";		
 	}
+	
+	//내정보보기
+	@GetMapping("/mylist")
+	public String mylist(
+			HttpSession session,
+			Model model) {
+		String id = (String) session.getAttribute("id");
+		List<MemberDto> list = memberService.mylist(id);
+		model.addAttribute("mylist",list);
+		return "member/mylist";
+	}
+	
+	//내정보수정
+	@GetMapping("/mylistchange")
+		public String mylistchange() {
+			return "member/mylistchange";
+		}
 	
 	
 	
