@@ -23,46 +23,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="faq">
 <!-- 게시글 작성 -->
-	<insert id="insert" parameterType="FaqDto">
+	<insert id="faqwrite" parameterType="FaqDto">
 	insert into faq (
 	faq_no,
 	member_id,
 	faq_title,
 	faq_head,
-	faq_content )
+	faq_content,
+	wdate 
+	)
 	values (
 	faq_no_seq.nextval,
-	'admin_han',
-	'test',
-	'test',
-	'test03'
+	#{member_id},
+	#{faq_title},
+	#{faq_head},
+	#{faq_content},
+	sysdate
 	)
 	</insert>
 	<!-- 게시글 전체 목록 조회 -->
-	<select id="listAll" resultType="FaqDto">
+	<select id="faqlist" resultType="FaqDto">
 	select
-	faq_no,faq_title,faq_head,faq_content,member_id
+	faq_no,faq_title,faq_head,faq_content,member_id,wdate
 	from
 	FAQ
 	order by
-	faq_no asc,
-	faq_title asc
+	faq_no desc
 	</select>
 	
 	<!-- 게시글 상세보기 조회 -->
-	<select id = "view">
+	<select id = "faqview" resultType="FaqDto">
 	select*from FAQ where faq_no= #{faq_no}
 	</select>
 	
 	<!-- 게시글 수정 -->
-	<update id="update">
+	<update id="faqupdate" >
 	update FAQ set
 	faq_title = #{faq_title},
+	faq_head = #{faq_head},
 	faq_content = #{faq_content}
+	where faq_no= #{faq_no}
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="delete">
+	<delete id="faqdelete">
 	delete from FAQ where faq_no = #{faq_no}
 	</delete>
 	
