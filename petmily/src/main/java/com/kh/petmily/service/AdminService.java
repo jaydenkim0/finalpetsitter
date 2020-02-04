@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminService {
 	
@@ -17,6 +18,19 @@ public interface AdminService {
 	// 회원 리스트
 	List<MemberDto> memberList(MemberDto memberDto);
 	
-	List<PetsitterDto> petsitterList(PetsitterDto petsitterDto);
+	// 펫시터 리스트
+	List<PetsitterVO> petsitterList();
+	
+	// 펫시터 신청 리스트
+	List<PetsitterVO> petsitterApplyList();
+	
+	// 펫시터 승인
+	void petsitterapply(String sitter_id);
+	
+	// 펫시터 거부
+	void petsitterNegative(String sitter_id);
+	
+	// 펫시터 단일 검색
+	List<PetsitterVO> PetsitterSearchOne(String sitter_id);
 	
 }
