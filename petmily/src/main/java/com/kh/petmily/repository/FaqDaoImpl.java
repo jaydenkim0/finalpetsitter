@@ -15,33 +15,33 @@ public class FaqDaoImpl implements FaqDao{
 	@Autowired
 	SqlSession sqlSession;
 	
+	//게시글 조회
+	@Override
+	public List<FaqDto>list() throws Exception {
+		return sqlSession.selectList("faq.faqlist");
+	}
+	
 	//게시글 작성
 	@Override
-	public void create(FaqVO faqVO) throws Exception {
-		sqlSession.insert("faq.insert",faqVO);
+	public void write(FaqDto faqDto) throws Exception {
+		sqlSession.insert("faq.faqwrite",faqDto);
 	}
-	
-	//게시글 전체 조회
-	@Override
-	public List<FaqVO> listAll() throws Exception {
-		return sqlSession.selectList("faq.listAll");
-	}
-	
+
 	//게시글 상세보기
 	@Override
-	public FaqDto read(int faq_no) throws Exception {
-		return sqlSession.selectOne("faq.read",faq_no);
+	public FaqDto view(int faq_no) throws Exception {
+		return sqlSession.selectOne("faq.faqview",faq_no);
 	}
-
-	//게시글 수정
+	
+	//게시글 작성 실행
 	@Override
-	public void update(FaqVO faqVO) throws Exception {
-		sqlSession.update("faq.update",faqVO);
+	public void update(FaqDto faqDto) throws Exception {
+		sqlSession.update("faq.faqupdate",faqDto);
 	}
-
-	//게시글 삭제
+	
+	//게시글 삭제 실행
 	@Override
 	public void delete(int faq_no) throws Exception {
-		sqlSession.delete("faq.delete",faq_no);
+		sqlSession.delete("faq.faqdelete",faq_no);
 	}
 }

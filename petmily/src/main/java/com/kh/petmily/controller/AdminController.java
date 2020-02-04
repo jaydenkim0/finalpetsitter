@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
@@ -33,8 +34,10 @@ public class AdminController {
 	// 관리자 메인페이지 연결
 	@GetMapping("/")
 	public String admin(Model model) {				
-		// 총 회원수 (회원 + 펫시터 + 관리자)
-		model.addAttribute("mtotal", adminService.memberTotal());				
+		// 총 등록수 (회원 + 펫시터 + 관리자)
+		model.addAttribute("mtotal", adminService.memberTotal());	
+		// 총 회원수
+		
 		// 총 펫시터 수
 		model.addAttribute("ptotal", adminService.petsitterTotal());		
 		// 총 관리자 수
@@ -80,21 +83,26 @@ public class AdminController {
 				// 펫시터 신청한 회원 승인 기능
 				@PostMapping("/apply")
 				public String petsitterapply(@RequestParam String sitter_id) {
-					System.out.println(sitter_id);
+					
 					// 데이터베이스 member -> petsitter 로변경
 					adminService.petsitterapply(sitter_id);
 					return "redirect:petsitter";					
 				}
 				// 펫시터 신청한 회원 거부 기능
 				@PostMapping("/negative")
-				public String negative(@ModelAttribute	PetsitterVO petsitterVO) {
+				@ResponseBody
+				public String negative(@ModelAttribute	PetsitterVO petsitterVO,
+														Model model) {
 					// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
 					String email = petsitterVO.getEmail();
-					amailService.sendCancel(email);
+					System.out.println("이메일 주소" + email);
+					String result = amailService.sendCancel(email);
 					// pet_sitter 테이블에서 신청한 내용을 삭제
 					String sitter_id = petsitterVO.getSitter_id();
-					adminService.petsitterNegative(sitter_id);
-					return "redirect:petsitter";	
+					System.out.println("펫시터 아이디 " + sitter_id);
+					adminService.petsitterNegative(sitter_id);							
+					System.out.println("이메일 전송 결과 = " + result);
+					return result;
 				}
 	
 	
