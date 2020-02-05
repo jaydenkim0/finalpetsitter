@@ -82,63 +82,63 @@
 	</div>
 	
 	<div class="skill">
-        <input type="checkbox" id="sick" value="1" name="skills" data-skills="투약">
+        <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
         <label for="sick" id="nameTo1">투약</label>
         
-        <input type="checkbox" id="old" value="2" name="skills" data-skills="노령견테어">
+        <input type="checkbox" id="old" value="2" name="skills_name" data-skills="노령견테어">
         <label for="old" id="nameTo2">노령견케어</label>
         
-        <input type="checkbox" id="kitten"  value="3" name="skills" data-skills="키튼케어">
+        <input type="checkbox" id="kitten"  value="3" name="skills_name" data-skills="키튼케어">
         <label for="kitten" id="nameTo3">키튼케어</label>
         
-        <input type="checkbox" id="walking"  value="4" name="skills" data-skills="도그워킹">
+        <input type="checkbox" id="walking"  value="4" name="skills_name" data-skills="도그워킹">
         <label for="walking" id="nameTo4">도그워킹</label>
         
         <div id="skills_text"></div>
     </div>
 
     <div class="type">
-        <input type="checkbox" id="dog" value="1" name="care_pet_type" data-animal="강아지">
+        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
         <label for="dog">강아지</label>
         
-        <input type="checkbox" id="cat" value="2" name="care_pet_type" data-animal="고양이">
+        <input type="checkbox" id="cat" value="2" name="care_name" data-animal="고양이">
         <label for="cat">고양이</label>
         
-        <input type="checkbox" id="fish"  value="3" name="care_pet_type" data-animal="물고기">
+        <input type="checkbox" id="fish"  value="3" name="care_name" data-animal="물고기">
         <label for="fish">물고기</label>
         
-        <input type="checkbox" id="rabbit"  value="4" name="care_pet_type" data-animal="토끼">
+        <input type="checkbox" id="rabbit"  value="4" name="care_name" data-animal="토끼">
         <label for="rabbit">토끼</label>
         
-        <input type="checkbox" id="hamster" value="5" name="care_pet_type" data-animal="햄스터">
+        <input type="checkbox" id="hamster" value="5" name="care_name" data-animal="햄스터">
         <label for="hamster">햄스터</label>
         
-        <input type="checkbox" id="reptiles" value="6" name="care_pet_type" data-animal="파충류">
+        <input type="checkbox" id="reptiles" value="6" name="care_name" data-animal="파충류">
         <label for="reptiles">파충류</label>        
         
         <div id="care_pet_type_text"></div>
     </div>
 
     <div class="condition">
-        <input type="checkbox" id="apt" value="1" name="care_condition" data-condition="아파트">
+        <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
         <label for="apt">아파트</label>
         
-        <input type="checkbox" id="villa" value="2" name="care_condition" data-condition="빌라">
+        <input type="checkbox" id="villa" value="2" name="care_condition_name" data-condition="빌라">
         <label for="villa">빌라</label>
         
-        <input type="checkbox" id="oneroom"  value="3" name="care_condition" data-condition="원룸">
+        <input type="checkbox" id="oneroom"  value="3" name="care_condition_name" data-condition="원룸">
         <label for="oneroom">원룸</label>
         
-        <input type="checkbox" id="housing"  value="4" name="care_condition" data-condition="주택">
+        <input type="checkbox" id="housing"  value="4" name="care_condition_name" data-condition="주택">
         <label for="housing">주택</label>
         
-        <input type="checkbox" id="baby" value="5" name="care_condition" data-condition="아기있음">
+        <input type="checkbox" id="baby" value="5" name="care_condition_name" data-condition="아기있음">
         <label for="baby">아기있음</label>
         
-        <input type="checkbox" id="smoking" value="6" name="care_condition" data-condition="흡연자">
+        <input type="checkbox" id="smoking" value="6" name="care_condition_name" data-condition="흡연자">
         <label for="smoking">흡연자</label>   
         
-        <input type="checkbox" id="x" value="7" name="care_condition" data-condition="해당사항없음">
+        <input type="checkbox" id="x" value="7" name="care_condition_name" data-condition="해당사항없음">
         <label for="x">해당사항없음</label>   
         
         <div id="care_condition_text"></div>

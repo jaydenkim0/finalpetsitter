@@ -30,23 +30,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{sitter_id},
 		#{info},
 		#{sitter_pets},
-		#{care_condition},
 		'정상',
 		'true',
 		#{sitter_matching_type},
 		sysdate)
 	</insert>
 	<!-- 펫시터 스킬 -->
-	<insert id="registSkills" parameterType="skillsDto">
-		insert into skills values(#{skills_name},#{skills_sitter_no})
+	<insert id="registSkills" parameterType="java.util.List">
+		insert into skills values
+		 <foreach collection="list" item="item" separator=" , " >
+		(#{skills_name},#{skills_sitter_no})
+		</foreach>
 	</insert>
+	
 	<!-- 펫시터 돌봄 가능 동물 -->
-	<insert id="registType" parameterType="carePetTypeDto">
-		insert into care_pet_type values(#{care_name},#{care_sitter_no})
+	<insert id="registType" parameterType="java.util.List">
+		insert into care_pet_type values
+		 <foreach collection="list" item="item" separator=" , " >
+		(#{care_name},#{care_sitter_no})
+		</foreach>
 	</insert>
+	
 	<!-- 펫시터 돌봄 환경 -->
-	<insert id="registCondition" parameterType="careConditionDto">
-		insert into care_condition values(#{care_condition_name},#{condition_sitter_no})
+	<insert id="registCondition" parameterType="java.util.List">
+		insert into care_condition values
+		 <foreach collection="list" item="item" separator=" , " >
+		(#{care_condition_name},#{condition_sitter_no})
+		</foreach>
 	</insert>
 </mapper>
 
