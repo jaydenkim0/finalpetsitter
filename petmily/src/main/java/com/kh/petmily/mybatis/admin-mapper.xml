@@ -89,19 +89,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!-- 펫시터 단일 검색  -->
 		<select id="petsitterSearchOne"  parameterType="String" resultType="petsitterVO">
-			select * from petsitter where grade = 'member' and sitter_id =#{sitter_id} 	
+			select * from petsitter where grade = 'petsitter' and sitter_id =#{sitter_id} 	
 		</select>
 		
 		
 		<!-- 펫시터리스트 검색 -->
-		<select id="petsitterSearchList" parameterType="String" resultType="petsitterDto">
+		<select id="petsitterSearchList" parameterType="String" resultType="petsitterVO">
 			select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
 		</select>
 		
+		<!-- 펫시터 상태 변경 등록 -->
+		<update id="sitter_status" parameterType="petsitterDto">
+			update pet_sitter set sitter_status = #{sitter_status} where id = #{sitter_id}
+		</update>	
 	
+	<!-- 블랙리스트 등록 -->
+		<insert id="blackList" parameterType="petsitterVO">
+			insert into blacklist values(
+			black_no_seq.nextval,
+			#{sitter_id},
+			#{name},
+			#{phone},
+			#{grade},
+			#{black_content},
+			sysdate
+			)
+		</insert>
 	
 	<!-- 정산관리 -->
 		<select id="account" resultType="accountDto"></select>
+	
+	
 	
 </mapper>
 
