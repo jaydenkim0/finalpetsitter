@@ -23,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override	
 		public MemberDto login(MemberDto memberDto) {					 
 			return memberDao.login(memberDto);	
-
+  
 		}
 	
 	//내정보조회
@@ -48,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String findid(MemberDto memberDto) {
 		return memberDao.findid(memberDto);
+	}
+	
+	// 비밀번호 변경
+	@Override
+	public void pwchange(MemberDto memberDto) {		
+		memberDao.pwchange(memberDto);
 	}
 	
 	}

@@ -1,6 +1,10 @@
 package com.kh.petmily.service;
 
+
+import java.util.Map;
+
 import java.util.List;
+
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
@@ -21,5 +25,8 @@ public interface MemberService {
 	void updatelastlogin(String id);
 
 	//아이디찾기
-	String findid(MemberDto memberDto);;
+	String findid(MemberDto memberDto);
+
+	void pwchange(MemberDto memberDto);
+
 }

@@ -55,5 +55,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.findid",memberDto);
 	}
 
+	// 비밀번호 변경
+	@Override
+	public void pwchange(MemberDto memberDto) {	
+		sqlSession.update("member.pwchange", memberDto);
+	}
 
 }

@@ -24,7 +24,7 @@
 	</div>
 	<div class="row-left">
 		<a href="findid">아이디 찾기</a><br>
-		<a href="#">비밀번호 찾기</a><br>
+		<a href="check">비밀번호 찾기</a><br>
 		<a href="regist">회원가입</a>
 	</div>
 	<%if(request.getParameter("error") != null){ %>

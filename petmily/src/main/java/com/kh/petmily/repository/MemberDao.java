@@ -25,4 +25,8 @@ public interface MemberDao {
 
 	//아이디찾기
 	String findid(MemberDto memberDto);
+
+	// 비밀번호 변경
+	void pwchange(MemberDto memberDto);
+
 }

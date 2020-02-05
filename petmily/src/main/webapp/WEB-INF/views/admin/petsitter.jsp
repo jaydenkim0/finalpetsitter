@@ -52,6 +52,9 @@
     
 	<h1>펫시터 관리페이지</h1>
 	
+	<a href="${pageContext.request.contextPath}/admin/">메인으로</a>
+		<a href="${pageContext.request.contextPath}/admin/petsitter/option">펫시터 옵션 등록하기</a>
+	
 	<br><br>
 	<hr>
 	<br><br>
@@ -62,13 +65,10 @@
 			<h3>${petsitter}</h3>
 					
 			<!-- 펫시터 상태 변경 버튼 -->
-			<form action="" method="post">			
+			<form action="petstatus" method=post>			
 					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-						<select name="sitter_status">
-							<option>정상</option>
-							<option>휴면</option>
-						</select>	
-					<button type="submit" >펫시터 상태 변경</button>						
+					<input type="hidden" name="sitter_status" value="휴면">					
+					<button type="submit" >펫시터  휴면 변경</button>						
 			</form>
 				
 			<!-- 펫시터 차단 버튼 -->	
@@ -103,4 +103,26 @@
 	</c:forEach>
 	
 	
+	<br><br>
+	<hr>
+	<br><br>
+	
+	<h2> 휴면 페시터 회원 </h2>	
+	
+	<c:forEach var="petsitterSleep" items="${petsitterSleepList}">
+		
+			<h3>${petsitterSleep}</h3>
+			
+				<!-- 펫시터 상태 변경 버튼 -->
+			<form action="petstatus" method=post>			
+					<input type="hidden" name="sitter_id" value="${petsitterSleep.sitter_id}">
+					<input type="hidden" name="sitter_status" value="정상">					
+					<button type="submit" >펫시터 정상 변경</button>						
+			</form>
+	
+	</c:forEach>
+	
+	<br><br>
+	<hr>
+	<br><br>
 	
