@@ -1,8 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+        	jQuery('#selectBox').change(function(){
+        		var state = jQuery('#selectBox option:selected').val();
+        		if(state=='예'){
+        			jQuery('.pet').show();
+        		}else{
+        			jQuery('.pet').hide();
+        		}
+        	});
+        });
+    </script>
+    <style>
+    	.pet{display:none;}
+    </style>
+</head>
 
-
-
+<body>
 <div align="center">
 	
 	<h2>회원가입</h2>
@@ -70,16 +87,16 @@
 		
 		
 		<tr>
-			<th rowspan="3">반려동물 유뮤</th>
-			<td>				
-			 		<select name="pets">
-			 			<option>예</option>
-			 			<option>아니오</option>			 		
+			<th colspan="2">반려동물이 있으신가요?		
+			 		<select name="pets" id="selectBox">
+			 			<option value="아니오">아니오</option>			 		
+			 			<option value="예">예</option>
 			 		</select>
-					
-			</td>
+			</th>
 		</tr>		
-		
+		<tr class="pet">
+			<th colspan="2">펫 등록 폼 넣기</th>
+		</tr>
 		
 		<tr> 
 			<th colspan="2">
@@ -93,4 +110,5 @@
 </div>
 
 <br><br><br>
+</body>
 

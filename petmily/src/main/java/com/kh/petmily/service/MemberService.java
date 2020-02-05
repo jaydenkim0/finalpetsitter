@@ -14,15 +14,19 @@ public interface MemberService {
 	void regist(MemberDto memberDto);
 	
 	MemberDto login(MemberDto memberDto);
-
+	
+	//내정보조회
 	MemberDto mylist(String id);
-
+	
+	//반려동물조회
 	List<PetDto> mylistpet(String id);
 
+	//최종로그인업데이트
 	void updatelastlogin(String id);
 
+	//아이디찾기
+	String findid(MemberDto memberDto);
+
 	void pwchange(MemberDto memberDto);
-
-
 
 }

@@ -144,6 +144,29 @@ public class MemberController {
 		return emailService.sendCertMessage(email, cert);
 	}
 	
+	//아이디찾기-GetMapping
+	@GetMapping("/findid")
+	public String findid() {
+		return "member/findid";
+	}
+	
+	//아이디찾기-PostMapping
+	@PostMapping("/findid")
+	public String findid(
+			@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String phone,
+			Model model,
+			MemberDto memberDto) {
+		memberDto.setName(name);
+		memberDto.setEmail(email);
+		memberDto.setPhone(phone);
+		String id = memberService.findid(memberDto);
+		model.addAttribute("id",id);
+		return "member/findid_result";
+	}
+
+	
 	@GetMapping("/validate")
 	
 	@ResponseBody
