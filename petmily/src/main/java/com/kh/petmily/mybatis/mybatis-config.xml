@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.petmily.entity.ReviewDto" alias="reviewDto"/>
 		<typeAlias type="com.kh.petmily.entity.SkillNameDto" alias="skillNameDto"/>
 		<typeAlias type="com.kh.petmily.entity.SkillsDto" alias="skillsDto"/>	
+		<typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>	
 		<typeAlias type="com.kh.petmily.vo.PetsitterVO" alias="petsitterVO"/>			
 	</typeAliases>
 	
