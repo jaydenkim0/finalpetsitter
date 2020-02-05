@@ -47,14 +47,18 @@
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petSkillNameD"  method="get">
-				<input type="hidden" name="care_type_no" value="${petSkillName.skill_no}">
+				<input type="hidden" name="skill_no" value="${petSkillName.skill_no}">
 				<input type="submit" value="삭제하기">
 			</form>
 		</c:forEach>
 	
 	<!-- 등록하기 -->
-		<form action="${pageContext.request.contextPath}/admin/petsitter/option/scarePetTypeI"  method="get">
+		<form action="${pageContext.request.contextPath}/admin/petsitter/option/petSkillNameI"  method="get">
 				<input type="text" name="skill_name" placeholder="스킬이름등록" required>
 				<input type="submit" value="등록하기">
 		</form>	
 	</h3>
+	
+	<br><br>
+	<hr>
+	<br><br>

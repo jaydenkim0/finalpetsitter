@@ -147,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 펫시터 옵션 : 환경 목록  -->
 				<!-- 불러오기 -->
 				<select id="getPetCareCondition" resultType="careConditionNameDto">
-					select * from care_condition_name;
+					select * from care_condition_name order by care_condition_no asc
 				</select>
 				<!-- 등록하기 -->
 				<insert id="petCareConditionI" parameterType="String">
