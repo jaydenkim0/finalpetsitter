@@ -22,6 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
 
 <mapper namespace="petsitter">
+<!-- 펫시터 회원 가입 -->
+	<!-- 펫시터 기본 정보 -->
 	<insert id="regist" parameterType="petsitterDto">
 		insert into pet_sitter values(
 		pet_sitter_no_seq.nextval,
@@ -34,8 +36,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{sitter_matching_type},
 		sysdate)
 	</insert>
-	
-	
+	<!-- 펫시터 스킬 -->
+	<insert id="registSkills" parameterType="skillsDto">
+		insert into skills values(#{skills_name},#{skills_sitter_no})
+	</insert>
+	<!-- 펫시터 돌봄 가능 동물 -->
+	<insert id="registType" parameterType="carePetTypeDto">
+		insert into care_pet_type values(#{care_name},#{care_sitter_no})
+	</insert>
+	<!-- 펫시터 돌봄 환경 -->
+	<insert id="registCondition" parameterType="careConditionDto">
+		insert into care_condition values(#{care_condition_name},#{condition_sitter_no})
+	</insert>
 </mapper>
 
 
