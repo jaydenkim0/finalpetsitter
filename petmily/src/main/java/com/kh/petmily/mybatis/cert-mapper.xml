@@ -24,16 +24,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 등록 기능 -->
 	<insert id="regist" parameterType="com.kh.petmily.entity.CertDto">
-		merge into cert using dual on(email = #{email})
-		when matched then
-			update set 
-				cert_no=#{cert_no}, when=sysdate 
-			where 
-				email=#{email}
-		when not matched then
-			insert values(#{email}, #{cert_no}, sysdate)
-	</insert>
+	insert into cert(email, cert_no) values(#{email},#{cert_no})
 	
+<!-- 		merge into cert using dual on(email = #{email}) -->
+<!-- 		when matched then -->
+<!-- 			update set  -->
+<!-- 				cert_no=#{cert_no}, when=sysdate  -->
+<!-- 			where  -->
+<!-- 				email=#{email} -->
+<!-- 		when not matched then -->
+<!-- 			insert values(#{email}, #{cert_no}, sysdate) -->
+	</insert>
+
 	<!-- 인증번호가 존재하는지 검사하는 구문 -->
 	<select id="check" resultType="com.kh.petmily.entity.CertDto" 
 																parameterType="map">

@@ -43,7 +43,7 @@ public class GmailService implements EmailService{
 		}
 	}
 
-	@Transactional//이 표시가 붙은 메소드는 기능이 하나로 합쳐져서 실행관리
+//	@Transactional//이 표시가 붙은 메소드는 기능이 하나로 합쳐져서 실행관리
 	@Override
 	public void sendChangePasswordMail(String email) throws MessagingException {
 		//1. 랜덤번호를 3자리 생성
