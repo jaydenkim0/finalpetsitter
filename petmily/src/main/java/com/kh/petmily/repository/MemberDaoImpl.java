@@ -48,7 +48,12 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.updatelastlogin",id);
 		
 	}
-	
-	
+
+	//아이디찾기
+	@Override
+	public String findid(MemberDto memberDto) {
+		return sqlSession.selectOne("member.findid",memberDto);
+	}
+
 
 }

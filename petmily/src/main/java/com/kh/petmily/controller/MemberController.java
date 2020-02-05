@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
@@ -93,9 +94,32 @@ public class MemberController {
 	
 	//내정보수정
 	@GetMapping("/mylistchange")
-		public String mylistchange() {
-			return "member/mylistchange";
-		}
+	public String mylistchange() {
+		return "member/mylistchange";
+	}
+	
+	//아이디찾기-GetMapping
+	@GetMapping("/findid")
+	public String findid() {
+		return "member/findid";
+	}
+	
+	//아이디찾기-PostMapping
+	@PostMapping("/findid")
+	public String findid(
+			@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String phone,
+			Model model,
+			MemberDto memberDto) {
+		memberDto.setName(name);
+		memberDto.setEmail(email);
+		memberDto.setPhone(phone);
+		String id = memberService.findid(memberDto);
+		model.addAttribute("id",id);
+		return "member/findid_result";
+	}
+	
 	
 }
 
