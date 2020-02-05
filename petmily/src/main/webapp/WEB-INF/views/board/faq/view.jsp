@@ -3,7 +3,8 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <h2>게시글 상세 보기</h2>
-<a href="${context}/board/faq/write">글쓰기</a>
+	<a href="${context}/board/faq/write">글쓰기</a>
+
 <table border="1">
 	<th>정보</th>
 	<th>데이터</th>
