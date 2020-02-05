@@ -114,19 +114,19 @@ public class AdminController {
 	// 차단 회원 및 펫시터 관리 페이지 연결
 	// 회원은 강제탈퇴( 강제 탈퇴전 해당 내용 이메일 전송 )
 	// 펫시터는 검색 노출 차단
-	@PostMapping("/blacklist_content")
-	public String blacklist_content(@ModelAttribute PetsitterDto petsitterDto, Model model) {
+	@GetMapping("/blacklist_content")
+	public String blacklist_content(@RequestParam String sitter_id, Model model) {
 		
-		System.out.println("blacklist_content" + petsitterDto);
-		model.addAttribute("petsitterDto", petsitterDto);
+//		System.out.println("sitter_id = " + sitter_id);
+		model.addAttribute("sitter_id", sitter_id);
 		return "admin/blacklist_content";
 	}
 	@PostMapping("/blackList")
 	public String blackList(@ModelAttribute PetsitterDto petsitterDto,
 										  @RequestParam String blacklist_centent) {
 		
-		System.out.println("blackList" + petsitterDto);
-		System.out.println("blacklist_centent" + blacklist_centent);
+//		System.out.println("blackList" + petsitterDto);
+//		System.out.println("blacklist_centent" + blacklist_centent);
 		
 		adminService.blackSitter(petsitterDto, blacklist_centent);
 		return "redirect:blacklist";		

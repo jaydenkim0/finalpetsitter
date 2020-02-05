@@ -74,7 +74,7 @@ public class AdiminServiceImpl implements AdminService {
 	// 펫시터 차단 기능
 	@Override
 	public void blackSitter(PetsitterDto petsitterDto, String blacklist_centent) {
-		// 펫시터 상태 휴면으로 변경
+		// 펫시터 상태 휴면으로 변경		
 		// 펫시터 단일 검색으로 정보 갖고 오기
 		String sitter_id = petsitterDto.getSitter_id();
 		PetsitterVO petsitterVO = (PetsitterVO) adminDao.petsitterSearchOne(sitter_id);

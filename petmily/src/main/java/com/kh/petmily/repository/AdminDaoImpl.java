@@ -65,7 +65,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 단일 검색
 	@Override
 	public List<PetsitterVO> petsitterSearchOne(String sitter_id) {
-		return sqlSession.selectOne("admin.", sitter_id);
+		return sqlSession.selectOne("admin.petsitterSearchOne", sitter_id);
 	}
 
 	// 펫시터 차단 (블랙리스트 등록)
