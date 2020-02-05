@@ -65,7 +65,7 @@ public class GmailService implements EmailService{
 		String url = ServletUriComponentsBuilder
 									.fromCurrentContextPath()
 									.port(8080)
-									.path("/pw/change")
+									.path("/member/change")
 									.queryParam("cert", cert)
 									.queryParam("email", email)
 									.toUriString();

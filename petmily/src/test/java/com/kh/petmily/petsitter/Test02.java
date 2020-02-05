@@ -1,5 +1,7 @@
 package com.kh.petmily.petsitter;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.repository.MemberDao;
+
+import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
@@ -16,19 +21,16 @@ import com.kh.petmily.entity.PetsitterDto;
 	"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"
 })
 @WebAppConfiguration
-public class Test01 {
-	
+@Slf4j
+public class Test02 {
 	@Autowired
 	private SqlSession sqlSession;
-	
+	@Autowired
+	private MemberDao memberDao;
 	@Test
-	public void registTest() {
-		PetsitterDto petsitterDto = PetsitterDto.builder()
-												.sitter_id("hello")
-												.info("저는 펫시터 테스트중입니다2")
-												.sitter_pets("예")											
-												.build();
-		sqlSession.insert("petsitter.regist", petsitterDto);
+	public void Test() {
+		String id = "test";
+		List<PetDto> list = memberDao.mylistpet(id);
+		System.out.println(list);
 	}
-
 }

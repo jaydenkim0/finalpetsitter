@@ -91,20 +91,16 @@ public class AdminController {
 				// 펫시터 신청한 회원 거부 기능
 				@PostMapping("/negative")
 				@ResponseBody
-				public String negative(@ModelAttribute	PetsitterVO petsitterVO,
-														Model model) {
+				public String negative(
+					@ModelAttribute PetsitterVO petsitterVO) {
 					// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
 					String email = petsitterVO.getEmail();
-					System.out.println("이메일 주소" + email);
+					String sitter_id = petsitterVO.getSitter_id();
 					String result = amailService.sendCancel(email);
 					// pet_sitter 테이블에서 신청한 내용을 삭제
-					String sitter_id = petsitterVO.getSitter_id();
-					System.out.println("펫시터 아이디 " + sitter_id);
-					adminService.petsitterNegative(sitter_id);							
-					System.out.println("이메일 전송 결과 = " + result);
+					adminService.petsitterNegative(sitter_id);	
 					return result;
-				}
-	
+				}	
 	
 				
 	// 정산관리 페이지 연결
@@ -118,11 +114,24 @@ public class AdminController {
 	// 차단 회원 및 펫시터 관리 페이지 연결
 	// 회원은 강제탈퇴( 강제 탈퇴전 해당 내용 이메일 전송 )
 	// 펫시터는 검색 노출 차단
-	@GetMapping("/blackList")
-	public String blackList(String sitter_id) {
-		adminService.petsitterapply(sitter_id);
-		return "admin/blackList";		
+	@GetMapping("/blacklist_content")
+	public String blacklist_content(@RequestParam String sitter_id, Model model) {
+		
+//		System.out.println("sitter_id = " + sitter_id);
+		model.addAttribute("sitter_id", sitter_id);
+		return "admin/blacklist_content";
 	}
+	@PostMapping("/blackList")
+	public String blackList(@ModelAttribute PetsitterDto petsitterDto,
+										  @RequestParam String blacklist_centent) {
+		
+//		System.out.println("blackList" + petsitterDto);
+//		System.out.println("blacklist_centent" + blacklist_centent);
+		
+		adminService.blackSitter(petsitterDto, blacklist_centent);
+		return "redirect:blacklist";		
+	}
+	
 	
 	
 	

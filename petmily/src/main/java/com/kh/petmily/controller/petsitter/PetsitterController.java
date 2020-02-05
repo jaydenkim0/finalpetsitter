@@ -18,6 +18,7 @@ public class PetsitterController {
 	
 	@GetMapping("/regist")
 	public String regist() {
+		/////
 		return "petsitter/regist";
 	}
 	
