@@ -32,7 +32,7 @@ public interface AdminDao {
 	// 펫시터 단일 검색
 	List<PetsitterVO> petsitterSearchOne(String sitter_id);
 
-	// 펫시터 차단 (블랙리스트 등록)
+	// 펫시터 차단 (블랙리스트 등록 및 펫시터 상태 휴면으로 변경)
 	void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO);
 
 	
