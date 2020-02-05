@@ -145,13 +145,15 @@ public class AdminController {
 				//skill_name
 				// 펫시터 스킬 등록
 				@GetMapping("/petsitter/option/petSkillNameI")
-				public String petSkillNameI(String skill_name) {
+				public String petSkillNameI(@RequestParam String skill_name) {
+					System.out.println("skill_name = "+ skill_name);
 					adminService.petSkillNameI(skill_name);
 					return "redirect:.";						
 				}
 				// 펫시터 스킬 삭제
 				@GetMapping("/petsitter/option/petSkillNameD")
-				public String petSkillNameD (int skill_no) {
+				public String petSkillNameD (@RequestParam int skill_no) {
+					System.out.println("skill_no = "+ skill_no);
 					adminService.petSkillNameD(skill_no);
 					return "redirect:.";		
 				}
@@ -159,13 +161,13 @@ public class AdminController {
 				// care_condition_name
 				// 펫시터 돌봄 가능 환경 등록
 				@GetMapping("petsitter/option/petCareConditionI")
-				public String petCareConditionI (String care_condition_name) {
+				public String petCareConditionI (@RequestParam String care_condition_name) {
 					adminService.petCareConditionI(care_condition_name);
 					return "redirect:.";	
 				}
 				// 펫시터 돌봄 가능 환경삭제
 				@GetMapping("petsitter/option/petCareConditionD")
-				public String petCareConditionD(int care_condition_no) {
+				public String petCareConditionD(@RequestParam int care_condition_no) {
 					adminService.petCareConditionD(care_condition_no);
 					return "redirect:.";	
 				}
