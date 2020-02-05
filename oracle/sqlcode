@@ -81,7 +81,7 @@ alter table pet_sitter modify sitter_joindate default sysdate;
 -- sitter_id 조건 unique 조건 적용
 alter table pet_sitter modify sitter_id unique;
 
---
+select * from pet_sitter;
 
 
 -- 시퀀스 번호 삭제
@@ -387,7 +387,9 @@ drop sequence black_no_seq;
 -- 시퀀스 번호 생성
 create sequence black_no_seq;
 
-
+select * from blacklist;
+delete blacklist;
+commit;
 ---------------------------------------------------------------
 -- member_cert 테이블 
 -- 비밀번호 변경 페이지 체크
