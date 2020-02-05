@@ -38,7 +38,7 @@
 	<hr>
 	<br><br>
 	
-		<h2>펫시터 케어가능 스킬 네임 추가 제거</h2>
+		<h2>펫시터 스킬 네임 추가 제거</h2>
 	
 	<h3>
 		<c:forEach var="petSkillName" items="${SKlist}">	
@@ -62,3 +62,25 @@
 	<br><br>
 	<hr>
 	<br><br>
+	
+		<h2>펫시터 환경 추가 제거</h2>
+	
+	<h3>
+		<c:forEach var="petCareCondition" items="${CClist}">	
+				
+			${petCareCondition}
+		
+		<!-- 삭제 -->
+			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petCareConditionD"  method="get">
+				<input type="hidden" name="care_condition_no" value="${petCareCondition.care_condition_no}">
+				<input type="submit" value="삭제하기">
+			</form>
+		</c:forEach>
+	
+	<!-- 등록하기 -->
+		<form action="${pageContext.request.contextPath}/admin/petsitter/option/petCareConditionI"  method="get">
+				<input type="text" name="care_condition_name" placeholder="스킬이름등록" required>
+				<input type="submit" value="등록하기">
+		</form>	
+	</h3>
+	
