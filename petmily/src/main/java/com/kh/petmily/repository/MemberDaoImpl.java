@@ -48,6 +48,11 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.updatelastlogin",id);
 		
 	}
+	// 비밀번호 변경
+	@Override
+	public void pwchange(MemberDto memberDto) {	
+		sqlSession.update("member.pwchange", memberDto);
+	}
 	
 	
 

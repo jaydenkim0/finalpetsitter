@@ -19,4 +19,7 @@ public interface MemberDao {
 	List<PetDto> mylistpet(String id);
 
 	void updatelastlogin(String id);
+
+	// 비밀번호 변경
+	void pwchange(MemberDto memberDto);
 }
