@@ -44,5 +44,16 @@ public class FaqServiceImpl implements FaqService {
 		faqDao.delete(faq_no);
 		
 	}
+	//게시글 검색 레코드 갯수 메소드
+	@Override
+	public int countArticle(String searchOpt, String keyword) throws Exception {
+		return faqDao.countArticle(searchOpt,keyword);
+	}
+	
+	//게시글 네비게이터
+	@Override
+	public List<FaqVO> listAll(String search_option, String keyword, int start, int end) throws Exception {
+		return faqDao.listAll(search_option, keyword,start,end);
+	}
 }
 

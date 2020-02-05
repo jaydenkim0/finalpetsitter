@@ -2,8 +2,10 @@
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<h2>공지글 작성</h2>
-<a href="${context}/board/faq/write">글쓰기</a><br><br>
+  
+<c:when test="${login}">
+	<a href="${context}/board/faq/write">글쓰기</a>
+</c:when>
 <form name="update" method="post" action="${context}/board/faq/update">
 	
 	<div>글 번호</div>
