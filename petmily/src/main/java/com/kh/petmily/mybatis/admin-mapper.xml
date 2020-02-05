@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  회원관리 -->	
 		<!-- 회원리시트 불러오가 -->
 		<select id="memberList"  resultType="memberDto">
-			select * from member order by id asc
+			select * from member where grade = 'member' order by id asc
 		</select>
 		
 		<!-- 
@@ -69,8 +69,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			member M
 			inner join pet_sitter P on M.id = P.sitter_id
 			order by pet_sitter_no desc -->
-			select * from petsitter where grade = 'petsitter' order by pet_sitter_no desc
+			select * from petsitter where grade = 'petsitter' and sitter_status = '정상' order by pet_sitter_no desc
 		</select>
+		
+		<!-- 휴면 펫시터 리스트 -->
+		<select id="petsleepList"  resultType="petsitterVO">
+			<!--	select * from 
+			member M
+			inner join pet_sitter P on M.id = P.sitter_id
+			order by pet_sitter_no desc -->
+			select * from petsitter where grade = 'petsitter' and sitter_status = '휴면' order by pet_sitter_no desc
+		</select>
+		
 		
 		<!-- 펫시터 신청한 회원 검색 -->
 		<select id="petsitterApplyList"  resultType="petsitterVO">	
@@ -100,8 +110,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!-- 펫시터 상태 변경 등록 -->
 		<update id="sitter_status" parameterType="petsitterDto">
-			update pet_sitter set sitter_status = #{sitter_status} where id = #{sitter_id}
+			update pet_sitter set sitter_status = #{sitter_status} where sitter_id = #{sitter_id}
 		</update>	
+		
+		<!--  펫시터 옵션 : 돌봄가능동물-->
+				<!-- 불러오기 -->
+				<select id="getCarePetType"  resultType="carePetTypeNameDto">
+					select * from care_pet_type_name order by care_type_no asc
+				</select>				
+				<!-- 등록하기 -->
+				<insert id="carePetType" parameterType="String">
+					insert into care_pet_type_name values(
+					care_type_no_seq.nextval, #{care_type})
+				</insert>
+				<!-- 삭제하기 -->
+				<delete id="carePetTypeDelete" parameterType="int">
+					delete care_pet_type_name where 
+					care_type_no = #{care_type_no}
+				</delete>
+				
+		<!-- 펫시터 옵션 : 스킬 이름  -->
+				<!-- 불러오기 -->
+				<select id="getPetSkills" resultType="skillNameDto">
+					select * from skill_name order by skill_no asc
+				</select>
+				<!-- 등록하기 -->
+				<insert id="petSkillNameI" parameterType="String">
+					insert into skill_name values(skill_no_seq.nextval, #{skill_name} ) 
+				</insert>
+				<!-- 삭제하기 -->
+				<delete id="petSkillNameD" parameterType="int">
+					delete skill_name where
+					skill_no = #{skill_no}
+				</delete>
+				
+		<!-- 펫시터 옵션 : 환경 목록  -->
+				<!-- 불러오기 -->
+				<select id="getPetCareCondition" resultType="careConditionNameDto">
+					select * from care_condition_name;
+				</select>
+				<!-- 등록하기 -->
+				<insert id="petCareConditionI" parameterType="String">
+					insert into care_condition_name values (
+					care_condition_no_seq.nextval,
+					care_condition_name)
+				</insert>
+				<!-- 삭제하기 -->
+				<delete id="petCareConditionD" parameterType="int">
+					delete care_condition_name where
+					care_condition_no = #{care_condition_no}
+				</delete>
+		
 	
 	<!-- 블랙리스트 등록 -->
 		<insert id="blackList" parameterType="petsitterVO">

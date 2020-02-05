@@ -5,6 +5,8 @@
     
 	<h1>회원 관리페이지</h1>
 	
+	<a href="${pageContext.request.contextPath}/admin/">메인으로</a>
+	
 	<c:forEach var="member"  items="${memberList}">
 					<h3>${member}</h3>
 	</c:forEach>
