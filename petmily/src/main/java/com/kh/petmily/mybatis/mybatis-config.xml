@@ -17,6 +17,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.petmily.entity.AccountDto" alias="accountDto"/>
 		<typeAlias type="com.kh.petmily.entity.CareBoardDto" alias="careBoardDto"/>
 		<typeAlias type="com.kh.petmily.entity.CareImageDto" alias="careImageDto"/>
+		<typeAlias type="com.kh.petmily.entity.CareConditionDto" alias="careConditionDto"/>
+		<typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>
 		<typeAlias type="com.kh.petmily.entity.CarePetTypeDto" alias="carePetTypeDto"/>
 		<typeAlias type="com.kh.petmily.entity.CarePetTypeNameDto" alias="carePetTypeNameDto"/>
 		<typeAlias type="com.kh.petmily.entity.CareReplyDto" alias="careReplyDto"/>
