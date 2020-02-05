@@ -1,0 +1,75 @@
+
+---------------------------------------------------------------
+-- final project 
+---------------------------------------------------------------
+
+-- select 
+
+
+    -- member + pet_sitter view 제거
+        drop view petsitter;
+    -- member + pet_sitter view 생성
+        create view petsitter as
+        select * from member M inner join pet_sitter P on M.id = P.sitter_id;
+    -- view 테스트 
+        select * from petsitter;
+
+-----------------------------------------------------------------------------------------
+
+    -- petsitter(view) +  care_condition + care_condition_name 삭제
+        drop view petsitter_care_condition;
+    -- petsitter(view) +  care_condition + care_condition_name 생성
+        create view petsitter_care_condition as
+        select 
+        P.*, 
+        c.care_condition_name, 
+        c.condition_sitter_no, 
+        n.care_condition_no as care_condition_name_no,
+        n.care_condition_name as care_condition_real_name        
+        from petsitter P 
+        inner join care_condition C on P.pet_sitter_no= C.condition_sitter_no
+        inner join care_condition_name N on C.care_condition_name  = N.care_condition_no;
+
+        select * from petsitter_care_condition;       
+        
+-------------------------------------------------------------------------------------------
+
+    -- pet_sitter + skills + skill_name  삭제
+       drop view petsitter_skills;
+    -- pet_sitter + skills + skill_name  생성
+       create view petsitter_skills as
+       select * from petsitter P
+       inner join skills S on P.pet_sitter_no= s.skills_sitter_no
+       inner Join skill_name N on s.skills_name = n.skill_no;
+       
+       select * from petsitter_skills;
+       
+       
+-------------------------------------------------------------------------------------------
+
+    -- pet_sitter + care_pet_type + care_pet_type_name  생성   
+       drop view petsitter_care_pet_type;
+    -- pet_sitter + care_pet_type + care_pet_type_name  생성
+       create view petsitter_care_pet_type as
+       select * from petsitter P
+       inner join care_pet_type C on P.pet_sitter_no= c.care_sitter_no
+       inner join care_pet_type_name N on c.care_name = n.care_type_no;
+       
+       select * from petsitter_care_pet_type;
+-------------------------------------------------------------------------------------------
+
+    -- member + pet view 생성
+        drop view memberpets;
+    -- member + pet view 생성
+        create view memberpets  as
+        select M.*, P.pet_no pet_no ,
+        P.name pet_name, 
+        P.age pet_age, 
+        P.type pet_type, 
+        P.ect pet_ect  
+        from member M inner join pet P on M.id = P.member_id;
+    -- view 테스트
+        select * from memberpets;        
+    
+-------------------------------------------------------------------------------------------
+
