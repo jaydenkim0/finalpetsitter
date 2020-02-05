@@ -72,9 +72,8 @@
 			</form>
 				
 			<!-- 펫시터 차단 버튼 -->	
-			<form action="blacklist_content" method="post">			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-					<input type="hidden" name="sitter_status" value="휴면">
+			<form action="blacklist_content" method="get">			
+					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
 					<button type="submit" >차단 펫시터 등록</button>						
 			</form>					
 	</c:forEach>	

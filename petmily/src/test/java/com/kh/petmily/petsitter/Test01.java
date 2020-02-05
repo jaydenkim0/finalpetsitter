@@ -26,8 +26,7 @@ public class Test01 {
 		PetsitterDto petsitterDto = PetsitterDto.builder()
 												.sitter_id("hello")
 												.info("저는 펫시터 테스트중입니다2")
-												.sitter_pets("예")
-												.care_condition("원룸")
+												.sitter_pets("예")											
 												.build();
 		sqlSession.insert("petsitter.regist", petsitterDto);
 	}
