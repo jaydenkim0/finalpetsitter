@@ -62,11 +62,16 @@ alter table pet_sitter modify sitter_terms_agree not null;
 -- care_condition 속성 변경
 alter table pet_sitter modify care_condition varchar2(80)
 check (care_condition in ('아파트', '빌라', '원룸', '주택', '아기있음', '흡연자', '기타', '해당사항없음'));
+-- 컬럼삭제
+alter table pet_sitter drop column care_condition;
 
 -- 펫시터 매칭 타입 컬럼 추가 생성
 alter table pet_sitter add sitter_matching_type varchar2(15);
 -- sitter_matching_type 속성 변경
 alter table pet_sitter modify check (sitter_matching_type in ('방문서비스', '위탁서비스', '둘다'));
+-- check 제약조건 삭제
+alter table pet_sitter DROP CONSTRAINT SYS_C0017831;
+
 
 -- 펫시터 가입일 컬럼 추가
 alter table pet_sitter add sitter_joindate date;
@@ -75,6 +80,9 @@ alter table pet_sitter modify sitter_joindate default sysdate;
 
 -- sitter_id 조건 unique 조건 적용
 alter table pet_sitter modify sitter_id unique;
+
+--
+
 
 -- 시퀀스 번호 삭제
 drop sequence pet_sitter_no_seq;
@@ -381,8 +389,8 @@ create sequence black_no_seq;
 
 
 ---------------------------------------------------------------
--- blackList 테이블 
--- 차단 회원
+-- member_cert 테이블 
+-- 비밀번호 변경 페이지 체크
 ---------------------------------------------------------------
 
 create table member_cert(
@@ -391,6 +399,37 @@ cert_no varchar2(128) not null,
 when date default sysdate
 );
 
+
+---------------------------------------------------------------
+-- care_condition_name 테이블 
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table care_condition_name;
+-- 테이블 생성
+create table care_condition_name(
+care_condition_no number primary key,
+care_condition_name varchar2(30) not null
+);
+
+-- 시퀀스 번호 삭제
+drop sequence care_condition_no_seq;
+-- 시퀀스 번호 생성
+create sequence care_condition_no_seq;
+
+
+---------------------------------------------------------------
+-- care_condition_name 테이블 
+-- pet_sitter 와 care_condition_name 을 연결해주는 테이블
+---------------------------------------------------------------
+
+-- 테이블 삭제
+
+-- 테이블 생성
+create table care_condition(
+care_condition_name constraint fk_ConditionName_CareCondition references care_condition_name(care_condition_no) on delete cascade,
+condition_sitter_no constraint fk_petsitter_no_care_condition references pet_sitter(pet_sitter_no) on delete cascade
+);
 
 
 
