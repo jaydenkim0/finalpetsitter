@@ -153,7 +153,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<insert id="petCareConditionI" parameterType="String">
 					insert into care_condition_name values (
 					care_condition_no_seq.nextval,
-					care_condition_name)
+					#{care_condition_name})
 				</insert>
 				<!-- 삭제하기 -->
 				<delete id="petCareConditionD" parameterType="int">
