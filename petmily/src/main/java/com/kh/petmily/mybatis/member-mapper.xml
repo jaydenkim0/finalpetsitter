@@ -64,6 +64,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set lastlogin=sysdate where id=#{id}
 	</update>
 	
+	<!-- 아이디찾기 -->
+	<select id="findid" parameterType="memberDto" resultType="String">
+		select id from member 
+		where name= #{name} and email=#{email} and phone=#{phone}
+	</select>
+
+	<!--  비밀번호 변경 -->
+	<update id="pwchange" parameterType="memberDto">
+		update member set pw = #{pw} where email = #{email}
+	</update>
 	
 </mapper>
 

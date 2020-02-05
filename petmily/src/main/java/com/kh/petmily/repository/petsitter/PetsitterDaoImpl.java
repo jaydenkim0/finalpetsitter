@@ -1,4 +1,4 @@
-package com.kh.petmily.repository;
+package com.kh.petmily.repository.petsitter;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

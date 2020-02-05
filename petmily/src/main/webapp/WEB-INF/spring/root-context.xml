@@ -21,8 +21,6 @@
 			properties 파일을 불러오도록 설정
 	 -->
 	<context:property-placeholder location="classpath:/properties/*.properties" />
-	<context:property-override/>
-	
 	
 	<!-- 
 		데이터베이스 연결을 담당하는 객체를 등록
@@ -39,6 +37,7 @@
 	<!-- 
 		DBCP용 연결 도구 설정
 		- common-dbcp2가 필요함 
+		jdbc:oracle:thin:@www.sysout.co.kr:1521:xe
 	-->
 	<bean id="dbcpSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="${database.driver}"></property>
@@ -72,8 +71,8 @@
 	 -->
 	 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 	 	<property name="dataSource" ref="dbcpSource"></property>
-	 	<property name="configLocation" value="${path.mybatis.config-location}"></property>
-	 	<property name="mapperLocations" value="${path.mybatis.mapper-location}"></property>
+	 	<property name="configLocation" value="classpath:/com/kh/petmily/mybatis/mybatis-config.xml"></property>
+	 	<property name="mapperLocations" value="classpath:/com/kh/petmily/mybatis/**/*-mapper.xml"></property>
 	 </bean>
 	 
 	 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
