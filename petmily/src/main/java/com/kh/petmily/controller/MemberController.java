@@ -17,24 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.MemberDto;
-
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.repository.CertDao;
-import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.kh.petmily.entity.CertDto;
-
-
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,16 +34,13 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
-	private MemberDao memberDao;
-	
-	@Autowired
 	private EmailService emailService;
 	
 	@Autowired
 	private RandomService randomService;
 		
 	@Autowired
-		private CertDao certDao;
+	private CertDao certDao;
 	
 	
 	@GetMapping("/input")
@@ -167,8 +151,7 @@ public class MemberController {
 	}
 
 	
-	@GetMapping("/validate")
-	
+	@GetMapping("/validate")	
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {

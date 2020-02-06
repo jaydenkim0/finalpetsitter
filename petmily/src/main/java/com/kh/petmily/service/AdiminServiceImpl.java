@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.PetsitterVO;
 
@@ -154,6 +158,43 @@ public class AdiminServiceImpl implements AdminService {
 		adminDao.petCareConditionD(care_condition_no);
 	}
 
+	// 펫시터 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> sitterBlackList() {		
+		return adminDao.getSitterBlackList();
+	}
+
+	// 회원 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> memberBlackList() {		
+		return adminDao.getMemberBlackList();
+	}
+	
+	// 페시터 회원 정보 (단일조회)
+	@Override
+	public PetsitterVO petsitterdetail(int pet_sitter_no) {
+		return adminDao.getPetsitterdetail(pet_sitter_no);
+	}
+	// 펫시터 회원정보 (지역) 
+	@Override
+	public LocationDto petsitterdetailLocation(int pet_sitter_no) {
+		return adminDao.getPetsitterdetailLocation(pet_sitter_no);
+	}
+	// 펫시터 회원정보 (돌봄가능동물) 
+	@Override
+	public CarePetTypeNameDto petsitterdetailCarePet(int pet_sitter_no) {
+		return adminDao.getPetsitterdetailCarePet(pet_sitter_no);
+	}
+	// 펫시터 회원정보 (스킬) 
+	@Override
+	public SkillNameDto petsitterdetailSkills(int pet_sitter_no) {
+		return adminDao.getPetsitterdetailSkills(pet_sitter_no);
+	}
+	// 펫시터 회원정보 (펫시터 환경) 
+	@Override
+	public CareConditionNameDto petsitterdetailCareCondition(int pet_sitter_no) {
+		return adminDao.getPetsitterdetailCareCondition(pet_sitter_no);
+	}
 
 
 

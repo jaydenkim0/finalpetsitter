@@ -6,8 +6,8 @@
 	
 	
 	<h1> 펫시터 옵션 기능 추가 삭제 </h1>
-	
-	<a href="${pageContext.request.contextPath}/admin/petsitter">펫시터 페이지로 이동</a>
+	<br>
+	<a href="${pageContext.request.contextPath}/admin/petsitter"><button>펫시터페이지로 이동</button></a>
 	
 	<br><br>
 	<hr>
@@ -18,7 +18,7 @@
 	<h3>
 		<c:forEach var="carePetType" items="${CTlist}">	
 				
-			${carePetType}
+			${carePetType.care_type}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/carePetTypeD"  method="get">
@@ -43,7 +43,7 @@
 	<h3>
 		<c:forEach var="petSkillName" items="${SKlist}">	
 				
-			${petSkillName}
+			${petSkillName.skill_name}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petSkillNameD"  method="get">
@@ -68,7 +68,7 @@
 	<h3>
 		<c:forEach var="petCareCondition" items="${CClist}">	
 				
-			${petCareCondition}
+			${petCareCondition.care_condition_name}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petCareConditionD"  method="get">

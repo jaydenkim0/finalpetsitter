@@ -2,9 +2,13 @@ package com.kh.petmily.repository;
 
 import java.util.List;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminDao {
@@ -71,7 +75,21 @@ public interface AdminDao {
 	// 삭제하기
 	void petCareConditionD(int care_condition_no);
 
+	// 펫시터 블랙리스트 불러오기
+	List<BlackListDto> getSitterBlackList();
+	// 회원 블랙리스트 불러오기
+	List<BlackListDto> getMemberBlackList();
 
+	// 페시터 회원 정보 (단일조회)
+	PetsitterVO getPetsitterdetail(int pet_sitter_no);
+	// 펫시터 회원정보 (지역) 
+	LocationDto getPetsitterdetailLocation(int pet_sitter_no);
+	// 펫시터 회원정보 (돌봄가능동물) 
+	CarePetTypeNameDto getPetsitterdetailCarePet(int pet_sitter_no);
+	// 펫시터 회원정보 (스킬) 
+	SkillNameDto getPetsitterdetailSkills(int pet_sitter_no);
+	// 펫시터 회원정보 (펫시터 환경) 
+	CareConditionNameDto getPetsitterdetailCareCondition(int pet_sitter_no);
 
 	
 

@@ -6,9 +6,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 @Repository
@@ -147,6 +151,43 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.delete("admin.petCareConditionD", care_condition_no)	;
 	}
 
+	// 펫시터 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> getSitterBlackList() {
+		return sqlSession.selectList("admin.getSitterBlackList");
+	}
+
+	// 펫시터 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> getMemberBlackList() {
+		return sqlSession.selectList("admin.getMemberBlackList");
+	}
+
+				// 페시터 회원 정보 (단일조회)
+				@Override
+				public PetsitterVO getPetsitterdetail(int pet_sitter_no) {		
+					return sqlSession.selectOne("admin.getPetsitterdetail", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (지역) 
+				@Override
+				public LocationDto getPetsitterdetailLocation(int pet_sitter_no) {
+					return sqlSession.selectOne("admin.getPetsitterdetailLocation", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (돌봄가능동물) 
+				@Override
+				public CarePetTypeNameDto getPetsitterdetailCarePet(int pet_sitter_no) {
+					return sqlSession.selectOne("admin.getPetsitterdetailCarePet", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (스킬) 
+				@Override
+				public SkillNameDto getPetsitterdetailSkills(int pet_sitter_no) {
+					return sqlSession.selectOne("admin.getPetsitterdetailSkills", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (펫시터 환경) 
+				@Override
+				public CareConditionNameDto getPetsitterdetailCareCondition(int pet_sitter_no) {
+					return sqlSession.selectOne("admin.getPetsitterdetailCareCondition", pet_sitter_no);
+				}
 
 
 
