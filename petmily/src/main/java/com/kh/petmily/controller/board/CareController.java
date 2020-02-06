@@ -2,6 +2,8 @@ package com.kh.petmily.controller.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,5 +33,15 @@ public class CareController {
 		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
 		return "board/care/list";
+	}
+	
+	//게시글 작성
+	@GetMapping("/write")
+	public String write(
+			HttpSession session,
+			Model model) {
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("id",id);
+		return "board/care/write";
 	}
 }
