@@ -51,9 +51,9 @@
     
     
 	<h1>펫시터 관리페이지</h1>
-	
-	<a href="${pageContext.request.contextPath}/admin/">메인으로</a>
-		<a href="${pageContext.request.contextPath}/admin/petsitter/option">펫시터 옵션 등록하기</a>
+	<br>
+	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+	<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
 	
 	<br><br>
 	<hr>
@@ -61,22 +61,28 @@
 	
 	<h2> 펫시터 리스트 </h2>
 	
-	<c:forEach var="petsitter" items="${petsitterList}">			
-			<h3>${petsitter}</h3>
+
+			<c:forEach var="petsitter" items="${petsitterList}">	
+
+					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
+					<h3>펫시터 ID : ${petsitter.sitter_id},
+					펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
+					펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}</h3></a>
 					
-			<!-- 펫시터 상태 변경 버튼 -->
-			<form action="petstatus" method=post>			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-					<input type="hidden" name="sitter_status" value="휴면">					
-					<button type="submit" >펫시터  휴면 변경</button>						
-			</form>
-				
-			<!-- 펫시터 차단 버튼 -->	
-			<form action="blacklist_content" method="get">			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
-					<button type="submit" >차단 펫시터 등록</button>						
-			</form>					
-	</c:forEach>	
+						
+					<!-- 펫시터 상태 변경 버튼 -->			
+					<form action="petstatus" method=post>			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+							<input type="hidden" name="sitter_status" value="휴면">					
+							<button type="submit" >펫시터  휴면 변경</button>						
+					</form>
+						
+					<!-- 펫시터 차단 버튼 -->	
+					<form action="blacklist_content" method="get">			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
+							<button type="submit" >차단 펫시터 등록</button>						
+					</form>							
+			</c:forEach>			
 	
 	
 	<br><br>
@@ -86,7 +92,13 @@
 	<h2> 페시터 신청 회원 </h2>	
 		
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
-			<h3>${petsitterapply}</h3>						
+			<h3>
+				${petsitterapply.id},
+				${petsitterapply.name},
+				${petsitterapply.nick},
+				${petsitterapply.phone},
+				${petsitterapply.joindate}			
+			</h3>						
 			
 			<!-- 펫시터 승인 버튼 -->			
 			<form action="apply" method="post">
@@ -111,7 +123,9 @@
 	
 	<c:forEach var="petsitterSleep" items="${petsitterSleepList}">
 		
-			<h3>${petsitterSleep}</h3>
+				<h3>펫시터 ID : ${petsitterSleep.sitter_id},
+				펫시터 상태(정상, 휴면) : ${petsitterSleep.sitter_status},
+				펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleep.sitter_matching_type}</h3>
 			
 				<!-- 펫시터 상태 변경 버튼 -->
 			<form action="petstatus" method=post>			

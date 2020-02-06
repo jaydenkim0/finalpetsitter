@@ -103,6 +103,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>
 		
 		
+				<!-- 페시터 회원 정보 (단일조회)  -->
+				<select id="getPetsitterdetail" resultType="petsitterVO">
+					select * from petsitter where pet_sitter_no = #{pet_sitter_no}				
+				</select>
+				<!-- 펫시터 회원정보 (지역)  -->
+				<select id="getPetsitterdetailLocation" resultType="locationDto">
+					select * from sitterlocation where pet_sitter_no = #{pet_sitter_no}	
+				</select>	
+				<!-- 펫시터 회원정보 (돌봄가능동물)  -->
+				<select id="getPetsitterdetailCarePet" resultType="carePetTypeNameDto">
+					select * from petsitter_care_pet_type where pet_sitter_no = #{pet_sitter_no}	
+				</select>
+				<!-- 펫시터 회원정보 (스킬)  -->
+				<select id="getPetsitterdetailSkills" resultType="skillNameDto">
+					 select * from petsitter_skills where pet_sitter_no = #{pet_sitter_no}	
+				</select>
+				<!-- 펫시터 회원정보 (펫시터 환경)  -->
+				<select id="getPetsitterdetailCareCondition" resultType="careConditionNameDto">
+					select * from petsitter_care_condition where pet_sitter_no = #{pet_sitter_no}	
+				</select>
+		
+		
 		<!-- 펫시터리스트 검색 -->
 		<select id="petsitterSearchList" parameterType="String" resultType="petsitterVO">
 			select * from petsitter where sitter_id like  '%'||#{id}||'%' order by id asc
@@ -162,7 +184,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</delete>
 		
 	
-	<!-- 블랙리스트 등록 -->
+	<!-- 블랙리스트 -->
+		<!-- 블랙리스트 펫시터 불러오기 -->
+		<select id="getSitterBlackList" resultType="blackListDto">
+			select * from blacklist where black_grade ='petsitter' order by black_no desc
+		</select>
+		
+		<!-- 블랙리스트 회원 불러오기 -->
+		<select id="getMemberBlackList" resultType="blackListDto">
+			select * from blacklist where black_grade ='member' order by black_no desc
+		</select>
+		
+		<!-- 블랙리스트 펫시터 등록 -->
 		<insert id="blackList" parameterType="petsitterVO">
 			insert into blacklist values(
 			black_no_seq.nextval,
@@ -176,7 +209,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</insert>
 	
 	<!-- 정산관리 -->
-		<select id="account" resultType="accountDto"></select>
+	
 	
 	
 	

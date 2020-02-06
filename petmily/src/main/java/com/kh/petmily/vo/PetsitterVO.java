@@ -41,5 +41,11 @@ public class PetsitterVO {
 	
 	// blacklist 사용시 추가 컨텐츠
 	private String black_content;
+	
+
+	
+
+	
+	
 
 }

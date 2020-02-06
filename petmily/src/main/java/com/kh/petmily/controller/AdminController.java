@@ -14,9 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.PetsitterVO;
@@ -111,17 +116,17 @@ public class AdminController {
 				}	
 				
 				
-				// 관리자 옵션 등록 페이지
+				// 펫시터 옵션 등록 페이지
 				@GetMapping("/petsitter/option")
 				public String petOtion(Model model) {				
 					// 펫시터 돌봄 가능 동물 종류 리스트
 					List<CarePetTypeNameDto> SPlist = (List<CarePetTypeNameDto>) adminService.carePetType();
 					model.addAttribute("CTlist", SPlist);
 					// 펫시터 스킬 종류 리스트
-					List<CarePetTypeNameDto> SKlist = (List<CarePetTypeNameDto>) adminService.petSkillsName();
+					List<SkillNameDto> SKlist = (List<SkillNameDto>) adminService.petSkillsName();
 					model.addAttribute("SKlist", SKlist);
 					// 펫시터 환경 리스트					
-					List<CarePetTypeNameDto> CClist = (List<CarePetTypeNameDto>) adminService.petCareCondition();
+					List<CareConditionNameDto> CClist = (List<CareConditionNameDto>) adminService.petCareCondition();
 					model.addAttribute("CClist", CClist);
 					return "admin/petsitter/option";					
 				}
@@ -132,14 +137,14 @@ public class AdminController {
 				public String carePetTypeI (@RequestParam String care_type) {
 					System.out.println("care_type = "+ care_type);
 					 adminService.carePetTypeI(care_type);
-					 return "redirect:.";	
+					 return "redirect:/admin/petsitter/option";	
 				}
 				// 돌봄 가능 동물 종류 삭제
 				@GetMapping("/petsitter/option/carePetTypeD")				
 				public String  carePetTypeD(@RequestParam int care_type_no) {
 					System.out.println("care_type_no = "+ care_type_no);
 					adminService.carePetTypeD(care_type_no);
-					 return "redirect:.";	
+					 return "redirect:/admin/petsitter/option";	
 				}
 				
 				//skill_name
@@ -148,14 +153,14 @@ public class AdminController {
 				public String petSkillNameI(@RequestParam String skill_name) {
 					System.out.println("skill_name = "+ skill_name);
 					adminService.petSkillNameI(skill_name);
-					return "redirect:.";						
+					return "redirect:/admin/petsitter/option";						
 				}
 				// 펫시터 스킬 삭제
 				@GetMapping("/petsitter/option/petSkillNameD")
 				public String petSkillNameD (@RequestParam int skill_no) {
 					System.out.println("skill_no = "+ skill_no);
 					adminService.petSkillNameD(skill_no);
-					return "redirect:.";		
+					return "redirect:/admin/petsitter/option";		
 				}
 				
 				// care_condition_name
@@ -163,13 +168,13 @@ public class AdminController {
 				@GetMapping("petsitter/option/petCareConditionI")
 				public String petCareConditionI (@RequestParam String care_condition_name) {
 					adminService.petCareConditionI(care_condition_name);
-					return "redirect:.";	
+					return "redirect:/admin/petsitter/option";	
 				}
 				// 펫시터 돌봄 가능 환경삭제
 				@GetMapping("petsitter/option/petCareConditionD")
 				public String petCareConditionD(@RequestParam int care_condition_no) {
 					adminService.petCareConditionD(care_condition_no);
-					return "redirect:.";	
+					return "redirect:/admin/petsitter/option";	
 				}
 				
 	// 펫시터 상태 변경 수정		
@@ -177,6 +182,35 @@ public class AdminController {
 	public String petstatus (@ModelAttribute PetsitterDto petsitterDto) {		
 		adminService.sitter_status(petsitterDto);
 		return "redirect:petsitter";	
+	}
+	
+	// 펫시터 정보 디테일 페이지로 연결
+	@GetMapping("/petsitter/petsitterdetail")
+	public String petsitterdetail(@RequestParam int pet_sitter_no, Model model) {
+		System.out.println(pet_sitter_no);
+		
+		// 펫시터 단일조회 조건 펫시터 번호로
+		PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
+		// 펫시터 회원정보 (지역) 
+		List<LocationDto>  petlocation = adminService.petsitterdetailLocation(pet_sitter_no);
+		// 펫시터 회원정보 (돌봄가능동물) 
+		List<CarePetTypeNameDto> pettypename = adminService.petsitterdetailCarePet(pet_sitter_no);
+		// 펫시터 회원정보 (스킬) 
+		List<SkillNameDto> petskill = adminService.petsitterdetailSkills(pet_sitter_no);
+		// 펫시터 회원정보 (펫시터 환경) 
+		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);		
+		System.out.println(petsitter);
+		System.out.println(petlocation);
+		System.out.println(pettypename);
+		System.out.println(petskill);
+		System.out.println(petcondition);		
+		
+		model.addAttribute("petsitter", petsitter);
+		model.addAttribute("petlocation", petlocation);
+		model.addAttribute("pettypename", pettypename);
+		model.addAttribute("petskill", petskill);
+		model.addAttribute("petcondition", petcondition);
+		return "admin/petsitter/petsitterdetail";		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -190,17 +224,23 @@ public class AdminController {
 		model.addAttribute("sitter_id", sitter_id);
 		return "admin/blacklist_content";
 	}
-				@PostMapping("/blackList")
+				@PostMapping("/blackListpage")
 				public String blackList(@ModelAttribute PetsitterDto petsitterDto,
 													  @RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
-					return "admin/blackList";		
+					return "redirect:blackList";		
 				}	
+				
 	// 블랙리스트 
-	@GetMapping("/blackListpage")
-	public String blackListpage () {
+	@GetMapping("/blackList")
+	public String blackListpage (Model model) {
+		// 펫시터 블랙리스트 불러오기
+		List<BlackListDto> PBlist = adminService.sitterBlackList();
+		// 회원 블랙리스트 불러오기
+		List<BlackListDto>MBlist = adminService.memberBlackList();
 		
-		
+		model.addAttribute("PBlist", PBlist);
+		model.addAttribute("MBlist", MBlist);
 		return "admin/blackList";		
 	}
 	

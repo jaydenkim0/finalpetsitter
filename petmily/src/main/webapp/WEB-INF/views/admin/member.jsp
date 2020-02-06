@@ -4,9 +4,16 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 	<h1>회원 관리페이지</h1>
+	<!-- 메인으로 돌아가는 버튼 -->
+	<br>
+	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
 	
-	<a href="${pageContext.request.contextPath}/admin/">메인으로</a>
+	
 	
 	<c:forEach var="member"  items="${memberList}">
-					<h3>${member}</h3>
+					<h5>아이디 : ${member.id},
+					이름 : ${member.name},
+					닉네임 : ${member.nick},
+					이메일 : ${member.email}</h5>
+					<hr>
 	</c:forEach>
