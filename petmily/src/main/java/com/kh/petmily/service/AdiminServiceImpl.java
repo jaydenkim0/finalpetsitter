@@ -12,6 +12,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.PetsitterVO;
 
@@ -111,12 +112,12 @@ public class AdiminServiceImpl implements AdminService {
 	}	
 	// 스킬 목록 불러오기
 	@Override
-	public List<CarePetTypeNameDto> petSkillsName() {		
+	public List<SkillNameDto> petSkillsName() {		
 		return adminDao.getPetSkills();
 	}
 	// 펫 컨디션(환경) 목록 불러오기
 	@Override
-	public List<CarePetTypeNameDto> petCareCondition() {	
+	public List<CareConditionNameDto> petCareCondition() {	
 		return adminDao.getPetCareCondition();
 	}
 	
@@ -177,22 +178,22 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	// 펫시터 회원정보 (지역) 
 	@Override
-	public LocationDto petsitterdetailLocation(int pet_sitter_no) {
+	public List<LocationDto> petsitterdetailLocation(int pet_sitter_no) {
 		return adminDao.getPetsitterdetailLocation(pet_sitter_no);
 	}
 	// 펫시터 회원정보 (돌봄가능동물) 
 	@Override
-	public CarePetTypeNameDto petsitterdetailCarePet(int pet_sitter_no) {
+	public List<CarePetTypeNameDto> petsitterdetailCarePet(int pet_sitter_no) {
 		return adminDao.getPetsitterdetailCarePet(pet_sitter_no);
 	}
 	// 펫시터 회원정보 (스킬) 
 	@Override
-	public SkillNameDto petsitterdetailSkills(int pet_sitter_no) {
+	public List<SkillNameDto> petsitterdetailSkills(int pet_sitter_no) {
 		return adminDao.getPetsitterdetailSkills(pet_sitter_no);
 	}
 	// 펫시터 회원정보 (펫시터 환경) 
 	@Override
-	public CareConditionNameDto petsitterdetailCareCondition(int pet_sitter_no) {
+	public List<CareConditionNameDto> petsitterdetailCareCondition(int pet_sitter_no) {
 		return adminDao.getPetsitterdetailCareCondition(pet_sitter_no);
 	}
 

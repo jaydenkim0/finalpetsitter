@@ -64,9 +64,10 @@
 
 			<c:forEach var="petsitter" items="${petsitterList}">	
 
+					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
 					<h3>펫시터 ID : ${petsitter.sitter_id},
 					펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
-					펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}</h3>
+					펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}</h3></a>
 					
 						
 					<!-- 펫시터 상태 변경 버튼 -->			

@@ -117,7 +117,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</select>
 				<!-- 펫시터 회원정보 (스킬)  -->
 				<select id="getPetsitterdetailSkills" resultType="skillNameDto">
-					select * from petsitter_skills where pet_sitter_no = #{pet_sitter_no}	
+					 select * from petsitter_skills where pet_sitter_no = #{pet_sitter_no}	
 				</select>
 				<!-- 펫시터 회원정보 (펫시터 환경)  -->
 				<select id="getPetsitterdetailCareCondition" resultType="careConditionNameDto">

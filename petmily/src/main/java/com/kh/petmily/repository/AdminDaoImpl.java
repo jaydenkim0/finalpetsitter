@@ -1,5 +1,7 @@
 package com.kh.petmily.repository;
 
+
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -105,13 +107,13 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 옵션 등록 : 스킬 이름
 	// 불러오기
 	@Override
-	public List<CarePetTypeNameDto> getPetSkills() {		
+	public List<SkillNameDto> getPetSkills() {		
 		return sqlSession.selectList("admin.getPetSkills");
 	}
 	// 펫시터 옵션 등록 : 환경 목록
 	// 불러오기
 	@Override
-	public List<CarePetTypeNameDto> getPetCareCondition() {		
+	public List<CareConditionNameDto> getPetCareCondition() {		
 		return sqlSession.selectList("admin.getPetCareCondition");
 	}
 	
@@ -170,23 +172,23 @@ public class AdminDaoImpl implements AdminDao {
 				}
 				// 펫시터 회원정보 (지역) 
 				@Override
-				public LocationDto getPetsitterdetailLocation(int pet_sitter_no) {
-					return sqlSession.selectOne("admin.getPetsitterdetailLocation", pet_sitter_no);
+				public List<LocationDto> getPetsitterdetailLocation(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailLocation", pet_sitter_no);
 				}
 				// 펫시터 회원정보 (돌봄가능동물) 
 				@Override
-				public CarePetTypeNameDto getPetsitterdetailCarePet(int pet_sitter_no) {
-					return sqlSession.selectOne("admin.getPetsitterdetailCarePet", pet_sitter_no);
+				public List<CarePetTypeNameDto> getPetsitterdetailCarePet(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailCarePet", pet_sitter_no);
 				}
 				// 펫시터 회원정보 (스킬) 
 				@Override
-				public SkillNameDto getPetsitterdetailSkills(int pet_sitter_no) {
-					return sqlSession.selectOne("admin.getPetsitterdetailSkills", pet_sitter_no);
+				public List<SkillNameDto> getPetsitterdetailSkills(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailSkills", pet_sitter_no);
 				}
 				// 펫시터 회원정보 (펫시터 환경) 
 				@Override
-				public CareConditionNameDto getPetsitterdetailCareCondition(int pet_sitter_no) {
-					return sqlSession.selectOne("admin.getPetsitterdetailCareCondition", pet_sitter_no);
+				public List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailCareCondition", pet_sitter_no);
 				}
 
 

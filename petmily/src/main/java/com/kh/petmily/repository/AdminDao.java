@@ -9,6 +9,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminDao {
@@ -51,10 +52,10 @@ public interface AdminDao {
 	List<CarePetTypeNameDto> getCarePetType();
 	// 펫시터 옵션 등록 : 스킬이름
 	// 불러오기
-	List<CarePetTypeNameDto> getPetSkills();
+	List<SkillNameDto> getPetSkills();
 	// 펫시터 옵션 등록 : 환경목록
 	// 불러오기
-	List<CarePetTypeNameDto> getPetCareCondition();
+	List<CareConditionNameDto> getPetCareCondition();
 	
 	
 	// 펫시터 옵션 등록 : 돌봄가능동물
@@ -83,13 +84,13 @@ public interface AdminDao {
 	// 페시터 회원 정보 (단일조회)
 	PetsitterVO getPetsitterdetail(int pet_sitter_no);
 	// 펫시터 회원정보 (지역) 
-	LocationDto getPetsitterdetailLocation(int pet_sitter_no);
+	List<LocationDto> getPetsitterdetailLocation(int pet_sitter_no);
 	// 펫시터 회원정보 (돌봄가능동물) 
-	CarePetTypeNameDto getPetsitterdetailCarePet(int pet_sitter_no);
+	List<CarePetTypeNameDto> getPetsitterdetailCarePet(int pet_sitter_no);
 	// 펫시터 회원정보 (스킬) 
-	SkillNameDto getPetsitterdetailSkills(int pet_sitter_no);
+	List<SkillNameDto> getPetsitterdetailSkills(int pet_sitter_no);
 	// 펫시터 회원정보 (펫시터 환경) 
-	CareConditionNameDto getPetsitterdetailCareCondition(int pet_sitter_no);
+	List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no);
 
 	
 
