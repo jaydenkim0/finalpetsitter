@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.service.board.CareService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,8 @@ public class CareController {
 	//게시글 목록
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<CareDto> list  = careService.list();
+		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
-		
 		return "board/care/list";
 	}
 }

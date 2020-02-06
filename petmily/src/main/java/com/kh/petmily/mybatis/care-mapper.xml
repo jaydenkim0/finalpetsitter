@@ -26,5 +26,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
 	</select>
+	<!-- 펫시터 번호로 펫시터 아이디 추출 -->
+	<select id="sitter_id" resultType="carePetsitterDto">
+		select
+		 	care_board_no,
+		 	care_member_id,
+		 	sitter_id,
+		 	care_board_content,
+		 	care_pw,
+		 	wdate
+		from
+		 care_board C
+		 	inner join pet_sitter P
+		 	on C.care_sitter_no=P.pet_sitter_no
+		order by wdate desc
+	</select>
 	
 </mapper>

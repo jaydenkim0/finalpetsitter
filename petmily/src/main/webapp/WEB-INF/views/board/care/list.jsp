@@ -14,7 +14,7 @@
 		<tr>
 			<td>${list.care_board_no }</td>
 			<td>${list.care_member_id }</td>
-			<td>${list.care_sitter_no }</td>
+			<td>${list.sitter_id }</td>
 			<td>${list.care_board_content }</td>
 			<td>${list.wdate.substring(0,16) }</td>
 		</tr>
