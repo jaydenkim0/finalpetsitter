@@ -47,7 +47,7 @@
        
 -------------------------------------------------------------------------------------------
 
-    -- pet_sitter + care_pet_type + care_pet_type_name  생성   
+    -- pet_sitter + care_pet_type + care_pet_type_name  삭제   
        drop view petsitter_care_pet_type;
     -- pet_sitter + care_pet_type + care_pet_type_name  생성
        create view petsitter_care_pet_type as
@@ -56,6 +56,18 @@
        inner join care_pet_type_name N on c.care_name = n.care_type_no;
        
        select * from petsitter_care_pet_type;
+       
+ -------------------------------------------------------------------------------------------      
+ 
+    -- pet_sitter + location  삭제
+       drop view sitterlocation;
+    -- pet_sitter + location  생성    
+       create view sitterlocation as
+       select * from petsitter P
+       inner join location L on p.sitter_id = l.location_sitter_no;
+       
+       select * from sitterlocation;
+       
 -------------------------------------------------------------------------------------------
 
     -- member + pet view 생성
@@ -73,3 +85,4 @@
     
 -------------------------------------------------------------------------------------------
 
+    -- 
