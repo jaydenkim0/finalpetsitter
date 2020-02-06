@@ -29,4 +29,7 @@ public interface MemberDao {
 	// 비밀번호 변경
 	void pwchange(MemberDto memberDto);
 
+	//펫등록
+	void pet_regist(PetDto petDto);
+
 }
