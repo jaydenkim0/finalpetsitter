@@ -69,6 +69,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set pw = #{pw} where email = #{email}
 	</update>
 	
+	<!-- 내정보 수정 -->
+	<update id="mylistchange" parameterType="memberDto">
+			update member set
+				name = #{name},
+				nick= #{nick},
+				email = #{email},
+				phone = #{phone},
+				post = #{post},
+				basic_addr = #{basic_addr},
+				extra_addr = #{extra_addr}				
+				where id = #{id}	
+	</update>
+	
+	
 </mapper>
 
 

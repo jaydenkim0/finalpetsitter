@@ -23,6 +23,9 @@ public interface MemberService {
 
 	void pwchange(MemberDto memberDto);
 
+	void mylistchange(MemberDto memberDto);
 
 
+
+	
 }
