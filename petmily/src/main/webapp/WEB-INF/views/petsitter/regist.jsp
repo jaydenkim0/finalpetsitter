@@ -96,11 +96,14 @@
 	받아야하는 목록 : 
 		sitter_id,info,sitter_pets,care_condition,sitter_terms_agree
 -->
-<form action="regist" method="post">
+<form action="regist" method="post" enctype="multipart/form-data">
 
 <!-- 회원 아이디 -->
 	<input type="hidden" name="sitter_id" value="${id}">
 	<h1>${id}</h1>
+	
+<!-- 신분증이미지 파일 -->	
+	<input type="file" name="license_file" multiple="image/*">
 	
 	<div>
 		<label for="info-text">펫밀리 기본 정보</label>
