@@ -15,12 +15,7 @@
 				// 버튼 속성 및 내용 변경
 				$(this).find("#nega-btn").prop("disabled", true);
 				$(this).find("#nega-btn").text("이메일 발송중");
-				
-				 // 비동기 통신으 이용하요 작성한 데이터 댓글을 수정 페이지로 전달
-                //  [1] 보내는 주소를 어떻게 구할 것인가?
-                // - form에 작성된 action을 불러올 수 있는가?
-                // - form에 작성된 method를 불러올 수 있는가?
-                //  [2] 비동기 통신으로 데이터를 어떻게 보내는가?
+			
 				var url = $(this).attr("action"); 
 				var method = $(this).attr("method");
 				var data = $(this).serialize();
@@ -51,6 +46,9 @@
     
     
 	<h1>펫시터 관리페이지</h1>
+	<br>
+	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+	<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
 	
 	<br><br>
 	<hr>
@@ -58,25 +56,30 @@
 	
 	<h2> 펫시터 리스트 </h2>
 	
-	<c:forEach var="petsitter" items="${petsitterList}">			
-			<h3>${petsitter}</h3>
+
+			<c:forEach var="petsitter" items="${petsitterList}">	
+
+					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
+						<h3>펫시터 ID : ${petsitter.sitter_id},
+						펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
+						펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}
+						</h3>
+					</a>
 					
-			<!-- 펫시터 상태 변경 버튼 -->
-			<form action="" method="post">			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-						<select name="sitter_status">
-							<option>정상</option>
-							<option>휴면</option>
-						</select>	
-					<button type="submit" >펫시터 상태 변경</button>						
-			</form>
-				
-			<!-- 펫시터 차단 버튼 -->	
-			<form action="blacklist_content" method="get">			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
-					<button type="submit" >차단 펫시터 등록</button>						
-			</form>					
-	</c:forEach>	
+						
+					<!-- 펫시터 상태 변경 버튼 -->			
+					<form action="petstatus" method=post>			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+							<input type="hidden" name="sitter_status" value="휴면">					
+							<button type="submit" >펫시터  휴면 변경</button>						
+					</form>
+						
+					<!-- 펫시터 차단 버튼 -->	
+					<form action="blacklist_content" method="get">			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
+							<button type="submit" >차단 펫시터 등록</button>						
+					</form>							
+			</c:forEach>			
 	
 	
 	<br><br>
@@ -86,7 +89,16 @@
 	<h2> 페시터 신청 회원 </h2>	
 		
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
-			<h3>${petsitterapply}</h3>						
+	
+		<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">
+				<h3>
+					펫시터 Id : ${petsitterapply.id},
+					펫시터 이름: ${petsitterapply.name},
+					펫시터 닉네임 : ${petsitterapply.nick},
+					펫시터 전화번호: ${petsitterapply.phone},
+					펫시터 가입신청일 : ${petsitterapply.joindate}			
+				</h3>						
+			</a>
 			
 			<!-- 펫시터 승인 버튼 -->			
 			<form action="apply" method="post">
@@ -103,4 +115,28 @@
 	</c:forEach>
 	
 	
+	<br><br>
+	<hr>
+	<br><br>
+	
+	<h2> 휴면 페시터 회원 </h2>	
+	
+	<c:forEach var="petsitterSleep" items="${petsitterSleepList}">
+		
+				<h3>펫시터 ID : ${petsitterSleep.sitter_id},
+				펫시터 상태(정상, 휴면) : ${petsitterSleep.sitter_status},
+				펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleep.sitter_matching_type}</h3>
+			
+				<!-- 펫시터 상태 변경 버튼 -->
+			<form action="petstatus" method=post>			
+					<input type="hidden" name="sitter_id" value="${petsitterSleep.sitter_id}">
+					<input type="hidden" name="sitter_status" value="정상">					
+					<button type="submit" >펫시터 정상 변경</button>						
+			</form>
+	
+	</c:forEach>
+	
+	<br><br>
+	<hr>
+	<br><br>
 	

@@ -44,10 +44,22 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.updatelastlogin(id);
 	}
 
+	//아이디찾기
+	@Override
+	public String findid(MemberDto memberDto) {
+		return memberDao.findid(memberDto);
+	}
+	
 	// 비밀번호 변경
 	@Override
 	public void pwchange(MemberDto memberDto) {		
 		memberDao.pwchange(memberDto);
+	}
+
+	//펫등록
+	@Override
+	public void pet_regist(PetDto petDto) {
+		memberDao.pet_regist(petDto);
 	}
 
 	//회원정보 수정

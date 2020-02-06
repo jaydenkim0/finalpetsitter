@@ -1,6 +1,8 @@
 package com.kh.petmily.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,26 @@ public class FaqDaoImpl implements FaqDao{
 	@Override
 	public void delete(int faq_no) throws Exception {
 		sqlSession.delete("faq.faqdelete",faq_no);
+	}
+	
+	@Override
+	public List<FaqVO> listAll(String search_option, String keyword, int start, int end) throws Exception {
+		//검색 옵션 , 키워드 맵에 저장
+		Map<String,Object>map = new HashMap<>();
+		map.put("search_option",search_option);
+		map.put("keyword",keyword);
+		map.put("start", start); 
+        map.put("end", end);
+		return sqlSession.selectList("faq.faqlistAll",map);
+	}
+	
+	//게시글 검색 레코드 갯수 메소드
+	@Override
+	public int countArticle(String search_option, String keyword) throws Exception {
+		//검색 옵션 , 키워드 맵에 저장
+		Map<String,String>map = new HashMap<>();
+		map.put("search_option",search_option);
+		map.put("keyword",keyword);
+		return sqlSession.selectOne("faq.faqCountList",map);
 	}
 }

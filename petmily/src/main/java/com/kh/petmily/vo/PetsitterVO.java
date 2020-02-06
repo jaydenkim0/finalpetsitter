@@ -40,6 +40,12 @@ public class PetsitterVO {
 	private String sitter_matching_type; // '방문서비스', '위탁서비스', '둘다' 만 작성가능
 	
 	// blacklist 사용시 추가 컨텐츠
-	private String blacklist_content;
+	private String black_content;
+	
+
+	
+
+	
+	
 
 }

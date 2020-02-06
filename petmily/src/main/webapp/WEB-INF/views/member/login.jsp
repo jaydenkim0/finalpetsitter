@@ -23,7 +23,7 @@
 		<input class="btn" type="submit" value="Login">
 	</div>
 	<div class="row-left">
-		<a href="find">아이디 찾기</a><br>
+		<a href="findid">아이디 찾기</a><br>
 		<a href="check">비밀번호 찾기</a><br>
 		<a href="regist">회원가입</a>
 	</div>

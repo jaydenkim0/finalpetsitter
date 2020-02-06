@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.repository.CertDao;
-import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
@@ -34,9 +33,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
-	@Autowired
-	private MemberDao memberDao;
 	
 	@Autowired
 	private EmailService emailService;
@@ -64,8 +60,26 @@ public class MemberController {
 	
 	// 회원가입
 	@PostMapping("/regist")
-	public String regist(@ModelAttribute MemberDto memberDto) {
+	public String regist(
+			@ModelAttribute MemberDto memberDto,
+			@RequestParam String pets,
+			@ModelAttribute PetDto petDto,
+			@RequestParam String id,
+			@RequestParam String pet_name,
+			@RequestParam String pet_age,
+			@RequestParam String pet_type,
+			@RequestParam String pet_ect) {
 		memberService.regist(memberDto);
+		if(pets.equals("예")) {
+			int real_pet_age = Integer.parseInt(pet_age);
+			petDto.setMember_id(id);
+			petDto.setName(pet_name);
+			petDto.setAge(real_pet_age);
+			petDto.setType(pet_type);
+			petDto.setEct(pet_ect);
+			
+			memberService.pet_regist(petDto);
+		}
 		return "redirect:login";		
 	}
 	
@@ -119,6 +133,14 @@ public class MemberController {
 	}
 	
 
+
+//	//내정보수정
+//	@GetMapping("/mylistchange")
+//		public String mylistchange() {
+//			return "member/mylistchange";
+//		}
+
+
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
 	public String send(@RequestParam String email, HttpSession session) {
@@ -129,9 +151,36 @@ public class MemberController {
 		return emailService.sendCertMessage(email, cert);
 	}
 	
+	//아이디찾기-GetMapping
+	@GetMapping("/findid")
+	public String findid() {
+		return "member/findid";
+	}
+	
+
 	@GetMapping("/validate")
 
 	
+
+	//아이디찾기-PostMapping
+	@PostMapping("/findid")
+	public String findid(
+			@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String phone,
+			Model model,
+			MemberDto memberDto) {
+		memberDto.setName(name);
+		memberDto.setEmail(email);
+		memberDto.setPhone(phone);
+		String id = memberService.findid(memberDto);
+		model.addAttribute("id",id);
+		return "member/findid_result";
+	}
+
+	
+	@GetMapping("/validate")	
+
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {

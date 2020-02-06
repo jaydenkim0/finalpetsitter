@@ -1,4 +1,4 @@
-package com.kh.petmily.repository;
+package com.kh.petmily.repository.petsitter;
 
 import com.kh.petmily.entity.PetsitterDto;
 
