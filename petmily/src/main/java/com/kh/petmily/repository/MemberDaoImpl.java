@@ -61,4 +61,10 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.pwchange", memberDto);
 	}
 
+	//펫등록
+	@Override
+	public void pet_regist(PetDto petDto) {
+		sqlSession.insert("member.pet_regist",petDto);
+	}
+
 }
