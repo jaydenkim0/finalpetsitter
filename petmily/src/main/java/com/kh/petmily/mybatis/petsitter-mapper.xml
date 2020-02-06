@@ -62,6 +62,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select pet_sitter_no_seq.nextval from dual
 	</select>
 	
+	<!-- 펫시터 지역 등록 -->
+	<insert id="registRegion" parameterType="list">
+		<foreach collection="list" item="locationDto" open="insert all" close="select * from dual">
+			into location values
+			(location_no_seq.nextval,#{locationDto.location_sitter_no},#{locationDto.city},#{locationDto.area})
+		</foreach>
+	</insert>
 	
 	
 	
