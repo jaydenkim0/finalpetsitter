@@ -61,6 +61,17 @@ public class MemberServiceImpl implements MemberService {
 	public void pet_regist(PetDto petDto) {
 		memberDao.pet_regist(petDto);
 	}
+
+	//회원정보 수정
+	@Override
+	public void mylistchange(MemberDto memberDto) {
+		memberDao.mylistchange(memberDto);
+	}
+
+
+	
+	
+	
 	
 	}
 

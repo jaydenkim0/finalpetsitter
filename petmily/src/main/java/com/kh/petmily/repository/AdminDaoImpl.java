@@ -1,14 +1,20 @@
 package com.kh.petmily.repository;
 
+
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 @Repository
@@ -101,13 +107,13 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 옵션 등록 : 스킬 이름
 	// 불러오기
 	@Override
-	public List<CarePetTypeNameDto> getPetSkills() {		
+	public List<SkillNameDto> getPetSkills() {		
 		return sqlSession.selectList("admin.getPetSkills");
 	}
 	// 펫시터 옵션 등록 : 환경 목록
 	// 불러오기
 	@Override
-	public List<CarePetTypeNameDto> getPetCareCondition() {		
+	public List<CareConditionNameDto> getPetCareCondition() {		
 		return sqlSession.selectList("admin.getPetCareCondition");
 	}
 	
@@ -147,6 +153,43 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.delete("admin.petCareConditionD", care_condition_no)	;
 	}
 
+	// 펫시터 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> getSitterBlackList() {
+		return sqlSession.selectList("admin.getSitterBlackList");
+	}
+
+	// 펫시터 블랙리스트 불러오기
+	@Override
+	public List<BlackListDto> getMemberBlackList() {
+		return sqlSession.selectList("admin.getMemberBlackList");
+	}
+
+				// 페시터 회원 정보 (단일조회)
+				@Override
+				public PetsitterVO getPetsitterdetail(int pet_sitter_no) {		
+					return sqlSession.selectOne("admin.getPetsitterdetail", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (지역) 
+				@Override
+				public List<LocationDto> getPetsitterdetailLocation(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailLocation", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (돌봄가능동물) 
+				@Override
+				public List<CarePetTypeNameDto> getPetsitterdetailCarePet(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailCarePet", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (스킬) 
+				@Override
+				public List<SkillNameDto> getPetsitterdetailSkills(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailSkills", pet_sitter_no);
+				}
+				// 펫시터 회원정보 (펫시터 환경) 
+				@Override
+				public List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no) {
+					return sqlSession.selectList("admin.getPetsitterdetailCareCondition", pet_sitter_no);
+				}
 
 
 

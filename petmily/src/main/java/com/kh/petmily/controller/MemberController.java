@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,24 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.MemberDto;
-
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.repository.CertDao;
-import com.kh.petmily.repository.MemberDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.kh.petmily.entity.CertDto;
-
-
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,17 +35,14 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired
-	private MemberDao memberDao;
-	
-	@Autowired
 	private EmailService emailService;
 	
 	@Autowired
 	private RandomService randomService;
 		
 	@Autowired
-		private CertDao certDao;
-	
+	private CertDao certDao;
+
 	
 	@GetMapping("/input")
 		public String input() {
@@ -72,6 +57,7 @@ public class MemberController {
 	public String regist() {
 		return "member/regist";		
 	}	
+	
 	// 회원가입
 	@PostMapping("/regist")
 	public String regist(
@@ -146,11 +132,14 @@ public class MemberController {
 		return "member/mylist";
 	}
 	
-	//내정보수정
-	@GetMapping("/mylistchange")
-		public String mylistchange() {
-			return "member/mylistchange";
-		}
+
+
+//	//내정보수정
+//	@GetMapping("/mylistchange")
+//		public String mylistchange() {
+//			return "member/mylistchange";
+//		}
+
 
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
@@ -168,6 +157,11 @@ public class MemberController {
 		return "member/findid";
 	}
 	
+
+	@GetMapping("/validate")
+
+	
+
 	//아이디찾기-PostMapping
 	@PostMapping("/findid")
 	public String findid(
@@ -185,8 +179,8 @@ public class MemberController {
 	}
 
 	
-	@GetMapping("/validate")
-	
+	@GetMapping("/validate")	
+
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {
@@ -240,9 +234,25 @@ public class MemberController {
 			return "/";
 		}
 		
-		
-		
+		// 회원정보수정
+		@GetMapping("/mylistchange")	
+		public String edit(@RequestParam String id, Model model) {
+			MemberDto dto = memberService.mylist(id);			
+			model.addAttribute("member", dto);
+			System.out.println(dto);
+			return "member/mylistchange";
 		}
+		@PostMapping("/mylistchange")
+		public String edit(@ModelAttribute MemberDto memberDto) {			
+			memberService.mylistchange(memberDto);
+			return "redirect:mylist";
+		}
+		
+		
+		
+		
+	}
+
 
 
 
