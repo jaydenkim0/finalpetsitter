@@ -58,8 +58,26 @@ public class MemberController {
 	}	
 	// 회원가입
 	@PostMapping("/regist")
-	public String regist(@ModelAttribute MemberDto memberDto) {
+	public String regist(
+			@ModelAttribute MemberDto memberDto,
+			@RequestParam String pets,
+			@ModelAttribute PetDto petDto,
+			@RequestParam String id,
+			@RequestParam String pet_name,
+			@RequestParam String pet_age,
+			@RequestParam String pet_type,
+			@RequestParam String pet_ect) {
 		memberService.regist(memberDto);
+		if(pets.equals("예")) {
+			int real_pet_age = Integer.parseInt(pet_age);
+			petDto.setMember_id(id);
+			petDto.setName(pet_name);
+			petDto.setAge(real_pet_age);
+			petDto.setType(pet_type);
+			petDto.setEct(pet_ect);
+			
+			memberService.pet_regist(petDto);
+		}
 		return "redirect:login";		
 	}
 	
