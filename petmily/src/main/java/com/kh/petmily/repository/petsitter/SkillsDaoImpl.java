@@ -1,10 +1,16 @@
 package com.kh.petmily.repository.petsitter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillsDto;
 
 
 
@@ -15,10 +21,18 @@ public class SkillsDaoImpl implements SkillsDao {
 	private SqlSession sqlSession;
 
 	@Override
-	public void registSkills(List<Integer> skills_name) {
-		sqlSession.insert("petsitter.registSkills", skills_name);	
-	}
-	
-	
+	public void registSkills(int no, List<Integer> skills_name) {
 
+		List<SkillsDto> skillsList = new ArrayList<>();
+		
+		for(Integer skillsNo : skills_name) {
+			skillsList.add(SkillsDto.builder()
+									.skills_name(skillsNo)
+									.skills_sitter_no(no)
+									.build());	
+		}
+		System.out.println(skillsList.toString());
+		sqlSession.insert("petsitter.registSkills", skillsList);
+		
+	}
 }

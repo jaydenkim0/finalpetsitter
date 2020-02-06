@@ -1,5 +1,6 @@
 package com.kh.petmily.controller.petsitter;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.PetsitterDto;
-
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.petsitter.CareConditionDao;
 import com.kh.petmily.repository.petsitter.CarePetTypeDao;
+import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
 
@@ -21,6 +25,7 @@ import com.kh.petmily.repository.petsitter.SkillsDao;
 @RequestMapping("/petsitter")
 public class PetsitterController {
 	
+	//서비스로 변경 예정
 	@Autowired
 	private PetsitterDao petsitterDao;
 	@Autowired
@@ -29,7 +34,8 @@ public class PetsitterController {
 	private CarePetTypeDao carePetTypeDao;
 	@Autowired
 	private CareConditionDao careConditionDao;
-	
+	@Autowired
+	private LicenseFileDao licenseFileDao;
 	
 	@GetMapping("/regist")
 	public String regist() {
@@ -42,13 +48,18 @@ public class PetsitterController {
 			@RequestParam List<Integer>skills_name,
 			@RequestParam List<Integer>care_name,
 			@RequestParam List<Integer>care_condition_name
+//			@RequestParam List<MultipartFile> license_file
 			) {
-		
 		//나중에 서비스에서 (파일과 함께)한 번에 받을 예정
+		int no = petsitterDao.getSequence();
+		petsitterDto.setPet_sitter_no(no);
+		
 		petsitterDao.regist(petsitterDto);
-		skillsDao.registSkills(skills_name);
-		carePetTypeDao.registType(care_name);
-		careConditionDao.registCondition(care_condition_name);
+		
+		skillsDao.registSkills(no,skills_name);
+		carePetTypeDao.registType(no,care_name);
+		careConditionDao.registCondition(no,care_condition_name);
+//		licenseFileDao.upload(license_file);
 		
 		return "redirect:../";
 	}
