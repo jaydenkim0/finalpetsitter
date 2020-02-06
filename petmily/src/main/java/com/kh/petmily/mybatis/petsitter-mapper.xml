@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 펫시터 기본 정보 -->
 	<insert id="regist" parameterType="petsitterDto">
 		insert into pet_sitter values(
-		pet_sitter_no_seq.nextval,
+		#{pet_sitter_no},
 		#{sitter_id},
 		#{info},
 		#{sitter_pets},
@@ -35,27 +35,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{sitter_matching_type},
 		sysdate)
 	</insert>
+	
 	<!-- 펫시터 스킬 -->
-	<insert id="registSkills" parameterType="java.util.List">
-		insert into skills values
-		 <foreach collection="list" item="item" separator=" , " >
-		(#{skills_name},#{skills_sitter_no})
+	<insert id="registSkills" parameterType="list">
+		<foreach collection="list" item="skillsDto" open="insert all" close="select * from dual">
+			into skills values(#{skillsDto.skills_name},#{skillsDto.skills_sitter_no})
 		</foreach>
 	</insert>
 	
 	<!-- 펫시터 돌봄 가능 동물 -->
-	<insert id="registType" parameterType="java.util.List">
-		insert into care_pet_type values
-		 <foreach collection="list" item="item" separator=" , " >
-		(#{care_name},#{care_sitter_no})
+	<insert id="registType" parameterType="list">
+		<foreach collection="list" item="carePetTypeDto" open="insert all" close="select * from dual">
+			into care_pet_type values(#{carePetTypeDto.care_name},#{carePetTypeDto.care_sitter_no})
 		</foreach>
 	</insert>
 	
 	<!-- 펫시터 돌봄 환경 -->
-	<insert id="registCondition" parameterType="java.util.List">
-		insert into care_condition values
-		 <foreach collection="list" item="item" separator=" , " >
-		(#{care_condition_name},#{condition_sitter_no})
+	<insert id="registCondition" parameterType="list">
+		<foreach collection="list" item="careConditionDto" open="insert all" close="select * from dual">
+			into care_condition values(#{careConditionDto.care_condition_name},#{careConditionDto.condition_sitter_no})
+		</foreach>
+	</insert>
+	
+	<!-- 펫시터 번호 미리 구해오기 -->
+	<select id="getSequence" resultType="int">
+		select pet_sitter_no_seq.nextval from dual
+	</select>
+	
+	
+	
+	
+	
+	<!-- 등록 테스트 -->
+	<insert id="testRegist" parameterType="petsitterDto">
+		insert into pet_sitter values(
+		#{pet_sitter_no},
+		#{sitter_id},
+		#{info},
+		#{sitter_pets},
+		'정상',
+		'true',
+		#{sitter_matching_type},
+		sysdate)
+	</insert>
+	
+	<insert id="testSkillRegist" parameterType="list">
+		insert into skills values(#{skills_name},#{skills_sitter_no})
+	</insert>
+	<insert id="testSkillRegist2" parameterType="list">
+		<foreach collection="list" item="skillsDto" open="insert all" close="select * from dual">
+			into skills values(#{skillsDto.skills_name},#{skillsDto.skills_sitter_no})
 		</foreach>
 	</insert>
 </mapper>

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.PetsitterDto;
-
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.petsitter.CareConditionDao;
 import com.kh.petmily.repository.petsitter.CarePetTypeDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
@@ -21,6 +21,7 @@ import com.kh.petmily.repository.petsitter.SkillsDao;
 @RequestMapping("/petsitter")
 public class PetsitterController {
 	
+	//서비스로 변경 예정
 	@Autowired
 	private PetsitterDao petsitterDao;
 	@Autowired
@@ -45,10 +46,14 @@ public class PetsitterController {
 			) {
 		
 		//나중에 서비스에서 (파일과 함께)한 번에 받을 예정
+		int no = petsitterDao.getSequence();
+		petsitterDto.setPet_sitter_no(no);
+		
 		petsitterDao.regist(petsitterDto);
-		skillsDao.registSkills(skills_name);
-		carePetTypeDao.registType(care_name);
-		careConditionDao.registCondition(care_condition_name);
+		
+		skillsDao.registSkills(no,skills_name);
+		carePetTypeDao.registType(no,care_name);
+		careConditionDao.registCondition(no,care_condition_name);
 		
 		return "redirect:../";
 	}
