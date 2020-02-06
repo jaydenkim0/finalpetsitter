@@ -36,75 +36,59 @@ public class FaqController {
 	FaqDto faqDto;
 	
 	//게시글 목록
-	@GetMapping("/list")
-	public String list(Model model) throws Exception {
-		List<FaqDto>list = faqService.list();
-		model.addAttribute("list",list);
-		return "board/faq/list";
+	@RequestMapping("/list")
+	public ModelAndView list(@RequestParam(defaultValue="faq_head")String type,
+			@RequestParam(defaultValue="")String keyword) throws Exception{
+		List<FaqVO>list = faqService.listAll(type,keyword);
+		int count = faqService.countArticle(type,keyword);
+		ModelAndView mav = new ModelAndView();
+		Map<String,Object>map = new HashMap<>();
+		map.put("list",list);
+		map.put("count",count);
+		map.put("type",type);
+		map.put("keyword",keyword);
+		mav.setViewName("board/faq/list");
+		mav.addObject("map", map);
+		return mav;
 	}
-	//게시글 작성
+	//게시글 작성 화면
 	@GetMapping("/write")
 	public String write() {
-		return"board/faq/write";
+		return "board/faq/write";
 	}
 	//게시글 작성 처리
 	@PostMapping("/insert")
-	public String write(FaqDto faqDto)throws Exception{
-		faqService.write(faqDto);
+	public String insert(@ModelAttribute FaqVO faqVO) throws Exception{
+		faqService.create(faqVO);
 		return "redirect:list";
 	}
-	//게시글 상세보기
+	//게시글 상세내용 조회
 	@GetMapping("/view")
-	public String view(@RequestParam int faq_no, Model model)throws Exception {
-		FaqDto view = faqService.view(faq_no); 
-		model.addAttribute("view",view);
-		return "board/faq/view";
+	public ModelAndView view(@RequestParam int faq_no, HttpSession session)throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/faq/view");
+		mav.addObject("faqVO", faqService.read(faq_no));
+		return mav;
 	}
 	//게시글 수정
 	@GetMapping("/update")
 	public String update(@RequestParam int faq_no, Model model)throws Exception{
 		//FaqDto view 내용을 수정
-		FaqDto view = faqService.view(faq_no); 
-		model.addAttribute("view",view);
+		FaqVO view = faqService.read(faq_no); 
+		model.addAttribute("faqVO",view);
 		return "board/faq/update";
 	}
-	
 	//게시글 수정 처리
 	@PostMapping("/update")
-	public String update(FaqDto faqDto)throws Exception{
-		faqService.update(faqDto);
+	public String update(FaqVO faqVO)throws Exception{
+		faqService.update(faqVO);
 		return "redirect:list";
 	}
-	
-	//게시글 삭제 처리
-	@GetMapping("/delete")
-	public String delete(@RequestParam int faq_no)throws Exception{
+	//게시글 삭제
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int faq_no) throws Exception{
 		faqService.delete(faq_no);
 		return "redirect:list";
-	}
-	
-	//게시글 네비게이터
-	@RequestMapping("list")
-	public ModelAndView list(@RequestParam(defaultValue="1")int curPage,
-			 @RequestParam(defaultValue="user_id") String search_option,
-	          @RequestParam(defaultValue="") String keyword
-			)throws Exception{
-		int count = 1000;
-		FaqPage faqPage = new FaqPage(count,curPage);
-		int start = faqPage.getPageBegin();
-		int end = faqPage.getPageEnd();
-		
-		List<FaqVO>list = faqService.listAll(search_option, keyword,start,end);
-				ModelAndView mav = new ModelAndView();
-				Map<String,Object>map = new HashMap<>();
-				map.put("list",list);
-				map.put("faqPage",faqPage);
-				map.put("count", count);
-		        map.put("search_option", search_option);
-		        map.put("keyword", keyword);
-		        mav.addObject("map", map);//modelandview에 map를 저장
-		        mav.setViewName("board/faq/list");//자료를 넘길 뷰의 이름
-		        return mav;    //게시판 페이지로 이동
 	}
 }
 

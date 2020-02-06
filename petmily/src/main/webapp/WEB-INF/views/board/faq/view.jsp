@@ -2,38 +2,80 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <h2>게시글 상세 보기</h2>
-	<a href="${context}/board/faq/write">글쓰기</a>
-
-<table border="1">
-	<th>정보</th>
-	<th>데이터</th>
+<script>
+$(document).ready(function(){
+	$("btndelete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			document.form1.action = "${context}/board/faq/delete";
+			document.form1.submit();
+		}
+	});
+	$("btnupdate").click(function(){
+		var faq_title = $("faq_title").val();
+		var faq_head = $("faq_head").val();
+		var faq_content = $("faq_content").val();
+		if(faq_title=""){
+			alert("말머리를 선택하세요")
+			document.form1.faq_title.focus();
+			return;
+		}
+		if(faq_head=""){
+			alert("제목을 입력하세요")
+			document.form1.faq_head.focus();
+			return;
+		}
+		if(faq_content=""){
+			alert("내용을 입력하세요")
+			document.form1.faq_content.focus();
+			return;
+		}
+		document.form1.action="${context}/board/faq/update"
+		document.form1.submit();
+	});
+});
+</script>
+<form name="form1" method="post">
+	<table border="1">
+		<th>정보</th>
+		<th>데이터</th>
 	
-	<!--FaqDto view 안에 있는 정보 불러오기 -->
+	<!--FaqVO 안에 있는 정보 불러오기 -->
 <tr>
 	<td>글번호</td>
-	<td>${view.faq_no}</td>
+	<td>${faqVO.faq_no}</td>
 </tr>
 
 <tr>
 	<td>게시일자</td>
-	<td>${view.wdate}</td>
+	<td>${faqVO.wdate}</td>
 </tr>
 
 <tr>
 	<td>말머리</td>
-	<td>${view.faq_title}</td>
+	<td>${faqVO.faq_title}</td>
 </tr>
 
 <tr>
 	<td>제목</td>
-	<td>${view.faq_head}</td>
+	<td>${faqVO.faq_head}</td>
 </tr>
 <tr>
 	<td>내용</td>
-	<td>${view.faq_content}</td>
+	<td>${faqVO.faq_content}</td>
 </tr>
-</table>
-	<a href="${context}/board/faq/list">목록으로</a>
-	<a href="${context}/board/faq/update?faq_no=${view.faq_no}">수정</a>
-	<a href="${context}/board/faq/delete?faq_no=${view.faq_no}">삭제</a>
+<div style="width:650px"; text-align : center";>
+	<a href="${context}/board/faq/list">
+		<button type="button" >공지게시판 목록</button>
+	</a><br><br>
+	</table><br>
+	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
+<a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
+	<button type="button" id="btnupdate">수정</button>
+</a><br><br>
+<a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
+	<button type="button" id="btndelete">삭제</button>
+</a><br><br>
+</form>

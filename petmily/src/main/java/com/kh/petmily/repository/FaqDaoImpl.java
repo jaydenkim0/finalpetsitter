@@ -16,55 +16,46 @@ public class FaqDaoImpl implements FaqDao{
 	
 	@Autowired
 	SqlSession sqlSession;
-	
-	//게시글 조회
+
 	@Override
-	public List<FaqDto>list() throws Exception {
-		return sqlSession.selectList("faq.faqlist");
-	}
-	
 	//게시글 작성
-	@Override
-	public void write(FaqDto faqDto) throws Exception {
-		sqlSession.insert("faq.faqwrite",faqDto);
+	public void create(FaqVO faqVO) throws Exception {
+		sqlSession.insert("faq.faqinsert",faqVO);
 	}
 
-	//게시글 상세보기
 	@Override
-	public FaqDto view(int faq_no) throws Exception {
+	//게시글 상세보기
+	public FaqVO read(int faq_no) throws Exception {
 		return sqlSession.selectOne("faq.faqview",faq_no);
 	}
-	
-	//게시글 작성 실행
+
 	@Override
-	public void update(FaqDto faqDto) throws Exception {
-		sqlSession.update("faq.faqupdate",faqDto);
+	//게시글 수정
+	public void update(FaqVO faqVO) throws Exception {
+		sqlSession.update("faq.faqupdate",faqVO);
+		
 	}
-	
-	//게시글 삭제 실행
+
 	@Override
+	//게시글 삭제
 	public void delete(int faq_no) throws Exception {
 		sqlSession.delete("faq.faqdelete",faq_no);
 	}
-	
+
 	@Override
-	public List<FaqVO> listAll(String search_option, String keyword, int start, int end) throws Exception {
-		//검색 옵션 , 키워드 맵에 저장
-		Map<String,Object>map = new HashMap<>();
-		map.put("search_option",search_option);
+	//게시글 전체 목록 조회
+	public List<FaqVO> listAll(String type, String keyword) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("type",type);
 		map.put("keyword",keyword);
-		map.put("start", start); 
-        map.put("end", end);
 		return sqlSession.selectList("faq.faqlistAll",map);
 	}
-	
-	//게시글 검색 레코드 갯수 메소드
+
 	@Override
-	public int countArticle(String search_option, String keyword) throws Exception {
-		//검색 옵션 , 키워드 맵에 저장
-		Map<String,String>map = new HashMap<>();
-		map.put("search_option",search_option);
+	public int countArticle(String type, String keyword) throws Exception {
+		Map<String, String> map = new HashMap<>();
+		map.put("type",type);
 		map.put("keyword",keyword);
-		return sqlSession.selectOne("faq.faqCountList",map);
+		return sqlSession.selectOne("faq.countArticle",map);
 	}
 }
