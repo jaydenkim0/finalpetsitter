@@ -29,4 +29,14 @@ public interface MemberService {
 
 	void pwchange(MemberDto memberDto);
 
+
+	void mylistchange(MemberDto memberDto);
+
+
+
+	
+
+	//펫등록
+	void pet_regist(PetDto petDto);
+
 }

@@ -2,9 +2,14 @@ package com.kh.petmily.service;
 
 import java.util.List;
 
+import com.kh.petmily.entity.BlackListDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminService {
@@ -45,8 +50,8 @@ public interface AdminService {
 	
 	// 펫시터 옵션 : 돌봄가능동물
 	List<CarePetTypeNameDto> carePetType();
-	List<CarePetTypeNameDto> petSkillsName();
-	List<CarePetTypeNameDto> petCareCondition();
+	List<SkillNameDto> petSkillsName();
+	List<CareConditionNameDto> petCareCondition();
 	
 	
 	// 펫시터 옵션 등록 : 돌봄가능동물
@@ -65,6 +70,21 @@ public interface AdminService {
 	void petCareConditionI(String care_condition_name);
 	// 펫시터 옵션 삭제 : 환경
 	void petCareConditionD(int care_condition_no);
+	
+	// 펫시터 블랙리스트
+	List<BlackListDto> sitterBlackList();
+	List<BlackListDto> memberBlackList();
+	
+	// 페시터 회원 정보 (단일조회)
+	PetsitterVO petsitterdetail(int pet_sitter_no);
+	// 펫시터 회원정보 (지역) 
+	List<LocationDto> petsitterdetailLocation(int pet_sitter_no);
+	// 펫시터 회원정보 (돌봄가능동물) 
+	List<CarePetTypeNameDto> petsitterdetailCarePet(int pet_sitter_no);
+	// 펫시터 회원정보 (스킬) 
+	List<SkillNameDto> petsitterdetailSkills(int pet_sitter_no);
+	// 펫시터 회원정보 (펫시터 환경) 
+	List<CareConditionNameDto> petsitterdetailCareCondition(int pet_sitter_no);
 	
 	
 }
