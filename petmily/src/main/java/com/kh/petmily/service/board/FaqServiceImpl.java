@@ -46,15 +46,20 @@ public class FaqServiceImpl implements FaqService {
 	public void delete(int faq_no) throws Exception {
 		faqDao.delete(faq_no);
 	}
-	//게시글 전체목록 조회
+	//게시글 검색목록 조회
 	@Override
-	public List<FaqVO> listAll(String type, String keyword) throws Exception {
-		return faqDao.listAll(type,keyword);
+	public List<FaqVO> listAll(String type, String keyword, int start, int finish) throws Exception {
+		return faqDao.listAll(type,keyword,start, finish);
 	}
 	//게시글 레코드 갯수
 	@Override
-	public int countArticle(String type, String keyword) throws Exception {
-		return faqDao.countArticle(type,keyword);
+	public int getCount(String type, String keyword) throws Exception {
+		return faqDao.getCount(type,keyword);
+	}
+	//게시글 목록
+	@Override
+	public List<FaqVO> getList(int start, int finish) {
+		return faqDao.getList(start,finish);
 	}
 }
 

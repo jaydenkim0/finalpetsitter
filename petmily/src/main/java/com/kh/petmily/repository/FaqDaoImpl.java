@@ -43,19 +43,29 @@ public class FaqDaoImpl implements FaqDao{
 	}
 
 	@Override
-	//게시글 전체 목록 조회
-	public List<FaqVO> listAll(String type, String keyword) throws Exception {
-		Map<String, String> map = new HashMap<>();
+	//게시글 검색 목록 조회
+	public List<FaqVO> listAll(String type, String keyword,int start, int finish) throws Exception {
+		Map<String, Object> map = new HashMap<>();
 		map.put("type",type);
 		map.put("keyword",keyword);
+		map.put("start",start);
+		map.put("finish",finish);
 		return sqlSession.selectList("faq.faqlistAll",map);
 	}
 
 	@Override
-	public int countArticle(String type, String keyword) throws Exception {
+	public int getCount(String type, String keyword) throws Exception {
 		Map<String, String> map = new HashMap<>();
 		map.put("type",type);
 		map.put("keyword",keyword);
-		return sqlSession.selectOne("faq.countArticle",map);
+		return sqlSession.selectOne("faq.getCount",map);
+	}
+	//게시글 전체 조회
+	@Override
+	public List<FaqVO> getList(int start, int finish) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("start",start);
+		map.put("finish",finish);
+		return sqlSession.selectList("faq.getList",map);
 	}
 }
