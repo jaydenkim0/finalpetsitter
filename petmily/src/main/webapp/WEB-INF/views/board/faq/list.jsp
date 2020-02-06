@@ -5,6 +5,15 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 	<c:set var="admin" value="${grade == 'admin'}"></c:set>
+	<c:choose>
+	<c:when test="${sessionScope.member_id == null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.member_id}님이 로그인 중입니다.
+	<a href = "${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+	</c:choose>
 <script>
  	$(document).ready(function(){
  		$("#btnWrite").click(function(){

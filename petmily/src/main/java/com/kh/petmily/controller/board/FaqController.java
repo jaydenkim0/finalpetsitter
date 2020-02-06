@@ -58,7 +58,9 @@ public class FaqController {
 	}
 	//게시글 작성 처리
 	@PostMapping("/insert")
-	public String insert(@ModelAttribute FaqVO faqVO) throws Exception{
+	public String insert(@ModelAttribute FaqVO faqVO,HttpSession session) throws Exception{
+		String member_id = (String)session.getAttribute("member_id");
+		faqVO.setMember_id(member_id);
 		faqService.create(faqVO);
 		return "redirect:list";
 	}
