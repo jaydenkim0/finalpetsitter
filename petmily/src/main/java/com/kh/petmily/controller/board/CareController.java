@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CarePetsitterDto;
@@ -43,5 +45,16 @@ public class CareController {
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		return "board/care/write";
+	}
+	
+	//게시글 등록
+	@PostMapping("/write")
+	public String write(
+			@RequestParam String care_member_id,
+			@RequestParam String care_sitter_id,
+			@RequestParam String care_board_content,
+			@RequestParam String care_pw) {
+		int pet_sitter_number = careService.id_to_number(care_sitter_id);
+		return "board/care/list";
 	}
 }

@@ -31,4 +31,10 @@ public class CareServiceImpl implements CareService{
 		return carePetsitterDao.pet_sitter_list();
 	}
 
+	//펫시터아이디로 펫시터번호 구하기
+	@Override
+	public int id_to_number(String care_sitter_id) {
+		return careDao.id_to_number(care_sitter_id);
+	}
+
 }

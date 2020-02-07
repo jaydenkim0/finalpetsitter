@@ -42,4 +42,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by wdate desc
 	</select>
 	
+	<!-- 펫시터아이디로 펫시터번호 구하기 -->
+	<select id="id_to_number" parameterType="String" resultType="int">
+		select 
+			pet_sitter_no
+		from
+			pet_sitter
+		where sitter_id=${care_sitter_id}
+				
+	</select>
+	
 </mapper>

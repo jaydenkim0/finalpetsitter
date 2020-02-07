@@ -12,4 +12,9 @@ public interface CareService {
 
 	//게시글목록(펫시터아이디)
 	List<CarePetsitterDto> pet_sitter_list();
+
+	
+	//펫시터아이디로 펫시터번호 구하기
+	int id_to_number(String care_sitter_id);
+
 }
