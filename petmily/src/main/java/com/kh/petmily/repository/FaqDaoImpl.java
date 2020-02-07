@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.FaqFileDto;
 import com.kh.petmily.vo.FaqVO;
 
 @Repository

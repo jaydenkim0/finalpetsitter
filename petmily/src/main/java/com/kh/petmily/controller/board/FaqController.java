@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.petmily.entity.FaqDto;
@@ -34,6 +35,9 @@ import lombok.extern.slf4j.Slf4j;
 public class FaqController {
 	@Autowired
 	FaqService faqService;
+	
+	@Autowired
+	FaqDao faqDao;
 	
 	//게시글 목록
 	@RequestMapping("/list")
@@ -82,14 +86,13 @@ public class FaqController {
 		return "board/faq/write";
 	}
 	//게시글 작성 처리
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute FaqVO faqVO,
-			HttpSession session) throws Exception{
-		String member_id = (String)session.getAttribute("member_id");
-		faqVO.setMember_id(member_id);
-		faqService.create(faqVO);
-		return "redirect:list";
-	}
+		@PostMapping("/insert")
+		public String insert(@ModelAttribute FaqVO faqVO,
+				HttpSession session) throws Exception{
+			String member_id = (String)session.getAttribute("member_id");
+			faqService.create(faqVO);
+			return "redirect:list";
+		}
 	//게시글 상세내용 조회
 	@GetMapping("/view")
 	public ModelAndView view(@RequestParam int faq_no, HttpSession session)throws Exception{

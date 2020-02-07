@@ -1,13 +1,20 @@
 package com.kh.petmily.service.board;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.FaqFileDto;
 import com.kh.petmily.repository.FaqDao;
 import com.kh.petmily.vo.FaqVO;
 
@@ -18,6 +25,10 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Autowired
 	private FaqVO faqVO;
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	//게시글 작성
 	@Override
 	public void create(FaqVO faqVO) throws Exception {

@@ -14,5 +14,5 @@ public class FaqFileDto {
 	private String uploadname;
 	private String savename;
 	private String filetype;
-	private int filesize;
+	private long filesize;
 }
