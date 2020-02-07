@@ -63,6 +63,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 신분증 등록 -->
+	<insert id="registInfo" parameterType="infoImageDto">
+		insert into info_image values
+			(info_image_no_seq.nextval,
+			#{info_sitter_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize})
+	</insert>
+	
+	<!-- 신분증 등록 -->
 	<insert id="registIdCard" parameterType="idCardFileDto">
 		insert into id_card_file values
 			(id_card_image_no_seq.nextval,

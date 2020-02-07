@@ -103,8 +103,8 @@
 	<h1>${id}</h1>
 	
 <!-- 소개 이미지 파일 -->	
-<!-- 	<label for="license_file">소개 이미지</label> -->
-<!-- 	<input type="file" id="license_file" name="license_file" multiple accept="image/*"> -->
+	<label for="info_image">소개 이미지</label>
+	<input type="file" id="info_image" name="info_image" multiple accept="image/*">
 	
 <!-- 신분증 이미지 파일 -->	
 	<label for="id_card_file">신분증</label>

@@ -22,6 +22,7 @@ import com.kh.petmily.repository.petsitter.IdCardFileDao;
 import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
+import com.kh.petmily.service.petsitter.PetsitterService;
 
 @Controller
 @RequestMapping("/petsitter")
@@ -36,10 +37,10 @@ public class PetsitterController {
 	private CarePetTypeDao carePetTypeDao;
 	@Autowired
 	private CareConditionDao careConditionDao;
+	
+	//파일 등록
 	@Autowired
-	private LicenseFileDao licenseFileDao;
-	@Autowired
-	private IdCardFileDao idCardFileDao;
+	private PetsitterService petsitterService;
 	
 	
 	@GetMapping("/regist")
@@ -54,19 +55,26 @@ public class PetsitterController {
 			@RequestParam List<Integer>care_name,
 			@RequestParam List<Integer>care_condition_name,
 			@RequestParam MultipartFile license_file,
-			@RequestParam MultipartFile id_card_file
+			@RequestParam MultipartFile id_card_file,
+			@RequestParam List<MultipartFile> info_image
 			) throws IllegalStateException, IOException {
 		//나중에 서비스에서 (파일과 함께)한 번에 받을 예정
 		int no = petsitterDao.getSequence();
 		petsitterDto.setPet_sitter_no(no);
 		
+		//펫시터 기본 정보 등록
 		petsitterDao.regist(petsitterDto);
 		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  등록
 		skillsDao.registSkills(no,skills_name);
 		carePetTypeDao.registType(no,care_name);
 		careConditionDao.registCondition(no,care_condition_name);
-		licenseFileDao.uploadLicense(no,license_file);
-		idCardFileDao.uploadId(no, id_card_file);
+		
+		//펫시터 소개 이미지,신분증,증빙서류 등록
+		petsitterService.uploadId(no, id_card_file);
+		petsitterService.uploadLicense(no, license_file);
+		petsitterService.uploadInfo(no, info_image);
+		
 		return "redirect:../";
 	}
 	
