@@ -95,6 +95,7 @@
 			</tbody>	
 			
 			<tfoot>
+			
 					<!-- 펫시터 상태 변경 -->
 					<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
 							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">

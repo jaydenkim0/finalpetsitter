@@ -60,10 +60,10 @@
 			<c:forEach var="petsitter" items="${petsitterList}">	
 
 					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-						<h3>펫시터 ID : ${petsitter.sitter_id},
-						펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
-						펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}
-						</h3>
+							<h3>펫시터 ID : ${petsitter.sitter_id},
+							펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
+							펫시터 서비스 유형 (방문, 돌봄, 둘다) : ${petsitter.sitter_matching_type}
+							</h3>
 					</a>
 					
 						
@@ -108,8 +108,9 @@
 			
 			<!-- 펫시터 거부 버튼 -->
 	 		<form   class="petnegative"  action="negative" method="post">
-						<input type="hidden" name=sitter_id value="${petsitterapply.sitter_id}">
-						<input type="hidden" name=email value="${petsitterapply.email}">				
+						<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">
+						<input type="hidden" name="email" value="${petsitterapply.email}">
+						<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
 						<button type="submit" id="nega-btn"> 펫시터 거부</button>
 			</form> 	
 	</c:forEach>
@@ -121,15 +122,18 @@
 	
 	<h2> 휴면 페시터 회원 </h2>	
 	
-	<c:forEach var="petsitterSleep" items="${petsitterSleepList}">
+	<c:forEach var="petsitterSleepList" items="${petsitterSleepList}">
 		
-				<h3>펫시터 ID : ${petsitterSleep.sitter_id},
-				펫시터 상태(정상, 휴면) : ${petsitterSleep.sitter_status},
-				펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleep.sitter_matching_type}</h3>
+			<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">
+				<h3>펫시터 ID : ${petsitterSleepList.sitter_id},
+				펫시터 상태(정상, 휴면) : ${petsitterSleepList.sitter_status},
+				펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleepList.sitter_matching_type}
+				</h3>
+				</a>
 			
 				<!-- 펫시터 상태 변경 버튼 -->
 			<form action="petstatus" method=post>			
-					<input type="hidden" name="sitter_id" value="${petsitterSleep.sitter_id}">
+					<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">
 					<input type="hidden" name="sitter_status" value="정상">					
 					<button type="submit" >펫시터 정상 변경</button>						
 			</form>

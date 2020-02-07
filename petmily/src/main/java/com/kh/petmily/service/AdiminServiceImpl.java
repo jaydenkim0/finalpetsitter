@@ -73,9 +73,8 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 펫시터 거부(삭제)
 	@Override
-	public void petsitterNegative(String sitter_id) {
-		adminDao.petsitterNegative(sitter_id);
-		
+	public void petsitterNegative(String sitter_id, int sitter_no) {
+		adminDao.petsitterNegative(sitter_id, sitter_no);		
 	}
 
 	// 펫시터 단일 검색
@@ -98,8 +97,7 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 펫시터 상태 변환
 	@Override
-	public void sitter_status(PetsitterDto petsitterDto) {
-		System.out.println("ServiceImpl = " + petsitterDto);
+	public void sitter_status(PetsitterDto petsitterDto) {		
 		adminDao.sitter_status(petsitterDto);
 		
 	}

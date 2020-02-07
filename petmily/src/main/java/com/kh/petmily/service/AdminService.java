@@ -37,7 +37,7 @@ public interface AdminService {
 	void petsitterapply(String sitter_id);
 	
 	// 펫시터 거부
-	void petsitterNegative(String sitter_id);
+	void petsitterNegative(String sitter_id, int sotter_no);
 	
 	// 펫시터 단일 검색
 	PetsitterVO PetsitterSearchOne(String sitter_id);
