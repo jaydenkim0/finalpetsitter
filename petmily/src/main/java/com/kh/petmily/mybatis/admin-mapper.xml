@@ -87,15 +87,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from petsitter where grade = 'member' order by pet_sitter_no desc
 		</select>
 		
+		
 		<!-- 펫시터 승인 -->
 		<update id="petsitterApply" parameterType="String">
 			update member set grade = 'petsitter' where id = #{sitter_id}
 		</update>
 		
+		
 		<!-- 펫시터 거부 테이블에서 삭제  -->		
 		<delete id="petsitterNegative" parameterType="String">
 			delete pet_sitter where sitter_id = #{sitter_id}
 		</delete>		
+				<!-- 지역삭제 -->
+				<delete id="locationNegative" parameterType="int">
+					delete location where location_sitter_no = #{sitter_no}
+				</delete>
+				<!-- 돌봄가능 동물 삭제 -->
+				<delete id="carePetTypeNegative" parameterType="int">
+					delete care_pet_type where care_sitter_no = #{sitter_no}
+				</delete>
+				<!-- 스킬삭제 -->
+				<delete id="skillsNegative" parameterType="int">
+					delete skills where skills_sitter_no = #{sitter_no}
+				</delete>
+				<!-- 환경삭제 -->
+				<delete id="careConditionNegative" parameterType="int">
+					delete care_condition where condition_sitter_no = #{sitter_no}
+				</delete>
+		
 		
 		<!-- 펫시터 단일 검색  -->
 		<select id="petsitterSearchOne"  parameterType="String" resultType="petsitterVO">

@@ -92,13 +92,12 @@ public class AdminController {
 	
 				// 펫시터 신청한 회원 승인 기능
 				@PostMapping("/apply")
-				public String petsitterapply(@RequestParam String sitter_id) {
-					
+				public String petsitterapply(@RequestParam String sitter_id) {					
 					// 데이터베이스 member -> petsitter 로변경
 					adminService.petsitterapply(sitter_id);
 					return "redirect:petsitter";					
 				}
-				// 펫시터 신청한 회원 거부 기능
+				// 펫시터 신청한 회원 거부 기능 ( 펫시터전체삭제 기능 )
 				@PostMapping("/negative")
 				@ResponseBody
 				public String negative(
@@ -106,9 +105,10 @@ public class AdminController {
 					// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
 					String email = petsitterVO.getEmail();
 					String sitter_id = petsitterVO.getSitter_id();
+					int sitter_no = petsitterVO.getPet_sitter_no();
 					String result = amailService.sendCancel(email);
 					// pet_sitter 테이블에서 신청한 내용을 삭제
-					adminService.petsitterNegative(sitter_id);	
+					adminService.petsitterNegative(sitter_id, sitter_no);	
 					return result;
 				}	
 				
@@ -242,7 +242,40 @@ public class AdminController {
 		return "admin/petsitter/petsitterdetailapply";	
 	}
 		
+	// 휴면 펫시터 디테일 페이지로 이동
+	@GetMapping("/petsitter/petsitterdetailsleep")
+	public String petsitterdetailsleep(@RequestParam int pet_sitter_no, Model model) {
+		System.out.println(pet_sitter_no);
+		
+		// 펫시터 단일조회 조건 펫시터 번호로
+		PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
+		// 펫시터 회원정보 (지역) 
+		List<LocationDto>  petlocation = adminService.petsitterdetailLocation(pet_sitter_no);
+		// 펫시터 회원정보 (돌봄가능동물) 
+		List<CarePetTypeNameDto> pettypename = adminService.petsitterdetailCarePet(pet_sitter_no);
+		// 펫시터 회원정보 (스킬) 
+		List<SkillNameDto> petskill = adminService.petsitterdetailSkills(pet_sitter_no);
+		// 펫시터 회원정보 (펫시터 환경) 
+		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);
+		
+		System.out.println(petsitter);
+		System.out.println(petlocation);
+		System.out.println(pettypename);
+		System.out.println(petskill);
+		System.out.println(petcondition);		
+		
+		model.addAttribute("petsitter", petsitter);
+		model.addAttribute("petlocation", petlocation);
+		model.addAttribute("pettypename", pettypename);
+		model.addAttribute("petskill", petskill);
+		model.addAttribute("petcondition", petcondition);		
+		return "admin/petsitter/petsitterdetailsleep";		
+	}
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
+	
 	
 	
 	// 차단 회원 및 펫시터 관리 페이지 연결

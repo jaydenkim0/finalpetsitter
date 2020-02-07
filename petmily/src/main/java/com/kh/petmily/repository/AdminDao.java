@@ -9,7 +9,6 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminDao {
@@ -36,7 +35,7 @@ public interface AdminDao {
 	void petsitterApply(String sitter_id);
 	
 	// 펫시터 거부 (삭제)
-	void petsitterNegative(String sitter_id);
+	void petsitterNegative(String sitter_id, int sitter_no);
 
 	// 펫시터 단일 검색
 	PetsitterVO petsitterSearchOne(String sitter_id);
@@ -82,7 +81,8 @@ public interface AdminDao {
 	List<BlackListDto> getMemberBlackList();
 
 	// 페시터 회원 정보 (단일조회)
-	PetsitterVO getPetsitterdetail(int pet_sitter_no);
+	PetsitterVO getPetsitterdetail(int pet_sitter_no);	
+	
 	// 펫시터 회원정보 (지역) 
 	List<LocationDto> getPetsitterdetailLocation(int pet_sitter_no);
 	// 펫시터 회원정보 (돌봄가능동물) 
@@ -91,6 +91,8 @@ public interface AdminDao {
 	List<SkillNameDto> getPetsitterdetailSkills(int pet_sitter_no);
 	// 펫시터 회원정보 (펫시터 환경) 
 	List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no);
+
+
 
 	
 
