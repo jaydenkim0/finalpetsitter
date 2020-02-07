@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -57,8 +58,6 @@ public class FaqController {
 		String keyword = req.getParameter("keyword");
 		
 		boolean isSearch = type != null && keyword != null;
-		System.out.println("");
-//		FaqService faqService = new FaqService();
 		
 		List<FaqVO>list;
 		
@@ -69,18 +68,17 @@ public class FaqController {
 			list = faqService.getList(start,finish);
 		}
 		int count = faqService.getCount(type, keyword);
+		
 		//뷰에서 필요한 데이터를 첨부(5개)
-		req.setAttribute("pno", pno);
-		req.setAttribute("count", count);
-		req.setAttribute("list", list);
-		req.setAttribute("pagesize", pagesize);
-		req.setAttribute("navsize", navsize);
-		
-		model.addAttribute("list",list);
-		
+		//System.out.println(list.size());
+		model.addAttribute("pno", pno);
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("pagesize", pagesize);
+		model.addAttribute("navsize", navsize);
 		return "board/faq/list";
 	}
-	
+		
 	//게시글 작성 화면
 	@GetMapping("/write")
 	public String write() {

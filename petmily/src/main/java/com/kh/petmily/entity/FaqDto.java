@@ -1,5 +1,8 @@
 package com.kh.petmily.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +21,5 @@ public class FaqDto {
 	private String faq_content; // 관리자에게 문의 하는 내용
 	private String wdate;//작성일자
 	private String nick; //닉네임
-
+	
 }

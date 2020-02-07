@@ -43,8 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getList" resultType="FaqVO" parameterType="map">
 		select*from (
 		select rownum as rn, A.* from(
-		select
-		faq_no,faq_title,faq_head,faq_content,wdate,member_id
+		select*
+<!-- 		faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
 		from FAQ
 		order by faq_no desc, wdate desc
 		) A

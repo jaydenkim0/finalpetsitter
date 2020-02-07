@@ -72,11 +72,12 @@ $(document).ready(function(){
 	</a><br><br>
 	</table><br>
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
-<c:if test="$[sessionScope.member_id == faqVO.member_id]">
+<%-- <c:if test="$[sessionScope.member_id == faqVO.member_id]"> --%>
 <a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
 	<button type="button" id="btnupdate">수정</button>
 </a><br><br>
 <a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
 	<button type="button" id="btndelete">삭제</button>
-</a><br><br></c:if>
+</a><br><br>
+<%-- </c:if> --%>
 </form>

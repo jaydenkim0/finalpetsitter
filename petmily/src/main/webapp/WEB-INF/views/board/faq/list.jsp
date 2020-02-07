@@ -32,25 +32,15 @@
 	<button type="button" id="btnwrite">글쓰기</button>
 </a><br><br>
 <%-- </c:if> --%>
-<form name="form1" method="post" action="${context}/board/faq/list">
-	<select name="type">
-		<option value="all" 
-		<c:out value="${map.type == 'all'?'selected':''}"/>>말머리+제목+작성자+내용
-		</option>
-		<option value="member_id" 
-		<c:out value="${map.type == 'member_id'?'selected':''}"/>>작성자
-		</option>
-		<option value="faq_title" 
-		<c:out value="${map.type == 'faq_title'?'selected':''}"/>>말머리
-		</option>
-		<option value="faq_head" 
-		<c:out value="${map.type == 'faq_head'?'selected':''}"/>>제목
-		</option>
+<form method="get" action="${context}/board/faq/list">
+	<select name="type" class="input-item">
+		<option value="member_id" >작성자</option>
+		<option value="faq_head" >제목</option>
 		</select>
-<input name="keyword" value="${map.keyword}">
+<input class="input-item" name="keyword" placeholder="검색어" requierd>
 <input type="submit" value="조회">
 </form>
-${map.count}개의 게시물이 있습니다.
+<section>
 <table border="1" width="100%">
 <tr>
 	<th>글번호</th>
@@ -60,7 +50,7 @@ ${map.count}개의 게시물이 있습니다.
 	<th>내용</th>
 	<th>게시일자</th>
 </tr>
-<c:forEach var="row" items="${map.list}">
+<c:forEach var="row" items="${list}">
 <tr>
 	<td>${row.faq_no}</td>
 	<td>${row.member_id}</td>
@@ -69,10 +59,11 @@ ${map.count}개의 게시물이 있습니다.
 		<a href="${context}/board/faq/view?faq_no=${row.faq_no}">${row.faq_head}</a>
 	</td>
 	<td>${row.faq_content}</td>
-	<td>${row.wdate}</td>
+	<td>${row.writedateWithFormat}</td>
 </tr>
 </c:forEach>
-<div class="row">
+</table>
+<div class="row" >
 		<!-- 네비게이터(navigator) -->
 		<jsp:include page="/WEB-INF/views/board/faq/navigator.jsp">
 			<jsp:param name="pno" value="${pno}"/>
@@ -81,8 +72,7 @@ ${map.count}개의 게시물이 있습니다.
 			<jsp:param name="pagesize" value="${pagesize}"/>
 		</jsp:include>
 	</div>
-</table>
-
+</section>
 
 
 
