@@ -52,4 +52,10 @@ public class CareDaoImpl implements CareDao{
 	public void content_edit(CareDto careDto) {
 		sqlSession.update("care.content_edit",careDto);
 	}
+
+	//돌봄 방 삭제
+	@Override
+	public void delete(String care_board_no) {
+		sqlSession.delete("care.delete",care_board_no);
+	}
 }

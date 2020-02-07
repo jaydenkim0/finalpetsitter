@@ -80,4 +80,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			care_board_no=#{care_board_no}
 	</update>
 	
+	<!-- 돌봄 방 삭제 -->
+	<delete id="delete" parameterType="String">
+		delete from care_board where care_board_no=#{care_board_no}
+	</delete>
+	
 </mapper>

@@ -61,4 +61,10 @@ public class CareServiceImpl implements CareService{
 		careDao.content_edit(careDto);
 	}
 
+	//돌봄 방 삭제
+	@Override
+	public void delete(String care_board_no) {
+		careDao.delete(care_board_no);
+	}
+
 }

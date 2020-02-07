@@ -10,6 +10,7 @@
 		<th>펫시터</th>
 		<th>방 제목</th>
 		<th>생성일</th>
+		<th>관리</th>
 	</tr>
 	<c:forEach var="list" items="${list }">
 		<tr>
@@ -22,6 +23,9 @@
 				</a>
 			</td>
 			<td>${list.wdate.substring(0,16) }</td>
+			<td>
+				<a href="delete?care_board_no=${list.care_board_no }"><button>방 삭제</button></a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

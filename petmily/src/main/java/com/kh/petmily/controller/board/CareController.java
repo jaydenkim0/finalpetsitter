@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CarePetsitterDto;
@@ -81,7 +82,7 @@ public class CareController {
 	
 	//돌봄 방 제목 수정
 	@GetMapping("/content_edit")
-	public String content_edit(
+	public void content_edit(
 			@RequestParam String board_no,
 			@RequestParam String care_board_content,
 			Model model) {
@@ -90,6 +91,13 @@ public class CareController {
 		careDto.setCare_board_content(care_board_content);
 		careService.content_edit(careDto);
 		model.addAttribute("care_board_no",care_board_no);
-		return "board/care/content";
+	}
+	
+	//돌봄 방 삭제
+	@GetMapping("/delete")
+	public String delete(
+			@RequestParam String care_board_no) {
+		careService.delete(care_board_no);
+		return "redirect:/board/care/list";
 	}
 }

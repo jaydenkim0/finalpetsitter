@@ -29,4 +29,7 @@ public interface CareService {
 	//돌봄 방 제목 변경
 	void content_edit(CareDto careDto);
 
+	//돌봄 방 삭제
+	void delete(String care_board_no);
+
 }

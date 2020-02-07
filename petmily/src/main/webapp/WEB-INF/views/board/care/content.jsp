@@ -17,7 +17,7 @@
         });
 
         //완료를 누르면 글자화면이 표시되도록 처리
-        $(".content_edit").find("form").submit(function(e){
+        $(".content_submit").submit(function(e){
             //this == form
             e.preventDefault();//기본이벤트 방지
 
@@ -44,6 +44,7 @@
 
             $(this).parents(".content_edit").hide();
             $(this).parents(".content_edit").prev(".content_view").show();
+	        window.location.reload();
         });
 	});
 </script>
@@ -52,7 +53,7 @@
 <body>
 
 <h1>돌봄 방 ${care_board_no }</h1><br>
-<a href="contentchange?care_board_no=${care_board_no }"><button>방 수정</button></a><br><br>
+<a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -76,7 +77,7 @@
 	 <tr class="content_edit">
 	 		<th>방 제목</th>
                 <td>
-                    <form action="content_edit" method="post">
+                    <form class="content_submit" action="content_edit" method="get">
                         <input type="hidden" name="board_no" value="${list.care_board_no }">
                         <input type="text" name="care_board_content" value="${list.care_board_content }">
                         <input type="submit" value="완료">
