@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
  
 <mapper namespace="care">
+
 	<!-- 게시글 목록 -->
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
@@ -44,12 +45,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 펫시터아이디로 펫시터번호 구하기 -->
 	<select id="id_to_number" parameterType="String" resultType="int">
-		select 
-			pet_sitter_no
-		from
-			pet_sitter
-		where sitter_id=${care_sitter_id}
-				
+		select pet_sitter_no from pet_sitter where sitter_id=#{care_sitter_id}	
 	</select>
+	
+	<!-- 돌봄방 생성 -->
+	<insert id="write" parameterType="careDto">
+		insert into care_board values(
+			care_board_no_seq.nextval,
+			#{care_member_id},
+			#{care_sitter_no},
+			#{care_board_content},
+			#{care_pw},
+			sysdate
+		)
+	</insert>
 	
 </mapper>

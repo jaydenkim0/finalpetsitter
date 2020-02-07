@@ -28,4 +28,10 @@ public class CareDaoImpl implements CareDao{
 	public int id_to_number(String care_sitter_id) {
 		return sqlSession.selectOne("care.id_to_number",care_sitter_id);
 	}
+
+	//돌봄방 생성
+	@Override
+	public void write(CareDto careDto) {
+		sqlSession.insert("care.write",careDto);
+	}
 }

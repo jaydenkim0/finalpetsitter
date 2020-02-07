@@ -37,4 +37,10 @@ public class CareServiceImpl implements CareService{
 		return careDao.id_to_number(care_sitter_id);
 	}
 
+	//돌봄방 생성
+	@Override
+	public void write(CareDto careDto) {
+		careDao.write(careDto);
+	}
+
 }

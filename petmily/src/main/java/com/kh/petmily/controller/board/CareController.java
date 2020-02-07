@@ -53,8 +53,22 @@ public class CareController {
 			@RequestParam String care_member_id,
 			@RequestParam String care_sitter_id,
 			@RequestParam String care_board_content,
-			@RequestParam String care_pw) {
-		int pet_sitter_number = careService.id_to_number(care_sitter_id);
-		return "board/care/list";
+			@RequestParam String care_pw,
+			Model model) {
+		int pet_sitter_no = (int)careService.id_to_number(care_sitter_id);
+		careDto.setCare_member_id(care_member_id);
+		careDto.setCare_sitter_no(pet_sitter_no);
+		careDto.setCare_board_content(care_board_content);
+		careDto.setCare_pw(care_pw);
+		//아이디 결과값 일치하는 돌봄글만 보여
+//		model.addAttribute("care_member_id",care_member_id);
+		careService.write(careDto);
+		return "redirect:/board/care/list";
+	}
+	
+	//돌봄 방 페이지 연결
+	@GetMapping("/content")
+	public String content() {
+		return "board/care/content";
 	}
 }
