@@ -102,8 +102,17 @@
 	<input type="hidden" name="sitter_id" value="${id}">
 	<h1>${id}</h1>
 	
-<!-- 신분증이미지 파일 -->	
-	<input type="file" name="license_file" multiple="image/*">
+<!-- 소개 이미지 파일 -->	
+	<label for="info_image">소개 이미지</label>
+	<input type="file" id="info_image" name="info_image" multiple accept="image/*">
+	
+<!-- 신분증 이미지 파일 -->	
+	<label for="id_card_file">신분증</label>
+	<input type="file" id="id_card_file" name="id_card_file" multiple accept="image/*" required>
+	
+<!-- 증빙서류 이미지 파일 -->	
+	<label for="license_file">증빙 서류</label>
+	<input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
 	
 	<div>
 		<label for="info-text">펫밀리 기본 정보</label>
