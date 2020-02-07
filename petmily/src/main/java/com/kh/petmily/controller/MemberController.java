@@ -156,11 +156,6 @@ public class MemberController {
 	public String findid() {
 		return "member/findid";
 	}
-	
-
-//	@GetMapping("/validate")
-
-	
 
 	//아이디찾기-PostMapping
 	@PostMapping("/findid")
@@ -180,7 +175,6 @@ public class MemberController {
 
 	
 	@GetMapping("/validate")	
-
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {
@@ -242,6 +236,7 @@ public class MemberController {
 			System.out.println(dto);
 			return "member/mylistchange";
 		}
+		
 		@PostMapping("/mylistchange")
 		public String edit(@ModelAttribute MemberDto memberDto) {			
 			memberService.mylistchange(memberDto);
