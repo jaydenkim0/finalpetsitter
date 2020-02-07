@@ -62,4 +62,3 @@ public class FaqServiceImpl implements FaqService {
 		return faqDao.getList(start,finish);
 	}
 }
-
