@@ -70,4 +70,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select sitter_id from pet_sitter where pet_sitter_no=#{care_sitter_no}
 	</select>
 	
+	<!-- 돌봄 방 제목 변경 -->
+	<update id="content_edit" parameterType="careDto">
+		update 
+			care_board 
+		set 
+			care_board_content=#{care_board_content} 
+		where 
+			care_board_no=#{care_board_no}
+	</update>
+	
 </mapper>

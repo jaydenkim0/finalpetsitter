@@ -79,16 +79,17 @@ public class CareController {
 		return "board/care/content";
 	}
 	
-	//돌봄 방 수정 페이지 연결
-	@GetMapping("/contentchange")
-	public String contentchange(
-			@RequestParam String care_board_no,
+	//돌봄 방 제목 수정
+	@GetMapping("/content_edit")
+	public String content_edit(
+			@RequestParam String board_no,
+			@RequestParam String care_board_content,
 			Model model) {
+		int care_board_no = Integer.parseInt(board_no);
+		careDto.setCare_board_no(care_board_no);
+		careDto.setCare_board_content(care_board_content);
+		careService.content_edit(careDto);
 		model.addAttribute("care_board_no",care_board_no);
-		CareDto list = careService.list(care_board_no);
-		model.addAttribute("list",list);
-		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
-		model.addAttribute("sitter_id",sitter_id);
-		return "board/care/contentchange";
+		return "board/care/content";
 	}
 }

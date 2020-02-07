@@ -20,4 +20,8 @@ public interface CareDao {
 
 	//펫시터번호로 펫시터아이디 구하기
 	String number_to_id(int care_sitter_no);
+
+	//돌봄 방 제목 변경
+	void content_edit(CareDto careDto);
+
 }

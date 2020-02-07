@@ -46,4 +46,10 @@ public class CareDaoImpl implements CareDao{
 	public String number_to_id(int care_sitter_no) {
 		return sqlSession.selectOne("care.number_to_id",care_sitter_no);
 	}
+
+	//돌봄 방 제목 변경
+	@Override
+	public void content_edit(CareDto careDto) {
+		sqlSession.update("care.content_edit",careDto);
+	}
 }
