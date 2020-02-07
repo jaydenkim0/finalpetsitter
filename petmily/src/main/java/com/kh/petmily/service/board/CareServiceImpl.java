@@ -43,4 +43,16 @@ public class CareServiceImpl implements CareService{
 		careDao.write(careDto);
 	}
 
+	//돌봄방 정보 불러오기
+	@Override
+	public CareDto list(String care_board_no) {
+		return careDao.list(care_board_no);
+	}
+
+	//펫시터번호로 펫시터아이디 구하기
+	@Override
+	public String number_to_id(int care_sitter_no) {
+		return careDao.number_to_id(care_sitter_no);
+	}
+
 }

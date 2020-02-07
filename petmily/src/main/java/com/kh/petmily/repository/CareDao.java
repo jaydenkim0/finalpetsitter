@@ -14,4 +14,10 @@ public interface CareDao {
 
 	//돌봄방 생성
 	void write(CareDto careDto);
+
+	//돌봄방 정보 불러오기
+	CareDto list(String care_board_no);
+
+	//펫시터번호로 펫시터아이디 구하기
+	String number_to_id(int care_sitter_no);
 }

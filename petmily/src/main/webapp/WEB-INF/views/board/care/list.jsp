@@ -16,7 +16,11 @@
 			<td>${list.care_board_no }</td>
 			<td>${list.care_member_id }</td>
 			<td>${list.sitter_id }</td>
-			<td>${list.care_board_content }</td>
+			<td>
+				<a href="content?care_board_no=${list.care_board_no }">
+					${list.care_board_content }
+				</a>
+			</td>
 			<td>${list.wdate.substring(0,16) }</td>
 		</tr>
 	</c:forEach>

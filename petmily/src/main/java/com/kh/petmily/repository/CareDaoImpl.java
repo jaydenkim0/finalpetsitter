@@ -34,4 +34,16 @@ public class CareDaoImpl implements CareDao{
 	public void write(CareDto careDto) {
 		sqlSession.insert("care.write",careDto);
 	}
+
+	//돌봄방 정보 불러오기
+	@Override
+	public CareDto list(String care_board_no) {
+		return sqlSession.selectOne("care.listcontent",care_board_no);
+	}
+
+	//펫시터번호로 펫시터아이디 구하기
+	@Override
+	public String number_to_id(int care_sitter_no) {
+		return sqlSession.selectOne("care.number_to_id",care_sitter_no);
+	}
 }

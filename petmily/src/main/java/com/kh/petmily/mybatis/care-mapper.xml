@@ -60,4 +60,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 돌봄방 정보 불러오기 -->
+	<select id="listcontent" parameterType="String" resultType="careDto">
+		select * from care_board where care_board_no=#{care_board_no}
+	</select>
+	
+	<!-- 펫시터번호로 펫시터아이디 구하기 -->
+	<select id="number_to_id" parameterType="int" resultType="String">
+		select sitter_id from pet_sitter where pet_sitter_no=#{care_sitter_no}
+	</select>
+	
 </mapper>
