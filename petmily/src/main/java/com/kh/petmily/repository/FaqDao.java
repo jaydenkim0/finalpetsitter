@@ -2,7 +2,6 @@ package com.kh.petmily.repository;
 
 import java.util.List;
 
-import com.kh.petmily.entity.FaqDto;
 import com.kh.petmily.vo.FaqVO;
 
 public interface FaqDao {
