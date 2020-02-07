@@ -156,9 +156,6 @@ public class MemberController {
 	public String findid() {
 		return "member/findid";
 	}
-	
-
-	
 
 	//아이디찾기-PostMapping
 	@PostMapping("/findid")
