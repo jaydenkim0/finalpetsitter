@@ -40,7 +40,7 @@
 <body>
 <h1>돌봄방 생성</h1>
 <table border="1">
-	<form action="write">
+	<form action="write" method="post">
 		<tr>
 			<th>작성자 아이디</th>
 			<td><input type="text" readonly value=${id } name="care_member_id"></td>

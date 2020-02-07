@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
  
 <mapper namespace="care">
+
 	<!-- 게시글 목록 -->
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
@@ -41,5 +42,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 	on C.care_sitter_no=P.pet_sitter_no
 		order by wdate desc
 	</select>
+	
+	<!-- 펫시터아이디로 펫시터번호 구하기 -->
+	<select id="id_to_number" parameterType="String" resultType="int">
+		select pet_sitter_no from pet_sitter where sitter_id=#{care_sitter_id}	
+	</select>
+	
+	<!-- 돌봄방 생성 -->
+	<insert id="write" parameterType="careDto">
+		insert into care_board values(
+			care_board_no_seq.nextval,
+			#{care_member_id},
+			#{care_sitter_no},
+			#{care_board_content},
+			#{care_pw},
+			sysdate
+		)
+	</insert>
+	
+	<!-- 돌봄방 정보 불러오기 -->
+	<select id="listcontent" parameterType="String" resultType="careDto">
+		select * from care_board where care_board_no=#{care_board_no}
+	</select>
+	
+	<!-- 펫시터번호로 펫시터아이디 구하기 -->
+	<select id="number_to_id" parameterType="int" resultType="String">
+		select sitter_id from pet_sitter where pet_sitter_no=#{care_sitter_no}
+	</select>
+	
+	<!-- 돌봄 방 제목 변경 -->
+	<update id="content_edit" parameterType="careDto">
+		update 
+			care_board 
+		set 
+			care_board_content=#{care_board_content} 
+		where 
+			care_board_no=#{care_board_no}
+	</update>
+	
+	<!-- 돌봄 방 삭제 -->
+	<delete id="delete" parameterType="String">
+		delete from care_board where care_board_no=#{care_board_no}
+	</delete>
 	
 </mapper>
