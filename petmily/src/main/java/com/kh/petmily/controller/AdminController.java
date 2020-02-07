@@ -2,14 +2,12 @@ package com.kh.petmily.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +19,6 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.PetsitterVO;
@@ -198,7 +195,8 @@ public class AdminController {
 		// 펫시터 회원정보 (스킬) 
 		List<SkillNameDto> petskill = adminService.petsitterdetailSkills(pet_sitter_no);
 		// 펫시터 회원정보 (펫시터 환경) 
-		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);		
+		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);
+		
 		System.out.println(petsitter);
 		System.out.println(petlocation);
 		System.out.println(pettypename);
@@ -213,6 +211,37 @@ public class AdminController {
 		return "admin/petsitter/petsitterdetail";		
 	}
 	
+	// 펫시터 신청 승인 디테일 페이지로 이동
+	@GetMapping("/petsitter/petsitterdetailapply")
+	public String petsitterdetailapply(@RequestParam int pet_sitter_no, Model model) {		
+		System.out.println(pet_sitter_no);
+		
+		// 펫시터 단일조회 조건 펫시터 번호로
+		PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
+		// 펫시터 회원정보 (지역) 
+		List<LocationDto>  petlocation = adminService.petsitterdetailLocation(pet_sitter_no);
+		// 펫시터 회원정보 (돌봄가능동물) 
+		List<CarePetTypeNameDto> pettypename = adminService.petsitterdetailCarePet(pet_sitter_no);
+		// 펫시터 회원정보 (스킬) 
+		List<SkillNameDto> petskill = adminService.petsitterdetailSkills(pet_sitter_no);
+		// 펫시터 회원정보 (펫시터 환경) 
+		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);
+		
+		System.out.println(petsitter);
+		System.out.println(petlocation);
+		System.out.println(pettypename);
+		System.out.println(petskill);
+		System.out.println(petcondition);		
+		
+		model.addAttribute("petsitter", petsitter);
+		model.addAttribute("petlocation", petlocation);
+		model.addAttribute("pettypename", pettypename);
+		model.addAttribute("petskill", petskill);
+		model.addAttribute("petcondition", petcondition);
+		
+		return "admin/petsitter/petsitterdetailapply";	
+	}
+		
 	/////////////////////////////////////////////////////////////////
 	
 	

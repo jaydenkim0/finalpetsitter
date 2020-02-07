@@ -15,12 +15,7 @@
 				// 버튼 속성 및 내용 변경
 				$(this).find("#nega-btn").prop("disabled", true);
 				$(this).find("#nega-btn").text("이메일 발송중");
-				
-				 // 비동기 통신으 이용하요 작성한 데이터 댓글을 수정 페이지로 전달
-                //  [1] 보내는 주소를 어떻게 구할 것인가?
-                // - form에 작성된 action을 불러올 수 있는가?
-                // - form에 작성된 method를 불러올 수 있는가?
-                //  [2] 비동기 통신으로 데이터를 어떻게 보내는가?
+			
 				var url = $(this).attr("action"); 
 				var method = $(this).attr("method");
 				var data = $(this).serialize();
@@ -65,9 +60,11 @@
 			<c:forEach var="petsitter" items="${petsitterList}">	
 
 					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-					<h3>펫시터 ID : ${petsitter.sitter_id},
-					펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
-					펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}</h3></a>
+						<h3>펫시터 ID : ${petsitter.sitter_id},
+						펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
+						펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitter.sitter_matching_type}
+						</h3>
+					</a>
 					
 						
 					<!-- 펫시터 상태 변경 버튼 -->			
@@ -92,13 +89,16 @@
 	<h2> 페시터 신청 회원 </h2>	
 		
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
-			<h3>
-				${petsitterapply.id},
-				${petsitterapply.name},
-				${petsitterapply.nick},
-				${petsitterapply.phone},
-				${petsitterapply.joindate}			
-			</h3>						
+	
+		<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">
+				<h3>
+					펫시터 Id : ${petsitterapply.id},
+					펫시터 이름: ${petsitterapply.name},
+					펫시터 닉네임 : ${petsitterapply.nick},
+					펫시터 전화번호: ${petsitterapply.phone},
+					펫시터 가입신청일 : ${petsitterapply.joindate}			
+				</h3>						
+			</a>
 			
 			<!-- 펫시터 승인 버튼 -->			
 			<form action="apply" method="post">

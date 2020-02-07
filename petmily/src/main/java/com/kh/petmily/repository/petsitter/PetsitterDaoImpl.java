@@ -13,8 +13,16 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	private SqlSession sqlSession;
 	
 	@Override
+	public int getSequence() {
+		int sitterNo = sqlSession.selectOne("petsitter.getSequence");
+		return sitterNo;
+	}
+	
+	@Override
 	public void regist(PetsitterDto petsitterDto) {
 		sqlSession.insert("petsitter.regist", petsitterDto);
 	}
+	
 
+	
 }

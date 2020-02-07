@@ -1,12 +1,16 @@
 package com.kh.petmily.repository.petsitter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CareConditionDto;
+import com.kh.petmily.entity.SkillsDto;
 
 @Repository
 public class CareConditionDaoImpl implements CareConditionDao{
@@ -15,10 +19,16 @@ public class CareConditionDaoImpl implements CareConditionDao{
 	private SqlSession sqlSession;
 
 	@Override
-	public void registCondition(List<Integer> care_condition_name) {
-		sqlSession.insert("petsitter.registCondition", care_condition_name);
+	public void registCondition(int no, List<Integer> care_condition_name) {
+		List<CareConditionDto> conditionList = new ArrayList<>();
+		
+		for(Integer conditionNo : care_condition_name) {
+			conditionList.add(CareConditionDto.builder()
+									.care_condition_name(conditionNo)
+									.condition_sitter_no(no)
+									.build());	
+		}
+		System.out.println(conditionList.toString());
+		sqlSession.insert("petsitter.registCondition", conditionList);
 	}
-	
-	
-	
 }
