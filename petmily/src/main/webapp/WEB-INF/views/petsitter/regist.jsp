@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>    
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 	<script>
 	 $(function(){
+//다중 선택 출력 스크립트 		 
          $("input[type=checkbox]").change(function() {
              //배열 선언
              var skillArray = [];
@@ -27,8 +30,6 @@
                  careConditionArray.push($(this).data("condition"));
              });
 
-       
-             
                  $("#skills_text").empty();
                  for (var i in skillArray)
                  {
@@ -46,7 +47,47 @@
                  {
                      $("<span>").text(careConditionArray[i]+"/").appendTo("#care_condition_text");
                  }               
-         })
+         });
+         
+//지역 관리 스크립트
+		var region = [];
+		var section = [];
+		$("#region").each
+		
+         $.ajax({
+             url:"../res/json/petmily_location.json",  
+             type:"get",             
+             dataType:"json",       
+             success:function(resp){ 
+             //도시 목록만 불러와서 #region에 배치
+             //resp의 변수목록을 구해온다
+                 for(var n in resp){
+                     $("<option>").text(n).appendTo("#region")
+                 }
+
+                 //설정 끝나고 나서 #region에 이벤트 설정
+                 $("#region").change(function(){
+                     //this == region
+                     var city=$(this).val();   
+                     $.ajax({
+                         url:"../res/json/petmily_location.json",  
+                         type:"get",             
+                         dataType:"json",
+                         success:function(resp){ 
+                             //resp 안에 있는 city에 해당하는 목록만 추출
+                          
+                             //지우고 시작
+                             $("#section").empty();
+
+                             $(resp[city]).each(function(){
+                                 //option을 생성해서 #section에 추가
+                                 $("<option>").text(this).appendTo("#section");
+                             });
+                         }
+                     });
+                 });
+             }
+         });  
      });
 	</script>
     
@@ -55,23 +96,30 @@
 	받아야하는 목록 : 
 		sitter_id,info,sitter_pets,care_condition,sitter_terms_agree
 -->
-<form action="regist" method="post">
+<form action="regist" method="post" enctype="multipart/form-data">
+
+<!-- 회원 아이디 -->
 	<input type="hidden" name="sitter_id" value="${id}">
 	<h1>${id}</h1>
+	
+<!-- 신분증이미지 파일 -->	
+	<input type="file" name="license_file" multiple="image/*">
+	
 	<div>
 		<label for="info-text">펫밀리 기본 정보</label>
 		<textarea id="info-text" name="info" required></textarea>
 	</div>
 	
+<!--반려동물 경험 -->
 	<div>
 		<label for="yn">반려동물 키워본 경험 유무</label>
-		<!-- 체크박스로 변경예정 -->
 		<select id="yn" name="sitter_pets">
 			<option>예</option>
 			<option>아니오</option>
 		</select>
 	</div>
 	
+<!-- 매칭(돌봄) 종류 -->
 	<div>
 		<label for="mt">가능한 돌봄 종류</label>
 		<select id="mt" name="sitter_matching_type">
@@ -81,6 +129,7 @@
 		</select>
 	</div>
 	
+<!-- 스킬 -->
 	<div class="skill">
         <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
         <label for="sick" id="nameTo1">투약</label>
@@ -97,6 +146,7 @@
         <div id="skills_text"></div>
     </div>
 
+<!-- 돌봄 가능 동물 종류 -->
     <div class="type">
         <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
         <label for="dog">강아지</label>
@@ -119,6 +169,7 @@
         <div id="care_pet_type_text"></div>
     </div>
 
+<!-- 돌봄 환경 -->
     <div class="condition">
         <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
         <label for="apt">아파트</label>
@@ -142,6 +193,17 @@
         <label for="x">해당사항없음</label>   
         
         <div id="care_condition_text"></div>
+    </div>
+	
+<!-- 활동 지역 -->
+	 <div class="form-group">
+        <select class="form-control" id="region">
+            <option>지역을 선택하세요</option>
+        </select>
+
+        <select class="form-control" id="section">
+            <option>구를 선택하세요</option>
+        </select>
     </div>
 	
 	<div>
