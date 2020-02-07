@@ -19,4 +19,6 @@ public class ReviewDto {
 	private int review_sitter_no; // pet_sitter 테이블의  pet_sitter_no
 	private String review_title; // 리뷰제목
 	private String review_content; // 리뷰내용
+	private int review_star; //리뷰 평점
+	private String review_wdate;//리뷰 작성시간
 }

@@ -158,10 +158,6 @@ public class MemberController {
 	}
 	
 
-	@GetMapping("/validate")
-
-	
-
 	//아이디찾기-PostMapping
 	@PostMapping("/findid")
 	public String findid(
