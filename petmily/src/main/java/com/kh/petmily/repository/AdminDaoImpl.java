@@ -50,6 +50,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.petsitterList"); 
 	}
 
+	// 펫시터 휴면 리스트
 	@Override
 	public List<PetsitterVO> getPetsitterSleep() {
 		return sqlSession.selectList("admin.petsleepList");
@@ -69,9 +70,19 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	// 펫시터 거부 (삭제)
 	@Override
-	public void petsitterNegative(String sitter_id) {
+	public void petsitterNegative(String sitter_id, int sitter_no) {
+		System.out.println("DaoImpl.sitter_id = " + sitter_id);
+		System.out.println("DaoImpl.sitter_no = " + sitter_no);
+		// 펫시터 삭제
 		sqlSession.delete("admin.petsitterNegative", sitter_id);
-		
+		// 등록 지역 삭제
+		sqlSession.delete("admin.locationNegative", sitter_no);
+		// 등록 돌봄가능 동물 삭제
+		sqlSession.delete("admin.carePetTypeNegative", sitter_no);
+		// 등록 스킬 삭제
+		sqlSession.delete("admin.skillsNegative", sitter_no);
+		// 등록 환경 삭제
+		sqlSession.delete("admin.careConditionNegative", sitter_no);
 	}
 
 	// 펫시터 단일 검색
@@ -79,7 +90,8 @@ public class AdminDaoImpl implements AdminDao {
 	public PetsitterVO petsitterSearchOne(String sitter_id) {
 		return sqlSession.selectOne("admin.petsitterSearchOne", sitter_id);
 	}
-
+	
+	
 	// 펫시터 차단 (블랙리스트 등록)
 	@Override
 	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO) {
@@ -191,6 +203,8 @@ public class AdminDaoImpl implements AdminDao {
 					return sqlSession.selectList("admin.getPetsitterdetailCareCondition", pet_sitter_no);
 				}
 
+
+	
 
 
 

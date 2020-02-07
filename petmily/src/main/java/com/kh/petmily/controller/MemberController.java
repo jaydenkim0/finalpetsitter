@@ -236,6 +236,7 @@ public class MemberController {
 			System.out.println(dto);
 			return "member/mylistchange";
 		}
+		
 		@PostMapping("/mylistchange")
 		public String edit(@ModelAttribute MemberDto memberDto) {			
 			memberService.mylistchange(memberDto);

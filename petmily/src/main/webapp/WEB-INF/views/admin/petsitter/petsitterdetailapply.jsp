@@ -147,10 +147,11 @@
 			
 			<!-- 펫시터 거부 버튼 -->
 	 		<form   class="petnegative"  action="${pageContext.request.contextPath}/admin/negative" method="post">
-						<input type="hidden" name=sitter_id value="${petsitter.sitter_id}">
-						<input type="hidden" name=email value="${petsitter.email}">				
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+						<input type="hidden" name="email" value="${petsitter.email}">
+						<input type="hidden" name="pet_sitter_no" value="${petsitter.pet_sitter_no}">			
 						<button type="submit" id="nega-btn"> 펫시터 거부</button>
-			</form> 	
+			</form> 
 			
 			</tfoot>
 	</table>

@@ -1,56 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
-<!-- <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/assets/css/suneditor.css" rel="stylesheet"> -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/assets/css/suneditor-contents.css" rel="stylesheet"> -->
-<style>
-    textarea[name=content]{
-        width:100%;
-        height:150px;
-    }
-</style>
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
-<script>
-    function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector('textarea[name=content]')),{
-            //언어 설정
-            lang: SUNEDITOR_LANG['ko'],
-            
-            //버튼 목록
-            buttonList:[
-            	 ['font','fontSize','fontColor'],
-                 ['underline','italic', 'bold','paragraphStyle','formatBlock'],
-                 ['align','table','image']
+ 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+   <c:choose>
+	<c:when test="${sessionScope.id == null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href = "${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+	</c:choose>
+<!-- <script>
+$(document).ready(function(){
+	$("btnsave").click(function(){
+		var faq_title = $("faq_title").val();
+		var faq_head = $("faq_head").val();
+		var faq_content = $("faq_content").val();
+		if(faq_title=""){
+			alert("말머리를 선택하세요")
+			document.form1.faq_title.focus();
+			return;
+		}
+		if(faq_head=""){
+			alert("제목을 입력하세요")
+			document.form1.faq_head.focus();
+			return;
+		}
+		if(faq_content=""){
+			alert("내용을 입력하세요")
+			document.form1.faq_content.focus();
+			return;
+		}
+		document.form1.submit();
+	});
+});
+</script> -->
 
-              ],
-              font:[
-                 '굴림','궁서','binggrae','Verdana','Arial'
-             ],
-             fontSize:[
-             '8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'
-             ],
-             fontColor:[
-          ],
-        });
-        
-    	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-	    editor.onKeyUp = function(e){
-	    	var faq_content = document.querySelector("textarea[name=content]");
-	    	content.value = editor.getContents();
-	    }
-    }
-    
-    //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-    window.onload = loadEditor;
-</script>
-
-<div align="center">
+<form name="form1" method="post" action="insert">
+	<div align="center">
 	<h2>공지글 작성</h2>
 	<form name="faqDto" method="post" action="insert">
-      <input type="hidden" name="member_id" value="${session.id }">
+      <input type="hidden" name="member_id" value="${sessionScope.id}">
 		<table border="1" width="70%">
         <div>
         말머리
@@ -64,6 +58,7 @@
         <div>내용<textarea name="faq_content" id="faq_content" rows="8" cols="80" placeholder="글 내용 입력"></textarea></div>
         <div style="width:650px; text-align:center;">
             <input type="submit" value="확인">
+            <input type="reset" value="초기화">
         </div>
       </table>
   </form>
