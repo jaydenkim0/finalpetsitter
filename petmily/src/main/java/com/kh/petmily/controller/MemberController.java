@@ -158,7 +158,7 @@ public class MemberController {
 	}
 	
 
-	@GetMapping("/validate")
+//	@GetMapping("/validate")
 
 	
 
