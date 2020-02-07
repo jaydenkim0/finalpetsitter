@@ -10,6 +10,7 @@ import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.entity.SkillsDto;
@@ -40,9 +41,11 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.getAtotal();
 	}
 	
+	
+	
 	// member 리스트
 	@Override
-	public List<MemberDto> memberList(MemberDto memberDto) {		
+	public List<PetsitterVO> memberList(MemberDto memberDto) {	
 		return adminDao.getMemberList(memberDto);
 	}
 
@@ -63,6 +66,8 @@ public class AdiminServiceImpl implements AdminService {
 	public List<PetsitterVO> petsitterSleepList() {
 		return adminDao.getPetsitterSleep();
 	}
+	
+	
 	
 	
 	// 펫시터 승인
@@ -195,6 +200,46 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.getPetsitterdetailCareCondition(pet_sitter_no);
 	}
 
+	// 회원 디테일 페이지 
+	@Override
+	public MemberDto getMemberdetail(String id) {
+		return adminDao.getMemberdetail(id);
+	}
+	// 회원 정보 페이지에 보여줄 반려동물 
+	@Override
+	public List<PetDto> getPets(String id) {		
+		return adminDao.getPets(id);
+	}
+
+	// 회원관리 페이지에서 회원 검색
+	@Override
+	public List<PetsitterVO> memberSearchList(String type, String keyword) {		
+		return adminDao.memberSearchList(type, keyword);
+	}
+	// 펫시터 관리 페이지에서 펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
+		return adminDao.petsitterSearch(type,  keyword);
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 신청 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+		return adminDao.petsitterSearchApply(type,  keyword);
+	}
+	
+	// 펫시터 관리 페이지에서 휴면펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+		return adminDao.petsitterSearchSleep(type,  keyword);
+	}
+
+	// 블랙리스트 여부 검사
+	@Override
+	public boolean blackLsitcheck(String id) {		
+		int result = adminDao.blackLsitcheck(id);		
+		return result == 0 ? false:true;
+	}
 
 
 

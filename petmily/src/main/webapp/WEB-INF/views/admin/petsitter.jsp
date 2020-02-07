@@ -54,8 +54,22 @@
 	<hr>
 	<br><br>
 	
+	
 	<h2> 펫시터 리스트 </h2>
 	
+				<!-- 펫시터 검색 -->
+				펫시터 검색 : 
+				<form action="petsitterSearch" method="post">	
+					<select name="type">
+						<option value="id">아이디</option>
+						<option value="name" >이름</option>
+						<option value="nick">닉네임</option>
+					</select>		
+					<input type="text" name="keyword" placeholder="검색명을 입력해주세요" required>
+					<input type="submit" value="검색" >	
+				</form>		
+				<br>
+
 
 			<c:forEach var="petsitter" items="${petsitterList}">	
 
@@ -87,6 +101,19 @@
 	<br><br>
 	
 	<h2> 페시터 신청 회원 </h2>	
+	
+				<!-- 펫시터 검색 -->
+				펫시터 신청 검색 : 
+				<form action="petsitterSearchApply" method="post">	
+					<select name="type">
+						<option value="id">아이디</option>
+						<option value="name" >이름</option>
+						<option value="nick">닉네임</option>
+					</select>		
+					<input type="text" name="keyword" placeholder="검색명을 입력해주세요" required>
+					<input type="submit" value="검색" >	
+				</form>		
+				<br>
 		
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
 	
@@ -121,6 +148,19 @@
 	<br><br>
 	
 	<h2> 휴면 페시터 회원 </h2>	
+
+				<!-- 펫시터 검색 -->
+				휴면 펫시터 검색 : 
+				<form action="petsitterSearchSleep" method="post">	
+					<select name="type">
+						<option value="id">아이디</option>
+						<option value="name" >이름</option>
+						<option value="nick">닉네임</option>
+					</select>		
+					<input type="text" name="keyword" placeholder="검색명을 입력해주세요" required>
+					<input type="submit" value="검색" >	
+				</form>		
+				<br>
 	
 	<c:forEach var="petsitterSleepList" items="${petsitterSleepList}">
 		

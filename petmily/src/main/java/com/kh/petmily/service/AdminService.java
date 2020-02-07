@@ -7,9 +7,9 @@ import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminService {
@@ -22,7 +22,7 @@ public interface AdminService {
 	int admimTotal();
 
 	// 회원 리스트
-	List<MemberDto> memberList(MemberDto memberDto);
+	List<PetsitterVO> memberList(MemberDto memberDto);
 	
 	// 펫시터 리스트
 	List<PetsitterVO> petsitterList();
@@ -85,6 +85,27 @@ public interface AdminService {
 	List<SkillNameDto> petsitterdetailSkills(int pet_sitter_no);
 	// 펫시터 회원정보 (펫시터 환경) 
 	List<CareConditionNameDto> petsitterdetailCareCondition(int pet_sitter_no);
+	
+	// 회원 정보 페이지 
+	MemberDto getMemberdetail(String id);
+	// 회원 정보 페이지에 보여줄 반려동물 
+	List<PetDto> getPets(String id);	
+	
+	// 회원관리 페이지에서 회원 검색
+	List<PetsitterVO> memberSearchList(String type, String keyword);
+	
+	// 펫시터 관리 페이지에서 펫시터 검색
+	List<PetsitterVO> petsitterSearch(String type, String keyword);
+	
+	// 펫시터 관리 페이지에서 펫시터 신청 검색
+	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
+	
+	// 펫시터 관리 페이지에서 휴면펫시터 검색
+	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
+	
+	// 블랙리스트 여부 검사
+	boolean blackLsitcheck(String id);
+	
 	
 	
 }
