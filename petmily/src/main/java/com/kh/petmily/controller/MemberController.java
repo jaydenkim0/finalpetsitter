@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +42,7 @@ public class MemberController {
 		
 	@Autowired
 	private CertDao certDao;
-	
+
 	
 	@GetMapping("/input")
 		public String input() {
@@ -56,6 +57,7 @@ public class MemberController {
 	public String regist() {
 		return "member/regist";		
 	}	
+	
 	// 회원가입
 	@PostMapping("/regist")
 	public String regist(
@@ -130,11 +132,14 @@ public class MemberController {
 		return "member/mylist";
 	}
 	
-	//내정보수정
-	@GetMapping("/mylistchange")
-		public String mylistchange() {
-			return "member/mylistchange";
-		}
+
+
+//	//내정보수정
+//	@GetMapping("/mylistchange")
+//		public String mylistchange() {
+//			return "member/mylistchange";
+//		}
+
 
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
@@ -152,6 +157,11 @@ public class MemberController {
 		return "member/findid";
 	}
 	
+
+	@GetMapping("/validate")
+
+	
+
 	//아이디찾기-PostMapping
 	@PostMapping("/findid")
 	public String findid(
@@ -170,6 +180,7 @@ public class MemberController {
 
 	
 	@GetMapping("/validate")	
+
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {
@@ -223,9 +234,25 @@ public class MemberController {
 			return "/";
 		}
 		
-		
-		
+		// 회원정보수정
+		@GetMapping("/mylistchange")	
+		public String edit(@RequestParam String id, Model model) {
+			MemberDto dto = memberService.mylist(id);			
+			model.addAttribute("member", dto);
+			System.out.println(dto);
+			return "member/mylistchange";
 		}
+		@PostMapping("/mylistchange")
+		public String edit(@ModelAttribute MemberDto memberDto) {			
+			memberService.mylistchange(memberDto);
+			return "redirect:mylist";
+		}
+		
+		
+		
+		
+	}
+
 
 
 

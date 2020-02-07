@@ -24,3 +24,9 @@
 </c:if>
 <h3>가입일 : ${mylist.joindate }</h3>
 <h3>최종로그인 : ${mylist.lastlogin }</h3>
+
+<!-- 정보수정 -->
+<form action="mylistchange" method="get">
+	<input type="hidden" name="id" value="${mylist.id}">
+	<input type="submit" value="정보수정">
+</form>

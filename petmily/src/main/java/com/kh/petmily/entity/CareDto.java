@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CareBoardDto {
+public class CareDto {
 
 	private int care_board_no;
 	private String care_member_id; // 회원 member 테이블의 id
