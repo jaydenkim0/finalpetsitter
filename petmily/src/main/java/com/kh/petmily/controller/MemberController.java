@@ -158,8 +158,6 @@ public class MemberController {
 	}
 	
 
-	@GetMapping("/validate")
-
 	
 
 	//아이디찾기-PostMapping
@@ -180,7 +178,6 @@ public class MemberController {
 
 	
 	@GetMapping("/validate")	
-
 	@ResponseBody
 	public String validate(
 			HttpSession session, @RequestParam String cert) {
