@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  회원관리 -->	
 		<!-- 회원리시트 불러오가 -->
 		<select id="memberList"  resultType="PetsitterVO">
-			select * from memberB where grade = 'member' order by id asc
+			select * from memberB order by id asc
 		</select>
 		
 		<!-- 
