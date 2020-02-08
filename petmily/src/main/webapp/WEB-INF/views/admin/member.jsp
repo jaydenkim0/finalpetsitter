@@ -30,9 +30,7 @@
 	</form>		
 	<br>
 	
-		<c:forEach var="member"  items="${memberList}">	
-				
-				
+		<c:forEach var="member"  items="${memberList}">					
 						<%-- 	
 						<-- 조건식 : black_content 가 null 이면 일반회원 -->		
 						<c:if test="${member.black_content == null }">
@@ -57,9 +55,7 @@
 						</h5>
 						<hr>
 						</a>	  
-				</c:if> --%>
-				
-				
+				</c:if> --%>				
 				
 				<%-- 
 				<-- 조건식 : black_content 가 null 이면 일반회원 -->		
@@ -86,12 +82,12 @@
 				</c:choose>	 
 				 --%>
 				
-				<!-- 
-					조건식1 경고 펫시터 : 등급이 '펫시터'이면서 black_content 가 null 이 아닌 사람
-					조건식1 경고 회원 : 등급이 '회원'이면서 black_content 가 null 이 아닌 사람
-					그외 : 일반회원
-				 -->
-				<c:choose>				
+		<!-- 
+			조건식1 경고 펫시터 : 등급이 '펫시터'이면서 black_content 가 null 이 아닌 사람
+			조건식1 경고 회원 : 등급이 '회원'이면서 black_content 가 null 이 아닌 사람
+			그외 : 일반회원
+		 -->
+		<c:choose>				
 				<c:when test="${member.grade eq 'petsitter' && not empty member.black_content}">
 						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
 						style="color:red;">
@@ -121,7 +117,6 @@
 						<hr>
 						</a>		
 				</c:otherwise>
-				</c:choose>	 
-						
+				</c:choose>							
 		</c:forEach>							
 	

@@ -56,19 +56,16 @@ public class AdminController {
 	@GetMapping("/member")
 	public String member(MemberDto memberDto,
 			Model model) {
-		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)
-		List<PetsitterVO> list = adminService.memberList(memberDto);
-		System.out.println(list);
-		model.addAttribute("memberList", list);
+		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
+		model.addAttribute("memberList", (List<PetsitterVO>)adminService.memberList(memberDto));
 		return  "admin/member";			
 	}
 	// 회원관리 페이지에서 회원 검색
 	@PostMapping("/member")
 	public String member(@RequestParam String type, 
 										@RequestParam String keyword,										
-										Model model) {
-		List<PetsitterVO> list = adminService.memberSearchList(type, keyword);		
-		model.addAttribute("memberList", list);
+										Model model) {		
+		model.addAttribute("memberList", (List<PetsitterVO>)adminService.memberSearchList(type, keyword));
 		return "admin/member";		
 	}
 	
@@ -77,10 +74,9 @@ public class AdminController {
 	public String memberdetail(@RequestParam String id,
 												 MemberDto member,												 
 												 Model model) {		
-		member = adminService.getMemberdetail(id);
-		List<PetDto> list = adminService.getPets(id);
-		model.addAttribute("member", member);
-		model.addAttribute("pets", list);
+		member = adminService.getMemberdetail(id);		
+		model.addAttribute("member", member)
+				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id));
 		return "admin/member/memberdetail";			
 	}
 	
@@ -89,19 +85,12 @@ public class AdminController {
 	// 펫시터관리 페이지 연결
 	@GetMapping("/petsitter")
 	public String petsitter(Model model) {					
-//		// 펫시터 리스트
-//		List<PetsitterVO> Plist = adminService.petsitterList();
-//		model.addAttribute("petsitterList", Plist);
-//		// 펫시터  신청 리스트
-//		List<PetsitterVO> PAlist = adminService.petsitterApplyList();
-//		model.addAttribute("petsitterApplyList", PAlist);		
-//		// 펫시터 휴면 리스트
-//		List<PetsitterVO> PSlist = adminService.petsitterSleepList();
-//		model.addAttribute("petsitterSleepList", PSlist);		
+		//		1. 펫시터 리스트
+		//		2. 펫시터  신청 리스트	
+		//		3 .펫시터 휴면 리스트	
 		model.addAttribute("petsitterList", (List<PetsitterVO>) adminService.petsitterList())
-		.addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())
-		.addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());
-		
+				  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())
+				  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
 				// 펫시터 관리페이지에서 펫시터 검색
