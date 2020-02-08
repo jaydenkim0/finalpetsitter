@@ -18,7 +18,7 @@
     <hr>
     <!-- 강제 탈퇴 -->
       <c:forEach var="memberblacklist" items="${MBlist}">      
-       <a href="#" style="color:yellow;"> 
+       <a href="#" style="color:#ff8d00;"> 
     	<h3>아이디 : ${memberblacklist.black_id}    	
 	    	이름 : ${memberblacklist.black_name}    	
 	    	전화번호 : ${memberblacklist.black_phone}    	

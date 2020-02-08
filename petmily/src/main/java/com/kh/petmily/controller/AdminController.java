@@ -1,5 +1,6 @@
 package com.kh.petmily.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,20 +88,20 @@ public class AdminController {
 	
 	// 펫시터관리 페이지 연결
 	@GetMapping("/petsitter")
-	public String petsitter(PetsitterVO petsitterVO,
-										Model model) {		
-		// 펫시터 리스트
-		List<PetsitterVO> Plist = adminService.petsitterList();
-		// 펫시터  신청 리스트
-		List<PetsitterVO> PAlist = adminService.petsitterApplyList();
-		// 펫시터 휴면 리스트
-		List<PetsitterVO> PSlist = adminService.petsitterSleepList();
-		// 펫시터 리스트 전달
-		model.addAttribute("petsitterList", Plist);
-		// 펫시터 신청 리스트 전달
-		model.addAttribute("petsitterApplyList", PAlist);		
-		// 휴면펫시터 리스트 전달
-		model.addAttribute("petsitterSleepList", PSlist);
+	public String petsitter(Model model) {					
+//		// 펫시터 리스트
+//		List<PetsitterVO> Plist = adminService.petsitterList();
+//		model.addAttribute("petsitterList", Plist);
+//		// 펫시터  신청 리스트
+//		List<PetsitterVO> PAlist = adminService.petsitterApplyList();
+//		model.addAttribute("petsitterApplyList", PAlist);		
+//		// 펫시터 휴면 리스트
+//		List<PetsitterVO> PSlist = adminService.petsitterSleepList();
+//		model.addAttribute("petsitterSleepList", PSlist);		
+		model.addAttribute("petsitterList", (List<PetsitterVO>) adminService.petsitterList())
+		.addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())
+		.addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());
+		
 		return "admin/petsitter";		
 	}	
 				// 펫시터 관리페이지에서 펫시터 검색
@@ -137,7 +138,7 @@ public class AdminController {
 												     					@RequestParam String keyword,										
 						                               Model model) {
 					List<PetsitterVO> PSlist = adminService.petsitterSearchSleep(type, keyword);					
-					List<PetsitterVO> Plist = adminService.petsitterSearch(type, keyword);					
+					List<PetsitterVO> Plist = adminService.petsitterList();				
 					List<PetsitterVO> PAlist = adminService.petsitterApplyList();				
 					model.addAttribute("petsitterList", Plist);				
 					model.addAttribute("petsitterApplyList", PAlist);					
