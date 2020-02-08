@@ -14,7 +14,7 @@
     <br>
     
     <h1>경고 회원 (블랙리스트)</h1>
-    ※경고 수위 회원은 회원 리스트에서 보라색으로 표시
+    ※경고 수위 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
     <hr>
     <!-- 강제 탈퇴 -->
       <c:forEach var="memberblacklist" items="${MBlist}">      
@@ -34,7 +34,7 @@
     <br><br>
     
 	<h1>경고 펫시터 (블랙리스트)</h1>
-	※경고 수위 페시터의 경우 회원과 펫시터 리스트에서 붉은색으로 표시
+	※경고 수위 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
 	<hr>
     <!-- 검색상태 휴면으로 변경  -->
     <c:forEach var="petblacklist" items="${PBlist}" >
