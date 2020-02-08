@@ -109,7 +109,11 @@ public class AdminController {
 																@RequestParam String keyword,										
 						                               Model model) {
 					List<PetsitterVO> Plist = adminService.petsitterSearch(type, keyword);
-					model.addAttribute("petsitterList", Plist);					
+					List<PetsitterVO> PAlist = adminService.petsitterApplyList();	
+					List<PetsitterVO> PSlist = adminService.petsitterSleepList();
+					model.addAttribute("petsitterList", Plist);				
+					model.addAttribute("petsitterApplyList", PAlist);		
+					model.addAttribute("petsitterSleepList", PSlist);
 					return "admin/petsitter";		
 				}
 	
@@ -118,7 +122,11 @@ public class AdminController {
 				public String petsitterSearchApply(@RequestParam String type, 
 																		@RequestParam String keyword,										
 						                               Model model) {
-					List<PetsitterVO> PAlist = adminService.petsitterSearchApply(type, keyword);
+					List<PetsitterVO> PAlist = adminService.petsitterSearchApply(type, keyword);			
+					List<PetsitterVO> Plist = adminService.petsitterList();
+					List<PetsitterVO> PSlist = adminService.petsitterSleepList();				
+					model.addAttribute("petsitterList", Plist);								
+					model.addAttribute("petsitterSleepList", PSlist);					
 					model.addAttribute("petsitterApplyList", PAlist);
 					return "admin/petsitter";		
 				}
@@ -128,7 +136,11 @@ public class AdminController {
 				public String petsitterSearchSleep(@RequestParam String type, 
 												     					@RequestParam String keyword,										
 						                               Model model) {
-					List<PetsitterVO> PSlist = adminService.petsitterSearchSleep(type, keyword);
+					List<PetsitterVO> PSlist = adminService.petsitterSearchSleep(type, keyword);					
+					List<PetsitterVO> Plist = adminService.petsitterSearch(type, keyword);					
+					List<PetsitterVO> PAlist = adminService.petsitterApplyList();				
+					model.addAttribute("petsitterList", Plist);				
+					model.addAttribute("petsitterApplyList", PAlist);					
 					model.addAttribute("petsitterSleepList", PSlist);
 					return "admin/petsitter";		
 				}
