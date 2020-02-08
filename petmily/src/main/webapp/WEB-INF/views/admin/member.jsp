@@ -104,7 +104,7 @@
 				</c:when>				
 				<c:when test="${member.grade eq 'member' && not empty member.black_content}">
 						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
-						style="color:yellow;">
+						style="color:#ff8d00;">
 						<h5>아이디 : ${member.id},
 						이름 : ${member.name},
 						닉네임 : ${member.nick},

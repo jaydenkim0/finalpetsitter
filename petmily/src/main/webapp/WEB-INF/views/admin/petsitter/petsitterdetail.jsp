@@ -51,8 +51,7 @@
 				
 				<tr>			
 					<td>포인트 : ${petsitter.point}</td>					
-			
-			
+				</tr>
 		
 				
 			<hr>
