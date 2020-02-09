@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CarePetsitterDto;
+import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.repository.CareDao;
 import com.kh.petmily.repository.CarePetsitterDao;
 
@@ -65,6 +66,24 @@ public class CareServiceImpl implements CareService{
 	@Override
 	public void delete(String care_board_no) {
 		careDao.delete(care_board_no);
+	}
+
+	//돌봄 방 댓글 목록
+	@Override
+	public List<CareReplyDto> replylist(String care_board_no) {
+		return careDao.replylist(care_board_no);
+	}
+
+	//돌봄 방 댓글 등록
+	@Override
+	public void reply_regist(CareReplyDto careReplyDto) {
+		careDao.reply_regist(careReplyDto);
+	}
+
+	//돌봄 방 댓글 수정
+	@Override
+	public void reply_change(CareReplyDto careReplyDto) {
+		careDao.reply_change(careReplyDto);
 	}
 
 }

@@ -6,6 +6,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(function(){
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//		방 제목 수정
+////////////////////////////////////////////////////////////////////////////////////////////////////
 		//edit 클래스를 가진 요소를 숨김
         $(".content_edit").hide();
 
@@ -45,6 +49,60 @@
             $(this).parents(".content_edit").hide();
             $(this).parents(".content_edit").prev(".content_view").show();
 	        window.location.reload();
+        });
+        
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//		댓글 등록
+////////////////////////////////////////////////////////////////////////////////////////////////////  
+        $(".reply_submit").submit(function(e){
+            e.preventDefault();
+
+            var url = $(this).attr("action");
+            var method = $(this).attr("method");
+
+            var data = $(this).serialize();
+
+            $.ajax({
+                url:url,
+                type:method,
+                data:data,
+                success:function(resp){
+                }
+            });
+	        window.location.reload();
+        });
+        
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//		댓글 수정
+//////////////////////////////////////////////////////////////////////////////////////////////////// 
+        $(".reply_edit").hide();
+
+        $(".reply_change").click(function(){
+            $(this).parent(".reply_view").hide();
+            $(this).prev(".reply_edit").show();
+            $(this).parent(".reply_edit").show();
+        });
+        
+        var text = $(this).parent(".reply_edit").children(".val").val();
+
+        $(".reply_change_submit").submit(function(e){
+            e.preventDefault();
+
+            var url = $(this).attr("action");
+            var method = $(this).attr("method");
+
+            var data = $(this).serialize();
+
+            $.ajax({
+                url:url,
+                type:method,
+                data:data
+            });
+
+            $(".reply_edit").hide();
+            $(".content").innerText="";
+            $(".content").innerText=text;
+            $(".reply_view").show();            
         });
 	});
 </script>
@@ -87,11 +145,45 @@
 	</tr>
 </table>
 <table border="1" width="100%">
-	<c:forEach>
-		<tr>
-			
-		</tr>
-	</c:forEach>
+	<tr>
+		<form action="reply_regist" method="post" class="reply_submit">
+			<td>
+				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
+				<input type="hidden" name="care_reply_writer" value="${id }">
+				<textarea name="care_reply_content" required></textarea>
+			</td>
+			<td align="right">
+				<input type="submit" value="등록">
+			</td>
+		</form>
+	</tr>
 </table>
+<c:forEach var="replylist" items="${replylist }">
+	<table border="1" width="100%">
+		<tr>
+			<th>작성자 : ${replylist.care_reply_writer }</th>
+			<th align="right">${replylist.wdate }</th>
+		</tr>
+		<tr class="reply_view">
+			<th class="content">${replylist.care_reply_content }</th>
+		</tr>
+		<tr class="reply_edit">
+			<th>
+				<form action="reply_change" method="post" class="reply_change_submit">
+				<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+                <textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
+                <input type="submit" value="완료">
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<input type="submit" value="완료" class="reply_edit reply_change_submit">
+				</form>				
+				<button class="reply_view reply_change">수정</button>
+				<button>삭제</button>
+			</th>
+		</tr>
+	</table>
+</c:forEach>
 
 </body>

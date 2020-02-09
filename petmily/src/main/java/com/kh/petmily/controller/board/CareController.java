@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CarePetsitterDto;
+import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.service.board.CareService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class CareController {
 	
 	@Autowired
 	CareDto careDto;
+	
+	@Autowired
+	CareReplyDto careReplyDto;
 	
 	//게시글 목록
 	@GetMapping("/list")
@@ -71,12 +76,17 @@ public class CareController {
 	@GetMapping("/content")
 	public String content(
 			@RequestParam String care_board_no,
+			HttpSession session,
 			Model model) {
 		model.addAttribute("care_board_no",care_board_no);
 		CareDto list = careService.list(care_board_no);
 		model.addAttribute("list",list);
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
+		List<CareReplyDto> replylist = careService.replylist(care_board_no);
+		model.addAttribute("replylist",replylist);
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("id",id);
 		return "board/care/content";
 	}
 	
@@ -99,5 +109,27 @@ public class CareController {
 			@RequestParam String care_board_no) {
 		careService.delete(care_board_no);
 		return "redirect:/board/care/list";
+	}
+	
+	//돌봄 방 댓글 등록
+	@PostMapping("/reply_regist")
+	public void reply_regist(
+			@RequestParam String care_reply_board_no,
+			@RequestParam String care_reply_writer,
+			@RequestParam String care_reply_content) {
+		careReplyDto.setCare_reply_board_no(Integer.parseInt(care_reply_board_no));
+		careReplyDto.setCare_reply_writer(care_reply_writer);
+		careReplyDto.setCare_reply_content(care_reply_content);
+		careService.reply_regist(careReplyDto);
+	}
+	
+	//돌봄 방 댓글 수정
+	@PostMapping("/reply_change")
+	public void repy_change(
+			@RequestParam String care_reply_no,
+			@RequestParam String care_reply_content) {
+		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
+		careReplyDto.setCare_reply_content(care_reply_content);
+		careService.reply_change(careReplyDto);
 	}
 }

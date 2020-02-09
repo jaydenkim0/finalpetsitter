@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareReplyDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,5 +58,23 @@ public class CareDaoImpl implements CareDao{
 	@Override
 	public void delete(String care_board_no) {
 		sqlSession.delete("care.delete",care_board_no);
+	}
+
+	//돌봄 방 댓글 목록
+	@Override
+	public List<CareReplyDto> replylist(String care_board_no) {
+		return sqlSession.selectList("care.replylist",care_board_no);
+	}
+
+	//돌봄 방 댓글 등록
+	@Override
+	public void reply_regist(CareReplyDto careReplyDto) {
+		sqlSession.insert("care.reply_regist",careReplyDto);
+	}
+
+	//돌봄 방 댓글 수정
+	@Override
+	public void reply_change(CareReplyDto careReplyDto) {
+		sqlSession.update("care.reply_change",careReplyDto);
 	}
 }
