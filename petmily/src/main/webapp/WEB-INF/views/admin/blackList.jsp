@@ -18,7 +18,7 @@
     <hr>
     <!-- 강제 탈퇴 -->
       <c:forEach var="memberblacklist" items="${MBlist}">      
-       <a href="#" style="color:#ff8d00;"> 
+        <a href="#" style="color:#ff8d00;"> 
     	<h3>아이디 : ${memberblacklist.black_id}    	
 	    	이름 : ${memberblacklist.black_name}    	
 	    	전화번호 : ${memberblacklist.black_phone}    	
@@ -29,9 +29,11 @@
 	    	</a>  	
     </c:forEach>
     
+    
     <br><br>
     <hr>
     <br><br>
+    
     
 	<h1>경고 펫시터 (블랙리스트)</h1>
 	※경고 수위 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시

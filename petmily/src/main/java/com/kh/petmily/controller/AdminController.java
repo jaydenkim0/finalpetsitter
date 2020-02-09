@@ -1,6 +1,5 @@
 package com.kh.petmily.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,8 @@ public class AdminController {
 	public String member(MemberDto memberDto,
 			Model model) {
 		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
-		model.addAttribute("memberList", (List<PetsitterVO>)adminService.memberList(memberDto));
+		model.addAttribute("memberList", 
+				  (List<PetsitterVO>)adminService.memberList(memberDto));
 		return  "admin/member";			
 	}
 	// 회원관리 페이지에서 회원 검색
@@ -65,7 +65,8 @@ public class AdminController {
 	public String member(@RequestParam String type, 
 										@RequestParam String keyword,										
 										Model model) {		
-		model.addAttribute("memberList", (List<PetsitterVO>)adminService.memberSearchList(type, keyword));
+		model.addAttribute("memberList", 
+				  (List<PetsitterVO>)adminService.memberSearchList(type, keyword));
 		return "admin/member";		
 	}
 	
@@ -88,40 +89,41 @@ public class AdminController {
 		//		1. 펫시터 리스트
 		//		2. 펫시터  신청 리스트	
 		//		3 .펫시터 휴면 리스트	
-		model.addAttribute("petsitterList", (List<PetsitterVO>) adminService.petsitterList())
-				  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())
-				  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
+		model.addAttribute("petsitterList", 
+				  (List<PetsitterVO>) adminService.petsitterList())
+				  .addAttribute("petsitterApplyList", 
+				  (List<PetsitterVO>) adminService.petsitterApplyList())
+				  .addAttribute("petsitterSleepList", 
+				  (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
-				// 펫시터 관리페이지에서 펫시터 검색
+				// 펫시터 관리페이지에서 펫시터 검색 (비동기화로 추후 구현)
 				@PostMapping("/petsitterSearch")
 				public String petsitterSearch(@RequestParam String type, 
 																@RequestParam String keyword,										
-						                               Model model) {
+																Model model) {
 					List<PetsitterVO> Plist = adminService.petsitterSearch(type, keyword);
 					List<PetsitterVO> PAlist = adminService.petsitterApplyList();	
 					List<PetsitterVO> PSlist = adminService.petsitterSleepList();
-					model.addAttribute("petsitterList", Plist);				
-					model.addAttribute("petsitterApplyList", PAlist);		
-					model.addAttribute("petsitterSleepList", PSlist);
+					model.addAttribute("petsitterList", Plist)				
+							  .addAttribute("petsitterApplyList", PAlist)	
+							  .addAttribute("petsitterSleepList", PSlist);
 					return "admin/petsitter";		
-				}
-	
-				// 펫시터 관리페이지에서 펫시터 신청 검색
+				}	
+				// 펫시터 관리페이지에서 펫시터 신청 검색(비동기화로 추후 구현)
 				@PostMapping("/petsitterSearchApply")
 				public String petsitterSearchApply(@RequestParam String type, 
 																		@RequestParam String keyword,										
-						                               Model model) {
+																		Model model) {
 					List<PetsitterVO> PAlist = adminService.petsitterSearchApply(type, keyword);			
 					List<PetsitterVO> Plist = adminService.petsitterList();
 					List<PetsitterVO> PSlist = adminService.petsitterSleepList();				
-					model.addAttribute("petsitterList", Plist);								
-					model.addAttribute("petsitterSleepList", PSlist);					
-					model.addAttribute("petsitterApplyList", PAlist);
+					model.addAttribute("petsitterList", Plist)							
+							  .addAttribute("petsitterSleepList", PSlist)			
+							  .addAttribute("petsitterApplyList", PAlist);
 					return "admin/petsitter";		
-				}
-				
-				// 펫시터 관리페이지에서 휴면 펫시터 검색
+				}				
+				// 펫시터 관리페이지에서 휴면 펫시터 검색(비동기화로 추후 구현)
 				@PostMapping("/petsitterSearchSleep")
 				public String petsitterSearchSleep(@RequestParam String type, 
 												     					@RequestParam String keyword,										
@@ -129,12 +131,11 @@ public class AdminController {
 					List<PetsitterVO> PSlist = adminService.petsitterSearchSleep(type, keyword);					
 					List<PetsitterVO> Plist = adminService.petsitterList();				
 					List<PetsitterVO> PAlist = adminService.petsitterApplyList();				
-					model.addAttribute("petsitterList", Plist);				
-					model.addAttribute("petsitterApplyList", PAlist);					
-					model.addAttribute("petsitterSleepList", PSlist);
+					model.addAttribute("petsitterList", Plist)		
+							  .addAttribute("petsitterApplyList", PAlist)			
+							  .addAttribute("petsitterSleepList", PSlist);
 					return "admin/petsitter";		
-				}
-	
+				}	
 	
 	
 				// 펫시터 신청한 회원 승인 기능
@@ -163,15 +164,15 @@ public class AdminController {
 				// 펫시터 옵션 등록 페이지
 				@GetMapping("/petsitter/option")
 				public String petOtion(Model model) {				
-					// 펫시터 돌봄 가능 동물 종류 리스트
-					List<CarePetTypeNameDto> SPlist = (List<CarePetTypeNameDto>) adminService.carePetType();
-					model.addAttribute("CTlist", SPlist);
-					// 펫시터 스킬 종류 리스트
-					List<SkillNameDto> SKlist = (List<SkillNameDto>) adminService.petSkillsName();
-					model.addAttribute("SKlist", SKlist);
-					// 펫시터 환경 리스트					
-					List<CareConditionNameDto> CClist = (List<CareConditionNameDto>) adminService.petCareCondition();
-					model.addAttribute("CClist", CClist);
+					// 1. 펫시터 돌봄 가능 동물 종류 리스트					
+					// 2. 펫시터 스킬 종류 리스트					
+					// 3. 펫시터 환경 리스트				
+					model.addAttribute("CTlist", 
+							  (List<CarePetTypeNameDto>)adminService.carePetType())
+							  .addAttribute("SKlist", 
+							  (List<SkillNameDto>)adminService.petSkillsName())
+							  .addAttribute("CClist", 
+							  (List<CareConditionNameDto>)adminService.petCareCondition());
 					return "admin/petsitter/option";					
 				}
 				
@@ -234,17 +235,13 @@ public class AdminController {
 		PetsitterVO petsitter = 
 				adminService.petsitterdetail(pet_sitter_no);
 		// 펫시터 회원정보 (지역) 
-		List<LocationDto>  petlocation = 
-				adminService.petsitterdetailLocation(pet_sitter_no);
+		List<LocationDto>  petlocation = adminService.petsitterdetailLocation(pet_sitter_no);
 		// 펫시터 회원정보 (돌봄가능동물) 
-		List<CarePetTypeNameDto> pettypename = 
-				adminService.petsitterdetailCarePet(pet_sitter_no);
+		List<CarePetTypeNameDto> pettypename = 	adminService.petsitterdetailCarePet(pet_sitter_no);
 		// 펫시터 회원정보 (스킬) 
-		List<SkillNameDto> petskill = 
-				adminService.petsitterdetailSkills(pet_sitter_no);
+		List<SkillNameDto> petskill = 	adminService.petsitterdetailSkills(pet_sitter_no);
 		// 펫시터 회원정보 (펫시터 환경) 
-		List<CareConditionNameDto> petcondition = 
-				adminService.petsitterdetailCareCondition(pet_sitter_no);			
+		List<CareConditionNameDto> petcondition = adminService.petsitterdetailCareCondition(pet_sitter_no);			
 		model.addAttribute("petsitter", petsitter);
 		model.addAttribute("petlocation", petlocation);
 		model.addAttribute("pettypename", pettypename);
