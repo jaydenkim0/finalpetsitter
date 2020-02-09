@@ -67,28 +67,31 @@
 		<th>펫시터</th>
 		<td>${sitter_id }</td>
 	</tr>
-	<tr class="content_view">
+	<tr>
 		<th>방 제목</th>
-		<td>
+		<td class="content_view">
 			${list.care_board_content }
 			<button class="content_change">변경</button>
 		</td>
+		<td class="content_edit">
+            <form class="content_submit" action="content_edit" method="get">
+                <input type="hidden" name="board_no" value="${list.care_board_no }">
+                <input type="text" name="care_board_content" value="${list.care_board_content }">
+                <input type="submit" value="완료">
+             </form>			
+		</td>
 	</tr>
-	 <tr class="content_edit">
-	 		<th>방 제목</th>
-                <td>
-                    <form class="content_submit" action="content_edit" method="get">
-                        <input type="hidden" name="board_no" value="${list.care_board_no }">
-                        <input type="text" name="care_board_content" value="${list.care_board_content }">
-                        <input type="submit" value="완료">
-                    </form>
-                </td>
-            </tr>
-	
 	<tr>
 		<th>생성일</th>
 		<td>${list.wdate.substring(0,16) }</td>
 	</tr>
+</table>
+<table border="1" width="100%">
+	<c:forEach>
+		<tr>
+			
+		</tr>
+	</c:forEach>
 </table>
 
 </body>
