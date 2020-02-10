@@ -50,7 +50,7 @@ $(document).ready(function(){
 
 <tr>
 	<td>게시일자</td>
-	<td>${faqVO.wdate}</td>
+	<td>${faqVO.writedateWithFormat}</td>
 </tr>
 
 <tr>

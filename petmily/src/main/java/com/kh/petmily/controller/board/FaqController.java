@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.petmily.entity.FaqDto;
@@ -34,6 +35,9 @@ import lombok.extern.slf4j.Slf4j;
 public class FaqController {
 	@Autowired
 	FaqService faqService;
+	
+	@Autowired
+	FaqDao faqDao;
 	
 	//게시글 목록
 	@RequestMapping("/list")
@@ -84,9 +88,13 @@ public class FaqController {
 	//게시글 작성 처리
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute FaqVO faqVO,
-			HttpSession session) throws Exception{
+			HttpSession session,
+			@RequestParam List<MultipartFile> faq_file) throws Exception{
 		String member_id = (String)session.getAttribute("member_id");
+		int no = faqDao.getSequence();
+		faqVO.setFaq_no(no);
 		faqService.create(faqVO);
+		faqService.uploadFile(no,faq_file);
 		return "redirect:list";
 	}
 	//게시글 상세내용 조회

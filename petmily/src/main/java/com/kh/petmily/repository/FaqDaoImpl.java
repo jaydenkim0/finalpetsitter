@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.FaqDto;
-import com.kh.petmily.entity.FaqFileDto;
 import com.kh.petmily.vo.FaqVO;
 
 @Repository
@@ -68,5 +67,11 @@ public class FaqDaoImpl implements FaqDao{
 		map.put("start",start);
 		map.put("finish",finish);
 		return sqlSession.selectList("faq.getList",map);
+	}
+	//게시글 번호 구해오기
+	@Override
+	public int getSequence() {
+		int faq_no = sqlSession.selectOne("faq.getSequence");
+		return faq_no;
 	}
 }

@@ -40,22 +40,23 @@ $(document).ready(function(){
 });
 </script> -->
 
-<form name="form1" method="post" action="insert">
-	<div align="center">
 	<h2>공지글 작성</h2>
-	<form name="faqDto" method="post" action="insert">
+<form method="post" action="insert" enctype="multipart/form-data">
       <input type="hidden" name="member_id" value="${sessionScope.id}">
 		<table border="1" width="70%">
-        <div>
-        말머리
+        <div>말머리
         	<select name="faq_title" >
         		<option>전체공지</option>
         			<option>펫시터공지</option>
         				<option>유저공지</option>
         	</select>
-        </div><br>
+        </div>
+        <br>
         <div>제목<input name="faq_head" id="faq_head" size="80" placeholder="글 제목 입력"></div><br>
         <div>내용<textarea name="faq_content" id="faq_content" rows="8" cols="80" placeholder="글 내용 입력"></textarea></div>
+        <div>이미지 첨부
+        <input type="file" id="faq_file" name="faq_file" multiple accept="image/*" required>
+        </div>
         <div style="width:650px; text-align:center;">
             <input type="submit" value="확인">
             <input type="reset" value="초기화">

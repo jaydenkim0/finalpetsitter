@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.petmily.entity.SkillsDto" alias="skillsDto"/>	
 		<typeAlias type="com.kh.petmily.vo.PetsitterVO" alias="petsitterVO"/>		
 		<typeAlias type="com.kh.petmily.vo.FaqVO" alias="FaqVO"/>	
-		<typeAlias type="com.kh.petmily.entity.FaqFileDto" alias="FaqFileDto"/>	
+		<typeAlias type="com.kh.petmily.entity.FaqFileDto" alias="faqfileDto"/>	
 		<typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>	
 		<typeAlias type="com.kh.petmily.entity.CarePetsitterDto" alias="carePetsitterDto"/>			
 		<typeAlias type="com.kh.petmily.entity.BlackListDto" alias="blackListDto"/>

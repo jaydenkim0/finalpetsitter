@@ -32,4 +32,5 @@ public class FaqVO {
 		return time;
 		
 	}
+
 }
