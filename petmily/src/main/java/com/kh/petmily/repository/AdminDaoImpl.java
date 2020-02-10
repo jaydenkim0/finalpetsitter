@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
@@ -16,6 +17,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
 
 @Repository
@@ -41,8 +43,8 @@ public class AdminDaoImpl implements AdminDao {
 	
 	// 회원리스트
 	@Override
-	public List<PetsitterVO> getMemberList(MemberDto memberDto) {		
-		return sqlSession.selectList("admin.memberList", memberDto);
+	public List<MemberVO> getMemberList() {		
+		return sqlSession.selectList("admin.memberList");
 	}
 
 	// 펫시터 리스트
@@ -72,8 +74,6 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 거부 (삭제)
 	@Override
 	public void petsitterNegative(String sitter_id, int sitter_no) {
-		System.out.println("DaoImpl.sitter_id = " + sitter_id);
-		System.out.println("DaoImpl.sitter_no = " + sitter_no);
 		// 펫시터 삭제
 		sqlSession.delete("admin.petsitterNegative", sitter_id);
 		// 등록 지역 삭제
@@ -83,24 +83,38 @@ public class AdminDaoImpl implements AdminDao {
 		// 등록 스킬 삭제
 		sqlSession.delete("admin.skillsNegative", sitter_no);
 		// 등록 환경 삭제
-		sqlSession.delete("admin.careConditionNegative", sitter_no);
+		sqlSession.delete("admin.careConditionNegative", sitter_no);		
 	}
 
 	// 펫시터 단일 검색
 	@Override
 	public PetsitterVO petsitterSearchOne(String sitter_id) {
 		return sqlSession.selectOne("admin.petsitterSearchOne", sitter_id);
+	}	
+
+	// 블랙리스트 등록 시퀀스 번호 미리 가지고 오기
+	public int blackListsno() {
+		return sqlSession.selectOne("admin.blackListsno");
 	}
 	
-	
-	// 펫시터 차단 (블랙리스트 등록)
+	// 펫시터 경고 등록 (블랙리스트 등록)
 	@Override
-	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO) {
+	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO
+											,BlackListContentDto blackListContentDto) {
 		// 펫시터 상태 휴면으로 변경
 		sqlSession.update("admin.sitter_status", petsitterDto);
 		// 블랙리스트 테이블에 등록
-		sqlSession.insert("admin.blackList", petsitterVO);
-		
+		sqlSession.insert("admin.blackList", petsitterVO);		
+		// 블랙리스트 컨텐츠 테이블에 등록
+		sqlSession.insert("admin.blackListContent", blackListContentDto);
+	}
+	// 회원 경고 등록
+	@Override
+	public void blackMember(BlackListDto blackListDto,
+			BlackListContentDto blackListContentDto) {
+		sqlSession.insert("admin.blackListMember", blackListDto);
+		// 블랙리스트 컨텐츠 테이블에 등록
+		sqlSession.insert("admin.blackListContent", blackListContentDto);
 	}
 
 	// 펫시터 상태 변환
@@ -207,7 +221,7 @@ public class AdminDaoImpl implements AdminDao {
 				
 	// 회원 디테일 페이지 정보
 	@Override
-	public MemberDto getMemberdetail(String id) {
+	public MemberVO getMemberdetail(String id) {
 		return sqlSession.selectOne("admin.getMemberdetail", id);
 	}
 	// 회원 정보 페이지에 보여줄 반려동물 
@@ -218,7 +232,7 @@ public class AdminDaoImpl implements AdminDao {
 	
 	// 회원관리 페이지에서 회원 검색
 	@Override
-	public List<PetsitterVO> memberSearchList(String type, String keyword) {
+	public List<MemberVO> memberSearchList(String type, String keyword) {
 		Map<String, String> param = new HashMap();
 		param.put("type", type);
 		param.put("keyword", keyword);		
@@ -257,6 +271,35 @@ public class AdminDaoImpl implements AdminDao {
 	public int blackLsitcheck(String id) {		
 		return sqlSession.selectOne("admin.blackLsitcheck", id);
 	}
+
+	// 블랙리스트 회원 탈퇴 (삭제)
+	@Override
+	public void memberdelete(String id) {
+		sqlSession.delete("admin.memberdelete", id);		
+	}
+
+	// 블랙리스트에서 삭제
+	@Override
+	public void blackListdelete(String id) {
+		sqlSession.delete("admin.blackListdelete", id);		
+	}
+	// 펫시터 블랙리스트 탈퇴시 등급변경
+	@Override
+	public void petsittersecession(String sitter_id) {
+		sqlSession.update("admin.petsittersecession", sitter_id);
+		
+	}
+
+	// 블랙리스트 디테일 페이지 내용 가지고 오기
+	@Override
+	public PetsitterVO blackListdetailSearch(String id) {		
+		return sqlSession.selectOne("admin.blackListdetailSearch", id);
+	}
+
+
+
+
+
 
 
 	

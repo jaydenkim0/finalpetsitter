@@ -1,4 +1,7 @@
-package com.kh.petmily.entity;
+package com.kh.petmily.vo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class MemberDto {
+public class MemberVO {
 
 	private String id; 
 	private String pw; 
@@ -27,5 +30,22 @@ public class MemberDto {
 	private String lastlogin;
 	private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 	private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
-		
+	
+	// 펫시터 넘버
+	private int pet_sitter_no;
+	
+	// blacklist 사용시 추가 컨텐츠
+	private int black_no;
+	private String black_content;
+	private int black_count;
+	
+	// 회원 가입일
+	public String getMemberdateWithFormat()throws Exception{
+	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	      Date date = read.parse(joindate);
+	      SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+	      String time = write.format(date);
+	      return time;
+	   }
+	
 }
