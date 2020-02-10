@@ -76,36 +76,57 @@
 //		댓글 수정
 //////////////////////////////////////////////////////////////////////////////////////////////////// 
         $(".reply_edit").hide();
+        $(".reply_edit_btn").hide();
 
-        $(".reply_change").click(function(){
-            $(this).parent(".reply_view").hide();
-            $(this).prev(".reply_edit").show();
-            $(this).parent(".reply_edit").show();
+        $(".reply_view_btn").click(function(){
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_view").hide();
+            $(this).prev(".reply_edit_btn").show();
+            $(this).parentsUntil(".mother").find(".reply_edit").show();
         });
         
-        var text = $(this).parent(".reply_edit").children(".val").val();
+        var textoriginal = $(this).parentsUntil(".mother").find(".content").val();
+        $(this).parentsUntil(".mother").find("textarea").text(textoriginal);
+        
 
-        $(".reply_change_submit").submit(function(e){
+        $(".reply_edit_btn").click(function(e){
+        	var text = $(this).parentsUntil(".mother").find("textarea").val();
+        	console.log(text);
+        	
             e.preventDefault();
 
-            var url = $(this).attr("action");
-            var method = $(this).attr("method");
-
-            var data = $(this).serialize();
+            var url = $(this).parentsUntil(".mother").find("form").attr("action");
+            var method = $(this).parentsUntil(".mother").find("form").attr("method");
+            var data = $(this).parentsUntil(".mother").find("form").serialize();
 
             $.ajax({
                 url:url,
                 type:method,
-                data:data
+                data:data,
+                success : function() {
+                    console.log("성공!");
+                  }
             });
 
-            $(".reply_edit").hide();
-            $(".content").innerText="";
-            $(".content").innerText=text;
-            $(".reply_view").show();            
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_edit").hide();
+            $(this).parentsUntil(".mother").find(".reply_view").show();
+            $(this).parentsUntil(".mother").find(".reply_view_btn").show();
+            $(this).parentsUntil(".mother").find(".content").text('');
+            $(this).parentsUntil(".mother").find(".content").text(text);       
         });
 	});
 </script>
+<style>
+  .mother {
+    width: 100%;
+    border: 1px solid #444444;
+  }
+  
+  textarea{
+ 	 width: 99%;
+  }
+</style>
 </head>
 
 <body>
@@ -159,27 +180,26 @@
 	</tr>
 </table>
 <c:forEach var="replylist" items="${replylist }">
-	<table border="1" width="100%">
+	<table width="100%" class="mother">
 		<tr>
-			<th>작성자 : ${replylist.care_reply_writer }</th>
-			<th align="right">${replylist.wdate }</th>
+			<th align="left">작성자 : ${replylist.care_reply_writer }</th>
+			<th align="right">${replylist.wdate.substring(0,16) }</th>
 		</tr>
 		<tr class="reply_view">
-			<th class="content">${replylist.care_reply_content }</th>
+			<th class="content" colspan="2" align="left">${replylist.care_reply_content }</th>
 		</tr>
 		<tr class="reply_edit">
-			<th>
+			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
 				<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
                 <textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
-                <input type="submit" value="완료">
+				</form>				
 			</th>
 		</tr>
 		<tr>
-			<th>
-				<input type="submit" value="완료" class="reply_edit reply_change_submit">
-				</form>				
-				<button class="reply_view reply_change">수정</button>
+			<th colspan="2" align="right">
+				<button class="reply_edit_btn">완료</button>
+				<button class="reply_view_btn">수정</button>
 				<button>삭제</button>
 			</th>
 		</tr>

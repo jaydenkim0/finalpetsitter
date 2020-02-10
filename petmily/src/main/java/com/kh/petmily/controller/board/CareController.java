@@ -125,7 +125,7 @@ public class CareController {
 	
 	//돌봄 방 댓글 수정
 	@PostMapping("/reply_change")
-	public void repy_change(
+	public void reply_change(
 			@RequestParam String care_reply_no,
 			@RequestParam String care_reply_content) {
 		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
