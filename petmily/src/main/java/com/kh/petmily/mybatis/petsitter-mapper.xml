@@ -102,9 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			(location_no_seq.nextval,#{locationDto.location_sitter_no},#{locationDto.city},#{locationDto.area})
 		</foreach>
 	</insert>
-	
-	
-	
+
 	
 	<!-- 등록 테스트 -->
 	<insert id="testRegist" parameterType="petsitterDto">

@@ -16,9 +16,13 @@ public class LocationDaoImpl implements LocationDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int getSequence() {
+		int locationNo = sqlSession.selectOne("petsitter.locationGetSequence");
+		return locationNo;
+	}
+
 	@Override
 	public void registLocation(int no, List<LocationDto> location_name) {
-		
 		List<LocationDto> locationList = new ArrayList<>();
 		
 		for(LocationDto dto : location_name) {

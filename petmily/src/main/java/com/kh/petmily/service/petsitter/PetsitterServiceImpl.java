@@ -57,6 +57,10 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//펫시터 번호 설정
 		PetsitterDto petsitterDto = PetsitterDto.builder()
 												.pet_sitter_no(no)
+												.sitter_id(vo.getSitter_id())
+												.info(vo.getInfo())
+												.sitter_pets(vo.getSitter_pets())
+												.sitter_matching_type(vo.getSitter_matching_type())
 												.build();
 		
 		//펫시터 기본 정보 등록
@@ -72,8 +76,10 @@ public class PetsitterServiceImpl implements PetsitterService {
 		petSitterFileService.uploadLicense(no, vo.getLicense_file());
 		petSitterFileService.uploadInfo(no, vo.getInfo_image());
 		
+		
+		
 		//지역 정보 등록
-		locationDao.registLocation(no, vo.getLocation_name());
+		locationDao.registLocation(no,vo.getLocation_name());
 		
 	}
 	

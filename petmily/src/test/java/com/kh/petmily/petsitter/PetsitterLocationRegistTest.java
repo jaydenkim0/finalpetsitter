@@ -30,8 +30,10 @@ public class PetsitterLocationRegistTest {
 	public void locationTest() {
 
 		List<LocationDto> locationList = new ArrayList<>();
-		locationList.add(LocationDto.builder().location_sitter_no(58).city("서울특별시").area("구로구").build());
-
+		locationList.add(LocationDto.builder().location_sitter_no(104).city("서울특별시").area("영등포구").build());
+		locationList.add(LocationDto.builder().location_sitter_no(104).city("부산광역시").area("중구").build());
+		locationList.add(LocationDto.builder().location_sitter_no(104).city("부산광역시").area("서구").build());
+		
 		sqlSession.insert("petsitter.registLocation", locationList);
 	}
 }
