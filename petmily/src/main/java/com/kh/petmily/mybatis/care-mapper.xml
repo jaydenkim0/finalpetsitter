@@ -85,4 +85,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from care_board where care_board_no=#{care_board_no}
 	</delete>
 	
+	<!-- 돌봄 방 댓글 목록 -->
+	<select id="replylist" resultType="careReplyDto" parameterType="String">
+		select * from care_reply where care_reply_board_no=#{care_board_no} order by wdate desc
+	</select>
+	
+	<!-- 돌봄 방 댓글 등록 -->
+	<insert id="reply_regist" parameterType="careReplyDto">
+		insert into care_reply values(
+			care_reply_no_seq.nextval,
+			#{care_reply_board_no },
+			#{care_reply_content},
+			sysdate,
+			#{care_reply_writer}
+		)
+	</insert>
+	
+	<!-- 돌봄 방 댓글 수정 -->
+	<update id="reply_change" parameterType="careReplyDto">
+		update 
+			care_reply 
+		set 
+			care_reply_content=#{care_reply_content} 
+		where 
+			care_reply_no=#{care_reply_no}
+	</update>
+
 </mapper>
