@@ -132,4 +132,31 @@ public class CareController {
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_change(careReplyDto);
 	}
+	
+	//돌봄 방 비밀번호 검사 창
+	@GetMapping("/password")
+	public String password(
+			@RequestParam String care_board_no,
+			Model model) {
+		model.addAttribute("care_board_no",care_board_no);
+		return "board/care/password";
+	}
+	
+	//돌봄 방 비밀번호 검사
+	@PostMapping("/password")
+	public String care_board_password(
+			@RequestParam String care_board_no,
+			@RequestParam String care_pw,
+			Model model) {
+		careDto.setCare_pw(care_pw);
+		careDto.setCare_board_no(Integer.parseInt(care_board_no));
+		int result = careService.care_board_password(careDto);
+		model.addAttribute("care_board_no",care_board_no);
+		if(result==0) {
+			return "redirect:/board/care/list";
+		}else{
+			return "redirect:/board/care/content";
+		}
+	}
+	
 }

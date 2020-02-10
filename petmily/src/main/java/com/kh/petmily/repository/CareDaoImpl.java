@@ -77,4 +77,10 @@ public class CareDaoImpl implements CareDao{
 	public void reply_change(CareReplyDto careReplyDto) {
 		sqlSession.update("care.reply_change",careReplyDto);
 	}
+
+	//돌봄 방 비밀번호 검사
+	@Override
+	public int care_board_password(CareDto careDto) {
+		return sqlSession.selectOne("care.care_board_password",careDto);
+	}
 }

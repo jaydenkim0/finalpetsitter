@@ -86,4 +86,10 @@ public class CareServiceImpl implements CareService{
 		careDao.reply_change(careReplyDto);
 	}
 
+	//돌봄 방 비밀번호 검사
+	@Override
+	public int care_board_password(CareDto careDto) {
+		return careDao.care_board_password(careDto);
+	}
+
 }

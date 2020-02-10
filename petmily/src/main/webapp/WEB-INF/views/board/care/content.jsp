@@ -39,11 +39,7 @@
             $.ajax({
                 url:url,
                 type:method,
-                data:data,
-                success:function(resp){
-                    console.log("성공");
-                    //resp에 들어온 정보를 토대로 화면을 갱신
-                }
+                data:data
             });
 
             $(this).parents(".content_edit").hide();
@@ -65,9 +61,7 @@
             $.ajax({
                 url:url,
                 type:method,
-                data:data,
-                success:function(resp){
-                }
+                data:data
             });
 	        window.location.reload();
         });
@@ -102,10 +96,7 @@
             $.ajax({
                 url:url,
                 type:method,
-                data:data,
-                success : function() {
-                    console.log("성공!");
-                  }
+                data:data
             });
 
             $(this).hide();
@@ -114,6 +105,22 @@
             $(this).parentsUntil(".mother").find(".reply_view_btn").show();
             $(this).parentsUntil(".mother").find(".content").text('');
             $(this).parentsUntil(".mother").find(".content").text(text);       
+        });
+        
+        $(".password_check_btn").click(function(e){
+        	e.preventDefault();
+        	
+        	var url = $(this).parentsUntil(".mom").find("form").attr("action");
+        	var method = $(this).parentsUntil(".mom").find("form").attr("method");
+        	var data = $(this).parentsUntil(".mom").find("form").serialize();
+        	
+        	$.ajax({
+        		url:url,
+        		type:method,
+        		data:data
+        	});
+        	
+        	
         });
 	});
 </script>
@@ -191,8 +198,8 @@
 		<tr class="reply_edit">
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
-				<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
-                <textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
+					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+                	<textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
 				</form>				
 			</th>
 		</tr>

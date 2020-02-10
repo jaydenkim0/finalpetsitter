@@ -18,7 +18,7 @@
 			<td>${list.care_member_id }</td>
 			<td>${list.sitter_id }</td>
 			<td>
-				<a href="content?care_board_no=${list.care_board_no }">
+				<a href="password?care_board_no=${list.care_board_no }">
 					${list.care_board_content }
 				</a>
 			</td>

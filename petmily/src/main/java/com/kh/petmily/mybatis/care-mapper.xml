@@ -110,5 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where 
 			care_reply_no=#{care_reply_no}
 	</update>
+	
+	<!-- 돌봄 방 비밀번호 검사 -->
+	<select id="care_board_password" resultType="int" parameterType="careDto">
+		select 
+			count(*) 
+		from 
+			care_board 
+		where 
+			care_board_no=#{care_board_no} and care_pw=#{care_pw}
+	</select>
 
 </mapper>

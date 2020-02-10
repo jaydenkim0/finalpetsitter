@@ -42,4 +42,7 @@ public interface CareService {
 	//돌봄 방 댓글 수정
 	void reply_change(CareReplyDto careReplyDto);
 
+	//돌봄 방 비밀번호 검사
+	int care_board_password(CareDto careDto);
+
 }
