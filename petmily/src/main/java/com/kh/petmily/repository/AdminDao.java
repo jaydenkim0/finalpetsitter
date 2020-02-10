@@ -2,6 +2,7 @@ package com.kh.petmily.repository;
 
 import java.util.List;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
@@ -10,6 +11,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
 
 public interface AdminDao {
@@ -21,7 +23,7 @@ public interface AdminDao {
 	int getAtotal();
 	
 	// 회원 리스트
-	List<PetsitterVO> getMemberList(MemberDto memberDto);
+	List<MemberVO> getMemberList();
 
 	// 펫시터 리스트
 	List<PetsitterVO> getPetsitterList();
@@ -37,12 +39,20 @@ public interface AdminDao {
 	
 	// 펫시터 거부 (삭제)
 	void petsitterNegative(String sitter_id, int sitter_no);
+	// 블랙리스트 회원 탈퇴 (삭제)
+	void memberdelete(String id);
 
-	// 펫시터 단일 검색
+
+	// 펫시터 단일 검색 (petsitterVO ver)
 	PetsitterVO petsitterSearchOne(String sitter_id);
+	
+	// 펫시터 시퀀스 번호 갖고오기
+	public int blackListsno();
+	// 펫시터 경고 등록 (블랙리스트 등록 및 펫시터 상태 휴면으로 변경)
+	void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO, BlackListContentDto blackListContentDto);
+	// 회원 경고 등록 (블랙리스트 등록)
+	void blackMember(BlackListDto blackListDto, BlackListContentDto blackListContentDto);
 
-	// 펫시터 차단 (블랙리스트 등록 및 펫시터 상태 휴면으로 변경)
-	void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO);
 	
 	// 펫시터 상태 변환
 	void sitter_status(PetsitterDto petsitterDto);
@@ -94,12 +104,12 @@ public interface AdminDao {
 	List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no);
 
 	// 회원 디테일 페이지
-	MemberDto getMemberdetail(String id);
+	MemberVO getMemberdetail(String id);
 	// 회원 정보 페이지에 보여줄 반려동물 
 	List<PetDto> getPets(String id);
 
 	// 회원관리 페이지에서 회원 검색
-	List<PetsitterVO> memberSearchList(String type, String keyword);
+	List<MemberVO> memberSearchList(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 펫시터 검색
 	List<PetsitterVO> petsitterSearch(String type, String keyword);
@@ -110,8 +120,20 @@ public interface AdminDao {
 	// 펫시터 관리 페이지에서 휴면펫시터 검색
 	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
 
+	// 블랙리스트 아이디 체크
 	int blackLsitcheck(String id);
 
+	// 블랙리스트에서 삭제
+	void blackListdelete(String id);
+
+	// 펫시터 블랙리스트 탈퇴시 등급변경
+	void petsittersecession(String sitter_id);
+
+	// 블랙리스트 디테일 페이지 내용 가지고 오기
+	PetsitterVO blackListdetailSearch(String id);
+
+
+	
 
 
 	

@@ -44,7 +44,7 @@
 	.resgis-btn{
 		margin-top:35px;
 	}
-	.resgis-btn form input{
+	.resgis-btn form input[type="submit"]{
 		background: #ad3a11;
 		color:#fff;
 	    border: none;
@@ -68,9 +68,8 @@
 	
 	<div class="regis-form">
 		<c:forEach var="carePetType" items="${CTlist}">	
-		<div>
-				
-			${carePetType.care_type}
+			<div>				
+				${carePetType.care_type}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/carePetTypeD"  method="get">
@@ -94,7 +93,7 @@
 	<div class="regis-form">	
 		<c:forEach var="petSkillName" items="${SKlist}">	
 			<div>		
-			${petSkillName.skill_name}
+				${petSkillName.skill_name}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petSkillNameD"  method="get">
@@ -117,7 +116,7 @@
 	<div class="regis-form">	
 		<c:forEach var="petCareCondition" items="${CClist}">	
 			<div>
-			${petCareCondition.care_condition_name}
+				${petCareCondition.care_condition_name}
 		
 		<!-- 삭제 -->
 			<form action="${pageContext.request.contextPath}/admin/petsitter/option/petCareConditionD"  method="get">

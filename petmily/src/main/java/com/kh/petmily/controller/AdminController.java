@@ -22,6 +22,7 @@ import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
 
 
@@ -35,6 +36,7 @@ public class AdminController {
 	private AdminEmailService amailService;
 	
 	// 관리자 메인페이지 연결
+	// 추후 삭제 예정
 	@GetMapping("/")
 	public String admin(Model model) {				
 		// 총 등록수 (회원 + 펫시터 + 관리자)
@@ -51,13 +53,30 @@ public class AdminController {
 	
 	//////////////////////////////////////////////////////////////////
 	
+	// 등록 현황으로 이동
+	@GetMapping("/RegistInfo")	
+	public String RegistInfo (Model model) {	
+		// 총 등록수 (회원 + 펫시터 + 관리자)
+		model.addAttribute("mtotal", adminService.memberTotal());	
+		// 총 회원 회원수
+		model.addAttribute("member", adminService.memberTotal() -  
+				adminService.petsitterTotal() - adminService.admimTotal());
+		// 총 펫시터 수
+		model.addAttribute("ptotal", adminService.petsitterTotal());		
+		// 총 관리자 수
+		model.addAttribute("atotal", adminService.admimTotal());	
+		return "admin/RegistInfo";
+	}
+	
+	//////////////////////////////////////////////////////////////////
+	
 	// 회원관리 페이지 연결
 	@GetMapping("/member")
 	public String member(MemberDto memberDto,
 			Model model) {
 		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
 		model.addAttribute("memberList", 
-				  (List<PetsitterVO>)adminService.memberList(memberDto));
+				  (List<MemberVO>)adminService.memberList());
 		return  "admin/member";			
 	}
 	// 회원관리 페이지에서 회원 검색
@@ -66,17 +85,16 @@ public class AdminController {
 										@RequestParam String keyword,										
 										Model model) {		
 		model.addAttribute("memberList", 
-				  (List<PetsitterVO>)adminService.memberSearchList(type, keyword));
+				  (List<MemberVO>)adminService.memberSearchList(type, keyword));
 		return "admin/member";		
 	}
 	
 	// 회원 디테일 페이지 연결
 	@GetMapping("/memberdetail")
 	public String memberdetail(@RequestParam String id,
-												 MemberDto member,												 
-												 Model model) {		
-		member = adminService.getMemberdetail(id);		
-		model.addAttribute("member", member)
+												MemberVO memberVO,												 
+												 Model model) {				
+		model.addAttribute("member", memberVO = adminService.getMemberdetail(id))
 				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id));
 		return "admin/member/memberdetail";			
 	}
@@ -310,22 +328,56 @@ public class AdminController {
 	
 	
 	
-	// 차단 회원 및 펫시터 관리 페이지 연결
-	// 회원은 강제탈퇴( 강제 탈퇴전 해당 내용 이메일 전송 )
+	// 블랙리스트 펫시터 등록
 	// 펫시터는 검색 노출 차단
-	@GetMapping("/blacklist_content")
-	public String blacklist_content(@RequestParam String sitter_id, Model model) {
+	@GetMapping("/sitter_blacklist_content")
+	public String sitter_blacklist_content(@RequestParam String sitter_id, Model model) {
 		model.addAttribute("sitter_id", sitter_id);
-		return "admin/blacklist_content";
+		return "admin/sitter_blacklist_content";
 	}
-				@PostMapping("/blackListpage")
-				public String blackList(@ModelAttribute PetsitterDto petsitterDto,
-													  @RequestParam String black_content) {		
+				// 펫시터 블랙리스트 등록 메소드
+				@PostMapping("/sitter_blackListpage")
+				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
+						@RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
 					return "redirect:blackList";		
 				}	
+	// 블랙리스트 회원 등록
+	@GetMapping("/member_blacklist_content")
+	public String member_blacklist_content(@RequestParam String id, Model model) {		
+		model.addAttribute("id", id);
+		return "admin/member_blacklist_contetnt";
+	}	
+				// 회원 블랙리스트 등록 메소드
+				@PostMapping("/member_blackListpage")
+				public String member_blackListpage(@RequestParam String id,
+						 								@RequestParam String black_content) {
+					adminService.blackMember(id, black_content);
+					return "redirect:blackList";		
+				}
 				
-	// 블랙리스트 
+	// 블랙리스트 회원 탈퇴(회원탈퇴)
+	// 블랙리스트 + 멤버 테이블에서 완전삭제
+	@GetMapping("/member_delete")
+	public String member_delete(@RequestParam String id) {
+		adminService.blackListdelete(id);
+		adminService.memberdelete(id);
+		return "redirect:blackList";	
+	}	
+	
+	// 블랙리스트 펫시터 탈퇴 (펫시터 탈퇴)
+	// 그냥 회원으로 강등되면서 블랙리스에 등록되어있음
+	// 펫시터 테이블에서만  삭제
+	@GetMapping("/sitter_delete")
+	public String sitter_delete (@RequestParam String sitter_id,
+												@RequestParam int sitter_no) {
+		adminService.petsitterNegative(sitter_id, sitter_no);	
+		adminService.petsittersecession(sitter_id);
+		return "redirect:blackList";	
+	}
+				
+				
+	// 블랙리스트 불러오기
 	@GetMapping("/blackList")
 	public String blackListpage (Model model) {
 		// 펫시터 블랙리스트 불러오기
@@ -339,11 +391,23 @@ public class AdminController {
 	}
 	
 	// 블랙리스트 여부 검사 (요청 파라미터 신청시)
+	// 카운터 2회 이상은 탈퇴
 	@GetMapping("/blackLsitcheck")	
 	public void blackLsitcheck(@RequestParam String id,
 												Model model) {
 		boolean result = adminService.blackLsitcheck(id);
 		model.addAttribute("result", result);		
+	}
+	
+	// 블랙리스트 세부사항 페이지
+	@GetMapping("/blackListdetail")
+	public String blackListdelete(@RequestParam String id,													
+													Model model) {
+		// 블랙리스트 디테일 페이지
+		// 삭제 및 복귀 가능
+		// 블랙리스트 디테일 불러오기 -> view로 쏴주기	
+		model.addAttribute("blackListdetail", (PetsitterVO) adminService.blackListdetail(id));
+		return "admin/blacklistdetail";		
 	}
 	
 	
