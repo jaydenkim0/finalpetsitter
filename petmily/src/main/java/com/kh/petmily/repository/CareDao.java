@@ -3,6 +3,7 @@ package com.kh.petmily.repository;
 import java.util.List;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareReplyDto;
 
 public interface CareDao {
 
@@ -26,5 +27,14 @@ public interface CareDao {
 
 	//돌봄 방 삭제
 	void delete(String care_board_no);
+
+	//돌봄 방 댓글 목록
+	List<CareReplyDto> replylist(String care_board_no);
+
+	//돌봄 방 댓글 등록
+	void reply_regist(CareReplyDto careReplyDto);
+
+	//돌봄 방 댓글 수정
+	void reply_change(CareReplyDto careReplyDto);
 
 }
