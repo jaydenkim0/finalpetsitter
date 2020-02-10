@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>돌봄게시판</h1>
+<c:if test="${not empty id}">
 <a href="write"><button>방 만들기</button></a><br><br>
+</c:if>
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
