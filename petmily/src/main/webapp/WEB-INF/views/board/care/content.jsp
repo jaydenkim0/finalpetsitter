@@ -108,6 +108,9 @@
         });
 
         
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    		댓글 삭제
+////////////////////////////////////////////////////////////////////////////////////////////////////         	
         $(".reply_delete_btn").click(function(e){
         	e.preventDefault();
         	
@@ -121,9 +124,6 @@
         		data:data
         	});
         	
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//    		댓글 삭제
-////////////////////////////////////////////////////////////////////////////////////////////////////         	
         	$(this).parentsUntil(".grandmother").hide();
         });
 	});
@@ -161,7 +161,9 @@
 		<th>방 제목</th>
 		<td class="content_view">
 			${list.care_board_content }
+			<c:if test="${list.care_member_id==id || grade=='admin'}">
 			<button class="content_change">변경</button>
+			</c:if>
 		</td>
 		<td class="content_edit">
             <form class="content_submit" action="content_edit" method="get">
@@ -208,6 +210,7 @@
 				</form>				
 			</th>
 		</tr>
+		<c:if test="${replylist.care_reply_writer==id || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
 				<button class="reply_edit_btn">완료</button>
@@ -218,6 +221,7 @@
 				<button class="reply_delete_btn">삭제</button>
 			</th>
 		</tr>
+		</c:if>
 	</table>
 </div>
 </c:forEach>

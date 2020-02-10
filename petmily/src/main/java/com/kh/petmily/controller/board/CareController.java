@@ -37,9 +37,16 @@ public class CareController {
 	
 	//게시글 목록
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(
+			Model model,
+			HttpSession session
+			) {
 		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("id",id);
+		String grade = (String) session.getAttribute("grade");
+		model.addAttribute("grade",grade);
 		return "board/care/list";
 	}
 	
@@ -87,6 +94,8 @@ public class CareController {
 		model.addAttribute("replylist",replylist);
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
+		String grade = (String) session.getAttribute("grade");
+		model.addAttribute("grade",grade);
 		return "board/care/content";
 	}
 	
