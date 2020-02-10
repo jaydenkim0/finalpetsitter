@@ -24,8 +24,6 @@ public class QnaVO {
 		private String qna_content; // 질문 게시판 내용
 		private String wdate; //작성 날짜
 		private String writedate; 
-		private int viewcount; //조회수
-		private int replycount; //댓글 수
 		
 		public String getwritedateWithFormat()throws Exception{
 			SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");

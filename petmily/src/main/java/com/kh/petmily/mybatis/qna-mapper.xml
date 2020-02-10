@@ -44,22 +44,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 댓글 등록 -->
-<!-- 	<insert id="qnaReply" parameterType="QnaVO"> -->
-<!-- 		insert into qna_reply( -->
-<!-- 		reply_no, -->
-<!-- 		origin, -->
-<!-- 		reply_writer, -->
-<!-- 		content, -->
-<!-- 		wdate -->
-<!-- 		) -->
-<!-- 		values( -->
-<!-- 		reply_no_seq.nextval, -->
-<!-- 		#{origin}, -->
-<!-- 		#{reply_writer}, -->
-<!-- 		#{content}, -->
-<!-- 		sysdate -->
-<!-- 		) -->
-<!-- 	</insert> -->
+	<insert id="qnaReply" parameterType="QnaVO">
+		insert into qna_reply(
+		reply_no,
+		origin,
+		reply_writer,
+		content,
+		wdate
+		)
+		values(
+		reply_no_seq.nextval,
+		#{origin},
+		#{reply_writer},
+		#{content},
+		sysdate
+		)
+	</insert>
 	
 	<!-- 댓글 조회 -->
 <!-- 	<select id="selectReply" parameterType="String" resultType="HashMap"> -->

@@ -47,7 +47,6 @@
 	<th>작성자</th>
 	<th>말머리</th>
 	<th>제목</th>
-	<th>내용</th>
 	<th>게시일자</th>
 </tr>
 <c:forEach var="row" items="${list}">
@@ -58,7 +57,6 @@
 	<td>
 		<a href="${context}/board/faq/view?faq_no=${row.faq_no}">${row.faq_head}</a>
 	</td>
-	<td>${row.faq_content}</td>
 	<td>${row.writedateWithFormat}</td>
 </tr>
 </c:forEach>

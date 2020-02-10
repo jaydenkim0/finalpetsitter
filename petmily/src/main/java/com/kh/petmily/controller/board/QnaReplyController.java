@@ -23,4 +23,8 @@ import com.kh.petmily.vo.QnaVO;
 public class QnaReplyController {
 	@Autowired
 	QnaReplyService qnaReplyService;
+	
+	@Autowired
+	QnaReplyVO qnaReplyVO;
+	
 }

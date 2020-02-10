@@ -44,7 +44,6 @@
 	<th>작성자</th>
 	<th>말머리</th>
 	<th>제목</th>
-	<th>내용</th>
 	<th>게시일자</th>
 </tr>
 <c:forEach var="row" items="${list}">
@@ -55,7 +54,6 @@
 	<td>
 		<a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a>
 	</td>
-	<td>${row.qna_content}</td>
 	<td>${row.writedateWithFormat}</td>
 </tr>
 </c:forEach>

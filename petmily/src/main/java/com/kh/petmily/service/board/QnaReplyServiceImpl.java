@@ -14,5 +14,5 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	
 	@Autowired
 	QnaReplyDao qnaReplyDao;
-	
+
 }
