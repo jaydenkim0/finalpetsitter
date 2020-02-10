@@ -1,8 +1,8 @@
 package com.kh.petmily.repository;
 
-
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.PetsitterVO;
@@ -40,7 +41,7 @@ public class AdminDaoImpl implements AdminDao {
 	
 	// 회원리스트
 	@Override
-	public List<MemberDto> getMemberList(MemberDto memberDto) {		
+	public List<PetsitterVO> getMemberList(MemberDto memberDto) {		
 		return sqlSession.selectList("admin.memberList", memberDto);
 	}
 
@@ -202,6 +203,60 @@ public class AdminDaoImpl implements AdminDao {
 				public List<CareConditionNameDto> getPetsitterdetailCareCondition(int pet_sitter_no) {
 					return sqlSession.selectList("admin.getPetsitterdetailCareCondition", pet_sitter_no);
 				}
+
+				
+	// 회원 디테일 페이지 정보
+	@Override
+	public MemberDto getMemberdetail(String id) {
+		return sqlSession.selectOne("admin.getMemberdetail", id);
+	}
+	// 회원 정보 페이지에 보여줄 반려동물 
+	@Override
+	public List<PetDto> getPets(String id) {					
+		return sqlSession.selectList("admin.getPets", id);
+	}
+	
+	// 회원관리 페이지에서 회원 검색
+	@Override
+	public List<PetsitterVO> memberSearchList(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.memberSearchList", param);
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearch(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchList", param);	
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 신청 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchApply", param);	
+	}
+
+	// 펫시터 관리 페이지에서 휴면펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchSleep", param);	
+	}
+	
+	// 블랙리스트 등록 여부 검사
+	@Override
+	public int blackLsitcheck(String id) {		
+		return sqlSession.selectOne("admin.blackLsitcheck", id);
+	}
 
 
 	

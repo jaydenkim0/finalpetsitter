@@ -342,6 +342,10 @@ create sequence care_reply_no_seq;
 -- 등록일 컬럼 추가
 alter table care_reply add wdate date default sysdate;
 
+--작성자 컬럼 추가
+alter table care_reply add (member constraint fk_member_care_reply_writer references member(id));
+alter table care_reply rename column member to care_reply_writer;
+
 ---------------------------------------------------------------
 -- care_image 테이블 
 -- 돌봄 사진
