@@ -62,15 +62,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 댓글 조회 -->
-<!-- 	<select id="selectReply" parameterType="String" resultType="HashMap"> -->
-<!-- 		select reply_no,  -->
-<!-- 		origin, -->
-<!-- 		reply_writer, -->
-<!-- 		content, -->
-<!-- 		wdate -->
-<!-- 		from reply where origin=#{origin} -->
-<!-- 		order by wdate desc -->
-<!-- 	</select> -->
+	<select id="readReply" resultType="QnaReplyVO">
+		select 
+		reply_no, 
+		reply_writer,
+		content,
+		wdate
+		from qna_reply where origin = #{origin}
+	</select>
 	
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="qnalistAll" parameterType="map" resultType="QnaVO">

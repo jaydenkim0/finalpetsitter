@@ -81,3 +81,18 @@ $(document).ready(function(){
 </a><br><br>
 <%-- </c:if> --%>
 </form>
+
+<!-- 댓글 -->
+<div id="qna_reply">
+	<ol class="replyList">
+	<c:forEach items="${qnaReplyVO.reply_writer}" var="replyList">
+	<li>
+		<p>
+		작성자 : ${qnaReplyVO.reply_writer}<br/>
+		작성 날짜 : ${qnaReplyVO.writedate}
+		</p>
+		<p>${qnaReplyVO.content}</p>
+		</li>
+	</c:forEach>
+	</ol>
+</div>

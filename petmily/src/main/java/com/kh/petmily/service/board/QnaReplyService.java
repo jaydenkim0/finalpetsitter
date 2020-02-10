@@ -6,4 +6,7 @@ import com.kh.petmily.vo.QnaReplyVO;
 
 public interface QnaReplyService {
 
+	//댓글 목록
+	List<QnaReplyVO> readReply(int origin);
+
 }

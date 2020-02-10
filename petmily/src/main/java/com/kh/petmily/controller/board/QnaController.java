@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.kh.petmily.repository.QnaDao;
+import com.kh.petmily.service.board.QnaReplyService;
 import com.kh.petmily.service.board.QnaService;
 import com.kh.petmily.vo.QnaReplyVO;
 import com.kh.petmily.vo.QnaVO;
@@ -37,6 +38,15 @@ public class QnaController {
 	
 	@Autowired
 	QnaDao qnaDao;
+	
+	@Autowired
+	QnaReplyService qnaReplyService;
+	
+	@Autowired
+	QnaVO qnaVO;
+	
+	@Autowired
+	QnaReplyVO qnaReplyVO;
 	
 	//게시글 목록
 	@RequestMapping("/list")
@@ -102,6 +112,10 @@ public class QnaController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/qna/view");
 		mav.addObject("qnaVO", qnaService.read(qna_no));
+		
+		List<QnaReplyVO> replyList = qnaReplyService.readReply(qnaReplyVO.getOrigin());
+		mav.addObject("replyList",replyList);
+		
 		return mav;
 	}
 	//게시글 수정
