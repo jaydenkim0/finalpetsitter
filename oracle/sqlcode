@@ -171,7 +171,7 @@ create table QnA(
 qna_no number primary key,
 qna_writer constraint fk_member_QnA references member(id) on delete set null,
 qna_title varchar2(20) not null,
-qna_haed varchar2(200) not null,
+qna_head varchar2(200) not null,
 qna_content varchar2(4000) 
 );
 
