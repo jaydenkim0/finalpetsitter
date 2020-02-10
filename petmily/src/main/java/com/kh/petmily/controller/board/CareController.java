@@ -140,16 +140,16 @@ public class CareController {
 		int care_reply_no = careService.find_care_reply_no();
 		if(care_image.isEmpty()==false) {
 			int care_image_no = careService.care_image_no()+1;
-			careImageDto.setCare_reply_no(care_reply_no);
-			careImageDto.setFilesize(care_image.getSize());//파일크기
-			careImageDto.setFiletype(care_image.getContentType());//파일사이즈
-			careImageDto.setSavename(care_image.getOriginalFilename());//파일명
-			careImageDto.setCare_image_no(care_image_no);
 			File dir = new File("C:/upload/care_image");
 			File target = new File(dir,Integer.toString(care_image_no));
 			
 			dir.mkdirs();//디렉터리 생성
 			care_image.transferTo(target);//파일 저장
+			careImageDto.setCare_reply_no(care_reply_no);
+			careImageDto.setFilesize(care_image.getSize());//파일크기
+			careImageDto.setFiletype(care_image.getContentType());//파일사이즈
+			careImageDto.setSavename(care_image.getOriginalFilename());//파일명
+			careImageDto.setCare_image_no(care_image_no);
 			
 			careService.care_image(careImageDto);
 		}
