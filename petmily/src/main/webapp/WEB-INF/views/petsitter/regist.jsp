@@ -50,44 +50,114 @@
          });
          
 //지역 관리 스크립트
-		var region = [];
-		var section = [];
-		$("#region").each
-		
          $.ajax({
-             url:"../res/json/petmily_location.json",  
+             url:"../res/json/petmily_location.json", 
              type:"get",             
              dataType:"json",       
              success:function(resp){ 
-             //도시 목록만 불러와서 #region에 배치
-             //resp의 변수목록을 구해온다
+             for(var i in resp){
+                 $("<option>").text(i).appendTo(".region");
+                 }    
+             }
+         });
+
+         $(".region").change(function(){
+             var region_text = $(this).children("option:selected").text();
+             console.log("시 : "+ region_text);
+             var city=$(this).val();
+
+             $.ajax({
+                     url:"../res/json/petmily_location.json",  
+                     type:"get",             
+                     dataType:"json",       
+                     success:function(resp){ 
+                         $(".section").empty();
+                         $(resp[city]).each(function(){
+                             $("<option>").text(this).appendTo(".section");
+                             });
+                     }
+                 });
+         });
+
+         $(".section").change(function(){
+             var section_text = $(this).children("option:selected").text();
+             console.log("군,구 : "+section_text);
+         });  
+
+//-----------------지역 추가 코드-----------------
+         $("#add-btn").click(function(e){
+             e.preventDefault();
+
+             var region_len = $(".region").length; 
+             console.log(region_len);
+
+             var section_len = $(".region").length; 
+             console.log(section_len);
+
+             var test = $("<div>");
+
+             var region = $("<select>");
+                 region.addClass("region");
+                 region.attr("name","location_name["+region_len+"].city");
+
+             var section = $("<select>");
+                 section.addClass("section");
+                 section.attr("name","location_name["+section_len+"].area");
+
+                 var test11 = region.attr("name");
+                 console.log(test11);
+                 var test22 = section.attr("name");
+                 console.log(test22);
+
+
+             var button = $("<button>").text("삭제");  
+                   
+             $.ajax({
+                 url:"../res/json/petmily_location.json",   
+                 type:"get",             
+                 dataType:"json",       
+                 success:function(resp){ 
                  for(var n in resp){
-                     $("<option>").text(n).appendTo("#region")
+                     // console.log(n);
+                     $("<option>").text(n).appendTo(region);
+                     region.appendTo(test);   
                  }
 
-                 //설정 끝나고 나서 #region에 이벤트 설정
-                 $("#region").change(function(){
-                     //this == region
-                     var city=$(this).val();   
-                     $.ajax({
-                         url:"../res/json/petmily_location.json",  
-                         type:"get",             
-                         dataType:"json",
-                         success:function(resp){ 
-                             //resp 안에 있는 city에 해당하는 목록만 추출
-                          
-                             //지우고 시작
-                             $("#section").empty();
+             $(region).change(function(){
+                 var add_region = $(this).children("option:selected").text();
+                 console.log("추가_시 : "+add_region);
 
-                             $(resp[city]).each(function(){
-                                 //option을 생성해서 #section에 추가
-                                 $("<option>").text(this).appendTo("#section");
-                             });
-                         }
-                     });
+                 var city=$(this).val();
+
+                 $.ajax({
+                     url:"../res/json/petmily_location.json", 
+                     type:"get",             
+                     dataType:"json",       
+                     success:function(resp){ 
+
+                         $(section).empty();
+
+                         $(resp[city]).each(function(){
+                             // console.log(this);
+                             $("<option>").text(this).appendTo(section);
+                                 section.appendTo(test);
+                                 button.appendTo(test);
+                         });
+                     } 
                  });
-             }
-         });  
+             });
+             test.appendTo("#result"); 
+                 }
+             });     
+             $(section).change(function(){
+                 var add_section = $(this).children("option:selected").text();
+                 console.log("추가_군,구 : "+add_section);
+
+             $(button).click(function(){
+                 test.remove();
+             });    
+             });  
+         });
      });
 	</script>
     
@@ -205,16 +275,21 @@
     </div>
 	
 <!-- 활동 지역 -->
-	 <div class="form-group">
-        <select class="form-control" id="region">
-            <option>지역을 선택하세요</option>
-        </select>
-
-        <select class="form-control" id="section">
-            <option>구를 선택하세요</option>
-        </select>
-    </div>
+	<div class="location">
+		<button id="add-btn">추가</button>
+	    <div class="template">
+	        <select class="region" name="location_name[0].city">
+	            <option>지역을 선택하세요</option>
+	        </select>
+	        
+	        <select class="section" name="location_name[0].area">
+	            <option>구를 선택하세요</option>
+	        </select>
+	    </div>
 	
+	    <div id="result"></div>
+	</div>
+		
 	<div>
 		<input type="submit" value="펫시터 등록">
 		<h5>다음 단계로 진행하면 펫밀리 신청 약관 에 동의하는 것으로 간주됩니다.</h5>
