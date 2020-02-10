@@ -44,6 +44,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.petmily.entity.CarePetsitterDto" alias="carePetsitterDto"/>			
 		<typeAlias type="com.kh.petmily.entity.BlackListDto" alias="blackListDto"/>
 		<typeAlias type="com.kh.petmily.vo.PetsitterVO" alias="petsitterVO"/>			
+		<typeAlias type="com.kh.petmily.vo.QnaVO" alias="QnaVO"/>
+		<typeAlias type="com.kh.petmily.vo.QnaReplyVO" alias="qnaReplyVO"/>
+		<typeAlias type="com.kh.petmily.entity.QnaDto" alias="QnaDto"/>
+		<typeAlias type="com.kh.petmily.entity.QnaFileDto" alias="qnafileDto"/>
 	</typeAliases>
 	
 </configuration>
