@@ -143,7 +143,9 @@
 <body>
 
 <h1>돌봄 방 ${care_board_no }</h1><br>
+<c:if test="${list.care_member_id==id || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
+</c:if>
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>

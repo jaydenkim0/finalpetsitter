@@ -18,9 +18,16 @@
 			<td>${list.care_member_id }</td>
 			<td>${list.sitter_id }</td>
 			<td>
+				<c:choose>
+				<c:when test="${list.care_member_id==id || grade=='admin'||list.sitter_id==id}">
 				<a href="password?care_board_no=${list.care_board_no }">
 					${list.care_board_content }
 				</a>
+				</c:when>
+				<c:otherwise>
+					${list.care_board_content }
+				</c:otherwise>
+				</c:choose>
 			</td>
 			<td>${list.wdate.substring(0,16) }</td>
 			<td>
