@@ -3,6 +3,7 @@ package com.kh.petmily.service.board;
 import java.util.List;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 
@@ -47,5 +48,14 @@ public interface CareService {
 
 	//돌봄 방 댓글 삭제
 	void reply_delete(CareReplyDto careReplyDto);
+
+	//파일업로드를 위한 댓글번호찾기
+	int find_care_reply_no();
+
+	//파일번호찾기
+	int care_image_no();
+
+	//파일 데이터베이스에 저장
+	void care_image(CareImageDto careImageDto);
 
 }

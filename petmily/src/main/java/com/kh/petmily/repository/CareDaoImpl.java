@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -88,5 +89,23 @@ public class CareDaoImpl implements CareDao{
 	@Override
 	public void reply_delete(CareReplyDto careReplyDto) {
 		sqlSession.delete("care.reply_delete",careReplyDto);
+	}
+
+	//파일업로드를위한 댓글번호찾기
+	@Override
+	public int find_care_reply_no() {
+		return sqlSession.selectOne("care.find_care_reply_no");
+	}
+
+	//파일번호찾기
+	@Override
+	public int care_image_no() {
+		return sqlSession.selectOne("care.care_image_no");
+	}
+
+	//파일 데이터베이스에 저장
+	@Override
+	public void care_image(CareImageDto careImageDto) {
+		sqlSession.insert("care.care_image");
 	}
 }

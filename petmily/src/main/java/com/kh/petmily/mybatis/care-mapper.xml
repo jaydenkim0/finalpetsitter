@@ -125,5 +125,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="reply_delete" parameterType="careReplyDto">
 		delete from care_reply where care_reply_no=#{care_reply_no}
 	</delete>
+	
+	<!-- 파일업로드를 위한 댓글번호 찾기 -->
+	<select id="find_care_reply_no" resultType="int">
+		select care_reply_no from(
+			select rownum as rn, E.* from (
+    			select * from care_reply order by care_reply_no desc
+			) E 
+		)where rn=1		
+	</select>
+	
+	<!-- 파일번호찾기 -->
+	<select id="care_image_no" resultType="int">
+		select care_image_no from(
+			select rownum as rn, E.* from (
+    			select * from care_image order by care_image_no desc
+			) E 
+		)where rn=1
+	</select>
+	
+	<!-- 파일 데이터베이스에 저장 -->
+	<insert id="care_image" parameterType="careImageDto">
+		insert into care_image values(
+			#{care_image_no},
+			#{care_reply_no },
+			#{savename},
+			#{filetype},
+			#{filesize}
+		)
+	</insert>
 
 </mapper>

@@ -182,13 +182,14 @@
 </table>
 <table border="1" width="100%">
 	<tr>
-		<form action="reply_regist" method="post" class="reply_submit">
+		<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
 			<td>
 				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 				<input type="hidden" name="care_reply_writer" value="${id }">
 				<textarea name="care_reply_content" required></textarea>
 			</td>
 			<td align="right">
+				<input type="file" name="care_image" accept="image/*">
 				<input type="submit" value="등록">
 			</td>
 		</form>

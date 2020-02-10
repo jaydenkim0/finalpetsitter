@@ -1,20 +1,23 @@
 package com.kh.petmily.controller.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.service.board.CareService;
@@ -34,6 +37,9 @@ public class CareController {
 	
 	@Autowired
 	CareReplyDto careReplyDto;
+	
+	@Autowired
+	CareImageDto careImageDto;
 	
 	//게시글 목록
 	@GetMapping("/list")
@@ -125,11 +131,28 @@ public class CareController {
 	public void reply_regist(
 			@RequestParam String care_reply_board_no,
 			@RequestParam String care_reply_writer,
-			@RequestParam String care_reply_content) {
+			@RequestParam String care_reply_content,
+			@RequestParam MultipartFile care_image) throws IllegalStateException, IOException {
 		careReplyDto.setCare_reply_board_no(Integer.parseInt(care_reply_board_no));
 		careReplyDto.setCare_reply_writer(care_reply_writer);
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_regist(careReplyDto);
+		int care_reply_no = careService.find_care_reply_no();
+		if(care_image.isEmpty()==false) {
+			int care_image_no = careService.care_image_no()+1;
+			careImageDto.setCare_reply_no(care_reply_no);
+			careImageDto.setFilesize(care_image.getSize());//파일크기
+			careImageDto.setFiletype(care_image.getContentType());//파일사이즈
+			careImageDto.setSavename(care_image.getOriginalFilename());//파일명
+			careImageDto.setCare_image_no(care_image_no);
+			File dir = new File("C:/upload/care_image");
+			File target = new File(dir,Integer.toString(care_image_no));
+			
+			dir.mkdirs();//디렉터리 생성
+			care_image.transferTo(target);//파일 저장
+			
+			careService.care_image(careImageDto);
+		}
 	}
 	
 	//돌봄 방 댓글 수정

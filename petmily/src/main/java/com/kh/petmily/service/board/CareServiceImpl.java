@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.repository.CareDao;
@@ -96,6 +97,24 @@ public class CareServiceImpl implements CareService{
 	@Override
 	public void reply_delete(CareReplyDto careReplyDto) {
 		careDao.reply_delete(careReplyDto);
+	}
+
+	//파일업로드를위한 댓글번호찾기
+	@Override
+	public int find_care_reply_no() {
+		return careDao.find_care_reply_no();
+	}
+
+	//파일번호찾기
+	@Override
+	public int care_image_no() {
+		return careDao.care_image_no();
+	}
+
+	//파일 데이터베이스에 저장
+	@Override
+	public void care_image(CareImageDto careImageDto) {
+		careDao.care_image(careImageDto);
 	}
 
 }
