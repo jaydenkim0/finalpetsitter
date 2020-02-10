@@ -24,24 +24,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="review">
 <!--CRUD-->
 <!--  리뷰 작성 -->
-<insert id = "reviewwrite" parameterType="reviewDto">
-	insert into review(
-	review_no,
-	member_id,
-	review_sitter_no,
-	review_title,
-	rewview_content,
-	rewview_star,
-	review_wdate
-	)
-	values (
-	faq_no_seq.nextval,
-	#{member_id},
+<insert id = "reviewinsert" parameterType="reviewDto">
+	insert into review values(
+	review_no_seq.nextval,
+	#{review_writer},
+	#{review_sitter_no},
 	#{review_title},
-	#{review_head},
 	#{review_content},
-	#{review_star}
-	)
+	#{review_star},
+	sysdate)
 </insert>
 
 <!--  리뷰 목록 -->
@@ -54,6 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	rewview_no desc
 </select>
 	
+
 	
 </mapper>
 

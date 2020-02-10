@@ -34,6 +34,4 @@
   <a href="${context}/board/review/update?review_no=#{view.review_no}">수정</a>
   <a href="${context}/board/review/delete?review_no=#{view.review_no}">삭제</a>
   	
-
-
 </table>

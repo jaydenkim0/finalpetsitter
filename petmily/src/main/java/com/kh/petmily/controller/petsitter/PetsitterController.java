@@ -64,4 +64,10 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
+	@GetMapping("/info")
+	public String info() {
+		return "petsitter/info";
+	}
+	
+		
 }
