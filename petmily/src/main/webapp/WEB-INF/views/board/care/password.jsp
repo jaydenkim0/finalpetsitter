@@ -46,7 +46,7 @@
 				</tr>
 				<tr>
 					<td align="center">
-						<input type="submit"></button>
+						<input type="submit" value="입력">
 					</td>
 				</tr>
 			</table>

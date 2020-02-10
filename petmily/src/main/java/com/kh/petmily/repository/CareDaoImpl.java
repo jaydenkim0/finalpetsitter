@@ -83,4 +83,10 @@ public class CareDaoImpl implements CareDao{
 	public int care_board_password(CareDto careDto) {
 		return sqlSession.selectOne("care.care_board_password",careDto);
 	}
+
+	//돌봄 방 댓글 삭제
+	@Override
+	public void reply_delete(CareReplyDto careReplyDto) {
+		sqlSession.delete("care.reply_delete",careReplyDto);
+	}
 }

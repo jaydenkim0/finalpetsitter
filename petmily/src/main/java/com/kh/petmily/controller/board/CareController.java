@@ -159,4 +159,12 @@ public class CareController {
 		}
 	}
 	
+	//돌봄 방 댓글 삭제
+	@PostMapping("/reply_delete")
+	public void reply_delete(
+			@RequestParam String care_reply_no) {
+		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
+		careService.reply_delete(careReplyDto);
+	}
+	
 }

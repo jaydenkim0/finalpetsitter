@@ -92,4 +92,10 @@ public class CareServiceImpl implements CareService{
 		return careDao.care_board_password(careDto);
 	}
 
+	//돌봄 방 댓글 삭제
+	@Override
+	public void reply_delete(CareReplyDto careReplyDto) {
+		careDao.reply_delete(careReplyDto);
+	}
+
 }

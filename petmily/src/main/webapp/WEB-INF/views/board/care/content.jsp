@@ -89,9 +89,9 @@
         	
             e.preventDefault();
 
-            var url = $(this).parentsUntil(".mother").find("form").attr("action");
-            var method = $(this).parentsUntil(".mother").find("form").attr("method");
-            var data = $(this).parentsUntil(".mother").find("form").serialize();
+            var url = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("action");
+            var method = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("method");
+            var data = $(this).parentsUntil(".mother").find(".reply_change_submit").serialize();
 
             $.ajax({
                 url:url,
@@ -106,13 +106,14 @@
             $(this).parentsUntil(".mother").find(".content").text('');
             $(this).parentsUntil(".mother").find(".content").text(text);       
         });
+
         
-        $(".password_check_btn").click(function(e){
+        $(".reply_delete_btn").click(function(e){
         	e.preventDefault();
         	
-        	var url = $(this).parentsUntil(".mom").find("form").attr("action");
-        	var method = $(this).parentsUntil(".mom").find("form").attr("method");
-        	var data = $(this).parentsUntil(".mom").find("form").serialize();
+        	var url = $(this).parentsUntil(".mother").find(".reply_delete_submit").attr("action");
+        	var method = $(this).parentsUntil("mother").find(".reply_delete_submit").attr("method");
+        	var data = $(this).parentsUntil(".mother").find(".reply_delete_submit").serialize();
         	
         	$.ajax({
         		url:url,
@@ -120,7 +121,10 @@
         		data:data
         	});
         	
-        	
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    		댓글 삭제
+////////////////////////////////////////////////////////////////////////////////////////////////////         	
+        	$(this).parentsUntil(".grandmother").hide();
         });
 	});
 </script>
@@ -187,6 +191,7 @@
 	</tr>
 </table>
 <c:forEach var="replylist" items="${replylist }">
+<div class="grandmother">
 	<table width="100%" class="mother">
 		<tr>
 			<th align="left">작성자 : ${replylist.care_reply_writer }</th>
@@ -207,10 +212,14 @@
 			<th colspan="2" align="right">
 				<button class="reply_edit_btn">완료</button>
 				<button class="reply_view_btn">수정</button>
-				<button>삭제</button>
+				<form action="reply_delete" method="post" class="reply_delete_submit">
+					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+				</form>
+				<button class="reply_delete_btn">삭제</button>
 			</th>
 		</tr>
 	</table>
+</div>
 </c:forEach>
 
 </body>

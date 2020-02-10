@@ -120,5 +120,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where 
 			care_board_no=#{care_board_no} and care_pw=#{care_pw}
 	</select>
+	
+	<!-- 돌봄 방 댓글 삭제 -->
+	<delete id="reply_delete" parameterType="careReplyDto">
+		delete from care_reply where care_reply_no=#{care_reply_no}
+	</delete>
 
 </mapper>
