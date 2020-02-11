@@ -133,6 +133,8 @@ public interface AdminDao {
 
 	// 블랙리스트 디테일 페이지 내용 가지고 오기
 	PetsitterVO blackListdetailSearch(String id);
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	List<BlackListContentDto> blacklistcontent(String id);
 	
 
 

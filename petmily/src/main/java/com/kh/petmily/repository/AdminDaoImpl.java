@@ -300,6 +300,11 @@ public class AdminDaoImpl implements AdminDao {
 	public PetsitterVO blackListdetailSearch(String id) {		
 		return sqlSession.selectOne("admin.blackListdetailSearch", id);
 	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {		
+		return sqlSession.selectList("admin.blacklistcontent", id);
+	}
 	
 
 

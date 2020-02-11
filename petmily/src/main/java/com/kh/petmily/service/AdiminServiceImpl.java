@@ -304,6 +304,11 @@ public class AdiminServiceImpl implements AdminService {
 	public PetsitterVO blackListdetail(String id) {			
 		return adminDao.blackListdetailSearch(id);
 	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {	
+		return adminDao.blacklistcontent(id);
+	}
 
 
 

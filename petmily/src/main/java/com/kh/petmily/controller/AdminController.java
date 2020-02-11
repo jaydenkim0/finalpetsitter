@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
@@ -383,13 +384,10 @@ public class AdminController {
 	// 블랙리스트 불러오기
 	@GetMapping("/blackList")
 	public String blackListpage (Model model) {
-		// 펫시터 블랙리스트 불러오기
-		List<BlackListDto> PBlist = adminService.sitterBlackList();
-		// 회원 블랙리스트 불러오기
-		List<BlackListDto>MBlist = adminService.memberBlackList();
-		
-		model.addAttribute("PBlist", PBlist);
-		model.addAttribute("MBlist", MBlist);
+		// 펫시터 블랙리스트 불러오기		
+		// 회원 블랙리스트 불러오기			
+		model.addAttribute("PBlist", (List<BlackListDto>) adminService.sitterBlackList())
+				  .addAttribute("MBlist", (List<BlackListDto>)adminService.memberBlackList());
 		return "admin/blackList";		
 	}
 	
@@ -409,7 +407,8 @@ public class AdminController {
 		// 블랙리스트 디테일 페이지
 		// 삭제 및 복귀 가능
 		// 블랙리스트 디테일 불러오기 -> view로 쏴주기	
-		model.addAttribute("blackListdetail", (PetsitterVO) adminService.blackListdetail(id));
+		model.addAttribute("blackListdetail", (PetsitterVO)adminService.blackListdetail(id))
+				  .addAttribute("blacklistcontent", (List<BlackListContentDto>)adminService.blacklistcontent(id));
 		return "admin/blacklistdetail";		
 	}
 	

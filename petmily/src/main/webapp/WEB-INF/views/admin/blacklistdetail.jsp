@@ -6,7 +6,7 @@
 	<h3>블랙리스트 정보 디테일 페이지</h3>
 	
 	
-	
+	<a href="${pageContext.request.contextPath}/admin/blackList"><button>블랙리스트 페이지로 이동</button></a>
 	
 	
 	<h2>${blackListdetail}</h2>
@@ -34,10 +34,16 @@
 					</table>		
 				
 					<h3>※아래와 같은 사유로 경고를 받은 펫시터입니다</h3>
-					
-					<!-- 경고 사유  -->
-					
-					<!--  경고 등록일-->	
+							<hr>						
+							<c:forEach var="blacklistcontent" items="${blacklistcontent}">						
+							<!-- 경고받을때 등급 -->
+								<h5> 경고 등급 : ${blacklistcontent.black_content_grade} </h5>
+							<!-- 경고 사유  -->
+								<h5> 경고 내용 : ${blacklistcontent.black_content} </h5>
+							<!--  경고 등록일-->
+								<h5> 경고 등급 : ${blacklistcontent.getBlackListdateWithFormat()} </h5>
+							<hr>		
+							</c:forEach>
 					
 							
 					<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
@@ -71,11 +77,16 @@
 					</table>		
 				
 					<h3>※아래와 같은 사유로 경고를 받은 회원입니다</h3>
-					
-					<!-- 경고 사유  -->
-					
-					<!--  경고 등록일-->		
-					
+							<hr>						
+							<c:forEach var="blacklistcontent" items="${blacklistcontent}">						
+							<!-- 경고받을때 등급 -->
+								<h5> 경고 등급 : ${blacklistcontent.black_content_grade} </h5>
+							<!-- 경고 사유  -->
+								<h5> 경고 내용 : ${blacklistcontent.black_content} </h5>
+							<!--  경고 등록일-->
+								<h5> 경고 등급 : ${blacklistcontent.getBlackListdateWithFormat()} </h5>
+							<hr>		
+							</c:forEach>
 					
 					<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
 						<form action="${pageContext.request.contextPath}/admin/member_delete" method="get">			
