@@ -98,7 +98,9 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//지역 정보 조회
 		locationDao.getLocationList(id);
 		
-		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
+//		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
+//		petsitterInfo.add(PetsitterGetListVO.builder()
+//											.build());
 		
 		//PetsitterGetListVO에 모아서 하나의 리스트로 보내고 싶은데, 일일이 빌드해주어야 하는가????
 		
