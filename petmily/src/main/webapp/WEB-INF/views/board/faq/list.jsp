@@ -26,6 +26,11 @@
  				"&type-${map.type}"+"&keyword=${map.keyword}";
  	}
  	</script>
+ 	<style>
+ 	.page-navigator li {
+	    display: inline-block;
+	}
+ 	</style>
 <h1>공지사항 게시판</h1><br>
 <%--  <c:if test="${admin}"> --%>
 <a href="${context}/board/faq/write">

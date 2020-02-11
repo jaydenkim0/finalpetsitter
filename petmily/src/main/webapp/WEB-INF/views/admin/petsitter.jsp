@@ -40,7 +40,17 @@
 				});						
 			});
     </script>
-    
+    <style>
+	.scrollbox{
+	    height: auto;
+    	max-height: 500px;
+	    background: rgba(202, 82, 38, 0.1);
+	    width: 70%;
+	    padding: 20px;
+	    overflow-y: auto;
+	    box-shadow: inset 1px 1px 7px rgba(0,0,0,0.1);
+	}
+    </style>
     
     
 	<h1>펫시터 관리페이지</h1>
@@ -51,7 +61,6 @@
 	<br><br>
 	<hr>
 	<br><br>
-	
 	
 	<h2> 펫시터 리스트 </h2>
 	
@@ -68,11 +77,13 @@
 				</form>		
 				<br>
 
+	<div class="scrollbox">
 	<c:forEach var="petsitter" items="${petsitterList}">	
 			<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-					<h3>펫시터 ID : ${petsitter.sitter_id},
-					펫시터 상태(정상, 휴면) : ${petsitter.sitter_status},
-					펫시터 서비스 유형 (방문, 돌봄, 둘다) : ${petsitter.sitter_matching_type}
+					<h3>
+					펫시터 ID : ${petsitter.sitter_id} |
+					펫시터 상태 : ${petsitter.sitter_status} |
+					펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
 					</h3>
 			</a>							
 			<!-- 펫시터 상태 변경 버튼 -->			
@@ -82,7 +93,7 @@
 					<button type="submit" >펫시터  휴면 변경</button>						
 			</form>						
 	</c:forEach>			
-	
+	</div>
 	
 	<br><br>
 	<hr>
@@ -108,17 +119,18 @@
 		조건 2 블랙리스트 회원  (black_content 가 null 값이 아니면 블랙리스트 회원)
 		회원이 펫시터로 승인요청시 맴버일때 경고 받은 회원은 주황색으로 표시
 	 -->			
+	<div class="scrollbox">
 	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
 			<c:choose>			
 					<c:when test="${petsitterapply.black_count >0 }">							
 						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}"
 						style="color:#ff8d00;">
 								<h3>
-									펫시터 Id : ${petsitterapply.id},
-									펫시터 이름: ${petsitterapply.name},
-									펫시터 닉네임 : ${petsitterapply.nick},
-									펫시터 전화번호: ${petsitterapply.phone},
-									펫시터 가입신청일 : ${petsitterapply.joindate}			
+									 Id : ${petsitterapply.id} |
+									이름: ${petsitterapply.name} |
+									닉네임 : ${petsitterapply.nick} |
+									전화번호: ${petsitterapply.phone} |
+									가입신청일 : ${petsitterapply.joindate}			
 								</h3>						
 							</a>			
 							<!-- 펫시터 승인 버튼 -->			
@@ -137,11 +149,11 @@
 					<c:otherwise>					
 						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">
 								<h3>
-									펫시터 Id : ${petsitterapply.id},
-									펫시터 이름: ${petsitterapply.name},
-									펫시터 닉네임 : ${petsitterapply.nick},
-									펫시터 전화번호: ${petsitterapply.phone},
-									펫시터 가입신청일 : ${petsitterapply.joindate}											
+									Id : ${petsitterapply.id} |
+									이름: ${petsitterapply.name} |
+									닉네임 : ${petsitterapply.nick} |
+									전화번호: ${petsitterapply.phone} |
+									가입신청일 : ${petsitterapply.joindate}											
 								</h3>								
 							</a>			
 							<!-- 펫시터 승인 버튼 -->			
@@ -159,7 +171,7 @@
 					</c:otherwise>	
 			</c:choose>			
 	</c:forEach>
-	
+	</div>
 	
 	<br><br>
 	<hr>
@@ -184,14 +196,16 @@
 		조건 2 블랙리스트 휴면 펫시터  (black_content 가 null 값이 아니면 블랙리스트 펫시터)
 		펫시터 경고를 받게 되면 바로 펫시터 상태가 '휴면'으로 변경되어 검색 노출이 안됨
 	 -->
+	<div class="scrollbox">
 	<c:forEach var="petsitterSleepList" items="${petsitterSleepList}">		
 			<c:choose>			
 				<c:when test="${petsitterSleepList.black_count  > 0}">				
-								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}"
+							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}"
 							style="color: red">
-							<h3>펫시터 ID : ${petsitterSleepList.sitter_id},
-							펫시터 상태(정상, 휴면) : ${petsitterSleepList.sitter_status},
-							펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleepList.sitter_matching_type}
+							<h3>
+							ID : ${petsitterSleepList.sitter_id} |
+							펫시터 상태 : ${petsitterSleepList.sitter_status} |
+							펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
 							</h3>
 							</a>		
 							<!-- 블랙리스트 등록 펫시터는 삭제 버튼 노출 -->
@@ -209,9 +223,10 @@
 				</c:when>		
 				<c:otherwise>								
 							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">
-							<h3>펫시터 ID : ${petsitterSleepList.sitter_id},
-							펫시터 상태(정상, 휴면) : ${petsitterSleepList.sitter_status},
-							펫시터 서비스 유형 (방문, 돌봄, 둘다)${petsitterSleepList.sitter_matching_type}
+							<h3>
+							ID : ${petsitterSleepList.sitter_id} |
+							펫시터 상태 : ${petsitterSleepList.sitter_status} |
+							펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
 							</h3>
 							</a>	
 							<!-- 펫시터 상태 변경 버튼 -->
@@ -223,7 +238,7 @@
 				</c:otherwise>
 			</c:choose>	 		
 	</c:forEach>
-	
+	</div>
 	
 	<br><br>
 	<hr>
