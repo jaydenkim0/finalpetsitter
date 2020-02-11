@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class PetSitterRegistTest {
+public class PetsitterSkillsRegistTest {
 	@Autowired
 	private SqlSession sqlSession;
 	

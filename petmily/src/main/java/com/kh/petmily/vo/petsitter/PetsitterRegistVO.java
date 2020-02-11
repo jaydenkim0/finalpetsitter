@@ -1,4 +1,4 @@
-package com.kh.petmily.vo;
+package com.kh.petmily.vo.petsitter;
 
 import java.util.List;
 

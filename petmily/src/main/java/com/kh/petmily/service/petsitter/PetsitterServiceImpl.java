@@ -23,7 +23,8 @@ import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.LocationDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
-import com.kh.petmily.vo.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
+import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {
@@ -48,8 +49,6 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Autowired
 	private LocationDao locationDao;
 	
-	
-
 	@Override
 	public void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException {
 		//펫시터 번호 뽑고
@@ -81,6 +80,31 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//지역 정보 등록
 		locationDao.registLocation(no,vo.getLocation_name());
 		
+	}
+
+
+
+	@Override
+	public List<PetsitterGetListVO> getList(String id) {
+		//펫시터 기본 정보 조회
+		petsitterDao.getList(id);
+		petsitterDao.getPetList(id);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
+		skillsDao.getSkillList(id);
+		careConditionDao.getCareConditionList(id);
+		carePetTypeDao.getPetTypeList(id);
+		
+		//지역 정보 조회
+		locationDao.getLocationList(id);
+		
+//		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
+//		petsitterInfo.add(PetsitterGetListVO.builder()
+//											.build());
+		
+		//PetsitterGetListVO에 모아서 하나의 리스트로 보내고 싶은데, 일일이 빌드해주어야 하는가????
+		
+		return null;
 	}
 	
 	

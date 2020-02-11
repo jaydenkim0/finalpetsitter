@@ -24,7 +24,7 @@ import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
 import com.kh.petmily.service.petsitter.PetsitterService;
-import com.kh.petmily.vo.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 
 @Controller
 @RequestMapping("/petsitter")
@@ -44,6 +44,11 @@ public class PetsitterController {
 	public String regist(@ModelAttribute PetsitterRegistVO vo) throws IllegalStateException, IOException{
 		petsitterService.regist(vo);
 		return "redirect:../";
+	}
+	
+	@GetMapping("/list")
+	public String list() {
+		return "petsitter/list";
 	}
 	
 }

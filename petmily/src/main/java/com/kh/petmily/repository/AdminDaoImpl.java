@@ -18,7 +18,7 @@ import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.MemberVO;
-import com.kh.petmily.vo.PetsitterVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
