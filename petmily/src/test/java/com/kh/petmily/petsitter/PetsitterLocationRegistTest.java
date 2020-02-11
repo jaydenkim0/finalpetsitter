@@ -12,9 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.SkillsDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,22 +25,22 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class PetSitterRegistTest {
+public class PetsitterLocationRegistTest {
 	@Autowired
 	private SqlSession sqlSession;
 	
 	@Test
-	public void test() {
+	public void locationTest() {
 		log.info("sqlSession = {}", sqlSession);
 		
 		//회원가입
 		MemberDto member = MemberDto.builder()
 											.id(UUID.randomUUID().toString().substring(0, 12))
-											.pw("test")
-											.name("몰라")
-											.phone("01011111111")
-											.email("test@gmail.com")
-											.nick("테스트")
+											.pw("test1017")
+											.name("test1017")
+											.phone("01012875964")
+											.email("test1017@gmail.com")
+											.nick("test1017")
 											.pets("아니오")
 											.post("00000")
 											.basic_addr("aaa")
@@ -53,29 +53,24 @@ public class PetSitterRegistTest {
 		PetsitterDto sitter = PetsitterDto.builder()
 											.pet_sitter_no(seq)
 											.sitter_id(member.getId())
-											.info("저는 펫시터 테스트중입니다2")
+											.info("저는 펫시터 지역 테스트중입니다")
 											.sitter_pets("아니오")
 											.sitter_matching_type("둘다")
 											.build();
 		sqlSession.insert("petsitter.testRegist", sitter);
 		
-		List<SkillsDto> skills = new ArrayList<>();
-		skills.add(SkillsDto.builder().skills_name(1).skills_sitter_no(seq).build());
-		skills.add(SkillsDto.builder().skills_name(2).skills_sitter_no(seq).build());
-		skills.add(SkillsDto.builder().skills_name(3).skills_sitter_no(seq).build());
-		skills.add(SkillsDto.builder().skills_name(4).skills_sitter_no(seq).build());
+
+		List<LocationDto> locationList = new ArrayList<>();
+		locationList.add(LocationDto.builder().location_sitter_no(seq).city("울산광역시").area("동구").build());
+		locationList.add(LocationDto.builder().location_sitter_no(seq).city("울산광역시").area("중구").build());
+		locationList.add(LocationDto.builder().location_sitter_no(seq).city("울산광역시").area("울주군").build());
 		
-//		for(SkillsDto sdto : skills) {
-//			sqlSession.insert("petsitter.testSkillRegist", sdto);
+//		for(LocationDto dto : locationList) {
+//			sqlSession.insert("petsitter.registLocation1", dto);			
 //		}
 		
-		sqlSession.insert("petsitter.testSkillRegist2", skills);
+		sqlSession.insert("petsitter.registLocation", locationList);	
 		
+		log.info("locationList = {}", locationList);
 	}
 }
-
-
-
-
-
-
