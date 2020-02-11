@@ -19,6 +19,7 @@ import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.service.board.CareService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,9 @@ public class CareController {
 	
 	@Autowired
 	CareImageDto careImageDto;
+	
+	@Autowired
+	CareReplyImageDto careReplyImageDto;
 	
 	//게시글 목록
 	@GetMapping("/list")
@@ -95,8 +99,12 @@ public class CareController {
 		model.addAttribute("list",list);
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
-		List<CareReplyDto> replylist = careService.replylist(care_board_no);
-		model.addAttribute("replylist",replylist);
+		//List<CareReplyDto> replylist = careService.replylist(care_board_no);
+		//model.addAttribute("replylist",replylist);
+		//List<CareImageDto> imagelist = careService.imagelist(care_board_no);
+		//model.addAttribute("imagelist",imagelist);
+		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
+		model.addAttribute("replyimagelist",replyimagelist);
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");

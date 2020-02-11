@@ -13,8 +13,10 @@ import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.repository.CareDao;
 import com.kh.petmily.repository.CarePetsitterDao;
+import com.kh.petmily.repository.CareReplyImageDao;
 
 @Service
 public class CareServiceImpl implements CareService{
@@ -24,6 +26,9 @@ public class CareServiceImpl implements CareService{
 	
 	@Autowired
 	private CarePetsitterDao carePetsitterDao; 
+	
+	@Autowired
+	private CareReplyImageDao careReplyImageDao;
 
 	//게시글 목록
 	@Override
@@ -128,6 +133,12 @@ public class CareServiceImpl implements CareService{
 		care_image.transferTo(target);
 		
 		careDao.care_image_regist(careImageDto);
+	}
+
+	//돌봄댓글&이미지 목록
+	@Override
+	public List<CareReplyImageDto> replyimagelist(String care_board_no) {
+		return careReplyImageDao.replyimagelist(care_board_no);
 	}
 
 }

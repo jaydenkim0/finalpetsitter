@@ -146,5 +146,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{uploadname}
 		)
 	</insert>
+	
+	<!-- 돌봄댓글&이미지 목록 -->
+	<select id="replyimagelist" parameterType="String" resultType="careReplyImageDto">
+		select
+		 	I.care_image_no,
+		 	I.care_reply_no,
+		 	I.savename,
+		 	I.filetype,
+		 	I.filesize,
+		 	I.uploadname,
+		 	R.care_reply_board_no,
+		 	R.care_reply_content,
+		 	R.wdate,
+		 	R.care_reply_writer
+		from
+		 	care_reply R
+		 		inner join care_image I
+		 		on R.care_reply_no=I.care_reply_no
+		where
+			R.care_reply_board_no=#{care_board_no}
+		order by R.wdate desc
+	</select>
 
 </mapper>

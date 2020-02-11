@@ -213,21 +213,27 @@
 
 <c:set var="care_image_context" value="C:\upload\care_image"></c:set>
 
-<c:forEach var="replylist" items="${replylist }">
+<c:forEach var="replyimagelist" items="${replyimagelist }">
 <div class="grandmother">
 	<table width="100%" class="mother">
 		<tr>
-			<th align="left">작성자 : ${replylist.care_reply_writer }</th>
-			<th align="right">${replylist.wdate.substring(0,16) }</th>
+			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
+			<th align="right">${replylistimage.wdate.substring(0,16) }</th>
 		</tr>
 		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">${replylist.care_reply_content }</th>
+			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
+		</tr>
+		<tr>
+			<th>
+				<c:set var="src" value="${care_image_context}:${replyimagelist.savename}"></c:set>
+				<img src="${src }"  width="500">
+			</th>
 		</tr>
 		<tr class="reply_edit">
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
-					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
-                	<textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
+					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
+                	<textarea name="care_reply_content" required class="val">${replyimagelist.care_reply_content }</textarea>
 				</form>				
 			</th>
 		</tr>

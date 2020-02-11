@@ -9,6 +9,7 @@ import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 
 public interface CareService {
 
@@ -57,5 +58,9 @@ public interface CareService {
 
 	//돌봄이미지 등록
 	void care_image_regist(int care_reply_no, MultipartFile care_image) throws IllegalStateException, IOException;
+
+	//돌봄댓글&이미지 목록
+	List<CareReplyImageDto> replyimagelist(String care_board_no);
+
 
 }
