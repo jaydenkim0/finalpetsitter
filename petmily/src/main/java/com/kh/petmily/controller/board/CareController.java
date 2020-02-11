@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
@@ -132,23 +133,24 @@ public class CareController {
 			@RequestParam String care_reply_board_no,
 			@RequestParam String care_reply_writer,
 			@RequestParam String care_reply_content,
-			@RequestParam MultipartFile care_image) throws IllegalStateException, IOException {
+			@RequestParam("file") MultipartHttpServletRequest mtfRequest) throws IllegalStateException, IOException {
 		careReplyDto.setCare_reply_board_no(Integer.parseInt(care_reply_board_no));
 		careReplyDto.setCare_reply_writer(care_reply_writer);
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_regist(careReplyDto);
 		int care_reply_no = careService.find_care_reply_no();
-		if(care_image.isEmpty()==false) {
+		MultipartFile mf = mtfRequest.getFile("file");
+		if(mf.isEmpty()==false) {
 			int care_image_no = careService.care_image_no()+1;
 			File dir = new File("C:/upload/care_image");
 			File target = new File(dir,Integer.toString(care_image_no));
 			
 			dir.mkdirs();//디렉터리 생성
-			care_image.transferTo(target);//파일 저장
+			mf.transferTo(target);//파일 저장
 			careImageDto.setCare_reply_no(care_reply_no);
-			careImageDto.setFilesize(care_image.getSize());//파일크기
-			careImageDto.setFiletype(care_image.getContentType());//파일사이즈
-			careImageDto.setSavename(care_image.getOriginalFilename());//파일명
+			careImageDto.setFilesize(mf.getSize());//파일크기
+			careImageDto.setFiletype(mf.getContentType());//파일사이즈
+			careImageDto.setSavename(mf.getOriginalFilename());//파일명
 			careImageDto.setCare_image_no(care_image_no);
 			
 			careService.care_image(careImageDto);
