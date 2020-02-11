@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("board/review")
+@RequestMapping("/board/review")
 public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
@@ -59,12 +61,22 @@ public class ReviewController {
 	
 	//리뷰 목록
 	@GetMapping("/list")
-	public String list(Model model) throws Exception {
+	public String list(Model model, @RequestParam int review_sitter_no) throws Exception {
 		List<ReviewDto>list = reviewService.list();
 		model.addAttribute("list",list);
-		return "board/review/list";
+		System.out.println("review_sitter_no=" +review_sitter_no);
+		return "redirect:list";
+		
 		
 	}
-}
+
+
+	}
+	
+	
+	
+
+
+
 
 

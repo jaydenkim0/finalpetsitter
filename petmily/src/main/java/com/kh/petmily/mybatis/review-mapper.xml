@@ -41,10 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	review_no, review_writer, review_sitter_no, review_title, review_content, review_star,review_wdate
 	from
 	REVIEW
+	where	
 	order by
 	review_no desc
 </select>
 	
+<!--  -->
 
 	
 </mapper>
