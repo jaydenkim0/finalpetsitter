@@ -127,22 +127,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 펫시터 정보 상세 조회 -->
 	<!-- 펫시터 기본 정보 -->
-	<select id="getList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getList" parameterType="String" resultType="petsitterVO">
 		select * from petsitter where id=#{id}
 	</select>
 	
 	<!-- 펫시터 스킬 -->
-	<select id="getSkillsList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getSkillsList" parameterType="String" resultType="skillNameDto">
 		select * from petsitter_skills where id=#{id}
 	</select>
 	
 	<!-- 펫시터 돌봄 가능 동물 -->
-	<select id="getPetTypeList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getPetTypeList" parameterType="String" resultType="CarePetTypeNameDto">
 		select * from petsitter_care_pet_type where id=#{id}
 	</select>
 	
 	<!-- 펫시터 돌봄 환경 -->
-	<select id="getCareConditionList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getCareConditionList" parameterType="String" resultType="CareConditionNameDto">
 		select * from petsitter_care_condition where id=#{id}
 	</select>
 
@@ -156,12 +156,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 펫시터 지역 등록 -->
-	<select id="getLocationList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getLocationList" parameterType="String" resultType="LocationDto">
 		select * from sitterlocation where id=#{id}
 	</select>
 	
 	<!-- 펫시터 펫 조회 -->
-	<select id="getPetList" parameterType="String" resultType="petsitterGetVO">
+	<select id="getPetList" parameterType="String" resultType="memberPetsVO">
 		select * from memberpets where id=#{id}
 	</select>
 
