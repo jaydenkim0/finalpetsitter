@@ -15,10 +15,15 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	
 	@Autowired
 	QnaReplyDao qnaReplyDao;
-
+	
+	//댓글 목록
 	@Override
-	public List<QnaReplyVO> readReply(int origin) {
-		return qnaReplyDao.readReply(origin);
+	public List<QnaReplyVO> readReply(int qna_no) throws Exception {
+		return qnaReplyDao.readReply(qna_no);
 	}
-
+	//댓글 작성
+	@Override
+	public void writeReply(QnaReplyVO qnaReplyVO) {
+		qnaReplyDao.writeReply(qnaReplyVO);
+	}
 }

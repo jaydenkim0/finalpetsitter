@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 댓글 등록 -->
-	<insert id="qnaReply" parameterType="QnaVO">
+	<insert id="writeReply" parameterType="QnaReplyVO">
 		insert into qna_reply(
 		reply_no,
 		origin,

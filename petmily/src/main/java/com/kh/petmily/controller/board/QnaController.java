@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.petmily.repository.QnaDao;
 import com.kh.petmily.service.board.QnaReplyService;
 import com.kh.petmily.service.board.QnaService;
+import com.kh.petmily.vo.QnaFileVO;
 import com.kh.petmily.vo.QnaReplyVO;
 import com.kh.petmily.vo.QnaVO;
 
@@ -41,13 +42,8 @@ public class QnaController {
 	
 	@Autowired
 	QnaReplyService qnaReplyService;
-	
-	@Autowired
-	QnaVO qnaVO;
-	
-	@Autowired
-	QnaReplyVO qnaReplyVO;
-	
+
+	private List<MultipartFile> getQna_no;
 	//게시글 목록
 	@RequestMapping("/list")
 	public String list (HttpServletRequest req, HttpServletResponse resp,Model model) throws Exception{
@@ -108,15 +104,11 @@ public class QnaController {
 	}
 	//게시글 상세내용 조회
 	@GetMapping("/view")
-	public ModelAndView view(@RequestParam int qna_no, HttpSession session)throws Exception{
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/qna/view");
-		mav.addObject("qnaVO", qnaService.read(qna_no));
-		
-		List<QnaReplyVO> replyList = qnaReplyService.readReply(qnaReplyVO.getOrigin());
-		mav.addObject("replyList",replyList);
-		
-		return mav;
+	public String view(@ModelAttribute QnaVO qnaVO, Model model)throws Exception{
+		model.addAttribute("qnaVO",qnaService.read(qnaVO.getQna_no()));
+		List<QnaReplyVO> replyList = qnaReplyService.readReply(qnaVO.getQna_no());
+		model.addAttribute("replyList", replyList);
+		return "board/qna/view";
 	}
 	//게시글 수정
 	@GetMapping("/update")
@@ -137,5 +129,14 @@ public class QnaController {
 	public String delete(@RequestParam int qna_no) throws Exception{
 		qnaService.delete(qna_no);
 		return "redirect:list";
+	}
+	//댓글 작성
+	@PostMapping("/replywrite")
+	public String replywrite(@ModelAttribute QnaReplyVO qnaReplyVO,
+			Model model, @RequestParam int origin) throws Exception {
+		model.addAttribute("origin",qnaReplyVO.getOrigin());
+		qnaReplyService.writeReply(qnaReplyVO);
+		model.addAttribute("qna_no", origin);
+		return "redirect:/board/qna/view";
 	}
 }

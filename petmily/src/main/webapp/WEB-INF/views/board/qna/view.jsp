@@ -4,95 +4,92 @@
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<c:choose>
+	<c:when test="${sessionScope.id == null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href = "${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+</c:choose>
 <h2>게시글 상세 보기</h2>
 <script>
-$(document).ready(function(){
-	$("#btndelete").click(function(){
-		if(confirm("삭제하시겠습니까?")){
-			document.form1.action = "${context}/board/qna/delete";
-			document.form1.submit();
-		}
-	});
-	$("#btnupdate").click(function(){
-		var qna_title = $("qna_title").val();
-		var qna_head = $("qna_head").val();
-		var qna_content = $("qna_content").val();
-		if(qna_title=""){
-			alert("말머리를 선택하세요")
-			document.form1.qma_title.focus();
-			return;
-		}
-		if(qna_head=""){
-			alert("제목을 입력하세요")
-			document.form1.qna_head.focus();
-			return;
-		}
-		if(qna_content=""){
-			alert("내용을 입력하세요")
-			document.form1.qna_content.focus();
-			return;
-		}
-		document.form1.action="${context}/board/qna/update"
-		document.form1.submit();
-	});
+	$(".reply_submit").submit(function(e){
+    e.preventDefault();
+
+    var url = $(this).attr("action");
+    var method = $(this).attr("method");
+
+    var data = $(this).serialize();
+
+    $.ajax({
+        url:url,
+        type:method,
+        data:data,
+        success:function(resp){
+        }
+    });
+    window.location.reload();
 });
 </script>
 <form name="form1" method="post">
-	<table border="1">
-		<th>정보</th>
-		<th>데이터</th>
-	
+	<div align="center">
+		<table border="1" width="70%">
 	<!--qnaVO 안에 있는 정보 불러오기 -->
 <tr>
-	<td>글번호</td>
-	<td>${qnaVO.qna_no}</td>
+	<td>글번호 : ${qnaVO.qna_no}</td>
 </tr>
 
 <tr>
-	<td>게시일자</td>
-	<td>${qnaVO.writedateWithFormat}</td>
+	<td>게시일자 : ${qnaVO.writedateWithFormat}</td>
 </tr>
 
 <tr>
-	<td>말머리</td>
-	<td>${qnaVO.qna_title}</td>
+	<td>작성자 : ${qnaVO.qna_writer} </td>
 </tr>
 
 <tr>
-	<td>제목</td>
-	<td>${qnaVO.qna_head}</td>
+	<td>말머리 : ${qnaVO.qna_title}</td>
+</tr>
+
+<tr>
+	<td>제목 : ${qnaVO.qna_head}</td>
 </tr>
 <tr>
-	<td>내용</td>
 	<td>${qnaVO.qna_content}</td>
 </tr>
-<div style="width:650px"; text-align : center";>
+	<c:if test="${sessionScope.id == qnaVO.qna_writer}">
+		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+			<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+				<button type="button" id="btnupdate">수정</button>
+			</a><br><br>
+		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+			<button type="button" id="btndelete">삭제</button>
+		</a><br><br>
+	</c:if>
+	</table>
 	<a href="${context}/board/qna/list">
-		<button type="button" >문의게시판 목록</button>
+			<button type="button" >문의게시판 목록</button>
 	</a><br><br>
-	</table><br>
-	<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-<%-- <c:if test="$[sessionScope.qna_writer == qnaVO.qna_writer]"> --%>
-<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-	<button type="button" id="btnupdate">수정</button>
-</a><br><br>
-<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-	<button type="button" id="btndelete">삭제</button>
-</a><br><br>
-<%-- </c:if> --%>
+</div>
 </form>
 
 <!-- 댓글 -->
-<div id="qna_reply">
-	<ol class="replyList">
-	<c:forEach items="${qnaReplyVO.reply_writer}" var="replyList">
-	<li>
-		<p>
-		작성자 : ${qnaReplyVO.reply_writer}<br/>
-		작성 날짜 : ${qnaReplyVO.writedate}
-		</p>
-		<p>${qnaReplyVO.content}</p>
-		</li>
+<table border="1" width="100%">
+ 	<c:forEach items="${replyList}" var="replyList">
+		<tr>
+ 	   			<th>작성자 : ${replyList.reply_writer}</th>
+				<th>작성 날짜 :  ${replyList.wdate}</th>
+				<th>${replyList.content}</th>
+			</tr>
 	</c:forEach>
-	</ol>
-</div>
+	</table>
+	
+<form action="replywrite"  method="post" class="reply_submit">
+	<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
+	<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
+	<textarea name="content" required placeholder="내용 입력"></textarea>
+	<input type="submit" value="등록">
+</form>
