@@ -41,6 +41,8 @@ public interface AdminDao {
 	void petsitterNegative(String sitter_id, int sitter_no);
 	// 블랙리스트 회원 탈퇴 (삭제)
 	void memberdelete(String id);
+	// 블랙리스트 테이블에서 권한 변경
+	void blackListgradechange(String sitter_id);
 
 
 	// 펫시터 단일 검색 (petsitterVO ver)
@@ -131,6 +133,7 @@ public interface AdminDao {
 
 	// 블랙리스트 디테일 페이지 내용 가지고 오기
 	PetsitterVO blackListdetailSearch(String id);
+	
 
 
 	

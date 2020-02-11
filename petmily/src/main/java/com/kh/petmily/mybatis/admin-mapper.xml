@@ -292,7 +292,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			blackListContent_no_seq.nextval,
 			#{black_content_id},
 			#{black_content},
-			sysdate
+			sysdate,
+			#{black_content_grade}
 			)
 		</insert>
 		
@@ -318,6 +319,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="petsitterVO">
 			select * from blackListall where black_id = #{id}
 		</select>
+		
+		<update id="blackListgradechange" parameterType="String">
+			update blacklist set black_grade = 'member' where black_id = #{sitter_id} 
+		</update>
 		
 	<!-- 정산관리 -->
 	

@@ -359,20 +359,23 @@ public class AdminController {
 	// 블랙리스트 회원 탈퇴(회원탈퇴)
 	// 블랙리스트 + 멤버 테이블에서 완전삭제
 	@GetMapping("/member_delete")
-	public String member_delete(@RequestParam String id) {
+	public String member_delete(@RequestParam String id) {		
 		adminService.blackListdelete(id);
-		adminService.memberdelete(id);
+		adminService.memberdelete(id);		
 		return "redirect:blackList";	
 	}	
 	
 	// 블랙리스트 펫시터 탈퇴 (펫시터 탈퇴)
 	// 그냥 회원으로 강등되면서 블랙리스에 등록되어있음
 	// 펫시터 테이블에서만  삭제
+	// petsittersecession -> 등급을 petsitter -> member로 변경
 	@GetMapping("/sitter_delete")
 	public String sitter_delete (@RequestParam String sitter_id,
 												@RequestParam int sitter_no) {
+		System.out.println(sitter_id);
 		adminService.petsitterNegative(sitter_id, sitter_no);	
 		adminService.petsittersecession(sitter_id);
+		adminService.blackListgradechange(sitter_id);
 		return "redirect:blackList";	
 	}
 				
