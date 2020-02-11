@@ -1,20 +1,24 @@
 package com.kh.petmily.controller.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.petmily.entity.CareDto;
+import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.service.board.CareService;
@@ -35,11 +39,21 @@ public class CareController {
 	@Autowired
 	CareReplyDto careReplyDto;
 	
+	@Autowired
+	CareImageDto careImageDto;
+	
 	//게시글 목록
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(
+			Model model,
+			HttpSession session
+			) {
 		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
+		String id = (String) session.getAttribute("id");
+		model.addAttribute("id",id);
+		String grade = (String) session.getAttribute("grade");
+		model.addAttribute("grade",grade);
 		return "board/care/list";
 	}
 	
@@ -87,6 +101,8 @@ public class CareController {
 		model.addAttribute("replylist",replylist);
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
+		String grade = (String) session.getAttribute("grade");
+		model.addAttribute("grade",grade);
 		return "board/care/content";
 	}
 	
@@ -116,20 +132,73 @@ public class CareController {
 	public void reply_regist(
 			@RequestParam String care_reply_board_no,
 			@RequestParam String care_reply_writer,
-			@RequestParam String care_reply_content) {
+			@RequestParam String care_reply_content,
+			@RequestParam("file") MultipartHttpServletRequest mtfRequest) throws IllegalStateException, IOException {
 		careReplyDto.setCare_reply_board_no(Integer.parseInt(care_reply_board_no));
 		careReplyDto.setCare_reply_writer(care_reply_writer);
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_regist(careReplyDto);
+		int care_reply_no = careService.find_care_reply_no();
+		MultipartFile mf = mtfRequest.getFile("file");
+		if(mf.isEmpty()==false) {
+			int care_image_no = careService.care_image_no()+1;
+			File dir = new File("C:/upload/care_image");
+			File target = new File(dir,Integer.toString(care_image_no));
+			
+			dir.mkdirs();//디렉터리 생성
+			mf.transferTo(target);//파일 저장
+			careImageDto.setCare_reply_no(care_reply_no);
+			careImageDto.setFilesize(mf.getSize());//파일크기
+			careImageDto.setFiletype(mf.getContentType());//파일사이즈
+			careImageDto.setSavename(mf.getOriginalFilename());//파일명
+			careImageDto.setCare_image_no(care_image_no);
+			
+			careService.care_image(careImageDto);
+		}
 	}
 	
 	//돌봄 방 댓글 수정
 	@PostMapping("/reply_change")
-	public void repy_change(
+	public void reply_change(
 			@RequestParam String care_reply_no,
 			@RequestParam String care_reply_content) {
 		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_change(careReplyDto);
 	}
+	
+	//돌봄 방 비밀번호 검사 창
+	@GetMapping("/password")
+	public String password(
+			@RequestParam String care_board_no,
+			Model model) {
+		model.addAttribute("care_board_no",care_board_no);
+		return "board/care/password";
+	}
+	
+	//돌봄 방 비밀번호 검사
+	@PostMapping("/password")
+	public String care_board_password(
+			@RequestParam String care_board_no,
+			@RequestParam String care_pw,
+			Model model) {
+		careDto.setCare_pw(care_pw);
+		careDto.setCare_board_no(Integer.parseInt(care_board_no));
+		int result = careService.care_board_password(careDto);
+		model.addAttribute("care_board_no",care_board_no);
+		if(result==0) {
+			return "redirect:/board/care/list";
+		}else{
+			return "redirect:/board/care/content";
+		}
+	}
+	
+	//돌봄 방 댓글 삭제
+	@PostMapping("/reply_delete")
+	public void reply_delete(
+			@RequestParam String care_reply_no) {
+		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
+		careService.reply_delete(careReplyDto);
+	}
+	
 }
