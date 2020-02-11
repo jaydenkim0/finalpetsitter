@@ -116,7 +116,9 @@ public class AdiminServiceImpl implements AdminService {
 				.builder()				
 				.black_content_id(sitter_id)
 				.black_content(black_content)
+				.black_content_grade(petsitterVO.getGrade())
 				.build();
+				
 		adminDao.blackSitter(petsitterDto, petsitterVO, blackListContentDto);
 		
 	}	
@@ -139,6 +141,7 @@ public class AdiminServiceImpl implements AdminService {
 				.builder()				
 				.black_content_id(id)
 				.black_content(black_content)
+				.black_content_grade(memberVO.getGrade())
 				.build();
 		System.out.println("blackListContentDto = " + blackListContentDto);
 		adminDao.blackMember(blackListDto, blackListContentDto);
@@ -153,9 +156,14 @@ public class AdiminServiceImpl implements AdminService {
 	// 펫시터 상태 변환
 	@Override
 	public void sitter_status(PetsitterDto petsitterDto) {		
-		adminDao.sitter_status(petsitterDto);
-		
+		adminDao.sitter_status(petsitterDto);		
 	}
+	// 블랙리스트 테이블에서 권한 변경
+	@Override
+	public void blackListgradechange(String sitter_id) {
+		adminDao.blackListgradechange(sitter_id);
+	}
+
 
 	// 펫시터 옵션
 		// 돌봄가능동물 불러오기
@@ -295,6 +303,11 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public PetsitterVO blackListdetail(String id) {			
 		return adminDao.blackListdetailSearch(id);
+	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {	
+		return adminDao.blacklistcontent(id);
 	}
 
 

@@ -94,8 +94,8 @@
 	</table>
 			
 		<c:choose>			
-			<c:when test="${empty petsitterSleepList.black_count}">	
-				<!-- 펫시터 상태 변경 -->
+			<c:when test="${petsitter.black_count == 0 || petsitter.black_count == null}">	
+				<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 상태 변경 -->
 				<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
 						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
 						<input type="hidden" name="sitter_status" value="휴면">					
