@@ -1,11 +1,15 @@
 package com.kh.petmily.service.board;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 
 public interface CareService {
 
@@ -52,10 +56,14 @@ public interface CareService {
 	//파일업로드를 위한 댓글번호찾기
 	int find_care_reply_no();
 
-	//파일번호찾기
-	int care_image_no();
+	//돌봄이미지 등록
+	void care_image_regist(int care_reply_no, MultipartFile care_image) throws IllegalStateException, IOException;
 
-	//파일 데이터베이스에 저장
-	void care_image(CareImageDto careImageDto);
+	//돌봄댓글&이미지 목록
+	List<CareReplyImageDto> replyimagelist(String care_board_no);
+
+	//펫시터 아이디 존재 검사
+	int userIdCheck(String user_id);
+
 
 }
