@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>돌봄게시판</h1>
+<c:if test="${not empty id}">
 <a href="write"><button>방 만들기</button></a><br><br>
+</c:if>
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -18,13 +20,22 @@
 			<td>${list.care_member_id }</td>
 			<td>${list.sitter_id }</td>
 			<td>
-				<a href="content?care_board_no=${list.care_board_no }">
+				<c:choose>
+				<c:when test="${list.care_member_id==id || grade=='admin'||list.sitter_id==id}">
+				<a href="password?care_board_no=${list.care_board_no }">
 					${list.care_board_content }
 				</a>
+				</c:when>
+				<c:otherwise>
+					${list.care_board_content }
+				</c:otherwise>
+				</c:choose>
 			</td>
 			<td>${list.wdate.substring(0,16) }</td>
 			<td>
+			<c:if test="${list.care_member_id==id || grade=='admin'}">
 				<a href="delete?care_board_no=${list.care_board_no }"><button>방 삭제</button></a>
+			</c:if>
 			</td>
 		</tr>
 	</c:forEach>
