@@ -75,5 +75,11 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("member.pet_regist",petDto);
 	}
 
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("member.userIdCheck",user_id);
+	}
+
 
 }
