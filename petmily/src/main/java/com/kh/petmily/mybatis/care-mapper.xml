@@ -151,7 +151,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="replyimagelist" parameterType="String" resultType="careReplyImageDto">
 		select
 		 	I.care_image_no,
-		 	I.care_reply_no,
+		 	R.care_reply_no,
 		 	I.savename,
 		 	I.filetype,
 		 	I.filesize,
