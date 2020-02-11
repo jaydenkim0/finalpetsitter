@@ -1,20 +1,27 @@
 package com.kh.petmily.service;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.IdCardFileDto;
+import com.kh.petmily.entity.InfoImageDto;
+import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
@@ -309,12 +316,91 @@ public class AdiminServiceImpl implements AdminService {
 	public List<BlackListContentDto> blacklistcontent(String id) {	
 		return adminDao.blacklistcontent(id);
 	}
+	
+	// 펫시터 가진 소개정보가 몇개인지 가지고오기
+	@Override
+	public List<InfoImageDto> sitterInfoimageAll(int pet_sitter_no) {		
+		return adminDao.sitterInfoimage(pet_sitter_no);
+	}
+	// 펫시터 소개이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitterInfoimage(int info_image_no) throws IOException {
+//		ResponseEntity : 스프링에서 응답해줄데이터가 담긴 상자
+//		ByteArrayResource : 스프링에서 관리할 수 있는 Byte 형식의 데이터 셋		
+//		파일(DB)정보를 불러온다 : InfoImageDto		
+		InfoImageDto infoImage = adminDao.getInfoImage(info_image_no);		
+//		실제파일을 불러온다 :  physicalInfoImage		
+		byte[] data =  adminDao.physicalInfoImage(infoImage.getSavename());	
+//		헤더설정 및 전송은 스프링의 방식으로 진행
+		ByteArrayResource resource = new ByteArrayResource(data);		
+
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(infoImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(infoImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
+
+	
+	// 펫시터가 가진 신분증 정보 가지고오기
+	@Override
+	public IdCardFileDto sitterIdcardimg(int pet_sitter_no) {		
+		return adminDao.sitterIdcardimg(pet_sitter_no);
+	}
+	// 펫시터 가진 신분증 이미지 가지고 오기 (1장)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitteridcardimage(int id_image_no) throws IOException {	
+		IdCardFileDto idcardImage = adminDao.getSitteridcardimage(id_image_no);				
+		byte[] data =  adminDao.physicalidcardimage(idcardImage.getSavename());		
+		ByteArrayResource resource = new ByteArrayResource(data);		
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(idcardImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(idcardImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
+	
+	
+	// 펫시터 가진 라이센스 정보 가지고 오기
+	@Override
+	public  LicenseFileDto sitterLicenseimge(int pet_sitter_no) {	
+		return adminDao.sitterLicenseimge(pet_sitter_no);
+	}
+	// 펫시터 가진 라이센스 이미지 가지고 오기 (1장)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitterlicenseimage(int license_image_no) throws IOException {
+		 LicenseFileDto LocationImage = adminDao.getSitterlicenseimage(license_image_no);				
+		byte[] data =  adminDao.physicallicenseimage(LocationImage.getSavename());		
+		ByteArrayResource resource = new ByteArrayResource(data);		
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(LocationImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(LocationImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
 
 
+	
 
-
-
-
-
-
+	
+	
+		
 }
+
+
+
+
+
+
+
+
+

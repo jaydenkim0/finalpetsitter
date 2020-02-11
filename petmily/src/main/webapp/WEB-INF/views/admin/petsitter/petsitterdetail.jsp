@@ -92,6 +92,24 @@
 			<hr>
 			</tbody>	
 	</table>
+	
+			<!-- 펫시터가 업로드한 사진 받아오기 -->
+			<!-- 
+				소개이미지
+				사진이 있는만큼 요청 
+			-->
+			<h3>소개이미지</h3>
+			<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
+				 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"> 
+			</c:forEach>
+			<!-- 신분증 -->
+			<h3>신분증이미지</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitteridcardimage?id_image_no=${sitterIdcardimg.id_image_no}"> 
+			<!-- 증빙서류 -->
+			<h3>증빙서류이미지</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterlicenseimage?license_image_no=${sitterLicenseimg.license_image_no}"> 
+			
+			
 			
 		<c:choose>			
 			<c:when test="${petsitter.black_count == 0 || petsitter.black_count == null}">	
