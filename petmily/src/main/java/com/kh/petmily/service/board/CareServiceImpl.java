@@ -1,9 +1,13 @@
 package com.kh.petmily.service.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
@@ -105,16 +109,25 @@ public class CareServiceImpl implements CareService{
 		return careDao.find_care_reply_no();
 	}
 
-	//파일번호찾기
+	//돌봄 이미지 등록
 	@Override
-	public int care_image_no() {
-		return careDao.care_image_no();
-	}
-
-	//파일 데이터베이스에 저장
-	@Override
-	public void care_image(CareImageDto careImageDto) {
-		careDao.care_image(careImageDto);
+	public void care_image_regist(int care_reply_no, MultipartFile care_image) throws IllegalStateException, IOException {
+		CareImageDto careImageDto = CareImageDto.builder()
+				.care_reply_no(care_reply_no)
+				.savename(UUID.randomUUID().toString())
+				.filetype(care_image.getContentType())
+				.filesize(care_image.getSize())
+				.uploadname(care_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/care_image");
+		
+		File target = new File(dir,careImageDto.getSavename());
+		dir.mkdirs();
+		
+		care_image.transferTo(target);
+		
+		careDao.care_image_regist(careImageDto);
 	}
 
 }

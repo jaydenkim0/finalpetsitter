@@ -50,21 +50,21 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //		댓글 등록
 ////////////////////////////////////////////////////////////////////////////////////////////////////  
-        $(".reply_submit").submit(function(e){
-            e.preventDefault();
+//         $(".reply_regist_btn").click(function(e){
+//             e.preventDefault();
 
-            var url = $(this).attr("action");
-            var method = $(this).attr("method");
+//             var url = $(this).attr("action");
+//             var method = $(this).attr("method");
 
-            var data = $(this).serialize();
+//             var data = $(this).serialize();
 
-            $.ajax({
-                url:url,
-                type:method,
-                data:data
-            });
-	        window.location.reload();
-        });
+//             $.ajax({
+//                 url:url,
+//                 type:method,
+//                 data:data
+//             });
+// 	        window.location.reload();
+//         });
         
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //		댓글 수정
@@ -187,10 +187,10 @@
 				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 				<input type="hidden" name="care_reply_writer" value="${id }">
 				<textarea name="care_reply_content" required></textarea>
+				<input type="file" name="care_image" multiple accept="image/*">
 			</td>
 			<td align="right">
-				<input type="file" name="file" accept="image/*">
-				<input type="submit" value="등록">
+				<input type="submit" value="등록" class="reply_regist_btn">
 			</td>
 		</tr>
 	</table>

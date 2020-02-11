@@ -1,10 +1,9 @@
 package com.kh.petmily.controller.board;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
@@ -129,32 +127,23 @@ public class CareController {
 	
 	//돌봄 방 댓글 등록
 	@PostMapping("/reply_regist")
-	public void reply_regist(
+	public String reply_regist(
 			@RequestParam String care_reply_board_no,
 			@RequestParam String care_reply_writer,
 			@RequestParam String care_reply_content,
-			@RequestParam("file") MultipartHttpServletRequest mtfRequest) throws IllegalStateException, IOException {
+			@RequestParam MultipartFile care_image,
+			Model model) throws IllegalStateException, IOException {
 		careReplyDto.setCare_reply_board_no(Integer.parseInt(care_reply_board_no));
 		careReplyDto.setCare_reply_writer(care_reply_writer);
 		careReplyDto.setCare_reply_content(care_reply_content);
 		careService.reply_regist(careReplyDto);
+		//댓글번호 구하기
 		int care_reply_no = careService.find_care_reply_no();
-		MultipartFile mf = mtfRequest.getFile("file");
-		if(mf.isEmpty()==false) {
-			int care_image_no = careService.care_image_no()+1;
-			File dir = new File("C:/upload/care_image");
-			File target = new File(dir,Integer.toString(care_image_no));
-			
-			dir.mkdirs();//디렉터리 생성
-			mf.transferTo(target);//파일 저장
-			careImageDto.setCare_reply_no(care_reply_no);
-			careImageDto.setFilesize(mf.getSize());//파일크기
-			careImageDto.setFiletype(mf.getContentType());//파일사이즈
-			careImageDto.setSavename(mf.getOriginalFilename());//파일명
-			careImageDto.setCare_image_no(care_image_no);
-			
-			careService.care_image(careImageDto);
+		if(care_image.isEmpty()==false) {
+			careService.care_image_regist(care_reply_no,care_image);
 		}
+		model.addAttribute("care_board_no",care_reply_board_no);
+		return "redirect:/board/care/content";
 	}
 	
 	//돌봄 방 댓글 수정

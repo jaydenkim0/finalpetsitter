@@ -16,5 +16,6 @@ public class CareImageDto {
 	private String savename; // DB에 저장되는 이름 = 사용자에게 보여줄이름
 	private String filetype;
 	private long filesize;
+	private String uploadname;
 
 }
