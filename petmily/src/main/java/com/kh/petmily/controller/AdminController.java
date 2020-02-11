@@ -23,7 +23,7 @@ import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.MemberVO;
-import com.kh.petmily.vo.PetsitterVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 
 @Controller

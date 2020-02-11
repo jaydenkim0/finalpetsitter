@@ -23,7 +23,7 @@ import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.LocationDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
-import com.kh.petmily.vo.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {

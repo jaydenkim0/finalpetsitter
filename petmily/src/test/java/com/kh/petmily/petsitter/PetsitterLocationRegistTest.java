@@ -71,6 +71,6 @@ public class PetsitterLocationRegistTest {
 		
 		sqlSession.insert("petsitter.registLocation", locationList);	
 		
-		System.out.println(locationList);
+		log.info("locationList = {}", locationList);
 	}
 }
