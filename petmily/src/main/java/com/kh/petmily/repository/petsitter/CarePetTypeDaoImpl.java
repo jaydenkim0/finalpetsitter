@@ -31,6 +31,12 @@ public class CarePetTypeDaoImpl implements CarePetTypeDao {
 		sqlSession.insert("petsitter.registType", petList);
 		
 	}
+
+	@Override
+	public List<CarePetTypeDto> getPetTypeList(String id) {
+		List<CarePetTypeDto> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", id);
+		return petTypeList;
+	}
 	
 	
 

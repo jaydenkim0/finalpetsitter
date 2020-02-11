@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 })
 @WebAppConfiguration
 @Slf4j
-public class Test01 {
+public class PetsitterRegistTest {
 	
 	@Autowired
 	private SqlSession sqlSession;
@@ -72,6 +72,6 @@ public class Test01 {
 	@Test
 	public void getSequence() {
 		int petsitterNo = sqlSession.selectOne("petsitter.getSequence");
-		System.out.println(petsitterNo);
+		log.info("petsitterNo = {}", petsitterNo);
 	}
 }

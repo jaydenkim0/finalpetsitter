@@ -27,5 +27,5 @@ public class MemberDto {
 	private String lastlogin;
 	private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 	private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
-	
+		
 }

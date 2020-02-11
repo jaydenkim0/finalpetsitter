@@ -39,11 +39,7 @@
             $.ajax({
                 url:url,
                 type:method,
-                data:data,
-                success:function(resp){
-                    console.log("성공");
-                    //resp에 들어온 정보를 토대로 화면을 갱신
-                }
+                data:data
             });
 
             $(this).parents(".content_edit").hide();
@@ -65,9 +61,7 @@
             $.ajax({
                 url:url,
                 type:method,
-                data:data,
-                success:function(resp){
-                }
+                data:data
             });
 	        window.location.reload();
         });
@@ -76,22 +70,28 @@
 //		댓글 수정
 //////////////////////////////////////////////////////////////////////////////////////////////////// 
         $(".reply_edit").hide();
+        $(".reply_edit_btn").hide();
 
-        $(".reply_change").click(function(){
-            $(this).parent(".reply_view").hide();
-            $(this).prev(".reply_edit").show();
-            $(this).parent(".reply_edit").show();
+        $(".reply_view_btn").click(function(){
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_view").hide();
+            $(this).prev(".reply_edit_btn").show();
+            $(this).parentsUntil(".mother").find(".reply_edit").show();
         });
         
-        var text = $(this).parent(".reply_edit").children(".val").val();
+        var textoriginal = $(this).parentsUntil(".mother").find(".content").val();
+        $(this).parentsUntil(".mother").find("textarea").text(textoriginal);
+        
 
-        $(".reply_change_submit").submit(function(e){
+        $(".reply_edit_btn").click(function(e){
+        	var text = $(this).parentsUntil(".mother").find("textarea").val();
+        	console.log(text);
+        	
             e.preventDefault();
 
-            var url = $(this).attr("action");
-            var method = $(this).attr("method");
-
-            var data = $(this).serialize();
+            var url = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("action");
+            var method = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("method");
+            var data = $(this).parentsUntil(".mother").find(".reply_change_submit").serialize();
 
             $.ajax({
                 url:url,
@@ -99,19 +99,53 @@
                 data:data
             });
 
-            $(".reply_edit").hide();
-            $(".content").innerText="";
-            $(".content").innerText=text;
-            $(".reply_view").show();            
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_edit").hide();
+            $(this).parentsUntil(".mother").find(".reply_view").show();
+            $(this).parentsUntil(".mother").find(".reply_view_btn").show();
+            $(this).parentsUntil(".mother").find(".content").text('');
+            $(this).parentsUntil(".mother").find(".content").text(text);       
+        });
+
+        
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//    		댓글 삭제
+////////////////////////////////////////////////////////////////////////////////////////////////////         	
+        $(".reply_delete_btn").click(function(e){
+        	e.preventDefault();
+        	
+        	var url = $(this).parentsUntil(".mother").find(".reply_delete_submit").attr("action");
+        	var method = $(this).parentsUntil("mother").find(".reply_delete_submit").attr("method");
+        	var data = $(this).parentsUntil(".mother").find(".reply_delete_submit").serialize();
+        	
+        	$.ajax({
+        		url:url,
+        		type:method,
+        		data:data
+        	});
+        	
+        	$(this).parentsUntil(".grandmother").hide();
         });
 	});
 </script>
+<style>
+  .mother {
+    width: 100%;
+    border: 1px solid #444444;
+  }
+  
+  textarea{
+ 	 width: 99%;
+  }
+</style>
 </head>
 
 <body>
 
 <h1>돌봄 방 ${care_board_no }</h1><br>
+<c:if test="${list.care_member_id==id || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
+</c:if>
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -129,7 +163,9 @@
 		<th>방 제목</th>
 		<td class="content_view">
 			${list.care_board_content }
+			<c:if test="${list.care_member_id==id || grade=='admin'}">
 			<button class="content_change">변경</button>
+			</c:if>
 		</td>
 		<td class="content_edit">
             <form class="content_submit" action="content_edit" method="get">
@@ -144,46 +180,53 @@
 		<td>${list.wdate.substring(0,16) }</td>
 	</tr>
 </table>
-<table border="1" width="100%">
-	<tr>
-		<form action="reply_regist" method="post" class="reply_submit">
+<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
+	<table border="1" width="100%">
+		<tr>
 			<td>
 				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 				<input type="hidden" name="care_reply_writer" value="${id }">
 				<textarea name="care_reply_content" required></textarea>
 			</td>
 			<td align="right">
+				<input type="file" name="file" accept="image/*">
 				<input type="submit" value="등록">
 			</td>
-		</form>
-	</tr>
-</table>
-<c:forEach var="replylist" items="${replylist }">
-	<table border="1" width="100%">
-		<tr>
-			<th>작성자 : ${replylist.care_reply_writer }</th>
-			<th align="right">${replylist.wdate }</th>
-		</tr>
-		<tr class="reply_view">
-			<th class="content">${replylist.care_reply_content }</th>
-		</tr>
-		<tr class="reply_edit">
-			<th>
-				<form action="reply_change" method="post" class="reply_change_submit">
-				<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
-                <textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
-                <input type="submit" value="완료">
-			</th>
-		</tr>
-		<tr>
-			<th>
-				<input type="submit" value="완료" class="reply_edit reply_change_submit">
-				</form>				
-				<button class="reply_view reply_change">수정</button>
-				<button>삭제</button>
-			</th>
 		</tr>
 	</table>
+</form>
+<c:forEach var="replylist" items="${replylist }">
+<div class="grandmother">
+	<table width="100%" class="mother">
+		<tr>
+			<th align="left">작성자 : ${replylist.care_reply_writer }</th>
+			<th align="right">${replylist.wdate.substring(0,16) }</th>
+		</tr>
+		<tr class="reply_view">
+			<th class="content" colspan="2" align="left">${replylist.care_reply_content }</th>
+		</tr>
+		<tr class="reply_edit">
+			<th colspan="2" align="left">
+				<form action="reply_change" method="post" class="reply_change_submit">
+					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+                	<textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
+				</form>				
+			</th>
+		</tr>
+		<c:if test="${replylist.care_reply_writer==id || grade=='admin'}">
+		<tr>
+			<th colspan="2" align="right">
+				<button class="reply_edit_btn">완료</button>
+				<button class="reply_view_btn">수정</button>
+				<form action="reply_delete" method="post" class="reply_delete_submit">
+					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+				</form>
+				<button class="reply_delete_btn">삭제</button>
+			</th>
+		</tr>
+		</c:if>
+	</table>
+</div>
 </c:forEach>
 
 </body>

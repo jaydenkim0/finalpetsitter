@@ -88,7 +88,7 @@
 			그외 : 일반회원
 		 -->
 		<c:choose>				
-				<c:when test="${member.grade eq 'petsitter' && not empty member.black_content}">
+				<c:when test="${member.grade eq 'petsitter' && member.black_count > 0}">
 						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
 						style="color:red;">
 						<h5>아이디 : ${member.id},
@@ -98,7 +98,7 @@
 						<hr>
 						</a>						
 				</c:when>				
-				<c:when test="${member.grade eq 'member' && not empty member.black_content}">
+				<c:when test="${member.grade eq 'member' && member.black_count > 0}">
 						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
 						style="color:#ff8d00;">
 						<h5>아이디 : ${member.id},

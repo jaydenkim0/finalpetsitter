@@ -14,94 +14,97 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
+import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.repository.petsitter.CareConditionDao;
+import com.kh.petmily.repository.petsitter.CarePetTypeDao;
 import com.kh.petmily.repository.petsitter.IdCardFileDao;
 import com.kh.petmily.repository.petsitter.InfoImageDao;
 import com.kh.petmily.repository.petsitter.LicenseFileDao;
+import com.kh.petmily.repository.petsitter.LocationDao;
+import com.kh.petmily.repository.petsitter.PetsitterDao;
+import com.kh.petmily.repository.petsitter.SkillsDao;
+import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
+import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {
 
+	//파일
 	@Autowired
-	private LicenseFileDao licenseFileDao;
+	private PetsitterFileService petSitterFileService;
+	
+	//펫시터
 	@Autowired
-	private IdCardFileDao idCardFileDao;
+	private PetsitterDao petsitterDao;
+	//스킬
 	@Autowired
-	private InfoImageDao infoImageDao;
+	private SkillsDao skillsDao;
+	//돌봄 환경
+	@Autowired
+	private CareConditionDao careConditionDao;
+	//돌봄 가능 동물
+	@Autowired
+	private CarePetTypeDao carePetTypeDao;
+	//지역
+	@Autowired
+	private LocationDao locationDao;
 	
 	@Override
-	public void uploadLicense(int no, MultipartFile license_file) throws IllegalStateException, IOException {
-		LicenseFileDto licenseFileDto = LicenseFileDto.builder()
-				.license_sitter_no(no)//파일 올린 시터 번호
-				.uploadname(license_file.getOriginalFilename())//업로드한 이름
-				.savename(UUID.randomUUID().toString())//저장된 이름
-				.filetype(license_file.getContentType())//파일 유형
-				.filesize(license_file.getSize())//파일 크기
-				.build();
+	public void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException {
+		//펫시터 번호 뽑고
+		int no = petsitterDao.getSequence();
+		//펫시터 번호 설정
+		PetsitterDto petsitterDto = PetsitterDto.builder()
+												.pet_sitter_no(no)
+												.sitter_id(vo.getSitter_id())
+												.info(vo.getInfo())
+												.sitter_pets(vo.getSitter_pets())
+												.sitter_matching_type(vo.getSitter_matching_type())
+												.build();
 		
-
-		//폴더 생성
-		File dir = new File("D:/upload/license");
+		//펫시터 기본 정보 등록
+		petsitterDao.regist(petsitterDto);
 		
-		//파일명 -> 시퀀스로 변경할 것!!
-		File target = new File(dir,licenseFileDto.getSavename());
-		dir.mkdirs();//디렉터리 생성
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  등록
+		skillsDao.registSkills(no,vo.getSkills_name());
+		carePetTypeDao.registType(no,vo.getCare_name());
+		careConditionDao.registCondition(no,vo.getCare_condition_name());
 		
-		license_file.transferTo(target);//파일 저장
+		//펫시터 소개 이미지,신분증,증빙서류 등록
+		petSitterFileService.uploadId(no, vo.getId_card_file());
+		petSitterFileService.uploadLicense(no, vo.getLicense_file());
+		petSitterFileService.uploadInfo(no, vo.getInfo_image());
 		
-		licenseFileDao.uploadLicense(licenseFileDto);//DB에 등록
+		
+		
+		//지역 정보 등록
+		locationDao.registLocation(no,vo.getLocation_name());
+		
 	}
 
-	@Override
-	public void uploadId(int no, MultipartFile id_card_file) throws IllegalStateException, IOException {
-		IdCardFileDto idCardFileDto = IdCardFileDto.builder()
-				.id_card_sitter_no(no)
-				.uploadname(id_card_file.getOriginalFilename())//업로드한 이름
-				.savename(UUID.randomUUID().toString())//저장된 이름
-				.filetype(id_card_file.getContentType())//파일 유형
-				.filesize(id_card_file.getSize())//파일 크기
-				.build();
 
-		//폴더 생성
-		File dir = new File("D:/upload/idCard");
-		
-				//파일명 -> 시퀀스로 변경할 것!!
-		File target = new File(dir,idCardFileDto.getSavename());
-		dir.mkdirs();//디렉터리 생성
-		
-		id_card_file.transferTo(target);//파일 저장
-		
-		idCardFileDao.uploadId(idCardFileDto);//DB에 등록
-	}
 
 	@Override
-	public void uploadInfo(int no, List<MultipartFile> info_image) throws IllegalStateException, IOException {
+	public List<PetsitterGetListVO> getList(String id) {
+		//펫시터 기본 정보 조회
+		petsitterDao.getList(id);
+		petsitterDao.getPetList(id);
 		
-		List<InfoImageDto> list =new ArrayList<>();
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
+		skillsDao.getSkillList(id);
+		careConditionDao.getCareConditionList(id);
+		carePetTypeDao.getPetTypeList(id);
 		
-		//폴더 생성
-		File dir = new File("D:/upload/info");
-		dir.mkdirs();//디렉터리 생성
+		//지역 정보 조회
+		locationDao.getLocationList(id);
 		
-		for(MultipartFile mf : info_image) {			
-			list.add(
-					InfoImageDto.builder()
-								.info_sitter_no(no)
-								.uploadname(mf.getOriginalFilename())//업로드한 이름
-								.savename(UUID.randomUUID().toString())//저장된 이름
-								.filetype(mf.getContentType())//파일 유형
-								.filesize(mf.getSize())//파일 크기
-								.build());
-		}
+//		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
+//		petsitterInfo.add(PetsitterGetListVO.builder()
+//											.build());
 		
-		for(int i=0; i< list.size(); i++) {
-			MultipartFile mf = info_image.get(i);
-			InfoImageDto infoImageDto = list.get(i);
-					
-			File target = new File(dir,infoImageDto.getSavename());
-			mf.transferTo(target);//파일 저장
-			infoImageDao.uploadInfo(infoImageDto);
-		}				 
+		//PetsitterGetListVO에 모아서 하나의 리스트로 보내고 싶은데, 일일이 빌드해주어야 하는가????
 		
+		return null;
 	}
 	
 	

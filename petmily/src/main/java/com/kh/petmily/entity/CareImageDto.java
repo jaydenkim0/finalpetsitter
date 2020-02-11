@@ -15,6 +15,6 @@ public class CareImageDto {
 	private int care_reply_no; // care_reply 테이블의 care_reply_no 
 	private String savename; // DB에 저장되는 이름 = 사용자에게 보여줄이름
 	private String filetype;
-	private int filesize;
+	private long filesize;
 
 }

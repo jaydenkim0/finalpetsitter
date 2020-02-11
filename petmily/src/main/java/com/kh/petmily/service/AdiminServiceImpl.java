@@ -1,21 +1,30 @@
 package com.kh.petmily.service;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.IdCardFileDto;
+import com.kh.petmily.entity.InfoImageDto;
+import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.AdminDao;
-import com.kh.petmily.vo.PetsitterVO;
+import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Service
 public class AdiminServiceImpl implements AdminService {
@@ -45,8 +54,8 @@ public class AdiminServiceImpl implements AdminService {
 	
 	// member 리스트
 	@Override
-	public List<PetsitterVO> memberList(MemberDto memberDto) {	
-		return adminDao.getMemberList(memberDto);
+	public List<MemberVO> memberList() {	
+		return adminDao.getMemberList();
 	}
 
 	// petsitter 리스트
@@ -80,7 +89,19 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public void petsitterNegative(String sitter_id, int sitter_no) {
 		adminDao.petsitterNegative(sitter_id, sitter_no);		
+	}	
+	// 블랙리스트 회원 탈퇴 (삭제)
+	@Override
+	public void memberdelete(String id) {
+		adminDao.memberdelete(id);		
 	}
+	
+	// 블랙리스트에서 삭제
+	@Override
+	public void blackListdelete(String id) {
+		adminDao.blackListdelete(id);
+	}
+
 
 	// 펫시터 단일 검색
 	@Override
@@ -88,24 +109,68 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.petsitterSearchOne(sitter_id);
 	}
 
-	// 펫시터 차단 기능
+	// 펫시터 블랙리스트 등록 기능
 	@Override
-	public void blackSitter(PetsitterDto petsitterDto, String black_content) {
+	public void blackSitter(PetsitterDto petsitterDto, String black_content	) {
+		
 		// 펫시터 상태 휴면으로 변경		
 		// 펫시터 단일 검색으로 정보 갖고 오기
 		String sitter_id = petsitterDto.getSitter_id();
-		PetsitterVO petsitterVO = (PetsitterVO) adminDao.petsitterSearchOne(sitter_id);
-		petsitterVO.setBlack_content(black_content);
+		PetsitterVO petsitterVO = adminDao.petsitterSearchOne(sitter_id);					
+		
 		// 블랙시트 테이블에 등록
-		adminDao.blackSitter(petsitterDto, petsitterVO);
-	}
+		BlackListContentDto blackListContentDto =BlackListContentDto
+				.builder()				
+				.black_content_id(sitter_id)
+				.black_content(black_content)
+				.black_content_grade(petsitterVO.getGrade())
+				.build();
+				
+		adminDao.blackSitter(petsitterDto, petsitterVO, blackListContentDto);
+		
+	}	
+	// 멤버 블랙리스트 등록 기능
+	@Override
+	public void blackMember(String id, String black_content) {
 
+	
+		// 회원 단일 검색으로 정보 갖고 오기
+		MemberVO memberVO = adminDao.getMemberdetail(id);
+		System.out.println("memberVO = " + memberVO);
+		BlackListDto blackListDto = BlackListDto.builder()				
+				.black_id(id)				
+				.black_name(memberVO.getName())
+				.black_phone(memberVO.getPhone())
+				.black_grade(memberVO.getGrade())
+				.build();
+		System.out.println("blackListDto = " + blackListDto);
+		BlackListContentDto blackListContentDto =BlackListContentDto
+				.builder()				
+				.black_content_id(id)
+				.black_content(black_content)
+				.black_content_grade(memberVO.getGrade())
+				.build();
+		System.out.println("blackListContentDto = " + blackListContentDto);
+		adminDao.blackMember(blackListDto, blackListContentDto);
+	}
+	
+	// 펫시터 블랙리스트 탈퇴시 등급변경
+	@Override
+	public void petsittersecession(String sitter_id) {	
+		adminDao.petsittersecession(sitter_id);
+	}
+	
 	// 펫시터 상태 변환
 	@Override
 	public void sitter_status(PetsitterDto petsitterDto) {		
-		adminDao.sitter_status(petsitterDto);
-		
+		adminDao.sitter_status(petsitterDto);		
 	}
+	// 블랙리스트 테이블에서 권한 변경
+	@Override
+	public void blackListgradechange(String sitter_id) {
+		adminDao.blackListgradechange(sitter_id);
+	}
+
 
 	// 펫시터 옵션
 		// 돌봄가능동물 불러오기
@@ -202,7 +267,7 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 회원 디테일 페이지 
 	@Override
-	public MemberDto getMemberdetail(String id) {
+	public MemberVO getMemberdetail(String id) {
 		return adminDao.getMemberdetail(id);
 	}
 	// 회원 정보 페이지에 보여줄 반려동물 
@@ -213,7 +278,7 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 회원관리 페이지에서 회원 검색
 	@Override
-	public List<PetsitterVO> memberSearchList(String type, String keyword) {		
+	public List<MemberVO> memberSearchList(String type, String keyword) {		
 		return adminDao.memberSearchList(type, keyword);
 	}
 	// 펫시터 관리 페이지에서 펫시터 검색
@@ -240,8 +305,102 @@ public class AdiminServiceImpl implements AdminService {
 		int result = adminDao.blackLsitcheck(id);		
 		return result == 0 ? false:true;
 	}
+	
+	// 블랙리스트 디테일 페이지 내용 가지고 오기
+	@Override
+	public PetsitterVO blackListdetail(String id) {			
+		return adminDao.blackListdetailSearch(id);
+	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {	
+		return adminDao.blacklistcontent(id);
+	}
+	
+	// 펫시터 가진 소개정보가 몇개인지 가지고오기
+	@Override
+	public List<InfoImageDto> sitterInfoimageAll(int pet_sitter_no) {		
+		return adminDao.sitterInfoimage(pet_sitter_no);
+	}
+	// 펫시터 소개이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitterInfoimage(int info_image_no) throws IOException {
+//		ResponseEntity : 스프링에서 응답해줄데이터가 담긴 상자
+//		ByteArrayResource : 스프링에서 관리할 수 있는 Byte 형식의 데이터 셋		
+//		파일(DB)정보를 불러온다 : InfoImageDto		
+		InfoImageDto infoImage = adminDao.getInfoImage(info_image_no);		
+//		실제파일을 불러온다 :  physicalInfoImage		
+		byte[] data =  adminDao.physicalInfoImage(infoImage.getSavename());	
+//		헤더설정 및 전송은 스프링의 방식으로 진행
+		ByteArrayResource resource = new ByteArrayResource(data);		
+
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(infoImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(infoImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
+
+	
+	// 펫시터가 가진 신분증 정보 가지고오기
+	@Override
+	public IdCardFileDto sitterIdcardimg(int pet_sitter_no) {		
+		return adminDao.sitterIdcardimg(pet_sitter_no);
+	}
+	// 펫시터 가진 신분증 이미지 가지고 오기 (1장)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitteridcardimage(int id_image_no) throws IOException {	
+		IdCardFileDto idcardImage = adminDao.getSitteridcardimage(id_image_no);				
+		byte[] data =  adminDao.physicalidcardimage(idcardImage.getSavename());		
+		ByteArrayResource resource = new ByteArrayResource(data);		
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(idcardImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(idcardImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
+	
+	
+	// 펫시터 가진 라이센스 정보 가지고 오기
+	@Override
+	public  LicenseFileDto sitterLicenseimge(int pet_sitter_no) {	
+		return adminDao.sitterLicenseimge(pet_sitter_no);
+	}
+	// 펫시터 가진 라이센스 이미지 가지고 오기 (1장)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitterlicenseimage(int license_image_no) throws IOException {
+		 LicenseFileDto LocationImage = adminDao.getSitterlicenseimage(license_image_no);				
+		byte[] data =  adminDao.physicallicenseimage(LocationImage.getSavename());		
+		ByteArrayResource resource = new ByteArrayResource(data);		
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(LocationImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(LocationImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);		
+	}
 
 
+	
 
-
+	
+	
+		
 }
+
+
+
+
+
+
+
+
+
