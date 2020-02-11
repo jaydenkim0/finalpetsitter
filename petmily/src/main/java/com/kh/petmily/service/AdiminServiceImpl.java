@@ -387,6 +387,14 @@ public class AdiminServiceImpl implements AdminService {
 					+"\"")
 				.body(resource);		
 	}
+	
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	@Override
+	public void gradeComback(String black_id) {
+		adminDao.gradeComback(black_id);
+		
+	}
 
 
 	
