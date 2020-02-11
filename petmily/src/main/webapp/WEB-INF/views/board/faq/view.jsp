@@ -59,16 +59,16 @@ $(document).ready(function(){
 <tr>
 	<td>${faqVO.faq_content}</td>
 </tr>
-<c:if test="${sessionScope.id == faqVO.member_id}">
+</table><br>
+<c:if test="${sessionScope.id eq faqVO.member_id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 		<a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
 			<button type="button" id="btnupdate">수정</button>
-		</a><br><br>
+		</a>
 	<a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
 			<button type="button" id="btndelete">삭제</button>
 		</a><br><br>
 	</c:if>
-</table>
 	<a href="${context}/board/faq/list">
 		<button type="button" >공지게시판 목록</button>
 	</a><br><br>

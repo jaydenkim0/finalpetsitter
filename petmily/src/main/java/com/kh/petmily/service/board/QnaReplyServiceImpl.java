@@ -26,4 +26,14 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	public void writeReply(QnaReplyVO qnaReplyVO) {
 		qnaReplyDao.writeReply(qnaReplyVO);
 	}
+	//댓글 수정
+	@Override
+	public void replyUpdate(QnaReplyVO qnaReplyVO) {
+		qnaReplyDao.replyUpdate(qnaReplyVO);
+	}
+	//댓글 삭제
+	@Override
+	public void replyDelete(QnaReplyVO qnaReplyVO) {
+		qnaReplyDao.replyDelete(qnaReplyVO);
+	}
 }

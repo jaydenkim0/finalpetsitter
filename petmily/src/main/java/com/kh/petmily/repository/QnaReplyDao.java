@@ -9,4 +9,8 @@ public interface QnaReplyDao {
 	List<QnaReplyVO> readReply(int qna_no);
 	//댓글 등록
 	void writeReply(QnaReplyVO qnaReplyVO);
+	//댓글 수정
+	void replyUpdate(QnaReplyVO qnaReplyVO);
+	//댓글 삭제
+	void replyDelete(QnaReplyVO qnaReplyVO);
 	}

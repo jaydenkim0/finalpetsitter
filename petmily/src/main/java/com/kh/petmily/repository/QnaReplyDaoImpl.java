@@ -22,4 +22,16 @@ public class QnaReplyDaoImpl implements QnaReplyDao{
 		sqlSession.insert("qna.writeReply",qnaReplyVO);
 		
 	}
+	//댓글 수정
+	@Override
+	public void replyUpdate(QnaReplyVO qnaReplyVO) {
+		sqlSession.update("qna.updateReply",qnaReplyVO);
+		
+	}
+	//댓글 삭제
+	@Override
+	public void replyDelete(QnaReplyVO qnaReplyVO) {
+		sqlSession.delete("qna.qnadelete",qnaReplyVO);
+	}
+
 }

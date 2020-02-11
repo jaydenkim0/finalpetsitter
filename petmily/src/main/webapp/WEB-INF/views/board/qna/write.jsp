@@ -6,7 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    
    <c:choose>
-	<c:when test="${sessionScope.id == null }">
+	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
 	</c:when>
 	<c:otherwise>

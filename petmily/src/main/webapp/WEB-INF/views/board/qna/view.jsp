@@ -6,7 +6,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <c:choose>
-	<c:when test="${sessionScope.id == null }">
+	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
 	</c:when>
 	<c:otherwise>
@@ -16,6 +16,7 @@
 </c:choose>
 <h2>게시글 상세 보기</h2>
 <script>
+// 댓글 작성
 	$(".reply_submit").submit(function(e){
     e.preventDefault();
 
@@ -32,6 +33,64 @@
         }
     });
     window.location.reload();
+});
+
+// 댓글 수정
+$(function(){
+	 $(".reply_edit").hide();
+     $(".reply_edit_btn").hide();
+
+     $(".reply_view_btn").click(function(){
+         $(this).hide();
+         $(this).parentsUntil(".mother").find(".reply_view").hide();
+         $(this).prev(".reply_edit_btn").show();
+         $(this).parentsUntil(".mother").find(".reply_edit").show();
+     });
+     
+     var textoriginal = $(this).parentsUntil(".mother").find(".content").val();
+     $(this).parentsUntil(".mother").find("textarea").text(textoriginal);
+     
+
+     $(".reply_edit_btn").click(function(e){
+     	var text = $(this).parentsUntil(".mother").find("textarea").val();
+     	console.log(text);
+     	
+         e.preventDefault();
+
+         var url = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("action");
+         var method = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("method");
+         var data = $(this).parentsUntil(".mother").find(".reply_change_submit").serialize();
+
+         $.ajax({
+             url:url,
+             type:method,
+             data:data
+         });
+
+         $(this).hide();
+         $(this).parentsUntil(".mother").find(".reply_edit").hide();
+         $(this).parentsUntil(".mother").find(".reply_view").show();
+         $(this).parentsUntil(".mother").find(".reply_view_btn").show();
+         $(this).parentsUntil(".mother").find(".content").text('');
+         $(this).parentsUntil(".mother").find(".content").text(text);       
+     });
+			
+//댓글 삭제 View
+     $(".reply_delete_btn").click(function(e){
+     	e.preventDefault();
+     	
+     	var url = $(this).parentsUntil(".mother").find(".reply_delete_submit").attr("action");
+     	var method = $(this).parentsUntil("mother").find(".reply_delete_submit").attr("method");
+     	var data = $(this).parentsUntil(".mother").find(".reply_delete_submit").serialize();
+     	
+     	$.ajax({
+     		url:url,
+     		type:method,
+     		data:data
+     	});
+     	
+     	$(this).parentsUntil(".grandmother").hide();
+     });
 });
 </script>
 <form name="form1" method="post">
@@ -60,19 +119,10 @@
 <tr>
 	<td>${qnaVO.qna_content}</td>
 </tr>
-	<c:if test="${sessionScope.id == qnaVO.qna_writer}">
-		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-			<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-				<button type="button" id="btnupdate">수정</button>
-			</a><br><br>
-		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-			<button type="button" id="btndelete">삭제</button>
-		</a><br><br>
-	</c:if>
-	</table>
+	</table><br>
 	<a href="${context}/board/qna/list">
 			<button type="button" >문의게시판 목록</button>
-	</a><br><br>
+	</a>
 </div>
 </form>
 
@@ -84,8 +134,20 @@
 				<th>작성 날짜 :  ${replyList.wdate}</th>
 				<th>${replyList.content}</th>
 			</tr>
+<%-- 	<c:if test="${sessionScope.id == replyList.reply_writer || grade=='admin'}"> --%>
+<!-- 	<form action="replyUpdate"  method="post" class="reply_view_btn"> -->
+<!-- 			<input type="text" class="reply_edit_btn" > -->
+<!-- 			<button type="button" class="reply_edit_btn">완료</button> -->
+<!-- 			<button type="button" class="reply_view_btn">수정</button> -->
+			
+<!-- 		</form> -->
+<!-- 	<form action="replyDelete" method="post" class="reply_delete_submit"> -->
+<%-- 			<input type="hidden" id="origin" name="origin" value="${qnaReplyVO.reply_no}"> --%>
+<!-- 			<button class="reply_delete_btn">삭제</button> -->
+<!-- 		</form> -->
+<%-- 	</c:if> --%>
 	</c:forEach>
-	</table>
+</table>
 	
 <form action="replywrite"  method="post" class="reply_submit">
 	<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
@@ -93,3 +155,16 @@
 	<textarea name="content" required placeholder="내용 입력"></textarea>
 	<input type="submit" value="등록">
 </form>
+
+<c:if test="${sessionScope.id eq replyList.reply_writer || grade eq 'admin'}">
+	<form action="replyUpdate"  method="post" class="reply_view_btn">
+		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
+			<textarea name="content" required placeholder="내용 입력"></textarea>
+				<input type="submit" value="등록" class="reply_edit_btn">
+	</form>
+	<form action="replyDelete" method="post" class="reply_delete_submit">
+		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
+			<input type="submit" value="등록" class="reply_delete_btn">
+	</form>
+</c:if>
