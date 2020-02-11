@@ -61,7 +61,7 @@ public class AdminController {
 	//////////////////////////////////////////////////////////////////
 	
 	// 등록 현황으로 이동
-	@GetMapping("/RegistInfo")	
+	@GetMapping("/registInfo")	
 	public String RegistInfo (Model model) {	
 		// 총 등록수 (회원 + 펫시터 + 관리자)
 		model.addAttribute("mtotal", adminService.memberTotal())	
@@ -69,7 +69,7 @@ public class AdminController {
 						  adminService.petsitterTotal() - adminService.admimTotal())		
 				  .addAttribute("ptotal", adminService.petsitterTotal())		
 				  .addAttribute("atotal", adminService.admimTotal());	
-		return "admin/RegistInfo";
+		return "admin/registInfo";
 	}
 	
 	//////////////////////////////////////////////////////////////////
@@ -114,7 +114,7 @@ public class AdminController {
 				  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
-				// 펫시터 관리페이지에서 펫시터 검색 (비동기화로 추후 구현)
+				// 펫시터 관리페이지에서 펫시터 검색
 				@PostMapping("/petsitterSearch")
 				public String petsitterSearch(@RequestParam String type, 
 																@RequestParam String keyword,										
@@ -124,7 +124,7 @@ public class AdminController {
 							  .addAttribute("petsitterSleepList", (List<PetsitterVO>)adminService.petsitterSleepList());
 					return "admin/petsitter";		
 				}	
-				// 펫시터 관리페이지에서 펫시터 신청 검색(비동기화로 추후 구현)
+				// 펫시터 관리페이지에서 펫시터 신청 검색
 				@PostMapping("/petsitterSearchApply")
 				public String petsitterSearchApply(@RequestParam String type, 
 																		@RequestParam String keyword,										
@@ -134,7 +134,7 @@ public class AdminController {
 							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterSearchApply(type, keyword));
 					return "admin/petsitter";		
 				}				
-				// 펫시터 관리페이지에서 휴면 펫시터 검색(비동기화로 추후 구현)
+				// 펫시터 관리페이지에서 휴면 펫시터 검색
 				@PostMapping("/petsitterSearchSleep")
 				public String petsitterSearchSleep(@RequestParam String type, 
 												     					@RequestParam String keyword,										
@@ -399,6 +399,19 @@ public class AdminController {
 		model.addAttribute("blackListdetail", (PetsitterVO)adminService.blackListdetail(id))
 				  .addAttribute("blacklistcontent", (List<BlackListContentDto>)adminService.blacklistcontent(id));
 		return "admin/blacklistdetail";		
+	}
+	
+	// 펫시터 복귀(블랙리스트에서 삭제)
+	@GetMapping("/blackList/comebackPet")
+	public String comebackPet(String black_id) {
+		adminService.gradeComback(black_id);		
+		return "redirect:/admin/petsitter";		
+	}
+	// 회원 복귀(블랙리스트에서 삭제)
+	@GetMapping("/blackList/comebackMember")
+	public String comebackMember(String black_id) {
+		adminService.gradeComback(black_id);		
+		return "redirect:/admin/member";		
 	}
 	
 	

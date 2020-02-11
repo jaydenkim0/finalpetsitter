@@ -150,6 +150,9 @@ public interface AdminService {
 	 LicenseFileDto sitterLicenseimge(int pet_sitter_no);	
 	// 펫시터 가진 라이센스 이미지 가지고 오기 (1장)
 	ResponseEntity<ByteArrayResource> sitterlicenseimage(int license_image_no) throws IOException;
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	void gradeComback(String black_id);
 
 
 

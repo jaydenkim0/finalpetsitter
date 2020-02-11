@@ -160,6 +160,9 @@ public interface AdminDao {
 	 LicenseFileDto getSitterlicenseimage(int license_image_no);
 	// 펫시터 라이센스이미지 실제로 가지고 오기(1장)
 	byte[] physicallicenseimage(String savename) throws IOException;
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	void gradeComback(String black_id);
 
 	
 
