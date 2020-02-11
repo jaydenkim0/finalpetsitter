@@ -28,11 +28,12 @@
 			    	petname.focus();
 			    	jQuery('.petnamecheck').show();
 			    }else{
-			    	jQuery('.petnamecheck').hide();
 			    	var form = document.querySelector("form");
 					form.submit();
+			    	jQuery('.petnamecheck').hide();
 			    }
 	        }else{
+	        	var form = document.querySelector("form");
 	        	form.submit();
     		}
        }
