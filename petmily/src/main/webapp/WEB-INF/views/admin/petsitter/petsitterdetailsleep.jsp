@@ -114,6 +114,11 @@
 		<div style="color:red;">		
 			<h3>※경고를 받은 펫시터입니다.  경고 내용은 블랙리스트 세부사항에서 확인하세요</h3>
 			<h3>경고 횟수 : ${petsitter.black_count}</h3>	
+			<!-- 펫시터 경고 등록 버튼 -->	
+			<form action="${pageContext.request.contextPath}/admin/sitter_blacklist_content" method="get">			
+					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
+					<button type="submit" >추가 경고 펫시터 등록</button>						
+			</form>	
 			<!-- 블랙리스트 등록 펫시터는 삭제 버튼 노출 -->
 			<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
 					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	

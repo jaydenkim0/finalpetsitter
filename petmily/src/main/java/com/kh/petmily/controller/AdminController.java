@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
@@ -359,20 +360,23 @@ public class AdminController {
 	// 블랙리스트 회원 탈퇴(회원탈퇴)
 	// 블랙리스트 + 멤버 테이블에서 완전삭제
 	@GetMapping("/member_delete")
-	public String member_delete(@RequestParam String id) {
+	public String member_delete(@RequestParam String id) {		
 		adminService.blackListdelete(id);
-		adminService.memberdelete(id);
+		adminService.memberdelete(id);		
 		return "redirect:blackList";	
 	}	
 	
 	// 블랙리스트 펫시터 탈퇴 (펫시터 탈퇴)
 	// 그냥 회원으로 강등되면서 블랙리스에 등록되어있음
 	// 펫시터 테이블에서만  삭제
+	// petsittersecession -> 등급을 petsitter -> member로 변경
 	@GetMapping("/sitter_delete")
 	public String sitter_delete (@RequestParam String sitter_id,
 												@RequestParam int sitter_no) {
+		System.out.println(sitter_id);
 		adminService.petsitterNegative(sitter_id, sitter_no);	
 		adminService.petsittersecession(sitter_id);
+		adminService.blackListgradechange(sitter_id);
 		return "redirect:blackList";	
 	}
 				
@@ -380,13 +384,10 @@ public class AdminController {
 	// 블랙리스트 불러오기
 	@GetMapping("/blackList")
 	public String blackListpage (Model model) {
-		// 펫시터 블랙리스트 불러오기
-		List<BlackListDto> PBlist = adminService.sitterBlackList();
-		// 회원 블랙리스트 불러오기
-		List<BlackListDto>MBlist = adminService.memberBlackList();
-		
-		model.addAttribute("PBlist", PBlist);
-		model.addAttribute("MBlist", MBlist);
+		// 펫시터 블랙리스트 불러오기		
+		// 회원 블랙리스트 불러오기			
+		model.addAttribute("PBlist", (List<BlackListDto>) adminService.sitterBlackList())
+				  .addAttribute("MBlist", (List<BlackListDto>)adminService.memberBlackList());
 		return "admin/blackList";		
 	}
 	
@@ -406,7 +407,8 @@ public class AdminController {
 		// 블랙리스트 디테일 페이지
 		// 삭제 및 복귀 가능
 		// 블랙리스트 디테일 불러오기 -> view로 쏴주기	
-		model.addAttribute("blackListdetail", (PetsitterVO) adminService.blackListdetail(id));
+		model.addAttribute("blackListdetail", (PetsitterVO)adminService.blackListdetail(id))
+				  .addAttribute("blacklistcontent", (List<BlackListContentDto>)adminService.blacklistcontent(id));
 		return "admin/blacklistdetail";		
 	}
 	

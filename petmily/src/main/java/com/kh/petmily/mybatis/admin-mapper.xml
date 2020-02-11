@@ -267,23 +267,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</insert>
 		<!-- 블랙리스트 회원 등록 -->
 		<insert id="blackListMember" parameterType="blackListDto">
-		merge into blacklist using dual on(black_id = #{black_id})
-		
-		when matched then
-		
-			update set 
-				black_count = black_count + 1
-			where black_id = #{black_id}
-		
-		when not matched then
-		
-			insert values(
-			 black_no_seq.nextval,
-			#{black_id},
-			#{black_name},
-			#{black_phone},
-			#{black_grade},			
-			1	
+			merge into blacklist using dual on(black_id = #{black_id})
+			
+			when matched then
+			
+				update set 
+					black_count = black_count + 1
+				where black_id = #{black_id}
+			
+			when not matched then
+			
+				insert values(
+				 black_no_seq.nextval,
+				#{black_id},
+				#{black_name},
+				#{black_phone},
+				#{black_grade},			
+				1	
 			)
 		</insert>
 		<!-- 블랙리스트 -->
@@ -292,7 +292,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			blackListContent_no_seq.nextval,
 			#{black_content_id},
 			#{black_content},
-			sysdate
+			sysdate,
+			#{black_content_grade}
 			)
 		</insert>
 		
@@ -317,6 +318,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="blackListdetailSearch" parameterType="String" 
 		resultType="petsitterVO">
 			select * from blackListall where black_id = #{id}
+		</select>
+		
+		<!-- 
+			블랙리스트에서 권한변경 
+			펫시터 강제 강등시 권한이 member로 변하기 때문에 blacklist 테이블에서도 변경
+		-->
+		<update id="blackListgradechange" parameterType="String">
+			update blacklist set black_grade = 'member' where black_id = #{sitter_id} 
+		</update>
+		
+		<!-- 블랙리스튼 컨텐츠 조회 -->
+		<select id="blacklistcontent" parameterType="String"
+		resultType="blackListContentDto">
+			select * from blackListContent where black_content_id = #{id}
 		</select>
 		
 	<!-- 정산관리 -->

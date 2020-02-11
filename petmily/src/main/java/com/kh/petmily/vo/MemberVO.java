@@ -35,9 +35,16 @@ public class MemberVO {
 	private int pet_sitter_no;
 	
 	// blacklist 사용시 추가 컨텐츠
-	private int black_no;
-	private String black_content;
+	private int black_no;	
 	private int black_count;
+	
+	// blackListContent 사용시 추가 컨텐츠
+	private int blackListContent_no;
+	private String black_content_id; // 아이디
+	private String black_content_grade; // 아이디
+	private String black_content; // 차단 이유
+	private String black_wdate; // 차단 등록 일시
+	
 	
 	// 회원 가입일
 	public String getMemberdateWithFormat()throws Exception{

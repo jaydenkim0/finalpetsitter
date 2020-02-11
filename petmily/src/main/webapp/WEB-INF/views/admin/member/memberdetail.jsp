@@ -67,12 +67,17 @@
 	
 
 	
-	<!-- 블랙리스트 등록된 회원여부 -->
+	<!-- 블랙리스트 등록된 회원여부에 따라 버튼내용이 달라진다 -->
 	<c:choose>			
 	<c:when test="${member.grade eq 'petsitter' && member.black_count > 0}">
 		<div style="color:red;">
 			<h3>※경고를 받은 펫시터입니다.  경고 내용은 블랙리스트 세부사항에서 확인하세요</h3>
-			<h3>경고 횟수 : ${member.black_count}</h3>					
+			<h3>경고 횟수 : ${member.black_count}</h3>	
+			<!-- 펫시터 경고 등록 버튼 -->	
+			<form action="${pageContext.request.contextPath}/admin/sitter_blacklist_content" method="get">			
+					<input type="hidden" name="sitter_id" value="${member.id}">				
+					<button type="submit" >추가 경고 펫시터 등록</button>						
+			</form>		
 			<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
 			<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
 					<input type="hidden" name="sitter_id" value="${member.id}">	
@@ -89,12 +94,17 @@
 	<c:when test="${member.grade eq 'member' && member.black_count > 0}">
 		<div style="color:#ff8d00;">
 			<h3>※경고를 받은 회원입니다.  경고 내용은 블랙리스트 세부사항에서 확인하세요</h3>
-			<h3>경고 횟수 : ${member.black_count}</h3>				
+			<h3>경고 횟수 : ${member.black_count}</h3>		
+			<!-- 회원 경고 등록 버튼 -->	
+			<form action="${pageContext.request.contextPath}/admin/member_blacklist_content" method="get">			
+					<input type="hidden" name="id" value="${member.id}">				
+					<button type="submit" > 추가 경고 회원 등록</button>						
+			</form>				
 			<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
 				<form action="${pageContext.request.contextPath}/admin/member_delete" method="get">			
 					<input type="hidden" name="id" value="${member.id}">				
 					<button type="submit" >경고 회원 탈퇴</button>						
-			</form>	
+			</form>			
 			<!-- 블랙리스트 디테일 페이지로 이동 -->
 			<form action="${pageContext.request.contextPath}/admin/blackListdetail" method="get">		
 					<input type="hidden" name="id" value="${member.id}">						
@@ -102,8 +112,15 @@
 			</form>		
 		</div>
 	</c:when>	
+	<c:when test="${member.grade eq 'petsitter'}">
+		<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 경고 등록 버튼 -->
+		<form action="${pageContext.request.contextPath}/admin/sitter_blacklist_content" method="get">			
+					<input type="hidden" name="sitter_id" value="${member.id}">				
+					<button type="submit" >경고 펫시터 등록</button>						
+			</form>		
+	</c:when>
 	<c:otherwise>
-			<!-- 펫시터 경고 등록 버튼 -->	
+			<!-- 일반 회원에게 보여줄 내용 : 회원 경고 등록 버튼 -->	
 			<form action="${pageContext.request.contextPath}/admin/member_blacklist_content" method="get">			
 					<input type="hidden" name="id" value="${member.id}">				
 					<button type="submit" >경고 회원 등록</button>						

@@ -121,9 +121,14 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public void sitter_status(PetsitterDto petsitterDto) {
 		System.out.println("DaoImpl = " + petsitterDto);
-		sqlSession.update("admin.sitter_status", petsitterDto);
-		
+		sqlSession.update("admin.sitter_status", petsitterDto);		
 	}
+	// 블랙리스트 테이블에서 권한 변경
+	@Override
+	public void blackListgradechange(String sitter_id) {
+		sqlSession.update("admin.blackListgradechange", sitter_id);
+	}
+
 
 	// 펫시터 옵션 등록 : 돌봄가능동물
 	// 불러오기
@@ -295,6 +300,12 @@ public class AdminDaoImpl implements AdminDao {
 	public PetsitterVO blackListdetailSearch(String id) {		
 		return sqlSession.selectOne("admin.blackListdetailSearch", id);
 	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {		
+		return sqlSession.selectList("admin.blacklistcontent", id);
+	}
+	
 
 
 

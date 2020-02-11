@@ -49,6 +49,8 @@ public interface AdminService {
 	
 	// 펫시터 블랙리스트 탈퇴시 등급변경
 	void petsittersecession(String sitter_id);
+	// 블랙리스트 테이블에서 등급변환
+	void blackListgradechange(String sitter_id);
 	
 	
 	// 펫시터 단일 검색
@@ -122,6 +124,10 @@ public interface AdminService {
 	
 	// 블랙리스트 디테일 페이지 내용 가지고 오기
 	PetsitterVO blackListdetail(String id);
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	List<BlackListContentDto> blacklistcontent(String id);
+
+
 
 	
 
