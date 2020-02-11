@@ -224,8 +224,8 @@
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
 		</tr>
 		<tr>
-			<th>
-				<c:set var="src" value="${care_image_context}:${replyimagelist.savename}"></c:set>
+			<th align="left">
+				<c:set var="src" value="${care_image_context}${replyimagelist.savename}${replyimagelist.filetype.substring(7) }"></c:set>
 				<img src="${src }"  width="500">
 			</th>
 		</tr>
