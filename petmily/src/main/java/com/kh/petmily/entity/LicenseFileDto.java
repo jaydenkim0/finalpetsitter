@@ -15,9 +15,9 @@ public class LicenseFileDto {
 	// uproadname 어떤 방식으로겹치지 않게 하는지 확인
 	private int license_image_no;
 	private int license_sitter_no;  //  pet_sitter 테이블의 pet_sitter_no
-	private String uproadname;
+	private String uploadname;
 	private String savename;
 	private String filetype;
-	private int filesize;
+	private long filesize;
 	
 }

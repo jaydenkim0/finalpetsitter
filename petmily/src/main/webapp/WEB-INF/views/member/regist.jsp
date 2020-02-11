@@ -21,15 +21,20 @@
         
        function onsubmit_petnamecheck(){
        	event.preventDefault();
-		    var petname = document.querySelector(".petname");
-		    if(petname.value == '' || petname.value == null){
-		    	petname.focus();
-		    	jQuery('.petnamecheck').show();
-		    }else{
-		    	jQuery('.petnamecheck').hide();
-		    	var form = document.querySelector("form");
-				form.submit();
-		    }
+       	var state = jQuery('#selectBox option:selected').val();
+	       	if(state=='예'){
+			    var petname = document.querySelector(".petname");
+			    if(petname.value == '' || petname.value == null){
+			    	petname.focus();
+			    	jQuery('.petnamecheck').show();
+			    }else{
+			    	jQuery('.petnamecheck').hide();
+			    	var form = document.querySelector("form");
+					form.submit();
+			    }
+	        }else{
+	        	form.submit();
+    		}
        }
     </script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

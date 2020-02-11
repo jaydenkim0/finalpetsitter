@@ -136,21 +136,44 @@
 				
 			<hr>
 			</tbody>	
+	</table>
 			
-			<tfoot>
-				
-							<!-- 펫시터 승인 버튼 -->			
+
+		
+	<!-- 블랙리스트 등록된 회원여부 -->
+	<c:choose>			
+	<c:when test="${petsitter.black_count == 0 || petsitter.black_count == null}">
+			<!-- 펫시터 승인 버튼 -->			
 			<form action="${pageContext.request.contextPath}/admin/apply" method="post">
 						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	
 						<button type="submit" > 펫시터 승인</button>
-			</form>		
-			
+			</form>			
 			<!-- 펫시터 거부 버튼 -->
-	 		<form   class="petnegative"  action="${pageContext.request.contextPath}/admin/negative" method="post">
-						<input type="hidden" name=sitter_id value="${petsitter.sitter_id}">
-						<input type="hidden" name=email value="${petsitter.email}">				
+				<form   class="petnegative"  action="${pageContext.request.contextPath}/admin/negative" method="post">
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+						<input type="hidden" name="email" value="${petsitter.email}">
+						<input type="hidden" name="pet_sitter_no" value="${petsitter.pet_sitter_no}">			
 						<button type="submit" id="nega-btn"> 펫시터 거부</button>
 			</form> 	
+	</c:when>
+	<c:otherwise>
+		<div style="color:#ff8d00;">
+			<h3>※경고를 받은 회원입니다.  경고 내용은 블랙리스트 세부사항에서 확인하세요</h3>
+			<h3>경고 횟수 : ${petsitter.black_count}</h3>	
+				<!-- 펫시터 승인 버튼 -->			
+				<form action="${pageContext.request.contextPath}/admin/apply" method="post">
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	
+							<button type="submit" > 펫시터 승인</button>
+				</form>					
+				<!-- 펫시터 거부 버튼 -->
+					<form   class="petnegative"  action="${pageContext.request.contextPath}/admin/negative" method="post">
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+							<input type="hidden" name="email" value="${petsitter.email}">
+							<input type="hidden" name="pet_sitter_no" value="${petsitter.pet_sitter_no}">			
+							<button type="submit" id="nega-btn"> 펫시터 거부</button>
+				</form> 			
+		</div>
+	</c:otherwise>
+	</c:choose>	 
 			
-			</tfoot>
-	</table>
+	

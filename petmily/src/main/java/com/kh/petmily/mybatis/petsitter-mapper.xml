@@ -61,8 +61,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSequence" resultType="int">
 		select pet_sitter_no_seq.nextval from dual
 	</select>
+
+	<!-- 신분증 등록 -->
+	<insert id="registInfo" parameterType="infoImageDto">
+		insert into info_image values
+			(info_image_no_seq.nextval,
+			#{info_sitter_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize})
+	</insert>
 	
-	<!-- 증빙서류 신분증 등록 -->
+	<!-- 신분증 등록 -->
+	<insert id="registIdCard" parameterType="idCardFileDto">
+		insert into id_card_file values
+			(id_card_image_no_seq.nextval,
+			#{id_card_sitter_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize})
+	</insert>
+	
+	<!-- 증빙서류 등록 -->
 	<insert id="registLicense" parameterType="licenseFileDto">
 		insert into license_file values
 			(license_image_no_seq.nextval,
@@ -74,15 +96,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 펫시터 지역 등록 -->
-	<insert id="registRegion" parameterType="list">
+	<insert id="registLocation" parameterType="list">
 		<foreach collection="list" item="locationDto" open="insert all" close="select * from dual">
 			into location values
-			(location_no_seq.nextval,#{locationDto.location_sitter_no},#{locationDto.city},#{locationDto.area})
+			(get_location_seq(),#{locationDto.location_sitter_no},#{locationDto.city},#{locationDto.area})
 		</foreach>
 	</insert>
 	
-	
-	
+
 	
 	<!-- 등록 테스트 -->
 	<insert id="testRegist" parameterType="petsitterDto">

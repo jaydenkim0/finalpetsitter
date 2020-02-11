@@ -1,20 +1,23 @@
 package com.kh.petmily.repository;
 
-
-
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
 
 @Repository
@@ -40,8 +43,8 @@ public class AdminDaoImpl implements AdminDao {
 	
 	// 회원리스트
 	@Override
-	public List<MemberDto> getMemberList(MemberDto memberDto) {		
-		return sqlSession.selectList("admin.memberList", memberDto);
+	public List<MemberVO> getMemberList() {		
+		return sqlSession.selectList("admin.memberList");
 	}
 
 	// 펫시터 리스트
@@ -50,6 +53,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.petsitterList"); 
 	}
 
+	// 펫시터 휴면 리스트
 	@Override
 	public List<PetsitterVO> getPetsitterSleep() {
 		return sqlSession.selectList("admin.petsleepList");
@@ -69,34 +73,62 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	// 펫시터 거부 (삭제)
 	@Override
-	public void petsitterNegative(String sitter_id) {
+	public void petsitterNegative(String sitter_id, int sitter_no) {
+		// 펫시터 삭제
 		sqlSession.delete("admin.petsitterNegative", sitter_id);
-		
+		// 등록 지역 삭제
+		sqlSession.delete("admin.locationNegative", sitter_no);
+		// 등록 돌봄가능 동물 삭제
+		sqlSession.delete("admin.carePetTypeNegative", sitter_no);
+		// 등록 스킬 삭제
+		sqlSession.delete("admin.skillsNegative", sitter_no);
+		// 등록 환경 삭제
+		sqlSession.delete("admin.careConditionNegative", sitter_no);		
 	}
 
 	// 펫시터 단일 검색
 	@Override
 	public PetsitterVO petsitterSearchOne(String sitter_id) {
 		return sqlSession.selectOne("admin.petsitterSearchOne", sitter_id);
-	}
+	}	
 
-	// 펫시터 차단 (블랙리스트 등록)
+	// 블랙리스트 등록 시퀀스 번호 미리 가지고 오기
+	public int blackListsno() {
+		return sqlSession.selectOne("admin.blackListsno");
+	}
+	
+	// 펫시터 경고 등록 (블랙리스트 등록)
 	@Override
-	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO) {
+	public void blackSitter(PetsitterDto petsitterDto, PetsitterVO petsitterVO
+											,BlackListContentDto blackListContentDto) {
 		// 펫시터 상태 휴면으로 변경
 		sqlSession.update("admin.sitter_status", petsitterDto);
 		// 블랙리스트 테이블에 등록
-		sqlSession.insert("admin.blackList", petsitterVO);
-		
+		sqlSession.insert("admin.blackList", petsitterVO);		
+		// 블랙리스트 컨텐츠 테이블에 등록
+		sqlSession.insert("admin.blackListContent", blackListContentDto);
+	}
+	// 회원 경고 등록
+	@Override
+	public void blackMember(BlackListDto blackListDto,
+			BlackListContentDto blackListContentDto) {
+		sqlSession.insert("admin.blackListMember", blackListDto);
+		// 블랙리스트 컨텐츠 테이블에 등록
+		sqlSession.insert("admin.blackListContent", blackListContentDto);
 	}
 
 	// 펫시터 상태 변환
 	@Override
 	public void sitter_status(PetsitterDto petsitterDto) {
 		System.out.println("DaoImpl = " + petsitterDto);
-		sqlSession.update("admin.sitter_status", petsitterDto);
-		
+		sqlSession.update("admin.sitter_status", petsitterDto);		
 	}
+	// 블랙리스트 테이블에서 권한 변경
+	@Override
+	public void blackListgradechange(String sitter_id) {
+		sqlSession.update("admin.blackListgradechange", sitter_id);
+	}
+
 
 	// 펫시터 옵션 등록 : 돌봄가능동물
 	// 불러오기
@@ -191,6 +223,97 @@ public class AdminDaoImpl implements AdminDao {
 					return sqlSession.selectList("admin.getPetsitterdetailCareCondition", pet_sitter_no);
 				}
 
+				
+	// 회원 디테일 페이지 정보
+	@Override
+	public MemberVO getMemberdetail(String id) {
+		return sqlSession.selectOne("admin.getMemberdetail", id);
+	}
+	// 회원 정보 페이지에 보여줄 반려동물 
+	@Override
+	public List<PetDto> getPets(String id) {					
+		return sqlSession.selectList("admin.getPets", id);
+	}
+	
+	// 회원관리 페이지에서 회원 검색
+	@Override
+	public List<MemberVO> memberSearchList(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.memberSearchList", param);
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearch(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchList", param);	
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 신청 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchApply", param);	
+	}
+
+	// 펫시터 관리 페이지에서 휴면펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+		Map<String, String> param = new HashMap();
+		param.put("type", type);
+		param.put("keyword", keyword);		
+		return sqlSession.selectList("admin.petsitterSearchSleep", param);	
+	}
+	
+	// 블랙리스트 등록 여부 검사
+	@Override
+	public int blackLsitcheck(String id) {		
+		return sqlSession.selectOne("admin.blackLsitcheck", id);
+	}
+
+	// 블랙리스트 회원 탈퇴 (삭제)
+	@Override
+	public void memberdelete(String id) {
+		sqlSession.delete("admin.memberdelete", id);		
+	}
+
+	// 블랙리스트에서 삭제
+	@Override
+	public void blackListdelete(String id) {
+		sqlSession.delete("admin.blackListdelete", id);		
+	}
+	// 펫시터 블랙리스트 탈퇴시 등급변경
+	@Override
+	public void petsittersecession(String sitter_id) {
+		sqlSession.update("admin.petsittersecession", sitter_id);
+		
+	}
+
+	// 블랙리스트 디테일 페이지 내용 가지고 오기
+	@Override
+	public PetsitterVO blackListdetailSearch(String id) {		
+		return sqlSession.selectOne("admin.blackListdetailSearch", id);
+	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {		
+		return sqlSession.selectList("admin.blacklistcontent", id);
+	}
+	
+
+
+
+
+
+
+
+	
 
 
 

@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  -->
  
 <mapper namespace="care">
+
 	<!-- 게시글 목록 -->
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
@@ -42,4 +43,116 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by wdate desc
 	</select>
 	
+	<!-- 펫시터아이디로 펫시터번호 구하기 -->
+	<select id="id_to_number" parameterType="String" resultType="int">
+		select pet_sitter_no from pet_sitter where sitter_id=#{care_sitter_id}	
+	</select>
+	
+	<!-- 돌봄방 생성 -->
+	<insert id="write" parameterType="careDto">
+		insert into care_board values(
+			care_board_no_seq.nextval,
+			#{care_member_id},
+			#{care_sitter_no},
+			#{care_board_content},
+			#{care_pw},
+			sysdate
+		)
+	</insert>
+	
+	<!-- 돌봄방 정보 불러오기 -->
+	<select id="listcontent" parameterType="String" resultType="careDto">
+		select * from care_board where care_board_no=#{care_board_no}
+	</select>
+	
+	<!-- 펫시터번호로 펫시터아이디 구하기 -->
+	<select id="number_to_id" parameterType="int" resultType="String">
+		select sitter_id from pet_sitter where pet_sitter_no=#{care_sitter_no}
+	</select>
+	
+	<!-- 돌봄 방 제목 변경 -->
+	<update id="content_edit" parameterType="careDto">
+		update 
+			care_board 
+		set 
+			care_board_content=#{care_board_content} 
+		where 
+			care_board_no=#{care_board_no}
+	</update>
+	
+	<!-- 돌봄 방 삭제 -->
+	<delete id="delete" parameterType="String">
+		delete from care_board where care_board_no=#{care_board_no}
+	</delete>
+	
+	<!-- 돌봄 방 댓글 목록 -->
+	<select id="replylist" resultType="careReplyDto" parameterType="String">
+		select * from care_reply where care_reply_board_no=#{care_board_no} order by wdate desc
+	</select>
+	
+	<!-- 돌봄 방 댓글 등록 -->
+	<insert id="reply_regist" parameterType="careReplyDto">
+		insert into care_reply values(
+			care_reply_no_seq.nextval,
+			#{care_reply_board_no },
+			#{care_reply_content},
+			sysdate,
+			#{care_reply_writer}
+		)
+	</insert>
+	
+	<!-- 돌봄 방 댓글 수정 -->
+	<update id="reply_change" parameterType="careReplyDto">
+		update 
+			care_reply 
+		set 
+			care_reply_content=#{care_reply_content} 
+		where 
+			care_reply_no=#{care_reply_no}
+	</update>
+	
+	<!-- 돌봄 방 비밀번호 검사 -->
+	<select id="care_board_password" resultType="int" parameterType="careDto">
+		select 
+			count(*) 
+		from 
+			care_board 
+		where 
+			care_board_no=#{care_board_no} and care_pw=#{care_pw}
+	</select>
+	
+	<!-- 돌봄 방 댓글 삭제 -->
+	<delete id="reply_delete" parameterType="careReplyDto">
+		delete from care_reply where care_reply_no=#{care_reply_no}
+	</delete>
+	
+	<!-- 파일업로드를 위한 댓글번호 찾기 -->
+	<select id="find_care_reply_no" resultType="int">
+		select care_reply_no from(
+			select rownum as rn, E.* from (
+    			select * from care_reply order by care_reply_no desc
+			) E 
+		)where rn=1		
+	</select>
+	
+	<!-- 파일번호찾기 -->
+	<select id="care_image_no" resultType="int">
+		select care_image_no from(
+			select rownum as rn, E.* from (
+    			select * from care_image order by care_image_no desc
+			) E 
+		)where rn=1
+	</select>
+	
+	<!-- 파일 데이터베이스에 저장 -->
+	<insert id="care_image" parameterType="careImageDto">
+		insert into care_image values(
+			#{care_image_no},
+			#{care_reply_no },
+			#{savename},
+			#{filetype},
+			#{filesize}
+		)
+	</insert>
+
 </mapper>

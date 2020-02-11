@@ -1,5 +1,8 @@
 package com.kh.petmily.vo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,11 +43,37 @@ public class PetsitterVO {
 	private String sitter_matching_type; // '방문서비스', '위탁서비스', '둘다' 만 작성가능
 	
 	// blacklist 사용시 추가 컨텐츠
-	private String black_content;
+	private int black_no;
+	private String black_id; // member 테이블의 id
+	private String black_name; // member 의 이름 저장
+	private String black_phone; // member 의 전화번호 저장
+	private String black_grade; // member 의 등급 (회원 및 펫시터)	
+	private int black_count; // 경고횟수
 	
-
+	// 블랙리스트 컨텐츠
+	private int blackListContent_no;
+	private String black_content_id; // 아이디
+	private String black_content_grade; // 아이디
+	private String black_content; // 차단 이유
+	private String black_wdate; // 차단 등록 일시
 	
-
+	// 펫시터 가입일
+	public String getPetsitterdateWithFormat()throws Exception{
+	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	      Date date = read.parse(sitter_joindate);
+	      SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+	      String time = write.format(date);
+	      return time;
+	   }
+	
+	// 블랙리스트 등록일
+	public String getBlackListdateWithFormat()throws Exception{
+	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	      Date date = read.parse(black_wdate);
+	      SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+	      String time = write.format(date);
+	      return time;
+	   }
 	
 	
 

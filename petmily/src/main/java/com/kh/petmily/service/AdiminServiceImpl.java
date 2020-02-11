@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.entity.SkillsDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.PetsitterVO;
 
 @Service
@@ -40,10 +43,12 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.getAtotal();
 	}
 	
+	
+	
 	// member 리스트
 	@Override
-	public List<MemberDto> memberList(MemberDto memberDto) {		
-		return adminDao.getMemberList(memberDto);
+	public List<MemberVO> memberList() {	
+		return adminDao.getMemberList();
 	}
 
 	// petsitter 리스트
@@ -65,6 +70,8 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	
 	
+	
+	
 	// 펫시터 승인
 	@Override
 	public void petsitterapply(String sitter_id) {
@@ -73,10 +80,21 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 펫시터 거부(삭제)
 	@Override
-	public void petsitterNegative(String sitter_id) {
-		adminDao.petsitterNegative(sitter_id);
-		
+	public void petsitterNegative(String sitter_id, int sitter_no) {
+		adminDao.petsitterNegative(sitter_id, sitter_no);		
+	}	
+	// 블랙리스트 회원 탈퇴 (삭제)
+	@Override
+	public void memberdelete(String id) {
+		adminDao.memberdelete(id);		
 	}
+	
+	// 블랙리스트에서 삭제
+	@Override
+	public void blackListdelete(String id) {
+		adminDao.blackListdelete(id);
+	}
+
 
 	// 펫시터 단일 검색
 	@Override
@@ -84,25 +102,68 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.petsitterSearchOne(sitter_id);
 	}
 
-	// 펫시터 차단 기능
+	// 펫시터 블랙리스트 등록 기능
 	@Override
-	public void blackSitter(PetsitterDto petsitterDto, String black_content) {
+	public void blackSitter(PetsitterDto petsitterDto, String black_content	) {
+		
 		// 펫시터 상태 휴면으로 변경		
 		// 펫시터 단일 검색으로 정보 갖고 오기
 		String sitter_id = petsitterDto.getSitter_id();
-		PetsitterVO petsitterVO = (PetsitterVO) adminDao.petsitterSearchOne(sitter_id);
-		petsitterVO.setBlack_content(black_content);
+		PetsitterVO petsitterVO = adminDao.petsitterSearchOne(sitter_id);					
+		
 		// 블랙시트 테이블에 등록
-		adminDao.blackSitter(petsitterDto, petsitterVO);
-	}
+		BlackListContentDto blackListContentDto =BlackListContentDto
+				.builder()				
+				.black_content_id(sitter_id)
+				.black_content(black_content)
+				.black_content_grade(petsitterVO.getGrade())
+				.build();
+				
+		adminDao.blackSitter(petsitterDto, petsitterVO, blackListContentDto);
+		
+	}	
+	// 멤버 블랙리스트 등록 기능
+	@Override
+	public void blackMember(String id, String black_content) {
 
+	
+		// 회원 단일 검색으로 정보 갖고 오기
+		MemberVO memberVO = adminDao.getMemberdetail(id);
+		System.out.println("memberVO = " + memberVO);
+		BlackListDto blackListDto = BlackListDto.builder()				
+				.black_id(id)				
+				.black_name(memberVO.getName())
+				.black_phone(memberVO.getPhone())
+				.black_grade(memberVO.getGrade())
+				.build();
+		System.out.println("blackListDto = " + blackListDto);
+		BlackListContentDto blackListContentDto =BlackListContentDto
+				.builder()				
+				.black_content_id(id)
+				.black_content(black_content)
+				.black_content_grade(memberVO.getGrade())
+				.build();
+		System.out.println("blackListContentDto = " + blackListContentDto);
+		adminDao.blackMember(blackListDto, blackListContentDto);
+	}
+	
+	// 펫시터 블랙리스트 탈퇴시 등급변경
+	@Override
+	public void petsittersecession(String sitter_id) {	
+		adminDao.petsittersecession(sitter_id);
+	}
+	
 	// 펫시터 상태 변환
 	@Override
-	public void sitter_status(PetsitterDto petsitterDto) {
-		System.out.println("ServiceImpl = " + petsitterDto);
-		adminDao.sitter_status(petsitterDto);
-		
+	public void sitter_status(PetsitterDto petsitterDto) {		
+		adminDao.sitter_status(petsitterDto);		
 	}
+	// 블랙리스트 테이블에서 권한 변경
+	@Override
+	public void blackListgradechange(String sitter_id) {
+		adminDao.blackListgradechange(sitter_id);
+	}
+
 
 	// 펫시터 옵션
 		// 돌봄가능동물 불러오기
@@ -196,6 +257,61 @@ public class AdiminServiceImpl implements AdminService {
 	public List<CareConditionNameDto> petsitterdetailCareCondition(int pet_sitter_no) {
 		return adminDao.getPetsitterdetailCareCondition(pet_sitter_no);
 	}
+
+	// 회원 디테일 페이지 
+	@Override
+	public MemberVO getMemberdetail(String id) {
+		return adminDao.getMemberdetail(id);
+	}
+	// 회원 정보 페이지에 보여줄 반려동물 
+	@Override
+	public List<PetDto> getPets(String id) {		
+		return adminDao.getPets(id);
+	}
+
+	// 회원관리 페이지에서 회원 검색
+	@Override
+	public List<MemberVO> memberSearchList(String type, String keyword) {		
+		return adminDao.memberSearchList(type, keyword);
+	}
+	// 펫시터 관리 페이지에서 펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
+		return adminDao.petsitterSearch(type,  keyword);
+	}
+	
+	// 펫시터 관리 페이지에서 펫시터 신청 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+		return adminDao.petsitterSearchApply(type,  keyword);
+	}
+	
+	// 펫시터 관리 페이지에서 휴면펫시터 검색
+	@Override
+	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+		return adminDao.petsitterSearchSleep(type,  keyword);
+	}
+
+	// 블랙리스트 여부 검사
+	@Override
+	public boolean blackLsitcheck(String id) {		
+		int result = adminDao.blackLsitcheck(id);		
+		return result == 0 ? false:true;
+	}
+	
+	// 블랙리스트 디테일 페이지 내용 가지고 오기
+	@Override
+	public PetsitterVO blackListdetail(String id) {			
+		return adminDao.blackListdetailSearch(id);
+	}
+	// 블랙리스트컨텐츠 내용 가지고 오기
+	@Override
+	public List<BlackListContentDto> blacklistcontent(String id) {	
+		return adminDao.blacklistcontent(id);
+	}
+
+
+
 
 
 
