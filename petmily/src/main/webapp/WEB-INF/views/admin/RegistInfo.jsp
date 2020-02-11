@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-	
-	
-	 <style>
+ 
+ 	<style>
 	 a button{
 	 	background: #ad3a11;
 	    padding: 7px 14px;
@@ -20,16 +18,12 @@
 	 
 	 </style>
 	 
-	<h1>관리자 메인페이지</h1>
+	<br>
+    <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+    <br>
+	 
+
 	
-	
-	<a href="RegistInfo"><button>회원 및 펫시터 등록 현황</button></a>
-	<a href="member"><button>회원 관리</button></a>
-	<a href="petsitter"><button>펫시터 관리</button></a>
-	<a href="account"><button>정산관리</button></a>
-	<a href="blackList"><button>경고 회원 및 펫시터 관리</button></a>
-	
-	<br><br>
 	<h3> 총 등록 수 (회원, 펫시터, 관리자 포함) : ${mtotal} 명 </h3>
 	<h3 style="background:#f2f2f2;"> 총 회원 : ${member} 명 </h3> 
 	<h3 style="background:rgba(96, 125, 139, 0.7);"> 총 펫시터 : ${ptotal} 명 </h3>

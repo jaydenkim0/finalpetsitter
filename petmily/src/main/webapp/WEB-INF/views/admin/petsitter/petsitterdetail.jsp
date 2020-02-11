@@ -51,9 +51,8 @@
 				
 				<tr>			
 					<td>포인트 : ${petsitter.point}</td>					
-				</tr>
-		
-				
+				</tr>	
+							
 			<hr>
 			
 		
@@ -92,23 +91,39 @@
 				
 			<hr>
 			</tbody>	
-			
-			<tfoot>
-			
-					<!-- 펫시터 상태 변경 -->
-					<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
-							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-							<input type="hidden" name="sitter_status" value="휴면">					
-							<button type="submit" >펫시터  휴면 변경</button>						
-					</form>
-						
-					<!-- 펫시터 차단 버튼 -->	
-					<form action="${pageContext.request.contextPath}/admin/blacklist_content" method="get">			
-							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
-							<button type="submit" >차단 펫시터 등록</button>						
-					</form>
-			
-			</tfoot>
 	</table>
+			
+		<c:choose>			
+			<c:when test="${empty petsitterSleepList.black_count}">	
+				<!-- 펫시터 상태 변경 -->
+				<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+						<input type="hidden" name="sitter_status" value="휴면">					
+						<button type="submit" >펫시터  휴면 변경</button>						
+				</form>		
+				<!-- 펫시터 경고 등록 버튼 -->	
+				<form action="${pageContext.request.contextPath}/admin/sitter_blacklist_content" method="get">			
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
+						<button type="submit" >경고 펫시터 등록</button>						
+				</form>
+			</c:when>
+			<c:otherwise>
+			<h3>※아래와 같은 사유로 경고를 받은 펫시터입니다</h3>
+			<h3>경고 사유 : ${petsitter.black_content}</h3>					
+			<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
+			<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
+					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	
+					<input type="hidden" name="sitter_no" value="${petsitter.pet_sitter_no}">				
+					<button type="submit" >경고 펫시터 탈퇴</button>						
+			</form>	
+			<!-- 블랙리스트 디테일 페이지로 이동 -->
+			<form action="${pageContext.request.contextPath}/admin/blackListdetail" method="get">			
+					<input type="hidden" name="id" value="${petsitter.sitter_id}">										
+					<button type="submit" >블랙리스트 세부사항으로 이동</button>						
+			</form>	
+			</c:otherwise>
+		</c:choose>
+
+	
 	
 	

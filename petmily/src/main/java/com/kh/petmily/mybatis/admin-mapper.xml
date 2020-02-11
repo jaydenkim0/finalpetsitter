@@ -44,26 +44,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  회원관리 -->	
 		<!-- 회원리시트 불러오가 -->
-		<select id="memberList"  resultType="PetsitterVO">
-			select * from memberB order by id asc
+		<select id="memberList"  resultType="memberVO">
+			select * from memberB
 		</select>
 		
 		<!-- 
 			회원리스트 검색
 			일단 이름 검색으로	
 		 -->
-		<select id="memberSearchList"  parameterType="Map"  resultType="PetsitterVO">
+		<select id="memberSearchList"  parameterType="Map"  resultType="MemberVO">
 			select * from memberB where ${type} like  '%'||#{keyword}||'%' order by id asc
 		</select>
 		
 		<!-- 회원 디테일 페이지 불러오기 -->
-		<select id="getMemberdetail" resultType="memberDto">
-			select * from member where id = #{id}
+		<select id="getMemberdetail" resultType="MemberVO">
+			select * from memberB where id = #{id}
 		</select>
 		<!-- 회원 디테일 페이지에 들어갈 반려동물목록 -->
 		<select id="getPets" resultType="petDto">
 			select * from pet where member_id = #{id}
 		</select>
+		
+		<!-- 블랙리스트 회원 탈퇴 (삭제) -->
+		<delete id="memberdelete" parameterType="String">
+			delete member where id = #{id}
+		</delete>
 		
 		
 		
@@ -103,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<update id="petsitterApply" parameterType="String">
 			update member set grade = 'petsitter' where id = #{sitter_id}
 		</update>
-		
+						
 		
 		<!-- 펫시터 거부 테이블에서 삭제  -->		
 		<delete id="petsitterNegative" parameterType="String">
@@ -238,25 +243,82 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from blacklist where black_grade ='member' order by black_no desc
 		</select>
 		
+
 		<!-- 블랙리스트 펫시터 등록 -->
 		<insert id="blackList" parameterType="petsitterVO">
-			insert into blacklist values(
-			black_no_seq.nextval,
+		merge into blacklist using dual on(black_id = #{sitter_id})
+		
+		when matched then
+		
+			update set 
+				black_count = black_count + 1
+			where black_id = #{sitter_id}
+		
+		when not matched then
+		
+			insert values(
+			 black_no_seq.nextval,
 			#{sitter_id},
 			#{name},
 			#{phone},
-			#{grade},
+			#{grade},			
+			1	
+			)
+		</insert>
+		<!-- 블랙리스트 회원 등록 -->
+		<insert id="blackListMember" parameterType="blackListDto">
+		merge into blacklist using dual on(black_id = #{black_id})
+		
+		when matched then
+		
+			update set 
+				black_count = black_count + 1
+			where black_id = #{black_id}
+		
+		when not matched then
+		
+			insert values(
+			 black_no_seq.nextval,
+			#{black_id},
+			#{black_name},
+			#{black_phone},
+			#{black_grade},			
+			1	
+			)
+		</insert>
+		<!-- 블랙리스트 -->
+		<insert id="blackListContent"  parameterType="blackListContentDto" >
+			insert into blackListContent values(
+			blackListContent_no_seq.nextval,
+			#{black_content_id},
 			#{black_content},
 			sysdate
 			)
 		</insert>
+		
 	
 		<!-- 블랙리스트 여부 검사 -->
 		<select id="blackLsitcheck" parameterType="String" resultType="int">
 			select count(*) from blacklist where black_id = #{id}		
 		</select>
+		
+		<!-- 블랙리스트에서 삭제 -> 정상 회원 및 정상 펫시터로 돌아감 -->
+		<delete id="blackListdelete" parameterType="String">
+			delete blacklist where black_id = #{id}
+		</delete>
+		
+		<!-- 블랙리스트에서 펫시터 삭제할때 등급변경 -->
+		<!-- 펫시터 -> 회원으로 변경 -->
+		<update id="petsittersecession" parameterType="String">
+			update member set grade = 'member' where id = #{sitter_id}
+		</update>
 	
-	
+		<!-- 블랙리스트 디테일 페이지 내용 불러오기 -->
+		<select id="blackListdetailSearch" parameterType="String" 
+		resultType="petsitterVO">
+			select * from blackListall where black_id = #{id}
+		</select>
+		
 	<!-- 정산관리 -->
 	
 	
