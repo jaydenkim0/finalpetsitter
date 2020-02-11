@@ -35,14 +35,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	sysdate)
 </insert>
 
-<!--  리뷰 목록 -->
+<!--  리뷰 조회 -->
 <select id="reviewlist" resultType="reviewDto">
 	select
-	review_no, review_title, review_star, review_content, member_id
+	review_no, review_writer, review_sitter_no, review_title, review_content, review_star,review_wdate
 	from
 	REVIEW
 	order by
-	rewview_no desc
+	review_no desc
 </select>
 	
 
