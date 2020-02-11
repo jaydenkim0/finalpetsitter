@@ -211,6 +211,8 @@
 <!-- 댓글 목록 -->
 
 
+<c:set var="care_image_context" value="C:\upload\care_image"></c:set>
+
 <c:forEach var="replylist" items="${replylist }">
 <div class="grandmother">
 	<table width="100%" class="mother">
@@ -232,7 +234,6 @@
 		
 		
 		<!-- 댓글 관리 -->
-		
 		
 		<c:if test="${replylist.care_reply_writer==id || grade=='admin'}">
 		<tr>
