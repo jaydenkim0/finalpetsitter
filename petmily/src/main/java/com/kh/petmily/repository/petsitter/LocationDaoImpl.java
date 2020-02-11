@@ -15,11 +15,6 @@ public class LocationDaoImpl implements LocationDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public int getSequence() {
-		int locationNo = sqlSession.selectOne("petsitter.locationGetSequence");
-		return locationNo;
-	}
 
 	@Override
 	public void registLocation(int no, List<LocationDto> location_name) {
@@ -35,6 +30,12 @@ public class LocationDaoImpl implements LocationDao {
 		System.out.println(locationList.toString());
 		sqlSession.insert("petsitter.registLocation", locationList);
 		
+	}
+
+	@Override
+	public List<LocationDto> getLocationList(String id) {
+		List<LocationDto> locationList = sqlSession.selectList("petsitter.getLocationList", id);
+		return locationList;
 	}
 	
 }

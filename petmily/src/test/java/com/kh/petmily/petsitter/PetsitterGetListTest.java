@@ -41,7 +41,7 @@ public class PetsitterGetListTest {
 	//펫시터 스킬 조회
 //	@Test
 	public void getSkillsList() {
-		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillsList", "aaaa");
+		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", "aaaa");
 		log.info("skills = {}", skillsList);
 	}
 	

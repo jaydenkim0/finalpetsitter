@@ -31,4 +31,10 @@ public class CareConditionDaoImpl implements CareConditionDao{
 		System.out.println(conditionList.toString());
 		sqlSession.insert("petsitter.registCondition", conditionList);
 	}
+
+	@Override
+	public List<CareConditionDto> getCareConditionList(String id) {
+		List<CareConditionDto> careConditionList = sqlSession.selectList("petsitter.getCareConditionList", id);
+		return careConditionList;
+	}
 }

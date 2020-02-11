@@ -132,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펫시터 스킬 -->
-	<select id="getSkillsList" parameterType="String" resultType="skillNameDto">
+	<select id="getSkillList" parameterType="String" resultType="skillNameDto">
 		select * from petsitter_skills where id=#{id}
 	</select>
 	
