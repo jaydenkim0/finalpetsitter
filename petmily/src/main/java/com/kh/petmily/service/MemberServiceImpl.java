@@ -68,6 +68,12 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.mylistchange(memberDto);
 	}
 
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return memberDao.userIdCheck(user_id);
+	}
+
 
 	
 	

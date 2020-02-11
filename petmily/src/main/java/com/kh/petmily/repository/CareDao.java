@@ -47,10 +47,10 @@ public interface CareDao {
 	//파일업로드를 위한 댓글번호찾기
 	int find_care_reply_no();
 
-	//파일번호찾기
-	int care_image_no();
+	//돌봄이미지 등록
+	void care_image_regist(CareImageDto careImageDto);
 
-	//파일 데이터베이스에 저장
-	void care_image(CareImageDto careImageDto);
+	//펫시터 아이디 존재 검사
+	int userIdCheck(String user_id);
 
 }

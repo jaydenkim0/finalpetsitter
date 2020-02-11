@@ -1,7 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+	$(function(){
+		$("#user_id").blur(function(){
+			var user_id = $("#user_id").val();
+			
+			$.ajax({
+				url:'${pageContext.request.contextPath}/board/care/idCheck?userId='+user_id,
+				type:'get',
+				success:function(data){
+					if(data==0){
+						$(".id_check").text("존재하지 않는 펫시터입니다");
+						$('.id_check').css('color','red');
+						$("#submit").attr("disabled",true);
+					}else{
+						$(".id_check").text("");
+						$("#submit").attr("disabled",false);
+					}
+				}
+			});
+		});
+	});
+	
 	function prevent(){
 	    var tag = document.querySelector(".password");
 	    var text = tag.value;
@@ -48,8 +70,8 @@
 		<tr>
 			<th>펫시터 아이디</th>
 			<td>
-				<input type="text" name="care_sitter_id" class="sitter_id_check">
-				<span></span>
+				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id">
+				<div class="id_check"></div>
 			</td>
 		</tr>
 		<tr>
@@ -62,7 +84,7 @@
 		</tr>
 		<tr>
 			<th colspan="2">
-				<input type="submit" value="생성">
+				<input type="submit" value="생성" id="submit">
 			</th>
 		</tr>
 	</form>
