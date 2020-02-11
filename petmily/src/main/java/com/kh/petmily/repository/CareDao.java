@@ -50,4 +50,7 @@ public interface CareDao {
 	//돌봄이미지 등록
 	void care_image_regist(CareImageDto careImageDto);
 
+	//펫시터 아이디 존재 검사
+	int userIdCheck(String user_id);
+
 }

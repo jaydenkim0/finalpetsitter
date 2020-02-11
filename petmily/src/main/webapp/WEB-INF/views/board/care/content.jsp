@@ -223,12 +223,14 @@
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
 		</tr>
+		<c:if test="${replyimagelist.care_image_no>=1 }">
 		<tr>
 			<th align="left">
 				<c:set var="src" value="${care_image_context}${replyimagelist.savename}${replyimagelist.filetype.substring(7) }"></c:set>
 				<img src="${src }"  width="500">
 			</th>
 		</tr>
+		</c:if>
 		<tr class="reply_edit">
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">

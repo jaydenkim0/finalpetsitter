@@ -62,5 +62,8 @@ public interface CareService {
 	//돌봄댓글&이미지 목록
 	List<CareReplyImageDto> replyimagelist(String care_board_no);
 
+	//펫시터 아이디 존재 검사
+	int userIdCheck(String user_id);
+
 
 }

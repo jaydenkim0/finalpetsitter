@@ -32,10 +32,6 @@ public interface MemberService {
 
 	void mylistchange(MemberDto memberDto);
 
-
-
-	
-
 	//펫등록
 	void pet_regist(PetDto petDto);
 

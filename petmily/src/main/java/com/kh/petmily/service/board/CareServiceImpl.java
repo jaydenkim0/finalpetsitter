@@ -141,4 +141,9 @@ public class CareServiceImpl implements CareService{
 		return careReplyImageDao.replyimagelist(care_board_no);
 	}
 
+	//펫시터 아이디 존재 검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return careDao.userIdCheck(user_id);
+	}
 }

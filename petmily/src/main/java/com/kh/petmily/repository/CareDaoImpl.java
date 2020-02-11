@@ -102,4 +102,11 @@ public class CareDaoImpl implements CareDao{
 	public void care_image_regist(CareImageDto careImageDto) {
 		sqlSession.insert("care.care_image_regist",careImageDto);
 	}
+
+	//펫시터 아이디 존재 검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("care.userIdCheck",user_id);
+	}
+
 }

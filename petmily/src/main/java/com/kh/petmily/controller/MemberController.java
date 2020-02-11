@@ -249,10 +249,7 @@ public class MemberController {
 		public int idCheck(@RequestParam("userId") String user_id) {
 			return memberService.userIdCheck(user_id);
 		}
-		
-		
-		
-		
+
 	}
 
 
