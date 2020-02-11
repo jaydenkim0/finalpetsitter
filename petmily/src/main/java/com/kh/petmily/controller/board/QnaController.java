@@ -134,9 +134,18 @@ public class QnaController {
 	@PostMapping("/replywrite")
 	public String replywrite(@ModelAttribute QnaReplyVO qnaReplyVO,
 			Model model, @RequestParam int origin) throws Exception {
-		model.addAttribute("origin",qnaReplyVO.getOrigin());
 		qnaReplyService.writeReply(qnaReplyVO);
+		model.addAttribute("origin",qnaReplyVO.getOrigin());
 		model.addAttribute("qna_no", origin);
 		return "redirect:/board/qna/view";
 	}
+//	//댓글 수정
+//	@PostMapping("/replyUpdate")
+//	public String replyUpdate(@ModelAttribute QnaReplyVO qnaReplyVO,
+//			Model model, @RequestParam int origin) {
+//		qnaReplyService.writeReply(qnaReplyVO);
+//		model.addAttribute("",)
+//				return null;
+//		
+//	}
 }

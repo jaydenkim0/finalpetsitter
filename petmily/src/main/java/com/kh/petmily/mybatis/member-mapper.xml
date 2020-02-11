@@ -93,6 +93,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="pet_regist" parameterType="petDto">
 		insert into pet values(pet_no_seq.nextval,#{member_id},#{name},#{age},#{type},#{ect})
 	</insert>
+	
+	<!-- 아이디 중복검사 -->
+	<select id="userIdCheck" parameterType="String" resultType="int">
+		select count(*) from member where id=#{user_id}
+	</select>
 
 	
 </mapper>

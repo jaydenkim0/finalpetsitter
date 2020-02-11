@@ -15,10 +15,6 @@
 	<div class="row">
 		<input class="block-item input-item" type="password" name="pw" placeholder="Password" required>
 	</div>
-	<div class="row-left">
-		<input type="checkbox">
-		아이디 저장하기
-	</div>
 	<div class="row-right">
 		<input class="btn" type="submit" value="Login">
 	</div>

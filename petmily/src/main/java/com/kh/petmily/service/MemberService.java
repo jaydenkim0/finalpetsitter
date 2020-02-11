@@ -32,11 +32,10 @@ public interface MemberService {
 
 	void mylistchange(MemberDto memberDto);
 
-
-
-	
-
 	//펫등록
 	void pet_regist(PetDto petDto);
+
+	//아이디중복검사
+	int userIdCheck(String user_id);
 
 }
