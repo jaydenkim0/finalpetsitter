@@ -143,9 +143,15 @@
 <body>
 
 <h1>돌봄 방 ${care_board_no }</h1><br>
+
+
 <c:if test="${list.care_member_id==id || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
 </c:if>
+
+
+<!-- 방 정보 -->
+
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -180,6 +186,11 @@
 		<td>${list.wdate.substring(0,16) }</td>
 	</tr>
 </table>
+
+
+<!-- 댓글 등록 -->
+
+
 <form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
 	<table border="1" width="100%">
 		<tr>
@@ -195,6 +206,11 @@
 		</tr>
 	</table>
 </form>
+
+
+<!-- 댓글 목록 -->
+
+
 <c:forEach var="replylist" items="${replylist }">
 <div class="grandmother">
 	<table width="100%" class="mother">
@@ -213,6 +229,11 @@
 				</form>				
 			</th>
 		</tr>
+		
+		
+		<!-- 댓글 관리 -->
+		
+		
 		<c:if test="${replylist.care_reply_writer==id || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
@@ -225,6 +246,8 @@
 			</th>
 		</tr>
 		</c:if>
+		
+		
 	</table>
 </div>
 </c:forEach>
