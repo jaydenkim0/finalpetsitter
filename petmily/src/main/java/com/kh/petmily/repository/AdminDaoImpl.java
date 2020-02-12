@@ -398,10 +398,10 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 회원 페이징 리스트
 	@Override
-	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {
+	public List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword) {
 		// 검색옵션, 키워드 맵에 저장
 		Map<String, Object> param = new HashMap<>();
-		param.put("searchPtion", searchPtion);
+		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		param.put("start", start);
 		param.put("end", end);		
@@ -409,9 +409,9 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	// 회원 리스트 총 카운트 불러오기
 	@Override
-	public int countAricle(String searchPtion, String keyword) {
+	public int countAricle(String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();
-		param.put("searchPtion", searchPtion);
+		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countArticle", param);
 	}
