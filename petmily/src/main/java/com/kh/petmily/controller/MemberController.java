@@ -263,7 +263,8 @@ public class MemberController {
 		public String memberdelete(
 				@RequestParam String id,
 				@RequestParam String password,
-				Model model) {
+				Model model,
+				HttpSession session) {
 			//회원탈퇴처리
 			memberService.memberdelete(id,password);
 			//회원 탈퇴되었는지 검사
@@ -274,6 +275,8 @@ public class MemberController {
 				model.addAttribute("fail",fail);
 				return "redirect:/member/mylistchange";
 			}else {
+				session.removeAttribute("id");
+				session.removeAttribute("grade");
 				return "redirect:/";
 			}
 		}
