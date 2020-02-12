@@ -124,6 +124,7 @@ public class CareController {
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+		System.out.println("사진 = "+careService.imageAll(Integer.parseInt(care_board_no)));
 		return "board/care/content";
 	}
 	

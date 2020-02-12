@@ -230,17 +230,15 @@
 				</form>				
 			</th>
 		</tr>
-		<c:if test="${replyimagelist.care_image_no>=1 }">
-		<tr>
-			<th align="left">
-			<c:forEach var="careimg" items="${imageList }">
-				<c:if test="${replyimagelist.care_image_no==imageList.care_image_no }">
-					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${imageList.care_image_no }">
-				</c:if>
-			</c:forEach>
-			</th>
-		</tr>
+		<c:forEach var="careimg" items="${imageList }">
+			<c:if test="${replyimagelist.care_image_no==careimg.care_image_no }">
+			<tr>
+				<th align="left">
+						<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }">
+				</th>
+			</tr>
 		</c:if>
+		</c:forEach>
 		
 		
 		<!-- 댓글 관리 -->
