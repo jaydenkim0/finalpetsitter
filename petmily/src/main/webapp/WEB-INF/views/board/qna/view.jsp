@@ -17,80 +17,79 @@
 <h2>게시글 상세 보기</h2>
 <script>
 // 댓글 작성
+$(function(){
 	$(".reply_submit").submit(function(e){
-    e.preventDefault();
-
-    var url = $(this).attr("action");
-    var method = $(this).attr("method");
-
-    var data = $(this).serialize();
-
-    $.ajax({
-        url:url,
-        type:method,
-        data:data,
-        success:function(resp){
-        }
+	    e.preventDefault();
+	
+	    var url = $(this).attr("action");
+	    var method = $(this).attr("method");
+	
+	    var data = $(this).serialize();
+	
+	    $.ajax({
+	        url:url,
+	        type:method,
+	        data:data,
+	        success:function(resp){
+	        }
+	    });
+	    window.location.reload();
+	});
+//댓글 삭제
+	$(".replyDelete_btn").click(function(e){
+    	e.preventDefault();
+    	
+    	var url = $(this).parentsUntil(".mother").find(".replyDelete_submit").attr("action");
+    	var method = $(this).parentsUntil("mother").find(".replyDelete_submit").attr("method");
+    	var data = $(this).parentsUntil(".mother").find(".replyDelete_submit").serialize();
+    	
+    	$.ajax({
+    		url:url,
+    		type:method,
+    		data:data
+    	});
+    	
+    	$(this).parentsUntil(".grandmother").hide();
     });
-    window.location.reload();
-});
 
 // 댓글 수정
-$(function(){
-	 $(".reply_edit").hide();
-     $(".reply_edit_btn").hide();
+         $(".reply_edit").hide();
+        $(".reply_edit_btn").hide();
 
-     $(".reply_view_btn").click(function(){
-         $(this).hide();
-         $(this).parentsUntil(".mother").find(".reply_view").hide();
-         $(this).prev(".reply_edit_btn").show();
-         $(this).parentsUntil(".mother").find(".reply_edit").show();
-     });
-     
-     var textoriginal = $(this).parentsUntil(".mother").find(".content").val();
-     $(this).parentsUntil(".mother").find("textarea").text(textoriginal);
-     
+        $(".reply_view_btn").click(function(){
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_view").hide();
+            $(this).next(".reply_edit_btn").show();
+            $(this).parentsUntil(".mother").find(".reply_edit").show();
+        });
+        
+        var textoriginal = $(this).parentsUntil(".mother").find(".content").val();
+        $(this).parentsUntil(".mother").find("textarea").text(textoriginal);
+        
 
-     $(".reply_edit_btn").click(function(e){
-     	var text = $(this).parentsUntil(".mother").find("textarea").val();
-     	console.log(text);
-     	
-         e.preventDefault();
+        $(".reply_edit_btn").click(function(e){
+        	var text = $(this).parentsUntil(".mother").find("textarea").val();
+        	
+            e.preventDefault();
 
-         var url = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("action");
-         var method = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("method");
-         var data = $(this).parentsUntil(".mother").find(".reply_change_submit").serialize();
+            var url = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("action");
+            var method = $(this).parentsUntil(".mother").find(".reply_change_submit").attr("method");
+            var data = $(this).parentsUntil(".mother").find(".reply_change_submit").serialize();
+			console.log(url, method, data);
+            
+            $.ajax({
+            	url:url,
+                type:method,
+                data:data
+            });
 
-         $.ajax({
-             url:url,
-             type:method,
-             data:data
-         });
-
-         $(this).hide();
-         $(this).parentsUntil(".mother").find(".reply_edit").hide();
-         $(this).parentsUntil(".mother").find(".reply_view").show();
-         $(this).parentsUntil(".mother").find(".reply_view_btn").show();
-         $(this).parentsUntil(".mother").find(".content").text('');
-         $(this).parentsUntil(".mother").find(".content").text(text);       
-     });
-			
-//댓글 삭제 View
-     $(".reply_delete_btn").click(function(e){
-     	e.preventDefault();
-     	
-     	var url = $(this).parentsUntil(".mother").find(".reply_delete_submit").attr("action");
-     	var method = $(this).parentsUntil("mother").find(".reply_delete_submit").attr("method");
-     	var data = $(this).parentsUntil(".mother").find(".reply_delete_submit").serialize();
-     	
-     	$.ajax({
-     		url:url,
-     		type:method,
-     		data:data
-     	});
-     	
-     	$(this).parentsUntil(".grandmother").hide();
-     });
+            $(this).hide();
+            $(this).parentsUntil(".mother").find(".reply_edit").hide();
+            $(this).parentsUntil(".mother").find(".reply_view").show();
+            $(this).parentsUntil(".mother").find(".reply_view_btn").show();
+            $(this).parentsUntil(".mother").find(".content").text('');
+            $(this).parentsUntil(".mother").find(".content").text(text);       
+        });
 });
 </script>
 <form name="form1" method="post">
@@ -126,30 +125,51 @@ $(function(){
 </div>
 </form>
 
+<!-- 댓글 등록 -->
+<form action="replywrite"  method="post" class="reply_submit">
+	<table border="1" width="100%">
+<tr>
+<td align="right" >
+		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
+				<textarea name="content" required placeholder="내용 입력"></textarea><br>
+			<input type="submit" value="등록">
+		</td>
+		</tr>
+	</table>
+</form>
+
 <!-- 댓글화면 -->
 <c:forEach items="${replyList}" var="reply">
-	<table border="1" width="100%">
+<div class="grandmother">
+	<table width="50%" class="mother">
 		<tr>
- 	   			<th>작성자 : ${reply.reply_writer}</th>
-				<th>작성 날짜 :  ${reply.wdate}</th>
-				<th>${reply.content}</th>
-			</tr>		
-		</table>
+			<th align="left">작성자 : ${reply.reply_writer}</th>
+			<th align="left">${reply.writedateWithFormat}</th>
+		</tr>	
+		<tr class="reply_view">
+			<th class="content" colspan="2" align="left">${reply.content}</th>
+		</tr>		
+	<tr class="reply_edit">
+		<th colspan="2" align="left">	
+			<form action="replyUpdate" method="post" class="reply_change_submit">	
+				<input type="hidden" name="reply_no" value="${reply.reply_no}">
+				<input type="hidden" name="origin" value="${reply.origin}">
+				<textarea name="content" required class="val">${reply.content}</textarea>
+			</form>
+		</th>
+	</tr>
 <!-- 댓글 수정 -->
-<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
-<a href="replyUpdate?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">수정</a>&nbsp;
-<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">삭제</a>
-</c:if>
+		<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+		<tr>
+			<th colspan="2" align="right">
+				<button class="reply_view_btn">수정</button>
+				<button class="reply_edit_btn">완료</button>
+				<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">
+				<button class="replyDelete_submit">삭제</button></a>
+				</th>
+			</tr>
+		</c:if>
+	</table>
 </div>
 </c:forEach>
-<!-- 댓글 등록 -->
-<tr>
-<td align="right">
-<form action="replywrite"  method="post" class="reply_submit">
-	<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
-	<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
-	<textarea name="content" required placeholder="내용 입력"></textarea>
-	<input type="submit" value="등록">
-</form>
-</td>
-</tr>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -141,16 +142,9 @@ public class QnaController {
 	}
 	//댓글 수정
 	@RequestMapping("/replyUpdate")
-	public String replyUpdate(@ModelAttribute QnaReplyVO qnaReplyVO ,
-			@RequestParam String reply_no,
-			@RequestParam String content,
-			@RequestParam int origin,
-			Model model) {
-		qnaReplyVO.setReply_no(Integer.parseInt(reply_no));
-		qnaReplyVO.setContent(content);
-		qnaReplyService.replyUpdate(qnaReplyVO);
-		model.addAttribute("qna_no", origin);
-		return "redirect:/board/qna/view";
+	@ResponseBody
+	public void replyUpdate(@ModelAttribute QnaReplyVO qnaReplyVO) {
+	qnaReplyService.replyUpdate(qnaReplyVO);
 	}
 	//댓글 삭제
 	@RequestMapping("/replyDelete")
