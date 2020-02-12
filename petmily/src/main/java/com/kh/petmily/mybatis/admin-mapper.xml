@@ -68,10 +68,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 블랙리스트 회원 탈퇴 (삭제) -->
 		<delete id="memberdelete" parameterType="String">
 			delete member where id = #{id}
-		</delete>
+		</delete>		
 		
+		<!-- 회원 페이징 서치 리스트 -->
+		<select id="memberListAll" resultType="memberVO" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from memberB
+						<if test="searchOption != null and keyword != null">
+							where ${searchOption} like '%'||#{keyword}||'%'
+						</if>
+					order by joindate desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>
 		
-		
+		<!-- count -->
+		<select id="countArticle" resultType="int" parameterType="Map">
+			select count(*) from
+			memberB		
+				<if test="searchOption != null and keyword != null">
+					where ${searchOption} like '%'||#{keyword}||'%'
+				</if>			
+			order by joindate desc
+		</select>	
+
+	
+	
 	
 	
 	
@@ -262,6 +285,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				resultType="licenseFileDto">
 					select * from license_file where license_image_no = #{license_image_no}
 				</select>
+				
+				<!-- 펫시터가 갖고 있는 통장 사본 정보 찾기 -->
+				<select id="sitterBankimge" parameterType="int" 
+				resultType="bankImageDto">
+					select * from bank_image where bank_sitter_no = #{pet_sitter_no}
+				</select>				
+				<!-- 통장사본이미지 가지고 오기 : 1장  -->
+				<select id="getSitterBankimge" parameterType="int" 
+				resultType="bankImageDto">
+					select * from bank_image where bank_image_no = #{bank_image_no}
+				</select>
+				
+				<!-- 펫시터 페이징 리스트 -->
+				<!-- 펫시터 페이징 서치 리스트 -->
+				
+				<!-- 펫시터 신청 페이징 리스트 -->
+				<!-- 펫시터 신청 페이징 서치 리스트 -->
+				
+				<!-- 펫시터 휴면 페이징 리스트 -->
+				<!-- 펫시터 휴면 페이징 서치 리스트 -->
+				
 		
 	
 	<!-- 블랙리스트 -->
@@ -366,9 +410,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from blackListContent where black_content_id = #{id}
 		</select>
 		
+		<!-- 블랙리스트에서 내용 삭제  -->
 		<delete id="gradeComback" parameterType="String">
 			delete blacklist where black_id = #{black_id}
 		</delete>
+		
+		<!-- 경고 회원 페이징 리스트 -->
+		<!-- 경고 회원 페이징 서치 리스트 -->
+
+		<!-- 경고 펫시터 페이징 리스트 -->
+		<!-- 경고 펫시터 페이징 서치 리스트 -->
 		
 	<!-- 정산관리 -->
 	

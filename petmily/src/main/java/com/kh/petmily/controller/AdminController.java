@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
@@ -254,6 +255,12 @@ public class AdminController {
 			@RequestParam int license_image_no) throws IOException{		
 		return adminService.sitterlicenseimage(license_image_no);		
 	}
+	// 통장사본 이미지 가져오기
+	@GetMapping("/petsitter/sitterbankimage")
+	public ResponseEntity<ByteArrayResource> sitterBankimage(
+			@RequestParam int bank_image_no) throws IOException{
+		return adminService.sitterbankimage(bank_image_no);
+	}
 	
 	
 	
@@ -269,16 +276,16 @@ public class AdminController {
 		// 6. 소개이미지 정보(여러장)
 		// 7. 신분증 정보 (한장)
 		// 8. 라이센스정보 (한장)
-		model.addAttribute("petsitter", 
-				(PetsitterVO)adminService.petsitterdetail(pet_sitter_no))
+		model.addAttribute("petsitter", (PetsitterVO)adminService.petsitterdetail(pet_sitter_no))
 		  		.addAttribute("petlocation", 	(List<LocationDto>)adminService.petsitterdetailLocation(pet_sitter_no))
 		  		.addAttribute("pettypename", (List<CarePetTypeNameDto>)adminService.petsitterdetailCarePet(pet_sitter_no))
 		  		.addAttribute("petskill", (List<SkillNameDto>)adminService.petsitterdetailSkills(pet_sitter_no))
 		  		.addAttribute("petcondition", (List<CareConditionNameDto>)adminService.petsitterdetailCareCondition(pet_sitter_no))
 		  		.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
 				.addAttribute("sitterIdcardimg", (IdCardFileDto)adminService.sitterIdcardimg(pet_sitter_no))
-				.addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
-		System.out.println(( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
+				.addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no))		
+				.addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
+		
 		return "admin/petsitter/petsitterdetail";	
 	}	
 	
@@ -293,7 +300,8 @@ public class AdminController {
 				  .addAttribute("petcondition", 	(List<CareConditionNameDto>)adminService.petsitterdetailCareCondition(pet_sitter_no))
 			  	  .addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
 			  	  .addAttribute("sitterIdcardimg", (IdCardFileDto)adminService.sitterIdcardimg(pet_sitter_no))
-			  	  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
+			  	  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no))
+			  	  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailapply";	
 	}
 		
@@ -308,7 +316,8 @@ public class AdminController {
 				  .addAttribute("petcondition", (List<CareConditionNameDto>)adminService.petsitterdetailCareCondition(pet_sitter_no))
 				  .addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
 				  .addAttribute("sitterIdcardimg", (IdCardFileDto)adminService.sitterIdcardimg(pet_sitter_no))
-				  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
+				  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no))
+				  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailsleep";		
 	}
 	

@@ -62,7 +62,7 @@
 	<hr>
 	<br><br>
 	
-	<h2> 펫시터 리스트 </h2>
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitter">펫시터 리스트</a> </h2>
 	
 		<!-- 	펫시터 검색
 				펫시터 검색 : 
@@ -119,7 +119,7 @@
 	<hr>
 	<br><br>
 	
-	<h2> 펫시터 신청 회원 </h2>	
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitterapply">펫시터 신청 리스트</a>  </h2>	
 	
 		<!-- 	펫시터 검색
 				펫시터 신청 검색 : 
@@ -176,7 +176,7 @@
 									가입신청일 : ${petsitterapply.joindate}											
 								</h3>								
 							</a>			
-							<!-- 펫시터 승인 버튼 -->			
+				<%-- 	<!-- 펫시터 승인 버튼 -->			
 							<form action="apply" method="post">
 										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
 										<button type="submit" > 펫시터 승인</button>
@@ -187,7 +187,7 @@
 										<input type="hidden" name="email" value="${petsitterapply.email}">
 										<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
 										<button type="submit" id="nega-btn"> 펫시터 거부</button>
-							</form> 				
+							</form> 	 --%>			
 					</c:otherwise>	
 			</c:choose>			
 	</c:forEach>
@@ -197,7 +197,7 @@
 	<hr>
 	<br><br>
 	
-	<h2> 휴면 펫시터 회원 </h2>	
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsittersleep"> 휴면 펫시터 리스트</a>  </h2>	
 
 		<!--  펫시터 검색
 				휴면 펫시터 검색 : 

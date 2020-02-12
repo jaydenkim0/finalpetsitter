@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
@@ -375,7 +376,7 @@ public class AdiminServiceImpl implements AdminService {
 	// 펫시터 가진 라이센스 이미지 가지고 오기 (1장)
 	@Override
 	public ResponseEntity<ByteArrayResource> sitterlicenseimage(int license_image_no) throws IOException {
-		 LicenseFileDto LocationImage = adminDao.getSitterlicenseimage(license_image_no);				
+		LicenseFileDto LocationImage = adminDao.getSitterlicenseimage(license_image_no);				
 		byte[] data =  adminDao.physicallicenseimage(LocationImage.getSavename());		
 		ByteArrayResource resource = new ByteArrayResource(data);		
 		return	ResponseEntity.ok()
@@ -388,12 +389,48 @@ public class AdiminServiceImpl implements AdminService {
 				.body(resource);		
 	}
 	
+	// 펫시터 가진 통장사본 정보 가지고 오기
+	@Override
+	public BankImageDto sitterBankimge(int pet_sitter_no) {		
+		return adminDao.sitterBankimge(pet_sitter_no);
+	}
+	// 펫시터 가진 통장사본 이미지 가지고오기 (1장)
+	@Override
+	public ResponseEntity<ByteArrayResource> sitterbankimage(int bank_image_no) throws IOException {		
+		BankImageDto bankImage = adminDao.getSitterbankimage(bank_image_no);				
+		byte[] data =  adminDao.physicallbankimage(bankImage.getSavename());		
+		ByteArrayResource resource = new ByteArrayResource(data);		
+		return	ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(bankImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(bankImage.getUploadname(), "UTF-8")
+					+"\"")
+				.body(resource);	
+	}
+	
 	
 	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
 	@Override
 	public void gradeComback(String black_id) {
 		adminDao.gradeComback(black_id);
 		
+	}
+	
+	
+	///////////////////////////////////////////////////	
+
+
+	// 회원 페이징 리스트
+	@Override
+	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {	
+		return adminDao.memberListAll(start, end, searchPtion, keyword);
+	}
+	// 회원 리스트 총 카운트 불러오기
+	@Override
+	public int countAricle(String searchPtion, String keyword) {	
+		return adminDao.countAricle(searchPtion, keyword);
 	}
 
 

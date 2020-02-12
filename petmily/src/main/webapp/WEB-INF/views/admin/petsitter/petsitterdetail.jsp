@@ -52,6 +52,12 @@
 				<tr>			
 					<td>포인트 : ${petsitter.point}</td>					
 				</tr>	
+				<tr>			
+					<td>은행 : ${petsitter.sitter_bankname}</td>					
+				</tr>	
+				<tr>			
+					<td>계좌번호 : ${petsitter.sitter_bank_account}</td>					
+				</tr>	
 							
 			<hr>
 			
@@ -107,7 +113,11 @@
 				<img src="${pageContext.request.contextPath}/admin/petsitter/sitteridcardimage?id_image_no=${sitterIdcardimg.id_image_no}"> 
 			<!-- 증빙서류 -->
 			<h3>증빙서류이미지</h3>
-				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterlicenseimage?license_image_no=${sitterLicenseimg.license_image_no}"> 
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterlicenseimage?license_image_no=${sitterLicenseimg.license_image_no}">
+			<!-- 통장사본 -->
+			<h3>통장사본</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterbankimage?bank_image_no=${sitterBankimg.bank_image_no}">	
+			 
 			
 			
 			
