@@ -14,47 +14,45 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 별칭 -->
 	<typeAliases>
-		<typeAlias type="com.kh.petmily.entity.AccountDto" alias="accountDto"/>
-		<typeAlias type="com.kh.petmily.entity.CareDto" alias="careDto"/>
-		<typeAlias type="com.kh.petmily.entity.CareImageDto" alias="careImageDto"/>
-		<typeAlias type="com.kh.petmily.entity.CareConditionDto" alias="careConditionDto"/>
-		<typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>
-		<typeAlias type="com.kh.petmily.entity.CarePetTypeDto" alias="carePetTypeDto"/>
-		<typeAlias type="com.kh.petmily.entity.CarePetTypeNameDto" alias="carePetTypeNameDto"/>
-		<typeAlias type="com.kh.petmily.entity.CareReplyDto" alias="careReplyDto"/>
-		<typeAlias type="com.kh.petmily.entity.FaqDto" alias="faqDto"/>
-		<typeAlias type="com.kh.petmily.entity.IdCardFileDto" alias="idCardFileDto"/>
-		<typeAlias type="com.kh.petmily.entity.InfoImageDto" alias="infoImageDto"/>
-		<typeAlias type="com.kh.petmily.entity.LicenseFileDto" alias="licenseFileDto"/>
-		<typeAlias type="com.kh.petmily.entity.LocationDto" alias="locationDto"/>
-		<typeAlias type="com.kh.petmily.entity.MemberDto" alias="memberDto"/>
-		<typeAlias type="com.kh.petmily.entity.PayDto" alias="payDto"/>
-		<typeAlias type="com.kh.petmily.entity.PetDto" alias="petDto"/>
-		<typeAlias type="com.kh.petmily.entity.PetsitterDto" alias="petsitterDto"/>
-		<typeAlias type="com.kh.petmily.entity.QnaDto" alias="qnaDto"/>
-		<typeAlias type="com.kh.petmily.entity.QnaReplyDto" alias="qnaReplyDto"/>
-		<typeAlias type="com.kh.petmily.entity.ReservationDto" alias="reservationDto"/>
-		<typeAlias type="com.kh.petmily.entity.ReviewDto" alias="reviewDto"/>
-		<typeAlias type="com.kh.petmily.entity.SkillNameDto" alias="skillNameDto"/>
-		<typeAlias type="com.kh.petmily.entity.SkillsDto" alias="skillsDto"/>	
-		<typeAlias type="com.kh.petmily.vo.FaqVO" alias="FaqVO"/>	
-		<typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>	
-		<typeAlias type="com.kh.petmily.entity.CareReplyImageDto" alias="careReplyImageDto"/>				
-		<typeAlias type="com.kh.petmily.entity.BlackListContentDto" alias="blackListContentDto"/>
-		<typeAlias type="com.kh.petmily.vo.petsitter.PetsitterVO" alias="petsitterVO"/>	
-		<typeAlias type="com.kh.petmily.vo.MemberVO" alias="memberVO"/>			
-		<typeAlias type="com.kh.petmily.entity.CarePetsitterDto" alias="carePetsitterDto"/>			
-		<typeAlias type="com.kh.petmily.entity.BlackListDto" alias="blackListDto"/>			
-		<typeAlias type="com.kh.petmily.vo.petsitter.PetsitterRegistVO" alias="petsitterRegistVO"/>				
-		<typeAlias type="com.kh.petmily.vo.petsitter.PetsitterGetListVO" alias="petsitterGetListVO"/>	
-		<typeAlias type="com.kh.petmily.vo.petsitter.PetsitterPetsVO" alias="petsitterPetsVO"/>	
-		<typeAlias type="com.kh.petmily.vo.MemberPetsVO" alias="memberPetsVO"/>	
-		<typeAlias type="com.kh.petmily.entity.BankImageDto" alias="bankImageDto"/>	
+		     <typeAlias type="com.kh.petmily.entity.AccountDto" alias="accountDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CareDto" alias="careDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CareImageDto" alias="careImageDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CareConditionDto" alias="careConditionDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CarePetTypeDto" alias="carePetTypeDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CarePetTypeNameDto" alias="carePetTypeNameDto"/>
+		     <typeAlias type="com.kh.petmily.entity.CareReplyDto" alias="careReplyDto"/>
+		     <typeAlias type="com.kh.petmily.entity.FaqDto" alias="faqDto"/>
+		     <typeAlias type="com.kh.petmily.entity.IdCardFileDto" alias="idCardFileDto"/>
+		     <typeAlias type="com.kh.petmily.entity.InfoImageDto" alias="infoImageDto"/>
+		     <typeAlias type="com.kh.petmily.entity.LicenseFileDto" alias="licenseFileDto"/>   
+		     <typeAlias type="com.kh.petmily.entity.LocationDto" alias="locationDto"/>
+		     <typeAlias type="com.kh.petmily.entity.MemberDto" alias="memberDto"/>
+		     <typeAlias type="com.kh.petmily.entity.PayDto" alias="payDto"/>
+		     <typeAlias type="com.kh.petmily.entity.PetDto" alias="petDto"/>
+		     <typeAlias type="com.kh.petmily.entity.PetsitterDto" alias="petsitterDto"/>
+		     <typeAlias type="com.kh.petmily.entity.QnaDto" alias="qnaDto"/>
+		     <typeAlias type="com.kh.petmily.entity.QnaReplyDto" alias="qnaReplyDto"/>
+		     <typeAlias type="com.kh.petmily.entity.ReservationDto" alias="reservationDto"/>
+		     <typeAlias type="com.kh.petmily.entity.ReviewDto" alias="reviewDto"/>
+		     <typeAlias type="com.kh.petmily.entity.SkillNameDto" alias="skillNameDto"/>
+		     <typeAlias type="com.kh.petmily.entity.SkillsDto" alias="skillsDto"/>   
+		     <typeAlias type="com.kh.petmily.vo.FaqVO" alias="FaqVO"/>   
+		     <typeAlias type="com.kh.petmily.vo.QnaVO" alias="QnaVO"/>   
+		     <typeAlias type="com.kh.petmily.entity.FaqFileDto" alias="faqfileDto"/>
+		     <typeAlias type="com.kh.petmily.entity.QnaFileDto" alias="qnafileDto"/>
+		     <typeAlias type="com.kh.petmily.vo.QnaReplyVO" alias="QnaReplyVO"/>  
+		     <typeAlias type="com.kh.petmily.entity.CareConditionNameDto" alias="careConditionNameDto"/>   
+		     <typeAlias type="com.kh.petmily.entity.CareReplyImageDto" alias="careReplyImageDto"/>            
+		     <typeAlias type="com.kh.petmily.entity.BlackListContentDto" alias="blackListContentDto"/>
+		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterVO" alias="petsitterVO"/>   
+		     <typeAlias type="com.kh.petmily.vo.MemberVO" alias="memberVO"/>         
+		     <typeAlias type="com.kh.petmily.entity.CarePetsitterDto" alias="carePetsitterDto"/>         
+		     <typeAlias type="com.kh.petmily.entity.BlackListDto" alias="blackListDto"/>         
+		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterRegistVO" alias="petsitterRegistVO"/>            
+		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterGetListVO" alias="petsitterGetListVO"/>   
+		     <typeAlias type="com.kh.petmily.vo.MemberPetsVO" alias="memberPetsVO"/>   
+		     <typeAlias type="com.kh.petmily.entity.BankImageDto" alias="bankImageDto"/>   
+		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterPetsVO" alias="petsitterPetsVO"/>	
 	</typeAliases>
-	
 </configuration>
-
-
-
-
-
