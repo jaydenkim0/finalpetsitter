@@ -38,4 +38,7 @@ public interface MemberService {
 	//아이디중복검사
 	int userIdCheck(String user_id);
 
+	//회원탈퇴처리
+	void memberdelete(String id, String password);
+
 }

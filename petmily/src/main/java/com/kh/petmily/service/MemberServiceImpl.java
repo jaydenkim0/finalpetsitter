@@ -74,6 +74,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.userIdCheck(user_id);
 	}
 
+	//회원탈퇴처리
+	@Override
+	public void memberdelete(String id, String password) {
+		MemberDto memberDto = null;
+		memberDto.setId(id);
+		memberDto.setPw(password);
+		memberDao.memberdelete(memberDto);
+	}
+
 
 	
 	

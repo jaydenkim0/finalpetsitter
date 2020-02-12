@@ -2,7 +2,6 @@
 
 
 	<body>
-		<section id="container">
 		
 			<form action="mylistchange?id=${member.id}" method="post">
 			    
@@ -23,14 +22,17 @@
 				
 				
 				<button type="submit" >회원정보수정</button><br><br>
-			
-				<a href="mylist">
-					<button type="button">취소</button>
-				</a>
-			
 			</form>
 			
-		</section>
+			<form action="memberdelete" method="post">
+				<input type="hidden" name="id" value="${member.id }">
+				<input type="password" name="password"><br>
+				<input type="submit" value="회원탈퇴">		
+			</form>
+			
+			<a href="mylist">
+				<button type="button">취소</button>
+			</a>
 		
 	</body>
 	

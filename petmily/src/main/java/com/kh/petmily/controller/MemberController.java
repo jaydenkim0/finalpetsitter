@@ -131,7 +131,6 @@ public class MemberController {
 		
 		return "member/mylist";
 	}
-	
 
 
 //	//내정보수정
@@ -250,6 +249,17 @@ public class MemberController {
 			return memberService.userIdCheck(user_id);
 		}
 
+		//회원탈퇴
+		@PostMapping("/memberdelete")
+		public String memberdelete(
+				@RequestParam String id,
+				@RequestParam String password) {
+			//회원탈퇴처리
+			memberService.memberdelete(id,password);
+			//회원 탈퇴되었는지 검사
+			
+			return "redirect:/";
+		}
 	}
 
 
