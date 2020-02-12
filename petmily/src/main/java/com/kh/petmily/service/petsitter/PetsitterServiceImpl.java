@@ -11,10 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
+import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.CareConditionDao;
 import com.kh.petmily.repository.petsitter.CarePetTypeDao;
 import com.kh.petmily.repository.petsitter.IdCardFileDao;
@@ -23,7 +27,10 @@ import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.LocationDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
-import com.kh.petmily.vo.PetsitterRegistVO;
+import com.kh.petmily.vo.MemberPetsVO;
+import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
+import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {
@@ -48,8 +55,6 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Autowired
 	private LocationDao locationDao;
 	
-	
-
 	@Override
 	public void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException {
 		//펫시터 번호 뽑고
@@ -61,6 +66,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 												.info(vo.getInfo())
 												.sitter_pets(vo.getSitter_pets())
 												.sitter_matching_type(vo.getSitter_matching_type())
+												.sitter_bankname(vo.getSitter_bankname())
+												.sitter_bank_account(vo.getSitter_bank_account())
 												.build();
 		
 		//펫시터 기본 정보 등록
@@ -75,12 +82,42 @@ public class PetsitterServiceImpl implements PetsitterService {
 		petSitterFileService.uploadId(no, vo.getId_card_file());
 		petSitterFileService.uploadLicense(no, vo.getLicense_file());
 		petSitterFileService.uploadInfo(no, vo.getInfo_image());
-		
+		petSitterFileService.uploadBank(no, vo.getBank_image());
 		
 		
 		//지역 정보 등록
 		locationDao.registLocation(no,vo.getLocation_name());
 		
+	}
+
+
+
+	@Override
+	public List<PetsitterGetListVO> getList(String id) {
+		//펫시터 기본 정보 조회
+		List<PetsitterVO> petsitterVO = petsitterDao.getList(id);
+		List<MemberPetsVO> memberPetsVO = petsitterDao.getPetList(id);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
+		List<SkillNameDto> skillNameDto = skillsDao.getSkillList(id);
+		List<CareConditionNameDto> careConditionNameDto =careConditionDao.getCareConditionList(id);
+		List<CarePetTypeNameDto> carePetTypeNameDto = carePetTypeDao.getPetTypeList(id);
+		
+		//지역 정보 조회
+		List<LocationDto> locationDto = locationDao.getLocationList(id);
+		
+		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
+		petsitterInfo.add(PetsitterGetListVO.builder()
+											.petsitterVO(petsitterVO)
+											.memberPetsVO(memberPetsVO)
+											.skillNameDto(skillNameDto)
+											.careConditionNameDto(careConditionNameDto)
+											.carePetTypeNameDto(carePetTypeNameDto)
+											.locationDto(locationDto)
+											.build());
+		
+		
+		return petsitterInfo;
 	}
 	
 	

@@ -1,24 +1,30 @@
 package com.kh.petmily.repository;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.IdCardFileDto;
+import com.kh.petmily.entity.InfoImageDto;
+import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.MemberVO;
-import com.kh.petmily.vo.PetsitterVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -119,8 +125,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	// 펫시터 상태 변환
 	@Override
-	public void sitter_status(PetsitterDto petsitterDto) {
-		System.out.println("DaoImpl = " + petsitterDto);
+	public void sitter_status(PetsitterDto petsitterDto) {		
 		sqlSession.update("admin.sitter_status", petsitterDto);		
 	}
 	// 블랙리스트 테이블에서 권한 변경
@@ -306,7 +311,110 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.blacklistcontent", id);
 	}
 	
+	
+	// 펫시터 가진 소개정보가 몇개인지 가지고오기
+	@Override
+	public List<InfoImageDto> sitterInfoimage(int pet_sitter_no) {		
+		return sqlSession.selectList("admin.sitterInfoimage", pet_sitter_no);
+	}
+	// 펫시터 소개이미지 가지고 오기(1장씩 요청)
+	@Override
+	public InfoImageDto getInfoImage(int info_image_no) {	
+		return sqlSession.selectOne("admin.getInfoImage",  info_image_no);
+	}
+	// 펫시터 소개이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalInfoImage(String savename) throws IOException {		
+		File file = new File("D:/upload/info", savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
 
+	
+	// 펫시터가 가진 신분증 정보 가지고오기
+	@Override
+	public IdCardFileDto sitterIdcardimg(int pet_sitter_no) {		
+		return sqlSession.selectOne("admin.sitterIdcardimg", pet_sitter_no);
+	}
+	// 펫시터 가진 신분증 이미지 가지고 오기 (1장)
+	@Override
+	public IdCardFileDto getSitteridcardimage(int id_image_no) {	
+		return sqlSession.selectOne("admin.getSitteridcardimage", id_image_no);
+	}
+	// 펫시터 신분증 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalidcardimage(String savename) throws IOException {		
+		File file = new File("D:/upload/idCard", savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
+	
+	
+	// 펫시터 가진 라이센스 정보 가지고 오기
+	@Override
+	public  LicenseFileDto sitterLicenseimge(int pet_sitter_no) {
+		return sqlSession.selectOne("admin.sitterLicenseimge", pet_sitter_no);
+	}
+	// 펫시터 가진 라이센스 이미지 가지고 오기
+	@Override
+	public  LicenseFileDto getSitterlicenseimage(int license_image_no) {	
+		return sqlSession.selectOne("admin.getSitterLicenseimge", license_image_no);
+	}
+	// 펫시터 신분증 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicallicenseimage(String savename) throws IOException {		
+		File file = new File("D:/upload/license", savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
+	
+	// 펫시터 가진 통장사본 정보 가지고 오기
+	@Override
+	public BankImageDto sitterBankimge(int pet_sitter_no) {	
+		return sqlSession.selectOne("admin.sitterBankimge", pet_sitter_no);
+	}
+	// 펫시터 가진 통장사본 이미지 가지고 오기
+	@Override
+	public BankImageDto getSitterbankimage(int bank_image_no) {		
+		return sqlSession.selectOne("admin.getSitterBankimge", bank_image_no);
+	}
+	// 펫시터 통장사본 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicallbankimage(String savename) throws IOException {
+		File file = new File("D:/upload/bank", savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
+		
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	@Override
+	public void gradeComback(String black_id) {
+		sqlSession.update("admin.gradeComback", black_id);		
+	}
+
+
+	///////////////////////////////////////////////////////
+
+	// 회원 페이징 리스트
+	@Override
+	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {
+		// 검색옵션, 키워드 맵에 저장
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchPtion", searchPtion);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.memberListAll", param);
+	}
+	// 회원 리스트 총 카운트 불러오기
+	@Override
+	public int countAricle(String searchPtion, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchPtion", searchPtion);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countArticle", param);
+	}
 
 
 

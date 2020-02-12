@@ -68,4 +68,10 @@ public class FaqDaoImpl implements FaqDao{
 		map.put("finish",finish);
 		return sqlSession.selectList("faq.getList",map);
 	}
+	//게시글 번호 구해오기
+	@Override
+	public int getSequence() {
+		int faq_no = sqlSession.selectOne("faq.getSequence");
+		return faq_no;
+	}
 }

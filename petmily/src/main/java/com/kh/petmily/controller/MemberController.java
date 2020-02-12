@@ -6,7 +6,6 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -244,9 +244,13 @@ public class MemberController {
 			return "redirect:mylist";
 		}
 		
-		
-		
-		
+		//아이디중복검사
+		@RequestMapping(value="idCheck",method = RequestMethod.GET)
+		@ResponseBody
+		public int idCheck(@RequestParam("userId") String user_id) {
+			return memberService.userIdCheck(user_id);
+		}
+
 	}
 
 

@@ -50,21 +50,21 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //		댓글 등록
 ////////////////////////////////////////////////////////////////////////////////////////////////////  
-        $(".reply_submit").submit(function(e){
-            e.preventDefault();
+//         $(".reply_regist_btn").click(function(e){
+//             e.preventDefault();
 
-            var url = $(this).attr("action");
-            var method = $(this).attr("method");
+//             var url = $(this).attr("action");
+//             var method = $(this).attr("method");
 
-            var data = $(this).serialize();
+//             var data = $(this).serialize();
 
-            $.ajax({
-                url:url,
-                type:method,
-                data:data
-            });
-	        window.location.reload();
-        });
+//             $.ajax({
+//                 url:url,
+//                 type:method,
+//                 data:data
+//             });
+// 	        window.location.reload();
+//         });
         
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //		댓글 수정
@@ -143,9 +143,15 @@
 <body>
 
 <h1>돌봄 방 ${care_board_no }</h1><br>
+
+
 <c:if test="${list.care_member_id==id || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
 </c:if>
+
+
+<!-- 방 정보 -->
+
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -180,6 +186,11 @@
 		<td>${list.wdate.substring(0,16) }</td>
 	</tr>
 </table>
+
+
+<!-- 댓글 등록 -->
+
+
 <form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
 	<table border="1" width="100%">
 		<tr>
@@ -187,44 +198,63 @@
 				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 				<input type="hidden" name="care_reply_writer" value="${id }">
 				<textarea name="care_reply_content" required></textarea>
+				<input type="file" name="care_image" multiple accept="image/*">
 			</td>
 			<td align="right">
-				<input type="file" name="file" accept="image/*">
-				<input type="submit" value="등록">
+				<input type="submit" value="등록" class="reply_regist_btn">
 			</td>
 		</tr>
 	</table>
 </form>
-<c:forEach var="replylist" items="${replylist }">
+
+
+<!-- 댓글 목록 -->
+
+
+
+<c:forEach var="replyimagelist" items="${replyimagelist }">
 <div class="grandmother">
 	<table width="100%" class="mother">
 		<tr>
-			<th align="left">작성자 : ${replylist.care_reply_writer }</th>
-			<th align="right">${replylist.wdate.substring(0,16) }</th>
+			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
+			<th align="right">${replylistimage.wdate.substring(0,16) }</th>
 		</tr>
 		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">${replylist.care_reply_content }</th>
+			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
 		</tr>
 		<tr class="reply_edit">
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
-					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
-                	<textarea name="care_reply_content" required class="val">${replylist.care_reply_content }</textarea>
+					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
+                	<textarea name="care_reply_content" required class="val">${replyimagelist.care_reply_content }</textarea>
 				</form>				
 			</th>
 		</tr>
-		<c:if test="${replylist.care_reply_writer==id || grade=='admin'}">
+		<c:if test="${replyimagelist.care_image_no>=1 }">
+		<tr>
+			<th align="left">
+				돌봄 이미지 ${replyimagelist.care_image_no }번 출력
+			</th>
+		</tr>
+		</c:if>
+		
+		
+		<!-- 댓글 관리 -->
+		
+		<c:if test="${replyimagelist.care_reply_writer==id || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
 				<button class="reply_edit_btn">완료</button>
 				<button class="reply_view_btn">수정</button>
 				<form action="reply_delete" method="post" class="reply_delete_submit">
-					<input type="hidden" name="care_reply_no" value="${replylist.care_reply_no }">
+					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
 				</form>
 				<button class="reply_delete_btn">삭제</button>
 			</th>
 		</tr>
 		</c:if>
+		
+		
 	</table>
 </div>
 </c:forEach>

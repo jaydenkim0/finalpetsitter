@@ -1,18 +1,27 @@
 package com.kh.petmily.service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
+
+import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.IdCardFileDto;
+import com.kh.petmily.entity.InfoImageDto;
+import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.MemberVO;
-import com.kh.petmily.vo.PetsitterVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 public interface AdminService {
 	
@@ -126,8 +135,38 @@ public interface AdminService {
 	PetsitterVO blackListdetail(String id);
 	// 블랙리스트컨텐츠 내용 가지고 오기
 	List<BlackListContentDto> blacklistcontent(String id);
+	
+	// 펫시터 가진 소개정보가 몇개인지 가지고오기
+	List<InfoImageDto> sitterInfoimageAll(int pet_sitter_no);
+	// 펫시터 소개이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> sitterInfoimage(int info_image_no) 
+			throws UnsupportedEncodingException, IOException;
+	
+	// 펫시터가 가진 신분증 정보 가지고오기
+	IdCardFileDto sitterIdcardimg(int pet_sitter_no);
+	// 펫시터 가진 신분증 이미지 가지고 오기 (1장)
+	ResponseEntity<ByteArrayResource> sitteridcardimage(int id_image_no) throws IOException;
+	
+	// 펫시터 가진 라이센스 정보 가지고 오기
+	 LicenseFileDto sitterLicenseimge(int pet_sitter_no);	
+	// 펫시터 가진 라이센스 이미지 가지고 오기 (1장)
+	ResponseEntity<ByteArrayResource> sitterlicenseimage(int license_image_no) throws IOException;
+	
+	// 펫시터 가진 통장사본 정보 가지고 오기
+	BankImageDto sitterBankimge(int pet_sitter_no);
+	// 펫시터 가진 통장사본 이미지 가지고 오기 (1장)
+	ResponseEntity<ByteArrayResource> sitterbankimage(int bank_image_no) throws IOException;
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	void gradeComback(String black_id);
 
+	/////////////////////////////////////////////////////	
 
+	
+	// 회원 리스트 전체 목록
+	List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword);
+	// 회원 리스트 총 카운트 불러오기
+	int countAricle(String searchPtion, String keyword);
 
 	
 

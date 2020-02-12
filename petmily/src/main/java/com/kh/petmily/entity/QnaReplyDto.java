@@ -1,5 +1,8 @@
 package com.kh.petmily.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +19,13 @@ public class QnaReplyDto {
 	private String reply_writer; //member 테이블의 id
 	private String content; // Qna 내용
 	private String wdate; // Qna 작성일
+	private String writedate;
+	
+	public String getwritedateWithFormat()throws Exception{
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(wdate);
+		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+		String time = write.format(date);
+		return time;
+	}
 }

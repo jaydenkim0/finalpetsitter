@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		wdate 
 		)
 			values (
-			faq_no_seq.nextval,
+			#{faq_no},
 			#{member_id},
 			#{faq_title},
 			#{faq_head},
@@ -25,6 +25,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			sysdate
 			)
 	</insert>
+	
+	<!-- 게시글 번호 받아오기 -->
+	<select id="getSequence" resultType="int">
+		select faq_no_seq.nextval from dual
+	</select>
+	
+	<!-- 이미지 등록 -->
+	<insert id="faqfile" parameterType="faqfileDto">
+		insert into faq_file values(
+		faq_file_no_seq.nextval,
+		#{faq_faq_no},
+		#{uploadname},
+		#{savename},
+		#{filetype},
+		#{filesize}
+		)
+	</insert>
+	
 	
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="faqlistAll" parameterType="map" resultType="FaqVO">

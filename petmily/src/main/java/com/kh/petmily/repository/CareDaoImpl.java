@@ -97,15 +97,16 @@ public class CareDaoImpl implements CareDao{
 		return sqlSession.selectOne("care.find_care_reply_no");
 	}
 
-	//파일번호찾기
+	//돌봄 이미지 등록
 	@Override
-	public int care_image_no() {
-		return sqlSession.selectOne("care.care_image_no");
+	public void care_image_regist(CareImageDto careImageDto) {
+		sqlSession.insert("care.care_image_regist",careImageDto);
 	}
 
-	//파일 데이터베이스에 저장
+	//펫시터 아이디 존재 검사
 	@Override
-	public void care_image(CareImageDto careImageDto) {
-		sqlSession.insert("care.care_image");
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("care.userIdCheck",user_id);
 	}
+
 }

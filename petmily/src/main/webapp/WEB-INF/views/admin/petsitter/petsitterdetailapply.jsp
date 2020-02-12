@@ -86,21 +86,22 @@
 				
 				<tr>			
 					<td> 펫시터 서비스 종류 (방문, 돌봄, 둘다)   : ${petsitter.sitter_matching_type}</td>					
-				</tr>
-				
+				</tr>				
 				<tr>			
 					<td>등급 : ${petsitter.grade}</td>					
-				</tr>			
-				
+				</tr>							
 				<tr>			
 					<td>포인트 : ${petsitter.point}</td>					
 				</tr>
-			
+				<tr>			
+					<td>은행 : ${petsitter.sitter_bankname}</td>					
+				</tr>	
+				<tr>			
+					<td>계좌번호 : ${petsitter.sitter_bank_account}</td>					
+				</tr>	
 		
 			
-			<hr>
-				
-		
+			<hr>		
 				<!-- 서비스 가능지역  -->
 				<h4>서비스 가능지역</h4>
 				<c:forEach var="petlocation" items="${petlocation}">
@@ -110,24 +111,21 @@
 			
 				</c:forEach>
 				
-			<hr>
-			
+			<hr>			
 				<!-- 돌봄 가능 동물종류  -->
 				<h4>돌봄 가능 동물 종류</h4>
 				<c:forEach var="pettypename" items="${pettypename}">
 					 ${pettypename.care_type}
 				</c:forEach>
 				
-			<hr>
-				
+			<hr>				
 				<!-- 서비스 가능 스킬  -->
 				<h4> 서비스 가능 스킬 </h4>
 				<c:forEach var="petskill" items="${petskill}">
 					${petskill.skill_name}
 				</c:forEach>
 				
-			<hr>
-			
+			<hr>			
 				<!-- 펫시터 환경  -->
 				<h4>펫시터 돌봄 가능 환경</h4>
 				<c:forEach var="petcondition" items="${petcondition}">
@@ -137,6 +135,27 @@
 			<hr>
 			</tbody>	
 	</table>
+			
+			
+			<!-- 펫시터가 업로드한 사진 받아오기 -->
+			<!-- 
+				소개이미지
+				사진이 있는만큼 요청 
+			-->
+			<h3>소개이미지</h3>
+			<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
+				 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"> 
+			</c:forEach>
+			<!-- 신분증 -->
+			<h3>신분증이미지</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitteridcardimage?id_image_no=${sitterIdcardimg.id_image_no}"> 
+			<!-- 증빙서류 -->
+			<h3>증빙서류이미지</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterlicenseimage?license_image_no=${sitterLicenseimg.license_image_no}"> 
+			<!-- 통장사본 -->
+			<h3>통장사본</h3>
+				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterbankimage?bank_image_no=${sitterBankimg.bank_image_no}">	
+			 			
 			
 
 		
@@ -171,7 +190,12 @@
 							<input type="hidden" name="email" value="${petsitter.email}">
 							<input type="hidden" name="pet_sitter_no" value="${petsitter.pet_sitter_no}">			
 							<button type="submit" id="nega-btn"> 펫시터 거부</button>
-				</form> 			
+				</form> 		
+				<!-- 블랙리스트 디테일 페이지로 이동 -->
+				<form action="${pageContext.request.contextPath}/admin/blackListdetail" method="get">			
+						<input type="hidden" name="id" value="${petsitter.id}">									
+						<button type="submit" >블랙리스트 세부사항으로 이동</button>						
+				</form>		
 		</div>
 	</c:otherwise>
 	</c:choose>	 

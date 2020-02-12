@@ -16,7 +16,25 @@
         			jQuery('.pet').hide();
         		}
         	});
-
+        	
+        	$("#user_id").blur(function(){
+ 				var user_id = $("#user_id").val();
+ 				
+ 				$.ajax({
+ 					url:'${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
+ 					type:'get',
+ 					success : function(data){
+ 						if(data == 0) {
+ 							$("#id_check").text("");
+ 							$("#submit").attr("disabled",false);
+ 						}else{
+ 							$("#id_check").text("사용중인 아이디입니다");
+ 							$('#id_check').css('color', 'red');
+ 							$("#submit").attr("disabled",true);
+ 						}
+ 					}
+ 				});
+            });
         });
         
        function onsubmit_petnamecheck(){
@@ -28,11 +46,12 @@
 			    	petname.focus();
 			    	jQuery('.petnamecheck').show();
 			    }else{
-			    	jQuery('.petnamecheck').hide();
 			    	var form = document.querySelector("form");
 					form.submit();
+			    	jQuery('.petnamecheck').hide();
 			    }
 	        }else{
+	        	var form = document.querySelector("form");
 	        	form.submit();
     		}
        }
@@ -103,7 +122,8 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="id" placeholder="아이디" required>
+				<input type="text" name="id" placeholder="아이디" required id="user_id">
+				<div id="id_check"></div>
 			</td>
 		</tr>
 		<tr>
@@ -207,7 +227,7 @@
 		
 		<tr> 
 			<th colspan="2">
-				<input type="submit" value="가입하기">
+				<input type="submit" value="가입하기" id="submit">
 				<input type="reset" value="지우기">
 			</th>
 		</tr>

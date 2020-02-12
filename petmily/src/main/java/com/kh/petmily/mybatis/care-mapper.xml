@@ -135,24 +135,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)where rn=1		
 	</select>
 	
-	<!-- 파일번호찾기 -->
-	<select id="care_image_no" resultType="int">
-		select care_image_no from(
-			select rownum as rn, E.* from (
-    			select * from care_image order by care_image_no desc
-			) E 
-		)where rn=1
-	</select>
-	
-	<!-- 파일 데이터베이스에 저장 -->
-	<insert id="care_image" parameterType="careImageDto">
+	<!-- 돌봄 이미지 등록 -->
+	<insert id="care_image_regist" parameterType="careImageDto">
 		insert into care_image values(
-			#{care_image_no},
+			care_image_no_seq.nextval,
 			#{care_reply_no },
 			#{savename},
 			#{filetype},
-			#{filesize}
+			#{filesize},
+			#{uploadname}
 		)
 	</insert>
+	
+	<!-- 돌봄댓글&이미지 목록 -->
+	<select id="replyimagelist" parameterType="String" resultType="careReplyImageDto">
+		select
+		 	I.care_image_no,
+		 	R.care_reply_no,
+		 	I.savename,
+		 	I.filetype,
+		 	I.filesize,
+		 	I.uploadname,
+		 	R.care_reply_board_no,
+		 	R.care_reply_content,
+		 	R.wdate,
+		 	R.care_reply_writer
+		from
+		 	care_reply R
+		 		left outer join care_image I
+		 		on R.care_reply_no=I.care_reply_no
+		where
+			R.care_reply_board_no=#{care_board_no}
+		order by R.wdate desc
+	</select>
+	
+	<!-- 펫시터 아이디 존재 검사 -->
+	<select id="userIdCheck" parameterType="String" resultType="int">
+		select count(*) from pet_sitter where sitter_id=#{user_id}
+	</select>
 
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.entity.SkillsDto;
 
 
@@ -34,5 +35,11 @@ public class SkillsDaoImpl implements SkillsDao {
 		System.out.println(skillsList.toString());
 		sqlSession.insert("petsitter.registSkills", skillsList);
 		
+	}
+
+	@Override
+	public List<SkillNameDto> getSkillList(String id) {
+		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", id);
+		return skillsList;
 	}
 }

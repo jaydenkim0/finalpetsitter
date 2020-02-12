@@ -1,4 +1,4 @@
-package com.kh.petmily.vo;
+package com.kh.petmily.vo.petsitter;
 
 import java.util.List;
 
@@ -29,6 +29,8 @@ public class PetsitterRegistVO {
 	private String sitter_terms_agree; // 펫시터 이용약관 동의, 무조건 'true' 일때 만 가입가능
 	private String sitter_joindate; // 시터 가입일
 	private String sitter_matching_type;// '방문서비스', '위탁서비스', '둘다' 만 작성가능
+	private String sitter_bankname; // 펫시터 은행
+	private String sitter_bank_account;  // 펫시터 계좌번호
 	
 	//펫시터 돌봄 환경
 	private List<Integer>care_condition_name; // care_condition_name 테이블의 care_condition_no
@@ -50,6 +52,9 @@ public class PetsitterRegistVO {
 
 	//증빙서류
 	private MultipartFile license_file;
+
+	//통장 사본
+	private MultipartFile bank_image;
 	
 	//지역
 	private List<LocationDto> location_name; //지역 List
