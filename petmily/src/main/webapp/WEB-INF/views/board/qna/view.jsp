@@ -137,7 +137,7 @@ $(function(){
 		</table>
 <!-- 댓글 수정 -->
 <c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
-<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">수정</a>&nbsp;
+<a href="replyUpdate?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">수정</a>&nbsp;
 <a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">삭제</a>
 </c:if>
 </div>

@@ -1,10 +1,7 @@
 package com.kh.petmily.controller.board;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.petmily.entity.FaqDto;
-import com.kh.petmily.page.FaqPage;
 import com.kh.petmily.repository.FaqDao;
 import com.kh.petmily.service.board.FaqService;
-import com.kh.petmily.service.board.FaqServiceImpl;
 import com.kh.petmily.vo.FaqVO;
 
 import lombok.extern.slf4j.Slf4j;

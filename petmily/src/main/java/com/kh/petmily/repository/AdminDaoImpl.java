@@ -366,6 +366,12 @@ public class AdminDaoImpl implements AdminDao {
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
+	
+	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
+	@Override
+	public void gradeComback(String black_id) {
+		sqlSession.update("admin.gradeComback", black_id);		
+	}
 
 
 

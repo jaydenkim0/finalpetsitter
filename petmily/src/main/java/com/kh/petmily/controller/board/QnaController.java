@@ -140,7 +140,7 @@ public class QnaController {
 		return "redirect:/board/qna/view";
 	}
 	//댓글 수정
-	@PostMapping("/replyUpdate")
+	@RequestMapping("/replyUpdate")
 	public String replyUpdate(@ModelAttribute QnaReplyVO qnaReplyVO ,
 			@RequestParam String reply_no,
 			@RequestParam String content,

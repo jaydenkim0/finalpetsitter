@@ -366,6 +366,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from blackListContent where black_content_id = #{id}
 		</select>
 		
+		<delete id="gradeComback" parameterType="String">
+			delete blacklist where black_id = #{black_id}
+		</delete>
+		
 	<!-- 정산관리 -->
 	
 	

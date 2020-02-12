@@ -33,11 +33,9 @@
 				<tr>			
 					<td> 펫시터 마지막로그인  : ${member.lastlogin}</td>					
 				</tr>
-
 				<tr>			
 					<td>등급 : ${member.grade}</td>					
-				</tr>			
-				
+				</tr>					
 				<tr>			
 					<td>포인트 : ${member.point}</td>					
 				</tr>		
