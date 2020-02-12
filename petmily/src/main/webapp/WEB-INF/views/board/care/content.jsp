@@ -233,7 +233,7 @@
 		<tr>
 			<th align="left">
 					<c:if test="${replyimagelist.care_image_no>0 }">
-						<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }">
+						<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
 					</c:if>
 			</th>
 		</tr>
