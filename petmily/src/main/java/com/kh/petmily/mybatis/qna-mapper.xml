@@ -72,13 +72,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 댓글 수정 -->
-	<update id="updateReply" parameterType="QnaReplyVO">
+	<update id="replyUpdate" parameterType="QnaReplyVO">
 		update qna_reply set content =#{content}
 		where reply_no = #{reply_no}
 	</update>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="">
+	<delete id="replyDelete">
 		delete from qna_reply where reply_no = #{reply_no}
 	</delete>
 	

@@ -30,6 +30,7 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	@Override
 	public void replyUpdate(QnaReplyVO qnaReplyVO) {
 		qnaReplyDao.replyUpdate(qnaReplyVO);
+		
 	}
 	//댓글 삭제
 	@Override

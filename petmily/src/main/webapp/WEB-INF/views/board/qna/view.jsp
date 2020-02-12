@@ -126,45 +126,30 @@ $(function(){
 </div>
 </form>
 
-<!-- 댓글 -->
-<table border="1" width="100%">
- 	<c:forEach items="${replyList}" var="replyList">
+<!-- 댓글화면 -->
+<c:forEach items="${replyList}" var="reply">
+	<table border="1" width="100%">
 		<tr>
- 	   			<th>작성자 : ${replyList.reply_writer}</th>
-				<th>작성 날짜 :  ${replyList.wdate}</th>
-				<th>${replyList.content}</th>
-			</tr>
-<%-- 	<c:if test="${sessionScope.id == replyList.reply_writer || grade=='admin'}"> --%>
-<!-- 	<form action="replyUpdate"  method="post" class="reply_view_btn"> -->
-<!-- 			<input type="text" class="reply_edit_btn" > -->
-<!-- 			<button type="button" class="reply_edit_btn">완료</button> -->
-<!-- 			<button type="button" class="reply_view_btn">수정</button> -->
-			
-<!-- 		</form> -->
-<!-- 	<form action="replyDelete" method="post" class="reply_delete_submit"> -->
-<%-- 			<input type="hidden" id="origin" name="origin" value="${qnaReplyVO.reply_no}"> --%>
-<!-- 			<button class="reply_delete_btn">삭제</button> -->
-<!-- 		</form> -->
-<%-- 	</c:if> --%>
-	</c:forEach>
-</table>
-	
+ 	   			<th>작성자 : ${reply.reply_writer}</th>
+				<th>작성 날짜 :  ${reply.wdate}</th>
+				<th>${reply.content}</th>
+			</tr>		
+		</table>
+<!-- 댓글 수정 -->
+<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">수정</a>&nbsp;
+<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">삭제</a>
+</c:if>
+</div>
+</c:forEach>
+<!-- 댓글 등록 -->
+<tr>
+<td align="right">
 <form action="replywrite"  method="post" class="reply_submit">
 	<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
 	<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
 	<textarea name="content" required placeholder="내용 입력"></textarea>
 	<input type="submit" value="등록">
 </form>
-
-<c:if test="${sessionScope.id eq replyList.reply_writer || grade eq 'admin'}">
-	<form action="replyUpdate"  method="post" class="reply_view_btn">
-		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly><br>
-			<textarea name="content" required placeholder="내용 입력"></textarea>
-				<input type="submit" value="등록" class="reply_edit_btn">
-	</form>
-	<form action="replyDelete" method="post" class="reply_delete_submit">
-		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
-			<input type="submit" value="등록" class="reply_delete_btn">
-	</form>
-</c:if>
+</td>
+</tr>
