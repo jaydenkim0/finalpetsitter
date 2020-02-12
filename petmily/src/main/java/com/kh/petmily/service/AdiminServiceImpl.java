@@ -424,13 +424,13 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 회원 페이징 리스트
 	@Override
-	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {	
-		return adminDao.memberListAll(start, end, searchPtion, keyword);
+	public List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword) {	
+		return adminDao.memberListAll(start, end, searchOption, keyword);
 	}
 	// 회원 리스트 총 카운트 불러오기
 	@Override
-	public int countAricle(String searchPtion, String keyword) {	
-		return adminDao.countAricle(searchPtion, keyword);
+	public int countAricle(String searchOption, String keyword) {	
+		return adminDao.countAricle(searchOption, keyword);
 	}
 
 

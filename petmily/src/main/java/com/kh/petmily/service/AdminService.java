@@ -164,9 +164,9 @@ public interface AdminService {
 
 	
 	// 회원 리스트 전체 목록
-	List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword);
+	List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword);
 	// 회원 리스트 총 카운트 불러오기
-	int countAricle(String searchPtion, String keyword);
+	int countAricle(String searchOption, String keyword);
 
 	
 

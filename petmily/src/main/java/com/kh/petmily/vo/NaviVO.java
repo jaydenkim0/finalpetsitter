@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class NaviVO {
 	
-	// 페이지당 게시물 수
+		// 페이지당 게시물 수
 		public static final int PAGE_SCALE = 10;
 		// 화면당 페이지 수
 		public static final int BLOCK_SCALE = 10;
