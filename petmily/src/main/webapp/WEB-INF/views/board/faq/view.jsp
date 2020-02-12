@@ -46,7 +46,7 @@ $(document).ready(function(){
 </tr>
 
 <tr>
-	<td>게시일자 : ${faqVO.writedateWithFormat}</td>
+	<td>게시일자 : ${faqVO.writedate}</td>
 </tr>
 
 <tr>
@@ -56,9 +56,11 @@ $(document).ready(function(){
 <tr>
 	<td>제목 : ${faqVO.faq_head}</td>
 </tr>
+
 <tr>
 	<td>${faqVO.faq_content}</td>
 </tr>
+
 </table><br>
 <c:if test="${sessionScope.id eq faqVO.member_id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
