@@ -8,6 +8,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<style>
+ 	.page-navigator li {
+	    display: inline-block;
+	}
+</style>
+
 <c:set var="type" value="${param.type}"></c:set>
 <c:set var="keyword" value="${param.keyword}"></c:set> 
 <c:set var="isSearch" value="${not empty type and not empty keyword}"></c:set> 
