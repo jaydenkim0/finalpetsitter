@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FaqFileDto {
-	private int faq_file_no;
-	private int faq_faq_no;  //  faq 테이블의 faq_no
+public class QnaFileDto {
+	private int qna_file_no;
+	private int qna_qna_no;  //  faq 테이블의 faq_no
 	private String uploadname;
 	private String savename;
 	private String filetype;

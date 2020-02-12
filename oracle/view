@@ -85,4 +85,19 @@
     
 -------------------------------------------------------------------------------------------
 
-    -- 
+    -- member + blacklist view 삭제
+        drop view petsitterpets;
+    -- member + blacklist view 생성
+        create view  petsitterpets as
+        select 
+        M.*, 
+        P.*, 
+        PE.name petname, 
+        pe.age petage,
+        pe.type pettype,
+        pe.ect petect
+        from member M
+        inner join pet_sitter P on M.id = P.sitter_id
+        inner join pet PE on M.id = pe.member_id;
+        
+        select  * from petsitterpets;
