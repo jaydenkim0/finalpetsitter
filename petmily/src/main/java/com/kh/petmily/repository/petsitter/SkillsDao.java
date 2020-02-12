@@ -6,5 +6,5 @@ import com.kh.petmily.entity.SkillNameDto;
 
 public interface SkillsDao {
 	void registSkills(int no,List<Integer>skills_name);//스킬 등록
-	List<SkillNameDto> getSkillList(String id);//펫시터 스킬 상세 조회
+	List<SkillNameDto> getSkillList(int pet_sitter_no);//펫시터 스킬 상세 조회
 }

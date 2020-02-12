@@ -31,8 +31,8 @@ public class CarePetTypeDaoImpl implements CarePetTypeDao {
 	}
 
 	@Override
-	public List<CarePetTypeNameDto> getPetTypeList(String id) {
-		List<CarePetTypeNameDto> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", id);
+	public List<CarePetTypeNameDto> getPetTypeList(int pet_sitter_no) {
+		List<CarePetTypeNameDto> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", pet_sitter_no);
 		return petTypeList;
 	}
 	
