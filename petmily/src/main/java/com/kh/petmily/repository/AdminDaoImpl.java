@@ -381,12 +381,11 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 통장사본 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicallbankimage(String savename) throws IOException {
-		File file = new File("D:/upload/license", savename);
+		File file = new File("D:/upload/bank ", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
-	
-	
+		
 	
 	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
 	@Override
