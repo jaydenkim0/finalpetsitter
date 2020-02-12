@@ -15,6 +15,9 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	@Autowired
+	MemberDto memberDto;
+	
 	@Override
 	public void regist(MemberDto memberDto) {
 		memberDao.regist(memberDto);
@@ -72,6 +75,20 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int userIdCheck(String user_id) {
 		return memberDao.userIdCheck(user_id);
+	}
+
+	//회원탈퇴처리
+	@Override
+	public void memberdelete(String id, String password) {
+		memberDto.setId(id);
+		memberDto.setPw(password);
+		memberDao.memberdelete(memberDto);
+	}
+
+	//회원 탈퇴되었는지 검사
+	@Override
+	public int idExist(String id) {
+		return memberDao.idExist(id);
 	}
 
 

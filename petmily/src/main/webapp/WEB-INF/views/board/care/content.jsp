@@ -183,7 +183,7 @@
 	</tr>
 	<tr>
 		<th>생성일</th>
-		<td>${list.wdate.substring(0,16) }</td>
+		<td>${list.writedateWithFormat }</td>
 	</tr>
 </table>
 
@@ -217,7 +217,7 @@
 	<table width="100%" class="mother">
 		<tr>
 			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
-			<th align="right">${replylistimage.wdate.substring(0,16) }</th>
+			<th align="right">${replyimagelist.wdate.substring(0,16) }</th>
 		</tr>
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
@@ -230,13 +230,13 @@
 				</form>				
 			</th>
 		</tr>
-		<c:if test="${replyimagelist.care_image_no>=1 }">
 		<tr>
 			<th align="left">
-				돌봄 이미지 ${replyimagelist.care_image_no }번 출력
+					<c:if test="${replyimagelist.care_image_no>0 }">
+						<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
+					</c:if>
 			</th>
 		</tr>
-		</c:if>
 		
 		
 		<!-- 댓글 관리 -->

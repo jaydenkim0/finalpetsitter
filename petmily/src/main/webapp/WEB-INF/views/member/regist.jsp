@@ -35,26 +35,40 @@
  					}
  				});
             });
+        	
+        	$("#selectBox").change(function(){	
+        		$(".petnamecheck").hide();
+        		$(".petagecheck").hide();
+        		var select = $("select[name=pets]").val();
+        		if(select=='예'){
+        			$("#submit").attr("disabled",true);
+        			$(".petname").blur(function(){
+        				var petname = $(".petname").val();
+        				if(petname==""){
+        					$(".petnamecheck").show();
+        				}else{
+        					$(".petnamecheck").hide();
+        					$("#submit").attr("disabled",false);
+        				}	
+        			});
+        			$(".petage").blur(function(){
+        				$("#submit").attr("disabled",true);
+        				var petage = $(".petage").val();
+        				var regex =  /[0-9]+/g;
+        				var a = regex.test(petage);
+        				if(!a){
+        					$("#submit").attr("disabled",true);
+        					$(".petagecheck").show();
+        				}else{
+        					$("#submit").attr("disabled",false);
+        					$(".petagecheck").hide();
+        				}
+        			});
+        		}else{
+        			$("#submit").attr("disabled",false);
+        		}
+        	});        	
         });
-        
-       function onsubmit_petnamecheck(){
-       	event.preventDefault();
-       	var state = jQuery('#selectBox option:selected').val();
-	       	if(state=='예'){
-			    var petname = document.querySelector(".petname");
-			    if(petname.value == '' || petname.value == null){
-			    	petname.focus();
-			    	jQuery('.petnamecheck').show();
-			    }else{
-			    	var form = document.querySelector("form");
-					form.submit();
-			    	jQuery('.petnamecheck').hide();
-			    }
-	        }else{
-	        	var form = document.querySelector("form");
-	        	form.submit();
-    		}
-       }
     </script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
@@ -200,7 +214,10 @@
 					</tr>
 					<tr>
 						<th>나이</th>
-						<td><input type="text" name="pet_age"></td>
+						<td>
+							<input type="text" name="pet_age" class="petage">
+							<p class="petagecheck">숫자를 입력해주세요</p>
+						</td>
 					</tr>
 					<tr>
 						<th>동물종</th>
