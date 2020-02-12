@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
- <form action ="test" method="post">
+
 
 
 <h1>리뷰 게시판</h1>
@@ -15,6 +15,8 @@
 	<th>내용</th>
 	<th>별점</th>
 	<th>작성일</th>
+	
+	
 </tr>
 <c:forEach var="reviewDto" items="${list}">
 <tr>
@@ -25,7 +27,15 @@
 	<td>${reviewDto.review_content}</td>
 	<td>${reviewDto.review_star}</td>
 	<td>${reviewDto.review_wdate}</td>
+	<td width="100">
+	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}">
+	<button type="button" id="btnupdate">수정</button>
+</a>
+<a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
+	<button type="button" id="btndelete">삭제</button>
+	</a>
+	</td>
 </tr>
 </c:forEach>
 </table>
-</form>
+
