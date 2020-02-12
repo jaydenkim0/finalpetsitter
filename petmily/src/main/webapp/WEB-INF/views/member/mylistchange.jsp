@@ -1,8 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$(".memberdelete_btn").click(function(){
+				var url = $(".memberdelete").attr("action");
+				var method = $(".memberdelete").attr("method");
+				var data = $(".memberdelete").serialize();
+				
+				$.ajax({
+					url:url,
+					type:method,
+					data:data
+				});
+			});
+		});
+	</script>
+	</head>
 
 	<body>
-		<section id="container">
 		
 			<form action="mylistchange?id=${member.id}" method="post">
 			    
@@ -22,13 +40,22 @@
 				<input type="text"  name="extra_addr" value=${member.extra_addr}><br>
 				
 				
-				<button type="submit" >회원정보수정</button><br>
-			
-				<button type="button">취소</button><br>
-			
+				<button type="submit" >회원정보수정</button><br><br>
 			</form>
 			
-		</section>
+			<hr>
+			
+			<a href="memberdelete?id=${member.id}"><button>회원탈퇴</button></a>
+
+			<c:if test="${not empty fail }">
+				<p>탈퇴 실패</p>
+			</c:if>
+			
+			<hr>
+			
+			<a href="mylist">
+				<button type="button">취소</button>
+			</a>
 		
 	</body>
 	

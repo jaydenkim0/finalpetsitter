@@ -29,6 +29,7 @@ import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
 import com.kh.petmily.vo.MemberPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
+import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
@@ -93,23 +94,23 @@ public class PetsitterServiceImpl implements PetsitterService {
 
 
 	@Override
-	public List<PetsitterGetListVO> getList(String id) {
+	public List<PetsitterGetListVO> getList(int pet_sitter_no) {
 		//펫시터 기본 정보 조회
-		List<PetsitterVO> petsitterVO = petsitterDao.getList(id);
-		List<MemberPetsVO> memberPetsVO = petsitterDao.getPetList(id);
+		List<PetsitterVO> petsitterVO = petsitterDao.getList(pet_sitter_no);
+		List<PetsitterPetsVO> petsitterPetsVO = petsitterDao.getPetList(pet_sitter_no);
 		
 		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
-		List<SkillNameDto> skillNameDto = skillsDao.getSkillList(id);
-		List<CareConditionNameDto> careConditionNameDto =careConditionDao.getCareConditionList(id);
-		List<CarePetTypeNameDto> carePetTypeNameDto = carePetTypeDao.getPetTypeList(id);
+		List<SkillNameDto> skillNameDto = skillsDao.getSkillList(pet_sitter_no);
+		List<CareConditionNameDto> careConditionNameDto =careConditionDao.getCareConditionList(pet_sitter_no);
+		List<CarePetTypeNameDto> carePetTypeNameDto = carePetTypeDao.getPetTypeList(pet_sitter_no);
 		
 		//지역 정보 조회
-		List<LocationDto> locationDto = locationDao.getLocationList(id);
+		List<LocationDto> locationDto = locationDao.getLocationList(pet_sitter_no);
 		
 		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
 		petsitterInfo.add(PetsitterGetListVO.builder()
 											.petsitterVO(petsitterVO)
-											.memberPetsVO(memberPetsVO)
+											.petsitterPetsVO(petsitterPetsVO)
 											.skillNameDto(skillNameDto)
 											.careConditionNameDto(careConditionNameDto)
 											.carePetTypeNameDto(carePetTypeNameDto)

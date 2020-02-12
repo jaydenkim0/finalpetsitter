@@ -173,5 +173,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="userIdCheck" parameterType="String" resultType="int">
 		select count(*) from pet_sitter where sitter_id=#{user_id}
 	</select>
+	
+	<!-- 돌봄이미지 한개씩 불러오기 -->
+	<select id="getImage" parameterType="int" resultType="careReplyImageDto">
+		select 
+			* 
+		from 	
+		 care_image
+		 where 
+		 	care_image_no = #{care_image_no}
+	</select>
 
 </mapper>

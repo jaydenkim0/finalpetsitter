@@ -40,5 +40,11 @@ public interface MemberDao {
 	//아이디중복검사
 	int userIdCheck(String user_id);
 
+	//회원탈퇴처리
+	void memberdelete(MemberDto memberDto);
+
+	//회원 탈퇴되었는지 검사
+	int idExist(String id);
+
 
 }

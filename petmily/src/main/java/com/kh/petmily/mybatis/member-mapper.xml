@@ -99,6 +99,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{user_id}
 	</select>
 
+	<!-- 회원탈퇴처리 -->
+	<delete id="memberdelete" parameterType="memberDto">
+		delete from member where id=#{id} and pw=#{pw}
+	</delete>
+	
+	<!-- 회원 탈퇴되었는지 검사 -->
+	<select id="idExist" parameterType="String" resultType="int">
+		select count(*) from member where id=#{id}
+	</select>
 	
 </mapper>
 

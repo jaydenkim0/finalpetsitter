@@ -1,11 +1,14 @@
 package com.kh.petmily.controller.board;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,12 +54,16 @@ public class CareController {
 			Model model,
 			HttpSession session
 			) {
+		
 		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
+		
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
+		
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+		
 		return "board/care/list";
 	}
 	
@@ -89,27 +96,39 @@ public class CareController {
 		return "redirect:/board/care/list";
 	}
 	
+	
+	//돌봄이미지 가져오기(src로 주소)
+	@GetMapping("/image")
+	public ResponseEntity<ByteArrayResource>image(
+			@RequestParam  int care_image_no) throws UnsupportedEncodingException,IOException {
+		return careService.image(care_image_no);
+	}
+	
+	
+	
 	//돌봄 방 페이지 연결
 	@GetMapping("/content")
 	public String content(
 			@RequestParam String care_board_no,
 			HttpSession session,
 			Model model) {
+		
 		model.addAttribute("care_board_no",care_board_no);
 		CareDto list = careService.list(care_board_no);
 		model.addAttribute("list",list);
+		
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
-		//List<CareReplyDto> replylist = careService.replylist(care_board_no);
-		//model.addAttribute("replylist",replylist);
-		//List<CareImageDto> imagelist = careService.imagelist(care_board_no);
-		//model.addAttribute("imagelist",imagelist);
+
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
 		model.addAttribute("replyimagelist",replyimagelist);
+
+		//세션 값 보내기
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+
 		return "board/care/content";
 	}
 	
