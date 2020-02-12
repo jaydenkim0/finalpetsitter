@@ -1,10 +1,12 @@
 package com.kh.petmily.repository;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 
 public interface CareDao {
 
@@ -52,5 +54,14 @@ public interface CareDao {
 
 	//펫시터 아이디 존재 검사
 	int userIdCheck(String user_id);
+
+	//해당 돌봄게시판이 가진 돌봄이미지가 몇개인지 가지고오기
+	List<CareReplyImageDto> image(int care_board_no);
+
+	//돌봄이미지 가지고 오기(1장씩 요청)
+	CareReplyImageDto getImage(int care_image_no);
+
+	//돌봄이미지 실제로 가지고오기(1장씩 요청)
+	byte[] physicalImage(String savename) throws IOException;
 
 }

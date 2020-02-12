@@ -233,7 +233,11 @@
 		<c:if test="${replyimagelist.care_image_no>=1 }">
 		<tr>
 			<th align="left">
-				돌봄 이미지 ${replyimagelist.care_image_no }번 출력
+			<c:forEach var="careimg" items="${imageList }">
+				<c:if test="${replyimagelist.care_image_no==imageList.care_image_no }">
+					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${imageList.care_image_no }">
+				</c:if>
+			</c:forEach>
 			</th>
 		</tr>
 		</c:if>

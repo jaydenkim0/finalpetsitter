@@ -1,7 +1,10 @@
 package com.kh.petmily.repository;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
+import com.kh.petmily.entity.CareReplyImageDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -107,6 +111,26 @@ public class CareDaoImpl implements CareDao{
 	@Override
 	public int userIdCheck(String user_id) {
 		return sqlSession.selectOne("care.userIdCheck",user_id);
+	}
+
+	//해당 돌봄게시판이 가진 돌봄이미지가 몇개인지 가지고오기
+	@Override
+	public List<CareReplyImageDto> image(int care_board_no) {
+		return sqlSession.selectList("care.image",care_board_no);
+	}
+
+	//돌봄이미지 가지고 오기(1장씩 요청)
+	@Override
+	public CareReplyImageDto getImage(int care_image_no) {
+		return sqlSession.selectOne("care.getImage",care_image_no);
+	}
+
+	//돌봄이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalImage(String savename) throws IOException {
+		File file = new File("C:/upload/care_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
 	}
 
 }
