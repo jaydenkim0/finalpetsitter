@@ -1,11 +1,14 @@
 package com.kh.petmily.controller.board;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -89,6 +92,16 @@ public class CareController {
 		return "redirect:/board/care/list";
 	}
 	
+	
+	//돌봄이미지 가져오기(src로 주소)
+	@GetMapping("/image")
+	public ResponseEntity<ByteArrayResource>image(
+			@RequestParam  int care_image_no) throws UnsupportedEncodingException,IOException {
+		return careService.image(care_image_no);
+	}
+	
+	
+	
 	//돌봄 방 페이지 연결
 	@GetMapping("/content")
 	public String content(
@@ -106,7 +119,7 @@ public class CareController {
 		//model.addAttribute("imagelist",imagelist);
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
 		model.addAttribute("replyimagelist",replyimagelist);
-		model.addAttribute("careImage",(CareImageDto)careService.careImage(care_board_no));
+		model.addAttribute("imageList",careService.imageAll(Integer.parseInt(care_board_no)));
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");

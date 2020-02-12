@@ -1,8 +1,11 @@
 package com.kh.petmily.service.board;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.CareDto;
@@ -64,6 +67,12 @@ public interface CareService {
 
 	//펫시터 아이디 존재 검사
 	int userIdCheck(String user_id);
+
+	//해당 돌봄방이 가진 돌봄이미지 몇개인지 가지고오기
+	List<CareImageDto> imageAll(int care_board_no);
+	//돌봄이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> image(int care_image_no) 
+			throws UnsupportedEncodingException, IOException;
 
 
 }
