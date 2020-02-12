@@ -43,19 +43,10 @@ public class AdminController {
 	@Autowired
 	private AdminEmailService amailService;
 	
-	// 관리자 메인페이지 연결
-	// 추후 삭제 예정
+	// 메인페이지
 	@GetMapping("/")
-	public String admin(Model model) {				
-		// 총 등록수 (회원 + 펫시터 + 관리자)
-		model.addAttribute("mtotal", adminService.memberTotal());	
-		// 총 회원 회원수
-		model.addAttribute("member", adminService.memberTotal() -  
-				adminService.petsitterTotal() - adminService.admimTotal());
-		// 총 펫시터 수
-		model.addAttribute("ptotal", adminService.petsitterTotal());		
-		// 총 관리자 수
-		model.addAttribute("atotal", adminService.admimTotal());		
+	public String admin(Model model) {	
+		// 명목상 있는 페이지
 		return "admin/main";		
 	}
 	
@@ -75,22 +66,22 @@ public class AdminController {
 	
 	//////////////////////////////////////////////////////////////////
 	
-	// 회원관리 페이지 연결
-	@GetMapping("/member")
-	public String member(MemberDto memberDto,
-			Model model) {
-		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
-		model.addAttribute("memberList", (List<MemberVO>)adminService.memberList());
-		return  "admin/member";			
-	}
-	// 회원관리 페이지에서 회원 검색
-	@PostMapping("/member")
-	public String member(@RequestParam String type, 
-										@RequestParam String keyword,										
-										Model model) {		
-		model.addAttribute("memberList",(List<MemberVO>)adminService.memberSearchList(type, keyword));
-		return "admin/member";		
-	}
+//	// 회원관리 페이지 연결
+//	@GetMapping("/member")
+//	public String member(MemberDto memberDto,
+//			Model model) {
+//		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
+//		model.addAttribute("memberList", (List<MemberVO>)adminService.memberList());
+//		return  "admin/member";			
+//	}	
+// 회원관리 페이지에서 회원 검색
+//	@PostMapping("/member")
+//	public String member(@RequestParam String type, 
+//										@RequestParam String keyword,										
+//										Model model) {		
+//		model.addAttribute("memberList",(List<MemberVO>)adminService.memberSearchList(type, keyword));
+//		return "admin/member";		
+//	}
 	
 	// 회원 디테일 페이지 연결
 	@GetMapping("/memberdetail")
@@ -115,36 +106,36 @@ public class AdminController {
 				  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
-				// 펫시터 관리페이지에서 펫시터 검색
-				@PostMapping("/petsitterSearch")
-				public String petsitterSearch(@RequestParam String type, 
-																@RequestParam String keyword,										
-																Model model) {					
-					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterSearch(type, keyword))				
-							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterApplyList())	
-							  .addAttribute("petsitterSleepList", (List<PetsitterVO>)adminService.petsitterSleepList());
-					return "admin/petsitter";		
-				}	
-				// 펫시터 관리페이지에서 펫시터 신청 검색
-				@PostMapping("/petsitterSearchApply")
-				public String petsitterSearchApply(@RequestParam String type, 
-																		@RequestParam String keyword,										
-																		Model model) {								
-					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())							
-							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList())			
-							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterSearchApply(type, keyword));
-					return "admin/petsitter";		
-				}				
-				// 펫시터 관리페이지에서 휴면 펫시터 검색
-				@PostMapping("/petsitterSearchSleep")
-				public String petsitterSearchSleep(@RequestParam String type, 
-												     					@RequestParam String keyword,										
-						                               Model model) {										
-					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())		
-							  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())			
-							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSearchSleep(type, keyword));
-					return "admin/petsitter";		
-				}	
+//				// 펫시터 관리페이지에서 펫시터 검색
+//				@PostMapping("/petsitterSearch")
+//				public String petsitterSearch(@RequestParam String type, 
+//																@RequestParam String keyword,										
+//																Model model) {					
+//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterSearch(type, keyword))				
+//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterApplyList())	
+//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>)adminService.petsitterSleepList());
+//					return "admin/petsitter";		
+//				}	
+//				// 펫시터 관리페이지에서 펫시터 신청 검색
+//				@PostMapping("/petsitterSearchApply")
+//				public String petsitterSearchApply(@RequestParam String type, 
+//																		@RequestParam String keyword,										
+//																		Model model) {								
+//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())							
+//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList())			
+//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterSearchApply(type, keyword));
+//					return "admin/petsitter";		
+//				}				
+//				// 펫시터 관리페이지에서 휴면 펫시터 검색
+//				@PostMapping("/petsitterSearchSleep")
+//				public String petsitterSearchSleep(@RequestParam String type, 
+//												     					@RequestParam String keyword,										
+//						                               Model model) {										
+//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())		
+//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())			
+//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSearchSleep(type, keyword));
+//					return "admin/petsitter";		
+//				}	
 	
 	
 	// 펫시터 신청한 회원 승인 기능
@@ -168,8 +159,7 @@ public class AdminController {
 		adminService.petsitterNegative(sitter_id, sitter_no);	
 		return result;
 	}	
-				
-				
+								
 				// 펫시터 옵션 등록 페이지
 				@GetMapping("/petsitter/option")
 				public String petOtion(Model model) {				

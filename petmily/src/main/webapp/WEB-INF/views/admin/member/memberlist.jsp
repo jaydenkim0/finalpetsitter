@@ -32,15 +32,44 @@
 	
 	
 		<!-- 정리해야되는 내용  -->
-		<c:forEach var="List" items="${list}">
-			<h3>${List}</h3>	
-		</c:forEach>
 		<h3>count : ${count}</h3>	
 		<h3>searchOption : ${searchOption }</h3>
 		<h3>keyword : ${keyword}</h3>
 		<h3>navi : ${navi}</h3>
 	
-	
+		<c:forEach var="member"  items="${list}">		
+			<c:choose>				
+				<c:when test="${member.grade eq 'petsitter' && member.black_count > 0}">
+						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
+						style="color:red;">
+						<h5>아이디 : ${member.id},
+						이름 : ${member.name},
+						닉네임 : ${member.nick},
+						이메일 : ${member.email}</h5>
+						<hr>
+						</a>						
+				</c:when>				
+				<c:when test="${member.grade eq 'member' && member.black_count > 0}">
+						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
+						style="color:#ff8d00;">
+						<h5>아이디 : ${member.id},
+						이름 : ${member.name},
+						닉네임 : ${member.nick},
+						이메일 : ${member.email}</h5>
+						<hr>
+						</a>						
+				</c:when>					
+				<c:otherwise>
+						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" >
+						<h5>아이디 : ${member.id},
+						이름 : ${member.name},
+						닉네임 : ${member.nick},
+						이메일 : ${member.email}</h5>
+						<hr>
+						</a>		
+				</c:otherwise>
+				</c:choose>							
+		</c:forEach>				
 	
 	
 	

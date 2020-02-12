@@ -24,7 +24,6 @@
 	
 	
 	<a href="registInfo"><button> 등록 현황</button></a>
-	<a href="member"><button>회원 관리</button></a>
 	<a href="${pageContext.request.contextPath}/admin/list/member"><button>회원 관리 리스트</button></a>	
 	<a href="petsitter"><button>펫시터 관리</button></a>
 	<a href="account"><button>정산관리</button></a>
