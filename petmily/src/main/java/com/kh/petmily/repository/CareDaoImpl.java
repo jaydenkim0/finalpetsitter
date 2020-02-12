@@ -113,16 +113,10 @@ public class CareDaoImpl implements CareDao{
 		return sqlSession.selectOne("care.userIdCheck",user_id);
 	}
 
-	//해당 돌봄게시판이 가진 돌봄이미지가 몇개인지 가지고오기
-	@Override
-	public List<CareReplyImageDto> image(int care_board_no) {
-		return sqlSession.selectList("care.image",care_board_no);
-	}
-
 	//돌봄이미지 가지고 오기(1장씩 요청)
 	@Override
-	public CareReplyImageDto getImage(int care_image_no) {
-		return sqlSession.selectOne("care.getImage",care_image_no);
+	public CareReplyImageDto getImage(int care_reply_no) {
+		return sqlSession.selectOne("care.getImage",care_reply_no);
 	}
 
 	//돌봄이미지 실제로 가지고오기(1장씩 요청)

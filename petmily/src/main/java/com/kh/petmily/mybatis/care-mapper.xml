@@ -174,18 +174,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from pet_sitter where sitter_id=#{user_id}
 	</select>
 	
-	<!-- 해당 돌봄게시판이 가진 돌봄이미지가 몇개인지 가지고 오기 -->
-	<select id="image" parameterType="int" resultType="careReplyImageDto">
-		select
-			*
-		from
-		 	care_reply R
-		 		left outer join care_image I
-		 		on R.care_reply_no=I.care_reply_no
-		where
-			R.care_reply_no=#{care_board_no}
-	</select>
-	
 	<!-- 돌봄이미지 한개씩 불러오기 -->
 	<select id="getImage" parameterType="int" resultType="careReplyImageDto">
 		select 

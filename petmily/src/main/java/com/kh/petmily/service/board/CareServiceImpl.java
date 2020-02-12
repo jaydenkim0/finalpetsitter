@@ -153,12 +153,6 @@ public class CareServiceImpl implements CareService{
 		return careDao.userIdCheck(user_id);
 	}
 
-	//해당 게시판이 가진 돌봄이미지가 몇개인지 가지고오기
-	@Override
-	public List<CareReplyImageDto> imageAll(int care_board_no) {
-		return careDao.image(care_board_no);
-	}
-
 	//돌봄이미지 가지고 오기(사진정보 1개씩 가지고 오기
 	@Override
 	public ResponseEntity<ByteArrayResource> image(int care_image_no) throws UnsupportedEncodingException, IOException {
@@ -174,4 +168,5 @@ public class CareServiceImpl implements CareService{
 						+"\"")
 				.body(resource);
 	}
+
 }
