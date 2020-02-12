@@ -5,7 +5,6 @@
    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-	<c:set var="admin" value="${grade eq 'admin'}"></c:set>
 	<c:choose>
 	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
@@ -18,7 +17,7 @@
 <script>
  	$(document).ready(function(){
  		$("#btnWrite").click(function(){
- 			location.herf="${context}/board/faq/write";
+ 			location.herf="${context}/board/qna/write";
  		});
  	});
  	function list(page){
@@ -26,21 +25,14 @@
  				"&type-${map.type}"+"&keyword=${map.keyword}";
  	}
  	</script>
- 	<style>
- 	.page-navigator li {
-	    display: inline-block;
-	}
- 	</style>
-<h1>공지사항 게시판</h1><br>
-<c:if test="${sessionScope.grade eq 'admin'}">
-<a href="${context}/board/faq/write">
+<h1>문의 게시판</h1><br>
+<a href="${context}/board/qna/write">
 	<button type="button" id="btnwrite">글쓰기</button>
 </a><br><br>
-</c:if>
-<form method="get" action="${context}/board/faq/list">
+<form method="get" action="${context}/board/qna/list">
 	<select name="type" class="input-item">
-		<option value="member_id" >작성자</option>
-		<option value="faq_head" >제목</option>
+		<option value="qna_writer" >작성자</option>
+		<option value="qna_head" >제목</option>
 		</select>
 <input class="input-item" name="keyword" placeholder="검색어" requierd>
 <input type="submit" value="조회">
@@ -56,11 +48,11 @@
 </tr>
 <c:forEach var="row" items="${list}">
 <tr>
-	<td>${row.faq_no}</td>
-	<td>${row.member_id}</td>
-	<td>${row.faq_title}</td>
+	<td>${row.qna_no}</td>
+	<td>${row.qna_writer}</td>
+	<td>${row.qna_title}</td>
 	<td>
-		<a href="${context}/board/faq/view?faq_no=${row.faq_no}">${row.faq_head}</a>
+		<a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a>
 	</td>
 	<td>${row.writedateWithFormat}</td>
 </tr>
@@ -68,7 +60,7 @@
 </table>
 <div class="row" >
 		<!-- 네비게이터(navigator) -->
-		<jsp:include page="/WEB-INF/views/board/faq/navigator.jsp">
+		<jsp:include page="/WEB-INF/views/board/qna/navigator.jsp">
 			<jsp:param name="pno" value="${pno}"/>
 			<jsp:param name="count" value="${count}"/>
 			<jsp:param name="navsize" value="${navsize}"/>
