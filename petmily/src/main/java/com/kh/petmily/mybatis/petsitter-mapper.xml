@@ -97,6 +97,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{filesize})
 	</insert>
 	
+	<!-- 통장 사본 등록 -->
+	<insert id="registLicense" parameterType="licenseFileDto">
+		insert into bank_image values
+			(bank_image_no_seq.nextval,
+			#{bank_sitter_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize})
+	</insert>
+	
 	<!-- 펫시터 지역 등록 -->
 	<insert id="registLocation" parameterType="list">
 		<foreach collection="list" item="locationDto" open="insert all" close="select * from dual">
