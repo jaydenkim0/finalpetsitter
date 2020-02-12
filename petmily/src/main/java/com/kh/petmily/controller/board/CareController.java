@@ -54,12 +54,16 @@ public class CareController {
 			Model model,
 			HttpSession session
 			) {
+		
 		List<CarePetsitterDto> list  = careService.pet_sitter_list();
 		model.addAttribute("list",list);
+		
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
+		
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+		
 		return "board/care/list";
 	}
 	
@@ -115,26 +119,16 @@ public class CareController {
 		
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
-		
-		//List<CareReplyDto> replylist = careService.replylist(care_board_no);
-		//model.addAttribute("replylist",replylist);
-		//List<CareImageDto> imagelist = careService.imagelist(care_board_no);
-		//model.addAttribute("imagelist",imagelist);
+
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
 		model.addAttribute("replyimagelist",replyimagelist);
-		//care_reply_no의 리스트 구하기
-//		List<CareReplyDto> care_reply_no_list = careService.care_reply_no_list(care_board_no);
-//		System.out.println(care_reply_no_list);
-//		for(int i =0;i<care_reply_no_list.size()+1;i++) {
-//			String strYear = listMap.get(0).get("care_image_no").toString();
-//			model.addAttribute("imageList",careService.imageAll(care_reply_no));
-//		}
-		//care_reply_no 구하기
+
+		//세션 값 보내기
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
-//		System.out.println("사진 = "+careService.imageAll(Integer.parseInt(care_board_no)));
+
 		return "board/care/content";
 	}
 	

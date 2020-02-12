@@ -183,7 +183,7 @@
 	</tr>
 	<tr>
 		<th>생성일</th>
-		<td>${list.wdate.substring(0,16) }</td>
+		<td>${list.writedateWithFormat }</td>
 	</tr>
 </table>
 
@@ -217,7 +217,7 @@
 	<table width="100%" class="mother">
 		<tr>
 			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
-			<th align="right">${replylistimage.wdate.substring(0,16) }</th>
+			<th align="right">${replyimagelist.wdate.substring(0,16) }</th>
 		</tr>
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
