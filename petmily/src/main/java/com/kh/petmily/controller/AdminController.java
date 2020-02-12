@@ -146,27 +146,27 @@ public class AdminController {
 				}	
 	
 	
-				// 펫시터 신청한 회원 승인 기능
-				@PostMapping("/apply")
-				public String petsitterapply(@RequestParam String sitter_id) {					
-					// 데이터베이스 member -> petsitter 로변경
-					adminService.petsitterapply(sitter_id);
-					return "redirect:petsitter";					
-				}
-				// 펫시터 신청한 회원 거부 기능 ( 펫시터전체삭제 기능 )
-				@PostMapping("/negative")
-				@ResponseBody
-				public String negative(
-					@ModelAttribute PetsitterVO petsitterVO) {
-					// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
-					String email = petsitterVO.getEmail();
-					String sitter_id = petsitterVO.getSitter_id();
-					int sitter_no = petsitterVO.getPet_sitter_no();
-					String result = amailService.sendCancel(email);
-					// pet_sitter 테이블에서 신청한 내용을 삭제
-					adminService.petsitterNegative(sitter_id, sitter_no);	
-					return result;
-				}	
+	// 펫시터 신청한 회원 승인 기능
+	@PostMapping("/apply")
+	public String petsitterapply(@RequestParam String sitter_id) {					
+		// 데이터베이스 member -> petsitter 로변경
+		adminService.petsitterapply(sitter_id);
+		return "redirect:petsitter";					
+	}
+	// 펫시터 신청한 회원 거부 기능 ( 펫시터전체삭제 기능 )
+	@PostMapping("/negative")
+	@ResponseBody
+	public String negative(
+		@ModelAttribute PetsitterVO petsitterVO) {
+		// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
+		String email = petsitterVO.getEmail();
+		String sitter_id = petsitterVO.getSitter_id();
+		int sitter_no = petsitterVO.getPet_sitter_no();
+		String result = amailService.sendCancel(email);
+		// pet_sitter 테이블에서 신청한 내용을 삭제
+		adminService.petsitterNegative(sitter_id, sitter_no);	
+		return result;
+	}	
 				
 				
 				// 펫시터 옵션 등록 페이지
