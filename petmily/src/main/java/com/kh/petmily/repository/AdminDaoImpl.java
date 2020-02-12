@@ -381,7 +381,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 통장사본 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicallbankimage(String savename) throws IOException {
-		File file = new File("D:/upload/bank ", savename);
+		File file = new File("D:/upload/bank", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
@@ -394,6 +394,27 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 
+	///////////////////////////////////////////////////////
+
+	// 회원 페이징 리스트
+	@Override
+	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {
+		// 검색옵션, 키워드 맵에 저장
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchPtion", searchPtion);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.memberListAll", param);
+	}
+	// 회원 리스트 총 카운트 불러오기
+	@Override
+	public int countAricle(String searchPtion, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchPtion", searchPtion);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countArticle", param);
+	}
 
 
 

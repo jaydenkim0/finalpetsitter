@@ -1,7 +1,6 @@
 package com.kh.petmily.service;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -418,7 +417,21 @@ public class AdiminServiceImpl implements AdminService {
 		adminDao.gradeComback(black_id);
 		
 	}
+	
+	
+	///////////////////////////////////////////////////	
 
+
+	// 회원 페이징 리스트
+	@Override
+	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {	
+		return adminDao.memberListAll(start, end, searchPtion, keyword);
+	}
+	// 회원 리스트 총 카운트 불러오기
+	@Override
+	public int countAricle(String searchPtion, String keyword) {	
+		return adminDao.countAricle(searchPtion, keyword);
+	}
 
 
 	

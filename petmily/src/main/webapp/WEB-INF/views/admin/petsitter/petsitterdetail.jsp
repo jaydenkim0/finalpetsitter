@@ -52,6 +52,12 @@
 				<tr>			
 					<td>포인트 : ${petsitter.point}</td>					
 				</tr>	
+				<tr>			
+					<td>은행 : ${petsitter.sitter_bankname}</td>					
+				</tr>	
+				<tr>			
+					<td>계좌번호 : ${petsitter.sitter_bank_account}</td>					
+				</tr>	
 							
 			<hr>
 			

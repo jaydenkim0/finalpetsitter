@@ -300,7 +300,8 @@ public class AdminController {
 				  .addAttribute("petcondition", 	(List<CareConditionNameDto>)adminService.petsitterdetailCareCondition(pet_sitter_no))
 			  	  .addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
 			  	  .addAttribute("sitterIdcardimg", (IdCardFileDto)adminService.sitterIdcardimg(pet_sitter_no))
-			  	  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
+			  	  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no))
+			  	  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailapply";	
 	}
 		
@@ -315,7 +316,8 @@ public class AdminController {
 				  .addAttribute("petcondition", (List<CareConditionNameDto>)adminService.petsitterdetailCareCondition(pet_sitter_no))
 				  .addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
 				  .addAttribute("sitterIdcardimg", (IdCardFileDto)adminService.sitterIdcardimg(pet_sitter_no))
-				  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no));
+				  .addAttribute("sitterLicenseimg", ( LicenseFileDto)adminService.sitterLicenseimge(pet_sitter_no))
+				  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailsleep";		
 	}
 	

@@ -168,13 +168,16 @@ public interface AdminDao {
 	BankImageDto getSitterbankimage(int bank_image_no);
 	// 펫시터 통장사본 이미지 실제로 가지고 오기(1장)
 	byte[] physicallbankimage(String savename) throws IOException;
-	
-	
+		
 	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
 	void gradeComback(String black_id);
 
-
+	//////////////////////////////////////////////////////
 	
+	// 회원 리스트 전체 목록
+	List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword);
+	// 회원 리스트 총 카운트 불러오기
+	int countAricle(String searchPtion, String keyword);
 
 	
 
