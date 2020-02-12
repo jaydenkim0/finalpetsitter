@@ -17,7 +17,14 @@
 	<c:forEach var="list" items="${list }">
 		<tr>
 			<td>${list.care_board_no }</td>
-			<td>${list.care_member_id }</td>
+			<c:choose>
+				<c:when test="${not empty list.care_member_id }">
+					<td>${list.care_member_id }</td>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
 			<td>${list.sitter_id }</td>
 			<td>
 				<c:choose>

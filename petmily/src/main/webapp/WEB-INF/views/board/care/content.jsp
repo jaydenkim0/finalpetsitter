@@ -159,7 +159,14 @@
 	</tr>
 	<tr>
 		<th>생성자</th>
-		<td>${list.care_member_id }</td>
+			<c:choose>
+				<c:when test="${not empty list.care_member_id }">
+					<td>${list.care_member_id }</td>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
 	</tr>
 	<tr>
 		<th>펫시터</th>
