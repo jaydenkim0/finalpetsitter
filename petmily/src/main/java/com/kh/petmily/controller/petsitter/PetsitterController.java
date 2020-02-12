@@ -47,7 +47,7 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("/info")
-	public String list(String id) {
+	public String list(@RequestParam String id) {
 		petsitterService.getList(id);
 		return "petsitter/info";
 	}

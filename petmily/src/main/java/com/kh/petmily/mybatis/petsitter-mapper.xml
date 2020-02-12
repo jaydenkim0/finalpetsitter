@@ -98,7 +98,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 통장 사본 등록 -->
-	<insert id="registLicense" parameterType="licenseFileDto">
+	<insert id="registBank" parameterType="bankImageDto">
 		insert into bank_image values
 			(bank_image_no_seq.nextval,
 			#{bank_sitter_no},

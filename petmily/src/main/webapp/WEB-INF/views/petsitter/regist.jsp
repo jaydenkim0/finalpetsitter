@@ -184,10 +184,6 @@
 	<label for="license_file">증빙 서류</label>
 	<input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
 	
-	<div>
-		<label for="info-text">펫밀리 기본 정보</label>
-		<textarea id="info-text" name="info" required></textarea>
-	</div>
 
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
@@ -196,7 +192,7 @@
 <!-- 통장 계좌 -->
 	<div>
 		<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
-		<label for="bankName">계좌 번호</label>
+		<label for="bankName">은행</label>
 			<select id="bankName" name="sitter_bankname"> 
 				<option value="" selected disabled hidden >은행선택</option>
 				<option>기업은행</option>
@@ -220,9 +216,15 @@
 				<option>카카오뱅크</option>
 				<option>케이뱅크</option>
 			</select>	
-			<input type="text" name="sitter_bank_account" required>	
+			<label for="bank_account">계좌 번호</label>
+			<input type="text" id="bank_account" name="sitter_bank_account" required>	
 	</div>
 	
+<!-- 펫시터 소개글 -->	
+	<div>
+		<label for="info-text">펫밀리 기본 정보</label>
+		<textarea id="info-text" name="info" required></textarea>
+	</div>
 <!--반려동물 경험 -->
 	<div>
 		<label for="yn">반려동물 키워본 경험 유무</label>

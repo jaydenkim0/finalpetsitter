@@ -66,6 +66,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 												.info(vo.getInfo())
 												.sitter_pets(vo.getSitter_pets())
 												.sitter_matching_type(vo.getSitter_matching_type())
+												.sitter_bankname(vo.getSitter_bankname())
+												.sitter_bank_account(vo.getSitter_bank_account())
 												.build();
 		
 		//펫시터 기본 정보 등록
@@ -80,7 +82,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 		petSitterFileService.uploadId(no, vo.getId_card_file());
 		petSitterFileService.uploadLicense(no, vo.getLicense_file());
 		petSitterFileService.uploadInfo(no, vo.getInfo_image());
-		
+		petSitterFileService.uploadBank(no, vo.getBank_image());
 		
 		
 		//지역 정보 등록
