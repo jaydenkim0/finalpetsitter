@@ -1,16 +1,15 @@
 package com.kh.petmily.repository.petsitter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CareConditionDto;
-import com.kh.petmily.entity.SkillsDto;
+import com.kh.petmily.entity.CareConditionNameDto;
 
 @Repository
 public class CareConditionDaoImpl implements CareConditionDao{
@@ -33,8 +32,8 @@ public class CareConditionDaoImpl implements CareConditionDao{
 	}
 
 	@Override
-	public List<CareConditionDto> getCareConditionList(String id) {
-		List<CareConditionDto> careConditionList = sqlSession.selectList("petsitter.getCareConditionList", id);
+	public List<CareConditionNameDto> getCareConditionList(int pet_sitter_no) {
+		List<CareConditionNameDto> careConditionList = sqlSession.selectList("petsitter.getCareConditionList", pet_sitter_no);
 		return careConditionList;
 	}
 }

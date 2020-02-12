@@ -84,6 +84,21 @@ alter table pet_sitter modify sitter_id unique;
 select * from pet_sitter;
 
 
+-- 펫시터 계좌 등록
+alter table pet_sitter add sitter_bankname varchar2(25);
+alter table pet_sitter modify sitter_bankname varchar2(30);
+-- 이미 만들어진 데이터에는 지금추가된 내용이 null 값이라서 
+-- null 값을 다른 값으로 치환시키고 null 값 적용 
+UPDATE pet_sitter SET sitter_bankname = 'Y';
+alter table pet_sitter modify sitter_bankname not null;
+
+-- 펫시터 은행리스트 등록
+alter table pet_sitter add sitter_bank_account varchar2(25);
+UPDATE pet_sitter SET sitter_bank_account = 'Y';
+alter table pet_sitter modify sitter_bank_account not null;
+
+
+
 -- 시퀀스 번호 삭제
 drop sequence pet_sitter_no_seq;
 -- 시퀀스 번호 생성
@@ -436,6 +451,28 @@ create table care_condition(
 care_condition_name constraint fk_ConditionName_CareCondition references care_condition_name(care_condition_no) on delete cascade,
 condition_sitter_no constraint fk_petsitter_no_care_condition references pet_sitter(pet_sitter_no) on delete cascade
 );
+
+
+---------------------------------------------------------------
+-- bank_image 테이블 
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table bank_image;
+-- 테이블 생성
+create table bank_image(
+bank_image_no number primary key,
+bank_sitter_no constraint fk_petsitter_bankimage references pet_sitter(pet_sitter_no) on delete cascade,
+uploadname varchar2(100),
+savename varchar2(100),
+filetype varchar2(15),
+filesize number
+);
+
+-- 시퀀스 번호 삭제
+drop sequence bank_image_no_seq;
+-- 시퀀스 번호 생성
+create sequence bank_image_no_seq;
 
 
 

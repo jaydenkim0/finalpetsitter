@@ -38,8 +38,8 @@ public class SkillsDaoImpl implements SkillsDao {
 	}
 
 	@Override
-	public List<SkillNameDto> getSkillList(String id) {
-		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", id);
+	public List<SkillNameDto> getSkillList(int pet_sitter_no) {
+		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", pet_sitter_no);
 		return skillsList;
 	}
 }

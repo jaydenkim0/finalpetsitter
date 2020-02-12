@@ -5,9 +5,9 @@
    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-	<c:set var="admin" value="${grade == 'admin'}"></c:set>
+	<c:set var="admin" value="${grade eq 'admin'}"></c:set>
 	<c:choose>
-	<c:when test="${sessionScope.id == null }">
+	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
 	</c:when>
 	<c:otherwise>
@@ -32,11 +32,11 @@
 	}
  	</style>
 <h1>공지사항 게시판</h1><br>
-<%--  <c:if test="${admin}"> --%>
+<c:if test="${sessionScope.grade eq 'admin'}">
 <a href="${context}/board/faq/write">
 	<button type="button" id="btnwrite">글쓰기</button>
 </a><br><br>
-<%-- </c:if> --%>
+</c:if>
 <form method="get" action="${context}/board/faq/list">
 	<select name="type" class="input-item">
 		<option value="member_id" >작성자</option>
@@ -52,7 +52,6 @@
 	<th>작성자</th>
 	<th>말머리</th>
 	<th>제목</th>
-	<th>내용</th>
 	<th>게시일자</th>
 </tr>
 <c:forEach var="row" items="${list}">
@@ -63,7 +62,6 @@
 	<td>
 		<a href="${context}/board/faq/view?faq_no=${row.faq_no}">${row.faq_head}</a>
 	</td>
-	<td>${row.faq_content}</td>
 	<td>${row.writedateWithFormat}</td>
 </tr>
 </c:forEach>

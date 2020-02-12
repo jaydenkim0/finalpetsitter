@@ -62,9 +62,9 @@
 	<hr>
 	<br><br>
 	
-	<h2> 펫시터 리스트 </h2>
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitter">펫시터 리스트</a> </h2>
 	
-				<!-- 펫시터 검색 -->
+		<!-- 	펫시터 검색
 				펫시터 검색 : 
 				<form action="petsitterSearch" method="post">	
 					<select name="type">
@@ -75,23 +75,43 @@
 					<input type="text" name="keyword" placeholder="검색명을 입력해주세요" required>
 					<input type="submit" value="검색" >	
 				</form>		
-				<br>
+				<br> -->
 
 	<div class="scrollbox">
 	<c:forEach var="petsitter" items="${petsitterList}">	
-			<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-					<h3>
-					펫시터 ID : ${petsitter.sitter_id} |
-					펫시터 상태 : ${petsitter.sitter_status} |
-					펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
-					</h3>
-			</a>							
-			<!-- 펫시터 상태 변경 버튼 -->			
-			<form action="petstatus" method=post>			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-					<input type="hidden" name="sitter_status" value="휴면">					
-					<button type="submit" >펫시터  휴면 변경</button>						
-			</form>						
+		<c:choose>			
+				<c:when test="${petsitter.black_count  > 0}">		
+					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}"
+					style="color: red">
+							<h3>
+							펫시터 ID : ${petsitter.sitter_id} |
+							펫시터 상태 : ${petsitter.sitter_status} |
+							펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
+							</h3>
+					</a>							
+					<!-- 펫시터 상태 변경 버튼 -->			
+					<form action="petstatus" method=post>			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+							<input type="hidden" name="sitter_status" value="휴면">					
+							<button type="submit" >펫시터  휴면 변경</button>						
+					</form>
+				</c:when>	
+			<c:otherwise>
+					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
+							<h3>
+							펫시터 ID : ${petsitter.sitter_id} |
+							펫시터 상태 : ${petsitter.sitter_status} |
+							펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
+							</h3>
+					</a>							
+					<!-- 펫시터 상태 변경 버튼 -->			
+					<form action="petstatus" method=post>			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+							<input type="hidden" name="sitter_status" value="휴면">					
+							<button type="submit" >펫시터  휴면 변경</button>						
+					</form>
+			</c:otherwise>
+		</c:choose>						
 	</c:forEach>			
 	</div>
 	
@@ -99,9 +119,9 @@
 	<hr>
 	<br><br>
 	
-	<h2> 펫시터 신청 회원 </h2>	
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitterapply">펫시터 신청 리스트</a>  </h2>	
 	
-				<!-- 펫시터 검색 -->
+		<!-- 	펫시터 검색
 				펫시터 신청 검색 : 
 				<form action="petsitterSearchApply" method="post">	
 					<select name="type">
@@ -113,7 +133,7 @@
 					<input type="submit" value="검색" >	
 				</form>		
 				<br>		
-				
+				 -->
 	<!-- 
 		조건 1 일반회원 (black_content 가 null 값이면 일반회원)
 		조건 2 블랙리스트 회원  (black_content 가 null 값이 아니면 블랙리스트 회원)
@@ -156,7 +176,7 @@
 									가입신청일 : ${petsitterapply.joindate}											
 								</h3>								
 							</a>			
-							<!-- 펫시터 승인 버튼 -->			
+				<%-- 	<!-- 펫시터 승인 버튼 -->			
 							<form action="apply" method="post">
 										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
 										<button type="submit" > 펫시터 승인</button>
@@ -167,7 +187,7 @@
 										<input type="hidden" name="email" value="${petsitterapply.email}">
 										<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
 										<button type="submit" id="nega-btn"> 펫시터 거부</button>
-							</form> 				
+							</form> 	 --%>			
 					</c:otherwise>	
 			</c:choose>			
 	</c:forEach>
@@ -177,9 +197,9 @@
 	<hr>
 	<br><br>
 	
-	<h2> 휴면 펫시터 회원 </h2>	
+	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsittersleep"> 휴면 펫시터 리스트</a>  </h2>	
 
-				<!-- 펫시터 검색 -->
+		<!--  펫시터 검색
 				휴면 펫시터 검색 : 
 				<form action="petsitterSearchSleep" method="post">	
 					<select name="type">
@@ -190,7 +210,7 @@
 					<input type="text" name="keyword" placeholder="검색명을 입력해주세요" required>
 					<input type="submit" value="검색" >	
 				</form>		
-				<br>
+				<br> -->
 	<!-- 
 		조건 1 일반 휴면 펫시터 (black_content 가 null 값이면 일반회원)
 		조건 2 블랙리스트 휴면 펫시터  (black_content 가 null 값이 아니면 블랙리스트 펫시터)

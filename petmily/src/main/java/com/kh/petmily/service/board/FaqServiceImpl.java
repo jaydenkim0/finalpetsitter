@@ -1,14 +1,28 @@
 package com.kh.petmily.service.board;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.FaqFileDto;
 import com.kh.petmily.repository.FaqDao;
+import com.kh.petmily.repository.FaqFileDao;
+import com.kh.petmily.vo.FaqFileVO;
 import com.kh.petmily.vo.FaqVO;
 
 @Service
@@ -18,6 +32,13 @@ public class FaqServiceImpl implements FaqService {
 	
 	@Autowired
 	private FaqVO faqVO;
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
+	@Autowired
+	private FaqFileDao faqfileDao;
+	
 	//게시글 작성
 	@Override
 	public void create(FaqVO faqVO) throws Exception {
@@ -61,4 +82,31 @@ public class FaqServiceImpl implements FaqService {
 	public List<FaqVO> getList(int start, int finish) {
 		return faqDao.getList(start,finish);
 	}
+	//게시글 다중파일 등록
+	@Override
+	public void uploadFile(int no, List<MultipartFile> faq_file) throws IllegalStateException, IOException {
+		List<FaqFileDto>list = new ArrayList<>();
+		File dir = new File("D:/upload/faq");
+		dir.mkdirs();
+		
+		for(MultipartFile mf : faq_file) {
+			list.add(
+					FaqFileDto.builder()
+					.faq_faq_no(no)
+					.uploadname(mf.getOriginalFilename())
+					.savename(UUID.randomUUID().toString())
+					.filetype(mf.getContentType())
+					.filesize(mf.getSize())
+					.build());
+		}
+		for(int i=0; i<list.size(); i++) {
+			MultipartFile mf = faq_file.get(i);
+			FaqFileDto faqfileDto = list.get(i);
+			
+			File target = new File(dir,faqfileDto.getSavename());
+			mf.transferTo(target);
+			faqfileDao.uploadfaq(faqfileDto);
+		}
+	}
 }
+

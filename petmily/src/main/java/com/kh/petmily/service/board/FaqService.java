@@ -1,10 +1,16 @@
 package com.kh.petmily.service.board;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.vo.FaqFileVO;
 import com.kh.petmily.vo.FaqVO;
 
 public interface FaqService {
@@ -22,5 +28,6 @@ public interface FaqService {
 	public int getCount(String type, String keyword) throws Exception;
 	//게시글 목록
 	List<FaqVO> getList(int start, int finish);
-
+	//게시글 다중파일 등록
+	void uploadFile(int no, List<MultipartFile> faq_file) throws IllegalStateException, IOException;
 }

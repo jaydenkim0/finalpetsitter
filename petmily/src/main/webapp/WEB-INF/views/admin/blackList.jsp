@@ -27,7 +27,7 @@
     <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
     <br>
     
-    <h1>경고 회원 (블랙리스트)</h1>
+    <h3><a href="${pageContext.request.contextPath}/admin/list/blacklistmember">경고 회원 리스트</a></h3>
     ※경고 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
     
     <!-- 강제 탈퇴 -->
@@ -49,7 +49,7 @@
     <br><br>
     
     
-	<h1>경고 펫시터 (블랙리스트)</h1>
+	<h3><a href="${pageContext.request.contextPath}/admin/list/blacklistsitter">경고 펫시터 리스트</a></h3>
 	※경고 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
 	
     <!-- 검색상태 휴면으로 변경  -->
@@ -64,7 +64,9 @@
 		    </a>
     </c:forEach>
 	</div>
+	
+	
     <br><br>
-    <hr>
+
     <br><br>
 	

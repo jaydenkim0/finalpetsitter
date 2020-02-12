@@ -38,46 +38,41 @@ $(document).ready(function(){
 });
 </script>
 <form name="form1" method="post">
-	<table border="1">
-		<th>정보</th>
-		<th>데이터</th>
-	
+<div align="center">
+	<table border="1" width="100%">
 	<!--FaqVO 안에 있는 정보 불러오기 -->
 <tr>
-	<td>글번호</td>
-	<td>${faqVO.faq_no}</td>
+	<td>글번호 : ${faqVO.faq_no}</td>
 </tr>
 
 <tr>
-	<td>게시일자</td>
-	<td>${faqVO.wdate}</td>
+	<td>게시일자 : ${faqVO.writedate}</td>
 </tr>
 
 <tr>
-	<td>말머리</td>
-	<td>${faqVO.faq_title}</td>
+	<td>말머리 : ${faqVO.faq_title}</td>
 </tr>
 
 <tr>
-	<td>제목</td>
-	<td>${faqVO.faq_head}</td>
+	<td>제목 : ${faqVO.faq_head}</td>
 </tr>
+
 <tr>
-	<td>내용</td>
 	<td>${faqVO.faq_content}</td>
 </tr>
-<div style="width:650px"; text-align : center";>
+
+</table><br>
+<c:if test="${sessionScope.id eq faqVO.member_id}">
+	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
+		<a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
+			<button type="button" id="btnupdate">수정</button>
+		</a>
+	<a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
+			<button type="button" id="btndelete">삭제</button>
+		</a><br><br>
+	</c:if>
 	<a href="${context}/board/faq/list">
 		<button type="button" >공지게시판 목록</button>
 	</a><br><br>
-	</table><br>
-	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
-<%-- <c:if test="$[sessionScope.member_id == faqVO.member_id]"> --%>
-<a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
-	<button type="button" id="btnupdate">수정</button>
-</a><br><br>
-<a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
-	<button type="button" id="btndelete">삭제</button>
-</a><br><br>
-<%-- </c:if> --%>
+	</div>
 </form>
