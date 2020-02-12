@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.petmily.entity.FaqDto" alias="faqDto"/>
 		<typeAlias type="com.kh.petmily.entity.IdCardFileDto" alias="idCardFileDto"/>
 		<typeAlias type="com.kh.petmily.entity.InfoImageDto" alias="infoImageDto"/>
-		<typeAlias type="com.kh.petmily.entity.LicenseFileDto" alias="licenseFileDto"/>
+		<typeAlias type="com.kh.petmily.entity.LicenseFileDto" alias="licenseFileDto"/>	
 		<typeAlias type="com.kh.petmily.entity.LocationDto" alias="locationDto"/>
 		<typeAlias type="com.kh.petmily.entity.MemberDto" alias="memberDto"/>
 		<typeAlias type="com.kh.petmily.entity.PayDto" alias="payDto"/>

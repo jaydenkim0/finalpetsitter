@@ -3,6 +3,7 @@ package com.kh.petmily.repository;
 import java.io.IOException;
 import java.util.List;
 
+import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
 import com.kh.petmily.entity.CareConditionNameDto;
@@ -161,8 +162,19 @@ public interface AdminDao {
 	// 펫시터 라이센스이미지 실제로 가지고 오기(1장)
 	byte[] physicallicenseimage(String savename) throws IOException;
 	
+	// 펫시터 가진 통장사본 정보 가지고 오기
+	BankImageDto sitterBankimge(int pet_sitter_no);
+	// 펫시터 가진 통장사본 이미지 가지고 오기 (1장)
+	BankImageDto getSitterbankimage(int bank_image_no);
+	// 펫시터 통장사본 이미지 실제로 가지고 오기(1장)
+	byte[] physicallbankimage(String savename) throws IOException;
+	
+	
 	// 회원 및 펫시터 복귀(블랙리스트에서 삭제)
 	void gradeComback(String black_id);
+
+
+	
 
 	
 
