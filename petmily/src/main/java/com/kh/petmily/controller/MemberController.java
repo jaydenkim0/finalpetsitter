@@ -249,16 +249,33 @@ public class MemberController {
 			return memberService.userIdCheck(user_id);
 		}
 
+		//회원탈퇴 비밀번호검사 페이지 연결
+		@GetMapping("/memberdelete")
+		public String memberdelete(
+				@RequestParam String id,
+				Model model) {
+			model.addAttribute("id",id);
+			return "member/memberdelete";
+		}
+		
 		//회원탈퇴
 		@PostMapping("/memberdelete")
 		public String memberdelete(
 				@RequestParam String id,
-				@RequestParam String password) {
+				@RequestParam String password,
+				Model model) {
 			//회원탈퇴처리
 			memberService.memberdelete(id,password);
 			//회원 탈퇴되었는지 검사
-			
-			return "redirect:/";
+			int idExist = memberService.idExist(id);
+			if(idExist>=1) {
+				model.addAttribute("id",id);
+				String fail = "fail";
+				model.addAttribute("fail",fail);
+				return "redirect:/member/mylistchange";
+			}else {
+				return "redirect:/";
+			}
 		}
 	}
 

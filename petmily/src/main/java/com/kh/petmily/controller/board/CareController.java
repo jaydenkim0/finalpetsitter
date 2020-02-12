@@ -106,6 +106,7 @@ public class CareController {
 		//model.addAttribute("imagelist",imagelist);
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
 		model.addAttribute("replyimagelist",replyimagelist);
+		model.addAttribute("careImage",(CareImageDto)careService.careImage(care_board_no));
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");

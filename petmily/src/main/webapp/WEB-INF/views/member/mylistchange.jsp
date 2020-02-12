@@ -1,5 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$(".memberdelete_btn").click(function(){
+				var url = $(".memberdelete").attr("action");
+				var method = $(".memberdelete").attr("method");
+				var data = $(".memberdelete").serialize();
+				
+				$.ajax({
+					url:url,
+					type:method,
+					data:data
+				});
+			});
+		});
+	</script>
+	</head>
 
 	<body>
 		
@@ -24,11 +43,15 @@
 				<button type="submit" >회원정보수정</button><br><br>
 			</form>
 			
-			<form action="memberdelete" method="post">
-				<input type="hidden" name="id" value="${member.id }">
-				<input type="password" name="password"><br>
-				<input type="submit" value="회원탈퇴">		
-			</form>
+			<hr>
+			
+			<a href="memberdelete?id=${member.id}"><button>회원탈퇴</button></a>
+
+			<c:if test="${not empty fail }">
+				<p>탈퇴 실패</p>
+			</c:if>
+			
+			<hr>
 			
 			<a href="mylist">
 				<button type="button">취소</button>

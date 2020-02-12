@@ -43,5 +43,8 @@ public interface MemberDao {
 	//회원탈퇴처리
 	void memberdelete(MemberDto memberDto);
 
+	//회원 탈퇴되었는지 검사
+	int idExist(String id);
+
 
 }
