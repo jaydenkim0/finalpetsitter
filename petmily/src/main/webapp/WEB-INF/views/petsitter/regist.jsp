@@ -188,6 +188,40 @@
 		<label for="info-text">펫밀리 기본 정보</label>
 		<textarea id="info-text" name="info" required></textarea>
 	</div>
+
+<!-- 통장 사본 이미지 파일 -->	
+	<label for="id_card_file">통장 사본 이미지</label>
+	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
+	
+<!-- 통장 계좌 -->
+	<div>
+		<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
+		<label for="bankName">계좌 번호</label>
+			<select id="bankName" name="sitter_bankname"> 
+				<option value="" selected disabled hidden >은행선택</option>
+				<option>기업은행</option>
+				<option>국민은행</option>
+				<option>우리은행</option>
+				<option>신한은행</option>
+				<option>KEB하나은행</option>
+				<option>농협은행</option>
+				<option>SC제일은행</option>
+				<option>한국씨티은행</option>
+				<option>우체국</option>
+				<option>경남은행</option>
+				<option>광주은행</option>
+				<option>대구은행</option>
+				<option>산업은행</option>
+				<option>새마을금고</option>
+				<option>수협</option>
+				<option>신협</option>
+				<option>전북은행</option>
+				<option>제주은행</option>
+				<option>카카오뱅크</option>
+				<option>케이뱅크</option>
+			</select>	
+			<input type="text" name="sitter_bank_account" required>	
+	</div>
 	
 <!--반려동물 경험 -->
 	<div>

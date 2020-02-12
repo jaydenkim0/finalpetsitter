@@ -33,7 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		'정상',
 		'true',
 		#{sitter_matching_type},
-		sysdate)
+		sysdate,
+		#{sitter_bankname},
+		#{sitter_bank_account})
 	</insert>
 	
 	<!-- 펫시터 스킬 -->

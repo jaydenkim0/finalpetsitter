@@ -46,9 +46,10 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
-	@GetMapping("/list")
-	public String list() {
-		return "petsitter/list";
+	@GetMapping("/info")
+	public String list(String id) {
+		petsitterService.getList(id);
+		return "petsitter/info";
 	}
 	
 }
