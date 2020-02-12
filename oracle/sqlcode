@@ -453,6 +453,28 @@ condition_sitter_no constraint fk_petsitter_no_care_condition references pet_sit
 );
 
 
+---------------------------------------------------------------
+-- bank_image 테이블 
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table bank_image;
+-- 테이블 생성
+create table bank_image(
+bank_image_no number primary key,
+bank_sitter_no constraint fk_petsitter_bankimage references pet_sitter(pet_sitter_no) on delete cascade,
+uploadname varchar2(100),
+savename varchar2(100),
+filetype varchar2(15),
+filesize number
+);
+
+-- 시퀀스 번호 삭제
+drop sequence bank_image_no_seq;
+-- 시퀀스 번호 생성
+create sequence bank_image_no_seq;
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 
