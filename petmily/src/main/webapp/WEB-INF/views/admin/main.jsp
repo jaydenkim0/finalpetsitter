@@ -29,8 +29,9 @@
 	<a href="account"><button>정산관리</button></a>
 	<a href="blackList"><button>경고 회원 및 펫시터 관리</button></a>
 	
-	<br><br>
-	<h3> 총 등록 수 (회원, 펫시터, 관리자 포함) : ${mtotal} 명 </h3>
-	<h3 style="background:#f2f2f2;"> 총 회원 : ${member} 명 </h3> 
-	<h3 style="background:rgba(96, 125, 139, 0.7);"> 총 펫시터 : ${ptotal} 명 </h3>
-	<h3> 총 관리자 : ${atotal} 명 </h3>
+
+	
+	<h3>
+	펫시터 메인 화면입니다 
+	※ 삭제할 페이지
+	</h3>

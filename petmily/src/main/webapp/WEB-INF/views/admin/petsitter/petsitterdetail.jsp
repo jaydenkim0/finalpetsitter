@@ -126,19 +126,31 @@
 				</form>
 			</c:when>
 			<c:otherwise>
-			<h3>※아래와 같은 사유로 경고를 받은 펫시터입니다</h3>
-			<h3>경고 사유 : ${petsitter.black_content}</h3>					
-			<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
-			<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
-					<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	
-					<input type="hidden" name="sitter_no" value="${petsitter.pet_sitter_no}">				
-					<button type="submit" >경고 펫시터 탈퇴</button>						
-			</form>	
-			<!-- 블랙리스트 디테일 페이지로 이동 -->
-			<form action="${pageContext.request.contextPath}/admin/blackListdetail" method="get">			
-					<input type="hidden" name="id" value="${petsitter.sitter_id}">										
-					<button type="submit" >블랙리스트 세부사항으로 이동</button>						
-			</form>	
+				<div style="color:red;">		
+					<h3>※경고를 받은 펫시터입니다.  경고 내용은 블랙리스트 세부사항에서 확인하세요</h3>
+					<h3>경고 횟수 : ${petsitter.black_count}</h3>			
+					<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
+					<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
+							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">	
+							<input type="hidden" name="sitter_no" value="${petsitter.pet_sitter_no}">				
+							<button type="submit" >경고 펫시터 탈퇴</button>						
+					</form>	
+					<!-- 블랙리스트 디테일 페이지로 이동 -->
+					<form action="${pageContext.request.contextPath}/admin/blackListdetail" method="get">			
+							<input type="hidden" name="id" value="${petsitter.sitter_id}">										
+							<button type="submit" >블랙리스트 세부사항으로 이동</button>						
+					</form>	
+									<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+						<input type="hidden" name="sitter_status" value="휴면">					
+						<button type="submit" >펫시터  휴면 변경</button>						
+				</form>		
+				<!-- 펫시터 경고 등록 버튼 -->	
+				<form action="${pageContext.request.contextPath}/admin/sitter_blacklist_content" method="get">			
+						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">				
+						<button type="submit" > 추가 경고 등록</button>						
+				</form>
+				</div>
 			</c:otherwise>
 		</c:choose>
 

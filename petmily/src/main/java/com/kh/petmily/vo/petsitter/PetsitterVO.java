@@ -41,6 +41,9 @@ public class PetsitterVO {
 	private String sitter_terms_agree; // 펫시터 이용약관 동의, 무조건 'true' 일때 만 가입가능
 	private String sitter_joindate; // 시터 가입일
 	private String sitter_matching_type; // '방문서비스', '위탁서비스', '둘다' 만 작성가능
+	private String sitter_bankname; // 펫시터 은행
+	private String sitter_bank_account;  // 펫시터 계좌번호
+
 	
 	// blacklist 사용시 추가 컨텐츠
 	private int black_no;
