@@ -1,7 +1,6 @@
 package com.kh.petmily.repository;
 
 import java.util.List;
-
 import com.kh.petmily.vo.FaqVO;
 
 public interface FaqDao {
@@ -19,5 +18,6 @@ public interface FaqDao {
 	public int getCount(String type, String keyword) throws Exception;
 	//게시글 목록 조회
 	List<FaqVO> getList(int start, int finish);
-	
+	//게시글 번호 구해오기
+	int getSequence();
 }
