@@ -6,5 +6,5 @@ import com.kh.petmily.entity.CarePetTypeNameDto;
 
 public interface CarePetTypeDao {
 	void registType(int no, List<Integer>care_name);
-	List<CarePetTypeNameDto> getPetTypeList(String id);
+	List<CarePetTypeNameDto> getPetTypeList(int pet_sitter_no);
 }

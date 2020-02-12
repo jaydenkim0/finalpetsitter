@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.vo.MemberPetsVO;
+import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Repository
@@ -28,17 +29,21 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	}
 
 	@Override
-	public List<PetsitterVO> getList(String id) {
-		List<PetsitterVO> petsitterList = sqlSession.selectList("petsitter.getList", id);
+	public List<PetsitterVO> getList(int pet_sitter_no) {
+		List<PetsitterVO> petsitterList = sqlSession.selectList("petsitter.getList", pet_sitter_no);
 		return petsitterList;
 	}
 
 	@Override
-	public List<MemberPetsVO> getPetList(String id) {
-		List<MemberPetsVO> petList = sqlSession.selectList("petsitter.getPetList", id);
+	public List<PetsitterPetsVO> getPetList(int pet_sitter_no) {
+		List<PetsitterPetsVO> petList = sqlSession.selectList("petsitter.getPetList", pet_sitter_no);
 		return petList;
 	}
-	
 
+	@Override
+	public List<PetsitterVO> getListAll() {
+		List<PetsitterVO> petsitterListAll = sqlSession.selectList("petsitter.getListAll");
+		return petsitterListAll;
+	}
 	
 }

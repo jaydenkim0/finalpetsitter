@@ -8,5 +8,5 @@ import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 
 public interface PetsitterService {
 	void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException;
-	List<PetsitterGetListVO> getList(String id);
+	List<PetsitterGetListVO> getList(int pet_sitter_no);
 }
