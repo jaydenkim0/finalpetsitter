@@ -22,9 +22,11 @@
 				<input type="text"  name="extra_addr" value=${member.extra_addr}><br>
 				
 				
-				<button type="submit" >회원정보수정</button><br>
+				<button type="submit" >회원정보수정</button><br><br>
 			
-				<button type="button">취소</button><br>
+				<a href="mylist">
+					<button type="button">취소</button>
+				</a>
 			
 			</form>
 			
