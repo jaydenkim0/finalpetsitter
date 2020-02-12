@@ -19,4 +19,6 @@ public class PetsitterDto {
 	private String sitter_terms_agree; // 펫시터 이용약관 동의, 무조건 'true' 일때 만 가입가능
 	private String sitter_matching_type; // 펫시터가 가능한 매칭서비스 종류(위탁서비스/방문서비스)
 	private String sitter_joindate; // 펫시터 가입일
+	private String sitter_bankname; // 펫시터 은행
+	private String sitter_bank_account;  // 펫시터 계좌번호
 }
