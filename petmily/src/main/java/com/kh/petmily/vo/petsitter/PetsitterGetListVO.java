@@ -38,8 +38,7 @@ public class PetsitterGetListVO {
 //		private String lastlogin;
 //		private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 //		private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
-//		
-//		
+//
 //		private int pet_sitter_no;
 //		private String sitter_id; // member 테이블의 id 
 //		private String info; // 소개글
@@ -51,7 +50,7 @@ public class PetsitterGetListVO {
 		
 		//뷰 이름 : memberpets
 		//펫정보
-		private List<MemberPetsVO> memberPetsVO;
+		private List<PetsitterPetsVO> petsitterPetsVO;
 //		private int pet_no;
 //		private String pet_name; // 반려 동물 이름
 //		private int pet_age; // 반려동물 나이
@@ -78,7 +77,7 @@ public class PetsitterGetListVO {
 		
 		//뷰 이름 : sitterlocation
 		//활동 지역
-		private List<LocationDto> locationDto; 
+		private List<LocationDto> locationDto;
 //		private int location_no;
 //		private int location_sitter_no; // pet_sitter의 pet_sitter_no
 //		private String city; // 광역시

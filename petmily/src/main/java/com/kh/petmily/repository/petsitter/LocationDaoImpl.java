@@ -33,8 +33,8 @@ public class LocationDaoImpl implements LocationDao {
 	}
 
 	@Override
-	public List<LocationDto> getLocationList(String id) {
-		List<LocationDto> locationList = sqlSession.selectList("petsitter.getLocationList", id);
+	public List<LocationDto> getLocationList(int pet_sitter_no) {
+		List<LocationDto> locationList = sqlSession.selectList("petsitter.getLocationList", pet_sitter_no);
 		return locationList;
 	}
 	

@@ -7,5 +7,5 @@ import com.kh.petmily.entity.CareConditionNameDto;
 
 public interface CareConditionDao {
 	void registCondition(int no, List<Integer>care_condition_name);
-	List<CareConditionNameDto> getCareConditionList(String id);
+	List<CareConditionNameDto> getCareConditionList(int pet_sitter_no);
 }
