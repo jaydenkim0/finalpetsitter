@@ -20,7 +20,7 @@ public class AdminListController {
 	@Autowired
 	private AdminService adminService;
 	
-	// 회원관리 페이지 연결
+	// 회원리스트
 	@RequestMapping("/member")
 	public String member(@RequestParam(defaultValue = "id", required = false) String searchOption,
 										@RequestParam(defaultValue = "", required = false) String keyword,
@@ -35,6 +35,7 @@ public class AdminListController {
 		int start = navi.getPageBegin();
 		int end = navi.getPageEnd();
 		
+		// 리스트 불러오기
 		model.addAttribute("list", (List<MemberVO>) adminService.memberListAll(start, end, searchOption, keyword))
 				  .addAttribute("count", count)
 				  .addAttribute("searchOption", searchOption)
@@ -44,37 +45,52 @@ public class AdminListController {
 	}
 	
 	
-	// 펫시터 리스트
+	// 펫시터 리스트 
 	@GetMapping("/petsitter")
-	public String petsitterList() {
+	public String petsitterList(@RequestParam(defaultValue = "id", required = false) String searchOption,
+												@RequestParam(defaultValue = "", required = false) String keyword,
+												@RequestParam(defaultValue = "1", required = false) int curPage,										
+												Model model) {
 		
 		return "admin/petsitter/petsitterlist";
 	}
 	
 	// 펫시터 신청 리스트
 	@GetMapping("/petsitterapply")
-	public String petsitterApplyList() {
+	public String petsitterApplyList(@RequestParam(defaultValue = "id", required = false) String searchOption,
+														@RequestParam(defaultValue = "", required = false) String keyword,
+														@RequestParam(defaultValue = "1", required = false) int curPage,										
+														Model model) {
 		
 		return "admin/petsitter/petsitterapplylist";
 	}
 	
 	// 휴면 펫시터 리스트
 	@GetMapping("/petsittersleep")
-	public String petsitterSleepList() {
+	public String petsitterSleepList(@RequestParam(defaultValue = "id", required = false) String searchOption,
+														@RequestParam(defaultValue = "", required = false) String keyword,
+														@RequestParam(defaultValue = "1", required = false) int curPage,										
+														Model model) {
 		
 		return "admin/petsitter/petsittersleeplist";
 	}
 	
 	// 경고 회원 리스트
 	@GetMapping("/blacklistmember")
-	public String blackListMemberList () {
+	public String blackListMemberList (@RequestParam(defaultValue = "id", required = false) String searchOption,
+															 @RequestParam(defaultValue = "", required = false) String keyword,
+														     @RequestParam(defaultValue = "1", required = false) int curPage,										
+														 	 Model model) {
 		
 		return "admin/petsitter/blacklistmemberlist";
 	}
 	
 	// 경고 펫시터 리스트
 	@GetMapping("/blacklistsitter")
-	public String blackListSitterList() {
+	public String blackListSitterList(@RequestParam(defaultValue = "id", required = false) String searchOption,
+														@RequestParam(defaultValue = "", required = false) String keyword,
+														@RequestParam(defaultValue = "1", required = false) int curPage,										
+														Model model) {
 		
 		return "admin/petsitter/blacklistsitterlist";
 	}

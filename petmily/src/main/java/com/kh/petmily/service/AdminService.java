@@ -33,7 +33,7 @@ public interface AdminService {
 	int admimTotal();
 
 	// 회원 리스트
-	List<MemberVO> memberList();
+//	List<MemberVO> memberList();
 	
 	// 펫시터 리스트
 	List<PetsitterVO> petsitterList();
@@ -117,16 +117,16 @@ public interface AdminService {
 	List<PetDto> getPets(String id);	
 	
 	// 회원관리 페이지에서 회원 검색
-	List<MemberVO> memberSearchList(String type, String keyword);
+//	List<MemberVO> memberSearchList(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 펫시터 검색
-	List<PetsitterVO> petsitterSearch(String type, String keyword);
+//	List<PetsitterVO> petsitterSearch(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 펫시터 신청 검색
-	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
+//	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 휴면펫시터 검색
-	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
+//	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
 	
 	// 블랙리스트 여부 검사
 	boolean blackLsitcheck(String id);
