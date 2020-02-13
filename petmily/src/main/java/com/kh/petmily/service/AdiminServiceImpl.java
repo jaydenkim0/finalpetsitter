@@ -465,6 +465,27 @@ public class AdiminServiceImpl implements AdminService {
 	public int countAriclePetsitterSleep(String searchOption, String keyword) {
 		return adminDao.countAriclePetsitterSleep(searchOption, keyword);
 	}
+	
+	// 경고 회원 리스트 전체 목록
+	@Override
+	public List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.blackMemberListAll(start, end, searchOption, keyword);
+	}
+	// 경고 회원 리스트 카운트
+	@Override
+	public int countAricleBlackMember(String searchOption, String keyword) {
+		return adminDao.countAricleBlackMember(searchOption, keyword);
+	}
+
+	@Override
+	public List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.blackPetsitterListAll(start, end, searchOption, keyword);
+	}
+
+	@Override
+	public int countAricleBlackPetsitter(String searchOption, String keyword) {
+		return adminDao.countAricleBlackPetsitter(searchOption, keyword);
+	}
 
 
 	

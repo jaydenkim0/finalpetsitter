@@ -194,6 +194,16 @@ public interface AdminDao {
 	// 휴면 펫시터 리스트 카운트 불러오기 (페이징에 필요)
 	int countAriclePetsitterSleep(String searchOption, String keyword);
 
+	// 경고 회원 리스트 전체 목록
+	List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword);
+	// 경고 회원 리스트 카운트
+	int countAricleBlackMember(String searchOption, String keyword);
+
+	// 경고 펫시터 리스트 전체 목록
+	List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword);
+	// 경고 펫시터 카운트
+	int countAricleBlackPetsitter(String searchOption, String keyword);
+
 	
 
 

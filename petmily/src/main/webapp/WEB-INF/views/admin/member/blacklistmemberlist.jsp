@@ -6,7 +6,7 @@
     <script>
 		// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 생성
 		function list(page){
-			location.href="${pageContext.request.contextPath}/admin/list/blacklistsitter?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
+			location.href="${pageContext.request.contextPath}/admin/list/blacklistmember?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
 			}
 	</script>
      <style>
@@ -22,12 +22,12 @@
 	 }
 	</style>
      
-	<h3> 경고 펫시터 리스트</h3>	
+	<h3> 경고 회원 리스트</h3>	
 	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
 	
 	<!-- 검색 기능 -->
-	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistsitter">
+	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistmember">
 		<select name="searchOption" >		
 			<option value="black_id"  >아이디</option>
 			<option value="black_name"  >이름</option>
@@ -41,15 +41,15 @@
 
 
 	<!-- 리스트 내용 -->
-	 ※경고 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
-    <c:forEach var="petblacklist" items="${list}" >
-    	<a href="${pageContext.request.contextPath}/admin/blackListdetail?id=${petblacklist.black_id}" style="color:red;">
-    	<h3>아이디 : ${petblacklist.black_id},    	
-		    이름 : ${petblacklist.black_name},    	
-		    전화번호 : ${petblacklist.black_phone},    	
-		    등급 : ${petblacklist.black_grade}	
-		    </h3>
-		    </a>
+	※경고 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
+	<c:forEach var="memberblacklist" items="${list}">      
+        <a href="${pageContext.request.contextPath }/admin/blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 
+    	<h3>아이디 : ${memberblacklist.black_id},    	
+	    	이름 : ${memberblacklist.black_name},   	
+	    	전화번호 : ${memberblacklist.black_phone},    	
+	    	등급 : ${memberblacklist.black_grade},      	
+	    	</h3>
+	    	</a>  	
     </c:forEach>
 
 
