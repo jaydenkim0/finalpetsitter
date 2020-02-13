@@ -279,6 +279,7 @@
 		<jsp:param name="count" value="${count}"/>
 		<jsp:param name="navsize" value="${navsize}"/>
 		<jsp:param name="pagesize" value="${pagesize}"/>
+		<jsp:param name="care_board_no" value="${care_board_no }"/>
 	</jsp:include>
 </div>
 
