@@ -16,7 +16,6 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -33,7 +32,7 @@ public interface AdminService {
 	int admimTotal();
 
 	// 회원 리스트
-	List<MemberVO> memberList();
+//	List<MemberVO> memberList();
 	
 	// 펫시터 리스트
 	List<PetsitterVO> petsitterList();
@@ -117,16 +116,16 @@ public interface AdminService {
 	List<PetDto> getPets(String id);	
 	
 	// 회원관리 페이지에서 회원 검색
-	List<MemberVO> memberSearchList(String type, String keyword);
+//	List<MemberVO> memberSearchList(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 펫시터 검색
-	List<PetsitterVO> petsitterSearch(String type, String keyword);
+//	List<PetsitterVO> petsitterSearch(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 펫시터 신청 검색
-	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
+//	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
 	
 	// 펫시터 관리 페이지에서 휴면펫시터 검색
-	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
+//	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
 	
 	// 블랙리스트 여부 검사
 	boolean blackLsitcheck(String id);
@@ -164,9 +163,35 @@ public interface AdminService {
 
 	
 	// 회원 리스트 전체 목록
-	List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword);
-	// 회원 리스트 총 카운트 불러오기
-	int countAricle(String searchPtion, String keyword);
+	List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword);
+	// 회원 리스트 총 카운트 불러오기 (페이징에 필요)
+	int countAricle(String searchOption, String keyword);
+	
+	// 펫시터 리스트 전체 목록
+	List<PetsitterVO> petsitterListAll(int start, int end, String searchOption, String keyword);
+	// 페시터 리스트 총 카운트 불러오기 (페이징에 필요)
+	int countAriclePetsitter(String searchOption, String keyword);
+		
+	// 펫시터 승인 리스트 전체 목록
+	List<PetsitterVO> petsitterApplyListAll(int start, int end, String searchOption, String keyword);
+	// 펫시터 승인 리스트 카운트 불러오기 (페이징에 필요)
+	int countAriclePetsitterApply(String searchOption, String keyword);
+	
+	// 휴면 펫시터 리스트 전체 목록
+	List<PetsitterVO> petsitterSleepListAll(int start, int end, String searchOption, String keyword);
+	// 휴면 펫시터 리스트 카운트 불러오기 (페이징에 필요)
+	int countAriclePetsitterSleep(String searchOption, String keyword);
+	
+	// 경고 회원 리스트 전체 목록
+	List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword);
+	// 경고 회원 리스트 카운트
+	int countAricleBlackMember(String searchOption, String keyword);
+	
+	// 경고 펫시터 리스트 전체 목록
+	List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword);
+	// 경고 펫시트 카운트
+	int countAricleBlackPetsitter(String searchOption, String keyword);
+
 
 	
 

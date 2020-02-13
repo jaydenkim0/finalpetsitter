@@ -1,12 +1,16 @@
 package com.kh.petmily.service.board;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.QnaFileDto;
 import com.kh.petmily.vo.QnaFileVO;
 import com.kh.petmily.vo.QnaReplyVO;
 import com.kh.petmily.vo.QnaVO;
@@ -28,4 +32,8 @@ public interface QnaService {
 	List<QnaVO> getList(int start, int finish);
 	//게시글 다중파일 등록
 	void uploadFile(int no, List<MultipartFile> qna_file) throws IllegalStateException, IOException;
+	//게시글에 있는 이미지가 몇개인지 가지고 오기
+	List<QnaFileDto> qnaImageList(int qna_no);
+	//게시글 이미지 가져오기(사진정보 한장씩)
+	ResponseEntity<ByteArrayResource> fileview(int qna_file_no) throws UnsupportedEncodingException, IOException;
 }

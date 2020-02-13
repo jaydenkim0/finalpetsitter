@@ -32,6 +32,7 @@ import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {
@@ -97,6 +98,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public List<PetsitterGetListVO> getList(int pet_sitter_no) {
 		//펫시터 기본 정보 조회
 		List<PetsitterVO> petsitterVO = petsitterDao.getList(pet_sitter_no);
+		//펫시터 반려동물 조회
 		List<PetsitterPetsVO> petsitterPetsVO = petsitterDao.getPetList(pet_sitter_no);
 		
 		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
@@ -107,8 +109,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//지역 정보 조회
 		List<LocationDto> locationDto = locationDao.getLocationList(pet_sitter_no);
 		
-		List<PetsitterGetListVO> petsitterInfo = new ArrayList<>();
-		petsitterInfo.add(PetsitterGetListVO.builder()
+		List<PetsitterGetListVO> petsitterList = new ArrayList<>();
+		petsitterList.add(PetsitterGetListVO.builder()
 											.petsitterVO(petsitterVO)
 											.petsitterPetsVO(petsitterPetsVO)
 											.skillNameDto(skillNameDto)
@@ -118,7 +120,20 @@ public class PetsitterServiceImpl implements PetsitterService {
 											.build());
 		
 		
-		return petsitterInfo;
+		return petsitterList;
+	}
+
+
+
+	@Override
+	public List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword) {
+		return petsitterDao.locationListAll(start, end, cityKeyword, areaKeyword) ;
+	}
+
+
+	@Override
+	public int countlocation(String cityKeyword, String areaKeyword) {		
+		return petsitterDao.countlocation(cityKeyword, areaKeyword) ;
 	}
 	
 	

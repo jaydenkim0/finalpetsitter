@@ -68,6 +68,17 @@ public class PetsitterVO {
 	      return time;
 	   }
 	
+	
+	// 펫시터 라스트 로그인 등록일
+	public String getLastLogindateWithFormat()throws Exception{
+	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	      Date date = read.parse(lastlogin);
+	      SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+	      String time = write.format(date);
+	      return time;
+	   }
+	
+	
 	// 블랙리스트 등록일
 	public String getBlackListdateWithFormat()throws Exception{
 	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
@@ -77,6 +88,23 @@ public class PetsitterVO {
 	      return time;
 	   }
 	
+	//은행 계좌 통합 
+	public String getTotal_account() {
+		if(sitter_bankname != null && sitter_bank_account != null) {
+			return "["+getSitter_bankname()+"}"+""+getSitter_bank_account();
+		}
+		else {
+			return"";
+		}
+	}
 	
-
+	//주소 통합
+	public String otal_addr() {
+		if(post != null && basic_addr != null && extra_addr != null) {
+			return "["+getPost()+"]"+""+getBasic_addr()+""+getExtra_addr();
+		}
+		else {
+			return"";
+		}
+	}
 }

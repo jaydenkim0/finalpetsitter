@@ -44,17 +44,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  회원관리 -->	
 		<!-- 회원리시트 불러오가 -->
-		<select id="memberList"  resultType="memberVO">
+		<!-- <select id="memberList"  resultType="memberVO">
 			select * from memberB
-		</select>
+		</select> -->
 		
 		<!-- 
 			회원리스트 검색
 			일단 이름 검색으로	
 		 -->
-		<select id="memberSearchList"  parameterType="Map"  resultType="MemberVO">
+		<!-- 	<select id="memberSearchList"  parameterType="Map"  resultType="MemberVO">
 			select * from memberB where ${type} like  '%'||#{keyword}||'%' order by id asc
-		</select>
+		</select> -->
 		
 		<!-- 회원 디테일 페이지 불러오기 -->
 		<select id="getMemberdetail" resultType="MemberVO">
@@ -104,27 +104,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			member 와 pet_sitter inner join으로 view 만들어 놓음 			
 		-->
 		<select id="petsitterList"  resultType="petsitterVO">
-			<!--	select * from 
-			member M
-			inner join pet_sitter P on M.id = P.sitter_id
-			order by pet_sitter_no desc -->
 			select * from petsitter where grade = 'petsitter' and sitter_status = '정상' order by pet_sitter_no desc
 		</select>
 		
 		<!-- 휴면 펫시터 리스트 -->
-		<select id="petsleepList"  resultType="petsitterVO">
-			<!--	select * from 
-			member M
-			inner join pet_sitter P on M.id = P.sitter_id
-			order by pet_sitter_no desc -->
+		<select id="petsleepList"  resultType="petsitterVO">	
 			select * from petsitter where grade = 'petsitter' and sitter_status = '휴면' order by pet_sitter_no desc
 		</select>
 		
 		
-		<!-- 펫시터 신청한 회원 검색 -->
-		<select id="petsitterApplyList"  resultType="petsitterVO">	
+		<!-- 펫시터 신청한 회원 리스트 -->
+	 	<select id="petsitterApplyList"  resultType="petsitterVO">	
 			select * from petsitter where grade = 'member' order by pet_sitter_no desc
-		</select>
+		</select> 
 		
 		
 		<!-- 펫시터 승인 -->
@@ -183,21 +175,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</select>
 		
 		
-		<!-- 펫시터리스트 검색 -->
-		<select id="petsitterSearchList" parameterType="Map" resultType="petsitterVO">
-			select * from petsitter where ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc 
-		</select>
-		
-		<!-- 펫시터 신청 리스트 검색 -->
-		<select id="petsitterSearchApply" parameterType="Map" resultType="petsitterVO">
-			select * from petsitter where grade = 'member' and ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc
-		</select>
-		
-		<!-- 휴면 펫시터 리스트 검색 -->
-		<select id="petsitterSearchSleep" parameterType="Map" resultType="petsitterVO">
-			select * from petsitter where sitter_status = '휴면' and grade = 'petsitter' and ${type} 
-			like  '%'||#{keyword}||'%' order by pet_sitter_no desc
-		</select>
 		
 		
 		
@@ -297,15 +274,88 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					select * from bank_image where bank_image_no = #{bank_image_no}
 				</select>
 				
-				<!-- 펫시터 페이징 리스트 -->
-				<!-- 펫시터 페이징 서치 리스트 -->
+				<!-- 펫시터리스트 검색 -->
+				<!--	<select id="petsitterSearchList" parameterType="Map" resultType="petsitterVO">
+					select * from petsitter where ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc 
+				</select> -->
 				
-				<!-- 펫시터 신청 페이징 리스트 -->
-				<!-- 펫시터 신청 페이징 서치 리스트 -->
+				<!-- 펫시터 신청 리스트 검색 -->
+				<!-- 	<select id="petsitterSearchApply" parameterType="Map" resultType="petsitterVO">
+					select * from petsitter where grade = 'member' and ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc
+				</select> -->
 				
-				<!-- 펫시터 휴면 페이징 리스트 -->
-				<!-- 펫시터 휴면 페이징 서치 리스트 -->
+				<!-- 휴면 펫시터 리스트 검색 -->
+				<!-- <select id="petsitterSearchSleep" parameterType="Map" resultType="petsitterVO">
+					select * from petsitter where sitter_status = '휴면' and grade = 'petsitter' and ${type} 
+					like  '%'||#{keyword}||'%' order by pet_sitter_no desc
+				</select> -->
+		
+				<!-- 펫시터 페이징 리스트 -->			
+				<select id="petsitterListAll" resultType="petsitterVO" parameterType="Map">
+					select * from (
+						select rownum rn, A.* from(
+							select * from petsitter
+								<if test="searchOption != null and keyword != null">
+									where ${searchOption} like '%'||#{keyword}||'%'
+								</if>
+							order by sitter_joindate desc
+							)A
+						) where rn between #{start} and #{end}	
+				</select>			
+				<!-- 펫시터 페이징 카운터 리스트 -->
+				<select id="countAriclePetsitter" resultType="int" parameterType="Map">
+					select count(*) from
+					petsitter		
+						<if test="searchOption != null and keyword != null">
+							where ${searchOption} like '%'||#{keyword}||'%'
+						</if>			
+					order by sitter_joindate desc
+				</select>	
 				
+				
+				<!-- 펫시터 신청 페이징 리스트 -->						
+				<select id="petsitterApplyListAll" resultType="petsitterVO" parameterType="Map">
+					select * from (
+						select rownum rn, A.* from(
+							select * from petsitter where grade = 'member' 
+								<if test="searchOption != null and keyword != null">
+									and ${searchOption} like '%'||#{keyword}||'%'
+								</if>
+							order by sitter_joindate desc
+							)A
+						) where rn between #{start} and #{end}	
+				</select>				
+				<!-- 펫시터 신청 페이징 카운터 리스트 -->
+				<select id="countAriclePetsitterApply" resultType="int" parameterType="Map">
+					select count(*) from
+					petsitter	where grade = 'member' 	
+						<if test="searchOption != null and keyword != null">
+							and ${searchOption} like '%'||#{keyword}||'%'
+						</if>			
+					order by sitter_joindate desc
+				</select>	
+				
+				<!-- 펫시터 휴면 페이징 리스트 -->				
+				<select id="petsitterSleepListAll" resultType="petsitterVO" parameterType="Map">
+					select * from (
+						select rownum rn, A.* from(
+							select * from petsitter where sitter_status = '휴면'
+								<if test="searchOption != null and keyword != null">
+									and ${searchOption} like '%'||#{keyword}||'%'
+								</if>
+							order by sitter_joindate desc
+							)A
+						) where rn between #{start} and #{end}	
+				</select>				
+				<!-- 펫시터 휴면 페이징 카운터 리스트 -->
+				<select id="countAriclePetsitterSleep" resultType="int" parameterType="Map">
+					select count(*) from
+					petsitter	where sitter_status = '휴면'	
+						<if test="searchOption != null and keyword != null">
+							and ${searchOption} like '%'||#{keyword}||'%'
+						</if>			
+					order by sitter_joindate desc
+				</select>	
 		
 	
 	<!-- 블랙리스트 -->
@@ -415,11 +465,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			delete blacklist where black_id = #{black_id}
 		</delete>
 		
+		
 		<!-- 경고 회원 페이징 리스트 -->
+			<select id="blackMemberListAll" resultType="petsitterVO" parameterType="Map">
+				select * from (
+					select rownum rn, A.* from(
+						select * from blackListall where black_grade = 'member'
+							<if test="searchOption != null and keyword != null">
+								and ${searchOption} like '%'||#{keyword}||'%'
+							</if>
+						order by black_no desc
+						)A
+					) where rn between #{start} and #{end}	
+			</select>				
 		<!-- 경고 회원 페이징 서치 리스트 -->
+			<select id="countAricleBlackMember" resultType="int" parameterType="Map">
+				select count(*) from
+				blackListall where black_grade = 'member'
+					<if test="searchOption != null and keyword != null">
+						and ${searchOption} like '%'||#{keyword}||'%'
+					</if>			
+				order by black_no desc
+			</select>			
 
-		<!-- 경고 펫시터 페이징 리스트 -->
+		<!-- 경고 펫시터 페이징 리스트 -->	
+		<select id="blackPetsitterListAll" resultType="petsitterVO" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from blackListall where black_grade = 'petsitter'
+						<if test="searchOption != null and keyword != null">
+							and ${searchOption} like '%'||#{keyword}||'%'
+						</if>
+					order by black_no desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>
 		<!-- 경고 펫시터 페이징 서치 리스트 -->
+		<select id="countAricleBlackPetsitter" resultType="int" parameterType="Map">
+			select count(*) from
+			blackListall where black_grade = 'petsitter'
+				<if test="searchOption != null and keyword != null">
+					and ${searchOption} like '%'||#{keyword}||'%'
+				</if>			
+			order by black_no desc
+		</select>	
 		
 	<!-- 정산관리 -->
 	

@@ -31,7 +31,7 @@
 				</c:otherwise>
 				</c:choose>
 			</td>
-			<td>${list.wdate.substring(0,16) }</td>
+			<td>${list.writedateWithFormat }</td>
 			<td>
 			<c:if test="${list.care_member_id==id || grade=='admin'}">
 				<a href="delete?care_board_no=${list.care_board_no }"><button>방 삭제</button></a>

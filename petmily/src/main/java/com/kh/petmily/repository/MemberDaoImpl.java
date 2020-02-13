@@ -81,5 +81,17 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.userIdCheck",user_id);
 	}
 
+	//회원탈퇴처리
+	@Override
+	public void memberdelete(MemberDto memberDto) {
+		sqlSession.delete("member.memberdelete",memberDto);
+	}
+
+	//회원 탈퇴되었는지 검사
+	@Override
+	public int idExist(String id) {
+		return sqlSession.selectOne("member.idExist",id);
+	}
+
 
 }
