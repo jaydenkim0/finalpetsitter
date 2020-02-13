@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 돌봄댓글&이미지 목록 -->
-	<select id="replyimagelist" parameterType="String" resultType="careReplyImageDto">
+	<select id="replyimagelist" parameterType="map" resultType="careReplyImageDto">
 		select*from (
 			select rownum as rn, A.* from(
 				select

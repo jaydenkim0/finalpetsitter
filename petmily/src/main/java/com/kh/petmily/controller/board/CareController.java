@@ -145,6 +145,9 @@ public class CareController {
 		
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no,start,finish);
 		model.addAttribute("replyimagelist",replyimagelist);
+		model.addAttribute("pagesize",pagesize);
+		model.addAttribute("navsize",navsize);
+		model.addAttribute("pno",pno);
 		
 		
 		return "board/care/content";
