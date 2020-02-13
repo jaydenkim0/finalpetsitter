@@ -17,3 +17,5 @@
 	<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
 		 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
 	</c:forEach>
+	
+	

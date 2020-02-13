@@ -15,11 +15,6 @@ public interface ReviewService {
 
 
 	
-
-
-
-	
-	
 	// 게시글 조회
 //	List<ReviewDto> listSearch(int review_sitter_no);
 

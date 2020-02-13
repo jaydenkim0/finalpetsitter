@@ -36,18 +36,24 @@ public class ReviewDaoImpl implements ReviewDao{
 	}
 	//게시글 수정
 	@Override
-	public void update(ReviewDto reviewDto) {
+	public void update(ReviewDto reviewDto) throws Exception {
 		sqlSession.update("review.reviewupdate",reviewDto);
-		
-	}
+	}	
+	
 	@Override
 	public ReviewDto get(int review_no){
 	return sqlSession.selectOne("review.reviewselect",review_no);
 	    
 	}
 
-	
+		
 	}
+	
+
+	
+
+	
+	
 
 
 		

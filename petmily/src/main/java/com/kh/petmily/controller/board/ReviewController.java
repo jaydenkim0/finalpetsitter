@@ -44,13 +44,7 @@ public class ReviewController {
 	
 
 	//리뷰 작성
-	@PostMapping("/write")
-	public String write() {
-		return"board/review/write";
-	}
-	
-
-	
+		
 	@GetMapping("/insert")
 	public String insert() {
 		return"board/review/insert";
@@ -90,6 +84,15 @@ public class ReviewController {
 	 	return "board/review/update";
 	}
 		
+	
+	@PostMapping("/update")
+	public String update(@ModelAttribute ReviewDto reviewDto) throws Exception{
+		 reviewDao.update(reviewDto);
+		 System.out.println("리뷰 = "+reviewDto);
+		return "redirect:/board/review/content";
+	}
+	
+		
 	//리뷰 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int review_no) throws Exception{
@@ -97,7 +100,13 @@ public class ReviewController {
 		return "redirect:list";
 	
 	}
-}
+	//리뷰 상세보기
+	
+	}
+
+
+	
+
 	
 	
 	
