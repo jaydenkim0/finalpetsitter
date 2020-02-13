@@ -396,7 +396,7 @@ public class AdminDaoImpl implements AdminDao {
 
 	///////////////////////////////////////////////////////
 
-	// 회원 페이징 리스트
+	// 회원 페이징 리스트 (검색포함)
 	@Override
 	public List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword) {
 		// 검색옵션, 키워드 맵에 저장
@@ -414,6 +414,62 @@ public class AdminDaoImpl implements AdminDao {
 		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countArticle", param);
+	}
+
+	// 펫시터 페이징 리스트(검색포함)
+	@Override
+	public List<PetsitterVO> petsitterListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterListAll", param);
+	}
+	// 펫시터 리스트 총 카운트 불러오기(페이징에 필요)
+	@Override
+	public int countAriclePetsitter(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitter", param);
+	}
+
+	// 펫시터 승인 페이징 리스트(검색포함)
+	@Override
+	public List<PetsitterVO> petsitterApplyListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterApplyListAll", param);
+	}
+	// 펫시터 승인 페이징 리스트(검색포함)
+	@Override
+	public int countAriclePetsitterApply(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitterApply", param);
+	}
+
+	@Override
+	public List<PetsitterVO> petsitterSleepListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterSleepListAll", param);
+	}
+
+	@Override
+	public int countAriclePetsitterSleep(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitterSleep", param);
 	}
 
 

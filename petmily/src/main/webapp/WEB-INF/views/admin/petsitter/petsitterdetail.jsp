@@ -27,10 +27,10 @@
 					<td> 반려동물 경험 유무   : ${petsitter.sitter_pets}</td>					
 				</tr>
 				<tr>			
-					<td> 펫시터 가입일   : ${petsitter.sitter_joindate}</td>					
+					<td> 펫시터 가입일   : ${petsitter.getPetsitterdateWithFormat()}</td>					
 				</tr>
 				<tr>			
-					<td> 펫시터 마지막로그인  : ${petsitter.lastlogin}</td>					
+					<td> 펫시터 마지막로그인  : ${petsitter.getLastLogindateWithFormat()}</td>					
 				</tr>
 				
 				<tr>			

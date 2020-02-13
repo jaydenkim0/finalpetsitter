@@ -68,6 +68,17 @@ public class PetsitterVO {
 	      return time;
 	   }
 	
+	
+	// 펫시터 라스트 로그인 등록일
+	public String getLastLogindateWithFormat()throws Exception{
+	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	      Date date = read.parse(lastlogin);
+	      SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+	      String time = write.format(date);
+	      return time;
+	   }
+	
+	
 	// 블랙리스트 등록일
 	public String getBlackListdateWithFormat()throws Exception{
 	      SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
