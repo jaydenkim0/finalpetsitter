@@ -358,8 +358,10 @@ create sequence care_reply_no_seq;
 alter table care_reply add wdate date default sysdate;
 
 --작성자 컬럼 추가
-alter table care_reply add (member constraint fk_member_care_reply_writer references member(id));
-alter table care_reply rename column member to care_reply_writer;
+alter table care_reply add care_reply_writer varchar2(12);
+
+alter table care_reply add constraint fk_member_care_reply foreign key(care_reply_writer) 
+references member(id) on delete set null;
 
 ---------------------------------------------------------------
 -- care_image 테이블 
