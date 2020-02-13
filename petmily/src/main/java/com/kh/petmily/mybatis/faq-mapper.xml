@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="faq">
-<!-- CRUD -->
-<!-- 게시글 작성 -->
+	<!-- CRUD -->
+	<!-- 게시글 작성 -->
 	<insert id="faqinsert" parameterType="FaqVO">
 		insert into faq (
 		faq_no,
@@ -14,23 +14,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		faq_title,
 		faq_head,
 		faq_content,
-		wdate 
+		wdate
 		)
-			values (
-			#{faq_no},
-			#{member_id},
-			#{faq_title},
-			#{faq_head},
-			#{faq_content},
-			sysdate
-			)
+		values (
+		#{faq_no},
+		#{member_id},
+		#{faq_title},
+		#{faq_head},
+		#{faq_content},
+		sysdate
+		)
 	</insert>
-	
+
 	<!-- 게시글 번호 받아오기 -->
 	<select id="getSequence" resultType="int">
-		select faq_no_seq.nextval from dual
+		select faq_no_seq.nextval
+		from dual
 	</select>
-	
+
 	<!-- 이미지 등록 -->
 	<insert id="faqfile" parameterType="faqfileDto">
 		insert into faq_file values(
@@ -42,8 +43,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{filesize}
 		)
 	</insert>
-	
-	
+
+	<!-- 등록된 이미지 가져오기 -->
+	<!-- 등록된 이미지가 몇개인지 가져오기 -->
+	<select id="faqImageList" parameterType="int"
+		resultType="faqfileDto">
+		select*from faq_file where faq_faq_no= #{faq_no}
+	</select>
+
+	<!-- 등록된 이미지 한장씩 불러오기 -->
+	<select id="fileview" parameterType="int"
+		resultType="faqfileDto">
+		select*from faq_file where faq_file_no= #{faq_file_no}
+	</select>
+
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="faqlistAll" parameterType="map" resultType="FaqVO">
 		select*from (
@@ -51,44 +64,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		faq_no,faq_title,faq_head,faq_content,wdate,member_id
 		from FAQ
-		where ${type} like '%'||#{keyword}||'%'
+		where
+		${type} like '%'||#{keyword}||'%'
 		order by faq_no desc, wdate desc
 		) A
-		) where rn between #{start} and #{finish}
+		)
+		where rn between #{start} and #{finish}
 	</select>
-	
+
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="FaqVO" parameterType="map">
 		select*from (
 		select rownum as rn, A.* from(
 		select*
-<!-- 		faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
+		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
 		from FAQ
 		order by faq_no desc, wdate desc
 		) A
-		) where rn between #{start} and #{finish}
+		) where rn between #{start}
+		and #{finish}
 	</select>
-	
-	
+
+
 	<!-- 게시글 레코드 갯수 조회 -->
-	<select id = "getCount" resultType="int" >
+	<select id="getCount" resultType="int">
 		select count(*) from FAQ
 	</select>
-	
+
 	<!-- 게시글 상세보기 조회 -->
-	<select id = "faqview" resultType="FaqVO">
-		select*from FAQ where faq_no= #{faq_no}
+	<select id="faqview" resultType="FaqVO">
+		select*from FAQ where faq_no=
+		#{faq_no}
 	</select>
-	
+
 	<!-- 게시글 수정 -->
-	<update id="faqupdate" >
+	<update id="faqupdate">
 		update FAQ set
 		faq_title = #{faq_title},
 		faq_head = #{faq_head},
 		faq_content = #{faq_content}
-		where faq_no= #{faq_no}
+		where faq_no=
+		#{faq_no}
 	</update>
-	
+
 	<!-- 게시글 삭제 -->
 	<delete id="faqdelete">
 		delete from FAQ where faq_no = #{faq_no}
