@@ -54,10 +54,10 @@ public class AdiminServiceImpl implements AdminService {
 	
 	
 	// member 리스트
-	@Override
-	public List<MemberVO> memberList() {	
-		return adminDao.getMemberList();
-	}
+//	@Override
+//	public List<MemberVO> memberList() {	
+//		return adminDao.getMemberList();
+//	}
 
 	// petsitter 리스트
 	@Override
@@ -277,28 +277,28 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.getPets(id);
 	}
 
-	// 회원관리 페이지에서 회원 검색
-	@Override
-	public List<MemberVO> memberSearchList(String type, String keyword) {		
-		return adminDao.memberSearchList(type, keyword);
-	}
-	// 펫시터 관리 페이지에서 펫시터 검색
-	@Override
-	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
-		return adminDao.petsitterSearch(type,  keyword);
-	}
-	
-	// 펫시터 관리 페이지에서 펫시터 신청 검색
-	@Override
-	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
-		return adminDao.petsitterSearchApply(type,  keyword);
-	}
-	
-	// 펫시터 관리 페이지에서 휴면펫시터 검색
-	@Override
-	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
-		return adminDao.petsitterSearchSleep(type,  keyword);
-	}
+//	 회원관리 페이지에서 회원 검색
+//	@Override
+//	public List<MemberVO> memberSearchList(String type, String keyword) {		
+//		return adminDao.memberSearchList(type, keyword);
+//	}
+//	// 펫시터 관리 페이지에서 펫시터 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
+//		return adminDao.petsitterSearch(type,  keyword);
+//	}
+//	
+//	// 펫시터 관리 페이지에서 펫시터 신청 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+//		return adminDao.petsitterSearchApply(type,  keyword);
+//	}
+//	
+//	// 펫시터 관리 페이지에서 휴면펫시터 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+//		return adminDao.petsitterSearchSleep(type,  keyword);
+//	}
 
 	// 블랙리스트 여부 검사
 	@Override
@@ -424,13 +424,67 @@ public class AdiminServiceImpl implements AdminService {
 
 	// 회원 페이징 리스트
 	@Override
-	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {	
-		return adminDao.memberListAll(start, end, searchPtion, keyword);
+	public List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword) {	
+		return adminDao.memberListAll(start, end, searchOption, keyword);
 	}
-	// 회원 리스트 총 카운트 불러오기
+	// 회원 리스트 총 카운트 불러오기(페이징에 필요)
 	@Override
-	public int countAricle(String searchPtion, String keyword) {	
-		return adminDao.countAricle(searchPtion, keyword);
+	public int countAricle(String searchOption, String keyword) {	
+		return adminDao.countAricle(searchOption, keyword);
+	}
+	
+	// 펫시터 리스트 전체 목록
+	@Override
+	public List<PetsitterVO> petsitterListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.petsitterListAll(start, end, searchOption, keyword);
+	}
+	// 페시터 리스트 총 카운트 불러오기 (페이징에 필요)
+	@Override
+	public int countAriclePetsitter(String searchOption, String keyword) {
+		return adminDao.countAriclePetsitter(searchOption, keyword);
+	}
+
+	// 펫시터 승인 리스트 전체 목록
+	@Override
+	public List<PetsitterVO> petsitterApplyListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.petsitterApplyListAll(start, end, searchOption, keyword);
+	}
+	// 페시터 승인 리스트 총 카운트 불러오기 (페이징에 필요)
+	@Override
+	public int countAriclePetsitterApply(String searchOption, String keyword) {
+		return adminDao.countAriclePetsitterApply(searchOption, keyword);
+	}
+
+	// 휴면 펫시터 리스트 전체 목록
+	@Override
+	public List<PetsitterVO> petsitterSleepListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.petsitterSleepListAll(start, end, searchOption, keyword);
+	}
+	// 휴면 펫시터 리스트 카운트 불러오기 (페이징에 필요)
+	@Override
+	public int countAriclePetsitterSleep(String searchOption, String keyword) {
+		return adminDao.countAriclePetsitterSleep(searchOption, keyword);
+	}
+	
+	// 경고 회원 리스트 전체 목록
+	@Override
+	public List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.blackMemberListAll(start, end, searchOption, keyword);
+	}
+	// 경고 회원 리스트 카운트
+	@Override
+	public int countAricleBlackMember(String searchOption, String keyword) {
+		return adminDao.countAricleBlackMember(searchOption, keyword);
+	}
+
+	@Override
+	public List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword) {
+		return adminDao.blackPetsitterListAll(start, end, searchOption, keyword);
+	}
+
+	@Override
+	public int countAricleBlackPetsitter(String searchOption, String keyword) {
+		return adminDao.countAricleBlackPetsitter(searchOption, keyword);
 	}
 
 

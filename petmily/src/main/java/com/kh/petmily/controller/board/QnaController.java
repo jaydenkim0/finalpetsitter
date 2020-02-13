@@ -1,5 +1,7 @@
 package com.kh.petmily.controller.board;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,12 +109,22 @@ public class QnaController {
 	}
 	//게시글 상세내용 조회
 	@GetMapping("/view")
-	public String view(@ModelAttribute QnaVO qnaVO, Model model)throws Exception{
+	public String view(@ModelAttribute QnaVO qnaVO, 
+			Model model,
+			@RequestParam(required = false) List<MultipartFile> qna_file,
+			@RequestParam int qna_no)throws Exception{
 		model.addAttribute("qnaVO",qnaService.read(qnaVO.getQna_no()));
+		model.addAttribute("qnaImageList",qnaService.qnaImageList(qna_no));
 		List<QnaReplyVO> replyList = qnaReplyService.readReply(qnaVO.getQna_no());
 		model.addAttribute("replyList", replyList);
 		return "board/qna/view";
-	}	
+	}
+	//게시글 이미지 가져오기(사진정보 하나씩)
+	@GetMapping("/view/file_view")
+	public ResponseEntity<ByteArrayResource> fileview(
+			@RequestParam int qna_file_no)throws UnsupportedEncodingException, IOException{
+			return qnaService.fileview(qna_file_no);
+	}
 	//게시글 수정
 	@GetMapping("/update")
 	public String update(@RequestParam int qna_no, Model model)throws Exception{

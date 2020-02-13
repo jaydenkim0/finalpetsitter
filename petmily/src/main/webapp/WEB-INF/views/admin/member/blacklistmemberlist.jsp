@@ -6,7 +6,7 @@
     <script>
 		// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 생성
 		function list(page){
-			location.href="${pageContext.request.contextPath}/admin/list/member?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
+			location.href="${pageContext.request.contextPath}/admin/list/blacklistmember?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
 			}
 	</script>
      <style>
@@ -22,17 +22,15 @@
 	 }
 	</style>
      
-	<h3>회원 리스트</h3>	
+	<h3> 경고 회원 리스트</h3>	
 	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
 	
 	<!-- 검색 기능 -->
-	<form method="post" action="${pageContext.request.contextPath}/admin/list/member">
-		<select name="searchOption" onchange="doChange(this, 'selTwo')">		
-			<option value="id"  >아이디</option>
-			<option value="name"  >이름</option>
-			<option value="nick"  >닉네임</option>
-			<option value="grade" >등급</option>
+	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistmember">
+		<select name="searchOption" >		
+			<option value="black_id"  >아이디</option>
+			<option value="black_name"  >이름</option>
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
 		<input type="submit" value="검색">
@@ -43,41 +41,16 @@
 
 
 	<!-- 리스트 내용 -->
-	<c:forEach var="member"  items="${list}">		
-		<c:choose>				
-			<c:when test="${member.grade eq 'petsitter' && member.black_count > 0}">
-					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
-					style="color:red;">
-					<h4>아이디 : ${member.id},
-					이름 : ${member.name},
-					닉네임 : ${member.nick},
-					이메일 : ${member.email}
-					(${member.black_count})
-					</h4>						
-					</a>						
-			</c:when>				
-			<c:when test="${member.grade eq 'member' && member.black_count > 0}">
-					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" 
-					style="color:#ff8d00;">
-					<h4>아이디 : ${member.id},
-					이름 : ${member.name},
-					닉네임 : ${member.nick},
-					이메일 : ${member.email}
-					(${member.black_count})
-					</h4>						
-					</a>						
-			</c:when>					
-			<c:otherwise>
-					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${member.id}" >
-					<h4>아이디 : ${member.id},
-					이름 : ${member.name},
-					닉네임 : ${member.nick},
-					이메일 : ${member.email}
-					</h4>						
-					</a>		
-			</c:otherwise>
-			</c:choose>							
-	</c:forEach>		
+	※경고 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
+	<c:forEach var="memberblacklist" items="${list}">      
+        <a href="${pageContext.request.contextPath }/admin/blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 
+    	<h3>아이디 : ${memberblacklist.black_id},    	
+	    	이름 : ${memberblacklist.black_name},   	
+	    	전화번호 : ${memberblacklist.black_phone},    	
+	    	등급 : ${memberblacklist.black_grade},      	
+	    	</h3>
+	    	</a>  	
+    </c:forEach>
 
 
 

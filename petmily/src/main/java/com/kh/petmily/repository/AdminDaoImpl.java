@@ -47,11 +47,11 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.admincount");
 	}
 	
-	// 회원리스트
-	@Override
-	public List<MemberVO> getMemberList() {		
-		return sqlSession.selectList("admin.memberList");
-	}
+//	// 회원리스트
+//	@Override
+//	public List<MemberVO> getMemberList() {		
+//		return sqlSession.selectList("admin.memberList");
+//	}
 
 	// 펫시터 리스트
 	@Override
@@ -240,41 +240,41 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectList("admin.getPets", id);
 	}
 	
-	// 회원관리 페이지에서 회원 검색
-	@Override
-	public List<MemberVO> memberSearchList(String type, String keyword) {
-		Map<String, String> param = new HashMap();
-		param.put("type", type);
-		param.put("keyword", keyword);		
-		return sqlSession.selectList("admin.memberSearchList", param);
-	}
-	
-	// 펫시터 관리 페이지에서 펫시터 검색
-	@Override
-	public List<PetsitterVO> petsitterSearch(String type, String keyword) {
-		Map<String, String> param = new HashMap();
-		param.put("type", type);
-		param.put("keyword", keyword);		
-		return sqlSession.selectList("admin.petsitterSearchList", param);	
-	}
-	
-	// 펫시터 관리 페이지에서 펫시터 신청 검색
-	@Override
-	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
-		Map<String, String> param = new HashMap();
-		param.put("type", type);
-		param.put("keyword", keyword);		
-		return sqlSession.selectList("admin.petsitterSearchApply", param);	
-	}
-
-	// 펫시터 관리 페이지에서 휴면펫시터 검색
-	@Override
-	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
-		Map<String, String> param = new HashMap();
-		param.put("type", type);
-		param.put("keyword", keyword);		
-		return sqlSession.selectList("admin.petsitterSearchSleep", param);	
-	}
+//	// 회원관리 페이지에서 회원 검색
+//	@Override
+//	public List<MemberVO> memberSearchList(String type, String keyword) {
+//		Map<String, String> param = new HashMap();
+//		param.put("type", type);
+//		param.put("keyword", keyword);		
+//		return sqlSession.selectList("admin.memberSearchList", param);
+//	}
+//	
+//	// 펫시터 관리 페이지에서 펫시터 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearch(String type, String keyword) {
+//		Map<String, String> param = new HashMap();
+//		param.put("type", type);
+//		param.put("keyword", keyword);		
+//		return sqlSession.selectList("admin.petsitterSearchList", param);	
+//	}
+//	
+//	// 펫시터 관리 페이지에서 펫시터 신청 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
+//		Map<String, String> param = new HashMap();
+//		param.put("type", type);
+//		param.put("keyword", keyword);		
+//		return sqlSession.selectList("admin.petsitterSearchApply", param);	
+//	}
+//
+//	// 펫시터 관리 페이지에서 휴면펫시터 검색
+//	@Override
+//	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
+//		Map<String, String> param = new HashMap();
+//		param.put("type", type);
+//		param.put("keyword", keyword);		
+//		return sqlSession.selectList("admin.petsitterSearchSleep", param);	
+//	}
 	
 	// 블랙리스트 등록 여부 검사
 	@Override
@@ -396,12 +396,12 @@ public class AdminDaoImpl implements AdminDao {
 
 	///////////////////////////////////////////////////////
 
-	// 회원 페이징 리스트
+	// 회원 페이징 리스트 (검색포함)
 	@Override
-	public List<MemberVO> memberListAll(int start, int end, String searchPtion, String keyword) {
+	public List<MemberVO> memberListAll(int start, int end, String searchOption, String keyword) {
 		// 검색옵션, 키워드 맵에 저장
 		Map<String, Object> param = new HashMap<>();
-		param.put("searchPtion", searchPtion);
+		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		param.put("start", start);
 		param.put("end", end);		
@@ -409,11 +409,105 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	// 회원 리스트 총 카운트 불러오기
 	@Override
-	public int countAricle(String searchPtion, String keyword) {
+	public int countAricle(String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();
-		param.put("searchPtion", searchPtion);
+		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countArticle", param);
+	}
+
+	// 펫시터 페이징 리스트(검색포함)
+	@Override
+	public List<PetsitterVO> petsitterListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterListAll", param);
+	}
+	// 펫시터 리스트 총 카운트 불러오기(페이징에 필요)
+	@Override
+	public int countAriclePetsitter(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitter", param);
+	}
+
+	// 펫시터 승인 페이징 리스트(검색포함)
+	@Override
+	public List<PetsitterVO> petsitterApplyListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterApplyListAll", param);
+	}
+	// 펫시터 승인 페이징 리스트(검색포함)
+	@Override
+	public int countAriclePetsitterApply(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitterApply", param);
+	}
+
+	// 휴면 펫시터 리스트
+	@Override
+	public List<PetsitterVO> petsitterSleepListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.petsitterSleepListAll", param);
+	}
+	// 휴면 펫시터 카운트
+	@Override
+	public int countAriclePetsitterSleep(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclePetsitterSleep", param);
+	}
+
+	// 경고 회원 리스트
+	@Override
+	public List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.blackMemberListAll", param);
+	}
+	// 경고 회원 카운트
+	@Override
+	public int countAricleBlackMember(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAricleBlackMember", param);
+	}
+
+	@Override
+	public List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.blackPetsitterListAll", param);
+	}
+
+	@Override
+	public int countAricleBlackPetsitter(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAricleBlackPetsitter", param);
 	}
 
 
