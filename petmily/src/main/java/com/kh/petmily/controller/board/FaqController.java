@@ -1,5 +1,7 @@
 package com.kh.petmily.controller.board;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,11 +97,19 @@ public class FaqController {
 	}
 	//게시글 상세내용 조회
 	@GetMapping("/view")
-	public ModelAndView view(@RequestParam int faq_no, HttpSession session)throws Exception{
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/faq/view");
-		mav.addObject("faqVO", faqService.read(faq_no));
-		return mav;
+	public String view(@RequestParam int faq_no, 
+			@RequestParam(required = false) List<MultipartFile> faq_file,
+			Model model)throws Exception{
+		model.addAttribute("faqVO", faqService.read(faq_no));
+		model.addAttribute("faqImageList",faqService.faqImageList(faq_no));
+		model.addAttribute("faq_file",faq_file);
+		return "board/faq/view";
+	}
+	//게시글 이미지 가져오기(사진정보 한장씩)
+	@GetMapping("/view/file_view")
+	public ResponseEntity<ByteArrayResource> fileview(
+			@RequestParam int faq_file_no)throws UnsupportedEncodingException, IOException{
+			return faqService.fileview(faq_file_no);
 	}
 	//게시글 수정
 	@GetMapping("/update")
