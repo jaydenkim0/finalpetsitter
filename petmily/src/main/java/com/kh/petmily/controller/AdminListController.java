@@ -47,7 +47,7 @@ public class AdminListController {
 	
 	
 	// 펫시터 리스트 
-	@GetMapping("/petsitter")
+	@RequestMapping("/petsitter")
 	public String petsitterList(@RequestParam(defaultValue = "id", required = false) String searchOption,
 												@RequestParam(defaultValue = "", required = false) String keyword,
 												@RequestParam(defaultValue = "1", required = false) int curPage,										
@@ -71,7 +71,7 @@ public class AdminListController {
 	}
 	
 	// 펫시터 신청 리스트
-	@GetMapping("/petsitterapply")
+	@RequestMapping("/petsitterapply")
 	public String petsitterApplyList(@RequestParam(defaultValue = "id", required = false) String searchOption,
 														@RequestParam(defaultValue = "", required = false) String keyword,
 														@RequestParam(defaultValue = "1", required = false) int curPage,										
@@ -95,7 +95,7 @@ public class AdminListController {
 	}
 	
 	// 휴면 펫시터 리스트
-	@GetMapping("/petsittersleep")
+	@RequestMapping("/petsittersleep")
 	public String petsitterSleepList(@RequestParam(defaultValue = "id", required = false) String searchOption,
 														@RequestParam(defaultValue = "", required = false) String keyword,
 														@RequestParam(defaultValue = "1", required = false) int curPage,										
@@ -118,53 +118,53 @@ public class AdminListController {
 		return "admin/petsitter/petsittersleeplist";
 	}
 	
-//	// 경고 회원 리스트
-//	@GetMapping("/blacklistmember")
-//	public String blackListMemberList (@RequestParam(defaultValue = "id", required = false) String searchOption,
-//															 @RequestParam(defaultValue = "", required = false) String keyword,
-//														     @RequestParam(defaultValue = "1", required = false) int curPage,										
-//														 	 Model model) {
-//		// 레코드의 갯수 계산
-//		int count = adminService.countAricleBlackMember(searchOption, keyword);
-//		
-//		// 페이지 나누기 관련 처리
-//		NaviVO navi = new NaviVO(count, curPage);
-//		
-//		int start = navi.getPageBegin();
-//		int end = navi.getPageEnd();
-//		
-//		// 리스트 불러오기
-//		model.addAttribute("list", (List<PetsitterVO>) adminService.blackMemberListAll(start, end, searchOption, keyword))
-//				  .addAttribute("count", count)
-//				  .addAttribute("searchOption", searchOption)
-//				  .addAttribute("keyword", keyword)
-//				  .addAttribute("navi", navi);		
-//		return "admin/petsitter/blacklistmemberlist";
-//	}
-//	
-//	// 경고 펫시터 리스트
-//	@GetMapping("/blacklistsitter")
-//	public String blackListSitterList(@RequestParam(defaultValue = "id", required = false) String searchOption,
-//														@RequestParam(defaultValue = "", required = false) String keyword,
-//														@RequestParam(defaultValue = "1", required = false) int curPage,										
-//														Model model) {
-//		// 레코드의 갯수 계산
-//		int count = adminService.countAricleBlackPetsitter(searchOption, keyword);
-//		
-//		// 페이지 나누기 관련 처리
-//		NaviVO navi = new NaviVO(count, curPage);
-//		
-//		int start = navi.getPageBegin();
-//		int end = navi.getPageEnd();
-//		
-//		// 리스트 불러오기
-//		model.addAttribute("list", (List<PetsitterVO>) adminService.blackPetsitterListAll(start, end, searchOption, keyword))
-//				  .addAttribute("count", count)
-//				  .addAttribute("searchOption", searchOption)
-//				  .addAttribute("keyword", keyword)
-//				  .addAttribute("navi", navi);		
-//		return "admin/petsitter/blacklistsitterlist";
-//	}
+	// 경고 회원 리스트
+	@RequestMapping("/blacklistmember")
+	public String blackListMemberList (@RequestParam(defaultValue = "black_id", required = false) String searchOption,
+															 @RequestParam(defaultValue = "", required = false) String keyword,
+														     @RequestParam(defaultValue = "1", required = false) int curPage,										
+														 	 Model model) {
+		// 레코드의 갯수 계산
+		int count = adminService.countAricleBlackMember(searchOption, keyword);
+		
+		// 페이지 나누기 관련 처리
+		NaviVO navi = new NaviVO(count, curPage);
+		
+		int start = navi.getPageBegin();
+		int end = navi.getPageEnd();
+		
+		// 리스트 불러오기
+		model.addAttribute("list", (List<PetsitterVO>) adminService.blackMemberListAll(start, end, searchOption, keyword))
+				  .addAttribute("count", count)
+				  .addAttribute("searchOption", searchOption)
+				  .addAttribute("keyword", keyword)
+				  .addAttribute("navi", navi);		
+		return "admin/member/blacklistmemberlist";
+	}
+	
+	// 경고 펫시터 리스트
+	@RequestMapping("/blacklistsitter")
+	public String blackListSitterList(@RequestParam(defaultValue = "black_id", required = false) String searchOption,
+														@RequestParam(defaultValue = "", required = false) String keyword,
+														@RequestParam(defaultValue = "1", required = false) int curPage,										
+														Model model) {
+		// 레코드의 갯수 계산
+		int count = adminService.countAricleBlackPetsitter(searchOption, keyword);
+		
+		// 페이지 나누기 관련 처리
+		NaviVO navi = new NaviVO(count, curPage);
+		
+		int start = navi.getPageBegin();
+		int end = navi.getPageEnd();
+		
+		// 리스트 불러오기
+		model.addAttribute("list", (List<PetsitterVO>) adminService.blackPetsitterListAll(start, end, searchOption, keyword))
+				  .addAttribute("count", count)
+				  .addAttribute("searchOption", searchOption)
+				  .addAttribute("keyword", keyword)
+				  .addAttribute("navi", navi);		
+		return "admin/petsitter/blacklistsitterlist";
+	}
 	
 	
 }

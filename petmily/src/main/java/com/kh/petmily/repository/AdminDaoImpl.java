@@ -454,6 +454,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countAriclePetsitterApply", param);
 	}
 
+	// 휴면 펫시터 리스트
 	@Override
 	public List<PetsitterVO> petsitterSleepListAll(int start, int end, String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();
@@ -463,13 +464,50 @@ public class AdminDaoImpl implements AdminDao {
 		param.put("end", end);		
 		return sqlSession.selectList("admin.petsitterSleepListAll", param);
 	}
-
+	// 휴면 펫시터 카운트
 	@Override
 	public int countAriclePetsitterSleep(String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countAriclePetsitterSleep", param);
+	}
+
+	// 경고 회원 리스트
+	@Override
+	public List<PetsitterVO> blackMemberListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.blackMemberListAll", param);
+	}
+	// 경고 회원 카운트
+	@Override
+	public int countAricleBlackMember(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAricleBlackMember", param);
+	}
+
+	@Override
+	public List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.blackPetsitterListAll", param);
+	}
+
+	@Override
+	public int countAricleBlackPetsitter(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAricleBlackPetsitter", param);
 	}
 
 

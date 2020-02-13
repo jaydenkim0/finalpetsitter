@@ -54,5 +54,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		     <typeAlias type="com.kh.petmily.vo.MemberPetsVO" alias="memberPetsVO"/>   
 		     <typeAlias type="com.kh.petmily.entity.BankImageDto" alias="bankImageDto"/>   
 		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterPetsVO" alias="petsitterPetsVO"/>	
+		     <typeAlias type="com.kh.petmily.vo.petsitter.SitterlocationVO" alias="sitterlocationVO"/>	
 	</typeAliases>
 </configuration>

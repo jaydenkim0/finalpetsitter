@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,17 +54,51 @@ public class CareController {
 	@GetMapping("/list")
 	public String list(
 			Model model,
-			HttpSession session
-			) {
-		
-		List<CarePetsitterDto> list  = careService.pet_sitter_list();
-		model.addAttribute("list",list);
+			HttpSession session,
+			HttpServletRequest req,
+			HttpServletResponse resp
+			) throws Exception{
 		
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+		
+		int pagesize = 10;
+		int navsize = 10;
+		int pno;
+		try {
+			pno = Integer.parseInt(req.getParameter("pno"));
+			if(pno <= 0) throw new Exception();
+		}
+		catch(Exception e) {
+			pno = 1;
+		}
+		int finish = pno * pagesize;
+		int start = finish - (pagesize -1);
+		
+		String type = req.getParameter("type");
+		String keyword = req.getParameter("keyword");
+		
+		boolean isSearch = type != null && keyword != null;
+		
+		List<CarePetsitterDto> list; 
+		int count;
+		
+//		if(isSearch) {
+			
+//		}
+//		else {
+			list = careService.pet_sitter_list(start,finish);
+			count = careService.getListCount();
+//		}
+		
+		model.addAttribute("pno",pno);
+		model.addAttribute("count",count);
+		model.addAttribute("pagesize",pagesize);
+		model.addAttribute("navsize",navsize);
+		model.addAttribute("list",list);
 		
 		return "board/care/list";
 	}
@@ -111,7 +147,9 @@ public class CareController {
 	public String content(
 			@RequestParam String care_board_no,
 			HttpSession session,
-			Model model) {
+			Model model,
+			HttpServletRequest req,
+			HttpServletResponse resp) throws Exception{
 		
 		model.addAttribute("care_board_no",care_board_no);
 		CareDto list = careService.list(care_board_no);
@@ -120,15 +158,35 @@ public class CareController {
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
 
-		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
-		model.addAttribute("replyimagelist",replyimagelist);
-
 		//세션 값 보내기
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
 
+		int pagesize = 10;
+		int navsize = 10;
+		int pno;
+		try {
+			pno = Integer.parseInt(req.getParameter("pno"));
+			if(pno <=0) throw new Exception();
+		}
+		catch(Exception e){
+			pno = 1;
+		}
+		int finish = pno * pagesize;
+		int start = finish - (pagesize - 1);
+		
+		int count = careService.getCount(care_board_no);
+		
+		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no,start,finish);
+		model.addAttribute("replyimagelist",replyimagelist);
+		model.addAttribute("pagesize",pagesize);
+		model.addAttribute("navsize",navsize);
+		model.addAttribute("pno",pno);
+		model.addAttribute("count",count);
+		
+		
 		return "board/care/content";
 	}
 	
