@@ -37,7 +37,7 @@
 				기본주소:
 				<input type="text"  name="basic_addr" value=${member.basic_addr}><br>
 				상세주소:
-				<input type="text"  name="extra_addr" value=${member.extra_addr}><br>
+				<input type="text"  name="extra_addr" value=${member.extra_addr}><br><br>
 				
 				
 				<button type="submit" >회원정보수정</button><br><br>

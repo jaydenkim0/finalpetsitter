@@ -67,4 +67,16 @@ public interface CareDao {
 	//검색X돌봄방개수
 	int getListCount();
 
+	//care_board_no 검색개수
+	int getListCount_care_board_no(String keyword);
+
+	//care_member_id 검색개수
+	int getListCount_care_member_id(String keyword);
+
+	//care_sitter_id 검색개수.
+	int getListCount_care_sitter_no(String keyword);
+
+	//care_board_content 검색개수
+	int getListCount_care_board_content(String keyword);
+
 }
