@@ -24,7 +24,6 @@ import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -103,7 +102,7 @@ public class AdminController {
 		//		3 .펫시터 휴면 리스트	
 		model.addAttribute("petsitterList", (List<PetsitterVO>) adminService.petsitterList())
 				  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())
-				  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
+				  .addAttribute("petsittersleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
 //				// 펫시터 관리페이지에서 펫시터 검색
