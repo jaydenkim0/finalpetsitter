@@ -154,7 +154,7 @@
 
 <!-- 댓글 등록 -->
 <form action="replywrite" method="post" class="reply_submit">
-	<table border="1" width="100%">
+	<br><table border="1" width="100%">
 		<tr>
 			<td align="right"><input type="hidden" id="origin" name="origin"
 				value="${qnaVO.qna_no}"><br> <input type="text"
