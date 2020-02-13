@@ -134,12 +134,11 @@
 			<tr>
 				<td>${qnaVO.qna_content}</td>
 			</tr>
-		</table>
+		</table><br>
 
 
 		<c:forEach var="qnaImage" items="${qnaImageList}">
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
-				<h2>첨부내용</h2>
 				<tr>
 					<td><img
 						src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}"></td>

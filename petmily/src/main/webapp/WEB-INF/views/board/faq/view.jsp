@@ -61,11 +61,10 @@
 			<tr>
 				<td>${faqVO.faq_content}</td>
 			</tr>
-		</table>
+		</table><br>
 
 		<c:forEach var="faqImage" items="${faqImageList}">
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
-				<h2>첨부내용</h2>
 				<tr>
 					<td><img
 						src="${context}/board/faq/view/file_view?faq_file_no=${faqImage.faq_file_no}"></td>
