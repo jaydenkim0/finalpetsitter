@@ -7,6 +7,7 @@
  -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <c:set var="type" value="${param.type}"></c:set>
 <c:set var="keyword" value="${param.keyword}"></c:set> 
@@ -15,6 +16,7 @@
 <c:set var="count" value="${param.count}"></c:set> 
 <c:set var="navsize" value="${param.navsize}"></c:set> 
 <c:set var="pagesize" value="${param.pagesize}"></c:set> 
+<c:set var="care_board_no" value="${param.care_board_no }"></c:set>
 
 <!-- EL은 parseInt가 없기 때문에 fmt의 formatNumber 태그를 통해 처리 -->
 <fmt:parseNumber var="startBlock" integerOnly="true" value="${(pno - 1) / navsize}"></fmt:parseNumber>
@@ -23,22 +25,28 @@
 <fmt:parseNumber var="pageCount" value="${(count + pagesize) / pagesize}"></fmt:parseNumber>
 
 <c:if test="${finishBlock > pageCount}">
-	<c:set var="finishBlock" value="${pageCount}"></c:set>
+<c:choose>
+	<c:when test="${param.count%param.pagesize==0 }">
+		<c:set var="finishBlock" value="${pageCount-1}"></c:set>
+	</c:when>
+	<c:otherwise>
+		<c:set var="finishBlock" value="${pageCount}"></c:set>
+	</c:otherwise>
+</c:choose>
 </c:if>
 
 <!-- 포워딩 구조에서는 주소 확인 명령이 달라짐 -->
 <c:set var="uri" value="${requestScope['javax.servlet.forward.request_uri']}"></c:set>
-
 <ul class="page-navigator">
 
 	<!-- 이전 버튼 -->
 	<c:if test="${startBlock > 1}">
 		<c:choose>
 			<c:when test="${isSearch}">
-				<li><a href="${uri}?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
+				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${uri}?care_board_no=${care_board_no }&pno=${startBlock-1}">이전</a></li>
+				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${startBlock-1}">이전</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -51,10 +59,10 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${isSearch}">
-						<li><a href="${uri}?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${i}">${i}</a></li>
+						<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${i}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="${uri}?care_board_no=${care_board_no }&pno=${i}">${i}</a></li>
+						<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -62,15 +70,14 @@
 	</c:forEach>
     
     <!-- 다음 버튼 -->
-    <c:if test="${finishBlock < pageCount}">
+    <c:if test="${finishBlock+1 < pageCount}">
     	<c:choose>
 			<c:when test="${isSearch}">
-				<li><a href="${uri}?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
+				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${uri}?care_board_no=${care_board_no }&pno=${finishBlock+1}">다음</a></li>	
+				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${finishBlock+1}">다음</a></li>	
 			</c:otherwise>
 		</c:choose>
 	</c:if>
-    
 </ul>
