@@ -145,7 +145,7 @@
 <h1>돌봄 방 ${care_board_no }</h1><br>
 
 
-<c:if test="${list.care_member_id==id || grade=='admin'}">
+<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
 </c:if>
 
@@ -176,7 +176,7 @@
 		<th>방 제목</th>
 		<td class="content_view">
 			${list.care_board_content }
-			<c:if test="${list.care_member_id==id || grade=='admin'}">
+			<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
 			<button class="content_change">변경</button>
 			</c:if>
 		</td>
@@ -197,23 +197,23 @@
 
 <!-- 댓글 등록 -->
 
-
-<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
-	<table border="1" width="100%">
-		<tr>
-			<td>
-				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
-				<input type="hidden" name="care_reply_writer" value="${id }">
-				<textarea name="care_reply_content" required></textarea>
-				<input type="file" name="care_image" multiple accept="image/*">
-			</td>
-			<td align="right">
-				<input type="submit" value="등록" class="reply_regist_btn">
-			</td>
-		</tr>
-	</table>
-</form>
-
+<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin' || sitter_id==id}">
+	<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
+		<table border="1" width="100%">
+			<tr>
+				<td>
+					<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
+					<input type="hidden" name="care_reply_writer" value="${id }">
+					<textarea name="care_reply_content" required></textarea>
+					<input type="file" name="care_image" multiple accept="image/*">
+				</td>
+				<td align="right">
+					<input type="submit" value="등록" class="reply_regist_btn">
+				</td>
+			</tr>
+		</table>
+	</form>
+</c:if>
 
 <!-- 댓글 목록 -->
 
@@ -255,7 +255,7 @@
 		
 		<!-- 댓글 관리 -->
 		
-		<c:if test="${replyimagelist.care_reply_writer==id || grade=='admin'}">
+		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
 				<button class="reply_edit_btn">완료</button>

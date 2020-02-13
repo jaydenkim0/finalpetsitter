@@ -28,19 +28,29 @@
 			<td>${list.sitter_id }</td>
 			<td>
 				<c:choose>
-				<c:when test="${list.care_member_id==id || grade=='admin'||list.sitter_id==id}">
-				<a href="password?care_board_no=${list.care_board_no }">
-					${list.care_board_content }
-				</a>
-				</c:when>
-				<c:otherwise>
-					${list.care_board_content }
-				</c:otherwise>
+					<c:when test="${list.care_member_id == 'null' }">
+						${list.care_board_content }
+					</c:when>
+					<c:when test="${list.care_member_id==id || grade=='admin'||list.sitter_id==id}">
+						<c:choose>
+							<c:when test="${id==null }">
+								${list.care_board_content }
+							</c:when>
+							<c:otherwise>
+								<a href="password?care_board_no=${list.care_board_no }">
+									${list.care_board_content }
+								</a>						
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						${list.care_board_content }
+					</c:otherwise>
 				</c:choose>
 			</td>
 			<td>${list.writedateWithFormat }</td>
 			<td>
-			<c:if test="${list.care_member_id==id || grade=='admin'}">
+			<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
 				<a href="delete?care_board_no=${list.care_board_no }"><button>방 삭제</button></a>
 			</c:if>
 			</td>
