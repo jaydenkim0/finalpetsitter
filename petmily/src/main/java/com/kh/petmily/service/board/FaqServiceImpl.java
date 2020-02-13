@@ -2,6 +2,7 @@ package com.kh.petmily.service.board;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,6 +108,28 @@ public class FaqServiceImpl implements FaqService {
 			mf.transferTo(target);
 			faqfileDao.uploadfaq(faqfileDto);
 		}
+	}
+	//게시글에 있는 이미지가 몇개인지 가지고오기
+	@Override
+	public List<FaqFileDto> faqImageList(int faq_no) {
+		return faqfileDao.faqImageList(faq_no);
+	}
+	//게시글 이미지 가져오기(사진정보 한장씩)
+	@Override
+	public ResponseEntity<ByteArrayResource> fileview(int faq_file_no)
+			throws UnsupportedEncodingException, IOException {
+		FaqFileDto faqfileDto = faqfileDao.fileview(faq_file_no);
+		//실제파일 불러오기
+		byte[]data = faqfileDao.physicalFaqImage(faqfileDto.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+					.contentType(MediaType.APPLICATION_OCTET_STREAM)
+					.contentLength(faqfileDto.getFilesize())
+					.header(HttpHeaders.CONTENT_ENCODING,"UTF-8")
+					.header("Content-Disposition",	"attachment; filename=\""
+					+URLEncoder.encode(faqfileDto.getUploadname(),"UTF-8")
+					+"\"")
+					.body(resource);
 	}
 }
 
