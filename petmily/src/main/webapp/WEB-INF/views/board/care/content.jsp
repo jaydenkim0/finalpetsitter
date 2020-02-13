@@ -223,8 +223,15 @@
 <div class="grandmother">
 	<table width="100%" class="mother">
 		<tr>
-			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
-			<th align="right">${replyimagelist.wdate.substring(0,16) }</th>
+			<c:choose>
+				<c:when test="${not empty replyimagelist.care_reply_writer }">
+					<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
+			<th align="right">${replyimagelist.wdateWithFormat }</th>
 		</tr>
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
