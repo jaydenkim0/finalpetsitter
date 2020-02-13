@@ -138,7 +138,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 게시글 수정 -->
-	<update id="qnaupdate">
+	<update id="qnaupdate" parameterType="QnaVO">
 		update Qna set
 		qna_title = #{qna_title},
 		qna_head =
