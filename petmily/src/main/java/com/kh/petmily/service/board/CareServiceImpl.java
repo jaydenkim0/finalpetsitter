@@ -143,8 +143,8 @@ public class CareServiceImpl implements CareService{
 
 	//돌봄댓글&이미지 목록
 	@Override
-	public List<CareReplyImageDto> replyimagelist(String care_board_no) {
-		return careReplyImageDao.replyimagelist(care_board_no);
+	public List<CareReplyImageDto> replyimagelist(String care_board_no, int start, int finish) {
+		return careReplyImageDao.replyimagelist(care_board_no,start,finish);
 	}
 
 	//펫시터 아이디 존재 검사

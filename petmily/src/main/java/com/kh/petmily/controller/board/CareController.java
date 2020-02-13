@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +113,9 @@ public class CareController {
 	public String content(
 			@RequestParam String care_board_no,
 			HttpSession session,
-			Model model) {
+			Model model,
+			HttpServletRequest req,
+			HttpServletResponse resp) throws Exception{
 		
 		model.addAttribute("care_board_no",care_board_no);
 		CareDto list = careService.list(care_board_no);
@@ -120,15 +124,29 @@ public class CareController {
 		String sitter_id  = careService.number_to_id(list.getCare_sitter_no());
 		model.addAttribute("sitter_id",sitter_id);
 
-		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no);
-		model.addAttribute("replyimagelist",replyimagelist);
-
 		//세션 값 보내기
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
 
+		int pagesize = 10;
+		int navsize = 10;
+		int pno;
+		try {
+			pno = Integer.parseInt(req.getParameter("pno"));
+			if(pno <=0) throw new Exception();
+		}
+		catch(Exception e){
+			pno = 1;
+		}
+		int finish = pno * pagesize;
+		int start = finish - (pagesize - 1);
+		
+		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no,start,finish);
+		model.addAttribute("replyimagelist",replyimagelist);
+		
+		
 		return "board/care/content";
 	}
 	
