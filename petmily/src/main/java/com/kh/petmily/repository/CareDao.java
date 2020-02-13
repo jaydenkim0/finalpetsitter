@@ -64,4 +64,7 @@ public interface CareDao {
 	//해당 돌봄 방의 돌봄 댓글 개수 구하기
 	int getCount(String care_board_no);
 
+	//검색X돌봄방개수
+	int getListCount();
+
 }

@@ -27,21 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
 	</select>
-	<!-- 펫시터 번호로 펫시터 아이디 추출 -->
-	<select id="sitter_id" resultType="carePetsitterDto">
-		select
-		 	care_board_no,
-		 	care_member_id,
-		 	sitter_id,
-		 	care_board_content,
-		 	care_pw,
-		 	wdate
-		from
-		 care_board C
-		 	inner join pet_sitter P
-		 	on C.care_sitter_no=P.pet_sitter_no
-		order by wdate desc
-	</select>
+	
 	
 	<!-- 펫시터아이디로 펫시터번호 구하기 -->
 	<select id="id_to_number" parameterType="String" resultType="int">
@@ -174,6 +160,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	</select>
 	
+	
+	<!-- 펫시터 번호로 펫시터 아이디 추출한 게시글 목록 -->
+	<select id="sitter_id" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+					select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
 	<!-- 해당 돌봄방의 돌봄 댓글 개수 구하기 -->
 	<select id="getCount" resultType="int" parameterType="String"> 
 		select count(*) from care_reply where care_reply_board_no=#{care_board_no}
@@ -192,6 +199,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 care_image
 		 where 
 		 	care_image_no = #{care_image_no}
+	</select>
+	
+	<!-- 검색X돌봄방개수 -->
+	<select id="getListCount" resultType="int">
+		select count(*) from care_board
 	</select>
 
 </mapper>

@@ -54,17 +54,51 @@ public class CareController {
 	@GetMapping("/list")
 	public String list(
 			Model model,
-			HttpSession session
-			) {
-		
-		List<CarePetsitterDto> list  = careService.pet_sitter_list();
-		model.addAttribute("list",list);
+			HttpSession session,
+			HttpServletRequest req,
+			HttpServletResponse resp
+			) throws Exception{
 		
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
 		
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
+		
+		int pagesize = 10;
+		int navsize = 10;
+		int pno;
+		try {
+			pno = Integer.parseInt(req.getParameter("pno"));
+			if(pno <= 0) throw new Exception();
+		}
+		catch(Exception e) {
+			pno = 1;
+		}
+		int finish = pno * pagesize;
+		int start = finish - (pagesize -1);
+		
+		String type = req.getParameter("type");
+		String keyword = req.getParameter("keyword");
+		
+		boolean isSearch = type != null && keyword != null;
+		
+		List<CarePetsitterDto> list; 
+		int count;
+		
+//		if(isSearch) {
+			
+//		}
+//		else {
+			list = careService.pet_sitter_list(start,finish);
+			count = careService.getListCount();
+//		}
+		
+		model.addAttribute("pno",pno);
+		model.addAttribute("count",count);
+		model.addAttribute("pagesize",pagesize);
+		model.addAttribute("navsize",navsize);
+		model.addAttribute("list",list);
 		
 		return "board/care/list";
 	}

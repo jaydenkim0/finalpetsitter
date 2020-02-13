@@ -20,7 +20,7 @@ public interface CareService {
 	List<CareDto> list();
 
 	//게시글목록(펫시터아이디)
-	List<CarePetsitterDto> pet_sitter_list();
+	List<CarePetsitterDto> pet_sitter_list(int start,int finish);
 
 	
 	//펫시터아이디로 펫시터번호 구하기
@@ -74,5 +74,8 @@ public interface CareService {
 
 	//해당 돌봄 방의 돌봄댓글 개수구하기
 	int getCount(String care_board_no);
+
+	//검색X돌봄방개수
+	int getListCount();
 
 }

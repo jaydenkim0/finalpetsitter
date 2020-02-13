@@ -133,4 +133,10 @@ public class CareDaoImpl implements CareDao{
 		return sqlSession.selectOne("care.getCount",care_board_no);
 	}
 
+	//검색X돌봄방개수
+	@Override
+	public int getListCount() {
+		return sqlSession.selectOne("care.getListCount");
+	}
+
 }

@@ -1,6 +1,8 @@
 package com.kh.petmily.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,10 @@ public class CarePetsitterDaoImpl implements CarePetsitterDao{
 	
 	//게시글목록
 	@Override
-	public List<CarePetsitterDto> pet_sitter_list() {
-		return sqlSession.selectList("care.sitter_id");
+	public List<CarePetsitterDto> pet_sitter_list(int start,int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("finish",finish);
+		return sqlSession.selectList("care.sitter_id",map);
 	}
-
 }
