@@ -72,4 +72,7 @@ public interface CareService {
 	ResponseEntity<ByteArrayResource> image(int care_image_no) 
 			throws UnsupportedEncodingException, IOException;
 
+	//해당 돌봄 방의 돌봄댓글 개수구하기
+	int getCount(String care_board_no);
+
 }

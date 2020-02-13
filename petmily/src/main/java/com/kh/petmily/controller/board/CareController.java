@@ -143,11 +143,14 @@ public class CareController {
 		int finish = pno * pagesize;
 		int start = finish - (pagesize - 1);
 		
+		int count = careService.getCount(care_board_no);
+		
 		List<CareReplyImageDto> replyimagelist = careService.replyimagelist(care_board_no,start,finish);
 		model.addAttribute("replyimagelist",replyimagelist);
 		model.addAttribute("pagesize",pagesize);
 		model.addAttribute("navsize",navsize);
 		model.addAttribute("pno",pno);
+		model.addAttribute("count",count);
 		
 		
 		return "board/care/content";

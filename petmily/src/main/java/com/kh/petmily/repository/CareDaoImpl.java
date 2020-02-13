@@ -127,4 +127,10 @@ public class CareDaoImpl implements CareDao{
 		return data;
 	}
 
+	//해당 돌봄 방의 돌봄댓글 개수 구하기
+	@Override
+	public int getCount(String care_board_no) {
+		return sqlSession.selectOne("care.getCount",care_board_no);
+	}
+
 }

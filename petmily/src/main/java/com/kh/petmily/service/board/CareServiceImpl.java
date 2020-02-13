@@ -169,4 +169,10 @@ public class CareServiceImpl implements CareService{
 				.body(resource);
 	}
 
+	//해당 돌봄방의 돌봄 댓글 개수 구하기
+	@Override
+	public int getCount(String care_board_no) {
+		return careDao.getCount(care_board_no);
+	}
+
 }
