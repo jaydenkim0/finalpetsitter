@@ -77,6 +77,23 @@ public class PetsitterVO {
 	      return time;
 	   }
 	
+	//은행 계좌 통합 
+	public String getTotal_account() {
+		if(sitter_bankname != null && sitter_bank_account != null) {
+			return "["+getSitter_bankname()+"}"+""+getSitter_bank_account();
+		}
+		else {
+			return"";
+		}
+	}
 	
-
+	//주소 통합
+	public String otal_addr() {
+		if(post != null && basic_addr != null && extra_addr != null) {
+			return "["+getPost()+"]"+""+getBasic_addr()+""+getExtra_addr();
+		}
+		else {
+			return"";
+		}
+	}
 }
