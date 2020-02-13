@@ -14,7 +14,17 @@
 	    padding: 20px;
 	    overflow-y: auto;
 	    box-shadow: inset 1px 1px 7px rgba(0,0,0,0.1);
-	}
+	}	
+	 a button{
+	 	background: #ad3a11;
+	    padding: 7px 14px;
+	    color: #fff;
+	    border: 0;
+	    font-weight: bold;
+	 }
+	  a:hover button{
+	 	background: rgba(173, 58, 17, 0.78);
+	 }		
     </style>
        <!-- 
     	이용약관에

@@ -2,12 +2,18 @@ package com.kh.petmily.service.board;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -101,6 +107,25 @@ public class QnaServiceImpl implements QnaService{
 			qnafileDao.uploadqna(qnafileDto);
 		}
 	}
-
+	//게시글에 있는 이미지가 몇개인지 가지고 오기
+	@Override
+	public List<QnaFileDto> qnaImageList(int qna_no) {
+		return qnafileDao.qnaImageList(qna_no);
 	}
+	//게시글 이미지 가져오기(사진정보 한장씩)
+	@Override
+	public ResponseEntity<ByteArrayResource> fileview(int qna_file_no) throws UnsupportedEncodingException, IOException{
+		QnaFileDto qnafileDto = qnafileDao.fileview(qna_file_no);
+		byte[]data = qnafileDao.physicalQnaImage(qnafileDto.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(qnafileDto.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING,"UTF-8")
+				.header("Content-Disposition",	"attachment; filename=\""
+				+URLEncoder.encode(qnafileDto.getUploadname(),"UTF-8")
+				+"\"")
+				.body(resource);
+	}
+}
 

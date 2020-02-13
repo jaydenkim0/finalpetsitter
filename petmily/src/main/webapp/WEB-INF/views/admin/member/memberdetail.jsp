@@ -5,7 +5,7 @@
     
 	<h3> 회원 관리 </h3>
 	
-	<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 페이지로 이동</button></a>
+	<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 리스트로 이동</button></a>
 	
 	<h3>	회원	정보</h3>		
 	<table>
