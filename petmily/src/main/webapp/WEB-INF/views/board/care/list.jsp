@@ -2,6 +2,17 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>돌봄게시판</h1>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+<c:choose>
+	<c:when test="${sessionScope.id eq null }">
+		<a href="${context}/member/login"><button>로그인</button></a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href = "${context}/member/logout"><button>로그아웃</button></a>
+	</c:otherwise>
+</c:choose>
+<br><br>
 <c:if test="${not empty id}">
 <a href="write"><button>방 만들기</button></a><br><br>
 </c:if>
