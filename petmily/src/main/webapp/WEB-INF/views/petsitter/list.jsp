@@ -4,13 +4,13 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
    <script>
    function list(page){
-		console.log("키워드");
+// 		console.log("키워드");
 	   if("${cityKeyword}" === "" && "${areaKeyword}" === ""){
 			location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page;
-			 console.log("키워드 없음");
+// 			 console.log("키워드 없음");
 		}else{
 			location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page+"&cityKeyword=${cityKeyword}"+"&areaKeyword=${areaKeyword}";			
-			console.log("키워드 있음");
+// 			console.log("키워드 있음");
 		}
 	}
    </script>
