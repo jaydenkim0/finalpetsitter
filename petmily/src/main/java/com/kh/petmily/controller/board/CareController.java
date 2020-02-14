@@ -65,7 +65,7 @@ public class CareController {
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
 		
-		int pagesize = 10;
+		int pagesize = 20;
 		int navsize = 10;
 		int pno;
 		try {
@@ -86,13 +86,25 @@ public class CareController {
 		List<CarePetsitterDto> list; 
 		int count;
 		
-//		if(isSearch) {
-			
-//		}
-//		else {
+		if(isSearch) {
+			if(type.equals("care_board_no")) {
+				list = careService.pet_sitter_list_care_board_no(keyword,start,finish);
+				count = careService.getListCount_care_board_no(keyword);
+			}else if(type.equals("care_member_id")) {
+				list = careService.pet_sitter_list_care_member_id(keyword,start,finish);
+				count = careService.getListCount_care_member_id(keyword);
+			}else if(type.equals("sitter_id")) {
+				list = careService.pet_sitter_list_sitter_id(keyword,start,finish);
+				count = careService.getListCount_sitter_id(keyword);
+			}else {
+				list = careService.pet_sitter_list_care_board_content(keyword,start,finish);
+				count = careService.getListCount_care_board_content(keyword);
+			}
+		}
+		else {
 			list = careService.pet_sitter_list(start,finish);
 			count = careService.getListCount();
-//		}
+		}
 		
 		model.addAttribute("pno",pno);
 		model.addAttribute("count",count);

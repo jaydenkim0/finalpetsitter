@@ -135,9 +135,11 @@ public class QnaController {
 	}
 	//게시글 수정 처리
 	@PostMapping("/update")
-	public String update(QnaVO qnaVO)throws Exception{
+	public String update(QnaVO qnaVO,Model model, 
+			@RequestParam int qna_no )throws Exception{
 		qnaService.update(qnaVO);
-		return "redirect:list";
+		model.addAttribute("qna_no", qna_no);
+		return "redirect:/board/qna/view";
 	}
 	//게시글 삭제
 	@RequestMapping("/delete")

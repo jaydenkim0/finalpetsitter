@@ -6,13 +6,61 @@
 -- select 
 
 
+    -- member + blacklist view 삭제
+        drop view memberB;
+    -- member + blacklist view 생성
+        create view memberB as
+        select M.*, p.pet_sitter_no, b.black_count, b.black_no from member M
+        left outer join pet_sitter P on M.id = P.sitter_id
+        left outer join blacklist B on M.id = b.black_id;
+        
+        select * from memberB where id ='petTest';
+        
+        update member set email = '518kje@naver.con' where id = 'petTest';
+        commit;
+-----------------------------------------------------------------------------------------
+    -- member + blacklist view 삭제
+        drop view petsitterpets;
+    -- member + blacklist view 생성
+        create view  petsitterpets as
+        select 
+        M.*, 
+        P.*, 
+        pe.pet_no,
+        PE.name pet_name, 
+        pe.age pet_age,
+        pe.type pet_type,
+        pe.ect pet_ect
+        from member M
+        inner join pet_sitter P on M.id = P.sitter_id
+        inner join pet PE on M.id = pe.member_id;
+        
+        select  * from petsitterpets;
+
+-----------------------------------------------------------------------------------------
+
+
     -- member + pet_sitter view 제거
         drop view petsitter;
     -- member + pet_sitter view 생성
         create view petsitter as
-        select * from member M inner join pet_sitter P on M.id = P.sitter_id;
+        select * from member M 
+        inner join pet_sitter P on M.id = P.sitter_id
+        left outer join blacklist B on M.id = b.black_id;
     -- view 테스트 
-        select * from petsitter;
+        select * from petsitter;        
+       
+-----------------------------------------------------------------------------------------
+  -- member + pet_sitter + blackList 삭제
+        drop view blackListall;
+  -- member + pet_sitter + blackList 생성
+        create view blackListall as
+        select * from member M 
+        left outer join pet_sitter P on M.id = P.sitter_id
+        left outer join blacklist B on M.id = b.black_id;
+       
+    -- view 테스트
+        select * from blackListall;
 
 -----------------------------------------------------------------------------------------
 
@@ -22,10 +70,9 @@
         create view petsitter_care_condition as
         select 
         P.*, 
-        c.care_condition_name, 
-        c.condition_sitter_no, 
-        n.care_condition_no as care_condition_name_no,
-        n.care_condition_name as care_condition_real_name        
+        N.*,      
+        c.condition_sitter_no,
+        c.care_condition_name as care_condition_name_no        
         from petsitter P 
         inner join care_condition C on P.pet_sitter_no= C.condition_sitter_no
         inner join care_condition_name N on C.care_condition_name  = N.care_condition_no;
@@ -55,7 +102,7 @@
        inner join care_pet_type C on P.pet_sitter_no= c.care_sitter_no
        inner join care_pet_type_name N on c.care_name = n.care_type_no;
        
-       select * from petsitter_care_pet_type;
+       select * from petsitter_care_pet_type where pet_sitter_no = 21;
        
  -------------------------------------------------------------------------------------------      
  
@@ -64,10 +111,10 @@
     -- pet_sitter + location  생성    
        create view sitterlocation as
        select * from petsitter P
-       inner join location L on p.sitter_id = l.location_sitter_no;
+       inner join location L on p.pet_sitter_no = l.location_sitter_no;
        
        select * from sitterlocation;
-       
+       select * from sitterlocation where pet_sitter_no = 58;
 -------------------------------------------------------------------------------------------
 
     -- member + pet view 생성
@@ -85,19 +132,30 @@
     
 -------------------------------------------------------------------------------------------
 
-    -- member + blacklist view 삭제
-        drop view petsitterpets;
-    -- member + blacklist view 생성
-        create view  petsitterpets as
-        select 
-        M.*, 
-        P.*, 
-        PE.name petname, 
-        pe.age petage,
-        pe.type pettype,
-        pe.ect petect
-        from member M
-        inner join pet_sitter P on M.id = P.sitter_id
-        inner join pet PE on M.id = pe.member_id;
-        
-        select  * from petsitterpets;
+
+
+select * from info_image where info_sitter_no = 86;
+select * from info_image where info_image_no = 46;
+
+
+-------------------------------------------------------------------------------------------
+
+    -- faq + faq_file 삭제
+    drop view faqimgAll;
+    -- faq + faq_file 생성
+    create view faqimgAll as
+    select * from faq Q
+    inner join faq_file F on Q.faq_no = F.faq_faq_no;
+
+    select * from faqimgAll;
+    
+-------------------------------------------------------------------------------------------
+    -- qna + qna_file 삭제
+    drop view qnaimgAll;
+    -- qna + qna_file 생성    
+    create view qnaimgAll as
+    select * from qna Q
+    inner join qna_file F on q.qna_no = f.qna_qna_no;
+    
+    select * from qnaimgAll;
+    
