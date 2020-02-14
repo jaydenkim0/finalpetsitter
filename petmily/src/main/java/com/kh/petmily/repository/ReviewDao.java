@@ -19,6 +19,9 @@ public interface ReviewDao {
 	void update(ReviewDto reviewDto) throws Exception;
 	//게시글 상세보기	
 	
+	// 리뷰작성시 포인트 플러스
+	void pointplus(ReviewDto reviewDto);
+	
 	
 	
 

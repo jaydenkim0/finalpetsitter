@@ -16,7 +16,7 @@
 	<div>작성일자</div>
 	<div>${reviewDto.review_wdate}</div>
 		
-	
+	<input type="hidden" name="review_no" value="${reviewDto.review_no}">
 	<div>제목 : </div>
 	<div><input name="review_title" value="${reviewDto.review_title}" type="text" required></div>
 	
