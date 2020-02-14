@@ -1,8 +1,11 @@
 package com.kh.petmily.repository;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -111,6 +114,26 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void pet_image_regist(PetImageDto petImageDto) {
 		sqlSession.insert("member.pet_image_regist",petImageDto);
+	}
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	@Override
+	public int member_image_no(String id) {
+		return sqlSession.selectOne("member.member_image_no",id);
+	}
+
+	//회원이미지 가지고 오기(1장씩 요청)
+	@Override
+	public MemberImageDto getmember_image(int member_image_no) {
+		return sqlSession.selectOne("member.getmember_image",member_image_no);
+	}
+
+	//회원이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalmember_image(String savename) throws IOException{
+		File file = new File("C:/upload/member_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
 	}
 
 

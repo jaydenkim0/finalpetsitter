@@ -2,10 +2,16 @@ package com.kh.petmily.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -139,6 +145,29 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberDao.pet_image_regist(petImageDto);
 		
+	}
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	@Override
+	public int member_image_no(String id) {
+		return memberDao.member_image_no(id);
+	}
+
+	//회원이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> member_image(int member_image_no)
+			throws UnsupportedEncodingException, IOException {
+		MemberImageDto memberImage = memberDao.getmember_image(member_image_no);
+		byte[]data = memberDao.physicalmember_image(memberImage.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(memberImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition", "attachment;filename=\""
+						+URLEncoder.encode(memberImage.getUploadname(), "UTF-8")
+						+"\"")				
+				.body(resource);
 	}
 	
 	}

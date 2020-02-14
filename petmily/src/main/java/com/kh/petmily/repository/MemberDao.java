@@ -1,5 +1,6 @@
 package com.kh.petmily.repository;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -56,6 +57,15 @@ public interface MemberDao {
 
 	//펫 이미지 등록
 	void pet_image_regist(PetImageDto petImageDto);
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	int member_image_no(String id);
+
+	//회원이미지 가지고오기(1장씩 요청)
+	MemberImageDto getmember_image(int member_image_no);
+
+	//회원이미지 실제로 가지고오기(1장씩 요청)
+	byte[] physicalmember_image(String savename) throws IOException;
 
 
 }

@@ -142,6 +142,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		);
 	</select>
 	
+	<!-- 해당 회원의 회원 이미지 번호 구해오기 -->
+	<select id="member_image_no" parameterType="String" resultType="int"> 
+		select member_image_no from member_image where member_image_member_id=#{id} 
+	</select>
+	
+	<!-- 회원이미지 한개씩 불러오기 -->
+	<select id="getmember_image" parameterType="int" resultType="memberImageDto">
+		select 
+			*
+		from
+			member_image
+		where 
+			member_image_no=#{member_image_no}
+	</select>
+	
 </mapper>
 
 

@@ -1,6 +1,7 @@
 package com.kh.petmily.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -131,15 +134,29 @@ public class MemberController {
 		return "redirect:/";		
 	}
 
+	//회원이미지 가져오기(src로 주소)
+	@GetMapping("/member/image")
+	public ResponseEntity<ByteArrayResource> member_image(
+			@RequestParam int member_image_no) throws UnsupportedEncodingException,IOException{
+		return memberService.member_image(member_image_no);
+	}
+	
 	
 	//내정보보기
 	@GetMapping("/mylist")
 	public String mylist(
 			HttpSession session,
 			Model model) {
+		
 		String id = (String) session.getAttribute("id");
+		
 		MemberDto list = memberService.mylist(id);
 		model.addAttribute("mylist",list);
+		
+		//해당 회원의 회원 이미지 번호 구해오기
+		int member_image_no = memberService.member_image_no(id);
+		model.addAttribute("member_image_no",member_image_no);
+				
 		List<PetDto> petlist = memberService.mylistpet(id);
 		model.addAttribute("mylistpet",petlist);
 		
