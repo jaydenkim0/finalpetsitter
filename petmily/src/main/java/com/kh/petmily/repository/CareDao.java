@@ -61,4 +61,10 @@ public interface CareDao {
 	//돌봄이미지 실제로 가지고오기(1장씩 요청)
 	byte[] physicalImage(String savename) throws IOException;
 
+	//해당 돌봄 방의 돌봄 댓글 개수 구하기
+	int getCount(String care_board_no);
+
+	//검색X돌봄방개수
+	int getListCount();
+
 }
