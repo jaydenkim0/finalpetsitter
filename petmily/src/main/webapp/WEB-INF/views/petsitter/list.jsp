@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-    <script>
-	// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 
-	function list(page){
-		location.href="${pageContext.request.contextPath}/admin/list/member?curPage="+page+"&cityKeyword=${cityKeyword}"+"&areaKeyword=${areaKeyword}";
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+   <script>
+   function list(page){
+		location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page+"&cityKeyword=${cityKeyword}"+"&areaKeyword=${areaKeyword}";
 		}
-	</script>
+   </script>
+   
 	<script>
 	 $(function(){
 		//지역 관리 스크립트
@@ -52,16 +52,17 @@
 		<form method="post" action="${pageContext.request.contextPath}/petsitter/list">
 			 <div class="location">
 			    <div class="template">
-			        <select class="region" name="location_name[0].city">
+			        <select class="region" name="cityKeyword">
 			            <option>지역을 선택하세요</option>
 			        </select>
 			        
-			        <select class="section" name="location_name[0].area">
+			        <select class="section" name="areaKeyword">
 			            <option>구를 선택하세요</option>
 			        </select>
 
 			    	<input type="submit" value="검색">
 			    </div>
+			    <div id="result"></div>
 			</div>
 		</form>
 		
