@@ -65,22 +65,7 @@ public class AdminController {
 	
 	//////////////////////////////////////////////////////////////////
 	
-//	// 회원관리 페이지 연결
-//	@GetMapping("/member")
-//	public String member(MemberDto memberDto,
-//			Model model) {
-//		// 가입된 모든 회원 열람 (일반, 펫시터, 관리자)				
-//		model.addAttribute("memberList", (List<MemberVO>)adminService.memberList());
-//		return  "admin/member";			
-//	}	
-// 회원관리 페이지에서 회원 검색
-//	@PostMapping("/member")
-//	public String member(@RequestParam String type, 
-//										@RequestParam String keyword,										
-//										Model model) {		
-//		model.addAttribute("memberList",(List<MemberVO>)adminService.memberSearchList(type, keyword));
-//		return "admin/member";		
-//	}
+
 	
 	// 회원 디테일 페이지 연결
 	@GetMapping("/memberdetail")
@@ -105,37 +90,6 @@ public class AdminController {
 				  .addAttribute("petsittersleepList", (List<PetsitterVO>) adminService.petsitterSleepList());		
 		return "admin/petsitter";		
 	}	
-//				// 펫시터 관리페이지에서 펫시터 검색
-//				@PostMapping("/petsitterSearch")
-//				public String petsitterSearch(@RequestParam String type, 
-//																@RequestParam String keyword,										
-//																Model model) {					
-//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterSearch(type, keyword))				
-//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterApplyList())	
-//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>)adminService.petsitterSleepList());
-//					return "admin/petsitter";		
-//				}	
-//				// 펫시터 관리페이지에서 펫시터 신청 검색
-//				@PostMapping("/petsitterSearchApply")
-//				public String petsitterSearchApply(@RequestParam String type, 
-//																		@RequestParam String keyword,										
-//																		Model model) {								
-//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())							
-//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSleepList())			
-//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>)adminService.petsitterSearchApply(type, keyword));
-//					return "admin/petsitter";		
-//				}				
-//				// 펫시터 관리페이지에서 휴면 펫시터 검색
-//				@PostMapping("/petsitterSearchSleep")
-//				public String petsitterSearchSleep(@RequestParam String type, 
-//												     					@RequestParam String keyword,										
-//						                               Model model) {										
-//					model.addAttribute("petsitterList", (List<PetsitterVO>)adminService.petsitterList())		
-//							  .addAttribute("petsitterApplyList", (List<PetsitterVO>) adminService.petsitterApplyList())			
-//							  .addAttribute("petsitterSleepList", (List<PetsitterVO>) adminService.petsitterSearchSleep(type, keyword));
-//					return "admin/petsitter";		
-//				}	
-	
 	
 	// 펫시터 신청한 회원 승인 기능
 	@PostMapping("/apply")
@@ -153,7 +107,7 @@ public class AdminController {
 		String email = petsitterVO.getEmail();
 		String sitter_id = petsitterVO.getSitter_id();
 		int sitter_no = petsitterVO.getPet_sitter_no();
-		String result = amailService.sendCancel(email);
+		String result = amailService.sendCancel(email, sitter_id);
 		// pet_sitter 테이블에서 신청한 내용을 삭제
 		adminService.petsitterNegative(sitter_id, sitter_no);	
 		return result;
@@ -344,6 +298,8 @@ public class AdminController {
 					return "redirect:blackList";		
 				}
 				
+				
+				
 	// 블랙리스트 회원 탈퇴(회원탈퇴)
 	// 블랙리스트 + 멤버 테이블에서 완전삭제
 	@GetMapping("/member_delete")
@@ -353,20 +309,34 @@ public class AdminController {
 		return "redirect:blackList";	
 	}	
 	
+	
+//			@ResponseBody
+//			@PostMapping("/memberdeleteemail")
+//			public String memberdeleteemail(@ModelAttribute PetsitterVO petsitterVO) {
+//				// 회원 탈퇴시 이메일 보내는 메소드 (회원 / 펫시터)
+//				String id = petsitterVO.getId();
+//				String email = petsitterVO.getEmail();
+//				String grade = petsitterVO.getBlack_grade();		
+//				System.out.println("id = " + id );
+//				System.out.println("email = " + email );
+//				System.out.println("grade = " + grade );
+//				return amailService.memberdeleteemail(id, email, grade);
+//			}
+	
 	// 블랙리스트 펫시터 탈퇴 (펫시터 탈퇴)
 	// 그냥 회원으로 강등되면서 블랙리스에 등록되어있음
 	// 펫시터 테이블에서만  삭제
 	// petsittersecession -> 등급을 petsitter -> member로 변경
 	@GetMapping("/sitter_delete")
 	public String sitter_delete (@RequestParam String sitter_id,
-												@RequestParam int sitter_no) {
-		System.out.println(sitter_id);
+												@RequestParam int sitter_no) {	
 		adminService.petsitterNegative(sitter_id, sitter_no);	
 		adminService.petsittersecession(sitter_id);
 		adminService.blackListgradechange(sitter_id);
 		return "redirect:blackList";	
 	}
-				
+			
+	
 				
 	// 블랙리스트 불러오기
 	@GetMapping("/blackList")

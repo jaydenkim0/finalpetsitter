@@ -47,11 +47,6 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.admincount");
 	}
 	
-//	// 회원리스트
-//	@Override
-//	public List<MemberVO> getMemberList() {		
-//		return sqlSession.selectList("admin.memberList");
-//	}
 
 	// 펫시터 리스트
 	@Override
@@ -238,43 +233,8 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<PetDto> getPets(String id) {					
 		return sqlSession.selectList("admin.getPets", id);
-	}
-	
-//	// 회원관리 페이지에서 회원 검색
-//	@Override
-//	public List<MemberVO> memberSearchList(String type, String keyword) {
-//		Map<String, String> param = new HashMap();
-//		param.put("type", type);
-//		param.put("keyword", keyword);		
-//		return sqlSession.selectList("admin.memberSearchList", param);
-//	}
-//	
-//	// 펫시터 관리 페이지에서 펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearch(String type, String keyword) {
-//		Map<String, String> param = new HashMap();
-//		param.put("type", type);
-//		param.put("keyword", keyword);		
-//		return sqlSession.selectList("admin.petsitterSearchList", param);	
-//	}
-//	
-//	// 펫시터 관리 페이지에서 펫시터 신청 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
-//		Map<String, String> param = new HashMap();
-//		param.put("type", type);
-//		param.put("keyword", keyword);		
-//		return sqlSession.selectList("admin.petsitterSearchApply", param);	
-//	}
-//
-//	// 펫시터 관리 페이지에서 휴면펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
-//		Map<String, String> param = new HashMap();
-//		param.put("type", type);
-//		param.put("keyword", keyword);		
-//		return sqlSession.selectList("admin.petsitterSearchSleep", param);	
-//	}
+	}	
+
 	
 	// 블랙리스트 등록 여부 검사
 	@Override
