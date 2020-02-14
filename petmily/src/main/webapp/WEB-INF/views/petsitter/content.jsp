@@ -29,7 +29,6 @@
 	</c:forEach>
 	
 	<!-- 펫시터 능력 정보 -->
-	
 	<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
 		<span>보유 스킬 : ${skillName.skill_name}</span><br>
 	</c:forEach>
@@ -40,8 +39,7 @@
 		<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span><br>
 	</c:forEach>
 	<c:forEach var="location" items="${petsitterGetList.locationDto}">
-		<span>${location.city}</span><br>
-		<span>${location.area}</span><br>
+		<span>${location.city} ${location.area}</span><br>
 	</c:forEach>
 
 	

@@ -3,10 +3,10 @@
 
     
     <form action="insert" method="post">
-    
+    <input type="hidden" name="review_writer" value="${id}">
 <!--     <div>번호:<input type="text" name="review_no"></div> -->
     <div>작성자:<br>
-    <input type="text" name="review_writer"></div>
+     <div>${id}</div>  
     <div>팻시터번호:<br>
     <input type="text" name="review_sitter_no" required></div>
   	<div>제목:<br>

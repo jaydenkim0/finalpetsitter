@@ -4,8 +4,15 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
    <script>
    function list(page){
-		location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page+"&cityKeyword=${cityKeyword}"+"&areaKeyword=${areaKeyword}";
+		console.log("키워드");
+	   if("${cityKeyword}" === "" && "${areaKeyword}" === ""){
+			location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page;
+			 console.log("키워드 없음");
+		}else{
+			location.href="${pageContext.request.contextPath}/petsitter/list?curPage="+page+"&cityKeyword=${cityKeyword}"+"&areaKeyword=${areaKeyword}";			
+			console.log("키워드 있음");
 		}
+	}
    </script>
    
 	<script>
@@ -21,12 +28,10 @@
                  }    
              }
          });
-
          $(".region").change(function(){
              var region_text = $(this).children("option:selected").text();
              console.log("시 : "+ region_text);
              var city=$(this).val();
-
              $.ajax({
                      url:"../res/json/petmily_location.json",  
                      type:"get",             
@@ -39,7 +44,6 @@
                      }
              });
          });
-
          $(".section").change(function(){
              var section_text = $(this).children("option:selected").text();
              console.log("군,구 : "+section_text);
@@ -71,10 +75,13 @@
 	
 		<c:forEach var="petsitter" items="${list}">
 			<!-- 펫시터 정보 -->
-			<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}"><span>닉네임 : ${petsitter.nick}</span></a>
+			<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
+				<span>닉네임 : ${petsitter.nick}</span></a>
 				<br>
 				<span>소개글 : ${petsitter.info}</span><br>
-				<span>${location.city} ${location.area}</span><br>
+					<c:forEach var="location" items="${petsitter.list}">
+						<span>지역 : ${location.city} ${location.area}</span><br>
+					</c:forEach>
 				<hr>
 			</c:forEach>
 	
