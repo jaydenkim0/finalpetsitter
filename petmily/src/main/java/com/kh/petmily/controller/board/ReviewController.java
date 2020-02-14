@@ -42,15 +42,7 @@ public class ReviewController {
 	@Autowired
 	ReviewDao reviewDao;
 	
-
-	//리뷰 작성
-	@PostMapping("/write")
-	public String write() {
-		return"board/review/write";
-	}
-	
-
-	
+//-리뷰 작성----------------------------------------------------------------------------	
 	@GetMapping("/insert")
 	public String insert() {
 		return"board/review/insert";
@@ -61,43 +53,59 @@ public class ReviewController {
 //		System.out.println(reviewDto);
 //		reviewService.insert(reviewDto);
 		reviewDao.insert(reviewDto);
+		reviewService.pointplus(reviewDto);
 		return "redirect:/petsitter/info";
 	}
-	
-	//리뷰 목록
+
+//-리뷰 목록----------------------------------------------------------------------------	
 	@GetMapping("/list")
 	public String list(Model model) {
 		List<ReviewDto>list = reviewService.list();
-//		List<ReviewDto>list = reviewService.listSearch(review_sitter_no);
 		model.addAttribute("list",list);	
 		return "board/review/list";     	
 	}
 	
-//리뷰 조회
-//	@GetMapping("/list")
-//	public String list(Model model, @RequestParam int review_sitter_no) {
-////		List<ReviewDto>list = reviewService.list();
-//		List<ReviewDto>list = reviewService.listSearch(review_sitter_no);
-//		model.addAttribute("list",list);	
-//		return "board/review/list";    
+//리뷰 시터조회목록----------------------------------------------------------------------------	
+	@GetMapping("/listsearch")
+	public String listSearch(Model model, @RequestParam int review_sitter_no) throws Exception {
+	    List<ReviewDto>list = reviewService.listSearch(review_sitter_no);
+		model.addAttribute("list",list);	
+		return "board/review/list";    
+   }
 
-		
-	//리뷰 변경
+	
+//-리뷰 변경----------------------------------------------------------------------------	
 	@GetMapping("/update")
 	public String select(@RequestParam int review_no,Model model) throws Exception {
 		 ReviewDto reviewDto= reviewDao.get(review_no);
 		 model.addAttribute("reviewDto",reviewDto);
+		 System.out.println("inset = " + reviewDto);
 	 	return "board/review/update";
 	}
 		
-	//리뷰 삭제
+	
+	@PostMapping("/update")
+	public String update(@ModelAttribute ReviewDto reviewDto) throws Exception{
+		 reviewDao.update(reviewDto);
+		 System.out.println("리뷰 = "+reviewDto);
+		return "redirect:/board/review/list";
+	}
+	
+//-리뷰 삭제----------------------------------------------------------------------------	
 	@GetMapping("/delete")
 	public String delete(@RequestParam int review_no) throws Exception{
 		reviewDao.delete(review_no);
 		return "redirect:list";
 	
 	}
+	
+//-리뷰 상세보기----------------------------------------------------------------------------	
+	
 }
+
+
+	
+
 	
 	
 	

@@ -39,6 +39,31 @@ alter table member add terms_agree varchar2(4) check (terms_agree in ('true'));
 alter table member modify terms_agree not null;
 
 ---------------------------------------------------------------
+-- member_image 테이블
+-- primary key = member_image_no
+---------------------------------------------------------------
+
+--테이블 생성
+create table member_image(
+member_image_no number primary key,
+member_image_member_id constraint fk_member_id references member(id) on delete cascade,
+savename varchar2(100),
+filetype varchar2(15),
+filesize number,
+uploadname varchar2(100)
+);
+
+--테이블 삭제
+drop table member_image;
+
+--시퀀스 생성
+create sequence member_image_no_seq;
+
+--시퀀스 삭제
+drop sequence member_image_no_seq;
+
+
+---------------------------------------------------------------
 -- petsitter 테이블
 -- 회원가입 후 펫시터 추가 내용 테이블
 ---------------------------------------------------------------
@@ -149,6 +174,33 @@ ect varchar2(4000)
 drop sequence pet_no_seq;
 -- 시퀀스 번호 생성
 create sequence pet_no_seq;
+
+
+---------------------------------------------------------------
+-- pet_image 테이블
+-- primary key = pet_image_no
+---------------------------------------------------------------
+
+--테이블 생성
+create table pet_image(
+pet_image_no number primary key,
+pet_image_pet_no constraint fk_pet_no references pet(pet_no) on delete cascade,
+savename varchar2(100),
+filetype varchar2(15),
+filesize number,
+uploadname varchar2(100)
+);
+
+--테이블 삭제
+drop table pet_image;
+
+--시퀀스 생성
+create sequence pet_image_no_seq;
+
+--시퀀스 삭제
+drop sequence pet_image_no_seq;
+
+
 
 
 ---------------------------------------------------------------
@@ -376,7 +428,8 @@ care_image_no number primary key,
 care_reply_no constraint fk_care_reply_image  references care_reply(care_reply_no ) on delete cascade,
 savename varchar2(100),
 filetype varchar2(15),
-filesize number
+filesize number,
+uploadname varchar2(100)
 );
 
 -- 시퀀스 번호 삭제

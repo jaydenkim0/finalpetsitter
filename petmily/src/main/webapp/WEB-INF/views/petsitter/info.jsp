@@ -17,4 +17,13 @@
 		<span>이메일 : ${petsitterVO.email}</span><br>	
 		<span>소개글 : ${petsitterVO.info}</span><br><br>
 	</c:forEach>
+
 </c:forEach>
+
+<h3>소개이미지</h3>
+	<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
+		 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
+	</c:forEach>
+	
+	
+

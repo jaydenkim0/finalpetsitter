@@ -4,73 +4,70 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 
-	namespace : 영역을 부르는 별칭
-	parameterType : 이 명령을 실행하기 위해 필요한 데이터의 형태
-	resultType : 기대되는 결과물의 형태(목록이든 아니든 dto 형태로 표기)
-	
-	태그때문에 못쓰게 되는 기호들은 다음의 영역으로 해결이 가능
-
-	<![CDATA[
-		SQL 구문
-	]]>
-	
-	형태에 따라 파라미터를 다르게 설정할 수 있다
-	- # 은 형태를 추론하여 자동으로 따옴표 설정 및 인코딩 처리를 수행
-	- $ 는 값을 있는 그대로 출력하는 명령이므로 주로 "항목"에 사용
-		- $ 는 SQL Injection 이라는 해킹공격에 매우 취약하므로 사용에 주의 
- -->
+<!-- namespace : 영역을 부르는 별칭 parameterType : 이 명령을 실행하기 위해 필요한 데이터의 형태 resultType 
+	: 기대되는 결과물의 형태(목록이든 아니든 dto 형태로 표기) 태그때문에 못쓰게 되는 기호들은 다음의 영역으로 해결이 가능 <![CDATA[ 
+	SQL 구문 ]]> 형태에 따라 파라미터를 다르게 설정할 수 있다 - # 은 형태를 추론하여 자동으로 따옴표 설정 및 인코딩 처리를 
+	수행 - $ 는 값을 있는 그대로 출력하는 명령이므로 주로 "항목"에 사용 - $ 는 SQL Injection 이라는 해킹공격에 매우 
+	취약하므로 사용에 주의 -->
 
 <mapper namespace="review">
-<!--CRUD-->
-<!--  리뷰 작성 -->
-<insert id = "reviewinsert" parameterType="reviewDto">
-	insert into review values(
-	review_no_seq.nextval,
-	#{review_writer},
-	#{review_sitter_no},
-	#{review_title},
-	#{review_content},
-	#{review_star},
-	sysdate)
-</insert>
-
-<!--  리뷰 리스트 -->
-<select id="reviewlist" resultType="reviewDto" >
-	select
-	*
-	from
-	REVIEW
-	order by
-	review_no desc
-</select>
-
-<!-- 리뷰 수정 -->
-<update id="reviewupdate" parameterType="reviewDto">
-update review set
-review_no=#{review_no}
-review_writer =#{review_writer}
-review_sitter_no=#{review_sitter_no}
-review_wdate=#{review_wdate}
-review_title = #{review_title}
-review_content =#{review_content}
-review_star =#{review_star}
-where review_no =#{review_no}
-where review_writer=#{review_writer}
-</update>
-<!-- 리뷰 찾기 -->
-<select id="reviewselect" parameterType="int" resultType="reviewDto">
-
-select * from review where review_no=#{review_no}
-
-</select>
-
-
-<!-- 리뷰 삭제 -->
-<delete id="reviewdelete" parameterType="reviewDto">
-  delete from review where review_no =#{review_no}
-</delete>
-
+	<!--CRUD -->
+	<!-- 리뷰 작성 -->
+	<insert id="reviewinsert" parameterType="reviewDto">
+		insert into review
+		values(
+		review_no_seq.nextval,
+		#{review_writer},
+		#{review_sitter_no},
+		#{review_title},
+		#{review_content},
+		#{review_star},
+		sysdate)
+	</insert>
+	<!-- 리뷰 리스트-->
+	<select id="reviewlist"  resultType="reviewDto">
+		select
+		*
+		from
+		REVIEW
+		order by
+		review_no desc
+		
+	</select>
+	
+	<!-- 리뷰 리스트 조회 -->
+	<select id="reviewlistSearch" parameterType="int" resultType="reviewDto">
+		select
+		*
+		from
+		REVIEW
+	    where review_sitter_no=#{review_sitter_no}
+		order by review_no desc
+	</select>
+	<!-- 리뷰 수정 -->
+	<update id="reviewupdate" parameterType="reviewDto" >
+		update REVIEW set	
+		review_title = #{review_title}, 
+		review_content=#{review_content},
+		review_star =#{review_star}
+		where review_no =#{review_no}
+		
+	</update>
+	<!-- 리뷰 찾기 -->
+	<select id="reviewselect" parameterType="int" resultType="reviewDto">
+		
+		select * from review where review_no=#{review_no}
+	</select>
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewdelete" parameterType="reviewDto">
+		delete from review where review_no =#{review_no}
+	</delete>
+	
+	<update id="pointplus" parameterType="reviewDto">
+		update member set point = point + 500
+		where id = #{review_writer}
+	</update>
+	
 </mapper>
 
 

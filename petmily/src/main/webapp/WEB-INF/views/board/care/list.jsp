@@ -31,6 +31,24 @@ li{
 <c:if test="${not empty id}">
 <a href="write"><button>방 만들기</button></a><br><br>
 </c:if>
+
+<!-- 검색창 -->
+
+<form method="get" action="${context }/board/care/list">
+	<select name="type">
+		<option value="care_board_no">방번호</option>
+		<option value="care_member_id">생성자 아이디</option>
+		<option value="sitter_id">펫시터 아이디</option>
+		<option value="care_board_content">방 제목</option>
+	</select>
+	<input name="keyword" placeholder="검색어" required>
+	<input type="submit" value="검색">
+</form>
+
+
+<!-- 목록 -->
+
+
 <table border="1" width="100%">
 	<tr>
 		<th>방번호</th>
@@ -83,6 +101,9 @@ li{
 		</tr>
 	</c:forEach>
 </table>
+
+
+
 <div class="row" >
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/board/care/navigator_list.jsp">
