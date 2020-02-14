@@ -125,13 +125,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="pet_no" resultType="int" parameterType="map">
 		select pet_no from(
 			select rownum as rn, E.* from (
-    			select * from pet 
-    			where pet_name=#{pet_name}
-    				and pet_age=#{pet_age}
-    				and pet_type=#{pet_type}
-    			order by pet_no desc
+    			select * from pet order by pet_no desc
 			) E 
-		)where rn=1			
+		)where rn=1	
 	</select>
 	
 	<!-- 펫 이미지 등록 -->
@@ -163,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 펫번호로 펫 이미지 번호 구하기 -->
 	<select id="pet_image_no">
-		select pet_image_no from pet_image whrer pet_image_pet_no=#{pet_no}
+		select pet_image_no from pet_image where pet_image_pet_no=#{pet_no}
 	</select>
 	
 	<!-- 펫이미지 한개씩 불러오기 -->

@@ -112,7 +112,6 @@ public class MemberDaoImpl implements MemberDao {
 		Map<String,Object> map = new HashMap<>();
 		map.put("pet_name", pet_name);
 		map.put("pet_age", pet_age);
-		map.put("pet_type", pet_type);
 		return sqlSession.selectOne("member.pet_no",map);
 	}
 
