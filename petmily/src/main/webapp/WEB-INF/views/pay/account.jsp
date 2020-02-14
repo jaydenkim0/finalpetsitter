@@ -181,7 +181,7 @@
         <button class="btn_style1">실시간 계좌이체</button>
         <button class="btn_style1">무통장 입금</button>
          <button class="btn_style1">
-         <img src="/img/kakaopay.png"></button>
+         <img src="${context}/resources/img/kakaopay.png"></button>
         <br><br>
 <%-- 		<form action="<%=request.getContextPath()%>/board/user_pay.do" method="post"> --%>
 <%-- 			<input type="hidden" name="host_content_name" value="<%=host_content_name %>"><!--컨텐츠 제목 --> --%>
