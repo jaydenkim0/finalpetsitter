@@ -109,6 +109,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{id}
 	</select>
 	
+	<!-- 회원 이미지 등록 -->
+	<insert id="member_image_regist" parameterType="memberImageDto">
+		insert into member_image values(
+			member_image_no_seq.nextval,
+			#{member_image_member_id},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		)
+	</insert>
+	
+	<!-- 펫 번호 구해오기 -->
+	<select id="pet_no" resultType="int" parameterType="map">
+		select pet_no from(
+			select rownum as rn, E.* from (
+    			select * from pet order by pet_no desc
+			) E 
+		)where rn=1	
+	</select>
+	
+	<!-- 펫 이미지 등록 -->
+	<select id="pet_image_regist" parameterType="petImageDto">
+		insert into pet_image values(
+			pet_image_no_seq.nextval,
+			#{pet_image_pet_no},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		)
+	</select>
+	
+	<!-- 해당 회원의 회원 이미지 번호 구해오기 -->
+	<select id="member_image_no" parameterType="String" resultType="int"> 
+		select member_image_no from member_image where member_image_member_id=#{id} 
+	</select>
+	
+	<!-- 회원이미지 한개씩 불러오기 -->
+	<select id="getmember_image" parameterType="int" resultType="memberImageDto">
+		select 
+			*
+		from
+			member_image
+		where 
+			member_image_no=#{member_image_no}
+	</select>
+	
+	<!-- 펫번호로 펫 이미지 번호 구하기 -->
+	<select id="pet_image_no">
+		select pet_image_no from pet_image where pet_image_pet_no=#{pet_no}
+	</select>
+	
+	<!-- 펫이미지 한개씩 불러오기 -->
+	<select id="getpet_image" parameterType="int" resultType="petImageDto">
+		select 
+			* 
+		from
+			pet_image
+		where
+			pet_image_no=#{pet_image_no}
+	</select>
+	
 </mapper>
 
 
