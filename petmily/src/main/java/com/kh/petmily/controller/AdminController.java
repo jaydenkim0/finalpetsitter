@@ -307,21 +307,7 @@ public class AdminController {
 		adminService.blackListdelete(id);
 		adminService.memberdelete(id);		
 		return "redirect:blackList";	
-	}	
-	
-	
-//			@ResponseBody
-//			@PostMapping("/memberdeleteemail")
-//			public String memberdeleteemail(@ModelAttribute PetsitterVO petsitterVO) {
-//				// 회원 탈퇴시 이메일 보내는 메소드 (회원 / 펫시터)
-//				String id = petsitterVO.getId();
-//				String email = petsitterVO.getEmail();
-//				String grade = petsitterVO.getBlack_grade();		
-//				System.out.println("id = " + id );
-//				System.out.println("email = " + email );
-//				System.out.println("grade = " + grade );
-//				return amailService.memberdeleteemail(id, email, grade);
-//			}
+	}		
 	
 	// 블랙리스트 펫시터 탈퇴 (펫시터 탈퇴)
 	// 그냥 회원으로 강등되면서 블랙리스에 등록되어있음

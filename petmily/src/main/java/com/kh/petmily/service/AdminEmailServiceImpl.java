@@ -44,12 +44,11 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 		
 	}
 	
-	// 회원 탈퇴시 이메일 전송
+	// 펫시터 강등시(펫시터 삭제) 이메일 전송
 	@Override
 	public String memberdeleteemail(String id, String email, String grade) {
 
 		try {
-				if (grade.equals("petsitter") ) { // 펫시터라면
 					// 메세지 객체 생성
 					SimpleMailMessage message = new SimpleMailMessage ();
 					// 정보설정 : 대상정보(email, 제목, 내용)
@@ -70,36 +69,15 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 							+ "\n 추가적인 내용이 필요하신 회원님께서는 관리자 및 "
 							+ "\n 상담센터로 연락주시면 감사하겠습니다.");			
 					sender.send(message);
-					return "success";
-				}else { // 멤버라면
-					// 메세지 객체 생성
-					SimpleMailMessage message = new SimpleMailMessage ();
-					// 정보설정 : 대상정보(email, 제목, 내용)
-					String[] to = {email};
-					message.setTo(to);		
-					message.setSubject("[PetMily] 회원 강제 탈퇴 내용 전달드립니다");		
-					message.setText(
-							" 안녕하세요 "+ id +" 회원 님, "
-							+ "\n 다음과 같은 사유로 인해 펫시터 회원이 강제 탈퇴 되었음을 알려드립니다"
-							+ "\n"
-							+ "\n - 펫밀리 회원 약관 위반 사항이 있을 시,"
-							+ "\n - 펫밀리 또는 펫시터 직원에게 폭언 및 폭력을 행사했을 시, "
-							+ "\n - 풍기 물란 및 그와 유사한 범죄 등등 "
-							+ "\n"
-							+ "\n 위와 같은 내용과 자료가 충족되지 않은 관계로"
-							+ "\n 회원의 강제 탈퇴가 되었습니다."
-							+ "\n"
-							+ "\n 추가적인 내용이 필요하신 회원님께서는 관리자 및 "
-							+ "\n 상담센터로 연락주시면 감사하겠습니다.");			
-					sender.send(message);
-					return "success";
-				}
-			
-		}catch (Exception ex) {
-				ex.printStackTrace();
-				return "fail";
-		}
+					return "success";			
+			}catch (Exception ex) {
+					ex.printStackTrace();
+					return "fail";
+			}
 	}
 
+	
+	
+	
 
 }
