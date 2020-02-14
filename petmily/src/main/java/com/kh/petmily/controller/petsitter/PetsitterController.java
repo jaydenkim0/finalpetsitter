@@ -27,9 +27,12 @@ import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.petsitter.PetsitterService;
+import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 @Controller
 @RequestMapping("/petsitter")
@@ -54,19 +57,35 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
-	@GetMapping("/list")
-	public String list(Model model) {
-		List<PetsitterVO> list = petsitterDao.getListAll();
-		model.addAttribute("list", list);
+	@RequestMapping("/list")
+	public String list(@RequestParam(defaultValue = "", required = false) String cityKeyword,
+						@RequestParam(defaultValue = "", required = false) String areaKeyword,
+						@RequestParam(defaultValue = "1", required = false) int curPage,										
+									Model model) {
+		// 레코드의 갯수 계산
+		int count = petsitterService.countlocation(cityKeyword, areaKeyword);
+		
+		// 페이지 나누기 관련 처리
+		NaviVO navi = new NaviVO(count, curPage);
+		
+		int start = navi.getPageBegin();
+		int end = navi.getPageEnd();
+		
+		// 리스트 불러오기
+		model.addAttribute("list", (List<SitterlocationVO>) petsitterService.locationListAll(start, end, cityKeyword, areaKeyword))
+				  .addAttribute("count", count)
+				  .addAttribute("cityKeyword", cityKeyword)
+				  .addAttribute("areaKeyword", areaKeyword)
+				  .addAttribute("navi", navi);;
 		return "petsitter/list";
 	}
 	
-	@GetMapping("/info")
-	public String info(@RequestParam int pet_sitter_no, Model model) {
+	@GetMapping("/content")
+	public String content(@RequestParam int pet_sitter_no, Model model) {
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		model.addAttribute("petsitterList", petsitterList)
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
-		return "petsitter/info";
+		return "petsitter/content";
 	}
 	
 }

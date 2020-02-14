@@ -1,5 +1,11 @@
 package com.kh.petmily.vo.petsitter;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 public class PetsitterPetsVO {
 	//회원 + 펫시터 정보
 	private String id; 

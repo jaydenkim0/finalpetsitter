@@ -44,8 +44,8 @@ public class CareServiceImpl implements CareService{
 
 	//게시글목록(펫시터아이디)
 	@Override
-	public List<CarePetsitterDto> pet_sitter_list() {
-		return carePetsitterDao.pet_sitter_list();
+	public List<CarePetsitterDto> pet_sitter_list(int start,int finish) {
+		return carePetsitterDao.pet_sitter_list(start,finish);
 	}
 
 	//펫시터아이디로 펫시터번호 구하기
@@ -143,8 +143,8 @@ public class CareServiceImpl implements CareService{
 
 	//돌봄댓글&이미지 목록
 	@Override
-	public List<CareReplyImageDto> replyimagelist(String care_board_no) {
-		return careReplyImageDao.replyimagelist(care_board_no);
+	public List<CareReplyImageDto> replyimagelist(String care_board_no, int start, int finish) {
+		return careReplyImageDao.replyimagelist(care_board_no,start,finish);
 	}
 
 	//펫시터 아이디 존재 검사
@@ -167,6 +167,18 @@ public class CareServiceImpl implements CareService{
 						+URLEncoder.encode(careImage.getUploadname(), "UTF-8")
 						+"\"")
 				.body(resource);
+	}
+
+	//해당 돌봄방의 돌봄 댓글 개수 구하기
+	@Override
+	public int getCount(String care_board_no) {
+		return careDao.getCount(care_board_no);
+	}
+
+	//검색X돌봄방개수
+	@Override
+	public int getListCount() {
+		return careDao.getListCount();
 	}
 
 }

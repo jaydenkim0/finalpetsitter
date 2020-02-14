@@ -165,15 +165,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from petsitter_care_condition where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
-	<!-- 소개이미지 등록 -->
-
-	
-	<!-- 신분증 등록 -->
-
-
-	<!-- 증빙서류 등록 -->
-	
-	
 	<!-- 펫시터 지역 등록 -->
 	<select id="getLocationList" parameterType="int" resultType="LocationDto">
 		select * from sitterlocation where pet_sitter_no=#{pet_sitter_no}
@@ -184,12 +175,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from petsitterpets where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
-
-
-
-
-
-
+	<!-- 펫시터 서치 리스트 -->
+		<select id="locationListAll" resultType="sitterlocationVO" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from sitterlocation where sitter_status='정상'
+						<if test="cityKeyword != null and areaKeyword != null">
+							and city = #{cityKeyword}
+                    		and sitterlocation.area = #{areaKeyword}
+						</if>
+					order by pet_sitter_no desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>		
+		<!-- count -->
+		<select id="countlocation" resultType="int" parameterType="Map">
+			select count(*) from
+			sitterlocation where sitter_status='정상'	
+				<if test="cityKeyword != null and areaKeyword != null">
+					and city = #{cityKeyword}
+                    and sitterlocation.area = #{areaKeyword}
+				</if>			
+			order by pet_sitter_no desc
+		</select>	
 
 </mapper>
 

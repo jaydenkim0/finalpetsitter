@@ -19,6 +19,11 @@
 			<input type="button" value="로그아웃">
 	</a>
 </c:if>
+<c:if test="${empty id }">
+	<a href="member/login">
+			<input type="button" value="로그인">
+	</a>
+</c:if>
 
 
 </body>

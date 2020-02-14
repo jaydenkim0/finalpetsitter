@@ -67,7 +67,36 @@
         		}else{
         			$("#submit").attr("disabled",false);
         		}
-        	});        	
+        	});  
+        	$(".phonecheck").hide();
+        	$(".phone").blur(function(){
+        		$("#submit").attr("disabled",true);
+        		var phone = $(".phone").val();
+        		var regex = /^[0-9]{9,11}$/
+        		var b = regex.test(phone);
+        		if(!b){
+        			$(".phonecheck").show();
+        			$("#submit").attr("disabled",true);
+        		}else{
+        			$(".phonecheck").hide();
+        			$("#submit").attr("disabled",false);
+        		}
+        	});
+        	
+        	$(".emailcheck").hide();
+        	$(".email").blur(function(){
+        		$("#submit").attr("disabled",true);
+        		var email = $(".email").val();
+        		var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+        		var c = regex.test(email);
+        		if(!c){
+        			$(".emailcheck").show();
+        			$("#submit").attr("disabled",true);
+        		}else{
+        			$(".emailcheck").hide();
+        			$("#submit").attr("disabled",false);
+        		}
+        	});
         });
     </script>
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -163,7 +192,8 @@
 		<tr>
 			<th>이메일</th>
 			<td>
-				<input type="text" name="email" placeholder="이메일" required>
+				<input type="text" name="email" placeholder="이메일" required class="email">
+				<p class="emailcheck">이메일 형식이 잘못되었습니다</p>
 			</td>
 		</tr>
 		
@@ -171,7 +201,8 @@
 		<tr>
 			<th>전화번호</th>
 			<td>
-				<input type="tel" name="phone" placeholder="전화번호" required>
+				<input type="tel" name="phone" placeholder="전화번호" required class="phone">
+				<p class="phonecheck">00000000000(숫자 11개) 형식으로 작성해주세요</p>
 			</td>
 		</tr>
 		
