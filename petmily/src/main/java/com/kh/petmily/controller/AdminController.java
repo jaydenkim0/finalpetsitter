@@ -24,6 +24,7 @@ import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -277,24 +278,36 @@ public class AdminController {
 		model.addAttribute("sitter_id", sitter_id);
 		return "admin/sitter_blacklist_content";
 	}
-				// 펫시터 블랙리스트 등록 메소드
+				// 펫시터 블랙리스트 등록 메소드(이메일 전송)
 				@PostMapping("/sitter_blackListpage")
 				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
 						@RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
+					String sitter_id = petsitterDto.getSitter_id();
+					PetsitterVO blacksitter =adminService.PetsitterSearchOne(sitter_id);
+					String id = blacksitter.getSitter_id();
+					String email = blacksitter.getEmail();
+					String grade = blacksitter.getGrade();
+					amailService.blackListAddEmail(id, email, grade, black_content);					
 					return "redirect:blackList";		
 				}	
 	// 블랙리스트 회원 등록
 	@GetMapping("/member_blacklist_content")
-	public String member_blacklist_content(@RequestParam String id, Model model) {		
+	public String member_blacklist_content(@RequestParam String id, Model model) {
+		
 		model.addAttribute("id", id);
 		return "admin/member_blacklist_contetnt";
 	}	
-				// 회원 블랙리스트 등록 메소드
+				// 회원 블랙리스트 등록 메소드 (이메일 전송)
 				@PostMapping("/member_blackListpage")
 				public String member_blackListpage(@RequestParam String id,
-						 								@RequestParam String black_content) {
+						 								@RequestParam String black_content) {						
+					MemberVO blackmember =adminService.getMemberdetail(id);
+					String email = blackmember.getEmail();
+					String grade = blackmember.getGrade();
+					amailService.blackListAddEmail(id, email, grade, black_content);		
 					adminService.blackMember(id, black_content);
+					System.out.println(blackmember);
 					return "redirect:blackList";		
 				}
 				
