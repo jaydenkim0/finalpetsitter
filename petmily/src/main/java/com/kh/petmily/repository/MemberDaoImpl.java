@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -91,6 +92,12 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int idExist(String id) {
 		return sqlSession.selectOne("member.idExist",id);
+	}
+
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(MemberImageDto memberImageDto) {
+		sqlSession.insert("member.member_image_regist",memberImageDto);
 	}
 
 

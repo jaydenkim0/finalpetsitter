@@ -1,11 +1,16 @@
 package com.kh.petmily.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.repository.MemberDao;
 
@@ -89,6 +94,27 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idExist(String id) {
 		return memberDao.idExist(id);
+	}
+
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException {
+		MemberImageDto memberImageDto = MemberImageDto.builder()
+				.member_image_member_id(id)
+				.savename(UUID.randomUUID().toString())
+				.filetype(member_image.getContentType())
+				.filesize(member_image.getSize())
+				.uploadname(member_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/member_image");
+		
+		File target = new File(dir,memberImageDto.getSavename());
+		dir.mkdirs();
+		
+		member_image.transferTo(target);
+		
+		memberDao.member_image_regist(memberImageDto);
 	}
 
 

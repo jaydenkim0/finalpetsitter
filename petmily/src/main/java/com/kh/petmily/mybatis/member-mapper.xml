@@ -109,6 +109,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{id}
 	</select>
 	
+	<!-- 회원 이미지 등록 -->
+	<insert id="member_image_regist" parameterType="memberImageDto">
+		insert into member_image values(
+			member_image_no_seq.nextval,
+			#{member_image_member_id},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		)
+	</insert>
+	
 </mapper>
 
 

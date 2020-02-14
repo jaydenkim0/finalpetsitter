@@ -1,5 +1,6 @@
 package com.kh.petmily.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
@@ -68,8 +70,12 @@ public class MemberController {
 			@RequestParam String pet_name,
 			@RequestParam String pet_age,
 			@RequestParam String pet_type,
-			@RequestParam String pet_ect) {
+			@RequestParam String pet_ect,
+			@RequestParam MultipartFile member_image) throws IllegalStateException,IOException{
 		memberService.regist(memberDto);
+		if(member_image.isEmpty()==false) {
+			memberService.member_image_regist(id,member_image);
+		}
 		if(pets.equals("예")) {
 			int real_pet_age = Integer.parseInt(pet_age);
 			petDto.setMember_id(id);

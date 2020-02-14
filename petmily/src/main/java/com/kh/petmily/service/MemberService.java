@@ -3,6 +3,9 @@ package com.kh.petmily.service;
 
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 
 
@@ -43,5 +46,8 @@ public interface MemberService {
 
 	//회원 탈퇴되었는지 검사
 	int idExist(String id);
+
+	//회원이미지 등록
+	void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException;
 
 }

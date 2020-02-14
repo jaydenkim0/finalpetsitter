@@ -160,7 +160,7 @@
 	
 	<h2>회원가입</h2>
 	
-	<form action="regist" method="post" onsubmit="onsubmit_petnamecheck();">
+	<form action="regist" method="post" onsubmit="onsubmit_petnamecheck();" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<th>아이디</th>
@@ -221,6 +221,15 @@
 		<tr>
 			<td>
 				<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소">
+			</td>
+		</tr>
+		
+		<!-- 사진첨부 -->
+		
+		<tr>
+			<th>프로필사진</th>
+			<td>
+				<input type="file" name="member_image" multiple accept="image/*">
 			</td>
 		</tr>
 		

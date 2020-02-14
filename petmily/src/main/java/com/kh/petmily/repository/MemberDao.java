@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 
 public interface MemberDao {	
@@ -45,6 +46,9 @@ public interface MemberDao {
 
 	//회원 탈퇴되었는지 검사
 	int idExist(String id);
+
+	//회원이미지 등록
+	void member_image_regist(MemberImageDto memberImageDto);
 
 
 }
