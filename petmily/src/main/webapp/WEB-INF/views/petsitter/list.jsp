@@ -71,7 +71,8 @@
 	
 		<c:forEach var="petsitter" items="${list}">
 			<!-- 펫시터 정보 -->
-				<span>닉네임 : ${petsitter.nick}</span><br>
+			<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}"><span>닉네임 : ${petsitter.nick}</span></a>
+				<br>
 				<span>소개글 : ${petsitter.info}</span><br>
 				<span>${location.city} ${location.area}</span><br>
 				<hr>
