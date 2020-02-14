@@ -66,7 +66,7 @@
 	
 	<tr>
 		<th>작성일자</th>
-		<td>${faqVO.writedateWithFormat}</td>
+		<td>${qnaVO.writedateWithFormat}</td>
 	</tr>
 
 	<tr>
