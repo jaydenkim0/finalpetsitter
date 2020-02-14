@@ -73,6 +73,7 @@
 				<option>펫시터 질문</option>
 				<option>유저 질문</option>
 				<option>기타 질문</option>
+				<option>신고합니다</option>
 			</select>
 		</td>
 	</tr>

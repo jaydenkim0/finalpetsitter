@@ -25,7 +25,7 @@ public class QnaVO {
 		private String wdate; //작성 날짜
 		private String writedate; 
 		
-		public String getwritedateWithFormat()throws Exception{
+		public String getWritedateWithFormat()throws Exception{
 			SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 			Date date = read.parse(wdate);
 			SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
