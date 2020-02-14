@@ -287,6 +287,6 @@
 		<jsp:param name="pagesize" value="${pagesize}"/>
 		<jsp:param name="care_board_no" value="${care_board_no }"/>
 	</jsp:include>
-</div>
+</div><br><br><br><br>
 
 </body>
