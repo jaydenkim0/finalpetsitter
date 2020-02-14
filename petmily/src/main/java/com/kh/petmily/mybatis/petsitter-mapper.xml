@@ -180,7 +180,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select * from (
 				select rownum rn, A.* from(
 					select * from sitterlocation where sitter_status='정상'
-						<if test="searchOption != null and keyword != null">
+						<if test="cityKeyword != null and areaKeyword != null">
 							and city = #{cityKeyword}
                     		and sitterlocation.area = #{areaKeyword}
 						</if>
@@ -192,7 +192,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="countlocation" resultType="int" parameterType="Map">
 			select count(*) from
 			sitterlocation where sitter_status='정상'	
-				<if test="searchOption != null and keyword != null">
+				<if test="cityKeyword != null and areaKeyword != null">
 					and city = #{cityKeyword}
                     and sitterlocation.area = #{areaKeyword}
 				</if>			

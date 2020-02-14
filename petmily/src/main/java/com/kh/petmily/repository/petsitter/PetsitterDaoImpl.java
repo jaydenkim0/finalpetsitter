@@ -51,7 +51,7 @@ public class PetsitterDaoImpl implements PetsitterDao {
 
 	@Override
 	public List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword) {
-		Map<String, Object> param = new HashMap();
+		Map<String, Object> param = new HashMap<>();
 		param.put("start", start);
 		param.put("end", end);
 		param.put("cityKeyword", cityKeyword);
@@ -61,7 +61,7 @@ public class PetsitterDaoImpl implements PetsitterDao {
 
 	@Override
 	public int countlocation(String cityKeyword, String areaKeyword) {
-		Map<String, Object> param = new HashMap();
+		Map<String, Object> param = new HashMap<>();
 		param.put("cityKeyword", cityKeyword);
 		param.put("areaKeyword", areaKeyword);
 		return sqlSession.selectOne("petsitter.countlocation", param);

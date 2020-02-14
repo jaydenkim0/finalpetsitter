@@ -40,26 +40,26 @@
 </script>
 <form name="form1" method="post">
 	<div align="center">
-		<table border="1" width="100%">
+		<table border="1" width="70%">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
-				<td>글번호 : ${faqVO.faq_no}</td>
+				<td>${faqVO.faq_no}</td>
 			</tr>
 
 			<tr>
-				<td>게시일자 : ${faqVO.writedate}</td>
+				<td>${faqVO.writedateWithFormat}</td>
 			</tr>
 
 			<tr>
-				<td>말머리 : ${faqVO.faq_title}</td>
+				<td>${faqVO.faq_title}</td>
 			</tr>
 
 			<tr>
 				<td>제목 : ${faqVO.faq_head}</td>
 			</tr>
 
-			<tr>
-				<td>${faqVO.faq_content}</td>
+			<tr height="200">
+				<td valign="top">${faqVO.faq_content}</td>
 			</tr>
 		</table><br>
 

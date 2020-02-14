@@ -322,7 +322,6 @@
 	            <option>구를 선택하세요</option>
 	        </select>
 	    </div>
-	
 	    <div id="result"></div>
 	</div>
 		

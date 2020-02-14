@@ -149,12 +149,25 @@
 </form>
 
 <a href="${context}/board/qna/list">
-	<button type="button">문의게시판 목록</button>
+	<button type="button">문의게시판 목록</button><br>
 </a>
+
+<br>
+<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+	<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+	<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btnupdate">수정</button>
+	</a>
+	<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btndelete">삭제</button>
+	</a>
+	<br>
+	<br>
+</c:if>
 
 <!-- 댓글 등록 -->
 <form action="replywrite" method="post" class="reply_submit">
-	<table border="1" width="100%">
+	<br><table border="1" width="100%">
 		<tr>
 			<td align="right"><input type="hidden" id="origin" name="origin"
 				value="${qnaVO.qna_no}"><br> <input type="text"
