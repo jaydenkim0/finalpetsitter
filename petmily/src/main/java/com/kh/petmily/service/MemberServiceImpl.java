@@ -1,12 +1,24 @@
 package com.kh.petmily.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -91,10 +103,100 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.idExist(id);
 	}
 
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException {
+		MemberImageDto memberImageDto = MemberImageDto.builder()
+				.member_image_member_id(id)
+				.savename(UUID.randomUUID().toString())
+				.filetype(member_image.getContentType())
+				.filesize(member_image.getSize())
+				.uploadname(member_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/member_image");
+		
+		File target = new File(dir,memberImageDto.getSavename());
+		dir.mkdirs();
+		
+		member_image.transferTo(target);
+		
+		memberDao.member_image_regist(memberImageDto);
+	}
 
-	
-	
-	
+	//펫이미지 등록
+	@Override
+	public void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException {
+		PetImageDto petImageDto = PetImageDto.builder()
+				.pet_image_pet_no(pet_no)
+				.savename(UUID.randomUUID().toString())
+				.filetype(pet_image.getContentType())
+				.filesize(pet_image.getSize())
+				.uploadname(pet_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/pet_image");
+		
+		File target = new File(dir,petImageDto.getSavename());
+		dir.mkdirs();
+		
+		pet_image.transferTo(target);
+		
+		memberDao.pet_image_regist(petImageDto);
+		
+	}
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	@Override
+	public int member_image_no(String id) {
+		return memberDao.member_image_no(id);
+	}
+
+	//회원이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> member_image(int member_image_no)
+			throws UnsupportedEncodingException, IOException {
+		MemberImageDto memberImage = memberDao.getmember_image(member_image_no);
+		byte[]data = memberDao.physicalmember_image(memberImage.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(memberImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition", "attachment;filename=\""
+						+URLEncoder.encode(memberImage.getUploadname(), "UTF-8")
+						+"\"")				
+				.body(resource);
+	}
+
+	//펫 번호로 펫 이미지 번호 구하기
+	@Override
+	public int pet_image_no(int pet_no) {
+		return memberDao.pet_image_no(pet_no);
+	}
+
+	//펫이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> pet_image(int pet_image_no)
+			throws UnsupportedEncodingException, IOException {
+		PetImageDto petImage = memberDao.getpet_image(pet_image_no);
+		byte[] data = memberDao.physicalpet_image(petImage.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(petImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition", "attachment;filename=\""
+						+URLEncoder.encode(petImage.getUploadname(), "UTF-8")
+						+"\"")				
+				.body(resource);
+	}
+
+	//펫번호 가지고오기
+	@Override
+	public int pet_no(String pet_name,String pet_age,String pet_type) {
+		return memberDao.pet_no(pet_name,pet_age,pet_type);
+	}
 	
 	}
 

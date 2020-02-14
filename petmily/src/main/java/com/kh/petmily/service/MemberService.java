@@ -3,6 +3,12 @@ package com.kh.petmily.service;
 
 import java.util.Map;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 
@@ -43,5 +49,28 @@ public interface MemberService {
 
 	//회원 탈퇴되었는지 검사
 	int idExist(String id);
+
+	//회원이미지 등록
+	void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException;
+
+	//펫이미지 등록
+	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	int member_image_no(String id);
+
+	//회원이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> member_image(int member_image_no) 
+			throws UnsupportedEncodingException, IOException;
+
+	//펫번호로 펫 이미지 번호 구하기
+	int pet_image_no(int pet_no);
+
+	//펫이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> pet_image(int pet_image_no)
+			throws UnsupportedEncodingException, IOException;
+
+	//펫번호 가지고오기
+	int pet_no(String pet_name,String pet_age, String pet_type);
 
 }
