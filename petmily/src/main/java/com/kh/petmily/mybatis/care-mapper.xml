@@ -223,7 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	sitter_id,
 				 	care_board_content,
 				 	care_pw,
-				 	wdate,
+				 	wdate
 				from
 				 care_board C
 				 	inner join pet_sitter P
@@ -243,7 +243,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	sitter_id,
 				 	care_board_content,
 				 	care_pw,
-				 	wdate,
+				 	wdate
 				from
 				 care_board C
 				 	inner join pet_sitter P
@@ -264,7 +264,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	sitter_id,
 				 	care_board_content,
 				 	care_pw,
-				 	wdate,
+				 	wdate
 				from
 				 care_board C
 				 	inner join pet_sitter P
@@ -285,7 +285,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	sitter_id,
 				 	care_board_content,
 				 	care_pw,
-				 	wdate,
+				 	wdate
 				from
 				 care_board C
 				 	inner join pet_sitter P
