@@ -20,7 +20,7 @@ public interface CareService {
 	List<CareDto> list();
 
 	//게시글목록(펫시터아이디)
-	List<CarePetsitterDto> pet_sitter_list();
+	List<CarePetsitterDto> pet_sitter_list(int start,int finish);
 
 	
 	//펫시터아이디로 펫시터번호 구하기
@@ -63,7 +63,7 @@ public interface CareService {
 	void care_image_regist(int care_reply_no, MultipartFile care_image) throws IllegalStateException, IOException;
 
 	//돌봄댓글&이미지 목록
-	List<CareReplyImageDto> replyimagelist(String care_board_no);
+	List<CareReplyImageDto> replyimagelist(String care_board_no,int start, int finish);
 
 	//펫시터 아이디 존재 검사
 	int userIdCheck(String user_id);
@@ -71,5 +71,35 @@ public interface CareService {
 	//돌봄이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> image(int care_image_no) 
 			throws UnsupportedEncodingException, IOException;
+
+	//해당 돌봄 방의 돌봄댓글 개수구하기
+	int getCount(String care_board_no);
+
+	//검색X돌봄방개수
+	int getListCount();
+
+	//care_board_no 검색목록
+	List<CarePetsitterDto> pet_sitter_list_care_board_no(String keyword, int start, int finish);
+
+	//care_board_no 검색개수
+	int getListCount_care_board_no(String keyword);
+
+	//care_member_id 검색목록
+	List<CarePetsitterDto> pet_sitter_list_care_member_id(String keyword, int start, int finish);
+
+	//care_member_id 검색개수
+	int getListCount_care_member_id(String keyword);
+
+	//sitter_id 검색목록
+	List<CarePetsitterDto> pet_sitter_list_sitter_id(String keyword, int start, int finish);
+
+	//sitter_id 검색개수
+	int getListCount_sitter_id(String keyword);
+
+	//care_board_content 검색목록
+	List<CarePetsitterDto> pet_sitter_list_care_board_content(String keyword, int start, int finish);
+
+	//care_board_content 검색개수
+	int getListCount_care_board_content(String keyword);
 
 }

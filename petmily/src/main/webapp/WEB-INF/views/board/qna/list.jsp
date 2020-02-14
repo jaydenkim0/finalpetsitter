@@ -28,11 +28,13 @@
 </script>
 <h1>문의 게시판</h1>
 <br>
+<c:if test="${not empty sessionScope.id}">
 <a href="${context}/board/qna/write">
 	<button type="button" id="btnwrite">글쓰기</button>
 </a>
 <br>
 <br>
+</c:if>
 <form method="get" action="${context}/board/qna/list">
 	<select name="type" class="input-item">
 		<option value="qna_writer">작성자</option>

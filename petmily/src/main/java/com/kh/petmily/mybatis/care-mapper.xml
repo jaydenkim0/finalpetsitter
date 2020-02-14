@@ -27,21 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="careDto">
 		select * from care_board order by wdate desc
 	</select>
-	<!-- 펫시터 번호로 펫시터 아이디 추출 -->
-	<select id="sitter_id" resultType="carePetsitterDto">
-		select
-		 	care_board_no,
-		 	care_member_id,
-		 	sitter_id,
-		 	care_board_content,
-		 	care_pw,
-		 	wdate
-		from
-		 care_board C
-		 	inner join pet_sitter P
-		 	on C.care_sitter_no=P.pet_sitter_no
-		order by wdate desc
-	</select>
+	
 	
 	<!-- 펫시터아이디로 펫시터번호 구하기 -->
 	<select id="id_to_number" parameterType="String" resultType="int">
@@ -148,25 +134,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 돌봄댓글&이미지 목록 -->
-	<select id="replyimagelist" parameterType="String" resultType="careReplyImageDto">
-		select
-		 	I.care_image_no,
-		 	R.care_reply_no,
-		 	I.savename,
-		 	I.filetype,
-		 	I.filesize,
-		 	I.uploadname,
-		 	R.care_reply_board_no,
-		 	R.care_reply_content,
-		 	R.wdate,
-		 	R.care_reply_writer
-		from
-		 	care_reply R
-		 		left outer join care_image I
-		 		on R.care_reply_no=I.care_reply_no
-		where
-			R.care_reply_board_no=#{care_board_no}
-		order by R.wdate desc
+	<select id="replyimagelist" parameterType="map" resultType="careReplyImageDto">
+		select*from (
+			select rownum as rn, A.* from(
+				select
+				 	I.care_image_no,
+				 	R.care_reply_no,
+				 	I.savename,
+				 	I.filetype,
+				 	I.filesize,
+				 	I.uploadname,
+				 	R.care_reply_board_no,
+				 	R.care_reply_content,
+				 	R.wdate,
+				 	R.care_reply_writer
+				from
+				 	care_reply R
+				 		left outer join care_image I
+				 		on R.care_reply_no=I.care_reply_no
+				where
+					R.care_reply_board_no=#{care_board_no}
+				order by R.wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+		
+	</select>
+	
+	
+	<!-- 해당 돌봄방의 돌봄 댓글 개수 구하기 -->
+	<select id="getCount" resultType="int" parameterType="String"> 
+		select count(*) from care_reply where care_reply_board_no=#{care_board_no}
 	</select>
 	
 	<!-- 펫시터 아이디 존재 검사 -->
@@ -183,5 +180,141 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 where 
 		 	care_image_no = #{care_image_no}
 	</select>
+	
+	<!-- 검색X돌봄방개수 -->
+	<select id="getListCount" resultType="int">
+		select count(*) from care_board
+	</select>
+	
+	<!-- care_board_no 검색개수 -->
+	<select id="getListCount_care_board_no" resultType="int" parameterType="String">
+		select count(*) from care_board where care_board_no=#{keyword}
+	</select>	
+	
+	<!-- care_member_id 검색개수 -->
+	<select id="getListCount_care_member_id" resultType="int" parameterType="String">
+		select count(*) from care_board where care_member_id like '%'||#{keyword}||'%'
+	</select>
+	
+	<!-- care_sitter_no 검색개수 -->
+	<select id="getListCount_care_sitter_no" resultType="int" parameterType="String">
+		select 
+			count(*) 
+		from 
+			care_board C
+				 inner join pet_sitter P
+				 on C.care_sitter_no=P.pet_sitter_no
+		where 
+			sitter_id='%'||#{keyword}||'%'
+	</select>
+	
+	<!-- care_board_content 검색개수 -->
+	<select id="getListCount_care_board_content" resultType="int" parameterType="String">
+		select count(*) from care_board where care_board_content='%'||#{keyword}||'%'
+	</select>
 
+	<!-- 펫시터 번호로 펫시터 아이디 추출한 게시글 목록 -->
+	<select id="sitter_id" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+					select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- care_board_no 검색목록 -->
+	<select id="pet_sitter_list_care_board_no" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+			select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				 where care_board_no=#{keyword}
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- care_member_id 검색목록 -->
+	<select id="pet_sitter_list_care_member_id" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+			select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				 where care_member_id like '%'||#{keyword}||'%'
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>	
+	
+	<!-- care_sitter_no 검색목록 -->
+	<select id="pet_sitter_list_care_sitter_no" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+			select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				where P.sitter_id like '%'||#{keyword}||'%'
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>	
+	
+	<!-- care_board_content 검색목록 -->
+	<select id="pet_sitter_list_care_board_content" resultType="carePetsitterDto" parameterType="map">
+		select*from (
+			select rownum as rn, A.* from(
+				select
+				 	care_board_no,
+				 	care_member_id,
+				 	sitter_id,
+				 	care_board_content,
+				 	care_pw,
+				 	wdate
+				from
+				 care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+				 where care_board_content like '%'||#{keyword}||'%'
+				order by wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>	
+	
 </mapper>

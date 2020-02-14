@@ -42,12 +42,6 @@ public class CareServiceImpl implements CareService{
 		return careDao.list();
 	}
 
-	//게시글목록(펫시터아이디)
-	@Override
-	public List<CarePetsitterDto> pet_sitter_list() {
-		return carePetsitterDao.pet_sitter_list();
-	}
-
 	//펫시터아이디로 펫시터번호 구하기
 	@Override
 	public int id_to_number(String care_sitter_id) {
@@ -143,8 +137,8 @@ public class CareServiceImpl implements CareService{
 
 	//돌봄댓글&이미지 목록
 	@Override
-	public List<CareReplyImageDto> replyimagelist(String care_board_no) {
-		return careReplyImageDao.replyimagelist(care_board_no);
+	public List<CareReplyImageDto> replyimagelist(String care_board_no, int start, int finish) {
+		return careReplyImageDao.replyimagelist(care_board_no,start,finish);
 	}
 
 	//펫시터 아이디 존재 검사
@@ -167,6 +161,72 @@ public class CareServiceImpl implements CareService{
 						+URLEncoder.encode(careImage.getUploadname(), "UTF-8")
 						+"\"")
 				.body(resource);
+	}
+
+	//해당 돌봄방의 돌봄 댓글 개수 구하기
+	@Override
+	public int getCount(String care_board_no) {
+		return careDao.getCount(care_board_no);
+	}
+	
+	//게시글목록(펫시터아이디)
+	@Override
+	public List<CarePetsitterDto> pet_sitter_list(int start,int finish) {
+		return carePetsitterDao.pet_sitter_list(start,finish);
+	}
+
+	//검색X돌봄방개수
+	@Override
+	public int getListCount() {
+		return careDao.getListCount();
+	}
+
+	//care_board_no 검색목록
+	@Override
+	public List<CarePetsitterDto> pet_sitter_list_care_board_no(String keyword, int start, int finish) {
+		return carePetsitterDao.pet_sitter_list_care_board_no(keyword,start,finish);
+	}
+
+	//care_board_no 검색개수
+	@Override
+	public int getListCount_care_board_no(String keyword) {
+		return careDao.getListCount_care_board_no(keyword);
+	}
+
+	//care_member_id 검색목록
+	@Override
+	public List<CarePetsitterDto> pet_sitter_list_care_member_id(String keyword, int start, int finish) {
+		return carePetsitterDao.pet_sitter_list_care_member_id(keyword,start,finish);
+	}
+
+	//care_member_id 검색개수
+	@Override
+	public int getListCount_care_member_id(String keyword) {
+		return careDao.getListCount_care_member_id(keyword);
+	}
+
+	//sitter_id 검색목록
+	@Override
+	public List<CarePetsitterDto> pet_sitter_list_sitter_id(String keyword, int start, int finish) {
+		return carePetsitterDao.pet_sitter_list_care_sitter_no(keyword,start,finish);
+	}
+
+	//sitter_id 검색개수
+	@Override
+	public int getListCount_sitter_id(String keyword) {
+		return careDao.getListCount_care_sitter_no(keyword);
+	}
+
+	//care_board_content 검색목록
+	@Override
+	public List<CarePetsitterDto> pet_sitter_list_care_board_content(String keyword, int start, int finish) {
+		return carePetsitterDao.pet_sitter_list_care_board_content(keyword,start,finish);
+	}
+
+	//care_board_content 검색개수
+	@Override
+	public int getListCount_care_board_content(String keyword) {
+		return careDao.getListCount_care_board_content(keyword);
 	}
 
 }

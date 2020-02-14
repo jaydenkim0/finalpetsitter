@@ -137,6 +137,12 @@
   textarea{
  	 width: 99%;
   }
+  
+  li{
+  	list-style-type:none;
+  	float:left;
+  	margin-left:20px;
+  }
 </style>
 </head>
 
@@ -145,7 +151,7 @@
 <h1>돌봄 방 ${care_board_no }</h1><br>
 
 
-<c:if test="${list.care_member_id==id || grade=='admin'}">
+<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
 <a href="delete?care_board_no=${care_board_no }"><button>방 삭제</button></a><br><br>
 </c:if>
 
@@ -159,7 +165,14 @@
 	</tr>
 	<tr>
 		<th>생성자</th>
-		<td>${list.care_member_id }</td>
+			<c:choose>
+				<c:when test="${not empty list.care_member_id }">
+					<td>${list.care_member_id }</td>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
 	</tr>
 	<tr>
 		<th>펫시터</th>
@@ -169,7 +182,7 @@
 		<th>방 제목</th>
 		<td class="content_view">
 			${list.care_board_content }
-			<c:if test="${list.care_member_id==id || grade=='admin'}">
+			<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
 			<button class="content_change">변경</button>
 			</c:if>
 		</td>
@@ -190,23 +203,23 @@
 
 <!-- 댓글 등록 -->
 
-
-<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
-	<table border="1" width="100%">
-		<tr>
-			<td>
-				<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
-				<input type="hidden" name="care_reply_writer" value="${id }">
-				<textarea name="care_reply_content" required></textarea>
-				<input type="file" name="care_image" multiple accept="image/*">
-			</td>
-			<td align="right">
-				<input type="submit" value="등록" class="reply_regist_btn">
-			</td>
-		</tr>
-	</table>
-</form>
-
+<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin' || sitter_id==id}">
+	<form action="reply_regist" method="post" class="reply_submit" enctype="multipart/form-data">
+		<table border="1" width="100%">
+			<tr>
+				<td>
+					<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
+					<input type="hidden" name="care_reply_writer" value="${id }">
+					<textarea name="care_reply_content" required></textarea>
+					<input type="file" name="care_image" multiple accept="image/*">
+				</td>
+				<td align="right">
+					<input type="submit" value="등록" class="reply_regist_btn">
+				</td>
+			</tr>
+		</table>
+	</form>
+</c:if>
 
 <!-- 댓글 목록 -->
 
@@ -216,8 +229,15 @@
 <div class="grandmother">
 	<table width="100%" class="mother">
 		<tr>
-			<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
-			<th align="right">${replyimagelist.wdate.substring(0,16) }</th>
+			<c:choose>
+				<c:when test="${not empty replyimagelist.care_reply_writer }">
+					<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
+			<th align="right">${replyimagelist.wdateWithFormat }</th>
 		</tr>
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
@@ -241,7 +261,7 @@
 		
 		<!-- 댓글 관리 -->
 		
-		<c:if test="${replyimagelist.care_reply_writer==id || grade=='admin'}">
+		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
 				<button class="reply_edit_btn">완료</button>
@@ -258,5 +278,15 @@
 	</table>
 </div>
 </c:forEach>
+<div class="row" >
+	<!-- 네비게이터(navigator) -->
+	<jsp:include page="/WEB-INF/views/board/care/navigator_content.jsp">
+		<jsp:param name="pno" value="${pno}"/>
+		<jsp:param name="count" value="${count}"/>
+		<jsp:param name="navsize" value="${navsize}"/>
+		<jsp:param name="pagesize" value="${pagesize}"/>
+		<jsp:param name="care_board_no" value="${care_board_no }"/>
+	</jsp:include>
+</div><br><br><br><br>
 
 </body>
