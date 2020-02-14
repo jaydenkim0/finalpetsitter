@@ -121,9 +121,10 @@ public class FaqController {
 	}
 	//게시글 수정 처리
 	@PostMapping("/update")
-	public String update(FaqVO faqVO)throws Exception{
+	public String update(FaqVO faqVO,@RequestParam int faq_no, Model model)throws Exception{
 		faqService.update(faqVO);
-		return "redirect:list";
+		model.addAttribute("faq_no",faq_no);
+		return "redirect:/board/faq/view";
 	}
 	//게시글 삭제
 	@RequestMapping("/delete")
