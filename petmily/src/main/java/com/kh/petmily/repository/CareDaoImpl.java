@@ -139,4 +139,28 @@ public class CareDaoImpl implements CareDao{
 		return sqlSession.selectOne("care.getListCount");
 	}
 
+	//care_board_no 검색개수
+	@Override
+	public int getListCount_care_board_no(String keyword) {
+		return sqlSession.selectOne("care.getListCount_care_board_no",keyword);
+	}
+
+	//care_member_id 검색개수
+	@Override
+	public int getListCount_care_member_id(String keyword) {
+		return sqlSession.selectOne("care.getListCount_care_member_id",keyword);
+	}
+
+	//care_sitter_no 검색개수
+	@Override
+	public int getListCount_care_sitter_no(String keyword) {
+		return sqlSession.selectOne("care.getListCount_care_sitter_no",keyword);
+	}
+
+	//care_board_content 검색개수
+	@Override
+	public int getListCount_care_board_content(String keyword) {
+		return sqlSession.selectOne("care.getListCount_care_board_content",keyword);
+	}
+
 }
