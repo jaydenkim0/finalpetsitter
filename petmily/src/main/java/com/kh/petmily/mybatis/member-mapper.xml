@@ -121,6 +121,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 펫 번호 구해오기 -->
+	<select id="pet_no" resultType="int">
+		select pet_no from(
+			select rownum as rn, E.* from (
+    			select * from pet order by pet_no desc
+			) E 
+		)where rn=1			
+	</select>
+	
+	<!-- 펫 이미지 등록 -->
+	<select id="pet_image_regist" parameterType="petImageDto">
+		insert into pet_image values(
+			pet_image_no_seq.nextval,
+			#{pet_image_pet_no},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		);
+	</select>
+	
 </mapper>
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -66,8 +67,9 @@ public class MemberServiceImpl implements MemberService {
 
 	//펫등록
 	@Override
-	public void pet_regist(PetDto petDto) {
+	public int pet_regist(PetDto petDto) {
 		memberDao.pet_regist(petDto);
+		return memberDao.pet_no();
 	}
 
 	//회원정보 수정
@@ -117,10 +119,27 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.member_image_regist(memberImageDto);
 	}
 
-
-	
-	
-	
+	//펫이미지 등록
+	@Override
+	public void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException {
+		PetImageDto petImageDto = PetImageDto.builder()
+				.pet_image_pet_no(pet_no)
+				.savename(UUID.randomUUID().toString())
+				.filetype(pet_image.getContentType())
+				.filesize(pet_image.getSize())
+				.uploadname(pet_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/pet_image");
+		
+		File target = new File(dir,petImageDto.getSavename());
+		dir.mkdirs();
+		
+		pet_image.transferTo(target);
+		
+		memberDao.pet_image_regist(petImageDto);
+		
+	}
 	
 	}
 

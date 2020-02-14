@@ -278,6 +278,12 @@
 							<textarea name="pet_ect"></textarea>
 						</td>
 					</tr>
+					<tr>
+						<th>이미지 첨부</th>
+						<td>
+							<input type="file" name="pet_image" multiple accept="image/*">S
+						</td>
+					</tr>
 				</table>
 			</th>
 		</tr>

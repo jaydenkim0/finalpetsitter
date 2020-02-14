@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -98,6 +99,18 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void member_image_regist(MemberImageDto memberImageDto) {
 		sqlSession.insert("member.member_image_regist",memberImageDto);
+	}
+
+	//펫 번호 구해오기
+	@Override
+	public int pet_no() {
+		return sqlSession.selectOne("member.pet_no");
+	}
+
+	//펫 이미지 등록
+	@Override
+	public void pet_image_regist(PetImageDto petImageDto) {
+		sqlSession.insert("member.pet_image_regist",petImageDto);
 	}
 
 

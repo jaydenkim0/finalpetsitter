@@ -36,7 +36,7 @@ public interface MemberService {
 	void mylistchange(MemberDto memberDto);
 
 	//펫등록
-	void pet_regist(PetDto petDto);
+	int pet_regist(PetDto petDto);
 
 	//아이디중복검사
 	int userIdCheck(String user_id);
@@ -49,5 +49,8 @@ public interface MemberService {
 
 	//회원이미지 등록
 	void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException;
+
+	//펫이미지 등록
+	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
 
 }

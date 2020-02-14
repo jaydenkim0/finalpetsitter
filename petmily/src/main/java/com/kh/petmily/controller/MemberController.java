@@ -71,11 +71,14 @@ public class MemberController {
 			@RequestParam String pet_age,
 			@RequestParam String pet_type,
 			@RequestParam String pet_ect,
-			@RequestParam MultipartFile member_image) throws IllegalStateException,IOException{
+			@RequestParam MultipartFile member_image,
+			@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
 		memberService.regist(memberDto);
+		
 		if(member_image.isEmpty()==false) {
 			memberService.member_image_regist(id,member_image);
 		}
+		
 		if(pets.equals("예")) {
 			int real_pet_age = Integer.parseInt(pet_age);
 			petDto.setMember_id(id);
@@ -84,7 +87,12 @@ public class MemberController {
 			petDto.setType(pet_type);
 			petDto.setEct(pet_ect);
 			
-			memberService.pet_regist(petDto);
+			int pet_no = memberService.pet_regist(petDto);
+			
+			if(pet_image.isEmpty()==false) {
+				memberService.pet_image_regist(pet_no,pet_image);
+			}
+			
 		}
 		return "redirect:login";		
 	}

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 
 public interface MemberDao {	
 	
@@ -49,6 +50,12 @@ public interface MemberDao {
 
 	//회원이미지 등록
 	void member_image_regist(MemberImageDto memberImageDto);
+
+	//펫 번호 구해오기
+	int pet_no();
+
+	//펫 이미지 등록
+	void pet_image_regist(PetImageDto petImageDto);
 
 
 }
