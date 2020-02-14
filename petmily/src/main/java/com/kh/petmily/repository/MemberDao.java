@@ -53,7 +53,7 @@ public interface MemberDao {
 	void member_image_regist(MemberImageDto memberImageDto);
 
 	//펫 번호 구해오기
-	int pet_no();
+	int pet_no(String pet_name,String pet_age,String pet_type);
 
 	//펫 이미지 등록
 	void pet_image_regist(PetImageDto petImageDto);

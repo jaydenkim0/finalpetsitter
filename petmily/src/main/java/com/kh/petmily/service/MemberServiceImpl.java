@@ -73,9 +73,8 @@ public class MemberServiceImpl implements MemberService {
 
 	//펫등록
 	@Override
-	public int pet_regist(PetDto petDto) {
+	public void pet_regist(PetDto petDto) {
 		memberDao.pet_regist(petDto);
-		return memberDao.pet_no();
 	}
 
 	//회원정보 수정
@@ -191,6 +190,12 @@ public class MemberServiceImpl implements MemberService {
 						+URLEncoder.encode(petImage.getUploadname(), "UTF-8")
 						+"\"")				
 				.body(resource);
+	}
+
+	//펫번호 가지고오기
+	@Override
+	public int pet_no(String pet_name,String pet_age,String pet_type) {
+		return memberDao.pet_no(pet_name,pet_age,pet_type);
 	}
 	
 	}

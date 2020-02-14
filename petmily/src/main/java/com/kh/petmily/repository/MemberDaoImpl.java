@@ -3,7 +3,9 @@ package com.kh.petmily.repository;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -106,8 +108,12 @@ public class MemberDaoImpl implements MemberDao {
 
 	//펫 번호 구해오기
 	@Override
-	public int pet_no() {
-		return sqlSession.selectOne("member.pet_no");
+	public int pet_no(String pet_name,String pet_age,String pet_type) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("pet_name", pet_name);
+		map.put("pet_age", pet_age);
+		map.put("pet_type", pet_type);
+		return sqlSession.selectOne("member.pet_no",map);
 	}
 
 	//펫 이미지 등록

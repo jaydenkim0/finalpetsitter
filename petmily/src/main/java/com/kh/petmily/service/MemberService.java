@@ -39,7 +39,7 @@ public interface MemberService {
 	void mylistchange(MemberDto memberDto);
 
 	//펫등록
-	int pet_regist(PetDto petDto);
+	void pet_regist(PetDto petDto);
 
 	//아이디중복검사
 	int userIdCheck(String user_id);
@@ -69,5 +69,8 @@ public interface MemberService {
 	//펫이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> pet_image(int pet_image_no)
 			throws UnsupportedEncodingException, IOException;
+
+	//펫번호 가지고오기
+	int pet_no(String pet_name,String pet_age, String pet_type);
 
 }

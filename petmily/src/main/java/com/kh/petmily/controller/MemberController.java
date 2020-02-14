@@ -90,7 +90,8 @@ public class MemberController {
 			petDto.setType(pet_type);
 			petDto.setEct(pet_ect);
 			
-			int pet_no = memberService.pet_regist(petDto);
+			memberService.pet_regist(petDto);
+			int pet_no = memberService.pet_no(pet_name,pet_age,pet_type);
 			
 			if(pet_image.isEmpty()==false) {
 				memberService.pet_image_regist(pet_no,pet_image);
