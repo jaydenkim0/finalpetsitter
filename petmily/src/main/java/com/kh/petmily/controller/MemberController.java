@@ -141,6 +141,13 @@ public class MemberController {
 		return memberService.member_image(member_image_no);
 	}
 	
+	//펫이미지 가져오기(src로 주소)
+	@GetMapping("/pet/image")
+	public ResponseEntity<ByteArrayResource> pet_image(
+			@RequestParam int pet_no) throws UnsupportedEncodingException,IOException {
+		int pet_image_no = memberService.pet_image_no(pet_no);
+		return memberService.pet_image(pet_image_no);
+	}
 	
 	//내정보보기
 	@GetMapping("/mylist")

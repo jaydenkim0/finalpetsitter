@@ -157,6 +157,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			member_image_no=#{member_image_no}
 	</select>
 	
+	<!-- 펫번호로 펫 이미지 번호 구하기 -->
+	<select id="pet_image_no">
+		select pet_image_no from pet_image whrer pet_image_pet_no=#{pet_no}
+	</select>
+	
+	<!-- 펫이미지 한개씩 불러오기 -->
+	<select id="getpet_image" parameterType="int" resultType="petImageDto">
+		select 
+			* 
+		from
+			pet_image
+		where
+			pet_image_no=#{pet_image_no}
+	</select>
+	
 </mapper>
 
 

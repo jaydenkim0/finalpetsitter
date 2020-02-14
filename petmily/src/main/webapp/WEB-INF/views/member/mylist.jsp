@@ -16,9 +16,9 @@
 	<c:forEach var="pet"  items="${mylistpet }">
 ----------------------------------------------------
 		<h3>이름 : ${pet.name }</h3>
-<%-- 		<c:if test="${petImage.pet_image_no>0 }"> --%>
-<%-- 			<img src="${pageContext.request.contextPath }/member/pet/image?pet_image_no=${petImage.pet_image_no}" style="max-width: 40%; height: auto;"> --%>
-<%-- 		</c:if> --%>
+		<c:if test="${petImage.pet_image_no>0 }">
+			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="max-width: 40%; height: auto;">
+		</c:if>
 		<h3>나이 : ${pet.age }</h3>
 		<h3>동물종 : ${pet.type }</h3>
 		<h3>${pet.ect }</h3>

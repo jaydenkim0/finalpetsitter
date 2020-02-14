@@ -63,4 +63,11 @@ public interface MemberService {
 	ResponseEntity<ByteArrayResource> member_image(int member_image_no) 
 			throws UnsupportedEncodingException, IOException;
 
+	//펫번호로 펫 이미지 번호 구하기
+	int pet_image_no(int pet_no);
+
+	//펫이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> pet_image(int pet_image_no)
+			throws UnsupportedEncodingException, IOException;
+
 }

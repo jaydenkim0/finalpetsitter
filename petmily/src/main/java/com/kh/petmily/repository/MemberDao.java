@@ -67,5 +67,14 @@ public interface MemberDao {
 	//회원이미지 실제로 가지고오기(1장씩 요청)
 	byte[] physicalmember_image(String savename) throws IOException;
 
+	//펫 번호로 펫 이미지 번호 구하기
+	int pet_image_no(int pet_no);
+
+	//펫이미지 가지고 오기(1장씩 요청)
+	PetImageDto getpet_image(int pet_image_no);
+
+	//펫이미지 실제로 가지고오기(1장씩 요청)
+	byte[] physicalpet_image(String savename) throws IOException;
+
 
 }

@@ -136,5 +136,25 @@ public class MemberDaoImpl implements MemberDao {
 		return data;
 	}
 
+	//펫번호로 펫 이미지 번호 구하기
+	@Override
+	public int pet_image_no(int pet_no) {
+		return sqlSession.selectOne("member.pet_image_no",pet_no);
+	}
+
+	//펫이미지 가지고 오기(1장씩 요청)
+	@Override
+	public PetImageDto getpet_image(int pet_image_no) {
+		return sqlSession.selectOne("member.getpet_image",pet_image_no);
+	}
+
+	//펫이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalpet_image(String savename) throws IOException {
+		File file = new File("C:/upload/pet_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
+
 
 }

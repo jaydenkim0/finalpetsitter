@@ -169,6 +169,29 @@ public class MemberServiceImpl implements MemberService {
 						+"\"")				
 				.body(resource);
 	}
+
+	//펫 번호로 펫 이미지 번호 구하기
+	@Override
+	public int pet_image_no(int pet_no) {
+		return memberDao.pet_image_no(pet_no);
+	}
+
+	//펫이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> pet_image(int pet_image_no)
+			throws UnsupportedEncodingException, IOException {
+		PetImageDto petImage = memberDao.getpet_image(pet_image_no);
+		byte[] data = memberDao.physicalpet_image(petImage.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(petImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition", "attachment;filename=\""
+						+URLEncoder.encode(petImage.getUploadname(), "UTF-8")
+						+"\"")				
+				.body(resource);
+	}
 	
 	}
 
