@@ -52,13 +52,6 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	
 	
-	
-	// member 리스트
-//	@Override
-//	public List<MemberVO> memberList() {	
-//		return adminDao.getMemberList();
-//	}
-
 	// petsitter 리스트
 	@Override
 	public List<PetsitterVO> petsitterList( ) {		
@@ -78,8 +71,7 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	
 	
-	
-	
+		
 	// 펫시터 승인
 	@Override
 	public void petsitterapply(String sitter_id) {
@@ -276,29 +268,6 @@ public class AdiminServiceImpl implements AdminService {
 	public List<PetDto> getPets(String id) {		
 		return adminDao.getPets(id);
 	}
-
-//	 회원관리 페이지에서 회원 검색
-//	@Override
-//	public List<MemberVO> memberSearchList(String type, String keyword) {		
-//		return adminDao.memberSearchList(type, keyword);
-//	}
-//	// 펫시터 관리 페이지에서 펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
-//		return adminDao.petsitterSearch(type,  keyword);
-//	}
-//	
-//	// 펫시터 관리 페이지에서 펫시터 신청 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
-//		return adminDao.petsitterSearchApply(type,  keyword);
-//	}
-//	
-//	// 펫시터 관리 페이지에서 휴면펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
-//		return adminDao.petsitterSearchSleep(type,  keyword);
-//	}
 
 	// 블랙리스트 여부 검사
 	@Override
