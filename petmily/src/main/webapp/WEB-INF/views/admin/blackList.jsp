@@ -35,6 +35,7 @@
      -->
     <br>
     <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+    <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
     <br>
     
     <h3><a href="${pageContext.request.contextPath}/admin/list/blacklistmember">경고 회원 리스트</a></h3>

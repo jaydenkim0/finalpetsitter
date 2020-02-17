@@ -20,11 +20,15 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Service
@@ -455,6 +459,39 @@ public class AdiminServiceImpl implements AdminService {
 	public int countAricleBlackPetsitter(String searchOption, String keyword) {
 		return adminDao.countAricleBlackPetsitter(searchOption, keyword);
 	}
+
+	// 가격 옵션 리스트 불러오기
+	@Override
+	public List<PayinfoDto> getAccountlist() {	
+		return adminDao.getAccountlist();
+	}
+	// 수수료 옵션 리스트 불러오기
+	@Override
+	public List<PayinfoDto> getFeesList() {	
+		return adminDao.getFeesList();
+	}
+	// 가격 옵션 등록하기
+	@Override
+	public void accountOtionAdd(PayinfoDto payinfoDto) {
+		adminDao.accountOtionAdd(payinfoDto);		
+	}
+	// 가격 옵션 삭제
+	@Override
+	public void accountoptiondelete(int payinfo_no) {
+		adminDao.accountoptiondelete(payinfo_no);		
+	}
+
+	// 신고게시판 불러오기
+	@Override
+	public List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword) {
+		return adminDao.getBlackreport(start, end, searchOption, keyword);
+	}
+	// 신고게시판 카운트
+	@Override
+	public int countAriclegetBlackreport(String searchOption, String keyword) {
+		return adminDao.countAriclegetBlackreport(searchOption, keyword);
+	}
+
 
 
 	
