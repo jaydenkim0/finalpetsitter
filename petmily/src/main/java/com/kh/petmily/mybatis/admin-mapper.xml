@@ -480,6 +480,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>			
 			order by black_no desc
 		</select>	
+				
+		<!-- 신고게시판 리스트 -->
+		<select id="getBlackreport" resultType="qnaVO" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from qna where qna_title = '신고합니다'
+						<if test="searchOption != null and keyword != null">
+							and ${searchOption} like '%'||#{keyword}||'%'
+						</if>
+					order by qna_no desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>
+		<!-- 신고게시판 페이징 카운트 -->
+		<select id="countAriclegetBlackreport" resultType="int" parameterType="Map">
+			select count(*) from
+				qna where qna_title = '신고합니다'
+				<if test="searchOption != null and keyword != null">
+					and ${searchOption} like '%'||#{keyword}||'%'
+				</if>			
+			order by qna_no desc
+		</select>	
+		
+		
+		
+		
+		
 		
 	<!-- 정산관리 -->
 		<!-- 가격 리스트 불러오기 -->

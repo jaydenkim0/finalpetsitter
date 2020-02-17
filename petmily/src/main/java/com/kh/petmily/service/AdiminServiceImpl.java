@@ -23,9 +23,12 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Service
@@ -476,6 +479,17 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public void accountoptiondelete(int payinfo_no) {
 		adminDao.accountoptiondelete(payinfo_no);		
+	}
+
+	// 신고게시판 불러오기
+	@Override
+	public List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword) {
+		return adminDao.getBlackreport(start, end, searchOption, keyword);
+	}
+	// 신고게시판 카운트
+	@Override
+	public int countAriclegetBlackreport(String searchOption, String keyword) {
+		return adminDao.countAriclegetBlackreport(searchOption, keyword);
 	}
 
 

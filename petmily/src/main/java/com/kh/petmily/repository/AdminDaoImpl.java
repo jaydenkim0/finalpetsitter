@@ -23,8 +23,11 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Repository
@@ -492,6 +495,25 @@ public class AdminDaoImpl implements AdminDao {
 	public void accountoptiondelete(int payinfo_no) {
 		sqlSession.insert("admin.accountoptiondelete", payinfo_no);
 		
+	}
+
+	// 신고게시판 불러오기
+	@Override
+	public List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword) {		
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.getBlackreport", param);
+	}
+	
+	@Override
+	public int countAriclegetBlackreport(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclegetBlackreport", param);
 	}
 
 

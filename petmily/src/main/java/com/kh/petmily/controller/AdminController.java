@@ -28,11 +28,14 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+
+import oracle.jdbc.proxy.annotation.GetProxy;
 
 
 @Controller
@@ -382,7 +385,7 @@ public class AdminController {
 		return "redirect:/admin/member";		
 	}
 	
-	
+
 	///////////////////////////////////////////////////////////////
 	
 	
@@ -405,7 +408,7 @@ public class AdminController {
 		adminService.accountOtionAdd(payinfoDto);
 		return "redirect:/admin/accountoption";		
 	}
-	// 가겨 정보 삭제
+	// 가격 정보 삭제
 	@GetMapping("/accountoptiondelete")
 	public String accountoptiondelete(
 			@RequestParam int payinfo_no) {

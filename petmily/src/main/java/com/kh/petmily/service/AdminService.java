@@ -19,8 +19,11 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 public interface AdminService {
@@ -187,6 +190,11 @@ public interface AdminService {
 	void accountOtionAdd(PayinfoDto payinfoDto);
 	// 가격 옵션 삭제
 	void accountoptiondelete(int payinfo_no);
+	
+	// 신고게시판 불러오기
+	List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword);
+	// 신고게시판 카운트
+	int countAriclegetBlackreport(String searchOption, String keyword);
 
 
 	
