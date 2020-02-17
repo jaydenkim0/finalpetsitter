@@ -215,7 +215,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 펫시터 번호로 펫시터 아이디 추출한 게시글 목록 -->
 	<select id="sitter_id" resultType="carePetsitterDto" parameterType="map">
-		select*from (
+		select * from (
 					select rownum as rn, A.* from(
 				select
 				 	care_board_no,
@@ -223,12 +223,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	sitter_id,
 				 	care_board_content,
 				 	care_pw,
-				 	wdate
+				 	wdate					 
 				from
 				 care_board C
 				 	inner join pet_sitter P
 				 	on C.care_sitter_no=P.pet_sitter_no
-				order by wdate desc
 			) A
 		) where rn between #{start} and #{finish}
 	</select>
