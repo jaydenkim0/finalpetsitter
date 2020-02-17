@@ -4,6 +4,10 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+<!-- languages (Basic Language: English/en) -->
+<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
 <script>
 	$(function(){
 
@@ -129,9 +133,40 @@
 	});
 </script>
 <script>
-function no_image() {
-	$("#member_image").hide();
- }
+    function loadEditor(){
+        var editor = SUNEDITOR.create((document.querySelector("#care_reply_content")),{
+            //언어 설정
+            lang: SUNEDITOR_LANG['ko'],
+            
+            //버튼 목록
+            buttonList:[
+            	 ['font','fontSize','fontColor'],
+                 ['underline','italic', 'bold','paragraphStyle','formatBlock'],
+                 ['align','table']
+
+              ],
+              font:[
+                 '굴림','궁서','binggrae','Verdana','Arial'
+             ],
+             fontSize:[
+             '8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'
+             ],
+             fontColor:[
+          ],
+        });
+        
+    	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
+	    editor.onKeyUp = function(e){
+	    	var care_content = document.querySelector("#care_reply_content");
+	    	care_content.value = editor.getContents();
+	    }
+    }
+    
+    //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
+    window.onload = loadEditor;
+    function no_image() {
+    	$("#member_image").hide();
+     }
 </script>
 <style>
   .mother {
@@ -139,20 +174,22 @@ function no_image() {
     border: 1px solid #444444;
   }
   
-  textarea{
- 	 width: 99%;
-  }
-  
   li{
   	list-style-type:none;
   	float:left;
   	margin-left:20px;
   }
+  
+   textarea{
+        width:100%;
+        height:150px;
+    }
 </style>
 </head>
 
 <body>
 
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <h1>돌봄 방 ${care_board_no }</h1><br>
 
 
@@ -215,7 +252,8 @@ function no_image() {
 				<td>
 					<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 					<input type="hidden" name="care_reply_writer" value="${id }">
-					<textarea name="care_reply_content" required></textarea>
+					<textarea name="care_reply_content" required id="care_reply_content"
+					style="resize:vertical;"placeholder="글 내용 입력"></textarea>
 					<input type="file" name="care_image" multiple accept="image/*">
 				</td>
 				<td align="right">
@@ -236,13 +274,13 @@ function no_image() {
 		<tr>
 			<c:choose>
 				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th>
+					<th align="left">
 						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;" onerror="no_image()" id="member_image">
+						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
 					</th>
-					<td align="left">작성자 : ${replyimagelist.care_reply_writer }</td>
 				</c:when>
 				<c:otherwise>
-					<td>탈퇴회원</td>
+					<th>탈퇴회원</th>
 				</c:otherwise>
 			</c:choose>
 			<th align="right">${replyimagelist.wdateWithFormat }</th>
