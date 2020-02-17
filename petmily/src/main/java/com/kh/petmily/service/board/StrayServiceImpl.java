@@ -68,6 +68,10 @@ public class StrayServiceImpl implements StrayService{
 
 	@Override
 	public void uploadFile(int no, List<MultipartFile> stray_file) throws IllegalStateException, IOException {
+		if(stray_file.get(0).isEmpty()) {
+			return;
+		}
+		
 		List<StrayFileDto>list = new ArrayList<>();
 		File dir = new File("D:/upload/stray");
 		dir.mkdirs();

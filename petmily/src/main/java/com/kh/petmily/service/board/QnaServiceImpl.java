@@ -84,6 +84,9 @@ public class QnaServiceImpl implements QnaService{
 	//게시글 다중파일 등록
 	@Override
 	public void uploadFile(int no, List<MultipartFile> qna_file) throws IllegalStateException, IOException {
+		if(qna_file.get(0).isEmpty()) {
+			return;
+		}
 		List<QnaFileDto>list = new ArrayList<>();
 		File dir = new File("D:/upload/qna");
 		dir.mkdirs();

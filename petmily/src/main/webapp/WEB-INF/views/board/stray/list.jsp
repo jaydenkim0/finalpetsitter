@@ -54,7 +54,14 @@
 		<c:forEach var="row" items="${list}">
 			<tr>
 				<td>${row.stray_no}</td>
+			<c:choose>
+			<c:when test="${not empty reply.reply_writer}">
 				<td>${row.stray_writer}</td>
+			</c:when>
+			<c:otherwise>
+				<td>	비회원</td>
+			</c:otherwise>
+			</c:choose>	
 				<td>${row.stray_title}
 			<c:if test="${strayVO.stray_title eq '완료글'}">
 			<font color="red">${row.stray_title}</font>

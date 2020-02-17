@@ -155,17 +155,19 @@
 	<div class="grandmother">
 		<table width="100%" class="mother">
 			<tr>
-		<c:when test="${not empty reply.reply_writer}">
 			<th align="left">
+			<c:choose>
+			<c:when test="${not empty reply.reply_writer}">
 				${reply.reply_writer}
-				<c:otherwise>
-				비회원
-				</c:otherwise>
+			</c:when>
+			<c:otherwise>
+			비회원
+			</c:otherwise>
+			</c:choose>
 				<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
 				</c:if>
 			</th>
-				</c:when>
 				
 				<th align="left">
 				작성일 : ${reply.writedateWithFormat}</th>

@@ -91,7 +91,7 @@
 	</tr>
 	<tr>
 	<th>이미지 첨부</th>
-	<td><input type="file" id="stray_file" name="stray_file" multiple accept="image/*" required></td>
+	<td><input type="file" id="stray_file" name="stray_file" multiple accept="image/*" ></td>
 		<td colspan="2" align="center">
 			<input type="submit" value="확인"> 
 			<input type="reset" value="초기화">
