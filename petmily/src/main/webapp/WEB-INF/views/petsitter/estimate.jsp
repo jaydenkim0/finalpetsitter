@@ -66,6 +66,55 @@
 		</select>
 	</div>
 	
+<!-- 돌봄 시간 -->
+	<div>
+		<label for="time">돌봄 시작 시간</label>
+		<select id="time" name="usage_time_start">
+			<option value="6">오전 6시(06:00)</option>
+			<option value="7">오전 7시(07:00)</option>
+			<option value="8">오전 8시(08:00)</option>
+			<option value="9">오전 9시(09:00)</option>
+			<option value="10">오전 10시(10:00)</option>
+			<option value="11">오전 11시(11:00)</option>
+			<option value="12">오후 12시(12:00)</option>
+			<option value="13">오후 1시(13:00)</option>
+			<option value="14">오후 2시(14:00)</option>
+			<option value="15">오후 3시(15:00)</option>
+			<option value="16">오후 4시(16:00)</option>
+			<option value="17">오후 5시(17:00)</option>
+			<option value="18">오후 6시(18:00)</option>
+			<option value="19">오후 7시(19:00)</option>
+			<option value="20">오후 8시(20:00)</option>
+			<option value="21">오후 9시(21:00)</option>
+			<option value="22">오후 10시(22:00)</option>
+		</select>
+	</div>
+	
+	<div>
+		<label for="time">돌봄 끝나는 시간</label>
+		<select id="time" name="usage_time_start">
+			<option value="6">오전 6시(06:00)</option>
+			<option value="7">오전 7시(07:00)</option>
+			<option value="8">오전 8시(08:00)</option>
+			<option value="9">오전 9시(09:00)</option>
+			<option value="10">오전 10시(10:00)</option>
+			<option value="11">오전 11시(11:00)</option>
+			<option value="12">오후 12시(12:00)</option>
+			<option value="13">오후 1시(13:00)</option>
+			<option value="14">오후 2시(14:00)</option>
+			<option value="15">오후 3시(15:00)</option>
+			<option value="16">오후 4시(16:00)</option>
+			<option value="17">오후 5시(17:00)</option>
+			<option value="18">오후 6시(18:00)</option>
+			<option value="19">오후 7시(19:00)</option>
+			<option value="20">오후 8시(20:00)</option>
+			<option value="21">오후 9시(21:00)</option>
+			<option value="22">오후 10시(22:00)</option>
+		</select>
+	</div>
+	
+
+	
 <!-- 스킬 -->
 	<div class="skill">
         <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
