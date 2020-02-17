@@ -3,6 +3,8 @@
     
     <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
     
+    
+    
 	<h3>블랙리스트 정보 디테일 페이지</h3>
 	
 	
@@ -47,10 +49,10 @@
 					
 							
 					<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
-					<form action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
+					<form  action="${pageContext.request.contextPath}/admin/sitter_delete" method="get">			
 							<input type="hidden" name="sitter_id" value="${blackListdetail.black_id}">	
 							<input type="hidden" name="sitter_no" value="${blackListdetail.pet_sitter_no}">				
-							<button type="submit" >경고 펫시터 탈퇴</button>						
+							<button  type="submit" >경고펫시터 탈퇴</button>						
 					</form>
 					<!-- 정상 펫시터로 복귀 -->
 					<form action="${pageContext.request.contextPath}/admin/blackList/comebackPet" method="get">
@@ -93,9 +95,9 @@
 							</c:forEach>
 					
 					<!-- 블랙리스트 등록 회원은 삭제 버튼 노출 -->
-						<form action="${pageContext.request.contextPath}/admin/member_delete" method="get">			
+					<form action="${pageContext.request.contextPath}/admin/member_delete" method="get">			
 							<input type="hidden" name="id" value="${blackListdetail.black_id}">				
-							<button type="submit" >경고 회원 탈퇴</button>						
+							<button type="submit" >경고회원 탈퇴</button>						
 					</form>	
 					<!-- 정상 회원으로 복귀 -->						
 					<form action="${pageContext.request.contextPath}/admin/blackList/comebackMember" method="get">

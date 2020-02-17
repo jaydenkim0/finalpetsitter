@@ -43,18 +43,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!--  회원관리 -->	
-		<!-- 회원리시트 불러오가 -->
-		<!-- <select id="memberList"  resultType="memberVO">
-			select * from memberB
-		</select> -->
-		
-		<!-- 
-			회원리스트 검색
-			일단 이름 검색으로	
-		 -->
-		<!-- 	<select id="memberSearchList"  parameterType="Map"  resultType="MemberVO">
-			select * from memberB where ${type} like  '%'||#{keyword}||'%' order by id asc
-		</select> -->
 		
 		<!-- 회원 디테일 페이지 불러오기 -->
 		<select id="getMemberdetail" resultType="MemberVO">
@@ -92,8 +80,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>			
 			order by joindate desc
 		</select>	
-
-	
 	
 	
 	
@@ -272,23 +258,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<select id="getSitterBankimge" parameterType="int" 
 				resultType="bankImageDto">
 					select * from bank_image where bank_image_no = #{bank_image_no}
-				</select>
-				
-				<!-- 펫시터리스트 검색 -->
-				<!--	<select id="petsitterSearchList" parameterType="Map" resultType="petsitterVO">
-					select * from petsitter where ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc 
-				</select> -->
-				
-				<!-- 펫시터 신청 리스트 검색 -->
-				<!-- 	<select id="petsitterSearchApply" parameterType="Map" resultType="petsitterVO">
-					select * from petsitter where grade = 'member' and ${type} like  '%'||#{keyword}||'%' order by pet_sitter_no desc
-				</select> -->
-				
-				<!-- 휴면 펫시터 리스트 검색 -->
-				<!-- <select id="petsitterSearchSleep" parameterType="Map" resultType="petsitterVO">
-					select * from petsitter where sitter_status = '휴면' and grade = 'petsitter' and ${type} 
-					like  '%'||#{keyword}||'%' order by pet_sitter_no desc
-				</select> -->
+				</select>		
+
 		
 				<!-- 펫시터 페이징 리스트 -->			
 				<select id="petsitterListAll" resultType="petsitterVO" parameterType="Map">
@@ -513,7 +484,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 정산관리 -->
 	
 	
-	
+
 	
 </mapper>
 
