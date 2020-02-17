@@ -13,6 +13,7 @@ import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -190,6 +191,16 @@ public interface AdminDao {
 	List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword);
 	// 경고 펫시터 카운트
 	int countAricleBlackPetsitter(String searchOption, String keyword);
+
+	
+	// 가격 옵션 리스트 불러오기
+	List<PayinfoDto> getAccountlist();
+	// 가격 옵션 등록하기
+	void accountOtionAdd(PayinfoDto payinfoDto);
+	// 가격 옵션 삭제
+	void accountoptiondelete(int payinfo_no);
+
+	List<PayinfoDto> getFeesList();
 
 	
 

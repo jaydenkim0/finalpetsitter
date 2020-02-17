@@ -25,6 +25,7 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -391,6 +392,26 @@ public class AdminController {
 		return "admin/account";		
 	}
 	
+	// 가격 정보 페이지 연결
+	@GetMapping("/accountoption")
+	public String accountOtion(Model model) {	
+		model.addAttribute("accountlist", (List<PayinfoDto>)adminService.getAccountlist())
+		.addAttribute("feesList", (List<PayinfoDto>)adminService.getFeesList());
+		return "admin/accountoption";		
+	}
+	// 가격 정보 등록
+	@PostMapping("/accountoption")
+	public String accountOtion(@ModelAttribute PayinfoDto payinfoDto) {	
+		adminService.accountOtionAdd(payinfoDto);
+		return "redirect:/admin/accountoption";		
+	}
+	// 가겨 정보 삭제
+	@GetMapping("/accountoptiondelete")
+	public String accountoptiondelete(
+			@RequestParam int payinfo_no) {
+		adminService.accountoptiondelete(payinfo_no);
+		return "redirect:/admin/accountoption";
+	}
 	
 
 }

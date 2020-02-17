@@ -18,3 +18,4 @@
 	<h1>정산 관리 페이지</h1>
 	<br>
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+	<a href="${pageContext.request.contextPath}/admin/accountoption"><button>가격 옵션 설정</button></a>
