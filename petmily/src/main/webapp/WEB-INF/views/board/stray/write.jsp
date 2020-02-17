@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- 에디터 불러오기 -->
 <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
 <style>
@@ -17,7 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
 <script>
     function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector('textarea[name=faq_content]')),{
+        var editor = SUNEDITOR.create((document.querySelector('textarea[name=stray_content]')),{
             //언어 설정
             lang: SUNEDITOR_LANG['ko'],
             
@@ -40,8 +42,8 @@
         
     	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
 	    editor.onKeyUp = function(e){
-	    	var faq_content = document.querySelector("textarea[name=faq_content]");
-	    	faq_content.value = editor.getContents();
+	    	var stray_content = document.querySelector("textarea[name=stray_content]");
+	    	stray_content.value = editor.getContents();
 	    }
     }
     
@@ -58,38 +60,38 @@
 	<a href="${context}/member/logout">로그아웃</a>
 	</c:otherwise>
 </c:choose>
-
 <div align="center">
 
-<h2>공지글 작성</h2>
+<h2>Save the Pets !</h2>
 <form method="post" action="insert" enctype="multipart/form-data">
-	<input type="hidden" name="member_id" value="${sessionScope.id}">
-	<table border="1" width="70%">
+	<input type="hidden" name="stray_writer" value="${sessionScope.id}">
+		<table border="1" width="70%">
 		<tr>
 			<th>말머리<th>
-			<td>
-			 <select name="faq_title">
-				<option>전체공지</option>
-				<option>펫시터공지</option>
-				<option>유저공지</option>
+			<select name="stray_title">
+				<option>임시보호</option>
+				<option>입양관련</option>
+				<option>반려동물을 찾습니다</option>
+				<option>주인을 찾습니다</option>
+				<option>완료글</option>
 			</select>
-		</td>
 	</tr>
 	<tr>
 		<th>제목</th>
 		<td>
-			<input name="faq_head" id="faq_head"  placeholder="글 제목 입력">
-		</td>
+		<input name="stray_head" id="stray_head" size="80"
+				placeholder="글 제목 입력">
+			</td>
 	</tr>
 		<tr>
 		<td colspan="2">
-			<textarea name="faq_content" id="faq_content" required rows="15" cols="100" 
+			<textarea name="stray_content" id="stray_content" required rows="15" cols="100" 
 			style="resize:vertical;" placeholder="글 내용 입력" ></textarea>
 		</td>
 	</tr>
 	<tr>
 	<th>이미지 첨부</th>
-	<td> <input type="file" id="faq_file" name="faq_file" multiple accept="image/*" command.BindByName = true></td>
+	<td><input type="file" id="stray_file" name="stray_file" multiple accept="image/*" ></td>
 		<td colspan="2" align="center">
 			<input type="submit" value="확인"> 
 			<input type="reset" value="초기화">

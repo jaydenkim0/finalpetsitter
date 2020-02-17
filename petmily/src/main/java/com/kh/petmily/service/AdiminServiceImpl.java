@@ -20,11 +20,15 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 @Service
@@ -52,13 +56,6 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	
 	
-	
-	// member 리스트
-//	@Override
-//	public List<MemberVO> memberList() {	
-//		return adminDao.getMemberList();
-//	}
-
 	// petsitter 리스트
 	@Override
 	public List<PetsitterVO> petsitterList( ) {		
@@ -78,8 +75,7 @@ public class AdiminServiceImpl implements AdminService {
 	}
 	
 	
-	
-	
+		
 	// 펫시터 승인
 	@Override
 	public void petsitterapply(String sitter_id) {
@@ -277,29 +273,6 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.getPets(id);
 	}
 
-//	 회원관리 페이지에서 회원 검색
-//	@Override
-//	public List<MemberVO> memberSearchList(String type, String keyword) {		
-//		return adminDao.memberSearchList(type, keyword);
-//	}
-//	// 펫시터 관리 페이지에서 펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearch(String type, String keyword) {		
-//		return adminDao.petsitterSearch(type,  keyword);
-//	}
-//	
-//	// 펫시터 관리 페이지에서 펫시터 신청 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchApply(String type, String keyword) {
-//		return adminDao.petsitterSearchApply(type,  keyword);
-//	}
-//	
-//	// 펫시터 관리 페이지에서 휴면펫시터 검색
-//	@Override
-//	public List<PetsitterVO> petsitterSearchSleep(String type, String keyword) {
-//		return adminDao.petsitterSearchSleep(type,  keyword);
-//	}
-
 	// 블랙리스트 여부 검사
 	@Override
 	public boolean blackLsitcheck(String id) {		
@@ -486,6 +459,39 @@ public class AdiminServiceImpl implements AdminService {
 	public int countAricleBlackPetsitter(String searchOption, String keyword) {
 		return adminDao.countAricleBlackPetsitter(searchOption, keyword);
 	}
+
+	// 가격 옵션 리스트 불러오기
+	@Override
+	public List<PayinfoDto> getAccountlist() {	
+		return adminDao.getAccountlist();
+	}
+	// 수수료 옵션 리스트 불러오기
+	@Override
+	public List<PayinfoDto> getFeesList() {	
+		return adminDao.getFeesList();
+	}
+	// 가격 옵션 등록하기
+	@Override
+	public void accountOtionAdd(PayinfoDto payinfoDto) {
+		adminDao.accountOtionAdd(payinfoDto);		
+	}
+	// 가격 옵션 삭제
+	@Override
+	public void accountoptiondelete(int payinfo_no) {
+		adminDao.accountoptiondelete(payinfo_no);		
+	}
+
+	// 신고게시판 불러오기
+	@Override
+	public List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword) {
+		return adminDao.getBlackreport(start, end, searchOption, keyword);
+	}
+	// 신고게시판 카운트
+	@Override
+	public int countAriclegetBlackreport(String searchOption, String keyword) {
+		return adminDao.countAriclegetBlackreport(searchOption, keyword);
+	}
+
 
 
 	

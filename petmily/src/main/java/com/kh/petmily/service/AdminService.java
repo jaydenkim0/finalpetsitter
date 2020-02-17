@@ -16,10 +16,14 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
 public interface AdminService {
@@ -31,8 +35,6 @@ public interface AdminService {
 	// 총 관리자 수
 	int admimTotal();
 
-	// 회원 리스트
-//	List<MemberVO> memberList();
 	
 	// 펫시터 리스트
 	List<PetsitterVO> petsitterList();
@@ -114,19 +116,7 @@ public interface AdminService {
 	MemberVO getMemberdetail(String id);
 	// 회원 정보 페이지에 보여줄 반려동물 
 	List<PetDto> getPets(String id);	
-	
-	// 회원관리 페이지에서 회원 검색
-//	List<MemberVO> memberSearchList(String type, String keyword);
-	
-	// 펫시터 관리 페이지에서 펫시터 검색
-//	List<PetsitterVO> petsitterSearch(String type, String keyword);
-	
-	// 펫시터 관리 페이지에서 펫시터 신청 검색
-//	List<PetsitterVO> petsitterSearchApply(String type, String keyword);
-	
-	// 펫시터 관리 페이지에서 휴면펫시터 검색
-//	List<PetsitterVO> petsitterSearchSleep(String type, String keyword);
-	
+		
 	// 블랙리스트 여부 검사
 	boolean blackLsitcheck(String id);
 	
@@ -191,6 +181,20 @@ public interface AdminService {
 	List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword);
 	// 경고 펫시트 카운트
 	int countAricleBlackPetsitter(String searchOption, String keyword);
+	
+	// 가격 옵션 리스트 불러오기
+	List<PayinfoDto> getAccountlist();
+	// 수수료 옵션 리스트 불러오기
+	List<PayinfoDto> getFeesList();
+	// 가격 옵션 등록하기
+	void accountOtionAdd(PayinfoDto payinfoDto);
+	// 가격 옵션 삭제
+	void accountoptiondelete(int payinfo_no);
+	
+	// 신고게시판 불러오기
+	List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword);
+	// 신고게시판 카운트
+	int countAriclegetBlackreport(String searchOption, String keyword);
 
 
 	

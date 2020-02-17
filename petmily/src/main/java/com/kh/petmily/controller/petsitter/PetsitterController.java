@@ -4,6 +4,8 @@ package com.kh.petmily.controller.petsitter;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.NaviVO;
@@ -57,9 +61,9 @@ public class PetsitterController {
 		// 리스트 불러오기
 		model.addAttribute("list", (List<SitterlocationVO>) petsitterService.locationListAll(start, end, cityKeyword, areaKeyword))
 				  .addAttribute("count", count)
-				  .addAttribute("city", cityKeyword)
-				  .addAttribute("area", areaKeyword)
-				  .addAttribute("navi", navi);;
+				  .addAttribute("cityKeyword", cityKeyword)
+				  .addAttribute("areaKeyword", areaKeyword)
+				  .addAttribute("navi", navi);
 		return "petsitter/list";
 	}
 	
@@ -77,6 +81,18 @@ public class PetsitterController {
 		model.addAttribute("petsitterList", petsitterList)
 		.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
 		return "petsitter/content";
+	}
+	
+	@GetMapping("/estimate")
+	public String estimate(@RequestParam int pet_sitter_no, 
+							HttpSession session,
+							Model model) {
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		
+		List<PetDto> petList = petsitterService.getPet(id);
+		model.addAttribute("petList", petList);
+		return "petsitter/estimate";
 	}
 	
 }

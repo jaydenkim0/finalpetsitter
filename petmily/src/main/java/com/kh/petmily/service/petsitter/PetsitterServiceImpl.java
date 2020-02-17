@@ -17,6 +17,7 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.CareConditionDao;
@@ -134,6 +135,13 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public int countlocation(String cityKeyword, String areaKeyword) {		
 		return petsitterDao.countlocation(cityKeyword, areaKeyword) ;
+	}
+
+
+
+	@Override
+	public List<PetDto> getPet(String id) {
+		return petsitterDao.getPet(id);
 	}
 	
 	
