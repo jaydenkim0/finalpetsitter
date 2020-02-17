@@ -480,15 +480,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>			
 			order by black_no desc
 		</select>	
+				
+		<!-- 신고게시판 리스트 -->
+		<select id="getBlackreport" resultType="qnaVO" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from qna where qna_title = '신고합니다'
+						<if test="searchOption != null and keyword != null">
+							and ${searchOption} like '%'||#{keyword}||'%'
+						</if>
+					order by qna_no desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>
+		<!-- 신고게시판 페이징 카운트 -->
+		<select id="countAriclegetBlackreport" resultType="int" parameterType="Map">
+			select count(*) from
+				qna where qna_title = '신고합니다'
+				<if test="searchOption != null and keyword != null">
+					and ${searchOption} like '%'||#{keyword}||'%'
+				</if>			
+			order by qna_no desc
+		</select>	
+		
+		
+		
+		
+		
 		
 	<!-- 정산관리 -->
-		<insert id="">
+		<!-- 가격 리스트 불러오기 -->
+		<select id="getAccountlist" resultType="payinfoDto">
+			select * from payinfo where paystatus = '가격'
+		</select>
+		<!-- 수수료 리스트 불러오기 -->
+		<select id="getFeesList" resultType="payinfoDto">
+			select * from payinfo where paystatus = '수수료'
+		</select>
+		<!-- 가격 옵션 등록 -->
+		<insert id="accountOtionAdd" parameterType="payinfoDto">
 			insert into payinfo values(
 			payinfo_no_seq.nextval, 
 			#{payname}, 
-			#{payment})
+			#{payment},
+			#{paystatus}
+			)
 		</insert>
-	
+		<!-- 가격 옵션 삭제 -->
+		<delete id="accountoptiondelete" parameterType="int">
+			delete payinfo where payinfo_no = #{payinfo_no}
+		</delete>
 
 	
 </mapper>

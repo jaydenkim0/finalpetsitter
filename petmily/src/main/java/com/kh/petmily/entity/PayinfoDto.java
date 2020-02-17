@@ -13,5 +13,6 @@ public class PayinfoDto {
 	private int payinfo_no; 
 	private String payname; // 금액 이름
 	private int payment; // 금액
+	private String paystatus; // '가격', '수수료' 만 입력 가능
 
 }
