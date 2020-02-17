@@ -86,6 +86,10 @@ public class FaqServiceImpl implements FaqService {
 	//게시글 다중파일 등록
 	@Override
 	public void uploadFile(int no, List<MultipartFile> faq_file) throws IllegalStateException, IOException {
+		if(faq_file.get(0).isEmpty()) {
+			return;
+		}
+		
 		List<FaqFileDto>list = new ArrayList<>();
 		File dir = new File("D:/upload/faq");
 		dir.mkdirs();

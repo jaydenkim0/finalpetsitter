@@ -66,16 +66,14 @@
 <form method="post" action="insert" enctype="multipart/form-data">
 	<input type="hidden" name="qna_writer" value="${sessionScope.id}">
 		<table border="1" width="70%">
-		<<tr>
+		<tr>
 			<th>말머리<th>
-			<td>
 			<select name="qna_title">
 				<option>펫시터 질문</option>
 				<option>유저 질문</option>
 				<option>기타 질문</option>
 				<option>신고합니다</option>
 			</select>
-		</td>
 	</tr>
 	<tr>
 		<th>제목</th>
@@ -92,7 +90,7 @@
 	</tr>
 	<tr>
 	<th>이미지 첨부</th>
-	<td><input type="file" id="qna_file" name="qna_file" multiple accept="image/*" required></td>
+	<td><input type="file" id="qna_file" name="qna_file" multiple accept="image/*" ></td>
 		<td colspan="2" align="center">
 			<input type="submit" value="확인"> 
 			<input type="reset" value="초기화">

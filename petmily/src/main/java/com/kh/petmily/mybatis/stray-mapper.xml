@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="stray">
+	<!-- CRUD -->
+	<!-- 게시글 작성 -->
+	<insert id="strayinsert" parameterType="StrayVO">
+		insert into stray_pet (
+		stray_no,
+		stray_writer,
+		stray_title,
+		stray_head,
+		stray_content,
+		wdate
+		)
+		values (
+		#{stray_no},
+		#{stray_writer},
+		#{stray_title},
+		#{stray_head},
+		#{stray_content},
+		sysdate
+		)
+	</insert>
+
+	<!-- 게시글 번호 받아오기 -->
+	<select id="getSequence" resultType="int">
+		select stray_no_seq.nextval
+		from dual
+	</select>
+
+	<!-- 이미지 등록 -->
+	<insert id="strayfile" parameterType="strayfileDto">
+		insert into stray_file values(
+		stray_file_no_seq.nextval,
+		#{stray_stray_no},
+		#{uploadname},
+		#{savename},
+		#{filetype},
+		#{filesize}
+		)
+	</insert>
+
+	<!-- 등록된 이미지 불러오기 -->
+	<!-- 등록된 이미지가 몇개인지 가져오기 -->
+	<select id="strayImageList" parameterType="int"
+		resultType="strayfileDto">
+		select*from stray_file where stray_stray_no = #{stray_no}
+	</select>
+
+	<!-- 등록된 이미지 한장씩 불러오기 -->
+	<select id="fileview" parameterType="int"
+		resultType="strayfileDto">
+		select*from stray_file where stray_file_no= #{stray_file_no}
+	</select>
+
+	<!-- 댓글 등록 -->
+	<insert id="writeReply" parameterType="StrayReplyVO">
+		insert into stray_reply(
+		reply_no,
+		origin,
+		reply_writer,
+		content,
+		wdate
+		)
+		values(
+		reply_no_seq.nextval,
+		#{origin},
+		#{reply_writer},
+		#{content},
+		sysdate
+		)
+	</insert>
+
+	<!-- 댓글 조회 -->
+	<select id="readReply" resultType="StrayReplyVO">
+		select
+		reply_no,
+		reply_writer,
+		content,
+		wdate
+		from stray_reply where origin = #{origin}
+	</select>
+
+	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterType="StrayReplyVO">
+		update stray_reply set
+		content =#{content}
+		where reply_no = #{reply_no}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete">
+		delete from qna_reply where reply_no = #{reply_no}
+	</delete>
+
+	<!-- 게시글 검색 목록 조회 -->
+	<select id="straylistAll" parameterType="map" resultType="StrayVO">
+		select*from (
+		select rownum as rn, A.* from(
+		select
+		stray_no,stray_title,stray_head,stray_content,wdate,stray_writer
+		from stray_pet
+		where
+		${type} like '%'||#{keyword}||'%'
+		order by stray_no desc, wdate desc
+		) A
+		)
+		where rn between #{start} and #{finish}
+	</select>
+
+	<!-- 게시글 목록 -->
+	<select id="getList" resultType="StrayVO" parameterType="map">
+		select*from (
+		select rownum as rn, A.* from(
+		select*
+		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
+		from stray_pet
+		order by stray_no desc, wdate desc
+		) A
+		) where rn between #{start}
+		and #{finish}
+	</select>
+
+
+	<!-- 게시글 레코드 갯수 조회 -->
+	<select id="getCount" resultType="int">
+		select count(*) from stray_pet
+	</select>
+
+	<!-- 게시글 상세보기 조회 -->
+	<select id="strayview" resultType="StrayVO">
+		select*from stray_pet where stray_no=
+		#{stray_no}
+	</select>
+
+	<!-- 게시글 수정 -->
+	<update id="strayupdate" parameterType="StrayVO">
+		update stray_pet set
+		stray_title = #{stray_title},
+		stray_head =
+		#{stray_head},
+		stray_content = #{stray_content}
+		where stray_no=
+		#{stray_no}
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="straydelete">
+		delete from stray_pet where stray_no = #{stray_no}
+	</delete>
+
+
+</mapper>
