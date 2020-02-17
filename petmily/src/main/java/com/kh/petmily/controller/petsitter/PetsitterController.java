@@ -1,9 +1,10 @@
   
 package com.kh.petmily.controller.petsitter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,25 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.kh.petmily.entity.LicenseFileDto;
-import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.SkillsDto;
-import com.kh.petmily.repository.petsitter.CareConditionDao;
-import com.kh.petmily.repository.petsitter.CarePetTypeDao;
-import com.kh.petmily.repository.petsitter.IdCardFileDao;
-import com.kh.petmily.repository.petsitter.LicenseFileDao;
-import com.kh.petmily.repository.petsitter.PetsitterDao;
-import com.kh.petmily.repository.petsitter.SkillsDao;
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.petsitter.PetsitterService;
-import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
-import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 @Controller
@@ -40,8 +29,6 @@ public class PetsitterController {
 	
 	@Autowired
 	private PetsitterService petsitterService;
-	@Autowired
-	private PetsitterDao petsitterDao;
 	@Autowired
 	private AdminService adminService;
 	
@@ -58,8 +45,8 @@ public class PetsitterController {
 	}
 	
 	@RequestMapping("/list")
-	public String list(@RequestParam(defaultValue = "", required = false) String cityKeyword,
-						@RequestParam(defaultValue = "", required = false) String areaKeyword,
+	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
+						@RequestParam(defaultValue="", required = false) String areaKeyword,
 						@RequestParam(defaultValue = "1", required = false) int curPage,										
 									Model model) {
 		// 레코드의 갯수 계산
@@ -76,7 +63,7 @@ public class PetsitterController {
 				  .addAttribute("count", count)
 				  .addAttribute("cityKeyword", cityKeyword)
 				  .addAttribute("areaKeyword", areaKeyword)
-				  .addAttribute("navi", navi);;
+				  .addAttribute("navi", navi);
 		return "petsitter/list";
 	}
 	
@@ -86,6 +73,26 @@ public class PetsitterController {
 		model.addAttribute("petsitterList", petsitterList)
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
 		return "petsitter/content";
+	}
+	
+	@GetMapping("/info")
+	public String info(@RequestParam int pet_sitter_no, Model model) {
+		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
+		model.addAttribute("petsitterList", petsitterList)
+		.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
+		return "petsitter/content";
+	}
+	
+	@GetMapping("/estimate")
+	public String estimate(@RequestParam int pet_sitter_no, 
+							HttpSession session,
+							Model model) {
+		String id = (String) session.getAttribute("id");
+		System.out.println(id);
+		
+		List<PetDto> petList = petsitterService.getPet(id);
+		model.addAttribute("petList", petList);
+		return "petsitter/estimate";
 	}
 	
 }

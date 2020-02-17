@@ -98,7 +98,7 @@ public class FaqController {
 	//게시글 상세내용 조회
 	@GetMapping("/view")
 	public String view(@RequestParam int faq_no, 
-			@RequestParam(required = false) List<MultipartFile> faq_file,
+			@RequestParam List<MultipartFile> faq_file,
 			Model model)throws Exception{
 		model.addAttribute("faqVO", faqService.read(faq_no));
 		model.addAttribute("faqImageList",faqService.faqImageList(faq_no));
@@ -121,9 +121,10 @@ public class FaqController {
 	}
 	//게시글 수정 처리
 	@PostMapping("/update")
-	public String update(FaqVO faqVO)throws Exception{
+	public String update(FaqVO faqVO,@RequestParam int faq_no, Model model)throws Exception{
 		faqService.update(faqVO);
-		return "redirect:list";
+		model.addAttribute("faq_no",faq_no);
+		return "redirect:/board/faq/view";
 	}
 	//게시글 삭제
 	@RequestMapping("/delete")

@@ -1,14 +1,21 @@
 package com.kh.petmily.repository;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -91,6 +98,67 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int idExist(String id) {
 		return sqlSession.selectOne("member.idExist",id);
+	}
+
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(MemberImageDto memberImageDto) {
+		sqlSession.insert("member.member_image_regist",memberImageDto);
+	}
+
+	//펫 번호 구해오기
+	@Override
+	public int pet_no(String pet_name,String pet_age,String pet_type) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("pet_name", pet_name);
+		map.put("pet_age", pet_age);
+		return sqlSession.selectOne("member.pet_no",map);
+	}
+
+	//펫 이미지 등록
+	@Override
+	public void pet_image_regist(PetImageDto petImageDto) {
+		sqlSession.insert("member.pet_image_regist",petImageDto);
+	}
+
+	//해당 회원의 회원 이미지 번호 구해오기
+	@Override
+	public int member_image_no(String id) {
+		return sqlSession.selectOne("member.member_image_no",id);
+	}
+
+	//회원이미지 가지고 오기(1장씩 요청)
+	@Override
+	public MemberImageDto getmember_image(int member_image_no) {
+		return sqlSession.selectOne("member.getmember_image",member_image_no);
+	}
+
+	//회원이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalmember_image(String savename) throws IOException{
+		File file = new File("C:/upload/member_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
+	}
+
+	//펫번호로 펫 이미지 번호 구하기
+	@Override
+	public int pet_image_no(int pet_no) {
+		return sqlSession.selectOne("member.pet_image_no",pet_no);
+	}
+
+	//펫이미지 가지고 오기(1장씩 요청)
+	@Override
+	public PetImageDto getpet_image(int pet_image_no) {
+		return sqlSession.selectOne("member.getpet_image",pet_image_no);
+	}
+
+	//펫이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalpet_image(String savename) throws IOException {
+		File file = new File("C:/upload/pet_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
 	}
 
 

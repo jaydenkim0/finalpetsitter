@@ -1,5 +1,7 @@
 package com.kh.petmily.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PetDto;
@@ -68,8 +73,15 @@ public class MemberController {
 			@RequestParam String pet_name,
 			@RequestParam String pet_age,
 			@RequestParam String pet_type,
-			@RequestParam String pet_ect) {
+			@RequestParam String pet_ect,
+			@RequestParam MultipartFile member_image,
+			@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
 		memberService.regist(memberDto);
+		
+		if(member_image.isEmpty()==false) {
+			memberService.member_image_regist(id,member_image);
+		}
+		
 		if(pets.equals("예")) {
 			int real_pet_age = Integer.parseInt(pet_age);
 			petDto.setMember_id(id);
@@ -79,6 +91,12 @@ public class MemberController {
 			petDto.setEct(pet_ect);
 			
 			memberService.pet_regist(petDto);
+			int pet_no = memberService.pet_no(pet_name,pet_age,pet_type);
+			
+			if(pet_image.isEmpty()==false) {
+				memberService.pet_image_regist(pet_no,pet_image);
+			}
+			
 		}
 		return "redirect:login";		
 	}
@@ -117,15 +135,36 @@ public class MemberController {
 		return "redirect:/";		
 	}
 
+	//회원이미지 가져오기(src로 주소)
+	@GetMapping("/member/image")
+	public ResponseEntity<ByteArrayResource> member_image(
+			@RequestParam int member_image_no) throws UnsupportedEncodingException,IOException{
+		return memberService.member_image(member_image_no);
+	}
+	
+	//펫이미지 가져오기(src로 주소)
+	@GetMapping("/pet/image")
+	public ResponseEntity<ByteArrayResource> pet_image(
+			@RequestParam int pet_no) throws UnsupportedEncodingException,IOException {
+		int pet_image_no = memberService.pet_image_no(pet_no);
+		return memberService.pet_image(pet_image_no);
+	}
 	
 	//내정보보기
 	@GetMapping("/mylist")
 	public String mylist(
 			HttpSession session,
 			Model model) {
+		
 		String id = (String) session.getAttribute("id");
+		
 		MemberDto list = memberService.mylist(id);
 		model.addAttribute("mylist",list);
+		
+		//해당 회원의 회원 이미지 번호 구해오기
+		int member_image_no = memberService.member_image_no(id);
+		model.addAttribute("member_image_no",member_image_no);
+				
 		List<PetDto> petlist = memberService.mylistpet(id);
 		model.addAttribute("mylistpet",petlist);
 		
