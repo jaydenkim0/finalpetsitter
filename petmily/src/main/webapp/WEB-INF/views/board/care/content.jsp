@@ -128,6 +128,11 @@
         });
 	});
 </script>
+<script>
+function no_image() {
+	$("#member_image").hide();
+ }
+</script>
 <style>
   .mother {
     width: 100%;
@@ -231,7 +236,10 @@
 		<tr>
 			<c:choose>
 				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th align="left">작성자 : ${replyimagelist.care_reply_writer }</th>
+					<th>
+						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;" onerror="no_image()" id="member_image">
+					</th>
+					<td align="left">작성자 : ${replyimagelist.care_reply_writer }</td>
 				</c:when>
 				<c:otherwise>
 					<td>탈퇴회원</td>
