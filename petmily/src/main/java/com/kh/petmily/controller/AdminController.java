@@ -284,6 +284,7 @@ public class AdminController {
 	}
 				// 펫시터 블랙리스트 등록 메소드(이메일 전송)
 				@PostMapping("/sitter_blackListpage")
+				@ResponseBody
 				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
 						@RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
@@ -292,8 +293,8 @@ public class AdminController {
 					String id = blacksitter.getSitter_id();
 					String email = blacksitter.getEmail();
 					String grade = blacksitter.getGrade();
-					amailService.blackListAddEmail(id, email, grade, black_content);					
-					return "redirect:blackList";		
+					String result =amailService.blackListAddEmail(id, email, grade, black_content);					
+					return result ;		
 				}	
 	// 블랙리스트 회원 등록
 	@GetMapping("/member_blacklist_content")
@@ -304,15 +305,16 @@ public class AdminController {
 	}	
 				// 회원 블랙리스트 등록 메소드 (이메일 전송)
 				@PostMapping("/member_blackListpage")
+				@ResponseBody
 				public String member_blackListpage(@RequestParam String id,
 						 								@RequestParam String black_content) {						
 					MemberVO blackmember =adminService.getMemberdetail(id);
 					String email = blackmember.getEmail();
 					String grade = blackmember.getGrade();
-					amailService.blackListAddEmail(id, email, grade, black_content);		
+					String result = amailService.blackListAddEmail(id, email, grade, black_content);		
 					adminService.blackMember(id, black_content);
 					System.out.println(blackmember);
-					return "redirect:blackList";		
+					return result ;		
 				}
 				
 				
