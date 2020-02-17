@@ -160,7 +160,7 @@
 	
 	<h2>회원가입</h2>
 	
-	<form action="regist" method="post" onsubmit="onsubmit_petnamecheck();">
+	<form action="regist" method="post" onsubmit="onsubmit_petnamecheck();" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<th>아이디</th>
@@ -224,6 +224,15 @@
 			</td>
 		</tr>
 		
+		<!-- 사진첨부 -->
+		
+		<tr>
+			<th>프로필사진</th>
+			<td>
+				<input type="file" name="member_image" multiple accept="image/*">
+			</td>
+		</tr>
+		
 		
 		<tr>
 			<th colspan="2">반려동물이 있으신가요?		
@@ -267,6 +276,12 @@
 						<th>상세설명</th>
 						<td>
 							<textarea name="pet_ect"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th>이미지 첨부</th>
+						<td>
+							<input type="file" name="pet_image" multiple accept="image/*">S
 						</td>
 					</tr>
 				</table>

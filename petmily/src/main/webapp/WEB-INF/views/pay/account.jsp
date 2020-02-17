@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<!--  <!-- Bootstrap CSS --> -->
+<!--  <!-- Bootstrap CSS -->
 <!--     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
 <!--     awesome CSS -->
 <!--     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
@@ -180,7 +180,8 @@
         <button class="btn_style1">핸드폰 결제</button>
         <button class="btn_style1">실시간 계좌이체</button>
         <button class="btn_style1">무통장 입금</button>
-         <button class="btn_style1"><img src="../image/kakao.png"></button>
+         <button class="btn_style1">
+         <img src="${context}/resources/img/kakaopay.png"></button>
         <br><br>
 <%-- 		<form action="<%=request.getContextPath()%>/board/user_pay.do" method="post"> --%>
 <%-- 			<input type="hidden" name="host_content_name" value="<%=host_content_name %>"><!--컨텐츠 제목 --> --%>
