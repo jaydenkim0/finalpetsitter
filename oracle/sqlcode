@@ -530,6 +530,39 @@ drop sequence bank_image_no_seq;
 create sequence bank_image_no_seq;
 
 
+---------------------------------------------------------------
+-- payinfo 테이블 (결제명 정의) 
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table payinfo;
+-- 테이블 생성
+create table payinfo(
+payinfo_no number primary key,
+payname varchar2(90) not null,
+payment number default 0 not null
+);
+
+-- 시퀀스 번호 삭제
+drop sequence payinfo_no_seq;
+-- 시퀀스 번호 생성
+create sequence payinfo_no_seq;
+
+
+---------------------------------------------------------------
+-- reservationPay 테이블 (최종 금액) 
+---------------------------------------------------------------
+-- 테이블 삭제
+drop table reservationPay;
+-- 테이블 생성
+create table reservationPay(
+payinfo_no number constraint fk_payinfo_reservationPay references payinfo(payinfo_no) on delete cascade,
+pay_reservation_no number constraint fk_payinfo_reservation references reservation(reservation_no) on delete cascade,
+usage_time number default 1 not null
+);
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 
