@@ -98,7 +98,7 @@ public class FaqController {
 	//게시글 상세내용 조회
 	@GetMapping("/view")
 	public String view(@RequestParam int faq_no, 
-			@RequestParam(required = false) List<MultipartFile> faq_file,
+			@RequestParam List<MultipartFile> faq_file,
 			Model model)throws Exception{
 		model.addAttribute("faqVO", faqService.read(faq_no));
 		model.addAttribute("faqImageList",faqService.faqImageList(faq_no));
