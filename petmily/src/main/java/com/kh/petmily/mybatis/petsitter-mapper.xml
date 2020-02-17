@@ -187,33 +187,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		
 	<select id="locationListAll" resultMap="sitter" parameterType="map">
-		select * from (select distinct petsitter.* from petsitter inner join (
-			select * from location 
-			<if test="cityKeyword != '' and areaKeyword != ''">
-				where city = #{cityKeyword} and area = #{areaKeyword}
-			</if>
-		)L on petsitter.pet_sitter_no = L.location_sitter_no) 
-		where sitter_status = '정상'  order by pet_sitter_no desc
+		select * from (
+        	select rownum rn, A.* from(
+        		select distinct petsitter.* from petsitter inner join (
+					select * from location 
+					<if test="cityKeyword != '' and areaKeyword != ''">
+						where city = #{cityKeyword} and area = #{areaKeyword}
+					</if>
+            	)L on petsitter.pet_sitter_no = L.location_sitter_no)A         
+			where sitter_status = '정상' order by pet_sitter_no desc)
+        where rn between #{start} and #{end}
 	</select>
 	
 	<select id="getLocationListMap" resultType="locationDto" parameterType="int">
 		select * from location where location_sitter_no = #{location_sitter_no}
 	</select>
 		
-		<!-- count -->
-		<select id="countlocation" resultType="int" parameterType="Map">
-			select count(*) from(
-		         select * from (
-		            select distinct petsitter.* from 
-		                petsitter inner join (
-		                    select * from location 
-		                    <if test="cityKeyword != '' and areaKeyword != ''">
-		                        where city = #{cityKeyword}
-		                        and area = #{areaKeyword}
-		            		</if>     
-		            )L on petsitter.pet_sitter_no = L.location_sitter_no) 
-		    where sitter_status = '정상')
-		</select>	
+	<!-- count -->
+	<select id="countlocation" resultType="int" parameterType="Map">
+		select count(*) from(
+	         select * from (
+	            select distinct petsitter.* from 
+	                petsitter inner join (
+	                    select * from location 
+	                    <if test="cityKeyword != '' and areaKeyword != ''">
+	                        where city = #{cityKeyword}
+	                        and area = #{areaKeyword}
+	            		</if>     
+	            )L on petsitter.pet_sitter_no = L.location_sitter_no) 
+	    where sitter_status = '정상')
+	</select>	
+		
 </mapper>
 
 
