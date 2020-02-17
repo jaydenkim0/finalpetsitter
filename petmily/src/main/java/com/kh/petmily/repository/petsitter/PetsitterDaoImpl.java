@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.vo.MemberPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
@@ -65,6 +66,11 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		param.put("cityKeyword", cityKeyword);
 		param.put("areaKeyword", areaKeyword);
 		return sqlSession.selectOne("petsitter.countlocation", param);
+	}
+
+	@Override
+	public List<PetDto> getPet(String id) {
+		return sqlSession.selectList("member.mylistpet", id);
 	}
 	
 }

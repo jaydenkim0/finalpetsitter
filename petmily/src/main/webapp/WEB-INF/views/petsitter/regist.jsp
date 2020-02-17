@@ -51,7 +51,7 @@
          
 //지역 관리 스크립트
          $.ajax({
-             url:"../res/json/petmily_location.json", 
+             url:"../resources/json/petmily_location.json", 
              type:"get",             
              dataType:"json",       
              success:function(resp){ 
@@ -67,7 +67,7 @@
              var city=$(this).val();
 
              $.ajax({
-                     url:"../res/json/petmily_location.json",  
+                     url:"../resources/json/petmily_location.json",  
                      type:"get",             
                      dataType:"json",       
                      success:function(resp){ 
