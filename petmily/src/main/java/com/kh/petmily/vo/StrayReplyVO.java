@@ -1,8 +1,9 @@
 package com.kh.petmily.vo;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.kh.petmily.vo.QnaReplyVO.QnaReplyVOBuilder;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class QnaReplyVO {
+public class StrayReplyVO {
 	private int reply_no;
 	private int origin; // QnA 테이블의 qna_no
 	private String reply_writer; //member 테이블의 id
@@ -26,4 +27,3 @@ public class QnaReplyVO {
 		return time;
 	}
 }
-

@@ -19,7 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
 <script>
     function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector('textarea[name=qna_content]')),{
+        var editor = SUNEDITOR.create((document.querySelector('textarea[name=stray_content]')),{
             //언어 설정
             lang: SUNEDITOR_LANG['ko'],
             
@@ -42,8 +42,8 @@
         
     	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
 	    editor.onKeyUp = function(e){
-	    	var qna_content = document.querySelector("textarea[name=qna_content]");
-	    	qna_content.value = editor.getContents();
+	    	var stray_content = document.querySelector("textarea[name=stray_content]");
+	    	stray_content.value = editor.getContents();
 	    }
     }
     
@@ -62,35 +62,36 @@
 </c:choose>
 <div align="center">
 
-<h2>문의글 작성</h2>
+<h2>Save the Pets !</h2>
 <form method="post" action="insert" enctype="multipart/form-data">
-	<input type="hidden" name="qna_writer" value="${sessionScope.id}">
+	<input type="hidden" name="stray_writer" value="${sessionScope.id}">
 		<table border="1" width="70%">
 		<tr>
 			<th>말머리<th>
-			<select name="qna_title">
-				<option>펫시터 질문</option>
-				<option>유저 질문</option>
-				<option>기타 질문</option>
-				<option>신고합니다</option>
+			<select name="stray_title">
+				<option>임시보호</option>
+				<option>입양관련</option>
+				<option>반려동물을 찾습니다</option>
+				<option>주인을 찾습니다</option>
+				<option>완료글</option>
 			</select>
 	</tr>
 	<tr>
 		<th>제목</th>
 		<td>
-		<input name="qna_head" id="qna_head" size="80"
+		<input name="stray_head" id="stray_head" size="80"
 				placeholder="글 제목 입력">
 			</td>
 	</tr>
 		<tr>
 		<td colspan="2">
-			<textarea name="qna_content" id="qna_content" required rows="15" cols="100" 
+			<textarea name="stray_content" id="stray_content" required rows="15" cols="100" 
 			style="resize:vertical;" placeholder="글 내용 입력" ></textarea>
 		</td>
 	</tr>
 	<tr>
 	<th>이미지 첨부</th>
-	<td><input type="file" id="qna_file" name="qna_file" multiple accept="image/*" required></td>
+	<td><input type="file" id="stray_file" name="stray_file" multiple accept="image/*" required></td>
 		<td colspan="2" align="center">
 			<input type="submit" value="확인"> 
 			<input type="reset" value="초기화">

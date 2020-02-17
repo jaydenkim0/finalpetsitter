@@ -66,7 +66,7 @@ public class QnaServiceImpl implements QnaService{
 	public void delete(int qna_no) throws Exception {
 		qnaDao.delete(qna_no);
 	}
-	//게시글 검색목록 조회
+	//게시글//게시글 삭제 검색목록 조회
 	@Override
 	public List<QnaVO> listAll(String type, String keyword, int start, int finish) throws Exception {
 		return qnaDao.listAll(type,keyword,start, finish);

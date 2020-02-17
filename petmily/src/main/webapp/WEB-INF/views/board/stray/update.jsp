@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- 에디터 불러오기 -->
 <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
@@ -19,7 +17,7 @@
 <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
 <script>
     function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector('textarea[name=qna_content]')),{
+        var editor = SUNEDITOR.create((document.querySelector('textarea[name=stray_content]')),{
             //언어 설정
             lang: SUNEDITOR_LANG['ko'],
             
@@ -42,8 +40,8 @@
         
     	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
 	    editor.onKeyUp = function(e){
-	    	var qna_content = document.querySelector("textarea[name=qna_content]");
-	    	qna_content.value = editor.getContents();
+	    	var stray_content = document.querySelector("textarea[name=stray_content]");
+	    	stray_content.value = editor.getContents();
 	    }
     }
     
@@ -51,50 +49,57 @@
     window.onload = loadEditor;
 </script>
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
 <div align="center">
+<form name="update" method="post" action="${context}/board/stray/update">
+	<input type="hidden" name="member_id" value="${sessionScope.id}">
+	<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
+	<table border="1" width="90%">
+	<tr>
+		<th>글 번호</th>
+		<td>${strayVO.stray_no}</td>
+	</tr>
+	
+	<tr>
+		<th>작성자</th>
+		<td>${strayVO.stray_writer}</td>
+	</tr>
+	
+	<tr>
+		<th>작성일자</th>
+		<td>${strayVO.writedateWithFormat}</td>
+	</tr>
 
-<h2>문의글 작성</h2>
-<form method="post" action="insert" enctype="multipart/form-data">
-	<input type="hidden" name="qna_writer" value="${sessionScope.id}">
-		<table border="1" width="70%">
-		<tr>
-			<th>말머리<th>
-			<select name="qna_title">
-				<option>펫시터 질문</option>
-				<option>유저 질문</option>
-				<option>기타 질문</option>
-				<option>신고합니다</option>
-			</select>
-	</tr>
 	<tr>
-		<th>제목</th>
-		<td>
-		<input name="qna_head" id="qna_head" size="80"
-				placeholder="글 제목 입력">
-			</td>
+		<th>말머리</th>
+	<td>
+		<select name="stray_title" value="${strayVO.stray_title}">
+			<option>임시보호</option>
+			<option>입양관련</option>
+			<option>반려동물을 찾습니다</option>
+			<option>주인을 찾습니다</option>
+		</select>
+	</td>
 	</tr>
-		<tr>
-		<td colspan="2">
-			<textarea name="qna_content" id="qna_content" required rows="15" cols="100" 
-			style="resize:vertical;" placeholder="글 내용 입력" ></textarea>
-		</td>
-	</tr>
+
 	<tr>
-	<th>이미지 첨부</th>
-	<td><input type="file" id="qna_file" name="qna_file" multiple accept="image/*" required></td>
-		<td colspan="2" align="center">
-			<input type="submit" value="확인"> 
-			<input type="reset" value="초기화">
-		</td>
-	</table>
+	<th>제목 :</th>
+	<td>
+		<input name="stray_head" value="${strayVO.stray_head}" type="text">
+	</td>
+	</tr>
+
+	<tr>
+	<th>내용 :</th>
+	<td colspan="2">
+		<textarea name="stray_content"  id="stray_content" required rows="15" cols="100"  type="text">${strayVO.stray_content}</textarea>
+	</td>
+	</tr>
+</table>
+
+	<div>
+		<input type="submit" value="수정"> 
+		<input type="reset"value="초기화">
+		<a href="${context}/board/stray/list"> 
+		<input type="button" value="목록으로"></a>
+	</div>
 </form>
-</div>
