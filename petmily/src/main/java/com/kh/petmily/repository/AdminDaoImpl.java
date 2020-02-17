@@ -452,6 +452,7 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countAricleBlackMember", param);
 	}
 
+	// 경고  펫시터 리스트
 	@Override
 	public List<PetsitterVO> blackPetsitterListAll(int start, int end, String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();
@@ -461,7 +462,7 @@ public class AdminDaoImpl implements AdminDao {
 		param.put("end", end);		
 		return sqlSession.selectList("admin.blackPetsitterListAll", param);
 	}
-
+	// 경고 펫시트 카운트
 	@Override
 	public int countAricleBlackPetsitter(String searchOption, String keyword) {
 		Map<String, Object> param = new HashMap<>();

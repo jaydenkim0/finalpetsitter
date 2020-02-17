@@ -84,7 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	
-	<!--  펫시터관리 -->	
+	<!-- 펫시터관리 -->	
 		<!-- 
 			펫시터리스트 불러오가
 			member 와 pet_sitter inner join으로 view 만들어 놓음 			
@@ -482,7 +482,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</select>	
 		
 	<!-- 정산관리 -->
-	
+		<insert id="">
+			insert into payinfo values(
+			payinfo_no_seq.nextval, 
+			#{payname}, 
+			#{payment})
+		</insert>
 	
 
 	

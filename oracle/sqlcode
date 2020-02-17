@@ -530,6 +530,39 @@ drop sequence bank_image_no_seq;
 create sequence bank_image_no_seq;
 
 
+---------------------------------------------------------------
+-- payinfo 테이블 (결제명 정의) 
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table payinfo;
+-- 테이블 생성
+create table payinfo(
+payinfo_no number primary key,
+payname varchar2(90) not null,
+payment number default 0 not null
+);
+
+-- 시퀀스 번호 삭제
+drop sequence payinfo_no_seq;
+-- 시퀀스 번호 생성
+create sequence payinfo_no_seq;
+
+
+---------------------------------------------------------------
+-- reservationPay 테이블 (최종 금액) 
+---------------------------------------------------------------
+-- 테이블 삭제
+drop table reservationPay;
+-- 테이블 생성
+create table reservationPay(
+payinfo_no number constraint fk_payinfo_reservationPay references payinfo(payinfo_no) on delete cascade,
+pay_reservation_no number constraint fk_payinfo_reservation references reservation(reservation_no) on delete cascade,
+usage_time number default 1 not null
+);
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -683,3 +716,66 @@ filesize number);
 create sequence faq_file_no_seq;
 -- 시퀀스 삭제
 drop sequence faq_file_no_seq;
+
+---------------------------------------------------------------
+-- stray_pet 테이블 (유기견)
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table stray_pet;
+-- 테이블 생성
+ create table stray_pet(
+ stray_no number primary key,
+ stray_writer constraint fk_member_stray_pet references member(id) on delete set null,
+ stray_title varchar2(20) not null,
+ stray_head varchar2(200) not null,
+ stray_content varchar2(4000)
+);
+
+-- 시퀀스 번호 삭제
+drop sequence stray_no_seq;
+-- 시퀀스 번호 생성
+create sequence stray_no_seq;
+
+-- 등록일 컬럼 추가
+alter table stray_pet add wdate date default sysdate;
+
+---------------------------------------------------------------
+-- stray_file 테이블 (파일 업로드용)
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table stray_file;
+-- 테이블 생성
+create table stray_file(
+stray_file_no number primary key,
+stray_stray_no constraint fk_stray_no_stray_file references stray_pet(stray_no) on delete cascade,
+uploadname varchar2(100),
+savename varchar2(100),
+filetype varchar2(15),
+filesize number);
+
+-- 시퀀스 생성
+create sequence stray_file_no_seq;
+-- 시퀀스 삭제
+drop sequence stray_file_no_seq;
+
+---------------------------------------------------------------
+-- stray_reply 테이블
+---------------------------------------------------------------
+
+-- 테이블 삭제
+drop table stray_reply;
+-- 테이블 생성
+create table stray_reply(
+reply_no number primary key,
+origin constraint fk_stray_pet_stray_reply references stray_pet(stray_no) on delete cascade,
+reply_writer constraint fk_member_stray_reply references member(id) on delete set null,
+content varchar2(4000) not null,
+wdate date default sysdate
+);
+
+-- 시퀀스 번호 삭제
+drop sequence stray_reply_seq;
+-- 시퀀스 번호 생성
+create sequence stray_reply_seq;
