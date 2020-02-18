@@ -12,11 +12,11 @@ function no_image() {
 
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
-	<table border="1">
+	<table border="1" width="100%">
 		<tr>
 			<th>이미지</th>
 			<td>
-				<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="max-width: 40%; height: auto;" onerror="no_image()" id="pet_image">
+				<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 25%; height: auto;" onerror="no_image()" id="pet_image">
 				<input type="file" name="pet_image" multiple accept="image/*">
 			</td>
 		</tr>
@@ -29,7 +29,7 @@ function no_image() {
 		<tr>
 			<th>나이</th>
 			<td>
-				<input type="text" name="age" value=${pet.age }>
+				<input type="number" name="age" value=${pet.age }>
 			</td>
 		</tr>
 		<tr>

@@ -269,5 +269,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberDao.pet_image_regist(petImageDto);
 	}
+
+	//펫삭제
+	@Override
+	public void pet_delete(int pet_no) {
+		memberDao.pet_delete(pet_no);
+	}
 	}
 

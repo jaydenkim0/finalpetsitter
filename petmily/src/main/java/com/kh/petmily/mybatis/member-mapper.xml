@@ -232,6 +232,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<!-- 펫 삭제 -->
+	<delete id="pet_delete" parameterType="int">
+		delete from pet where pet_no=#{pet_no}
+	</delete>
+	
 </mapper>
 
 

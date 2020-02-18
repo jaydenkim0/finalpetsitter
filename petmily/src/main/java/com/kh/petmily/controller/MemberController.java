@@ -387,6 +387,14 @@ public class MemberController {
 			}
 			return "redirect:mylist";
 		}
+		
+		//펫 삭제
+		@GetMapping("/pet_delete")
+		public String pet_delete(
+				@RequestParam int pet_no) {
+			memberService.pet_delete(pet_no);
+			return "redirect:mylist";
+		}
 	}
 
 

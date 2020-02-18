@@ -97,5 +97,8 @@ public interface MemberDao {
 	//펫이미지등록
 	void pet_image_regist2(PetImageDto petImageDto);
 
+	//펫삭제
+	void pet_delete(int pet_no);
+
 
 }

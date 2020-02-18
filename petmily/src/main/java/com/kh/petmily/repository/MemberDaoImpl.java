@@ -203,5 +203,11 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("member.pet_image_regist2",petImageDto);
 	}
 
+	//펫삭제
+	@Override
+	public void pet_delete(int pet_no) {
+		sqlSession.delete("member.pet_delete",pet_no);
+	}
+
 
 }

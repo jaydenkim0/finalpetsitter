@@ -5,16 +5,23 @@
 <script>
 	$(function(){
 		$("#add_content").hide();
+		
 		//펫 추가 버튼 눌렀을 시
 		$("#add_btn").click(function(){
 			$(this).hide();
 			$("#add_content").show();
 		});
+		
+		//취소 버튼 눌렀을 시
+		$("#cancel").click(function(){
+			$("#add_content").hide();
+			$("#add_btn").show();
+		});
 	});
 </script>
 <h1>아이디 : ${mylist.id }</h1><br>
 <c:if test="${member_image_no>0 }">
-	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
+	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image">
 </c:if>
 <h3>이름 : ${mylist.name }</h3>
 <h3>닉네임 : ${mylist.nick }</h3>
@@ -35,7 +42,7 @@
 	<c:forEach var="pet"  items="${mylistpet }">
 	<br><hr>
 		<h3>이름 : ${pet.name }</h3>
-			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="max-width: 40%; height: auto;" onerror="no_image()" id="pet_image">
+			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
 			<script>
 			function no_image() {
 				$("#pet_image").hide();
@@ -48,12 +55,14 @@
 		<h3>동물종 : ${pet.type }</h3>
 		<h3>${pet.ect }</h3>
 		<a href="petchange?pet_no=${pet.pet_no }"><button>펫정보수정</button></a>
+		<a href="pet_delete?pet_no=${pet.pet_no }"><button>삭제</button></a>
 	<hr>	
 	</c:forEach>
 </c:if>
 <button id="add_btn">펫 추가</button>
 <div id="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
+	<input type="hidden" name="member_id" value="${mylist.id }">
 	<table border="1">
 		<tr>
 			<th>이미지</th>
@@ -64,13 +73,13 @@
 		<tr>
 			<th>이름</th>
 			<td>
-				<input type="text" name="name">
+				<input type="text" name="name" required>
 			</td>
 		</tr>
 		<tr>
 			<th>나이</th>
 			<td>
-				<input type="text" name="age" >
+				<input type="number" name="age" >
 			</td>
 		</tr>
 		<tr>
@@ -94,7 +103,7 @@
 		</tr>
 		<tr>
 			<th colspan="2">
-				<input type="submit" value="펫추가">
+				<input type="submit" value="펫추가"><input type="reset" value="취소" id="cancel">
 			</th>
 		</tr>
 	</table>

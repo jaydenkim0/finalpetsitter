@@ -94,5 +94,8 @@ public interface MemberService {
 	//펫이미지 등록
 	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
 
+	//펫삭제
+	void pet_delete(int pet_no);
+
 
 }
