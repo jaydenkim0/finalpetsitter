@@ -148,6 +148,12 @@
 
 
 <!-- 댓글화면 -->
+<%-- <c:if test="${member_image_no>0"> --%>
+<%-- 	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image"> --%>
+<%-- </c:if> --%>
+<%-- <c:otherwise> --%>
+<!-- 	<img src="http://placehold.it/100x100"> -->
+<%-- </c:otherwise> --%>
 <c:forEach items="${replyList}" var="reply">
 <c:if test="${reply.content ne null}">
 <tr>
@@ -155,13 +161,11 @@
 	<div class="grandmother">
 		<table width="100%" class="mother">
 			<tr>
-				<th align="left">
-				${reply.reply_writer}
+				<th align="left" width="100"> ${reply.reply_writer}</th>
 				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
 				</c:if>
-				</th>
-				
+
 				<th align="left">
 				작성일 : ${reply.writedateWithFormat}</th>
 			</tr>
@@ -203,14 +207,13 @@
 </c:if>
 </c:forEach>
 
-
 <!-- 댓글 등록 -->
 <tr>
 <td align="right">
 <form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 		<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
+				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea><br>
 				 <input type="submit" value="등록">
 		</form>
 		</td>
