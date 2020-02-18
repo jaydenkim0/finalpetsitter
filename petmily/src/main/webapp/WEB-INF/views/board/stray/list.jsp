@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
@@ -54,19 +54,24 @@
 		<c:forEach var="row" items="${list}">
 			<tr>
 				<td>${row.stray_no}</td>
-			<c:choose>
-			<c:when test="${not empty reply.reply_writer}">
-				<td>${row.stray_writer}</td>
-			</c:when>
-			<c:otherwise>
-				<td>	비회원</td>
-			</c:otherwise>
-			</c:choose>	
-				<td>${row.stray_title}
-			<c:if test="${strayVO.stray_title eq '완료글'}">
-			<font color="red">${row.stray_title}</font>
-			</c:if></td>
-				<td><a href="${context}/board/stray/view?stray_no=${row.stray_no}">${row.stray_head}</a>
+				<c:choose>
+					<c:when test="${not empty row.stray_writer}">
+						<td>${row.stray_writer}</td>
+					</c:when>
+					<c:otherwise>
+						<td>비회원</td>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${row.stray_title ne '완료글'}">
+						<td>${row.stray_title}
+					</c:when>
+					<c:otherwise>
+						<td style="color: red">${row.stray_title}</td>
+					</c:otherwise>
+				</c:choose>
+				<td><a
+					href="${context}/board/stray/view?stray_no=${row.stray_no}">${row.stray_head}</a>
 				</td>
 				<td>${row.writedateWithFormat}</td>
 			</tr>
