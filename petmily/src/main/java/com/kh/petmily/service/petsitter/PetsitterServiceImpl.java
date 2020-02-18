@@ -1,38 +1,32 @@
 package com.kh.petmily.service.petsitter;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
-import org.apache.ibatis.session.SqlSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
-import com.kh.petmily.entity.IdCardFileDto;
-import com.kh.petmily.entity.InfoImageDto;
-import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.ReservationDto;
+import com.kh.petmily.entity.ReservationPayDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.CareConditionDao;
 import com.kh.petmily.repository.petsitter.CarePetTypeDao;
-import com.kh.petmily.repository.petsitter.IdCardFileDao;
-import com.kh.petmily.repository.petsitter.InfoImageDao;
-import com.kh.petmily.repository.petsitter.LicenseFileDao;
 import com.kh.petmily.repository.petsitter.LocationDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
+import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
-import com.kh.petmily.vo.MemberPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 @Service
@@ -57,6 +51,10 @@ public class PetsitterServiceImpl implements PetsitterService {
 	//지역
 	@Autowired
 	private LocationDao locationDao;
+	
+	//예약
+	@Autowired
+	private ReservationDao reservationDao;
 	
 	@Override
 	public void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException {
@@ -142,6 +140,31 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public List<PetDto> getPet(String id) {
 		return petsitterDao.getPet(id);
+	}
+
+	@Override
+	public void reservation(ReservationVO reservationVO) {
+		//예약 번호 구해오기
+		int reservation_no = reservationDao.getSequenceReservation();
+		//예약 Dto
+		ReservationDto reservationDto = ReservationDto.builder()
+														.reservation_no(reservation_no)
+														.member_id(reservationVO.getMember_id())
+														.reservation_sitter_no(reservationVO.getReservation_sitter_no())
+														.matching_time(reservationVO.getMatching_time())
+														.pet_name(reservationVO.getPet_name())
+														.ect(reservationVO.getEct())
+														.build();
+		//예약 금액 Dto
+		ReservationPayDto reservationPayDto = ReservationPayDto.builder()
+																.pay_reservation_no(reservation_no)
+																.usage_time(reservationVO.getUsage_time())
+																.build();
+		//예약 등록
+		reservationDao.registReservation(reservationDto);
+		//시간,금액 등록
+		reservationDao.registPay(reservationVO.getPayinfo_no(),reservationPayDto);
+		
 	}
 	
 	
