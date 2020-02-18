@@ -18,5 +18,6 @@ public class QnaDto {
 	private String qna_title; //질문 게시판 타이틀
 	private String qna_head;//질문 게시판 제목
 	private String qna_content; // 질문 게시판 내용
+	private String wdate;
 	
 }
