@@ -123,7 +123,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	//해당 회원의 회원 이미지 번호 구해오기
 	@Override
-	public int member_image_no(String id) {
+	public Integer member_image_no(String id) {
 		return sqlSession.selectOne("member.member_image_no",id);
 	}
 

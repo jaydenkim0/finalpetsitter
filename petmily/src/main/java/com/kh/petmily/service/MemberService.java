@@ -57,7 +57,7 @@ public interface MemberService {
 	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
 
 	//해당 회원의 회원 이미지 번호 구해오기
-	int member_image_no(String id);
+	Integer member_image_no(String id);
 
 	//회원이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> member_image(int member_image_no) 

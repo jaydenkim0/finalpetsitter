@@ -162,7 +162,7 @@ public class MemberController {
 		model.addAttribute("mylist",list);
 		
 		//해당 회원의 회원 이미지 번호 구해오기
-		int member_image_no = memberService.member_image_no(id);
+		Integer member_image_no = memberService.member_image_no(id);
 		model.addAttribute("member_image_no",member_image_no);
 				
 		List<PetDto> petlist = memberService.mylistpet(id);

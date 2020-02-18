@@ -148,8 +148,13 @@ public class MemberServiceImpl implements MemberService {
 
 	//해당 회원의 회원 이미지 번호 구해오기
 	@Override
-	public int member_image_no(String id) {
-		return memberDao.member_image_no(id);
+	public Integer member_image_no(String id) {
+		Integer member_image_no = memberDao.member_image_no(id);
+		if(member_image_no==null) {
+			return 0;
+		}else {
+			return memberDao.member_image_no(id);
+		}
 	}
 
 	//회원이미지 가지고 오기(사진정보 1개씩 가지고 오기)
