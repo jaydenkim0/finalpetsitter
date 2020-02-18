@@ -159,3 +159,44 @@ select * from info_image where info_image_no = 46;
     
     select * from qnaimgAll;
     
+    
+--------------------------------------------------------------------------------------------
+
+    -- payinfo + reservationPay + reservation 뷰 생성
+    drop view reservationAll;
+    -- payinfo + reservationPay + reservation 뷰 생성
+    create view reservationAll as
+    select 
+    R.*,    
+    P.*,
+    rp.pay_reservation_no,
+    rp.payinfo_no pay_payinfo_no,
+    rp.usage_time
+    from reservation R
+    inner join reservationPay RP on r.reservation_no = rp.pay_reservation_no
+    inner join payinfo P on rp.payinfo_no = p.payinfo_no;
+    
+        
+    
+    select * from reservationAll;
+--------------------------------------------------------------------------------------------   
+
+    -- reservationAll(view) + account + pay(total_amount) 삭제
+    drop view getPayAll;
+    -- reservationAll(view) + account + pay(total_amount) 생성
+    create view getPayAll as
+    select 
+    R.*,
+    A.*,
+    p.total_amount
+    from reservationAll R
+    inner join account A on r.reservation_no = a.account_reser_no
+    inner join pay P on a.acoount_no = p.partner_order_id;
+    
+
+
+    select * from getPayAll;
+
+
+-------------------------------------------------------------------------------------------- 
+        
