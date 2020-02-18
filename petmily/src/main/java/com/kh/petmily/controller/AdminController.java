@@ -64,12 +64,25 @@ public class AdminController {
 				  .addAttribute("member", adminService.memberTotal() -  
 						  adminService.petsitterTotal() - adminService.admimTotal())		
 				  .addAttribute("ptotal", adminService.petsitterTotal())		
-				  .addAttribute("atotal", adminService.admimTotal());	
+				  .addAttribute("atotal", adminService.admimTotal())
+				  .addAttribute("mlist", adminService.memberJoinall())
+				  .addAttribute("slist", adminService.petsitterApplyup())
+				  .addAttribute("mlist+slist", adminService.memberJoinall() + 
+						  adminService.petsitterApplyup())
+				  .addAttribute("listBqna", adminService.blackqnacount())
+				  .addAttribute("listBm", adminService.blacklistmembercount())
+				  .addAttribute("listBs", adminService.blacklistpetsittercount());	
 		return "admin/registInfo";
 	}
 	
 	//////////////////////////////////////////////////////////////////
 	
+	// 예약 현황
+	@GetMapping("/reservationstatus")
+	public String reservationstatus() {
+		
+		return "admin/reservationstatus";
+	}
 
 	
 	// 회원 디테일 페이지 연결

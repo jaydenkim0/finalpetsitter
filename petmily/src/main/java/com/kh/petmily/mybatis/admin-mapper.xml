@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="admin">
 	
-	<!-- 메인화면에 보여줄 내용 -->
+	<!-- 등록화면에 보여줄 내용 -->
 	
 		<!-- 전체 맴버 회원수 -->
 		<select id="membercount" resultType="int">
@@ -40,6 +40,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select count(*) from member where grade = 'admin'
 		</select>
 	
+		<!-- 어제 가입한 회원 수 -->
+		<select id="memberJoinall" resultType="int">
+			select count(*) from member where grade='member'
+			and joindate between 
+    		To_char(sysdate-1, 'YYYY/MM/DD') and 
+    		To_char(sysdate, 'YYYY/MM/DD')		
+		</select>
+	
+		<!-- 어제 펫시터 신청 수  -->
+		<select id="petsitterApplyup" resultType="int">
+			select count(*) from petsitter where grade = 'member' 
+			and  joindate between 
+    		To_char(sysdate-1, 'YYYY/MM/DD') and 
+    		To_char(sysdate, 'YYYY/MM/DD')
+		</select>
+		
+		<!-- 어제 신고 게시물의 수 -->
+		<select id="blackqnacount" resultType="int">
+			select count(*) from qna where qna_title = '신고합니다'
+			and  wdate between 
+    		To_char(sysdate-1, 'YYYY/MM/DD') and 
+    		To_char(sysdate, 'YYYY/MM/DD')
+		</select>
+		
+		<!-- 어제 경고당한 회원 수 -->
+		<select id="blacklistmembercount" resultType="int">
+			select count(*) from blacklistcontent where black_content_grade = 'member' 
+	   		and black_wdate between 
+	   		To_char(sysdate-1, 'YYYY/MM/DD') and 
+	   		To_char(sysdate, 'YYYY/MM/DD')
+		</select>
+	
+		<!-- 어제 경고당한 펫시터 수 -->
+		<select id="blacklistpetsittercount" resultType="int">
+			select count(*) from blacklistcontent where black_content_grade = 'petsitter' 
+	   		and black_wdate between 
+	   		To_char(sysdate-1, 'YYYY/MM/DD') and 
+	   		To_char(sysdate, 'YYYY/MM/DD')
+		</select>
+	
+		<!-- 저번달 매출 -->
+		<!-- 어제 매출 -->
+		
+		<!-- 저번달 결제건 수 -->
+		<!-- 어제 결제건 수 -->	
 	
 	
 	<!--  회원관리 -->	
@@ -425,7 +470,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			update blacklist set black_grade = 'member' where black_id = #{sitter_id} 
 		</update>
 		
-		<!-- 블랙리스튼 컨텐츠 조회 -->
+		<!-- 블랙리스트 컨텐츠 조회 -->
 		<select id="blacklistcontent" parameterType="String"
 		resultType="blackListContentDto">
 			select * from blackListContent where black_content_id = #{id}
