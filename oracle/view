@@ -181,21 +181,23 @@ select * from info_image where info_image_no = 46;
     select * from reservationAll;
 --------------------------------------------------------------------------------------------   
 
+
     -- reservationAll(view) + account + pay(total_amount) 삭제
     drop view getPayAll;
     -- reservationAll(view) + account + pay(total_amount) 생성
     create view getPayAll as
     select 
     R.*,
-    A.*,
-    p.total_amount
+    P.total_amount,
+    A.*
     from reservationAll R
-    inner join account A on r.reservation_no = a.account_reser_no
-    inner join pay P on a.acoount_no = p.partner_order_id;
+    inner join pay P on r.reservation_no = p.partner_order_id
+    inner join account A on p.pay_no = A.account_pay_no;
     
 
 
     select * from getPayAll;
+
 
 
 -------------------------------------------------------------------------------------------- 
