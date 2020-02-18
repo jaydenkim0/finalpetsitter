@@ -5,7 +5,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	
 	<!-- 운영 설정 -->
 	<settings>
 		<setting name="cacheEnabled" value="true"/>
@@ -62,5 +61,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		     <typeAlias type="com.kh.petmily.entity.MemberImageDto" alias="memberImageDto"/>
 		     <typeAlias type="com.kh.petmily.entity.PetImageDto" alias="petImageDto"/>
 		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterLocationSearchVO" alias="petsitterLocationSearchVO"/>	
+		     <typeAlias type="com.kh.petmily.entity.PayinfoDto" alias="payinfoDto"/>
+		     <typeAlias type="com.kh.petmily.entity.ReservationPayDto" alias="reservationPayDto"/>
 	</typeAliases>
 </configuration>

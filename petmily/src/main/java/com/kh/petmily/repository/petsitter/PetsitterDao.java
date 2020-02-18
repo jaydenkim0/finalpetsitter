@@ -2,8 +2,8 @@ package com.kh.petmily.repository.petsitter;
 
 import java.util.List;
 
+import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.vo.MemberPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
@@ -19,5 +19,5 @@ public interface PetsitterDao {
 	List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword);
 	// 카운트
 	int countlocation(String cityKeyword, String areaKeyword);
-	
+	List<PetDto> getPet(String id);
 }

@@ -7,6 +7,7 @@ import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
+import com.kh.petmily.entity.MemberImageDto;
 
 public interface CareDao {
 
@@ -78,5 +79,11 @@ public interface CareDao {
 
 	//care_board_content 검색개수
 	int getListCount_care_board_content(String keyword);
+
+	//회원이미지 가지고오기(1장씩 요청)
+	MemberImageDto getmember_image(String member_image_member_id);
+
+	//회원이미지 실제로 가지고오기(1장씩 요청)
+	byte[] physicalmember_image(String savename) throws IOException;
 
 }

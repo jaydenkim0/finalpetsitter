@@ -13,6 +13,7 @@ import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
+import com.kh.petmily.entity.MemberImageDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -161,6 +162,20 @@ public class CareDaoImpl implements CareDao{
 	@Override
 	public int getListCount_care_board_content(String keyword) {
 		return sqlSession.selectOne("care.getListCount_care_board_content",keyword);
+	}
+
+	//회원이미지 가지고 오기(1장씩 요청)
+	@Override
+	public MemberImageDto getmember_image(String member_image_member_id) {
+		return sqlSession.selectOne("care.getmember_image",member_image_member_id);
+	}
+
+	//회원이미지 실제로 가지고오기(1장씩 요청)
+	@Override
+	public byte[] physicalmember_image(String savename) throws IOException{
+		File file = new File("C:/upload/member_image",savename);
+		byte[] data = FileUtils.readFileToByteArray(file);
+		return data;
 	}
 
 }

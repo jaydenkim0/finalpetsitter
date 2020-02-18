@@ -25,13 +25,17 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+
+import oracle.jdbc.proxy.annotation.GetProxy;
 
 
 @Controller
@@ -280,6 +284,7 @@ public class AdminController {
 	}
 				// 펫시터 블랙리스트 등록 메소드(이메일 전송)
 				@PostMapping("/sitter_blackListpage")
+				@ResponseBody
 				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
 						@RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
@@ -288,8 +293,8 @@ public class AdminController {
 					String id = blacksitter.getSitter_id();
 					String email = blacksitter.getEmail();
 					String grade = blacksitter.getGrade();
-					amailService.blackListAddEmail(id, email, grade, black_content);					
-					return "redirect:blackList";		
+					String result =amailService.blackListAddEmail(id, email, grade, black_content);					
+					return result ;		
 				}	
 	// 블랙리스트 회원 등록
 	@GetMapping("/member_blacklist_content")
@@ -300,15 +305,16 @@ public class AdminController {
 	}	
 				// 회원 블랙리스트 등록 메소드 (이메일 전송)
 				@PostMapping("/member_blackListpage")
+				@ResponseBody
 				public String member_blackListpage(@RequestParam String id,
 						 								@RequestParam String black_content) {						
 					MemberVO blackmember =adminService.getMemberdetail(id);
 					String email = blackmember.getEmail();
 					String grade = blackmember.getGrade();
-					amailService.blackListAddEmail(id, email, grade, black_content);		
+					String result = amailService.blackListAddEmail(id, email, grade, black_content);		
 					adminService.blackMember(id, black_content);
 					System.out.println(blackmember);
-					return "redirect:blackList";		
+					return result ;		
 				}
 				
 				
@@ -381,7 +387,7 @@ public class AdminController {
 		return "redirect:/admin/member";		
 	}
 	
-	
+
 	///////////////////////////////////////////////////////////////
 	
 	
@@ -391,6 +397,26 @@ public class AdminController {
 		return "admin/account";		
 	}
 	
+	// 가격 정보 페이지 연결
+	@GetMapping("/accountoption")
+	public String accountOtion(Model model) {	
+		model.addAttribute("accountlist", (List<PayinfoDto>)adminService.getAccountlist())
+		.addAttribute("feesList", (List<PayinfoDto>)adminService.getFeesList());
+		return "admin/accountoption";		
+	}
+	// 가격 정보 등록
+	@PostMapping("/accountoption")
+	public String accountOtion(@ModelAttribute PayinfoDto payinfoDto) {	
+		adminService.accountOtionAdd(payinfoDto);
+		return "redirect:/admin/accountoption";		
+	}
+	// 가격 정보 삭제
+	@GetMapping("/accountoptiondelete")
+	public String accountoptiondelete(
+			@RequestParam int payinfo_no) {
+		adminService.accountoptiondelete(payinfo_no);
+		return "redirect:/admin/accountoption";
+	}
 	
 
 }

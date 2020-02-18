@@ -4,17 +4,23 @@
 
 <h1>펫시터 상세 페이지</h1>
 
+<!-- 소개 이미지 출력 -->
 <div>
 <h3>소개이미지</h3>
 	<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
 		 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
 	</c:forEach>
 </div>
-	
+
+
+<!-- 펫시터 정보 출력 -->
 <div>
 <c:forEach var="petsitterGetList" items="${petsitterList}">
 	<!-- 펫시터 정보 -->
 	<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}">
+		<!-- 펫시터 견적 신청 버튼 -->
+		<a href="estimate?pet_sitter_no=${petsitter.pet_sitter_no}"><button>펫시터 견적 신청</button></a><br><br>		
+		
 		<span>닉네임 : ${petsitter.nick}</span><br>
 		<span>소개글 : ${petsitter.info}</span><br><br>
 		<span>매칭 종류 : ${petsitter.sitter_matching_type}</span>

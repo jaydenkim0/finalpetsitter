@@ -102,4 +102,8 @@ public interface CareService {
 	//care_board_content 검색개수
 	int getListCount_care_board_content(String keyword);
 
+	//회원이미지 가지고 오기(1장씩 요청)
+	ResponseEntity<ByteArrayResource> member_image(String member_image_member_id)
+			throws UnsupportedEncodingException, IOException;
+
 }
