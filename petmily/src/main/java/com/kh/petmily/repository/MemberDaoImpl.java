@@ -197,5 +197,11 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.pet_image_change",petImage);
 	}
 
+	//펫이미지등록
+	@Override
+	public void pet_image_regist2(PetImageDto petImageDto) {
+		sqlSession.insert("member.pet_image_regist2",petImageDto);
+	}
+
 
 }

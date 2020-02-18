@@ -368,6 +368,25 @@ public class MemberController {
 			
 			return "redirect:mylist";
 		}
+		
+		//펫 추가 
+		@PostMapping("/pet_regist")
+		public String pet_regist(
+				@RequestParam String member_id,
+				@ModelAttribute PetDto petDto,
+				@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
+			memberService.pet_regist(petDto);
+			String pet_name = petDto.getName();
+			String pet_age = Integer.toString(petDto.getAge());
+			String pet_type = petDto.getType();
+			int pet_no = memberService.pet_no(pet_name,pet_age,pet_type);
+			
+			//이미지등록
+			if(pet_image.isEmpty()==false) {
+				memberService.pet_image_regist(pet_no, pet_image);
+			}
+			return "redirect:mylist";
+		}
 	}
 
 

@@ -94,5 +94,8 @@ public interface MemberDao {
 	//펫이미지수정
 	void pet_image_change(PetImageDto petImage);
 
+	//펫이미지등록
+	void pet_image_regist2(PetImageDto petImageDto);
+
 
 }

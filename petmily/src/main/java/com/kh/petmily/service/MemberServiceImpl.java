@@ -104,28 +104,6 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	//펫이미지 등록
-	@Override
-	public void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException {
-		PetImageDto petImageDto = PetImageDto.builder()
-				.pet_image_pet_no(pet_no)
-				.savename(UUID.randomUUID().toString())
-				.filetype(pet_image.getContentType())
-				.filesize(pet_image.getSize())
-				.uploadname(pet_image.getOriginalFilename())
-				.build();
-		
-		File dir = new File("C:/upload/pet_image");
-		
-		File target = new File(dir,petImageDto.getSavename());
-		dir.mkdirs();
-		
-		pet_image.transferTo(target);
-		
-		memberDao.pet_image_regist(petImageDto);
-		
-	}
-
 	//해당 회원의 회원 이미지 번호 구해오기
 	@Override
 	public Integer member_image_no(String id) {
@@ -270,6 +248,26 @@ public class MemberServiceImpl implements MemberService {
 	public PetImageDto getPetImageInfo(int pet_image_pet_no) {
 		return memberDao.getPetImageInfo(pet_image_pet_no);
 	}
-
+	
+	//펫이미지 등록
+	@Override
+	public void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException {
+		PetImageDto petImageDto = PetImageDto.builder()
+				.pet_image_pet_no(pet_no)
+				.savename(UUID.randomUUID().toString())
+				.filetype(pet_image.getContentType())
+				.filesize(pet_image.getSize())
+				.uploadname(pet_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/pet_image");
+		
+		File target = new File(dir,petImageDto.getSavename());
+		dir.mkdirs();
+		
+		pet_image.transferTo(target);
+		
+		memberDao.pet_image_regist(petImageDto);
+	}
 	}
 

@@ -217,6 +217,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where 
 			pet_image_no=#{pet_image_no}
 	</update>
+	
+	<!-- 펫이미지등록(추가) -->
+	<insert id="pet_image_regist2" parameterType="petImageDto">
+		insert into 
+			pet_image
+		values(
+			pet_no_seq.nextval,
+			member_id=#{member_id},
+			name=#{name},
+			age=#{age},
+			type=#{type},
+			ect=#{ect}
+		)
+	</insert>
+	
 </mapper>
 
 
