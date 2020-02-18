@@ -172,6 +172,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			pet_image_no=#{pet_image_no}
 	</select>
 	
+	<!-- 펫정보 가지고오기 -->
+	<select id="getpet" parameterType="String" resultType="petDto">
+		select * from pet where pet_no=#{pet_no}
+	</select>
+	
+	<!-- 펫정보수정 -->
+	<update id="petchange" parameterType="petDto">
+		update pet set
+				name = #{name},
+				age= #{age},
+				type = #{type},
+				ect = #{ect}		
+				where pet_no = #{pet_no}	
+	</update>
 </mapper>
 
 

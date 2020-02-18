@@ -73,4 +73,10 @@ public interface MemberService {
 	//펫번호 가지고오기
 	int pet_no(String pet_name,String pet_age, String pet_type);
 
+	//펫정보 가지고오기
+	PetDto getpet(String pet_no);
+
+	//펫정보수정
+	void petchange(PetDto petDto);
+
 }

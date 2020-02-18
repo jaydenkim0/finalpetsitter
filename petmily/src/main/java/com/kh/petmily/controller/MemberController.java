@@ -149,27 +149,6 @@ public class MemberController {
 		int pet_image_no = memberService.pet_image_no(pet_no);
 		return memberService.pet_image(pet_image_no);
 	}
-	
-	//내정보보기
-	@GetMapping("/mylist")
-	public String mylist(
-			HttpSession session,
-			Model model) {
-		
-		String id = (String) session.getAttribute("id");
-		
-		MemberDto list = memberService.mylist(id);
-		model.addAttribute("mylist",list);
-		
-		//해당 회원의 회원 이미지 번호 구해오기
-		Integer member_image_no = memberService.member_image_no(id);
-		model.addAttribute("member_image_no",member_image_no);
-				
-		List<PetDto> petlist = memberService.mylistpet(id);
-		model.addAttribute("mylistpet",petlist);
-		
-		return "member/mylist";
-	}
 
 
 //	//내정보수정
@@ -267,11 +246,44 @@ public class MemberController {
 			return "/";
 		}
 		
+		
+		//내정보보기
+		@GetMapping("/mylist")
+		public String mylist(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			return "member/mylist";
+		}
+		
 		// 회원정보수정
 		@GetMapping("/mylistchange")	
 		public String edit(@RequestParam String id, Model model) {
 			MemberDto dto = memberService.mylist(id);			
 			model.addAttribute("member", dto);
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
 			System.out.println(dto);
 			return "member/mylistchange";
 		}
@@ -319,6 +331,28 @@ public class MemberController {
 				session.removeAttribute("grade");
 				return "redirect:/";
 			}
+		}
+		
+		//반려동물 정보수정 페이지 연결
+		@GetMapping("/petchange")
+		public String petchange(
+				@RequestParam String pet_no,
+				Model model) {
+			model.addAttribute("pet_no",pet_no);
+			
+			//동물정보 가져오기
+			PetDto pet = memberService.getpet(pet_no);
+			model.addAttribute("pet",pet);
+			return "member/petchange";
+		}
+		
+		//반려동물 정보수정 제출 후 연결
+		@PostMapping("/petchange")
+		public String petchange(
+				@RequestParam String pet_no,
+				@ModelAttribute PetDto petDto) {
+			memberService.petchange(petDto);
+			return "redirect:mylist";
 		}
 	}
 

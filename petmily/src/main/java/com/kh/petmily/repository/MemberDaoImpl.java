@@ -161,5 +161,17 @@ public class MemberDaoImpl implements MemberDao {
 		return data;
 	}
 
+	//펫정보 가지고오기
+	@Override
+	public PetDto getpet(String pet_no) {
+		return sqlSession.selectOne("member.getpet",pet_no);
+	}
+
+	//펫정보수정
+	@Override
+	public void petchange(PetDto petDto) {
+		sqlSession.update("member.petchange",petDto);
+	}
+
 
 }

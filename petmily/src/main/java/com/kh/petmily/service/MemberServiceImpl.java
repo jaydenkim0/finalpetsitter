@@ -202,6 +202,18 @@ public class MemberServiceImpl implements MemberService {
 	public int pet_no(String pet_name,String pet_age,String pet_type) {
 		return memberDao.pet_no(pet_name,pet_age,pet_type);
 	}
+
+	//펫정보 가지고오기
+	@Override
+	public PetDto getpet(String pet_no) {
+		return memberDao.getpet(pet_no);
+	}
+
+	//펫정보수정
+	@Override
+	public void petchange(PetDto petDto) {
+		memberDao.petchange(petDto);
+	}
 	
 	}
 
