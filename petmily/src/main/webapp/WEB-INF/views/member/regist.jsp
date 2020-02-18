@@ -281,7 +281,7 @@
 					<tr>
 						<th>이미지 첨부</th>
 						<td>
-							<input type="file" name="pet_image" multiple accept="image/*">S
+							<input type="file" name="pet_image" multiple accept="image/*">
 						</td>
 					</tr>
 				</table>

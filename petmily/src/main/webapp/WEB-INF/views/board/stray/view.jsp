@@ -111,133 +111,149 @@
 
 <div align="center">
 	<h2>Save the Pets !</h2>
-		<table border="1" width="80%">
-			<!--strayVO 안에 있는 정보 불러오기 -->
-			<tr>
-				<td>글번호 : ${strayVO.stray_no}</td>
-			</tr>
+	<table border="1" width="80%">
+		<!--strayVO 안에 있는 정보 불러오기 -->
+		<tr>
+			<td>글번호 : ${strayVO.stray_no}</td>
+		</tr>
 
-			<tr>
-				<td>게시일자 : ${strayVO.writedateWithFormat}</td>
-			</tr>
+		<tr>
+			<td>게시일자 : ${strayVO.writedateWithFormat}</td>
+		</tr>
 
-			<tr>
-				<td>작성자 : ${strayVO.stray_writer}</td>
-			</tr>
+		<tr>
+			<c:choose>
+				<c:when test="${not empty row.stray_writer}">
+					<td>작성자 : ${strayVO.stray_writer}</td>
+				</c:when>
+				<c:otherwise>
+					<td>작성자 : 비회원</td>
+				</c:otherwise>
+			</c:choose>
+		</tr>
 
-			<tr>
-				<td>말머리 : ${strayVO.stray_title}</td>
-			</tr>
+		<tr>
+			<c:choose>
+				<c:when test="${strayVO.stray_title ne '완료글'}">
+					<td>말머리 : ${strayVO.stray_title}</td>
+				</c:when>
+				<c:otherwise>
+					<td style="color: red">말머리 : ${strayVO.stray_title}</td>
+				</c:otherwise>
+			</c:choose>
 
-			<tr>
-				<td>제목 : ${strayVO.stray_head}</td>
-			</tr>
-			
-			<tr>
-		<c:forEach var="strayImage" items="${strayImageList}">
-			<c:if test="${strayfileDto.stray_file_no ne 0}">
+		</tr>
+
+		<tr>
+			<td>제목 : ${strayVO.stray_head}</td>
+		</tr>
+
+		<tr>
+			<c:forEach var="strayImage" items="${strayImageList}">
+				<c:if test="${strayfileDto.stray_file_no ne 0}">
+					<tr>
+						<td><img
+							src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
+							width="200" height="100"></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+			<td>${strayVO.stray_content}</td>
+		</tr>
+
+
+
+		<!-- 댓글화면 -->
+		<c:forEach items="${replyList}" var="reply">
+			<c:if test="${reply.content ne null}">
 				<tr>
-					<td><img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}" width="200" height="100">
+					<td>
+						<div class="grandmother">
+							<table width="100%" class="mother">
+								<tr>
+									<th align="left"><c:choose>
+											<c:when test="${not empty sessionScope.id}">
+				${reply.reply_writer}
+			</c:when>
+											<c:otherwise>
+			비회원
+			</c:otherwise>
+										</c:choose> <c:if test="${strayVO.stray_writer == reply.reply_writer}">
+											<font color="red">(작성자)</font>
+										</c:if></th>
+
+									<th align="left">작성일 : ${reply.writedateWithFormat}</th>
+								</tr>
+
+								<tr class="reply_view">
+									<th class="content" colspan="2" align="left">${reply.content}</th>
+								</tr>
+
+								<tr class="reply_edit">
+									<td align="right">
+									<th colspan="2" align="left">
+										<form action="replyUpdate" method="post"
+											class="reply_change_submit">
+											<input type="hidden" name="reply_no"
+												value="${reply.reply_no}"> <input type="hidden"
+												name="origin" value="${reply.origin}">
+											<textarea name="content" requistray class="val">${reply.content}</textarea>
+										</form>
+									</th>
+
+									<!-- 댓글 수정 -->
+									<c:if
+										test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+										<tr>
+											<th colspan="2" align="right">
+												<button class="reply_view_btn">수정</button>
+												<button class="reply_edit_btn">완료</button> <a
+												href="replyDelete?reply_no=${reply.reply_no}&origin=${strayVO.stray_no}">
+													<button class="replyDelete_submit">삭제</button>
+											</a>
+											</th>
+										</tr>
+									</c:if>
+								</tr>
+								</td>
+							</table>
+						</div>
 					</td>
 				</tr>
 			</c:if>
 		</c:forEach>
-				<td>${strayVO.stray_content}</td>
-			</tr>
 
 
+		<!-- 댓글 등록 -->
+		<tr>
+			<td align="right">
+				<form action="replywrite" method="post" class="reply_submit">
+					<input type="hidden" id="origin" name="origin"
+						value="${strayVO.stray_no}"><br> <input type="text"
+						id="reply_writer" name="reply_writer" value="${sessionScope.id}"
+						readonly>
+					<textarea name="content" requistray placeholder="내용 입력" rows="4"
+						cols="100"></textarea>
+					<input type="submit" value="등록">
+				</form>
+			</td>
+		</tr>
 
-<!-- 댓글화면 -->
-<c:forEach items="${replyList}" var="reply">
-<c:if test="${reply.content ne null}">
-<tr>
-	<td>
-	<div class="grandmother">
-		<table width="100%" class="mother">
-			<tr>
-			<th align="left">
-			<c:choose>
-			<c:when test="${not empty reply.reply_writer}">
-				${reply.reply_writer}
-			</c:when>
-			<c:otherwise>
-			비회원
-			</c:otherwise>
-			</c:choose>
-				<c:if test="${strayVO.stray_writer == reply.reply_writer}">
-					<font color="red">(작성자)</font>
-				</c:if>
-			</th>
-				
-				<th align="left">
-				작성일 : ${reply.writedateWithFormat}</th>
-			</tr>
-			
-			<tr class="reply_view">
-				<th class="content" colspan="2" align="left">${reply.content}</th>
-			</tr>
-			
-			<tr class="reply_edit">
-				<td align="right">
-				<th colspan="2" align="left">
-					<form action="replyUpdate" method="post"
-						class="reply_change_submit">
-						<input type="hidden" name="reply_no" value="${reply.reply_no}">
-						<input type="hidden" name="origin" value="${reply.origin}">
-						<textarea name="content" requistray class="val">${reply.content}</textarea>
-					</form>
-				</th>
-
-			<!-- 댓글 수정 -->
-			<c:if
-				test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
-				<tr>
-					<th colspan="2" align="right">
-						<button class="reply_view_btn">수정</button>
-						<button class="reply_edit_btn">완료</button> 
-						<a href="replyDelete?reply_no=${reply.reply_no}&origin=${strayVO.stray_no}">
-							<button class="replyDelete_submit">삭제</button>
-						</a>
-						</th>
-					</tr>
-				</c:if>
-			</tr>
-		</td>
-		</table>
-	</div>
-	</td>
-</tr>
-</c:if>
-</c:forEach>
-
-
-<!-- 댓글 등록 -->
-<tr>
-<td align="right">
-<form action="replywrite" method="post" class="reply_submit">
-		<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br> 
-		<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-				<textarea name="content" requistray placeholder="내용 입력" rows="4" cols="100" ></textarea>
-				 <input type="submit" value="등록">
-		</form>
-		</td>
-	</tr>
-
-<tr>
-	<td align="right">
-
-	<c:if test="${sessionScope.id eq strayVO.stray_writer || grade eq 'admin'}">
-		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
-		<a href="${context}/board/stray/update?stray_no=${strayVO.stray_no}">
-		<button type="button" id="btnupdate">게시글 수정</button></a>
-		<a href="${context}/board/stray/delete?stray_no=${strayVO.stray_no}">
-		<button type="button" id="btndelete">게시글 삭제</button></a>
-	</c:if>
-	
-	<a href="${context}/board/stray/list">
-	<button type="button">문의게시판 목록</button></a>
-	</td>
-	</tr>
+		<tr>
+			<td align="right"><c:if
+					test="${sessionScope.id eq strayVO.stray_writer || grade eq 'admin'}">
+					<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
+					<a
+						href="${context}/board/stray/update?stray_no=${strayVO.stray_no}">
+						<button type="button" id="btnupdate">게시글 수정</button>
+					</a>
+					<a
+						href="${context}/board/stray/delete?stray_no=${strayVO.stray_no}">
+						<button type="button" id="btndelete">게시글 삭제</button>
+					</a>
+				</c:if> <a href="${context}/board/stray/list">
+					<button type="button">게시판 목록</button>
+			</a></td>
+		</tr>
 	</table>
 </div>
-	

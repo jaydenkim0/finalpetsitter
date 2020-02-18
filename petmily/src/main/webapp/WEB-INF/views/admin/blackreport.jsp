@@ -45,14 +45,14 @@
 
 	<!-- 리스트 내용 -->
 	<c:forEach var="blackreport" items="${list}">	
-							<a href="${pageContext.request.contextPath}/board/qna/view?qna_no=${blackreport.qna_no}">
-							<h4>
-								신고 게시글 번호 : ${blackreport.qna_no} |
-								신고 작성자 : ${blackreport.qna_writer} |
-								신고 제목 : ${blackreport.qna_head} |
-								신고 등록일 : ${blackreport.getWritedateWithFormat()}  	
-							</h4>
-							</a>		
+					<a href="${pageContext.request.contextPath}/board/qna/view?qna_no=${blackreport.qna_no}">
+					<h4>
+						신고 게시글 번호 : ${blackreport.qna_no} |
+						신고 작성자 : ${blackreport.qna_writer} |
+						신고 제목 : ${blackreport.qna_head} |
+						신고 등록일 : ${blackreport.getWritedateWithFormat()}  	
+					</h4>
+					</a>		
 	</c:forEach>	
 
 
