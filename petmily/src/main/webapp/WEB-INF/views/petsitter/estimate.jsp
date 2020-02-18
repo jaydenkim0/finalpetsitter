@@ -60,7 +60,7 @@ $(function(){
      var end = $("#time_end option:selected").val();
      var use_time_cal = end-start;
   	
-     $("#use_time").val(use_time_cal);
+     $("#usage_time").val(use_time_cal);
 
      //총 시간 * 10.000원
      total = use_time_cal *10000;
@@ -106,7 +106,7 @@ $(function(){
     </div>
 
 <!-- 돌봄 시간 -->
-	<input type="hidden" name="use_time" id="use_time">
+	<input type="hidden" name="usage_time" id="usage_time">
 	<!-- 나중에 달력 api가져오기 -->
 	<div>
 		<input type="text" name="matching_time" placeholder="날짜">
