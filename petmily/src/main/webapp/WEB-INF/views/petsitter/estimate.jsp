@@ -58,14 +58,15 @@ $(function(){
  function calcurate(){
      var start = $("#time_start option:selected").val();
      var end = $("#time_end option:selected").val();
-     var use_time = end-start;
-  
+     var use_time_cal = end-start;
+  	
+     $("#use_time").val(use_time_cal);
+
      //총 시간 * 10.000원
-     total = use_time *10000;
+     total = use_time_cal *10000;
 
-     var matching = $("#mt option:selected").val();
+     var matching = $("#mt option:selected").text();
 
-     console.log(matching);
      //만약 위탁 서비스가 선택 되어 있다면
      if(matching == "위탁서비스"){
          total +=10000;
@@ -86,25 +87,33 @@ $(function(){
 </script>
     
 <h1>펫시터 견적 신청 페이지</h1>
-<form action="estimate" method="post" enctype="multipart/form-data">
 
+<form action="estimate" method="post" enctype="multipart/form-data">
+<!-- 펫시터 아이디 -->
+	<input type="hidden" name="reservation_sitter_no" value="${pet_sitter_no}">
+	
 <!-- 회원 아이디 -->
-	<input type="hidden" name="sitter_id" value="${id}">
+	<input type="hidden" name="member_id" value="${id}">
 	<h1>${id}</h1>
 <!-- 돌봄 종류 -->	
-<div>
+	<div>
 		<label for="mt">가능한 돌봄 종류</label>
-		<select id="mt" name="sitter_matching_type">
+		<select id="mt" name="payinfo_no">
             <option value="">서비스 종류 선택</option>
-			<option>방문서비스</option>
-			<option>위탁서비스</option>
+			<option value="2">방문서비스</option>
+			<option value="3">위탁서비스</option>
 		</select>
     </div>
 
-<!-- 돌봄 시간 -->	    
+<!-- 돌봄 시간 -->
+	<input type="hidden" name="use_time" id="use_time">
+	<!-- 나중에 달력 api가져오기 -->
+	<div>
+		<input type="text" name="matching_time" placeholder="날짜">
+	</div>	    
     <div>
 		<label for="time_start">돌봄 시작 시간</label>
-		<select id="time_start" name="usage_time_start">
+		<select id="time_start" name="usage_time_start" >
             <option value="">시작 시간을 선택</option>
 			<option value="6">오전 6시(06:00)</option>
 			<option value="7">오전 7시(07:00)</option>
@@ -152,16 +161,16 @@ $(function(){
 
 <!-- 이용할 스킬 -->	
     <div class="skill">
-        <input type="checkbox" id="sick" value="1" name="skills" data-skills="투약">
+        <input type="checkbox" id="sick" value="6" name="payinfo_no" data-skills="투약">
         <label for="sick">투약</label>
         
-        <input type="checkbox" id="old" value="2" name="skills" data-skills="노령견테어">
+        <input type="checkbox" id="old" value="41" name="payinfo_no" data-skills="노령견테어">
         <label for="old">노령견케어</label>
         
-        <input type="checkbox" id="kitten"  value="3" name="skills" data-skills="키튼케어">
+        <input type="checkbox" id="kitten" value="42" name="payinfo_no" data-skills="키튼케어">
         <label for="kitten" >키튼케어</label>
         
-        <input type="checkbox" id="walking"  value="4" name="skills" data-skills="도그워킹">
+        <input type="checkbox" id="walking"  value="4" name="payinfo_no" data-skills="도그워킹">
         <label for="walking" >도그워킹</label>
         
         <div id="skills_text"></div>
@@ -196,12 +205,16 @@ $(function(){
     <!-- 회원 반려동물 정보 -->
     <div>
 	<c:forEach var="petDto" items="${petList}">
+	<input type="hidden" name="pet_name" value="${petDto.name}">
 		<span>반려 동물 이름 : ${petDto.name}</span><br>
 		<span>반려 동물 나이 : ${petDto.age}</span><br>
 		<span>반려 동물 종류 : ${petDto.type}</span><br>
 		<span>반려 동물 기타 : ${petDto.ect}</span><br>
 	</c:forEach>    
     <h5>회원 ${id}님의 반려 동물 정보가 맞습니까?</h5>
+    
+    <label for="ect">특이사항</label>
+    <textarea rows="1" cols="3" id="ect" name="ect"></textarea>
     </div>
   
 	<div>

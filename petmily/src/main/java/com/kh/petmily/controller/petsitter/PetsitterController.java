@@ -4,6 +4,7 @@ package com.kh.petmily.controller.petsitter;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 @Controller
@@ -32,7 +34,7 @@ public class PetsitterController {
 	@Autowired
 	private AdminService adminService;
 	
-	
+	//펫시터 가입 페이지
 	@GetMapping("/regist")
 	public String regist() {
 		return "petsitter/regist";
@@ -44,6 +46,7 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
+	//펫시터 검색(조회) 페이지
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
 						@RequestParam(defaultValue="", required = false) String areaKeyword,
@@ -67,6 +70,7 @@ public class PetsitterController {
 		return "petsitter/list";
 	}
 	
+	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
 	public String content(@RequestParam int pet_sitter_no, Model model) {
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
@@ -75,6 +79,7 @@ public class PetsitterController {
 		return "petsitter/content";
 	}
 	
+	//회원 정보 페이지
 	@GetMapping("/info")
 	public String info(@RequestParam int pet_sitter_no, Model model) {
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
@@ -83,6 +88,7 @@ public class PetsitterController {
 		return "petsitter/content";
 	}
 	
+	//견적 요청 페이지
 	@GetMapping("/estimate")
 	public String estimate(@RequestParam int pet_sitter_no, 
 							HttpSession session,
@@ -90,8 +96,21 @@ public class PetsitterController {
 		String id = (String) session.getAttribute("id");
 		
 		List<PetDto> petList = petsitterService.getPet(id);
-		model.addAttribute("petList", petList);
+		model.addAttribute("petList", petList)
+				.addAttribute("pet_sitter_no", pet_sitter_no);
 		return "petsitter/estimate";
 	}
 	
+	@PostMapping("/estimate")
+	public String estimate(@ModelAttribute ReservationVO reservationVO) {
+		petsitterService.reservation(reservationVO);
+		//회원 예약 조회 할 수 있는 페이지로 보내기(나중에 변경 할것!!!)
+		return "redirect:../";
+	}
+	
+	//예약(견적)확인 페이지
+	@GetMapping("/confirm")
+	public String confirm() {
+		return "petsitter/confirm";
+	}
 }
