@@ -73,12 +73,27 @@
 			});
 		});
 	</script>
+	<script>
+	 function no_image2(){
+		 $("#member_image").hide();
+	 }
+	</script>
 	</head>
 
 	<body>
 		
-			<form action="mylistchange?id=${member.id}" method="post">
+			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="member_image_no" value="${member_image_no }">
 			    <table border="1">
+			    	<c:if test="${member_image_no>0 }">
+			    	<tr>
+			    		<th>이미지</th>
+			    		<td>
+			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
+			    			<input type="file" name="member_image" multiple accept="image/*">
+			    		</td>
+			    	</tr>
+			    	</c:if>
 			    	<tr>
 			    		<th>성명</th>
 			    		<td>

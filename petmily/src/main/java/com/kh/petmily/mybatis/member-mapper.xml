@@ -109,18 +109,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{id}
 	</select>
 	
-	<!-- 회원 이미지 등록 -->
-	<insert id="member_image_regist" parameterType="memberImageDto">
-		insert into member_image values(
-			member_image_no_seq.nextval,
-			#{member_image_member_id},
-			#{savename},
-			#{filetype},
-			#{filesize},
-			#{uploadname}
-		)
-	</insert>
-	
 	<!-- 펫 번호 구해오기 -->
 	<select id="pet_no" resultType="int" parameterType="map">
 		select pet_no from(
@@ -185,6 +173,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				type = #{type},
 				ect = #{ect}		
 				where pet_no = #{pet_no}	
+	</update>
+	
+	<!-- 회원이미지정보 -->
+	<select id="getImageInfo" resultType="memberImageDto" parameterType="int">
+		select * from member_image where member_image_no=#{member_image_no}
+	</select>
+	
+	<!-- 회원 이미지 등록 -->
+	<insert id="member_image_regist" parameterType="memberImageDto">
+		insert into member_image values(
+			member_image_no_seq.nextval,
+			#{member_image_member_id},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		)
+	</insert>
+	
+	<!-- 회원 이미지 수정 -->	
+	<update id="member_image_change" parameterType="memberImageDto">
+		update member_image set
+			filetype=#{filetype},
+			filesize=#{filesize},
+			uploadname=#{uploadname}
+			where member_image_no=#{member_image_no}
 	</update>
 </mapper>
 

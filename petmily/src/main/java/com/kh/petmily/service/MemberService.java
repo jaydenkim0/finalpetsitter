@@ -13,6 +13,7 @@ import java.util.List;
 
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 
 public interface MemberService {
@@ -78,5 +79,11 @@ public interface MemberService {
 
 	//펫정보수정
 	void petchange(PetDto petDto);
+
+	//회원이미지정보
+	MemberImageDto getImageInfo(int member_image_no);
+
+	//회원이미지수정
+	void member_image_change(MemberImageDto memberImageDto, MultipartFile member_image) throws IllegalStateException, IOException;
 
 }

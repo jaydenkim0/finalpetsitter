@@ -100,12 +100,6 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.idExist",id);
 	}
 
-	//회원 이미지 등록
-	@Override
-	public void member_image_regist(MemberImageDto memberImageDto) {
-		sqlSession.insert("member.member_image_regist",memberImageDto);
-	}
-
 	//펫 번호 구해오기
 	@Override
 	public int pet_no(String pet_name,String pet_age,String pet_type) {
@@ -171,6 +165,24 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void petchange(PetDto petDto) {
 		sqlSession.update("member.petchange",petDto);
+	}
+
+	//회원이미지정보
+	@Override
+	public MemberImageDto getImageInfo(int member_image_no) {
+		return sqlSession.selectOne("member.getImageInfo",member_image_no);
+	}
+	
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(MemberImageDto memberImageDto) {
+		sqlSession.insert("member.member_image_regist",memberImageDto);
+	}
+
+	//회원이미지수정
+	@Override
+	public void member_image_change(MemberImageDto memberImage) {
+		sqlSession.update("member.member_image_change",memberImage);
 	}
 
 

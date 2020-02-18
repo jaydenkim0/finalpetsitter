@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
@@ -151,13 +152,6 @@ public class MemberController {
 	}
 
 
-//	//내정보수정
-//	@GetMapping("/mylistchange")
-//		public String mylistchange() {
-//			return "member/mylistchange";
-//		}
-
-
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
 	public String send(@RequestParam String email, HttpSession session) {
@@ -268,32 +262,6 @@ public class MemberController {
 			return "member/mylist";
 		}
 		
-		// 회원정보수정
-		@GetMapping("/mylistchange")	
-		public String edit(@RequestParam String id, Model model) {
-			MemberDto dto = memberService.mylist(id);			
-			model.addAttribute("member", dto);
-			
-			MemberDto list = memberService.mylist(id);
-			model.addAttribute("mylist",list);
-			
-			//해당 회원의 회원 이미지 번호 구해오기
-			Integer member_image_no = memberService.member_image_no(id);
-			model.addAttribute("member_image_no",member_image_no);
-			
-			List<PetDto> petlist = memberService.mylistpet(id);
-			model.addAttribute("mylistpet",petlist);
-			
-			System.out.println(dto);
-			return "member/mylistchange";
-		}
-		
-		@PostMapping("/mylistchange")
-		public String edit(@ModelAttribute MemberDto memberDto) {			
-			memberService.mylistchange(memberDto);
-			return "redirect:mylist";
-		}
-		
 		//아이디중복검사
 		@RequestMapping(value="idCheck",method = RequestMethod.GET)
 		@ResponseBody
@@ -354,6 +322,42 @@ public class MemberController {
 			memberService.petchange(petDto);
 			return "redirect:mylist";
 		}
+		// 회원정보수정
+		@GetMapping("/mylistchange")	
+		public String edit(@RequestParam String id, Model model) {
+			MemberDto dto = memberService.mylist(id);			
+			model.addAttribute("member", dto);
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			System.out.println(dto);
+			return "member/mylistchange";
+		}
+		
+		@PostMapping("/mylistchange")
+		public String edit(
+				@ModelAttribute MemberDto memberDto,
+				@RequestParam MultipartFile member_image,
+				@RequestParam int member_image_no) throws IllegalStateException, IOException {		
+			
+			if(member_image.isEmpty()==false) {
+				MemberImageDto memberImageDto = memberService.getImageInfo(member_image_no);
+				memberService.member_image_change(memberImageDto,member_image);
+			}
+			
+			memberService.mylistchange(memberDto);
+			
+			
+			return "redirect:mylist";
+		}
 	}
 
 
@@ -361,4 +365,5 @@ public class MemberController {
 
 	
 	
+
 

@@ -103,26 +103,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.idExist(id);
 	}
 
-	//회원 이미지 등록
-	@Override
-	public void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException {
-		MemberImageDto memberImageDto = MemberImageDto.builder()
-				.member_image_member_id(id)
-				.savename(UUID.randomUUID().toString())
-				.filetype(member_image.getContentType())
-				.filesize(member_image.getSize())
-				.uploadname(member_image.getOriginalFilename())
-				.build();
-		
-		File dir = new File("C:/upload/member_image");
-		
-		File target = new File(dir,memberImageDto.getSavename());
-		dir.mkdirs();
-		
-		member_image.transferTo(target);
-		
-		memberDao.member_image_regist(memberImageDto);
-	}
 
 	//펫이미지 등록
 	@Override
@@ -215,5 +195,53 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.petchange(petDto);
 	}
 	
+	//회원이미지정보
+	@Override
+	public MemberImageDto getImageInfo(int member_image_no) {
+		return memberDao.getImageInfo(member_image_no);
+	}
+
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException {
+		MemberImageDto memberImageDto = MemberImageDto.builder()
+				.member_image_member_id(id)
+				.savename(UUID.randomUUID().toString())
+				.filetype(member_image.getContentType())
+				.filesize(member_image.getSize())
+				.uploadname(member_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/member_image");
+		
+		File target = new File(dir,memberImageDto.getSavename());
+		dir.mkdirs();
+		
+		member_image.transferTo(target);
+		
+		memberDao.member_image_regist(memberImageDto);
+	}
+
+	//회원이미지수정
+	@Override
+	public void member_image_change(MemberImageDto memberImageDto, MultipartFile member_image) throws IllegalStateException, IOException {
+		MemberImageDto memberImage = MemberImageDto.builder()
+				.member_image_no(memberImageDto.getMember_image_no())
+				.member_image_member_id(memberImageDto.getMember_image_member_id())
+				.savename(memberImageDto.getSavename())
+				.filetype(member_image.getContentType())
+				.filesize(member_image.getSize())
+				.uploadname(member_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/member_image");
+		
+		File target = new File(dir,memberImage.getSavename());
+		dir.mkdirs();
+		
+		member_image.transferTo(target);
+		
+		memberDao.member_image_change(memberImage);
+	}
 	}
 
