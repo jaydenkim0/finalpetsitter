@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -314,14 +315,6 @@ public class MemberController {
 			return "member/petchange";
 		}
 		
-		//반려동물 정보수정 제출 후 연결
-		@PostMapping("/petchange")
-		public String petchange(
-				@RequestParam String pet_no,
-				@ModelAttribute PetDto petDto) {
-			memberService.petchange(petDto);
-			return "redirect:mylist";
-		}
 		// 회원정보수정
 		@GetMapping("/mylistchange")	
 		public String edit(@RequestParam String id, Model model) {
@@ -338,7 +331,6 @@ public class MemberController {
 			List<PetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
-			System.out.println(dto);
 			return "member/mylistchange";
 		}
 		
@@ -355,6 +347,24 @@ public class MemberController {
 			
 			memberService.mylistchange(memberDto);
 			
+			
+			return "redirect:mylist";
+		}
+		
+		//반려동물 정보수정 제출 후 연결
+		@PostMapping("/petchange")
+		public String petchange(
+				@RequestParam String pet_no,
+				@ModelAttribute PetDto petDto,
+				@RequestParam MultipartFile pet_image) throws IllegalStateException, IOException {
+			memberService.petchange(petDto);
+			
+			int pet_image_pet_no = Integer.parseInt(pet_no);
+			
+			if(pet_image.isEmpty()==false) {
+				PetImageDto petImageDto = memberService.getPetImageInfo(pet_image_pet_no);
+				memberService.pet_image_change(petImageDto,pet_image);
+			}
 			
 			return "redirect:mylist";
 		}

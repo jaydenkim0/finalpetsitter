@@ -243,5 +243,33 @@ public class MemberServiceImpl implements MemberService {
 		
 		memberDao.member_image_change(memberImage);
 	}
+
+	//펫이미지수정
+	@Override
+	public void pet_image_change(PetImageDto petImageDto, MultipartFile pet_image) throws IllegalStateException, IOException {
+		PetImageDto petImage = PetImageDto.builder()
+				.pet_image_no(petImageDto.getPet_image_no())
+				.pet_image_pet_no(petImageDto.getPet_image_pet_no())
+				.savename(petImageDto.getSavename())
+				.filetype(pet_image.getContentType())
+				.filesize(pet_image.getSize())
+				.uploadname(pet_image.getOriginalFilename())
+				.build();
+		
+		File dir = new File("C:/upload/pet_image");
+		
+		File target = new File(dir,petImage.getSavename());
+		dir.mkdirs();
+		
+		pet_image.transferTo(target);
+		
+		memberDao.pet_image_change(petImage);
+	}
+	//펫이미지정보
+	@Override
+	public PetImageDto getPetImageInfo(int pet_image_pet_no) {
+		return memberDao.getPetImageInfo(pet_image_pet_no);
+	}
+
 	}
 

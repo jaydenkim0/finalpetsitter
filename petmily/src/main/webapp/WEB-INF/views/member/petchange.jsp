@@ -2,28 +2,38 @@
     pageEncoding="UTF-8"%>
 <head>
 <script>
+function no_image() {
+	$("#pet_image").hide();
+ }
 </script>
 </head>
 
 <body>
 
-<form action="petchange?pet_no=${pet.pet_no }" method="post" name="test">
+<form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
 	<table border="1">
 		<tr>
-			<th>name</th>
+			<th>이미지</th>
+			<td>
+				<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="max-width: 40%; height: auto;" onerror="no_image()" id="pet_image">
+				<input type="file" name="pet_image" multiple accept="image/*">
+			</td>
+		</tr>
+		<tr>
+			<th>이름</th>
 			<td>
 				<input type="text" name="name" value=${pet.name }>
 			</td>
 		</tr>
 		<tr>
-			<th>age</th>
+			<th>나이</th>
 			<td>
 				<input type="text" name="age" value=${pet.age }>
 			</td>
 		</tr>
 		<tr>
-			<th>type</th>
+			<th>동물종</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
@@ -37,7 +47,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th>ect</th>
+			<th>설명</th>
 			<td>
 				<textarea name="ect">${pet.ect }</textarea>
 			</td>

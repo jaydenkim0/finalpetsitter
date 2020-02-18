@@ -200,6 +200,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			uploadname=#{uploadname}
 			where member_image_no=#{member_image_no}
 	</update>
+	
+	<!-- 펫이미지정보 -->
+	<select id="getPetImageInfo" resultType="petImageDto" parameterType="int">
+		select * from pet_image where pet_image_pet_no=#{pet_image_pet_no}
+	</select>
+	
+	<!-- 펫이미지수정 -->
+	<update id="pet_image_change" parameterType="petImageDto">
+		update 
+			pet_image 
+		set
+			filetype=#{filetype},
+			filesize=#{filesize},
+			uploadname=#{uploadname}
+		where 
+			pet_image_no=#{pet_image_no}
+	</update>
 </mapper>
 
 

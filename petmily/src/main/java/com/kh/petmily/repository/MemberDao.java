@@ -88,5 +88,11 @@ public interface MemberDao {
 	//회원이미지수정
 	void member_image_change(MemberImageDto memberImage);
 
+	//펫이미지정보
+	PetImageDto getPetImageInfo(int pet_image_pet_no);
+
+	//펫이미지수정
+	void pet_image_change(PetImageDto petImage);
+
 
 }

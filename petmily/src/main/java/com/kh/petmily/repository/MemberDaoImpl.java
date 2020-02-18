@@ -185,5 +185,17 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.member_image_change",memberImage);
 	}
 
+	//펫이미지정보
+	@Override
+	public PetImageDto getPetImageInfo(int pet_image_pet_no) {
+		return sqlSession.selectOne("member.getPetImageInfo",pet_image_pet_no);
+	}
+
+	//펫이미지수정
+	@Override
+	public void pet_image_change(PetImageDto petImage) {
+		sqlSession.update("member.pet_image_change",petImage);
+	}
+
 
 }
