@@ -3,136 +3,180 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 <script>
-	 $(function(){
-		//다중 선택 출력 스크립트 		 
-         $("input[type=checkbox]").change(function() {
-             //배열 선언
-             var skillArray = [];
-             var carePetTypeArray = [];
-             var careConditionArray = [];
+$(function(){
+    $("#time_start").change(function(){
+        calcurate();
+    });
+    $("#time_end").change(function(){
+        calcurate();
+    });
+    $("#mt").change(function(){
+        calcurate();
+    });
+    $("#walking").change(function(){
+         calcurate();
+    }); 
+    $("#sick").change(function(){
+         calcurate();
+    }); 
+   $(".skill").change(function(){
+     var skillArray = [];
 
-             //체크박스에 체크된 경우
-             var skillCheck = $('.skill > input[type=checkbox]:checked');
-             var typeCheck = $('.type > input[type=checkbox]:checked');
-             var conditionCheck = $('.condition > input[type=checkbox]:checked');
+     //체크박스에 체크된 경우
+     var skillCheck = $('.skill > input[type=checkbox]:checked');
 
-             //반복해서 데이터를 배열에 저장해라
-             $(skillCheck).each(function(i){ //스킬
-                 skillArray.push($(this).data("skills"));
-             });
+      //반복해서 데이터를 배열에 저장해라
+      $(skillCheck).each(function(i){ //스킬
+         skillArray.push($(this).data("skills"));
+     });
 
-             $(typeCheck).each(function(i){ //동물종류
-                 carePetTypeArray.push($(this).data("animal"));
-             });
+     $("#skills_text").empty();
+         for (var i in skillArray)
+         {
+             $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
+         }
+   });
+   $(".type").change(function(){
+	   	var carePetTypeArray = [];
 
-             $(conditionCheck).each(function(i){ //돌봄환경
-                 careConditionArray.push($(this).data("condition"));
-             });
+	     //체크박스에 체크된 경우
+	     var typeCheck = $('.type > input[type=checkbox]:checked');
 
-                 $("#skills_text").empty();
-                 for (var i in skillArray)
-                 {
-                     $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
-                 }
-  
-                 $("#care_pet_type_text").empty();
-                 for (var i in carePetTypeArray)
-                 {
-                     $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
-                 }
+	      //반복해서 데이터를 배열에 저장해라
+	       $(typeCheck).each(function(i){ //동물종류
+               carePetTypeArray.push($(this).data("animal"));
+           });
 
-                 $("#care_condition_text").empty();
-                 for (var i in careConditionArray)
-                 {
-                     $("<span>").text(careConditionArray[i]+"/").appendTo("#care_condition_text");
-                 }               
-         });
-    });  
-	</script>
+	       $("#care_pet_type_text").empty();
+           for (var i in carePetTypeArray)
+           {
+               $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
+           }
+	   });
+
+ var total;
+ function calcurate(){
+     var start = $("#time_start option:selected").val();
+     var end = $("#time_end option:selected").val();
+     var use_time_cal = end-start;
+  	
+     $("#use_time").val(use_time_cal);
+
+     //총 시간 * 10.000원
+     total = use_time_cal *10000;
+
+     var matching = $("#mt option:selected").text();
+
+     //만약 위탁 서비스가 선택 되어 있다면
+     if(matching == "위탁서비스"){
+         total +=10000;
+     }else{
+         total +=20000;
+     }
+     if($("#walking").is(":checked")){
+         total += 10000;
+     }
+     if($("#sick").is(":checked")){
+         total += 20000;
+     }
+     
+     $("#payment").empty();
+     $("#payment").append("총 "+total+" 원");
+ }
+ });
+</script>
     
 <h1>펫시터 견적 신청 페이지</h1>
-<form action="estimate" method="post" enctype="multipart/form-data">
 
-<!-- 회원 아이디 -->
-	<input type="hidden" name="sitter_id" value="${id}">
-	<h1>${id}</h1>
+<form action="estimate" method="post" enctype="multipart/form-data">
+<!-- 펫시터 아이디 -->
+	<input type="hidden" name="reservation_sitter_no" value="${pet_sitter_no}">
 	
-<!-- 매칭(돌봄) 종류 -->
+<!-- 회원 아이디 -->
+	<input type="hidden" name="member_id" value="${id}">
+	<h1>${id}</h1>
+<!-- 돌봄 종류 -->	
 	<div>
 		<label for="mt">가능한 돌봄 종류</label>
-		<select id="mt" name="sitter_matching_type">
-			<option>방문서비스</option>
-			<option>위탁서비스</option>
+		<select id="mt" name="payinfo_no">
+            <option value="">서비스 종류 선택</option>
+			<option value="2">방문서비스</option>
+			<option value="3">위탁서비스</option>
 		</select>
-	</div>
-	
-<!-- 돌봄 시간 -->
-	<div>
-		<label for="time">돌봄 시작 시간</label>
-		<select id="time" name="usage_time_start">
-			<option value="6">오전 6시(06:00)</option>
-			<option value="7">오전 7시(07:00)</option>
-			<option value="8">오전 8시(08:00)</option>
-			<option value="9">오전 9시(09:00)</option>
-			<option value="10">오전 10시(10:00)</option>
-			<option value="11">오전 11시(11:00)</option>
-			<option value="12">오후 12시(12:00)</option>
-			<option value="13">오후 1시(13:00)</option>
-			<option value="14">오후 2시(14:00)</option>
-			<option value="15">오후 3시(15:00)</option>
-			<option value="16">오후 4시(16:00)</option>
-			<option value="17">오후 5시(17:00)</option>
-			<option value="18">오후 6시(18:00)</option>
-			<option value="19">오후 7시(19:00)</option>
-			<option value="20">오후 8시(20:00)</option>
-			<option value="21">오후 9시(21:00)</option>
-			<option value="22">오후 10시(22:00)</option>
-		</select>
-	</div>
-	
-	<div>
-		<label for="time">돌봄 끝나는 시간</label>
-		<select id="time" name="usage_time_start">
-			<option value="6">오전 6시(06:00)</option>
-			<option value="7">오전 7시(07:00)</option>
-			<option value="8">오전 8시(08:00)</option>
-			<option value="9">오전 9시(09:00)</option>
-			<option value="10">오전 10시(10:00)</option>
-			<option value="11">오전 11시(11:00)</option>
-			<option value="12">오후 12시(12:00)</option>
-			<option value="13">오후 1시(13:00)</option>
-			<option value="14">오후 2시(14:00)</option>
-			<option value="15">오후 3시(15:00)</option>
-			<option value="16">오후 4시(16:00)</option>
-			<option value="17">오후 5시(17:00)</option>
-			<option value="18">오후 6시(18:00)</option>
-			<option value="19">오후 7시(19:00)</option>
-			<option value="20">오후 8시(20:00)</option>
-			<option value="21">오후 9시(21:00)</option>
-			<option value="22">오후 10시(22:00)</option>
-		</select>
-	</div>
-	
+    </div>
 
-	
-<!-- 스킬 -->
-	<div class="skill">
-        <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
-        <label for="sick" id="nameTo1">투약</label>
+<!-- 돌봄 시간 -->
+	<input type="hidden" name="use_time" id="use_time">
+	<!-- 나중에 달력 api가져오기 -->
+	<div>
+		<input type="text" name="matching_time" placeholder="날짜">
+	</div>	    
+    <div>
+		<label for="time_start">돌봄 시작 시간</label>
+		<select id="time_start" name="usage_time_start" >
+            <option value="">시작 시간을 선택</option>
+			<option value="6">오전 6시(06:00)</option>
+			<option value="7">오전 7시(07:00)</option>
+			<option value="8">오전 8시(08:00)</option>
+			<option value="9">오전 9시(09:00)</option>
+			<option value="10">오전 10시(10:00)</option>
+			<option value="11">오전 11시(11:00)</option>
+			<option value="12">오후 12시(12:00)</option>
+			<option value="13">오후 1시(13:00)</option>
+			<option value="14">오후 2시(14:00)</option>
+			<option value="15">오후 3시(15:00)</option>
+			<option value="16">오후 4시(16:00)</option>
+			<option value="17">오후 5시(17:00)</option>
+			<option value="18">오후 6시(18:00)</option>
+			<option value="19">오후 7시(19:00)</option>
+			<option value="20">오후 8시(20:00)</option>
+			<option value="21">오후 9시(21:00)</option>
+			<option value="22">오후 10시(22:00)</option>
+		</select>
+    </div>
+    
+    <div>
+		<label for="time_end">돌봄 시작 시간</label>
+		<select id="time_end" name="usage_time_start">
+            <option value="">끝나는 시간을 선택</option>
+			<option value="6">오전 6시(06:00)</option>
+			<option value="7">오전 7시(07:00)</option>
+			<option value="8">오전 8시(08:00)</option>
+			<option value="9">오전 9시(09:00)</option>
+			<option value="10">오전 10시(10:00)</option>
+			<option value="11">오전 11시(11:00)</option>
+			<option value="12">오후 12시(12:00)</option>
+			<option value="13">오후 1시(13:00)</option>
+			<option value="14">오후 2시(14:00)</option>
+			<option value="15">오후 3시(15:00)</option>
+			<option value="16">오후 4시(16:00)</option>
+			<option value="17">오후 5시(17:00)</option>
+			<option value="18">오후 6시(18:00)</option>
+			<option value="19">오후 7시(19:00)</option>
+			<option value="20">오후 8시(20:00)</option>
+			<option value="21">오후 9시(21:00)</option>
+			<option value="22">오후 10시(22:00)</option>
+		</select>
+    </div>
+
+<!-- 이용할 스킬 -->	
+    <div class="skill">
+        <input type="checkbox" id="sick" value="6" name="payinfo_no" data-skills="투약">
+        <label for="sick">투약</label>
         
-        <input type="checkbox" id="old" value="2" name="skills_name" data-skills="노령견테어">
-        <label for="old" id="nameTo2">노령견케어</label>
+        <input type="checkbox" id="old" value="41" name="payinfo_no" data-skills="노령견테어">
+        <label for="old">노령견케어</label>
         
-        <input type="checkbox" id="kitten"  value="3" name="skills_name" data-skills="키튼케어">
-        <label for="kitten" id="nameTo3">키튼케어</label>
+        <input type="checkbox" id="kitten" value="42" name="payinfo_no" data-skills="키튼케어">
+        <label for="kitten" >키튼케어</label>
         
-        <input type="checkbox" id="walking"  value="4" name="skills_name" data-skills="도그워킹">
-        <label for="walking" id="nameTo4">도그워킹</label>
+        <input type="checkbox" id="walking"  value="4" name="payinfo_no" data-skills="도그워킹">
+        <label for="walking" >도그워킹</label>
         
         <div id="skills_text"></div>
     </div>
 
-<!-- 돌봄 가능 동물 종류 -->
+<!-- 이용할 동물 종류 -->
     <div class="type">
         <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
         <label for="dog">강아지</label>
@@ -153,44 +197,26 @@
         <label for="reptiles">파충류</label>        
         
         <div id="care_pet_type_text"></div>
-    </div>
+    </div><br>
 
-<!-- 돌봄 환경 -->
-    <div class="condition">
-        <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
-        <label for="apt">아파트</label>
-        
-        <input type="checkbox" id="villa" value="2" name="care_condition_name" data-condition="빌라">
-        <label for="villa">빌라</label>
-        
-        <input type="checkbox" id="oneroom"  value="3" name="care_condition_name" data-condition="원룸">
-        <label for="oneroom">원룸</label>
-        
-        <input type="checkbox" id="housing"  value="4" name="care_condition_name" data-condition="주택">
-        <label for="housing">주택</label>
-        
-        <input type="checkbox" id="baby" value="5" name="care_condition_name" data-condition="아기있음">
-        <label for="baby">아기있음</label>
-        
-        <input type="checkbox" id="smoking" value="6" name="care_condition_name" data-condition="흡연자">
-        <label for="smoking">흡연자</label>   
-        
-        <input type="checkbox" id="x" value="7" name="care_condition_name" data-condition="해당사항없음">
-        <label for="x">해당사항없음</label>   
-        
-        <div id="care_condition_text"></div>
-    </div>
+    <div id="payment"></div><br>
+    
     
     <!-- 회원 반려동물 정보 -->
     <div>
 	<c:forEach var="petDto" items="${petList}">
+	<input type="hidden" name="pet_name" value="${petDto.name}">
 		<span>반려 동물 이름 : ${petDto.name}</span><br>
 		<span>반려 동물 나이 : ${petDto.age}</span><br>
 		<span>반려 동물 종류 : ${petDto.type}</span><br>
 		<span>반려 동물 기타 : ${petDto.ect}</span><br>
 	</c:forEach>    
-    </div>
+    <h5>회원 ${id}님의 반려 동물 정보가 맞습니까?</h5>
     
+    <label for="ect">특이사항</label>
+    <textarea rows="1" cols="3" id="ect" name="ect"></textarea>
+    </div>
+  
 	<div>
 		<input type="submit" value="견적 요청">
 	</div>
