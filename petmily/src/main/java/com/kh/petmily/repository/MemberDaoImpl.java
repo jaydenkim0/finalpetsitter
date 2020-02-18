@@ -100,12 +100,6 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.idExist",id);
 	}
 
-	//회원 이미지 등록
-	@Override
-	public void member_image_regist(MemberImageDto memberImageDto) {
-		sqlSession.insert("member.member_image_regist",memberImageDto);
-	}
-
 	//펫 번호 구해오기
 	@Override
 	public int pet_no(String pet_name,String pet_age,String pet_type) {
@@ -123,7 +117,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	//해당 회원의 회원 이미지 번호 구해오기
 	@Override
-	public int member_image_no(String id) {
+	public Integer member_image_no(String id) {
 		return sqlSession.selectOne("member.member_image_no",id);
 	}
 
@@ -159,6 +153,76 @@ public class MemberDaoImpl implements MemberDao {
 		File file = new File("C:/upload/pet_image",savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
+	}
+
+	//펫정보 가지고오기
+	@Override
+	public PetDto getpet(String pet_no) {
+		return sqlSession.selectOne("member.getpet",pet_no);
+	}
+
+	//펫정보수정
+	@Override
+	public void petchange(PetDto petDto) {
+		sqlSession.update("member.petchange",petDto);
+	}
+
+	//회원이미지정보
+	@Override
+	public MemberImageDto getImageInfo(int member_image_no) {
+		return sqlSession.selectOne("member.getImageInfo",member_image_no);
+	}
+	
+	//회원 이미지 등록
+	@Override
+	public void member_image_regist(MemberImageDto memberImageDto) {
+		sqlSession.insert("member.member_image_regist",memberImageDto);
+	}
+
+	//회원이미지수정
+	@Override
+	public void member_image_change(MemberImageDto memberImage) {
+		sqlSession.update("member.member_image_change",memberImage);
+	}
+
+	//펫이미지정보
+	@Override
+	public PetImageDto getPetImageInfo(int pet_image_pet_no) {
+		return sqlSession.selectOne("member.getPetImageInfo",pet_image_pet_no);
+	}
+
+	//펫이미지수정
+	@Override
+	public void pet_image_change(PetImageDto petImage) {
+		sqlSession.update("member.pet_image_change",petImage);
+	}
+
+	//펫이미지등록
+	@Override
+	public void pet_image_regist2(PetImageDto petImageDto) {
+		sqlSession.insert("member.pet_image_regist2",petImageDto);
+	}
+
+	//펫삭제
+	@Override
+	public void pet_delete(int pet_no) {
+		sqlSession.delete("member.pet_delete",pet_no);
+	}
+
+	//펫숫자세기
+	@Override
+	public int pet_exist(String id) {
+		return sqlSession.selectOne("member.pet_exist",id);
+	}
+
+	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
+	@Override
+	public void pet_Yes(String id) {
+		sqlSession.update("member.pet_Yes",id);
+	}
+	@Override
+	public void pet_No(String id) {
+		sqlSession.update("member.pet_No",id);
 	}
 
 

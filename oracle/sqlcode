@@ -324,7 +324,7 @@ drop table account;
 -- 테이블 생성
 create table account(
 acoount_no number primary key,
-account_reser_no constraint fk_reservation_account references reservation(reservation_no) on delete set null,
+account_pay_no constraint fk_pay_account references pay(pay_no) on delete set null,
 account_date date default sysdate not null,
 account_info varchar2(30) not null
 );
@@ -344,7 +344,7 @@ drop table pay;
 -- 테이블 생성
 create table pay(
 pay_no number primary key,
-partner_order_id constraint fk_account_pay references account(acoount_no) on delete set null,
+partner_order_id constraint fk_reservation_pay references  reservation(reservation_no) on delete set null,
 partner_user_id varchar2(15) not null,
 tid varchar2(20) not null,
 cid varchar2(10) not null,
@@ -361,6 +361,8 @@ aid varchar2(25)
 drop sequence pay_no_seq;
 -- 시퀀스 번호 생성
 create sequence pay_no_seq;
+
+
 
 
 ---------------------------------------------------------------
@@ -558,7 +560,7 @@ drop table reservationPay;
 create table reservationPay(
 payinfo_no number constraint fk_payinfo_reservationPay references payinfo(payinfo_no) on delete cascade,
 pay_reservation_no number constraint fk_payinfo_reservation references reservation(reservation_no) on delete cascade,
-usage_time number default 1 not null
+usage_time number default 0
 );
 
 

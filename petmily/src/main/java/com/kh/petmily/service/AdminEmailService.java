@@ -1,6 +1,10 @@
 package com.kh.petmily.service;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
+
+import com.kh.petmily.entity.PayinfoDto;
 
 public interface AdminEmailService {
 
@@ -11,19 +15,19 @@ public interface AdminEmailService {
 	String blackListAddEmail(String id, String email, String grade, String black_content);
 
 	// 회원 -> 펫시터 견적 신청시 발송되는 이메일 
-	public String estimateEMail(String id, String email, int sitter_no) throws MessagingException;
-			// 회원에게 견적요청이 완료되었다고 발송되는 이메일 (이메일 발송시)
-			void estimateEMailGo(String id, String email, String result);		
-
+	String estimateEMail(String id, String email, int sitter_no) throws MessagingException;
+			
+	// 펫시터 -> 회원에게 견정 승인시 발송되는 이메일
+	String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException;		
+	// 펫시터가 견적을 거부하면 반려사유와 함께 취소이메일 전달
+	String NoestimateEMail(String id, String memberemail, String content);
+	
+	// 결제가 완료되면 회원과 펫시터에게 결제 완료 이메일 전달
+	String paymentApplyEMail(String id, String memberemail,
+	        int total_amount, String sitter_id, String sitteremail, List<PayinfoDto> list);
 	
 	
 	
-	
-	
-	
-	// 펫시터가 견적(승인, 취소)응답을 발송되는 이메일
-	
-	// 펫시터가 승인하게되면 회원이 결제할때 발송되는 이메일
 
 
 }
