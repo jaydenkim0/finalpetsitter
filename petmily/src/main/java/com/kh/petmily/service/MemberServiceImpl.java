@@ -275,5 +275,21 @@ public class MemberServiceImpl implements MemberService {
 	public void pet_delete(int pet_no) {
 		memberDao.pet_delete(pet_no);
 	}
+
+	//펫숫자세기
+	@Override
+	public int pet_exist(String id) {
+		return memberDao.pet_exist(id);
+	}
+
+	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
+	@Override
+	public void pet_Yes(String id) {
+		memberDao.pet_Yes(id);
+	}
+	@Override
+	public void pet_No(String id) {
+		memberDao.pet_No(id);
+	}
 	}
 

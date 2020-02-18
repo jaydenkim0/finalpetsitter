@@ -374,7 +374,8 @@ public class MemberController {
 		public String pet_regist(
 				@RequestParam String member_id,
 				@ModelAttribute PetDto petDto,
-				@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
+				@RequestParam MultipartFile pet_image,
+				HttpSession session) throws IllegalStateException,IOException{
 			memberService.pet_regist(petDto);
 			String pet_name = petDto.getName();
 			String pet_age = Integer.toString(petDto.getAge());
@@ -385,14 +386,36 @@ public class MemberController {
 			if(pet_image.isEmpty()==false) {
 				memberService.pet_image_regist(pet_no, pet_image);
 			}
+			
+			
+			//펫 마리수 세기
+			String id = (String) session.getAttribute("id");
+			int count = memberService.pet_exist(id);
+			if(count==0) {
+				memberService.pet_Yes(id);
+			}else {
+				memberService.pet_No(id);
+			}
+			
 			return "redirect:mylist";
 		}
 		
 		//펫 삭제
 		@GetMapping("/pet_delete")
 		public String pet_delete(
-				@RequestParam int pet_no) {
+				@RequestParam int pet_no,
+				HttpSession session) {
 			memberService.pet_delete(pet_no);
+			
+			//펫 마리수 세기
+			String id = (String) session.getAttribute("id");
+			int count = memberService.pet_exist(id);
+			if(count==0) {
+				memberService.pet_Yes(id);
+			}else {
+				memberService.pet_No(id);
+			}
+			
 			return "redirect:mylist";
 		}
 	}

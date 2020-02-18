@@ -97,5 +97,12 @@ public interface MemberService {
 	//펫삭제
 	void pet_delete(int pet_no);
 
+	//펫숫자세기
+	int pet_exist(String id);
+
+	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
+	void pet_Yes(String id);
+	void pet_No(String id);
+
 
 }
