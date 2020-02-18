@@ -88,7 +88,6 @@ public class PetsitterController {
 							HttpSession session,
 							Model model) {
 		String id = (String) session.getAttribute("id");
-		System.out.println(id);
 		
 		List<PetDto> petList = petsitterService.getPet(id);
 		model.addAttribute("petList", petList);
