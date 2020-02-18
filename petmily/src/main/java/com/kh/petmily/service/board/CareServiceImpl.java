@@ -20,6 +20,7 @@ import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.repository.CareDao;
 import com.kh.petmily.repository.CarePetsitterDao;
 import com.kh.petmily.repository.CareReplyImageDao;
@@ -227,6 +228,24 @@ public class CareServiceImpl implements CareService{
 	@Override
 	public int getListCount_care_board_content(String keyword) {
 		return careDao.getListCount_care_board_content(keyword);
+	}
+
+	
+	//회원이미지 가지고 오기(사진정보 1개씩 가지고 오기)
+	@Override
+	public ResponseEntity<ByteArrayResource> member_image(String member_image_member_id)
+			throws UnsupportedEncodingException, IOException {
+		MemberImageDto memberImage = careDao.getmember_image(member_image_member_id);
+		byte[] data = careDao.physicalmember_image(memberImage.getSavename());
+		ByteArrayResource resource = new ByteArrayResource(data);
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(memberImage.getFilesize())
+				.header(HttpHeaders.CONTENT_ENCODING, "UTF-8")
+				.header("Content-Disposition", "attachment;filename=\""
+						+URLEncoder.encode(memberImage.getUploadname(), "UTF-8")
+						+"\"")						
+				.body(resource);
 	}
 
 }

@@ -558,7 +558,7 @@ drop table reservationPay;
 create table reservationPay(
 payinfo_no number constraint fk_payinfo_reservationPay references payinfo(payinfo_no) on delete cascade,
 pay_reservation_no number constraint fk_payinfo_reservation references reservation(reservation_no) on delete cascade,
-usage_time number default 1 not null
+usage_time number default 0
 );
 
 

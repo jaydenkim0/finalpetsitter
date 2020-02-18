@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <head>
 
 <style>
@@ -18,6 +19,9 @@ li{
 
 <h1>돌봄게시판</h1>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+<c:set var="type" value="${param.type}"></c:set>
+<c:set var="keyword" value="${param.keyword}"></c:set> 
+<c:set var="isSearch" value="${not empty type and not empty keyword}"></c:set> 
 <c:choose>
 	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login"><button>로그인</button></a>
@@ -58,49 +62,64 @@ li{
 		<th>생성일</th>
 		<th>관리</th>
 	</tr>
-	<c:forEach var="list" items="${list }">
+	<c:forEach var="listitem" items="${list }">
 		<tr>
-			<td>${list.care_board_no }</td>
+			<td>${listitem.care_board_no }</td>
 			<c:choose>
-				<c:when test="${not empty list.care_member_id }">
-					<td>${list.care_member_id }</td>
+				<c:when test="${not empty listitem.care_member_id }">
+					<td>${listitem.care_member_id }</td>
 				</c:when>
 				<c:otherwise>
 					<td>탈퇴회원</td>
 				</c:otherwise>
 			</c:choose>
-			<td>${list.sitter_id }</td>
+			<c:choose>
+				<c:when test="${not empty listitem.sitter_id }">
+					<td>${listitem.sitter_id }</td>
+				</c:when>
+				<c:otherwise>
+					<td>탈퇴회원</td>
+				</c:otherwise>
+			</c:choose>
 			<td>
 				<c:choose>
-					<c:when test="${list.care_member_id == 'null' }">
-						${list.care_board_content }
+					<c:when test="${listitem.care_member_id == 'null' }">
+						${listitem.care_board_content }
 					</c:when>
-					<c:when test="${list.care_member_id==id || grade=='admin'||list.sitter_id==id}">
+					<c:when test="${listitem.care_member_id==id || grade=='admin'||listitem.sitter_id==id}">
 						<c:choose>
 							<c:when test="${id==null }">
-								${list.care_board_content }
+								${listitem.care_board_content }
 							</c:when>
 							<c:otherwise>
-								<a href="password?care_board_no=${list.care_board_no }">
-									${list.care_board_content }
+								<a href="password?care_board_no=${listitem.care_board_no }">
+									${listitem.care_board_content }
 								</a>						
 							</c:otherwise>
 						</c:choose>
 					</c:when>
 					<c:otherwise>
-						${list.care_board_content }
+						${listitem.care_board_content }
 					</c:otherwise>
 				</c:choose>
 			</td>
-			<td>${list.writedateWithFormat }</td>
+			<td>${listitem.writedateWithFormat }</td>
 			<td>
-			<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}">
-				<a href="delete?care_board_no=${list.care_board_no }"><button>방 삭제</button></a>
+			<c:if test="${(listitem.care_member_id==id && id!=null) || grade=='admin'}">
+				<a href="delete?care_board_no=${listitem.care_board_no }"><button>방 삭제</button></a>
 			</c:if>
 			</td>
 		</tr>
 	</c:forEach>
 </table>
+<c:if test="${fn:length(list)<1 }">
+	<hr>
+	<p>검색결과가 없습니다</p>
+</c:if>
+<c:if test="${isSearch }">
+	<hr>
+	<a href="list"><button>목록으로</button></a>
+</c:if>
 
 
 

@@ -295,4 +295,11 @@ public class CareController {
 		return careService.userIdCheck(user_id);
 	}
 	
+	//회원이미지 가져오기(src로 주소)
+	@GetMapping("/member/image")
+	public ResponseEntity<ByteArrayResource> member_image(
+			@RequestParam String member_image_member_id) throws UnsupportedEncodingException,IOException{
+		return careService.member_image(member_image_member_id);
+	}
+	
 }
