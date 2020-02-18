@@ -22,6 +22,7 @@
 		<a href="estimate?pet_sitter_no=${petsitter.pet_sitter_no}"><button>펫시터 견적 신청</button></a><br><br>		
 		
 		<span>닉네임 : ${petsitter.nick}</span><br>
+		<span>점수: ${reviewstar}</span><br>
 		<span>소개글 : ${petsitter.info}</span><br><br>
 		<span>매칭 종류 : ${petsitter.sitter_matching_type}</span>
 	</c:forEach>

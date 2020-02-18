@@ -4,10 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletMapping;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.petmily.entity.CareDto;
@@ -99,14 +105,21 @@ public class ReviewController {
 	
 	}
 	
-//-리뷰 별점불러오기
+//-리뷰 별점불러오기---------------------------------------------------------------------
 	@GetMapping("/content")
-	public String select2(@RequestParam int pet_sitter_no,Model model) throws Exception{
-		ReviewDto reviewDto = reviewDao.get(pet_sitter_no);
-		model.addAttribute("reviewDto",reviewDto);
-		return"board/review/content";
+	public String star(@RequestParam int pet_sitter_no,
+							 Model model) throws Exception{
+		
+		double star =  reviewService.star(pet_sitter_no);
+ 
+	    model.addAttribute("reviewstar",star);
+		
+		return "board/review/content";
+		
 		
 	}
+	
+	@
 }
 
 
