@@ -96,10 +96,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// step1 회원이 펫시터에게 예약에 대한 견적요청을 진행 
 	// (String id, String email, int sitter_no, String result)
 	// 회원 -> 펫시터 (펫시터 이메일로 전송)
-	//////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	// step1-1 회원이 펫시터에게 견정요청이 되면 펫시터에게 전송되는 이메일
+	//////////////////////////////////////////////////////////////////////////////////////////	
 	@Transactional 
 	@Override
 	public String estimateEMail(String id, String sitteremail, int sitter_no) throws MessagingException {			
@@ -145,8 +142,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// step2 펫시터가 견적요청을 확인하고 답변을 회원에게 보냄
 	// 회원에게 결제페이지 전송
 	// 펫시터 -> 회원 (회원 이메일로 전송)
-	//////////////////////////////////////////////////////////////////////////////////////////
-	
+	//////////////////////////////////////////////////////////////////////////////////////////	
 	@Transactional 
 	@Override
 	public String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException {			
@@ -220,15 +216,11 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	
 	
 	
-	
-	
 	//////////////////////////////////////////////////////////////////////////////////////////
 	// step3 결제가 완료되면 회원과 펫시터에게 결제완료 이메일 전달
-	//////////////////////////////////////////////////////////////////////////////////////////
-	
-	
+	//////////////////////////////////////////////////////////////////////////////////////////	
 	public String paymentApplyEMail(String id, 
-													        String memberemail,
+													        String email,
 													        int total_amount,
 													        String sitter_id, 
 													        String sitteremail,
@@ -237,7 +229,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					// 회원 메세지 객체 생성
 					SimpleMailMessage membermessage = new SimpleMailMessage ();
 					// 정보설정 : 대상정보(email, 제목, 내용)
-					String[] to = {memberemail};
+					String[] to = {email};
 					membermessage.setTo(to);		
 					membermessage.setSubject("[PetMily] "+id+" 님 신청하신 서비스 결제가 완료되었습니다");		
 					membermessage.setText(
@@ -269,6 +261,8 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 						for(PayinfoDto service : list) {
 							buffer.append(service.getPayment());
 						}					
+					buffer.append("\n ");
+					buffer.append("\n 신청한 이용시간은 "+list.get(0).getUsage_time()+"");
 					buffer.append("\n ");
 					buffer.append("\n ");
 					buffer.append("\n 문의가 있으신 경우는 문의 게시판을 이용해주시거나 ");
