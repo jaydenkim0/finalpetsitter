@@ -13,6 +13,7 @@ import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
+import com.kh.petmily.entity.PetsitterDto;
 
 public interface CareService {
 
@@ -64,9 +65,6 @@ public interface CareService {
 
 	//돌봄댓글&이미지 목록
 	List<CareReplyImageDto> replyimagelist(String care_board_no,int start, int finish);
-
-	//펫시터 아이디 존재 검사
-	int userIdCheck(String user_id);
 	
 	//돌봄이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> image(int care_image_no) 
@@ -105,5 +103,12 @@ public interface CareService {
 	//회원이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> member_image(String member_image_member_id)
 			throws UnsupportedEncodingException, IOException;
+	
+	//펫시터 아이디 존재 검사
+	int userIdCheck(String user_id);
+
+	//펫시터아이디제공
+	List<String> offer_id();
+
 
 }

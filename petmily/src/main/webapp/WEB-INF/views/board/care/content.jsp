@@ -164,9 +164,14 @@
     
     //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
     window.onload = loadEditor;
-    function no_image() {
-    	$("#member_image").hide();
-     }
+</script>
+<script>
+function no_image1(){
+	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
+function no_image2(){
+	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
 </script>
 <style>
   .mother {
@@ -206,7 +211,7 @@
 		<td>${list.care_board_no }</td>
 	</tr>
 	<tr>
-		<th>생성자</th>
+		<th rowspan="2">생성자</th>
 			<c:choose>
 				<c:when test="${not empty list.care_member_id }">
 					<td>${list.care_member_id }</td>
@@ -215,6 +220,11 @@
 					<td>탈퇴회원</td>
 				</c:otherwise>
 			</c:choose>
+	</tr>
+	<tr>
+		<td>
+			<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${list.care_member_id }" style="max-width: 15%; height: auto;" onerror="no_image1()" id="1"/>
+		</td>
 	</tr>
 	<tr>
 		<th>펫시터</th>
@@ -275,7 +285,7 @@
 			<c:choose>
 				<c:when test="${not empty replyimagelist.care_reply_writer }">
 					<th align="left">
-						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;" onerror="no_image()" id="member_image">
+						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
 						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
 					</th>
 				</c:when>

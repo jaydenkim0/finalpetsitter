@@ -19,10 +19,16 @@
 		});
 	});
 </script>
+<script>
+function no_image1(){
+	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
+function no_image2(){
+	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
+</script>
 <h1>아이디 : ${mylist.id }</h1><br>
-<c:if test="${member_image_no>0 }">
-	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image">
-</c:if>
+	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="2">
 <h3>이름 : ${mylist.name }</h3>
 <h3>닉네임 : ${mylist.nick }</h3>
 <h3>전화번호 : ${mylist.phone }</h3>
@@ -42,15 +48,7 @@
 	<c:forEach var="pet"  items="${mylistpet }">
 	<br><hr>
 		<h3>이름 : ${pet.name }</h3>
-			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
-			<script>
-			function no_image() {
-				$("#pet_image").hide();
-			 }
-			 function no_image2(){
-				 $("#member_image").hide();
-			 }
-			</script>
+			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;" onerror="no_image1()" id="1">
 		<h3>나이 : ${pet.age }</h3>
 		<h3>동물종 : ${pet.type }</h3>
 		<h3>${pet.ect }</h3>

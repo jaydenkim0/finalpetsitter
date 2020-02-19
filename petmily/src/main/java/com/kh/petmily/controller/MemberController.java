@@ -392,9 +392,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";
@@ -411,9 +411,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";
