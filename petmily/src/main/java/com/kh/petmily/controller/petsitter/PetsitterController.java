@@ -4,6 +4,7 @@ package com.kh.petmily.controller.petsitter;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -33,6 +37,9 @@ public class PetsitterController {
 	private PetsitterService petsitterService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private AdminEmailService aemailService;
+	
 	
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
@@ -89,23 +96,35 @@ public class PetsitterController {
 	}
 	
 	//견적 요청 페이지
+
 	@GetMapping("/estimate")
+
 	public String estimate(@RequestParam int pet_sitter_no, 
 							HttpSession session,
-							Model model) {
+							Model model) {		
 		String id = (String) session.getAttribute("id");
 		
 		List<PetDto> petList = petsitterService.getPet(id);
 		model.addAttribute("petList", petList)
-				.addAttribute("pet_sitter_no", pet_sitter_no);
+				.addAttribute("reservation_sitter_no", pet_sitter_no);
 		return "petsitter/estimate";
 	}
 	
 	@PostMapping("/estimate")
-	public String estimate(@ModelAttribute ReservationVO reservationVO) {
+	@ResponseBody()
+	public String estimate(@ModelAttribute ReservationVO reservationVO) throws MessagingException {
 		petsitterService.reservation(reservationVO);
-		//회원 예약 조회 할 수 있는 페이지로 보내기(나중에 변경 할것!!!)
-		return "redirect:../";
+		PetsitterVO petsitterVO = petsitterService.get(reservationVO.getReservation_sitter_no());
+		
+		// 이메일 보내기
+		String id = reservationVO.getMember_id();
+		int sitter_no = reservationVO.getReservation_sitter_no();
+		String sitteremail = petsitterVO.getEmail();
+		
+		System.out.println(sitteremail);
+		
+		String result = aemailService.estimateEMail(id, sitteremail, sitter_no);
+		return result;
 	}
 	
 	//예약(견적)확인 페이지
