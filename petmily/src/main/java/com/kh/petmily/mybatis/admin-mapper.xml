@@ -135,18 +135,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			member 와 pet_sitter inner join으로 view 만들어 놓음 			
 		-->
 		<select id="petsitterList"  resultType="petsitterVO">
-			select * from petsitter where grade = 'petsitter' and sitter_status = '정상' order by pet_sitter_no desc
+			select * from petsitter where grade = 'petsitter' and sitter_status = '정상' order by sitter_joindate desc
 		</select>
 		
 		<!-- 휴면 펫시터 리스트 -->
 		<select id="petsleepList"  resultType="petsitterVO">	
-			select * from petsitter where grade = 'petsitter' and sitter_status = '휴면' order by pet_sitter_no desc
+			select * from petsitter where grade = 'petsitter' and sitter_status = '휴면' order by sitter_joindate desc
 		</select>
 		
 		
 		<!-- 펫시터 신청한 회원 리스트 -->
 	 	<select id="petsitterApplyList"  resultType="petsitterVO">	
-			select * from petsitter where grade = 'member' order by pet_sitter_no desc
+			select * from petsitter where grade = 'member' order by sitter_joindate desc
 		</select> 
 		
 		
@@ -551,6 +551,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		
 		
+	<!-- 예약 리스트 -->
+		<!-- 예약 리스트 -->
+			<select id="getAccountreservationList" resultType="accountVO" parameterType="Map">
+				select * from (
+					select rownum rn, A.* from(
+						select * from reservationlist 
+							<if test="searchOption != null and keyword != null">
+								where ${searchOption} like '%'||#{keyword}||'%'
+							</if>
+						order by reservation_no desc
+						)A
+					) where rn between #{start} and #{end}	
+			</select>
+			<!-- 예약 페이징 카운트 -->
+			<select id="countAriclegetAccount" resultType="int" parameterType="Map">
+				select count(*) from reservationlist
+					<if test="searchOption != null and keyword != null">
+						where ${searchOption} like '%'||#{keyword}||'%'
+					</if>			
+				order by reservation_no desc
+			</select>	
+			
+		<!-- 예약 디테일 페이지 정보 -->
+		<select id="reservationstatusdetail" parameterType="int" resultType="AccountVO">
+			select * from reservationlist where reservation_no = #{reservation_no}
+		</select>
+		<!-- 결제 서비스 정보 -->
+		<select id="payinfoName" parameterType="int" resultType="payinfoDto">
+			select * from reservationAll where reservation_no = #{reservation_no}
+		</select>
+
+		
+		
+		
 		
 		
 	<!-- 정산관리 -->
@@ -575,7 +609,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<delete id="accountoptiondelete" parameterType="int">
 			delete payinfo where payinfo_no = #{payinfo_no}
 		</delete>
-
+		<!-- 가격 옵션 수정 -->
+		<update id="accountoptionupdate" parameterType="payinfoDto">
+			update payinfo set 	
+			payment = #{payment}
+			where payinfo_no = #{payinfo_no}
+		</update>
 	
 </mapper>
 

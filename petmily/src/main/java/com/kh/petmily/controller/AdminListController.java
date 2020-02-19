@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.QnaVO;
@@ -189,7 +190,34 @@ public class AdminListController {
 		return "admin/blackreport";
 	}
 	
+	//////////////////////////////////////////////////////////////////
 	
+	// 예약 현황
+	@GetMapping("/reservationstatus")
+	public String reservationstatus(@RequestParam(defaultValue = "reservation_no", required = false) String searchOption,
+			  @RequestParam(defaultValue = "", required = false) String keyword,
+			  @RequestParam(defaultValue = "1", required = false) int curPage,										
+			  Model model) {
+		// 레코드의 갯수 계산
+		int count = adminService.countAriclegetAccount(searchOption, keyword);		
+		// 페이지 나누기 관련 처리
+		NaviVO navi = new NaviVO(count, curPage);	
+		int start = navi.getPageBegin();
+		int end = navi.getPageEnd();		
+		// 리스트 불러오기
+		model.addAttribute("list", (List<AccountVO>) adminService.getAccountreservationList(start, end, searchOption, keyword))
+				  .addAttribute("count", count)
+				  .addAttribute("searchOption", searchOption)
+				  .addAttribute("keyword", keyword)
+				  .addAttribute("navi", navi);		
+
+		System.out.println((List<AccountVO>) adminService.getAccountreservationList(start, end, searchOption, keyword));
+		return "admin/reservationstatus";
+	}
+
+	
+	
+	//////////////////////////////////////////////////////////////////
 	
 	
 }
