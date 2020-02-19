@@ -166,6 +166,14 @@ public class PetsitterServiceImpl implements PetsitterService {
 		reservationDao.registPay(reservationVO.getPayinfo_no(),reservationPayDto);
 		
 	}
+
+
+
+	@Override
+	public PetsitterVO get(int pet_sitter_no) {
+		PetsitterVO petsitterVO = petsitterDao.get(pet_sitter_no);
+		return petsitterVO;
+	}
 	
 	
 
