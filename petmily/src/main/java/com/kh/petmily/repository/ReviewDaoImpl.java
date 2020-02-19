@@ -50,6 +50,11 @@ public class ReviewDaoImpl implements ReviewDao{
 		sqlSession.update("review.pointplus", reviewDto)	;
 	}
 
+	@Override
+	public double star(int pet_sitter_no) {
+		return sqlSession.selectOne("review.star", pet_sitter_no);		
+	}
+
 		
 	}
 	
