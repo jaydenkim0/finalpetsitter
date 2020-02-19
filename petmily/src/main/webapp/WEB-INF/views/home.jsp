@@ -15,6 +15,11 @@
 <p>로그인 아이디 : ${id} <br>
 로그인 등급 : ${grade} <br><p>
 <c:if test="${not empty id }">
+<c:if test="${param.blackcount>0 }">
+	<h3>
+		${id }님은 경고 횟수 ${param.blackcount } 블랙리스트 회원입니다.
+	</h3>
+</c:if>
 	<a href="member/logout">
 			<input type="button" value="로그아웃">
 	</a>

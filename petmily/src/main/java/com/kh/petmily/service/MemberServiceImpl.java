@@ -292,5 +292,17 @@ public class MemberServiceImpl implements MemberService {
 	public void pet_No(String id) {
 		memberDao.pet_No(id);
 	}
+
+	//블랙리스트인지 검사
+	@Override
+	public int isBlack(String id) {
+		return memberDao.isBlack(id);
+	}
+
+	//경고횟순
+	@Override
+	public int blackcount(String id) {
+		return memberDao.blackcount(id);
+	}
 	}
 

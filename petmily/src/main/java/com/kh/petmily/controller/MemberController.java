@@ -112,7 +112,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
+	public String login(
+			@ModelAttribute MemberDto memberDto, 
+			HttpSession session,
+			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
 		
@@ -125,6 +128,18 @@ public class MemberController {
 		session.setAttribute("grade", find.getGrade());
 		String id = find.getId();
 		memberService.updatelastlogin(id);
+		
+		//블랙리스트인지 검사
+		int isBlack = memberService.isBlack(id);
+		
+		int blackcount;
+		if(isBlack>0) {
+			//경고횟수
+			blackcount = memberService.blackcount(id);
+		}else {
+			blackcount = 0;
+		}
+		model.addAttribute("blackcount",blackcount);
 		return "redirect:/";
 		}
 	}

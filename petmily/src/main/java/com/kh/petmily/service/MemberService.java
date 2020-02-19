@@ -102,5 +102,11 @@ public interface MemberService {
 	void pet_Yes(String id);
 	void pet_No(String id);
 
+	//블랙리스트인지 검사
+	int isBlack(String id);
+
+	//경고횟수
+	int blackcount(String id);
+
 
 }

@@ -226,5 +226,17 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.update("member.pet_No",id);
 	}
 
+	//블랙리스트인지 검사
+	@Override
+	public int isBlack(String id) {
+		return sqlSession.selectOne("member.isBlack",id);
+	}
+
+	//경고횟수
+	@Override
+	public int blackcount(String id) {
+		return sqlSession.selectOne("member.blackcount",id);
+	}
+
 
 }
