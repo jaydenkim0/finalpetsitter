@@ -20,8 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PetDto;
+
+import com.kh.petmily.entity.ReviewDto;
+
 import com.kh.petmily.service.AdminEmailService;
+
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.service.board.ReviewService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
@@ -39,8 +44,12 @@ public class PetsitterController {
 	@Autowired
 	private AdminService adminService;
 	@Autowired
+
+	private ReviewService reviewService;
+
 	private AdminEmailService aemailService;
 	
+
 	
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
@@ -58,8 +67,9 @@ public class PetsitterController {
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
 						@RequestParam(defaultValue="", required = false) String areaKeyword,
-						@RequestParam(defaultValue = "1", required = false) int curPage,										
-									Model model) {
+						@RequestParam(defaultValue = "1", required = false) int curPage,
+																                            Model model) {
+		
 		// 레코드의 갯수 계산
 		int count = petsitterService.countlocation(cityKeyword, areaKeyword);
 		
@@ -75,15 +85,22 @@ public class PetsitterController {
 				  .addAttribute("cityKeyword", cityKeyword)
 				  .addAttribute("areaKeyword", areaKeyword)
 				  .addAttribute("navi", navi);
+		
 		return "petsitter/list";
 	}
 	
 	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
-	public String content(@RequestParam int pet_sitter_no, Model model) {
+	public String content(@RequestParam int pet_sitter_no,
+									Model model) throws Exception {
+		
+		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
+		double star = reviewService.star(pet_sitter_no);
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		model.addAttribute("petsitterList", petsitterList)
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
+		model.addAttribute("reviewstar",star);
+		model.addAttribute("list",list);
 		return "petsitter/content";
 	}
 	

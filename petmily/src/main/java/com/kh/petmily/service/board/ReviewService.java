@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.petmily.entity.FaqDto;
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.repository.ReviewDao;
 import com.kh.petmily.vo.FaqVO;
 
 public interface ReviewService {
@@ -17,14 +18,21 @@ public interface ReviewService {
 	
 	// 리뷰 작성시 포인트 업
 	void pointplus(ReviewDto reviewDto);
+		// TODO Auto-generated method stub
+	double star(int pet_sitter_no);
+		
+	//리뷰 별점 
+	
+
+		
+		
+	}
+	
+
 
 
 	
-	// 게시글 조회
-//	List<ReviewDto> listSearch(int review_sitter_no);
-
-	
 	
 
 
-}
+
