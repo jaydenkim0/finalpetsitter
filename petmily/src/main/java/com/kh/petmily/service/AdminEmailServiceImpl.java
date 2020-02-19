@@ -99,7 +99,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	//////////////////////////////////////////////////////////////////////////////////////////	
 
 	@Override
-	public String estimateEMail(String id, String sitteremail, int sitter_no) throws MessagingException {			
+	public String estimateEMail(String id, String sitteremail, int sitter_no, int reservation_no) throws MessagingException {			
 		try {
 					MimeMessage message = sender.createMimeMessage();	
 					MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");				
@@ -114,6 +114,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 											.path("/petsitter/confirm")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
+											.queryParam("reservation_no", reservation_no)
 											.toUriString();					
 					
 					StringBuffer buffer = new StringBuffer();
