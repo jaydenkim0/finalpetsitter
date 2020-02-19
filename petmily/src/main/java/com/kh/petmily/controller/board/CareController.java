@@ -26,6 +26,7 @@ import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
+import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.service.board.CareService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -122,6 +123,9 @@ public class CareController {
 			Model model) {
 		String id = (String) session.getAttribute("id");
 		model.addAttribute("id",id);
+		
+		List<String> list = careService.offer_id();
+		model.addAttribute("list",list);
 		return "board/care/write";
 	}
 	
@@ -286,13 +290,6 @@ public class CareController {
 			@RequestParam String care_reply_no) {
 		careReplyDto.setCare_reply_no(Integer.parseInt(care_reply_no));
 		careService.reply_delete(careReplyDto);
-	}
-	
-	//펫시터 아이디 존재 검사
-	@RequestMapping(value="idCheck",method=RequestMethod.GET)
-	@ResponseBody
-	public int idCheck(@RequestParam("userId") String user_id) {
-		return careService.userIdCheck(user_id);
 	}
 	
 	//회원이미지 가져오기(src로 주소)

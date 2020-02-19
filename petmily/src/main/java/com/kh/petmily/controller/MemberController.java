@@ -26,6 +26,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -111,7 +112,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
+	public String login(
+			@ModelAttribute MemberDto memberDto, 
+			HttpSession session,
+			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
 		
@@ -124,6 +128,18 @@ public class MemberController {
 		session.setAttribute("grade", find.getGrade());
 		String id = find.getId();
 		memberService.updatelastlogin(id);
+		
+		//블랙리스트인지 검사
+		int isBlack = memberService.isBlack(id);
+		
+		int blackcount;
+		if(isBlack>0) {
+			//경고횟수
+			blackcount = memberService.blackcount(id);
+		}else {
+			blackcount = 0;
+		}
+		model.addAttribute("blackcount",blackcount);
 		return "redirect:/";
 		}
 	}
@@ -257,7 +273,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylist";
@@ -310,7 +326,7 @@ public class MemberController {
 			model.addAttribute("pet_no",pet_no);
 			
 			//동물정보 가져오기
-			PetDto pet = memberService.getpet(pet_no);
+			PetImagePetDto pet = memberService.getpet(pet_no);
 			model.addAttribute("pet",pet);
 			return "member/petchange";
 		}
@@ -328,7 +344,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylistchange";
@@ -392,9 +408,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";
@@ -411,9 +427,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";
