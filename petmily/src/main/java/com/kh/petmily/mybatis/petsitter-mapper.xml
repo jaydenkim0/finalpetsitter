@@ -140,7 +140,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 펫시터 단일 조회 -->
 	<select id="get" parameterType="int" resultType="petsitterVO">
-		select * from petsitter where pet_sitter_no=#{pet_sitter_no};
+		select * from petsitter where pet_sitter_no=#{pet_sitter_no}
 	</select>
 <!-- 펫시터 전체 조회 -->
 	<select id="getListAll" resultType="petsitterVO">
