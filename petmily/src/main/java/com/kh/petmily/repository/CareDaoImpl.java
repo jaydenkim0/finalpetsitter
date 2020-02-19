@@ -14,6 +14,7 @@ import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.entity.MemberImageDto;
+import com.kh.petmily.entity.PetsitterDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -108,12 +109,6 @@ public class CareDaoImpl implements CareDao{
 		sqlSession.insert("care.care_image_regist",careImageDto);
 	}
 
-	//펫시터 아이디 존재 검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return sqlSession.selectOne("care.userIdCheck",user_id);
-	}
-
 	//돌봄이미지 가지고 오기(1장씩 요청)
 	@Override
 	public CareReplyImageDto getImage(int care_reply_no) {
@@ -177,5 +172,18 @@ public class CareDaoImpl implements CareDao{
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
+	
+	//펫시터 아이디 존재 검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("care.userIdCheck",user_id);
+	}
+
+	//펫시터 아이디 제공
+	@Override
+	public List<String> offer_id() {
+		return sqlSession.selectList("care.offer_id");
+	}
+
 
 }

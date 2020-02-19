@@ -16,6 +16,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +46,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	//반려동물조회
 	@Override
-	public List<PetDto> mylistpet(String id){
+	public List<PetImagePetDto> mylistpet(String id){
 		return sqlSession.selectList("member.mylistpet",id);
 	}
 
@@ -157,7 +158,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	//펫정보 가지고오기
 	@Override
-	public PetDto getpet(String pet_no) {
+	public PetImagePetDto getpet(String pet_no) {
 		return sqlSession.selectOne("member.getpet",pet_no);
 	}
 
@@ -223,6 +224,18 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void pet_No(String id) {
 		sqlSession.update("member.pet_No",id);
+	}
+
+	//블랙리스트인지 검사
+	@Override
+	public int isBlack(String id) {
+		return sqlSession.selectOne("member.isBlack",id);
+	}
+
+	//경고횟수
+	@Override
+	public int blackcount(String id) {
+		return sqlSession.selectOne("member.blackcount",id);
 	}
 
 
