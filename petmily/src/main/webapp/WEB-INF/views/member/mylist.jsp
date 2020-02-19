@@ -20,9 +20,6 @@
 	});
 </script>
 <script>
-function no_image1(){
-	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
-}
 function no_image2(){
 	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 }
@@ -48,7 +45,14 @@ function no_image2(){
 	<c:forEach var="pet"  items="${mylistpet }">
 	<br><hr>
 		<h3>이름 : ${pet.name }</h3>
-			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;" onerror="no_image1()" id="1">
+		<c:choose>
+			<c:when test="${pet.pet_image_no<1 }">
+				<img src="/petmily/resources/img/기본프로필.jpeg">
+			</c:when>
+			<c:otherwise>
+				<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;">			
+			</c:otherwise>
+		</c:choose>
 		<h3>나이 : ${pet.age }</h3>
 		<h3>동물종 : ${pet.type }</h3>
 		<h3>${pet.ect }</h3>

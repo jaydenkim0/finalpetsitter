@@ -19,6 +19,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -49,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	//반려동물조회
 	@Override
-	public List<PetDto> mylistpet(String id){
+	public List<PetImagePetDto> mylistpet(String id){
 		return memberDao.mylistpet(id);
 	}
 	

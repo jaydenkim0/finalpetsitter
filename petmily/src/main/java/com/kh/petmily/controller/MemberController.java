@@ -26,6 +26,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -257,7 +258,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylist";
@@ -328,7 +329,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylistchange";

@@ -16,6 +16,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,7 +46,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	//반려동물조회
 	@Override
-	public List<PetDto> mylistpet(String id){
+	public List<PetImagePetDto> mylistpet(String id){
 		return sqlSession.selectList("member.mylistpet",id);
 	}
 

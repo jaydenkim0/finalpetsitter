@@ -55,8 +55,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 반려동물조회 -->
-	<select id="mylistpet" parameterType="String" resultType="petDto">
-		select * from pet where member_id=#{id}
+	<select id="mylistpet" parameterType="String" resultType="petImagePetDto">
+		select 
+			P.pet_no,
+			P.member_id,
+			P.name,
+			P.age,
+			P.type,
+			P.ect,
+			I.pet_image_no,
+			I.savename,
+			I.filetype,
+			I.filesize,
+			I.uploadname
+		from 
+			pet P
+			 	left outer join pet_image I
+				on P.pet_no=I.pet_image_pet_no
+		where 
+			P.member_id=#{id}
 	</select>
 	
 	<!-- 최종로그인 일시 업데이트 -->
