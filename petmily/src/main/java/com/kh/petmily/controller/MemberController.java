@@ -311,7 +311,7 @@ public class MemberController {
 			model.addAttribute("pet_no",pet_no);
 			
 			//동물정보 가져오기
-			PetDto pet = memberService.getpet(pet_no);
+			PetImagePetDto pet = memberService.getpet(pet_no);
 			model.addAttribute("pet",pet);
 			return "member/petchange";
 		}

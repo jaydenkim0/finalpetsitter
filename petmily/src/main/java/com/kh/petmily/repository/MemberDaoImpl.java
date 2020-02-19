@@ -158,7 +158,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	//펫정보 가지고오기
 	@Override
-	public PetDto getpet(String pet_no) {
+	public PetImagePetDto getpet(String pet_no) {
 		return sqlSession.selectOne("member.getpet",pet_no);
 	}
 

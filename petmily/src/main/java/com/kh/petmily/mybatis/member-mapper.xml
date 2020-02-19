@@ -178,8 +178,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펫정보 가지고오기 -->
-	<select id="getpet" parameterType="String" resultType="petDto">
-		select * from pet where pet_no=#{pet_no}
+	<select id="getpet" parameterType="String" resultType="petImagePetDto">			
+		select 
+			P.pet_no,
+			P.member_id,
+			P.name,
+			P.age,
+			P.type,
+			P.ect,
+			I.pet_image_no,
+			I.savename,
+			I.filetype,
+			I.filesize,
+			I.uploadname
+		from 
+			pet P
+			 	left outer join pet_image I
+				on P.pet_no=I.pet_image_pet_no
+		where 
+			P.pet_no=#{pet_no}
 	</select>
 	
 	<!-- 펫정보수정 -->

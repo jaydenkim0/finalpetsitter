@@ -164,7 +164,7 @@ public class MemberServiceImpl implements MemberService {
 
 	//펫정보 가지고오기
 	@Override
-	public PetDto getpet(String pet_no) {
+	public PetImagePetDto getpet(String pet_no) {
 		return memberDao.getpet(pet_no);
 	}
 

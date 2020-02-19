@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 <script>
 function no_image() {
@@ -16,7 +17,14 @@ function no_image() {
 		<tr>
 			<th>이미지</th>
 			<td>
+			<c:choose>
+				<c:when test="${pet.pet_image_no<1 }">
+					<img src="/petmily/resources/img/기본프로필.jpeg">
+				</c:when>
+				<c:otherwise>	
 					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 25%; height: auto;" onerror="no_image()" id="pet_image">
+				</c:otherwise>
+			</c:choose>
 				<input type="file" name="pet_image" multiple accept="image/*">
 			</td>
 		</tr>
