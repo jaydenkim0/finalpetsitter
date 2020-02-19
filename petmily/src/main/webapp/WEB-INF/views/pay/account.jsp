@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <form action=account method="post">
-	<input type="text" name="partner_order_id" value="32" placeholder="주문번호"><br><br>
-	<input type="text" name="partner_user_id" value="103" placeholder="사용자번호"><br><br>
+	<input type="text" name="partner_order_id" value="44" placeholder="주문번호"><br><br>
+	<input type="text" name="partner_user_id" value="122" placeholder="사용자번호"><br><br>
 	<input type="text" name="item_name" value="죠르디이" placeholder="상품명"><br><br>
 	<input type="text" name="quantity" value="1" placeholder="수량"><br><br>
 	<input type="text" name="total_amount" value="9900" placeholder="총 가격"><br><br>
