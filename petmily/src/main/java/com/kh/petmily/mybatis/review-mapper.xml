@@ -71,11 +71,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 리뷰 점수 불러오기 -->
 	<select id="star" parameterType="int" resultType="double">
 	  select 
-	  AVG(review_star) 
-	  REVIEWSTAR
-	  from 
+	  NVL (AVG(review_star),0)
+	     from 
 	  REVIEWSTAR
 	  where pet_sitter_no = #{pet_sitter_no}
+	  
    
 	</select>
  	

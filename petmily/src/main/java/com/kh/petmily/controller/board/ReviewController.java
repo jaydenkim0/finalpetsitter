@@ -60,7 +60,7 @@ public class ReviewController {
 //		reviewService.insert(reviewDto);
 		reviewDao.insert(reviewDto);
 		reviewService.pointplus(reviewDto);
-		return "redirect:/board/review/list";
+		return "redirect:/petsitter/list";
 	}
 
 //-리뷰 목록----------------------------------------------------------------------------	
@@ -106,21 +106,22 @@ public class ReviewController {
 	}
 	
 //-리뷰 별점불러오기---------------------------------------------------------------------
-	@GetMapping("/content")
-	public String star(@RequestParam int pet_sitter_no,
-							 Model model) throws Exception{
-		
-		double star =  reviewService.star(pet_sitter_no);
- 
-	    model.addAttribute("reviewstar",star);
-		
-		return "board/review/content";
+//	@GetMapping("/content")
+//	public String star(@RequestParam int pet_sitter_no,
+//							 Model model) throws Exception{
+//		
+//		double star =  reviewService.star(pet_sitter_no);
+// 
+//	    model.addAttribute("reviewstar",star);
+//		
+//		return "board/review/content";
 		
 		
 	}
 	
-	@
-}
+
+				
+
 
 
 	

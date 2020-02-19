@@ -1,10 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style></style>
+    <script src="https://cdn.jsdelivr.net/gh/hiphop5782/js/star/hakademy-star.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+        	Hakademy.PointManager.factory(".star-wrap");
+        });
+    </script>
+</head>
+<body>
 <h1>펫시터 상세 페이지</h1>
 
 <!-- 소개 이미지 출력 -->
+
 <div>
 <h3>소개이미지</h3>
 	<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
@@ -13,18 +29,23 @@
 </div>
 
 
+
 <!-- 펫시터 정보 출력 -->
 <div>
 <c:forEach var="petsitterGetList" items="${petsitterList}">
+ 
 	<!-- 펫시터 정보 -->
-	<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}">
+	<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+	
+
 		<!-- 펫시터 견적 신청 버튼 -->
 		<a href="estimate?pet_sitter_no=${petsitter.pet_sitter_no}"><button>펫시터 견적 신청</button></a><br><br>		
-		
 		<span>닉네임 : ${petsitter.nick}</span><br>
-		<span>점수: ${reviewstar}</span><br>
+		<span>별점: <fmt:formatNumber value="${reviewstar}" pattern=".00"/>개<br></span>
+		<div class="star-wrap" data-limit="3" data-unitsize="40" data-point="${reviewstar}" data-image="http://www.sysout.co.kr/file/image/288" data-readonly></div><br>
 		<span>소개글 : ${petsitter.info}</span><br><br>
 		<span>매칭 종류 : ${petsitter.sitter_matching_type}</span>
+	 
 	</c:forEach>
 	
 	<!-- 펫시터 반려동물 정보 -->
@@ -48,7 +69,42 @@
 	<c:forEach var="location" items="${petsitterGetList.locationDto}">
 		<span>${location.city} ${location.area}</span><br>
 	</c:forEach>
+	<!-- 펫시터 리뷰 목록 -->
 
+
+
+<h1>리뷰</h1>
+<table border="0" width="40%" height="40%">
+<tr>
+<!-- 	<th>글번호</th> -->
+	<th>작성자</th>
+<!-- 	<th>시터번호</th> -->
+	<th>제목</th>
+	<th>내용</th>
+	<th>별점</th>
+<!-- 	<th>작성일</th> -->
 	
-</c:forEach>
+	
+</tr>
+<c:forEach var="reviewDto" items="${list}">
+<tr>
+<%-- 	<td>${reviewDto.review_no}</td> --%>
+	<td align="center">${reviewDto.review_writer}</td>
+<%-- 	<td align="center">${reviewDto.review_sitter_no}</td> --%>
+	<td align="center">${reviewDto.review_title}</td>
+	<td align="center">${reviewDto.review_content}</td>
+	<td align="center">${reviewDto.review_star}</td>
+<%-- 	<td align="center">${reviewDto.review_wdate}</td> --%>
+	
+	</tr>
+	</c:forEach>
+	</table>
+ <a href="/petmily/board/review/insert">
+	<button type="button" id="btndelete">리뷰쓰기</button>
+	</a>
+	
+	</c:forEach>
+	</body>
+	</html>
+
 </div>
