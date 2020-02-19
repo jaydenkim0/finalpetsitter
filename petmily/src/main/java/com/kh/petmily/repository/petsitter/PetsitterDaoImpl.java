@@ -72,5 +72,11 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	public List<PetDto> getPet(String id) {
 		return sqlSession.selectList("member.mylistpet", id);
 	}
+
+	@Override
+	public PetsitterVO get(int pet_sitter_no) {
+		PetsitterVO petsitterVO = sqlSession.selectOne("petsitter.get", pet_sitter_no);
+		return petsitterVO;
+	}
 	
 }

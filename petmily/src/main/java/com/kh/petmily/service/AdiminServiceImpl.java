@@ -23,10 +23,8 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
-import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -54,6 +52,34 @@ public class AdiminServiceImpl implements AdminService {
 	public int admimTotal() {
 		return adminDao.getAtotal();
 	}
+
+	// 어제 가입한 회원의 수
+	@Override
+	public int memberJoinall() {
+		return adminDao.memberJoinall();
+	}
+	// 어제 펫시터 신청한 수
+	@Override
+	public int petsitterApplyup() {
+		return adminDao.petsitterApplyup();
+	}
+	// 어제 등록된 신고게시물의 수
+	@Override
+	public int blackqnacount() {
+		return adminDao.blackqnacount();
+	}
+	// 어제 신고된 회원의 수
+	@Override
+	public int blacklistmembercount() {	
+		return adminDao.blacklistmembercount();
+	}
+	// 어제 신고된 펫시터의 수
+	@Override
+	public int blacklistpetsittercount() {		
+		return adminDao.blacklistpetsittercount();
+	}
+
+	
 	
 	
 	// petsitter 리스트

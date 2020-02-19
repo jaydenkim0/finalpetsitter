@@ -14,6 +14,7 @@ public interface PetsitterDao {
 	List<PetsitterVO> getListAll();//펫시터 전체 조회
 	List<PetsitterVO> getList(int pet_sitter_no);//펫시터 상세 정보 조회
 	List<PetsitterPetsVO> getPetList(int pet_sitter_no);//펫 시터 펫 조회
+	PetsitterVO get(int pet_sitter_no);//펫시터 단일 조회
 	
 	// 리스트 및 검색
 	List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword);

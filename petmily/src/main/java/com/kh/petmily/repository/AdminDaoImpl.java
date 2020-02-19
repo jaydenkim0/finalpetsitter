@@ -23,9 +23,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -50,6 +48,42 @@ public class AdminDaoImpl implements AdminDao {
 	public int getAtotal() {
 		return sqlSession.selectOne("admin.admincount");
 	}
+	// 어제 가입한 회원의 수
+	@Override
+	public int memberJoinall() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.memberJoinall");
+	}
+	// 어제 펫시터 신청한 수
+	@Override
+	public int petsitterApplyup() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.petsitterApplyup");
+	}
+	// 어제 등록된 신고게시물의 수
+	@Override
+	public int blackqnacount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.blackqnacount");
+	}
+	// 어제 신고된 회원의 수
+	@Override
+	public int blacklistmembercount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.blacklistmembercount");
+	}
+	// 어제 신고된 펫시터의 수
+	@Override
+	public int blacklistpetsittercount() {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectOne("admin.blacklistpetsittercount");
+	}
+
+
+
+
+	
+	
 	
 
 	// 펫시터 리스트
@@ -515,8 +549,6 @@ public class AdminDaoImpl implements AdminDao {
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countAriclegetBlackreport", param);
 	}
-
-
 
 
 

@@ -109,18 +109,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where id=#{id}
 	</select>
 	
-	<!-- 회원 이미지 등록 -->
-	<insert id="member_image_regist" parameterType="memberImageDto">
-		insert into member_image values(
-			member_image_no_seq.nextval,
-			#{member_image_member_id},
-			#{savename},
-			#{filetype},
-			#{filesize},
-			#{uploadname}
-		)
-	</insert>
-	
 	<!-- 펫 번호 구해오기 -->
 	<select id="pet_no" resultType="int" parameterType="map">
 		select pet_no from(
@@ -158,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펫번호로 펫 이미지 번호 구하기 -->
-	<select id="pet_image_no">
+	<select id="pet_image_no" parameterType="int" resultType="int">
 		select pet_image_no from pet_image where pet_image_pet_no=#{pet_no}
 	</select>
 	
@@ -172,6 +160,95 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			pet_image_no=#{pet_image_no}
 	</select>
 	
+	<!-- 펫정보 가지고오기 -->
+	<select id="getpet" parameterType="String" resultType="petDto">
+		select * from pet where pet_no=#{pet_no}
+	</select>
+	
+	<!-- 펫정보수정 -->
+	<update id="petchange" parameterType="petDto">
+		update pet set
+				name = #{name},
+				age= #{age},
+				type = #{type},
+				ect = #{ect}		
+				where pet_no = #{pet_no}	
+	</update>
+	
+	<!-- 회원이미지정보 -->
+	<select id="getImageInfo" resultType="memberImageDto" parameterType="int">
+		select * from member_image where member_image_no=#{member_image_no}
+	</select>
+	
+	<!-- 회원 이미지 등록 -->
+	<insert id="member_image_regist" parameterType="memberImageDto">
+		insert into member_image values(
+			member_image_no_seq.nextval,
+			#{member_image_member_id},
+			#{savename},
+			#{filetype},
+			#{filesize},
+			#{uploadname}
+		)
+	</insert>
+	
+	<!-- 회원 이미지 수정 -->	
+	<update id="member_image_change" parameterType="memberImageDto">
+		update member_image set
+			filetype=#{filetype},
+			filesize=#{filesize},
+			uploadname=#{uploadname}
+			where member_image_no=#{member_image_no}
+	</update>
+	
+	<!-- 펫이미지정보 -->
+	<select id="getPetImageInfo" resultType="petImageDto" parameterType="int">
+		select * from pet_image where pet_image_pet_no=#{pet_image_pet_no}
+	</select>
+	
+	<!-- 펫이미지수정 -->
+	<update id="pet_image_change" parameterType="petImageDto">
+		update 
+			pet_image 
+		set
+			filetype=#{filetype},
+			filesize=#{filesize},
+			uploadname=#{uploadname}
+		where 
+			pet_image_no=#{pet_image_no}
+	</update>
+	
+	<!-- 펫이미지등록(추가) -->
+	<insert id="pet_image_regist2" parameterType="petImageDto">
+		insert into 
+			pet_image
+		values(
+			pet_no_seq.nextval,
+			member_id=#{member_id},
+			name=#{name},
+			age=#{age},
+			type=#{type},
+			ect=#{ect}
+		)
+	</insert>
+	
+	<!-- 펫 삭제 -->
+	<delete id="pet_delete" parameterType="int">
+		delete from pet where pet_no=#{pet_no}
+	</delete>
+	
+	<!-- 펫숫자세기 -->
+	<select id="pet_exist" parameterType="String" resultType="int">
+		select count(*) from pet where member_id=#{id}
+	</select>
+	
+	<!-- 펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기 -->
+	<update id="pet_Yes" parameterType="String">
+		update member set pets='예' where id=#{id}
+	</update>
+	<update id="pet_No" parameterType="String">
+		update member set pets='아니오' where id=#{id}
+	</update>
 </mapper>
 
 

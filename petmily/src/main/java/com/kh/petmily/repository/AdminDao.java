@@ -12,13 +12,10 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.vo.FaqVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -209,6 +206,17 @@ public interface AdminDao {
 	List<QnaVO> getBlackreport(int start, int end, String searchOption, String keyword);
 	// 신고게시판 카운트
 	int countAriclegetBlackreport(String searchOption, String keyword);
+
+	// 어제 가입한 회원의 수
+	int memberJoinall();
+	// 어제 펫시터 신청한 수
+	int petsitterApplyup();
+	// 어제 등록된 신고게시물의 수
+	int blackqnacount();
+	// 어제 신고된 회원의 수
+	int blacklistmembercount();
+	// 어제 신고된 펫시터의 수
+	int blacklistpetsittercount();
 
 	
 
