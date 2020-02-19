@@ -119,7 +119,9 @@
 		namespaces 에서 tx 추가		
 	 -->
 	<tx:annotation-driven/>
-
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbcpSource"></property>
+		</bean>
 		
 	<!-- 
 		스프링 스케쥴링 활성화
