@@ -120,7 +120,7 @@ public class MemberController {
 		MemberDto find = memberService.login(memberDto);
 		
 		if(find == null) { //로그인 실패
-		return"redirect:/login?error"; 
+		return"redirect:/member/login?error"; 
 		
 		}
 		else { //로그인 성공
