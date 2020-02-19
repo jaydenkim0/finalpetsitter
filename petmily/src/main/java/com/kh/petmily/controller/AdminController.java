@@ -24,18 +24,14 @@ import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
-import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
-import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
-
-import oracle.jdbc.proxy.annotation.GetProxy;
 
 
 @Controller

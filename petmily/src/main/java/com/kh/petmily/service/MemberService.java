@@ -13,7 +13,9 @@ import java.util.List;
 
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 
 public interface MemberService {
 	
@@ -53,11 +55,9 @@ public interface MemberService {
 	//회원이미지 등록
 	void member_image_regist(String id, MultipartFile member_image) throws IllegalStateException, IOException;
 
-	//펫이미지 등록
-	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
 
 	//해당 회원의 회원 이미지 번호 구해오기
-	int member_image_no(String id);
+	Integer member_image_no(String id);
 
 	//회원이미지 가지고 오기(1장씩 요청)
 	ResponseEntity<ByteArrayResource> member_image(int member_image_no) 
@@ -72,5 +72,37 @@ public interface MemberService {
 
 	//펫번호 가지고오기
 	int pet_no(String pet_name,String pet_age, String pet_type);
+
+	//펫정보 가지고오기
+	PetDto getpet(String pet_no);
+
+	//펫정보수정
+	void petchange(PetDto petDto);
+
+	//회원이미지정보
+	MemberImageDto getImageInfo(int member_image_no);
+
+	//회원이미지수정
+	void member_image_change(MemberImageDto memberImageDto, MultipartFile member_image) throws IllegalStateException, IOException;
+
+	//펫이미지정보
+	PetImageDto getPetImageInfo(int pet_image_pet_no);
+
+	//펫이미지수정
+	void pet_image_change(PetImageDto petImageDto, MultipartFile pet_image) throws IllegalStateException, IOException;
+
+	//펫이미지 등록
+	void pet_image_regist(int pet_no, MultipartFile pet_image) throws IllegalStateException, IOException;
+
+	//펫삭제
+	void pet_delete(int pet_no);
+
+	//펫숫자세기
+	int pet_exist(String id);
+
+	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
+	void pet_Yes(String id);
+	void pet_No(String id);
+
 
 }

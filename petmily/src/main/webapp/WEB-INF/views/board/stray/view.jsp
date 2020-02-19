@@ -141,7 +141,6 @@
 					<td style="color: red">말머리 : ${strayVO.stray_title}</td>
 				</c:otherwise>
 			</c:choose>
-
 		</tr>
 
 		<tr>
@@ -207,8 +206,8 @@
 										<tr>
 											<th colspan="2" align="right">
 												<button class="reply_view_btn">수정</button>
-												<button class="reply_edit_btn">완료</button> <a
-												href="replyDelete?reply_no=${reply.reply_no}&origin=${strayVO.stray_no}">
+												<button class="reply_edit_btn">완료</button> 
+												<a href="replyDelete?reply_no=${reply.reply_no}&origin=${strayVO.stray_no}">
 													<button class="replyDelete_submit">삭제</button>
 											</a>
 											</th>
@@ -233,25 +232,24 @@
 						id="reply_writer" name="reply_writer" value="${sessionScope.id}"
 						readonly>
 					<textarea name="content" requistray placeholder="내용 입력" rows="4"
-						cols="100"></textarea>
+						cols="100"></textarea><br>
 					<input type="submit" value="등록">
 				</form>
 			</td>
 		</tr>
-
+	
 		<tr>
-			<td align="right"><c:if
-					test="${sessionScope.id eq strayVO.stray_writer || grade eq 'admin'}">
+			<td align="right">
+			<c:if test="${sessionScope.id eq strayVO.stray_writer || grade eq 'admin'}">
 					<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
-					<a
-						href="${context}/board/stray/update?stray_no=${strayVO.stray_no}">
+					<a href="${context}/board/stray/update?stray_no=${strayVO.stray_no}">
 						<button type="button" id="btnupdate">게시글 수정</button>
 					</a>
-					<a
-						href="${context}/board/stray/delete?stray_no=${strayVO.stray_no}">
+					<a href="${context}/board/stray/delete?stray_no=${strayVO.stray_no}">
 						<button type="button" id="btndelete">게시글 삭제</button>
 					</a>
-				</c:if> <a href="${context}/board/stray/list">
+				</c:if> 
+				<a href="${context}/board/stray/list">
 					<button type="button">게시판 목록</button>
 			</a></td>
 		</tr>

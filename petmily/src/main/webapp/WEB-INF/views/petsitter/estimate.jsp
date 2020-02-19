@@ -60,7 +60,7 @@ $(function(){
      var end = $("#time_end option:selected").val();
      var use_time_cal = end-start;
   	
-     $("#use_time").val(use_time_cal);
+     $("#usage_time").val(use_time_cal);
 
      //총 시간 * 10.000원
      total = use_time_cal *10000;
@@ -83,14 +83,48 @@ $(function(){
      $("#payment").empty();
      $("#payment").append("총 "+total+" 원");
  }
+ 
+//이메일
+	$(".estimate1").submit(function(e) {
+		// 이벤트 정지
+		e.preventDefault();				
+		// 버튼 속성 및 내용 변경
+		$(".sendemail").prop("disabled", true);
+		$(".sendemail").val("견적서 발송중");				
+		
+		var url = $(this).attr("action"); 
+		var method = $(this).attr("method");
+		var data = $(this).serialize();
+		
+			$.ajax({
+				url:url,
+				type:"post",
+				data:data,
+				success:function(resp){
+					console.log(resp);
+					if(resp == "success"){
+						alert("견적서 발송 완료");								
+						location.href = '${pageContext.request.contextPath}/';
+					}
+					else{
+						alert("견적서 발송 실패");								
+						$(".sendemail").prop("disabled", false);
+						$(".sendemail").val("견적 요청");
+					}
+				}
+			});
+		});					
+ 
+ 
+ 
  });
 </script>
     
 <h1>펫시터 견적 신청 페이지</h1>
 
-<form action="estimate" method="post" enctype="multipart/form-data">
+<form class="estimate1" action="estimate" method="post" enctype="multipart/form-data">
 <!-- 펫시터 아이디 -->
-	<input type="hidden" name="reservation_sitter_no" value="${pet_sitter_no}">
+	<input type="hidden" name="reservation_sitter_no" value="${reservation_sitter_no}">
 	
 <!-- 회원 아이디 -->
 	<input type="hidden" name="member_id" value="${id}">
@@ -106,7 +140,7 @@ $(function(){
     </div>
 
 <!-- 돌봄 시간 -->
-	<input type="hidden" name="use_time" id="use_time">
+	<input type="hidden" name="usage_time" id="usage_time">
 	<!-- 나중에 달력 api가져오기 -->
 	<div>
 		<input type="text" name="matching_time" placeholder="날짜">
@@ -218,6 +252,6 @@ $(function(){
     </div>
   
 	<div>
-		<input type="submit" value="견적 요청">
+		<input class="sendemail" type="submit" value="견적 요청">
 	</div>
 </form>
