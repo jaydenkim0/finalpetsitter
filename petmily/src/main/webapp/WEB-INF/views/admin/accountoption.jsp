@@ -3,11 +3,29 @@
 	
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
+	 <style>
+	 a button{
+	 	background: #ad3a11;
+	    padding: 7px 14px;
+	    color: #fff;
+	    border: 0;
+	    font-weight: bold;
+	 }
+	  a:hover button{
+	 	background: rgba(173, 58, 17, 0.78);
+	 }
+	 h3{
+	 	padding:20px;
+	 }	 
+	 </style>
+	
 	<h3>가격 옵션 설정</h3>
 	
 	<a href="${pageContext.request.contextPath}/admin/account"><button> 정산 페이지로 이동</button></a>
 	
+	
 	<h3> 가격 리스트 </h3>
+	<hr>
 		<c:forEach var="accountList" items="${accountlist}" >
 			<h5>가격명 : ${accountList.payname}</h5>
 			<h5>가격 : ${accountList.payment} 원 </h5>		
@@ -21,12 +39,15 @@
 		
 		
 	<h3> 수수료 리스트 </h3>
+	<hr>
 		<c:forEach var="accountList" items="${feesList}" >
-			<h5>수수료명 : ${accountList.payname}</h5>
+			<div style="background: #bbbbbb;">
+			<h5 >수수료명 : ${accountList.payname}</h5>
 			<h5>수수료 : ${accountList.payment} % </h5>		
 				<a href="${pageContext.request.contextPath}/admin/accountoptiondelete?payinfo_no=${accountList.payinfo_no}">
 				<button> 삭제</button>
 			</a>
+			</div>
 			<hr>	
 		</c:forEach>
 	

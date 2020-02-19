@@ -111,7 +111,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					String url = ServletUriComponentsBuilder
 											.fromCurrentContextPath()
 											.port(8080)
-											.path("/petsitter/estimate")
+											.path("/petsitter/confirm")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
 											.toUriString();					
@@ -157,7 +157,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					String url = ServletUriComponentsBuilder
 											.fromCurrentContextPath()
 											.port(8080)
-											.path("/petsitter/pament")
+											.path("/petsitter/paymentlogin")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
 											.toUriString();					

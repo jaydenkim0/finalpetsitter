@@ -207,6 +207,17 @@ public interface AdminDao {
 	// 신고게시판 카운트
 	int countAriclegetBlackreport(String searchOption, String keyword);
 
+	// 어제 가입한 회원의 수
+	int memberJoinall();
+	// 어제 펫시터 신청한 수
+	int petsitterApplyup();
+	// 어제 등록된 신고게시물의 수
+	int blackqnacount();
+	// 어제 신고된 회원의 수
+	int blacklistmembercount();
+	// 어제 신고된 펫시터의 수
+	int blacklistpetsittercount();
+
 	
 
 

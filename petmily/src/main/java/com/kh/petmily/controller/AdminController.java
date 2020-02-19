@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,12 +61,25 @@ public class AdminController {
 				  .addAttribute("member", adminService.memberTotal() -  
 						  adminService.petsitterTotal() - adminService.admimTotal())		
 				  .addAttribute("ptotal", adminService.petsitterTotal())		
-				  .addAttribute("atotal", adminService.admimTotal());	
+				  .addAttribute("atotal", adminService.admimTotal())
+				  .addAttribute("mlist", adminService.memberJoinall())
+				  .addAttribute("slist", adminService.petsitterApplyup())
+				  .addAttribute("mlist+slist", adminService.memberJoinall() + 
+						  adminService.petsitterApplyup())
+				  .addAttribute("listBqna", adminService.blackqnacount())
+				  .addAttribute("listBm", adminService.blacklistmembercount())
+				  .addAttribute("listBs", adminService.blacklistpetsittercount());	
 		return "admin/registInfo";
 	}
 	
 	//////////////////////////////////////////////////////////////////
 	
+	// 예약 현황
+	@GetMapping("/reservationstatus")
+	public String reservationstatus() {
+		
+		return "admin/reservationstatus";
+	}
 
 	
 	// 회원 디테일 페이지 연결
@@ -102,6 +116,7 @@ public class AdminController {
 	// 펫시터 신청한 회원 거부 기능 ( 펫시터전체삭제 기능 )
 	@PostMapping("/negative")
 	@ResponseBody
+	@Transactional
 	public String negative(
 		@ModelAttribute PetsitterVO petsitterVO) {
 		// petsitter 신청한 회원의 이메일로 거부내용의 이메일을 발송
@@ -281,6 +296,7 @@ public class AdminController {
 				// 펫시터 블랙리스트 등록 메소드(이메일 전송)
 				@PostMapping("/sitter_blackListpage")
 				@ResponseBody
+				@Transactional
 				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
 						@RequestParam String black_content) {		
 					adminService.blackSitter(petsitterDto, black_content);
@@ -302,6 +318,7 @@ public class AdminController {
 				// 회원 블랙리스트 등록 메소드 (이메일 전송)
 				@PostMapping("/member_blackListpage")
 				@ResponseBody
+				@Transactional
 				public String member_blackListpage(@RequestParam String id,
 						 								@RequestParam String black_content) {						
 					MemberVO blackmember =adminService.getMemberdetail(id);
