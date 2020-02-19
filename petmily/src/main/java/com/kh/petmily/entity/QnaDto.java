@@ -19,5 +19,9 @@ public class QnaDto {
 	private String qna_head;//질문 게시판 제목
 	private String qna_content; // 질문 게시판 내용
 	private String wdate;
+	//-------------------------------------
+	private int groupno, //원글 번호
+	superno, //원글에 대한 순서 (답글 포함)
+	depth; //답글 계층
 	
 }

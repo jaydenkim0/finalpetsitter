@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import com.kh.petmily.vo.QnaVO;
 
@@ -20,6 +23,11 @@ public class QnaDaoImpl implements QnaDao{
 	//게시글 작성
 	public void create(QnaVO qnaVO) throws Exception {
 		sqlSession.insert("qna.qnainsert",qnaVO);
+	}
+	//게시글 답글 작성
+	@Override
+	public void createReply(QnaVO qnaVO) {
+		sqlSession.insert("qna.qnaReplyinsert",qnaVO);
 	}
 
 	@Override
