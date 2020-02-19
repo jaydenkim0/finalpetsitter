@@ -255,7 +255,7 @@
 					<tr>
 						<th>나이</th>
 						<td>
-							<input type="text" name="pet_age" class="petage">
+							<input type="number" name="pet_age" class="petage">
 							<p class="petagecheck">숫자를 입력해주세요</p>
 						</td>
 					</tr>

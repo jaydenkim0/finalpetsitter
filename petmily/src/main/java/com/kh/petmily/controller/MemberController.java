@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.MemberDto;
+import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -149,34 +151,6 @@ public class MemberController {
 		int pet_image_no = memberService.pet_image_no(pet_no);
 		return memberService.pet_image(pet_image_no);
 	}
-	
-	//내정보보기
-	@GetMapping("/mylist")
-	public String mylist(
-			HttpSession session,
-			Model model) {
-		
-		String id = (String) session.getAttribute("id");
-		
-		MemberDto list = memberService.mylist(id);
-		model.addAttribute("mylist",list);
-		
-		//해당 회원의 회원 이미지 번호 구해오기
-		int member_image_no = memberService.member_image_no(id);
-		model.addAttribute("member_image_no",member_image_no);
-				
-		List<PetDto> petlist = memberService.mylistpet(id);
-		model.addAttribute("mylistpet",petlist);
-		
-		return "member/mylist";
-	}
-
-
-//	//내정보수정
-//	@GetMapping("/mylistchange")
-//		public String mylistchange() {
-//			return "member/mylistchange";
-//		}
 
 
 	@GetMapping("/send")
@@ -267,19 +241,26 @@ public class MemberController {
 			return "/";
 		}
 		
-		// 회원정보수정
-		@GetMapping("/mylistchange")	
-		public String edit(@RequestParam String id, Model model) {
-			MemberDto dto = memberService.mylist(id);			
-			model.addAttribute("member", dto);
-			System.out.println(dto);
-			return "member/mylistchange";
-		}
 		
-		@PostMapping("/mylistchange")
-		public String edit(@ModelAttribute MemberDto memberDto) {			
-			memberService.mylistchange(memberDto);
-			return "redirect:mylist";
+		//내정보보기
+		@GetMapping("/mylist")
+		public String mylist(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			return "member/mylist";
 		}
 		
 		//아이디중복검사
@@ -320,6 +301,123 @@ public class MemberController {
 				return "redirect:/";
 			}
 		}
+		
+		//반려동물 정보수정 페이지 연결
+		@GetMapping("/petchange")
+		public String petchange(
+				@RequestParam String pet_no,
+				Model model) {
+			model.addAttribute("pet_no",pet_no);
+			
+			//동물정보 가져오기
+			PetDto pet = memberService.getpet(pet_no);
+			model.addAttribute("pet",pet);
+			return "member/petchange";
+		}
+		
+		// 회원정보수정
+		@GetMapping("/mylistchange")	
+		public String edit(@RequestParam String id, Model model) {
+			MemberDto dto = memberService.mylist(id);			
+			model.addAttribute("member", dto);
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			return "member/mylistchange";
+		}
+		
+		@PostMapping("/mylistchange")
+		public String edit(
+				@ModelAttribute MemberDto memberDto,
+				@RequestParam MultipartFile member_image,
+				@RequestParam int member_image_no) throws IllegalStateException, IOException {		
+			
+			if(member_image.isEmpty()==false) {
+				MemberImageDto memberImageDto = memberService.getImageInfo(member_image_no);
+				memberService.member_image_change(memberImageDto,member_image);
+			}
+			
+			memberService.mylistchange(memberDto);
+			
+			
+			return "redirect:mylist";
+		}
+		
+		//반려동물 정보수정 제출 후 연결
+		@PostMapping("/petchange")
+		public String petchange(
+				@RequestParam String pet_no,
+				@ModelAttribute PetDto petDto,
+				@RequestParam MultipartFile pet_image) throws IllegalStateException, IOException {
+			memberService.petchange(petDto);
+			
+			int pet_image_pet_no = Integer.parseInt(pet_no);
+			
+			if(pet_image.isEmpty()==false) {
+				PetImageDto petImageDto = memberService.getPetImageInfo(pet_image_pet_no);
+				memberService.pet_image_change(petImageDto,pet_image);
+			}
+			
+			return "redirect:mylist";
+		}
+		
+		//펫 추가 
+		@PostMapping("/pet_regist")
+		public String pet_regist(
+				@RequestParam String member_id,
+				@ModelAttribute PetDto petDto,
+				@RequestParam MultipartFile pet_image,
+				HttpSession session) throws IllegalStateException,IOException{
+			memberService.pet_regist(petDto);
+			String pet_name = petDto.getName();
+			String pet_age = Integer.toString(petDto.getAge());
+			String pet_type = petDto.getType();
+			int pet_no = memberService.pet_no(pet_name,pet_age,pet_type);
+			
+			//이미지등록
+			if(pet_image.isEmpty()==false) {
+				memberService.pet_image_regist(pet_no, pet_image);
+			}
+			
+			
+			//펫 마리수 세기
+			String id = (String) session.getAttribute("id");
+			int count = memberService.pet_exist(id);
+			if(count==0) {
+				memberService.pet_Yes(id);
+			}else {
+				memberService.pet_No(id);
+			}
+			
+			return "redirect:mylist";
+		}
+		
+		//펫 삭제
+		@GetMapping("/pet_delete")
+		public String pet_delete(
+				@RequestParam int pet_no,
+				HttpSession session) {
+			memberService.pet_delete(pet_no);
+			
+			//펫 마리수 세기
+			String id = (String) session.getAttribute("id");
+			int count = memberService.pet_exist(id);
+			if(count==0) {
+				memberService.pet_Yes(id);
+			}else {
+				memberService.pet_No(id);
+			}
+			
+			return "redirect:mylist";
+		}
 	}
 
 
@@ -327,4 +425,5 @@ public class MemberController {
 
 	
 	
+
 

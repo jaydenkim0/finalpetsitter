@@ -98,11 +98,9 @@ public class FaqController {
 	//게시글 상세내용 조회
 	@GetMapping("/view")
 	public String view(@RequestParam int faq_no, 
-			@RequestParam List<MultipartFile> faq_file,
 			Model model)throws Exception{
 		model.addAttribute("faqVO", faqService.read(faq_no));
 		model.addAttribute("faqImageList",faqService.faqImageList(faq_no));
-		model.addAttribute("faq_file",faq_file);
 		return "board/faq/view";
 	}
 	//게시글 이미지 가져오기(사진정보 한장씩)

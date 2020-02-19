@@ -63,5 +63,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		     <typeAlias type="com.kh.petmily.vo.petsitter.PetsitterLocationSearchVO" alias="petsitterLocationSearchVO"/>	
 		     <typeAlias type="com.kh.petmily.entity.PayinfoDto" alias="payinfoDto"/>
 		     <typeAlias type="com.kh.petmily.entity.ReservationPayDto" alias="reservationPayDto"/>
+		     <typeAlias type="com.kh.petmily.entity.PayDto" alias="payDto"/>
 	</typeAliases>
 </configuration>
