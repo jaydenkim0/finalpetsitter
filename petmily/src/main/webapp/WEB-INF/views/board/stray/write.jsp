@@ -77,8 +77,8 @@ textarea[name=faq_content] {
 				<th><select name="stray_title">
 						<option>임시보호</option>
 						<option>입양관련</option>
-						<option>반려동물을 찾습니다</option>
-						<option>주인을 찾습니다</option>
+						<option>반려동물찾습니다</option>
+						<option>주인찾습니다</option>
 						<option>완료글</option>
 				</select>
 			</tr>

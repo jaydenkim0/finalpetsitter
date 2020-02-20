@@ -23,6 +23,7 @@ public class StrayVO {
 	private String stray_content;
 	private String wdate;
 	private String writedate; 
+	private int replycount;
 	
 	//-------------------------------------
 	private int groupno, //원글 번호

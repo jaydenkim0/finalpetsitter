@@ -31,4 +31,10 @@ public class StrayReplyDaoImpl implements StrayReplyDao {
 		sqlSession.delete("stray.replyDelete",strayReplyVO);
 	}
 
+	@Override
+	public void replyCal(StrayReplyVO strayReplyVO) {
+		sqlSession.update("stray.replyCal",strayReplyVO);
+		
+	}
+
 }
