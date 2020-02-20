@@ -21,6 +21,10 @@ public interface ReviewDao {
 	
 	// 리뷰작성시 포인트 플러스
 	void pointplus(ReviewDto reviewDto);
+
+	
+	// 별점평균 불러오기
+	double star(int pet_sitter_no);
 	
 	
 	

@@ -8,6 +8,7 @@ import com.kh.petmily.entity.CareImageDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.entity.MemberImageDto;
+import com.kh.petmily.entity.PetsitterDto;
 
 public interface CareDao {
 
@@ -85,5 +86,8 @@ public interface CareDao {
 
 	//회원이미지 실제로 가지고오기(1장씩 요청)
 	byte[] physicalmember_image(String savename) throws IOException;
+
+	//펫시터 아이디 제공
+	List<String> offer_id();
 
 }

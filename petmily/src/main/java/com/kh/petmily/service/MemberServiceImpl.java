@@ -19,6 +19,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -49,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	//반려동물조회
 	@Override
-	public List<PetDto> mylistpet(String id){
+	public List<PetImagePetDto> mylistpet(String id){
 		return memberDao.mylistpet(id);
 	}
 	
@@ -163,7 +164,7 @@ public class MemberServiceImpl implements MemberService {
 
 	//펫정보 가지고오기
 	@Override
-	public PetDto getpet(String pet_no) {
+	public PetImagePetDto getpet(String pet_no) {
 		return memberDao.getpet(pet_no);
 	}
 
@@ -290,6 +291,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void pet_No(String id) {
 		memberDao.pet_No(id);
+	}
+
+	//블랙리스트인지 검사
+	@Override
+	public int isBlack(String id) {
+		return memberDao.isBlack(id);
+	}
+
+	//경고횟순
+	@Override
+	public int blackcount(String id) {
+		return memberDao.blackcount(id);
 	}
 	}
 

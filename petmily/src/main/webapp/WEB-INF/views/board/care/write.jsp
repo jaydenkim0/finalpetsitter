@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(function(){
+		
 		$("#user_id").blur(function(){
 			var user_id = $("#user_id").val();
 			
@@ -34,29 +36,7 @@
 	    }
 	}
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-        //해야할일 : id에 input 이벤트가 발생하면 ajax로 xml을 불러와서 검사
-        $(function(){
-            $("input[name=care_sitter_id]").blur(function(){
-                $.ajax({
-                    url:"./id_check.xml",
-                    dataType:"xml",
-                    success:function(resp){
-                        var result = false;
-                        $(resp).find("id").each(function(){
-                            if($(this).text() === $("input[name=id]").val()){
-                                result = true;
-                            }
-                        });
-                        if(!result){
-                            $("input[name=id]").next().text("이미 사용중인 아이디입니다");
-                        }
-                    }
-                });
-            });
-        });
-    </script>
+
 </head>
 
 <body>
@@ -70,7 +50,12 @@
 		<tr>
 			<th>펫시터 아이디</th>
 			<td>
-				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id">
+				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()">
+				<datalist id="depList">
+					<c:forEach var="data" items="${list }">
+						<option value="${data }">${data }</option>
+					</c:forEach>
+				</datalist>
 				<div class="id_check"></div>
 			</td>
 		</tr>

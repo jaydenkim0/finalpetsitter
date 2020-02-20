@@ -21,6 +21,7 @@ import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.entity.MemberImageDto;
+import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.repository.CareDao;
 import com.kh.petmily.repository.CarePetsitterDao;
 import com.kh.petmily.repository.CareReplyImageDao;
@@ -142,12 +143,6 @@ public class CareServiceImpl implements CareService{
 		return careReplyImageDao.replyimagelist(care_board_no,start,finish);
 	}
 
-	//펫시터 아이디 존재 검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return careDao.userIdCheck(user_id);
-	}
-
 	//돌봄이미지 가지고 오기(사진정보 1개씩 가지고 오기
 	@Override
 	public ResponseEntity<ByteArrayResource> image(int care_image_no) throws UnsupportedEncodingException, IOException {
@@ -246,6 +241,18 @@ public class CareServiceImpl implements CareService{
 						+URLEncoder.encode(memberImage.getUploadname(), "UTF-8")
 						+"\"")						
 				.body(resource);
+	}
+	
+	//펫시터 아이디 존재 검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return careDao.userIdCheck(user_id);
+	}
+
+	//펫시터 아이디 제공
+	@Override
+	public List<String> offer_id() {
+		return careDao.offer_id();
 	}
 
 }
