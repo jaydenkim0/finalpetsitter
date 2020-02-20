@@ -35,4 +35,10 @@ public class StrayReplyServiceImpl implements StrayReplyService{
 		strayReplyDao.replyDelete(strayReplyVO);
 	}
 
+	@Override
+	public void replyCal(StrayReplyVO strayReplyVO) {
+		strayReplyDao.replyCal(strayReplyVO);
+		
+	}
+
 }
