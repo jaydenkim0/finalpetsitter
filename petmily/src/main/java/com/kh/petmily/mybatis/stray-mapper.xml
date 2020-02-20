@@ -14,7 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		stray_title,
 		stray_head,
 		stray_content,
-		wdate
+		wdate,
+		superno,
+		groupno,
+		depth
 		)
 		values (
 		#{stray_no},
@@ -22,7 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{stray_title},
 		#{stray_head},
 		#{stray_content},
-		sysdate
+		sysdate,
+		#{superno},
+		#{groupno},
+		#{depth}
 		)
 	</insert>
 
@@ -101,12 +107,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="straylistAll" parameterType="map" resultType="StrayVO">
 		select*from (
 		select rownum as rn, A.* from(
-		select
-		stray_no,stray_title,stray_head,stray_content,wdate,stray_writer
-		from stray_pet
+		select * from stray_pet
 		where
 		${type} like '%'||#{keyword}||'%'
-		order by stray_no desc, wdate desc
+		connect by prior stray_no = superno
+		start with superno=0
+		order siblings by groupno desc,  stray_no asc, wdate desc
 		) A
 		)
 		where rn between #{start} and #{finish}
@@ -116,10 +122,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getList" resultType="StrayVO" parameterType="map">
 		select*from (
 		select rownum as rn, A.* from(
-		select*
-		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
-		from stray_pet
-		order by stray_no desc, wdate desc
+		select* from stray_pet
+		connect by prior stray_no = superno
+		start with superno=0
+		order siblings by groupno desc, stray_no asc, wdate desc
 		) A
 		) where rn between #{start}
 		and #{finish}

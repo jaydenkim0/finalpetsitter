@@ -67,6 +67,10 @@ textarea[name=faq_content] {
 
 	<h2>문의글 작성</h2>
 	<form method="post" action="insert" enctype="multipart/form-data">
+		<c:if test="${param.superno>0}">
+		<input type="hidden" name="superno" value="${param.superno}">
+		</c:if>
+		
 		<input type="hidden" name="qna_writer" value="${sessionScope.id}">
 		<table border="1" width="70%">
 			<tr>
@@ -80,7 +84,11 @@ textarea[name=faq_content] {
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input name="qna_head" id="qna_head" size="80"
+				<td>
+				<c:if test="${param.superno > 0}">
+				<input type="text" name="qna_head" value="RE:" id="qna_head" size="75">
+				</c:if>
+				<input name="qna_head" id="qna_head" size="80"
 					placeholder="글 제목 입력"></td>
 			</tr>
 			<tr>

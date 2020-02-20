@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.entity.QnaFileDto;

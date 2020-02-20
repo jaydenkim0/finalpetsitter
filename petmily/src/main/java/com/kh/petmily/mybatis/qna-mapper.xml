@@ -14,7 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		qna_title,
 		qna_head,
 		qna_content,
-		wdate
+		wdate,
+		superno,
+		groupno,
+		depth
 		)
 		values (
 		#{qna_no},
@@ -22,7 +25,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{qna_title},
 		#{qna_head},
 		#{qna_content},
-		sysdate
+		sysdate,
+		#{superno},
+		#{groupno},
+		#{depth}
 		)
 	</insert>
 
@@ -31,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select qna_no_seq.nextval
 		from dual
 	</select>
+		
 
 	<!-- 이미지 등록 -->
 	<insert id="qnafile" parameterType="qnafileDto">
@@ -101,12 +108,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="qnalistAll" parameterType="map" resultType="QnaVO">
 		select*from (
 		select rownum as rn, A.* from(
-		select
-		qna_no,qna_title,qna_head,qna_content,wdate,qna_writer
-		from Qna
+		select * from Qna
 		where
 		${type} like '%'||#{keyword}||'%'
-		order by qna_no desc, wdate desc
+		connect by prior qna_no = superno
+		start with superno=0
+		order siblings by groupno desc, qna_no asc, wdate desc
 		) A
 		)
 		where rn between #{start} and #{finish}
@@ -115,14 +122,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="QnaVO" parameterType="map">
 		select*from (
-		select rownum as rn, A.* from(
-		select*
-		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
-		from Qna
-		order by qna_no desc, wdate desc
-		) A
-		) where rn between #{start}
-		and #{finish}
+			select rownum as rn, A.* from(
+				select*from Qna
+				connect by prior qna_no = superno
+				start with superno=0
+				order siblings by groupno desc, qna_no asc, wdate desc
+			) A
+		) where rn between #{start} and #{finish}
 	</select>
 
 

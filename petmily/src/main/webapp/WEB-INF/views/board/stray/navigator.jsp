@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <!-- 네비게이터(navigator) -->
-<!-- 
-	반드시 받아야 하는 데이터 : type, keyword, pno, count, navsize, pagesize
- -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 

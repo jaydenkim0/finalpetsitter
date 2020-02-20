@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -41,14 +46,24 @@ public class QnaServiceImpl implements QnaService{
 	//게시글 작성
 	@Override
 	public void create(QnaVO qnaVO) throws Exception {
-		String qna_title = qnaVO.getQna_title();
-		String qna_head = qnaVO.getQna_head();
-		String qna_content = qnaVO.getQna_content();
-		String qna_writer = qnaVO.getQna_writer();
-		qnaVO.setQna_title(qna_title);
-		qnaVO.setQna_head(qna_head);
-		qnaVO.setQna_content(qna_content);
-		qnaVO.setQna_writer(qna_writer);
+		int qna_no = qnaVO.getQna_no();
+		
+		int superno = qnaVO.getSuperno();
+		int groupno = qnaVO.getGroupno();
+		int depth = qnaVO.getDepth();
+		
+		//새글 : 글번호와 그룹번호는 동일, 부모글 0번 , 차수 0
+		if(qnaVO.getSuperno() == 0) {
+			qnaVO.setQna_no(qna_no);
+			qnaVO.setGroupno(qna_no);
+		}
+		//답글 : 그룹번호는 부모 그룹 번호, superno = 부모글 번호, 차수 = 부모글 + 1
+		else {
+			qnaVO.setQna_no(qna_no);
+			qnaVO.setGroupno(groupno);
+			qnaVO.setSuperno(superno);
+			qnaVO.setDepth(depth+1);
+		}
 		qnaDao.create(qnaVO);
 	}
 	//게시글 상세보기
@@ -66,7 +81,7 @@ public class QnaServiceImpl implements QnaService{
 	public void delete(int qna_no) throws Exception {
 		qnaDao.delete(qna_no);
 	}
-	//게시글//게시글 삭제 검색목록 조회
+	//게시글 삭제 검색목록 조회
 	@Override
 	public List<QnaVO> listAll(String type, String keyword, int start, int finish) throws Exception {
 		return qnaDao.listAll(type,keyword,start, finish);

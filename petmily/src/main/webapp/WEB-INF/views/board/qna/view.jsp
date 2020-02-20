@@ -232,6 +232,8 @@
 	
 	<a href="${context}/board/qna/list">
 	<button type="button">문의게시판 목록</button></a>
+	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+	<button type="button">답글쓰기</button></a>
 	</td>
 	</tr>
 	</table>
