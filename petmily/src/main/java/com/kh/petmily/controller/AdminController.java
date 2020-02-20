@@ -97,14 +97,8 @@ public class AdminController {
 		 		  .addAttribute("usage_time",list.get(0).getUsage_time())
 		 		  .addAttribute("sitter_id", sitter_id);		
 		return "admin/reservationstatusdetail";		
-	}
-	
-	
-	
-	
-	
-	
-	
+	}	
+		
 	/////////////////////////////////////////////////////////////////////
 	
 	// 회원 디테일 페이지 연결
@@ -334,10 +328,10 @@ public class AdminController {
 					adminService.blackSitter(petsitterDto, black_content);
 					return result ;		
 				}	
+				
 	// 블랙리스트 회원 등록
 	@GetMapping("/member_blacklist_content")
-	public String member_blacklist_content(@RequestParam String id, Model model) {
-		
+	public String member_blacklist_content(@RequestParam String id, Model model) {		
 		model.addAttribute("id", id);
 		return "admin/member_blacklist_contetnt";
 	}	
@@ -377,8 +371,7 @@ public class AdminController {
 		adminService.petsittersecession(sitter_id);
 		adminService.blackListgradechange(sitter_id);
 		return "redirect:blackList";	
-	}
-			
+	}			
 	
 				
 	// 블랙리스트 불러오기
@@ -392,7 +385,7 @@ public class AdminController {
 	}
 	
 	// 블랙리스트 여부 검사 (요청 파라미터 신청시)
-	// 카운터 2회 이상은 탈퇴
+	// 카운터 2회 이상은 탈퇴<?>
 	@GetMapping("/blackLsitcheck")	
 	public void blackLsitcheck(@RequestParam String id,
 												Model model) {
@@ -458,9 +451,7 @@ public class AdminController {
 					// 가격 정보 수정
 					@PostMapping("/accountoptionupdate")					
 					public String accountoptionupdate(
-							@ModelAttribute PayinfoDto payinfoDto	) {
-						System.out.println("payinfoDto = " + payinfoDto);				
-						
+							@ModelAttribute PayinfoDto payinfoDto	) {						
 						adminService.accountoptionupdate(payinfoDto);
 						return "redirect:/admin/accountoption";
 					}
