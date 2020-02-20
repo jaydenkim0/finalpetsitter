@@ -28,6 +28,7 @@ import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -144,7 +145,6 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public void reservation(int reservation_no,ReservationVO reservationVO) {
 		
-		System.out.println("!!!예약 번호 : "+reservation_no);
 		//예약 Dto
 		ReservationDto reservationDto = ReservationDto.builder()
 														.reservation_no(reservation_no)
@@ -174,8 +174,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 		return petsitterVO;
 	}
 	@Override
-	public List<ReservationAllVO> getReservation(int reservation_no) {
-		List<ReservationAllVO> reservationList = reservationDao.getReservation(reservation_no);
+	public List<ReservationListVO> getReservation(int reservation_no) {
+		List<ReservationListVO> reservationList = reservationDao.getReservation(reservation_no);
 		return reservationList;
 	}
 	
