@@ -5,8 +5,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
-	    <script>
-    	$(function () {
+	<script>
+    $(function () {
     		// 펫시터 거부 버튼 클릭시 발생
 			$(".petnegative").submit(function(e) {
 				// 이벤트 정지
@@ -38,9 +38,7 @@
 					});
 				});						
 			});
-    		
-
-    </script>
+   	 </script>
 	
 	<h3>회원 경고 사유 작성</h3>
 	

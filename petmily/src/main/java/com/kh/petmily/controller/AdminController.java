@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.service.MemberService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -45,6 +47,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private AdminEmailService amailService;
+	@Autowired
+	private MemberService memberService;
 	
 	// 메인페이지
 	@GetMapping("/")
@@ -108,8 +112,10 @@ public class AdminController {
 	public String memberdetail(@RequestParam String id,
 												MemberVO memberVO,												 
 												 Model model) {				
+		Integer member_image_no = memberService.member_image_no(id);
 		model.addAttribute("member", memberVO = adminService.getMemberdetail(id))
-				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id));
+				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id))		
+				  .addAttribute("member_image_no",member_image_no);
 		return "admin/member/memberdetail";			
 	}
 	
@@ -460,7 +466,6 @@ public class AdminController {
 					}
 	
 
-	
 	
 	
 }
