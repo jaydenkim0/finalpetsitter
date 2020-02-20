@@ -37,4 +37,10 @@ public class QnaReplyServiceImpl implements QnaReplyService{
 	public void replyDelete(QnaReplyVO qnaReplyVO) {
 		qnaReplyDao.replyDelete(qnaReplyVO);
 	}
+	//댓글 수 갱신
+	@Override
+	public void replyCal(QnaReplyVO qnaReplyVO) {
+		qnaReplyDao.replyCal(qnaReplyVO);
+		
+	}
 }

@@ -49,9 +49,6 @@
 			<th>작성자</th>
 			<th>제목</th>
 			<th>게시일자</th>
-			<th>groupno</th>
-			<th>superno</th>
-			<th>depth</th>
 		</tr>
 		<c:forEach var="row" items="${list}">
 			<tr>
@@ -67,17 +64,23 @@
 						<c:if test="${row.depth > 0}">
 						 <img src="${context}/resources/img/reply.png" width="20" height="10">
 						</c:if>
-						
+						<font color="blue">
+								[${row.qna_title}]
+						</font>					
 						<a href="view?qna_no=${row.qna_no}">
 							<!-- 제목 출력 -->
 							${row.qna_head}
 						</a>
+						
+						<c:if test="${row.replycount > 0}">
+							<!-- 댓글수 출력 -->
+							<font color="red">
+								[${row.replycount}]
+							</font>
+						</c:if>
 					</td>
 <%-- 				<a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a> --%>
 				<td>${row.writedateWithFormat}</td>
-				<td>${row.groupno}</td>
-				<td>${row.superno}</td>
-				<td>${row.depth}</td>
 			</tr>
 		</c:forEach>
 	</table>

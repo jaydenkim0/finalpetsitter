@@ -49,9 +49,6 @@
 			<th>작성자</th>
 			<th>제목</th>
 			<th>게시일자</th>
-			<th>groupno</th>
-			<th>superno</th>
-			<th>depth</th>
 		</tr>
 		<c:forEach var="row" items="${list}">
 			<tr>
@@ -64,8 +61,8 @@
 						<td>비회원</td>
 					</c:otherwise>
 				</c:choose>
-				<td align="left">
 					<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 -->
+						<td align="left">
 						<c:forEach var="i" begin="1" end="${row.depth}">
 							&nbsp;&nbsp;&nbsp;&nbsp;
 						</c:forEach>
@@ -74,16 +71,21 @@
 						<c:if test="${row.depth > 0}">
 						 <img src="${context}/resources/img/reply.png" width="20" height="10">
 						</c:if>
-						
+						<font color="blue">
+								[${row.stray_title}]
+						</font>	
 						<a href="view?stray_no=${row.stray_no}">
 							<!-- 제목 출력 -->
 							${row.stray_head}
 						</a>
+						<c:if test="${row.replycount > 0}">
+							<!-- 댓글수 출력 -->
+							<font color="red">
+								[${row.replycount}]
+							</font>
+						</c:if>
 					</td>
 				<td>${row.writedateWithFormat}</td>
-				<td>${row.groupno}</td>
-				<td>${row.superno}</td>
-				<td>${row.depth}</td>
 			</tr>
 		</c:forEach>
 	</table>
