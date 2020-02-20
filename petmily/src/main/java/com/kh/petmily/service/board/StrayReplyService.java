@@ -13,5 +13,7 @@ public interface StrayReplyService {
 	void replyUpdate(StrayReplyVO strayReplyVO);
 	//댓글 삭제
 	 void replyDelete(StrayReplyVO strayReplyVO);
+	 //댓글 카운트
+	void replyCal(StrayReplyVO strayReplyVO);
 	}
 

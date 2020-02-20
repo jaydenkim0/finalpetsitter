@@ -13,5 +13,7 @@ public interface StrayReplyDao {
 	void replyUpdate(StrayReplyVO strayReplyVO);
 	//댓글 삭제
 	void replyDelete(StrayReplyVO strayReplyVO);
+	//댓글수 갱신
+	void replyCal(StrayReplyVO strayReplyVO);
 
 }

@@ -32,4 +32,9 @@ public class QnaReplyDaoImpl implements QnaReplyDao{
 	public void replyDelete(QnaReplyVO qnaReplyVO) {
 		sqlSession.delete("qna.replyDelete",qnaReplyVO);
 	}
+	@Override
+	public void replyCal(QnaReplyVO qnaReplyVO) {
+		sqlSession.update("qna.replyCal",qnaReplyVO);
+		
+	}
 }

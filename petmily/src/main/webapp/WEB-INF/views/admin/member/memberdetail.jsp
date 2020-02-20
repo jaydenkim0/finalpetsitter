@@ -8,6 +8,11 @@
 	<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 리스트로 이동</button></a>
 	
 	<h3>	회원	정보</h3>		
+	
+	<h5> 회원 이미지 </h5>
+		<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" 
+		style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
+		
 	<table>
 		<tbody>			
 			<tr>
@@ -34,30 +39,40 @@
 					<td> 펫시터 마지막로그인  : ${member.lastlogin}</td>					
 				</tr>
 				<tr>			
-					<td>등급 : ${member.grade}</td>					
+					<td> 등급 : ${member.grade}</td>					
 				</tr>					
 				<tr>			
-					<td>포인트 : ${member.point}</td>					
+					<td> 포인트 : ${member.point}</td>					
 				</tr>		
 		</tbody>	
 	</table>
 	
 	
 	<h3>반려동물 정보</h3>
-	<c:forEach var="pets" items="${pets}">
+	
+
+	
+	
+	
+	<c:forEach var="Pets" items="${pets}">
+	
+		<h5>	반려동물 이미지 </h5>
+			<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${Pets.pet_no}" 
+				style="width: 20%; height: auto;">
+			 
 		<table>
-			<tbody>
+			<tbody>		
 				<tr>
-					<td>이름 : ${pets.name}</td>
+					<td>이름 : ${Pets.name}</td>
 				</tr>
 				<tr>
-					<td>나이 : ${pets.age}</td>
+					<td>나이 : ${Pets.age}</td>
 				</tr>
 				<tr>
-					<td>종류 : ${pets.age}</td>
+					<td>종류 : ${Pets.type}</td>
 				</tr>
 				<tr>
-					<td>추가정보 : ${pets.ect}</td>
+					<td>추가정보 : ${Pets.ect}</td>
 				</tr>			
 			</tbody>				
 		</table>	
