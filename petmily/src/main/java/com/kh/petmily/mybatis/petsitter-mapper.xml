@@ -140,7 +140,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 펫시터 단일 조회 -->
 	<select id="get" parameterType="int" resultType="petsitterVO">
-		select * from petsitter where pet_sitter_no=#{pet_sitter_no};
+		select * from petsitter where pet_sitter_no=#{pet_sitter_no}
 	</select>
 <!-- 펫시터 전체 조회 -->
 	<select id="getListAll" resultType="petsitterVO">
@@ -185,6 +185,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
 		<result column="nick" property="nick"/>
 		<result column="info" property="info"/>
+		<result column="member_image_no" property="member_image_no"/>
+		<result column="member_image_member_id" property="member_image_member_id"/>
 		
 		<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap"></collection>
 	</resultMap>
@@ -193,14 +195,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="locationListAll" resultMap="sitter" parameterType="map">
 		select * from (
         	select rownum rn, A.* from(
-        		select distinct petsitter.* from petsitter inner join (
-					select * from location 
-					<if test="cityKeyword != '' and areaKeyword != ''">
-						where city = #{cityKeyword} and area = #{areaKeyword}
-					</if>
-            	)L on petsitter.pet_sitter_no = L.location_sitter_no)A         
+        	     select B.* from( 
+	        		select distinct petsitter.*, M.* from petsitter inner join (
+						select * from location 
+						<if test="cityKeyword != '' and areaKeyword != ''">
+							where city = #{cityKeyword} and area = #{areaKeyword}
+						</if>
+	            	)L on petsitter.pet_sitter_no = L.location_sitter_no
+		          left outer join member_image M on petsitter.id = m.member_image_member_id	
+		         )B
+            	)A         
 			where sitter_status = '정상' order by pet_sitter_no desc)
-        where rn between #{start} and #{end}
+        where rn between #{start} and #{end} order by rn
 	</select>
 	
 	<select id="getLocationListMap" resultType="locationDto" parameterType="int">
@@ -252,6 +258,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{reservationPayDto.usage_time})
 			</foreach>
 	</insert>	
+		
+<!-- 펫시터 예약 조회 -->
+	<!-- 예약 정보 조회 -->
+	<select id="getReservation" parameterType="int" resultType="reservationAllVO">
+		select * from reservationall R
+		    inner join pet P 
+		        on r.member_id = p.member_id where reservation_no = #{reservation_no}
+	</select>
+	
 </mapper>
 
 

@@ -2,12 +2,15 @@
 package com.kh.petmily.controller.petsitter;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,13 +18,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.repository.petsitter.ReservationDao;
+
+
+import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.service.MemberService;
+import com.kh.petmily.service.board.ReviewService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
+import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -29,11 +42,26 @@ import com.kh.petmily.vo.petsitter.SitterlocationVO;
 @RequestMapping("/petsitter")
 public class PetsitterController {
 	
+	//펫시터 서비스
 	@Autowired
 	private PetsitterService petsitterService;
+	//관리자 이메일 서비스
+	@Autowired
+	private AdminEmailService aemailService;
+	//관리자 서비스
 	@Autowired
 	private AdminService adminService;
+	//나중에 수정할  것(펫시터 서비스)
+	@Autowired
+	private ReservationDao reservationDao;
 	
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private ReviewService reviewService;
+
+	
+
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
 	public String regist() {
@@ -46,12 +74,28 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
+	//회원이미지 가져오기(src로 주소)
+		@GetMapping("/member/image")
+		public ResponseEntity<ByteArrayResource> member_image(
+				@RequestParam int member_image_no) throws UnsupportedEncodingException,IOException{
+			return memberService.member_image(member_image_no);
+		}
+		
+		//펫이미지 가져오기(src로 주소)
+		@GetMapping("/pet/image")
+		public ResponseEntity<ByteArrayResource> pet_image(
+				@RequestParam int pet_no) throws UnsupportedEncodingException,IOException {
+			int pet_image_no = memberService.pet_image_no(pet_no);
+			return memberService.pet_image(pet_image_no);
+		}
+	
 	//펫시터 검색(조회) 페이지
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
 						@RequestParam(defaultValue="", required = false) String areaKeyword,
-						@RequestParam(defaultValue = "1", required = false) int curPage,										
-									Model model) {
+						@RequestParam(defaultValue = "1", required = false) int curPage,
+																                            Model model) {
+		
 		// 레코드의 갯수 계산
 		int count = petsitterService.countlocation(cityKeyword, areaKeyword);
 		
@@ -61,21 +105,31 @@ public class PetsitterController {
 		int start = navi.getPageBegin();
 		int end = navi.getPageEnd();
 		
+		//펫시터 정보
+		List<SitterlocationVO> list = petsitterService.locationListAll(start, end, cityKeyword, areaKeyword);
+		
 		// 리스트 불러오기
-		model.addAttribute("list", (List<SitterlocationVO>) petsitterService.locationListAll(start, end, cityKeyword, areaKeyword))
+		model.addAttribute("list", list)
 				  .addAttribute("count", count)
 				  .addAttribute("cityKeyword", cityKeyword)
 				  .addAttribute("areaKeyword", areaKeyword)
 				  .addAttribute("navi", navi);
+		
 		return "petsitter/list";
 	}
 	
 	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
-	public String content(@RequestParam int pet_sitter_no, Model model) {
+	public String content(@RequestParam int pet_sitter_no,
+									Model model) throws Exception {
+		
+		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
+		double star = reviewService.star(pet_sitter_no);
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		model.addAttribute("petsitterList", petsitterList)
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
+		model.addAttribute("reviewstar",star);
+		model.addAttribute("list",list);
 		return "petsitter/content";
 	}
 	
@@ -92,25 +146,51 @@ public class PetsitterController {
 	@GetMapping("/estimate")
 	public String estimate(@RequestParam int pet_sitter_no, 
 							HttpSession session,
-							Model model) {
+							Model model) {		
 		String id = (String) session.getAttribute("id");
 		
 		List<PetDto> petList = petsitterService.getPet(id);
 		model.addAttribute("petList", petList)
-				.addAttribute("pet_sitter_no", pet_sitter_no);
+				.addAttribute("reservation_sitter_no", pet_sitter_no);
 		return "petsitter/estimate";
 	}
 	
 	@PostMapping("/estimate")
-	public String estimate(@ModelAttribute ReservationVO reservationVO) {
-		petsitterService.reservation(reservationVO);
-		//회원 예약 조회 할 수 있는 페이지로 보내기(나중에 변경 할것!!!)
-		return "redirect:../";
+	@ResponseBody()
+	public String estimate(@ModelAttribute ReservationVO reservationVO) throws MessagingException {
+		//petsitterVO에서 펫시터 이메일 불러오기
+		PetsitterVO petsitterVO = petsitterService.get(reservationVO.getReservation_sitter_no());
+		
+		// 이메일 보내기
+		String id = reservationVO.getMember_id();
+		String sitteremail = petsitterVO.getEmail();
+		int sitter_no = reservationVO.getReservation_sitter_no();
+		
+		int reservation_no = reservationDao.getSequenceReservation();
+		
+		System.out.println(reservationVO.toString());
+		System.out.println(reservation_no);
+		
+		String result = aemailService.estimateEMail(id, sitteremail, sitter_no, reservation_no);
+		
+		petsitterService.reservation(reservation_no, reservationVO);
+		return result;
 	}
 	
 	//예약(견적)확인 페이지
 	@GetMapping("/confirm")
-	public String confirm() {
+	public String confirm(@RequestParam int reservation_no,
+							Model model) {
+		//회원아이디 -펫시터 아이디
+		List<ReservationAllVO> reservationList = petsitterService.getReservation(reservation_no);
+		model.addAttribute("reservationList", reservationList);
+		
 		return "petsitter/confirm";
+	}
+	@PostMapping("/confirm")
+	public String confirm() {
+		
+		String result="";
+		return result;
 	}
 }

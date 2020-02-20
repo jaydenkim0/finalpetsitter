@@ -2,6 +2,7 @@ package com.kh.petmily.service.petsitter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -26,6 +27,7 @@ import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -90,9 +92,6 @@ public class PetsitterServiceImpl implements PetsitterService {
 		locationDao.registLocation(no,vo.getLocation_name());
 		
 	}
-
-
-
 	@Override
 	public List<PetsitterGetListVO> getList(int pet_sitter_no) {
 		//펫시터 기본 정보 조회
@@ -143,9 +142,9 @@ public class PetsitterServiceImpl implements PetsitterService {
 	}
 
 	@Override
-	public void reservation(ReservationVO reservationVO) {
-		//예약 번호 구해오기
-		int reservation_no = reservationDao.getSequenceReservation();
+	public void reservation(int reservation_no,ReservationVO reservationVO) {
+		
+		System.out.println("!!!예약 번호 : "+reservation_no);
 		//예약 Dto
 		ReservationDto reservationDto = ReservationDto.builder()
 														.reservation_no(reservation_no)
@@ -165,6 +164,19 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//시간,금액 등록
 		reservationDao.registPay(reservationVO.getPayinfo_no(),reservationPayDto);
 		
+	}
+
+
+
+	@Override
+	public PetsitterVO get(int pet_sitter_no) {
+		PetsitterVO petsitterVO = petsitterDao.get(pet_sitter_no);
+		return petsitterVO;
+	}
+	@Override
+	public List<ReservationAllVO> getReservation(int reservation_no) {
+		List<ReservationAllVO> reservationList = reservationDao.getReservation(reservation_no);
+		return reservationList;
 	}
 	
 	

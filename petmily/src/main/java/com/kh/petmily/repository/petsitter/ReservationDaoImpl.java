@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReservationPayDto;
-import com.kh.petmily.entity.SkillsDto;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
 
 @Repository
 public class ReservationDaoImpl implements ReservationDao {
@@ -38,11 +38,16 @@ public class ReservationDaoImpl implements ReservationDao {
 												.payinfo_no(payno)
 												.pay_reservation_no(reservationPayDto.getPay_reservation_no())
 												.usage_time(reservationPayDto.getUsage_time())
-												.build());	
+												.build());
 		}
 		System.out.println(payinfoList.toString());
 		
 		sqlSession.insert("petsitter.registPay", payinfoList);
+	}
+
+	@Override
+	public List<ReservationAllVO> getReservation(int reservation_no) {
+		return sqlSession.selectList("petsitter.getReservation", reservation_no);
 	}
 
 }

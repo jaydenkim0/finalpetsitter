@@ -25,6 +25,7 @@ import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -52,6 +53,34 @@ public class AdiminServiceImpl implements AdminService {
 	public int admimTotal() {
 		return adminDao.getAtotal();
 	}
+
+	// 어제 가입한 회원의 수
+	@Override
+	public int memberJoinall() {
+		return adminDao.memberJoinall();
+	}
+	// 어제 펫시터 신청한 수
+	@Override
+	public int petsitterApplyup() {
+		return adminDao.petsitterApplyup();
+	}
+	// 어제 등록된 신고게시물의 수
+	@Override
+	public int blackqnacount() {
+		return adminDao.blackqnacount();
+	}
+	// 어제 신고된 회원의 수
+	@Override
+	public int blacklistmembercount() {	
+		return adminDao.blacklistmembercount();
+	}
+	// 어제 신고된 펫시터의 수
+	@Override
+	public int blacklistpetsittercount() {		
+		return adminDao.blacklistpetsittercount();
+	}
+
+	
 	
 	
 	// petsitter 리스트
@@ -478,6 +507,11 @@ public class AdiminServiceImpl implements AdminService {
 	public void accountoptiondelete(int payinfo_no) {
 		adminDao.accountoptiondelete(payinfo_no);		
 	}
+	// 가격 옵션 수정
+	@Override
+	public void accountoptionupdate(PayinfoDto payinfoDto) {
+		adminDao.accountoptionupdate(payinfoDto);
+	}
 
 	// 신고게시판 불러오기
 	@Override
@@ -489,6 +523,29 @@ public class AdiminServiceImpl implements AdminService {
 	public int countAriclegetBlackreport(String searchOption, String keyword) {
 		return adminDao.countAriclegetBlackreport(searchOption, keyword);
 	}
+
+	// 예약 게시판 리스트
+	@Override
+	public List<AccountVO> getAccountreservationList(int start, int end, String searchOption, String keyword) {
+		return adminDao.getAccountreservationList(start, end, searchOption, keyword);
+	}
+	// 예약 게시판 카운트
+	@Override
+	public int countAriclegetAccount(String searchOption, String keyword) {		
+		return adminDao.countAriclegetAccount(searchOption, keyword);
+	}
+
+	// 예약 디테일 페이지 정보
+	@Override
+	public AccountVO reservationstatusdetail(int reservation_no) {	
+		return adminDao.reservationstatusdetail(reservation_no);
+	}
+	// 예약 디테일 페이지에 보여줄 결제 정보
+	@Override
+	public List<PayinfoDto> payinfoName(int reservation_no) {	
+		return adminDao.payinfoName(reservation_no);
+	}
+
 
 
 

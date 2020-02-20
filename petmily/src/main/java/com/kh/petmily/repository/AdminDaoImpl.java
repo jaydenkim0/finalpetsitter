@@ -24,6 +24,7 @@ import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -48,6 +49,42 @@ public class AdminDaoImpl implements AdminDao {
 	public int getAtotal() {
 		return sqlSession.selectOne("admin.admincount");
 	}
+	// 어제 가입한 회원의 수
+	@Override
+	public int memberJoinall() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.memberJoinall");
+	}
+	// 어제 펫시터 신청한 수
+	@Override
+	public int petsitterApplyup() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.petsitterApplyup");
+	}
+	// 어제 등록된 신고게시물의 수
+	@Override
+	public int blackqnacount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.blackqnacount");
+	}
+	// 어제 신고된 회원의 수
+	@Override
+	public int blacklistmembercount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("admin.blacklistmembercount");
+	}
+	// 어제 신고된 펫시터의 수
+	@Override
+	public int blacklistpetsittercount() {
+		// TODO Auto-generated method stub
+		return  sqlSession.selectOne("admin.blacklistpetsittercount");
+	}
+
+
+
+
+	
+	
 	
 
 	// 펫시터 리스트
@@ -494,6 +531,12 @@ public class AdminDaoImpl implements AdminDao {
 		sqlSession.insert("admin.accountoptiondelete", payinfo_no);
 		
 	}
+	// 가격 옵션 수정
+	@Override
+	public void accountoptionupdate(PayinfoDto payinfoDto) {
+		sqlSession.update("admin.accountoptionupdate", payinfoDto);
+
+	}
 
 	// 신고게시판 불러오기
 	@Override
@@ -514,6 +557,34 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.countAriclegetBlackreport", param);
 	}
 
+	// 예약 게시판 리스트
+	@Override
+	public List<AccountVO> getAccountreservationList(int start, int end, String searchOption, String keyword) {	
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);	
+		return sqlSession.selectList("admin.getAccountreservationList", param);
+	}
+	// 예약게시판 카운트
+	@Override
+	public int countAriclegetAccount(String searchOption, String keyword) {	
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAriclegetAccount", param);
+	}
+	// 디테일 페이지
+	@Override
+	public AccountVO reservationstatusdetail(int reservation_no) {	
+		return sqlSession.selectOne("admin.reservationstatusdetail", reservation_no) ;
+	}
+	// 서비스 결제 네임
+	@Override
+	public List<PayinfoDto> payinfoName(int reservation_no) {	
+		return sqlSession.selectList("admin.payinfoName", reservation_no);
+	}
 
 
 

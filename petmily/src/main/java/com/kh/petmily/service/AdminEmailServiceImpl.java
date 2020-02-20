@@ -97,9 +97,9 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// (String id, String email, int sitter_no, String result)
 	// 회원 -> 펫시터 (펫시터 이메일로 전송)
 	//////////////////////////////////////////////////////////////////////////////////////////	
-	@Transactional 
+
 	@Override
-	public String estimateEMail(String id, String sitteremail, int sitter_no) throws MessagingException {			
+	public String estimateEMail(String id, String sitteremail, int sitter_no, int reservation_no) throws MessagingException {			
 		try {
 					MimeMessage message = sender.createMimeMessage();	
 					MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");				
@@ -111,9 +111,10 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					String url = ServletUriComponentsBuilder
 											.fromCurrentContextPath()
 											.port(8080)
-											.path("/petsitter/estimate")
+											.path("/petsitter/confirm")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
+											.queryParam("reservation_no", reservation_no)
 											.toUriString();					
 					
 					StringBuffer buffer = new StringBuffer();
@@ -143,7 +144,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// 회원에게 결제페이지 전송
 	// 펫시터 -> 회원 (회원 이메일로 전송)
 	//////////////////////////////////////////////////////////////////////////////////////////	
-	@Transactional 
+
 	@Override
 	public String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException {			
 		try {
@@ -157,7 +158,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					String url = ServletUriComponentsBuilder
 											.fromCurrentContextPath()
 											.port(8080)
-											.path("/petsitter/pament")
+											.path("/petsitter/paymentlogin")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
 											.toUriString();					
@@ -184,6 +185,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	
 	
 	// step2-2 펫시터가 견적을 거부하면 반려사유와 함께 취소이메일 전달
+	@Override
 	public String NoestimateEMail(String id, String memberemail, String content) {
 		try {	
 							
@@ -219,6 +221,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	//////////////////////////////////////////////////////////////////////////////////////////
 	// step3 결제가 완료되면 회원과 펫시터에게 결제완료 이메일 전달
 	//////////////////////////////////////////////////////////////////////////////////////////	
+	@Override
 	public String paymentApplyEMail(String id, 
 													        String email,
 													        int total_amount,

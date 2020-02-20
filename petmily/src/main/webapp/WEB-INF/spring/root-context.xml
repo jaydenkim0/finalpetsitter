@@ -119,13 +119,17 @@
 		namespaces 에서 tx 추가		
 	 -->
 	<tx:annotation-driven/>
-
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dbcpSource"></property>
+		</bean>
 		
 	<!-- 
 		스프링 스케쥴링 활성화
 		namespaces 에서 task 추가
 	 -->
 	<task:annotation-driven/>
+	
+	
 	
 	<!-- bcrypt Password Encoder 등록 -->	
 	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>

@@ -34,7 +34,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public void pointplus(ReviewDto reviewDto) {
 		reviewDao.pointplus(reviewDto);	
 	}
-
+    // 리뷰 평균별점
+	@Override
+	public double star(int pet_sitter_no){
+		return reviewDao.star(pet_sitter_no);
+		
+	}
 
 
 

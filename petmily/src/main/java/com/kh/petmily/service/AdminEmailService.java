@@ -15,7 +15,7 @@ public interface AdminEmailService {
 	String blackListAddEmail(String id, String email, String grade, String black_content);
 
 	// 회원 -> 펫시터 견적 신청시 발송되는 이메일 
-	String estimateEMail(String id, String email, int sitter_no) throws MessagingException;
+	String estimateEMail(String id, String sitteremail, int sitter_no,int reservation_no) throws MessagingException;
 			
 	// 펫시터 -> 회원에게 견정 승인시 발송되는 이메일
 	String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException;		

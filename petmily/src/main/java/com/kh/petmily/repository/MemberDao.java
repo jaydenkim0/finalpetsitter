@@ -3,13 +3,11 @@ package com.kh.petmily.repository;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 
 public interface MemberDao {	
 	
@@ -21,7 +19,7 @@ public interface MemberDao {
 	MemberDto mylist(String id);
 
 	//반려동물조회
-	List<PetDto> mylistpet(String id);
+	List<PetImagePetDto> mylistpet(String id);
 
 	//최종로그인일시업데이트
 	void updatelastlogin(String id);
@@ -77,7 +75,7 @@ public interface MemberDao {
 	byte[] physicalpet_image(String savename) throws IOException;
 
 	//펫정보 가지고오기
-	PetDto getpet(String pet_no);
+	PetImagePetDto getpet(String pet_no);
 
 	//펫정보수정
 	void petchange(PetDto petDto);
@@ -106,6 +104,12 @@ public interface MemberDao {
 	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
 	void pet_Yes(String id);
 	void pet_No(String id);
+
+	//블랙리스트인지 검사
+	int isBlack(String id);
+
+	//경고횟수
+	int blackcount(String id);
 
 
 }
