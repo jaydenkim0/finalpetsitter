@@ -28,7 +28,7 @@
 		    	 $('.modalfade').hide();
 		            
 		        $('.optionupdate').click(function () {						         
-		        	$(this).next().parent().next($('.modalfade').fadeToggle());
+		        	$(this).parent().next().next().fadeToggle();
 		        });						
 		
 		        
@@ -59,6 +59,7 @@
 	<h3> 가격 리스트 </h3>
 	<hr>
 		<c:forEach var="accountList" items="${accountlist}" >
+			
 			<h1> </h1>
 			<h5>가격명 : ${accountList.payname}</h5>
 			<h5>가격 : ${accountList.payment} 원 </h5>	

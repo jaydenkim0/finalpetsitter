@@ -41,7 +41,7 @@
 			<option value="id"  >아이디</option>
 			<option value="name"  >이름</option>
 			<option value="nick"  >닉네임</option>
-			<option value="grade" >등급</option>
+			<option value="reservation_no" >예약번호</option>
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
 		<input type="submit" value="검색">
@@ -57,20 +57,20 @@
 			<c:when test="${reservation.status == '대기' && reservation.kakaopaystatus eq null }">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
-				예약 번호 : ${reservation.reservation_no} |
-				신청 회원 : ${reservation.member_id} |		
-				견적 상태 : 펫시터 견적 확인 중 |
-				결제 상테 : 결제 준비|
+					예약 번호 : ${reservation.reservation_no} |
+					신청 회원 : ${reservation.member_id} |		
+					견적 상태 : 펫시터 견적 확인 중 |
+					결제 상테 : 결제 준비 |
 				</h4>
 				</a>		
 			</c:when>	
 			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq null }">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
-				예약 번호 : ${reservation.reservation_no} |
-				신청 회원 : ${reservation.member_id} |		
-				견적 상태 : ${reservation.status} |
-				결제 상테 :  회원이 결제 준비 중 |
+					예약 번호 : ${reservation.reservation_no} |
+					신청 회원 : ${reservation.member_id} |		
+					견적 상태 : ${reservation.status} |
+					결제 상테 :  회원이 결제 준비 중 |
 				</h4>
 				</a>		
 			
