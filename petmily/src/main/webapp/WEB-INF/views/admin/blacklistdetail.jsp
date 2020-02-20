@@ -9,7 +9,6 @@
 	
 	
 	<a href="${pageContext.request.contextPath}/admin/blackList"><button>블랙리스트 페이지로 이동</button></a>	
-
 	
 	
 	<c:choose>			
@@ -52,6 +51,7 @@
 							<input type="hidden" name="sitter_no" value="${blackListdetail.pet_sitter_no}">				
 							<button  type="submit" >경고펫시터 탈퇴</button>						
 					</form>
+					
 					<!-- 정상 펫시터로 복귀 -->
 					<form action="${pageContext.request.contextPath}/admin/blackList/comebackPet" method="get">
 							<input type="hidden" name="black_id" value="${blackListdetail.id}">

@@ -54,8 +54,7 @@ public class PetsitterController {
 	private AdminService adminService;
 	//나중에 수정할  것(펫시터 서비스)
 	@Autowired
-	private ReservationDao reservationDao;
-	
+	private ReservationDao reservationDao;	
 	@Autowired
 	private MemberService memberService;
 	@Autowired
@@ -199,15 +198,17 @@ public class PetsitterController {
 			.addAttribute("payMent", payMent);
 		return "petsitter/confirm";
 	}
+	
+	
 	@PostMapping("/confirm")
-	public String confirm() {
-		// 이메일 보내기
-		String id ;
-		String sitteremail;
-		int sitter_no;
-		
+	public String confirm(String id, 
+									    String memberemail, 
+									    String content , 
+									    int sitter_no) throws MessagingException {
 		//승인(회원/펫시터) -> 예약확정메일 / 거절(회원/펫시터) -> 예약 거절 메일
-//		String result = aemailService.estimateEMail(id, sitteremail, sitter_no, reservation_no);
+//		String result = aemailService.PaymentReqEMail(id, memberemail, sitter_no);		
+		// 거절(content 포함해서 전달 받아야함)
+		String result = aemailService.NoestimateEMail(id, memberemail, content);
 		return result;
 	}
 }
