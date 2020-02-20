@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.petmily.repository.StrayDao;
 import com.kh.petmily.service.board.StrayReplyService;
 import com.kh.petmily.service.board.StrayService;
+import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.StrayReplyVO;
 import com.kh.petmily.vo.StrayVO;
 import com.kh.petmily.vo.StrayReplyVO;
@@ -92,16 +93,34 @@ public class StrayController {
 		public String write() {
 			return "board/stray/write";
 	}
-		//게시글 작성 처리
+		//게시글 작성 처리(+답글)
 		@PostMapping("/insert")
 		public String insert(@ModelAttribute StrayVO strayVO,
 				HttpSession session,
+				@RequestParam(required = false, defaultValue = "0") int superno,
 				@RequestParam List<MultipartFile> stray_file) throws Exception{
 			String stray_writer = (String)session.getAttribute("stray_writer");
+			
 			int no = strayDao.getSequence();
-			strayVO.setStray_no(no);
-			strayService.create(strayVO);
-			strayService.uploadFile(no,stray_file);
+			
+			//새글
+			if(superno==0) {
+				strayVO.setStray_no(no);
+				strayService.create(strayVO);
+				strayService.uploadFile(no,stray_file);
+			}
+			//답글
+			else {
+				StrayVO target = strayDao.read(superno);
+				strayVO.setStray_no(no);
+				strayVO.setSuperno(target.getStray_no());
+				strayVO.setGroupno(target.getGroupno());
+				strayVO.setDepth(target.getDepth());
+				strayService.create(strayVO);
+				log.info("strayVO={}", strayVO);
+				strayService.uploadFile(superno,stray_file);	
+			}
+			
 			return "redirect:list";
 		}
 		//게시글 상세 내용 조회

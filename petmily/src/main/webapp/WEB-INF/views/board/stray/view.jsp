@@ -250,8 +250,10 @@
 					</a>
 				</c:if> 
 				<a href="${context}/board/stray/list">
-					<button type="button">게시판 목록</button>
-			</a></td>
+					<button type="button">게시판 목록</button></a>
+				<a href ="${context}/board/stray/write?superno=${strayVO.stray_no}">
+				<button type="button">답글쓰기</button></a>	
+			</td>
 		</tr>
 	</table>
 </div>

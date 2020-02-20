@@ -54,14 +54,24 @@ public class StrayServiceImpl implements StrayService{
 
 	@Override
 	public void create(StrayVO strayVO) {
-		String stray_title = strayVO.getStray_title();
-		String stray_head = strayVO.getStray_head();
-		String stray_content = strayVO.getStray_content();
-		String stray_writer = strayVO.getStray_writer();
-		strayVO.setStray_title(stray_title);
-		strayVO.setStray_head(stray_head);
-		strayVO.setStray_content(stray_content);
-		strayVO.setStray_writer(stray_writer);
+		int stray_no = strayVO.getStray_no();
+		
+		int superno = strayVO.getSuperno();
+		int groupno = strayVO.getGroupno();
+		int depth = strayVO.getDepth();
+		
+		//새글
+		if(strayVO.getSuperno() == 0) {
+			strayVO.setStray_no(stray_no);
+			strayVO.setGroupno(stray_no);
+		}
+		//답글
+		else {
+			strayVO.setStray_no(stray_no);
+			strayVO.setGroupno(groupno);
+			strayVO.setSuperno(superno);
+			strayVO.setDepth(depth+1);
+		}
 		strayDao.create(strayVO);
 		
 	}
