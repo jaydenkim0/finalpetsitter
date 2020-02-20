@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,6 +56,7 @@ public class QnaController {
 		int pagesize = 10;
 		int navsize=10;
 		int pno;
+		
 		try{
 			pno =  Integer.parseInt(req.getParameter("pno"));
 			if(pno <= 0) throw new Exception();
@@ -186,5 +188,11 @@ public class QnaController {
 		qnaReplyService.replyDelete(qnaReplyVO);
 		model.addAttribute("qna_no", origin);
 		return "redirect:/board/qna/view";
+	}
+	//댓글 카운트
+	@RequestMapping("/replyCal")
+	@ResponseBody
+	public void replyCal(@ModelAttribute QnaReplyVO qnaReplyVO) {
+	qnaReplyService.replyCal(qnaReplyVO);
 	}
 }

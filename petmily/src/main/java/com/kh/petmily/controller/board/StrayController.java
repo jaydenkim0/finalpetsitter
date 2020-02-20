@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.petmily.repository.StrayDao;
 import com.kh.petmily.service.board.StrayReplyService;
 import com.kh.petmily.service.board.StrayService;
+import com.kh.petmily.vo.QnaReplyVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.StrayReplyVO;
 import com.kh.petmily.vo.StrayVO;
@@ -187,5 +188,11 @@ public class StrayController {
 			strayReplyService.replyDelete(strayReplyVO);
 			model.addAttribute("stray_no", origin);
 			return "redirect:/board/stray/view";
+		}
+		//댓글 카운트
+		@RequestMapping("/replyCal")
+		@ResponseBody
+		public void replyCal(@ModelAttribute StrayReplyVO strayReplyVO) {
+		strayReplyService.replyCal(strayReplyVO);
 		}
 	}

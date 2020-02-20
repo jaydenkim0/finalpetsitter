@@ -12,7 +12,7 @@
 		  a:hover button{
 		 	background: rgba(173, 58, 17, 0.78);
 		 }
-		</style>
+	</style>
 	 
     
 	<h1>정산 관리 페이지</h1>

@@ -169,7 +169,7 @@ public class AdminListController {
 	}
 	
 	// 문의 게시판에서 신고게시물만 불러오기
-	@GetMapping("/blackreport")
+	@RequestMapping("/blackreport")
 	public String blackreport(@RequestParam(defaultValue = "qna_writer", required = false) String searchOption,
 											  @RequestParam(defaultValue = "", required = false) String keyword,
 											  @RequestParam(defaultValue = "1", required = false) int curPage,										
@@ -192,8 +192,9 @@ public class AdminListController {
 	
 	//////////////////////////////////////////////////////////////////
 	
+	
 	// 예약 현황
-	@GetMapping("/reservationstatus")
+	@RequestMapping("/reservationstatus")
 	public String reservationstatus(@RequestParam(defaultValue = "reservation_no", required = false) String searchOption,
 			  @RequestParam(defaultValue = "", required = false) String keyword,
 			  @RequestParam(defaultValue = "1", required = false) int curPage,										

@@ -13,4 +13,6 @@ public interface QnaReplyDao {
 	void replyUpdate(QnaReplyVO qnaReplyVO);
 	//댓글 삭제
 	void replyDelete(QnaReplyVO qnaReplyVO);
+	//댓글수 카운트
+	void replyCal(QnaReplyVO qnaReplyVO);
 	}

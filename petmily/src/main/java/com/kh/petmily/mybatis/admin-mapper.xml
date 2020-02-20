@@ -32,12 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<!-- 전체 펫시터수 -->
 		<select id="petsittercount" resultType="int">
-			select count(*) from petsitter where grade = 'petsitter'
+			select count(*) from petsitter where grade ='petsitter'
 		</select>
 		
 		<!-- 전체 관리자수 -->
 		<select id="admincount" resultType="int">
-			select count(*) from member where grade = 'admin'
+			select count(*) from member where grade ='admin'
 		</select>
 	
 		<!-- 어제 가입한 회원 수 -->
@@ -310,9 +310,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<select id="petsitterListAll" resultType="petsitterVO" parameterType="Map">
 					select * from (
 						select rownum rn, A.* from(
-							select * from petsitter
+							select * from petsitter  where grade = 'petsitter' 
 								<if test="searchOption != null and keyword != null">
-									where ${searchOption} like '%'||#{keyword}||'%'
+									and ${searchOption} like '%'||#{keyword}||'%'
 								</if>
 							order by sitter_joindate desc
 							)A
@@ -321,9 +321,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<!-- 펫시터 페이징 카운터 리스트 -->
 				<select id="countAriclePetsitter" resultType="int" parameterType="Map">
 					select count(*) from
-					petsitter		
+					petsitter	where grade = 'petsitter' 	
 						<if test="searchOption != null and keyword != null">
-							where ${searchOption} like '%'||#{keyword}||'%'
+							and ${searchOption} like '%'||#{keyword}||'%'
 						</if>			
 					order by sitter_joindate desc
 				</select>	
