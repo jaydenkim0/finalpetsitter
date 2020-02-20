@@ -35,6 +35,7 @@ import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -182,15 +183,31 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
 		//회원아이디 -펫시터 아이디
-		List<ReservationAllVO> reservationList = petsitterService.getReservation(reservation_no);
-		model.addAttribute("reservationList", reservationList);
-		
+		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);
+		//최종 결제 금액 구하기
+		int payMent = 0;
+		for(ReservationListVO vo : reservationList) {
+			List<ReservationAllVO> all = vo.getList();
+			for(ReservationAllVO allVO : all) {
+				int usagetime = allVO.getUsage_time();
+				int oneHour = usagetime * 10000;
+				int payment = allVO.getPayment();
+				payMent = oneHour + payment;				
+			}
+		}
+		model.addAttribute("reservationList", reservationList)
+			.addAttribute("payMent", payMent);
 		return "petsitter/confirm";
 	}
 	@PostMapping("/confirm")
 	public String confirm() {
+		// 이메일 보내기
+		String id ;
+		String sitteremail;
+		int sitter_no;
 		
-		String result="";
+		//승인(회원/펫시터) -> 예약확정메일 / 거절(회원/펫시터) -> 예약 거절 메일
+//		String result = aemailService.estimateEMail(id, sitteremail, sitter_no, reservation_no);
 		return result;
 	}
 }
