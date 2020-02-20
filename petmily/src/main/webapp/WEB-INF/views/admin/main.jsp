@@ -24,7 +24,7 @@
 	
 	
 	<a href="registInfo"><button> 등록 현황</button></a>
-	<a href="reservationstatus"><button> 예약 현황</button></a>
+	<a href="${pageContext.request.contextPath}/admin/list/reservationstatus"><button> 예약 현황</button></a>
 	<a href="${pageContext.request.contextPath}/admin/list/member"><button>회원 관리 리스트</button></a>	
 	<a href="petsitter"><button>펫시터 관리</button></a>
 		<a href="${pageContext.request.contextPath}/admin/list/petsitter"><button> 펫시터 관리 리스트</button></a>	

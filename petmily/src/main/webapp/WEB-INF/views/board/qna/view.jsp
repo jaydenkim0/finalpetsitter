@@ -194,7 +194,7 @@
 						<button class="reply_edit_btn">완료</button> 
 						<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">
 							<button class="replyDelete_submit">삭제</button>
-						</a>
+						</a>						
 						</th>
 					</tr>
 				</c:if>

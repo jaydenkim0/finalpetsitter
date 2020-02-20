@@ -16,6 +16,7 @@ import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -199,7 +200,9 @@ public interface AdminDao {
 	void accountOtionAdd(PayinfoDto payinfoDto);
 	// 가격 옵션 삭제
 	void accountoptiondelete(int payinfo_no);
-	// 수수룟 리스트 불러오기
+	// 가격 옵션 수정
+	void accountoptionupdate(PayinfoDto payinfoDto);
+	// 수수료 리스트 불러오기
 	List<PayinfoDto> getFeesList();
 
 	// 신고 게시판 리스트 불러오기
@@ -217,6 +220,18 @@ public interface AdminDao {
 	int blacklistmembercount();
 	// 어제 신고된 펫시터의 수
 	int blacklistpetsittercount();
+
+	
+	// 예약 게시판 리스트
+	List<AccountVO> getAccountreservationList(int start, int end, String searchOption, String keyword);
+	// 예약 게시판 카운트
+	int countAriclegetAccount(String searchOption, String keyword);
+
+	// 예약 디테일 페이지 정보
+	AccountVO reservationstatusdetail(int reservation_no);
+	// 예약 디테일 페이지에 보여줄 결제 정보
+	List<PayinfoDto> payinfoName(int reservation_no);
+
 
 	
 
