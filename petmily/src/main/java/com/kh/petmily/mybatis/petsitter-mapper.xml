@@ -261,12 +261,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 <!-- 펫시터 예약 조회 -->
 	<!-- 예약 정보 조회 -->
-	<select id="getReservation" parameterType="int" resultType="reservationAllVO">
-		select * from reservationall R
-		    inner join pet P 
-		        on r.member_id = p.member_id where reservation_no = #{reservation_no}
+		<resultMap type="reservationListVO" id="reservation">
+		<result column="reservation_no" property="reservation_no"/>
+		<result column="member_id" property="member_id"/>
+		<result column="matching_time" property="matching_time"/>
+		<result column="pet_name" property="pet_name"/>
+		<result column="usage_time" property="usage_time"/>
+		<result column="payname" property="payname"/>
+		<result column="pet_no" property="pet_no"/>
+		<result column="age" property="age"/>
+		<result column="type" property="type"/>
+		<result column="pet_ect" property="pet_ect"/>
+		<result column="pet_image_no" property="pet_image_no"/>
+		<result column="pet_image_pet_no" property="pet_image_pet_no"/>
+		
+		<collection column="reservation_no" javaType="List" ofType="ReservationAllVO" property="list" select="getReservationMap"></collection>
+	</resultMap>
+	
+	<select id="getReservation" resultMap="reservation" parameterType="map">
+		select * from (
+		    select A.* from(
+		        select B.* from (
+		            select c.* from(
+		                select distinct R.*, p.pet_no,p.age,p.type,p.ect pet_ect,g.pet_image_no,g.pet_image_pet_no from reservation R inner join (
+		                    select * from reservationall
+		                )V on r.reservation_no = v.pay_reservation_no
+		                inner join pet P on r.member_id = p.member_id
+		            inner join pet_image G on p.pet_no = g.pet_image_pet_no
+		            )C
+		        )B
+		    )A where reservation_no = #{reservation_no} order by reservation_no desc
+		 )
 	</select>
 	
+	<select id="getReservationMap" resultType="reservationAllVO" parameterType="int">
+		select * from reservationall where reservation_no= #{reservation_no}
+	</select>	
 </mapper>
 
 
