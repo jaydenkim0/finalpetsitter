@@ -402,6 +402,7 @@ public class AdminController {
 		// 블랙리스트 디테일 불러오기 -> view로 쏴주기	
 		model.addAttribute("blackListdetail", (PetsitterVO)adminService.blackListdetail(id))
 				  .addAttribute("blacklistcontent", (List<BlackListContentDto>)adminService.blacklistcontent(id));
+		
 		return "admin/blacklistdetail";		
 	}
 	
