@@ -185,8 +185,11 @@ public class PetsitterController {
 		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);
 		//최종 결제 금액 구하기
 		int payMent = 0;
+		int totalTime =0;
 		for(ReservationListVO vo : reservationList) {
 			List<ReservationAllVO> all = vo.getList();
+			totalTime = all.get(0).getUsage_time();
+			
 			for(ReservationAllVO allVO : all) {
 				int usagetime = allVO.getUsage_time();
 				int oneHour = usagetime * 10000;
@@ -194,8 +197,10 @@ public class PetsitterController {
 				payMent = oneHour + payment;				
 			}
 		}
+		
 		model.addAttribute("reservationList", reservationList)
-			.addAttribute("payMent", payMent);
+			.addAttribute("payMent", payMent)
+			.addAttribute("usageTime", totalTime);
 		return "petsitter/confirm";
 	}
 	

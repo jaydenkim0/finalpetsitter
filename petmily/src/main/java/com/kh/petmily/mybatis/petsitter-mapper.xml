@@ -263,6 +263,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 예약 정보 조회 -->
 		<resultMap type="reservationListVO" id="reservation">
 		<result column="reservation_no" property="reservation_no"/>
+		<result column="reservation_sitter_no" property="reservation_sitter_no"/>
 		<result column="member_id" property="member_id"/>
 		<result column="matching_time" property="matching_time"/>
 		<result column="pet_name" property="pet_name"/>

@@ -67,9 +67,11 @@ $(function(){
 <form class="confirm_status" action="confirm" method="post">
 <c:forEach var="rlist" items="${reservationList}">
 	<span>예약 번호 : ${rlist.reservation_no}</span><br>
+	<span>예약 시터 : ${rlist.reservation_sitter_no}</span><br>
 	<span>예약 회원 : ${rlist.member_id}</span><br>
 	<span>예약 날짜 : ${rlist.matching_time}</span><br>
-	<span>이용 시간 : ${list.usage_time}시간</span><br>
+	
+	
 	<c:forEach var="skill" items="${rlist.list}">
 	<span>예약 스킬 : ${skill.payname}</span><br>
 	</c:forEach>
@@ -81,6 +83,7 @@ $(function(){
 	<span>반려동물 특이사항 : ${rlist.pet_ect}</span><br><br>
 </c:forEach>
 
+<span>이용 시간 : ${usageTime}시간</span><br>
 <span>예약 총 금액 :${payMent}</span><br><br>
 
 <button id="approval_btn">승인</button>
