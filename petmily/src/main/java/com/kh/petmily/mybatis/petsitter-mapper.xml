@@ -296,9 +296,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getReservationMap" resultType="reservationAllVO" parameterType="int">
 		select * from reservationall where reservation_no= #{reservation_no}
-	</select>	
+	</select>
+	
+		
+	<!-- 견적 승인시 예약 상태	 '대기'->'승인'으로 변경  -->
+	<update id="reservationStatusUpdate" parameterType="int">
+		update reservation	set status = '승인' 
+		where reservation_no = #{reservation_no} 
+	</update>
+	
+	<!-- 견적 거절시 테이블에서 해당 내용 삭제 -->
+	<delete id="reservationDelete" parameterType="int">
+		delete reservation 
+		where reservation_no = #{reservation_no} 
+	</delete>
+	
 </mapper>
-
 
 
 
