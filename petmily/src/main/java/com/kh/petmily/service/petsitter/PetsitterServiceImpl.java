@@ -178,6 +178,16 @@ public class PetsitterServiceImpl implements PetsitterService {
 		List<ReservationListVO> reservationList = reservationDao.getReservation(reservation_no);
 		return reservationList;
 	}
+	// 예약 상태 승인으로 변경
+	@Override
+	public void reservationStatusUpdate(int reservation_no) {
+		reservationDao.reservationStatusUpdate(reservation_no);
+	}
+	// 예약 내용 삭제
+	@Override
+	public void reservationDelete(int reservation_no) {
+		reservationDao.reservationDelete(reservation_no);		
+	}
 	
 	
 

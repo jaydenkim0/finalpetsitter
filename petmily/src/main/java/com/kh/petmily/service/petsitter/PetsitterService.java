@@ -24,4 +24,9 @@ public interface PetsitterService {
 	void reservation(int reservation_no,ReservationVO reservationVO);//예약 등록
 	PetsitterVO get(int pet_sitter_no);//펫시터 단일 조회
 	List<ReservationListVO> getReservation(int reservation_no);//펫시터 예약 조회
+	
+	// 예약 상태 승인으로 변경
+	void reservationStatusUpdate(int reservation_no);
+	// 예약 내용 삭제
+	void reservationDelete(int reservation_no);
 }
