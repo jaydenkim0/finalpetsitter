@@ -69,9 +69,9 @@ $(function(){
 	<span>예약 번호 : ${rlist.reservation_no}</span><br>
 	<span>예약 회원 : ${rlist.member_id}</span><br>
 	<span>예약 날짜 : ${rlist.matching_time}</span><br>
-	<span>이용 시간 : ${list.usage_time}시간</span><br>
 	<c:forEach var="skill" items="${rlist.list}">
 	<span>예약 스킬 : ${skill.payname}</span><br>
+	<span>이용 시간 : ${skill.usage_time}시간</span><br>
 	</c:forEach>
 	
 	<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${list.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">

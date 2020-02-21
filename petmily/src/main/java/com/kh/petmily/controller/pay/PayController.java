@@ -1,6 +1,7 @@
 package com.kh.petmily.controller.pay;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.repository.kakao.PayDao;
 import com.kh.petmily.service.kakao.PayService;
+import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.kakao.KakaoPayReadyVO;
 import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.kakao.KakaoPaySuccessReadyVO;
 import com.kh.petmily.vo.kakao.KakaoPaySuccessReturnVO;
 import com.kh.petmily.vo.kakao.PayReadyReturnVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,9 +38,28 @@ public class PayController {
 	@Autowired
 	private PayDao payDao;
 	
+	@Autowired
+	private PetsitterService petsitterService;
+	
 	@GetMapping("/account")
-	public String account() {
-		return "pay/account";
+	public String account(@RequestParam int reservation_no,
+			Model model) {
+		//회원아이디 -펫시터 아이디
+		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);
+		//최종 결제 금액 구하기
+		int payMent = 0;
+		for(ReservationListVO vo : reservationList) {
+			List<ReservationAllVO> all = vo.getList();
+			for(ReservationAllVO allVO : all) {
+					int usagetime = allVO.getUsage_time();
+					int oneHour = usagetime * 10000;
+					int payment = allVO.getPayment();
+					payMent = oneHour + payment;				
+				}
+		}
+			model.addAttribute("reservationList", reservationList)
+			.addAttribute("payMent", payMent);
+			return "pay/account";
 	}
 	@PostMapping("/account")
 	public String account(@ModelAttribute KakaoPayReadyVO kpayReadyVO, HttpSession session) throws URISyntaxException {
