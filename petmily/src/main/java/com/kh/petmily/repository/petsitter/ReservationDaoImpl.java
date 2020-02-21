@@ -41,14 +41,27 @@ public class ReservationDaoImpl implements ReservationDao {
 												.usage_time(reservationPayDto.getUsage_time())
 												.build());
 		}
-		System.out.println(payinfoList.toString());
-		
+		System.out.println(payinfoList.toString());		
 		sqlSession.insert("petsitter.registPay", payinfoList);
 	}
-
+	
+	
 	@Override
 	public List<ReservationListVO> getReservation(int reservation_no) {
 		return sqlSession.selectList("petsitter.getReservation", reservation_no);
 	}
+
+	// 예약 상태 승인으로 변경
+	@Override
+	public void reservationStatusUpdate(int reservation_no) {
+		sqlSession.update("petsitter.reservationStatusUpdate", reservation_no);
+	}
+	// 예약 내용 삭제
+	@Override
+	public void reservationDelete(int reservation_no) {
+		sqlSession.delete("petsitter.reservationDelete", reservation_no);
+	}
+	
+	
 
 }
