@@ -216,7 +216,7 @@ public class PetsitterController {
 		String memberemail = memberVO.getEmail();
 		String result;
 		if(check.equals("승인")) {	//승인(회원에게 결제 주소 전달)
-				result = aemailService.PaymentReqEMail(id, memberemail, sitter_no);
+				result = aemailService.PaymentReqEMail(id, memberemail, sitter_no, reservation_no);
 				// 예약 상태 승인으로 변경
 				petsitterService.reservationStatusUpdate(reservation_no);
 		}else {	// 거절(content 포함해서 이메일 전송)

@@ -54,7 +54,7 @@
 	<!-- 리스트 내용 -->
 	<c:forEach var="reservation"  items="${list}">		
 		<c:choose>
-			<c:when test="${reservation.status == '대기' && reservation.kakaopaystatus eq null }">
+			<c:when test="${reservation.status eq '대기' && reservation.kakaopaystatus eq null }">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
 					예약 번호 : ${reservation.reservation_no} |
@@ -64,16 +64,45 @@
 				</h4>
 				</a>		
 			</c:when>	
-			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq null }">
+			<c:when test="${reservation.status eq '승인' && reservation.kakaopaystatus eq null }">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
-				<h4>
+				<h4 style="background:#e4e4e4;">
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : ${reservation.status} |
 					결제 상테 :  회원이 결제 준비 중 |
 				</h4>
-				</a>		
-			
+				</a>					
+			</c:when>
+			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '대기' }">
+				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
+				<h4 >
+					예약 번호 : ${reservation.reservation_no} |
+					신청 회원 : ${reservation.member_id} |		
+					견적 상태 : ${reservation.status} |
+					결제 상테 : ${reservation.kakaopaystatus} |
+				</h4>
+				</a>	
+			</c:when>
+				<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '완료' }">
+				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
+				<h4>
+					예약 번호 : ${reservation.reservation_no} |
+					신청 회원 : ${reservation.member_id} |		
+					견적 상태 : ${reservation.status} |
+					결제 상테 : ${reservation.kakaopaystatus} |
+				</h4>
+				</a>	
+			</c:when>
+			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '취소' }">
+				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
+				<h4 style="background:#ea4b4b; color: white;">
+					예약 번호 : ${reservation.reservation_no} |
+					신청 회원 : ${reservation.member_id} |		
+					견적 상태 : ${reservation.status} |
+					결제 상테 : ${reservation.kakaopaystatus} |
+				</h4>
+				</a>	
 			</c:when>
 		</c:choose>
 	</c:forEach>		
