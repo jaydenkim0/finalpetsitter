@@ -8,11 +8,14 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 
 public interface MemberDao {	
 	
+	//회원가입
 	void regist(MemberDto memberDto);
 	
+	//로그인
 	MemberDto login(MemberDto memberDto);
 
 	//내정보조회
@@ -110,6 +113,12 @@ public interface MemberDao {
 
 	//경고횟수
 	int blackcount(String id);
+
+	//내가 쓴 리뷰
+	List<ReviewSitterDto> myreview(String id,int start, int finish);
+
+	//내가 쓴 리뷰 개수 세기
+	int getmyreviewCount(String id);
 
 
 }

@@ -26,7 +26,7 @@
       <input type="hidden" name="partner_order_id" value="${rlist.reservation_no}" readonly>
       ${rlist.reservation_no}
       </td>
-      <td>${rlist.TotalMatchingTime}</td>
+      <td>${rlist.matching_time}</td>
       <td>
       <input type="hidden" name="partner_user_id" value="${rlist.member_id}" readonly>
       ${rlist.member_id}

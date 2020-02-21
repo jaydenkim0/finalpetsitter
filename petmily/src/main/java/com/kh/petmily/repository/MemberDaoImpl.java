@@ -17,6 +17,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -236,6 +237,22 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int blackcount(String id) {
 		return sqlSession.selectOne("member.blackcount",id);
+	}
+
+	//내가 쓴 리뷰
+	@Override
+	public List<ReviewSitterDto> myreview(String id,int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start",start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.myreview",map);
+	}
+
+	//내가 쓴 리뷰 개수 세기
+	@Override
+	public int getmyreviewCount(String id) {
+		return sqlSession.selectOne("member.getmyreviewCount",id);
 	}
 
 

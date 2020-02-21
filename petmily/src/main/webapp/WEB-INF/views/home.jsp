@@ -34,8 +34,8 @@
 		<a href="petsitter/regist"><button>펫시터 가입</button></a>
 	</c:if>
 	
-	<a href="member/mylist">
-		<button>내정보관리</button>
+	<a href="member/mypage">
+		<button>마이페이지</button>
 	</a>
 	
 	<a href="member/logout">
