@@ -159,6 +159,9 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 											.fromCurrentContextPath()
 											.port(8080)
 											.path("/petsitter/paymentlogin")
+											//	     pay/account --> 결제버튼
+											//     pay/success --->결제완료
+											//     pay/list ---->결제리스트
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
 											.queryParam("reservation_no", reservation_no)
@@ -188,8 +191,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// step2-2 펫시터가 견적을 거부하면 반려사유와 함께 취소이메일 전달
 	@Override
 	public String NoestimateEMail(String id, String memberemail, String content, String sitter_id) {
-		try {	
-							
+		try {							
 					// 메세지 객체 생성
 					SimpleMailMessage message = new SimpleMailMessage ();
 					// 정보설정 : 대상정보(email, 제목, 내용)

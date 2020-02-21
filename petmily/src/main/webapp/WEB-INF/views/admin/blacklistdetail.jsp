@@ -16,9 +16,9 @@
 				<div style="color:red;">
 					<table>
 						<tr>
-							<td> 아이디 : ${blackListdetail.black_id}							
+							<td> 아이디 : ${blackListdetail.black_id}	|						
 							<a href="${pageContext.request.contextPath}/admin//petsitter/petsitterdetail?pet_sitter_no=${blackListdetail.pet_sitter_no}">							
-							| 회원정보 보기
+							회원정보 보기
 							</a>
 							</td>				
 						</tr>
@@ -68,9 +68,9 @@
 				<div style="color:#ff8d00;">
 									<table>
 						<tr>
-							<td> 아이디 : ${blackListdetail.black_id}
+							<td> 아이디 : ${blackListdetail.black_id} |
 							<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${blackListdetail.black_id}">
-							| 회원정보 보기
+							회원정보 보기
 							</a>
 							</td>				
 						</tr>
