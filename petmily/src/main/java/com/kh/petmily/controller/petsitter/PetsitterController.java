@@ -187,6 +187,7 @@ public class PetsitterController {
 		//최종 결제 금액 구하기
 		int payMent = 0;
 		int totalTime =0;
+		String date = null;
 		for(ReservationListVO vo : reservationList) {
 			List<ReservationAllVO> all = vo.getList();
 			totalTime = all.get(0).getUsage_time();
@@ -195,7 +196,7 @@ public class PetsitterController {
 				int usagetime = allVO.getUsage_time();
 				int oneHour = usagetime * 10000;
 				int payment = allVO.getPayment();
-				payMent = oneHour + payment;				
+				payMent = oneHour + payment;			
 			}
 		}
 		
