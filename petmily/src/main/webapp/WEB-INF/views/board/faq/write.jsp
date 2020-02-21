@@ -67,13 +67,11 @@
 	<table border="1" width="70%">
 		<tr>
 			<th>말머리<th>
-			<td>
 			 <select name="faq_title">
 				<option>전체공지</option>
 				<option>펫시터공지</option>
 				<option>유저공지</option>
 			</select>
-		</td>
 	</tr>
 	<tr>
 		<th>제목</th>
