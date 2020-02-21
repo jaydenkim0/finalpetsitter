@@ -22,7 +22,7 @@ public interface AdminEmailService {
 			
 	
 	// 펫시터 -> 회원에게 견정 승인시 발송되는 이메일
-	String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException;		
+	String PaymentReqEMail(String id, String memberemail, int sitter_no,  int reservation_no) throws MessagingException;		
 	// 펫시터가 견적을 거부하면 반려사유와 함께 취소이메일 전달
 	String NoestimateEMail(String id, String memberemail, String content, String sitter_id);
 	
