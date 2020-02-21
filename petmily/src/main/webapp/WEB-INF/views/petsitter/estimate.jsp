@@ -131,8 +131,8 @@ $(function(){
 		<label for="mt">가능한 돌봄 종류</label>
 		<select id="mt" name="payinfo_no">
             <option value="">서비스 종류 선택</option>
-			<option value="2">방문서비스</option>
-			<option value="3">위탁서비스</option>
+			<option value="3">방문서비스</option>
+			<option value="2">위탁서비스</option>
 		</select>
     </div>
 
@@ -192,13 +192,13 @@ $(function(){
 
 <!-- 이용할 스킬 -->	
     <div class="skill">
-        <input type="checkbox" id="sick" value="6" name="payinfo_no" data-skills="투약">
+        <input type="checkbox" id="sick" value="5" name="payinfo_no" data-skills="투약">
         <label for="sick">투약</label>
         
-        <input type="checkbox" id="old" value="41" name="payinfo_no" data-skills="노령견테어">
+        <input type="checkbox" id="old" value="6" name="payinfo_no" data-skills="노령견테어">
         <label for="old">노령견케어</label>
         
-        <input type="checkbox" id="kitten" value="42" name="payinfo_no" data-skills="키튼케어">
+        <input type="checkbox" id="kitten" value="7" name="payinfo_no" data-skills="키튼케어">
         <label for="kitten" >키튼케어</label>
         
         <input type="checkbox" id="walking"  value="4" name="payinfo_no" data-skills="도그워킹">
