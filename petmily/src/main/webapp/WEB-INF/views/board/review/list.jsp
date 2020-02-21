@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  
-
+ 
 
 
 <h1>리뷰 게시판</h1>
+<section>
 <table border="1" width="100%">
 <tr>
 	<th>글번호</th>
@@ -27,9 +27,9 @@
 	<td>${reviewDto.review_content}</td>
 	<td>${reviewDto.review_star}</td>
 	<td>${reviewDto.review_wdate}</td>
-	<td width="100">
-	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}">
-	<button type="button" id="btnupdate">수정</button>
+	<td width="40">
+<%-- 	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}"> --%>
+<!-- 	<button type="button" id="btnupdate">수정</button> -->
 </a>
 <a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
 	<button type="button" id="btndelete">삭제</button>
@@ -38,4 +38,14 @@
 </tr>
 </c:forEach>
 </table>
+<div class="row">
+<!-- 네비게이터(navigator) -->
+		<jsp:include page="/WEB-INF/views/board/review/navigator.jsp">
+			<jsp:param name="pno" value="${pno}" />
+			<jsp:param name="count" value="${count}" />
+			<jsp:param name="navsize" value="${navsize}" />
+			<jsp:param name="pagesize" value="${pagesize}" />
+		</jsp:include>
+		</div>
+	</section>
 

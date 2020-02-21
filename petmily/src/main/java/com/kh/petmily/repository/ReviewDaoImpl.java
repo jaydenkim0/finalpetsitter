@@ -1,7 +1,8 @@
 package com.kh.petmily.repository;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,15 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public double star(int pet_sitter_no) {
 		return sqlSession.selectOne("review.star", pet_sitter_no);		
+	}
+	@Override
+	public List<ReviewDto> listall(String type, String keyword, int start, int finish) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("type",type);
+		map.put("keyword",keyword);
+		map.put("start",start);
+		map.put("finish",finish);
+		return sqlSession.selectList("review.reviewlistAll",map);
 	}
 
 		

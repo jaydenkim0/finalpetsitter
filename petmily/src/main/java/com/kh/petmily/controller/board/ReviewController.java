@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletMapping;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -63,13 +64,71 @@ public class ReviewController {
 		return "redirect:/petsitter/list";
 	}
 
-//-리뷰 목록----------------------------------------------------------------------------	
-	@GetMapping("/list")
-	public String list(Model model) {
-		List<ReviewDto>list = reviewService.list();
-		model.addAttribute("list",list);	
-		return "board/review/list";     	
+////-리뷰 목록----------------------------------------------------------------------------	
+//	@GetMapping("/list")
+//	public String list(Model model) {
+//		List<ReviewDto>list = reviewService.list();
+//		model.addAttribute("list",list);	
+//		return "board/review/list";     	
+//}
+	@RequestMapping("/list")
+	public String list (HttpServletRequest req, HttpServletResponse resp,Model model) throws Exception{
+		int pagesize = 10;
+		int navsize=10;
+		int pno;
+		try{
+			pno =  Integer.parseInt(req.getParameter("pno"));
+			if(pno <= 0) throw new Exception();
+		}
+		catch(Exception e) {
+			pno = 1;
+		}
+		int finish = pno * pagesize;
+		int start = finish - (pagesize -1);
+		
+		String type = req.getParameter("type");
+		String keyword = req.getParameter("keyword");
+		
+		boolean isSearch = type != null && keyword != null;
+		
+		List<ReviewDto>list;
+		
+		if(isSearch) {
+			list = reviewService.listAll(type,keyword,start,finish);
+		}
+		else {
+			list = reviewService.getList(start,finish);
+		}
+		int count = reviewService.getCount(type, keyword);
+		
+		//뷰에서 필요한 데이터를 첨부(5개)
+		//System.out.println(list.size());
+		model.addAttribute("pno", pno);
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("pagesize", pagesize);
+		model.addAttribute("navsize", navsize);
+		return "board/review/list";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 //리뷰 시터조회목록----------------------------------------------------------------------------	
 	@GetMapping("/listsearch")

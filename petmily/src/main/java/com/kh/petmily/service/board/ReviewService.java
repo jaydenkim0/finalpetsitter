@@ -20,6 +20,9 @@ public interface ReviewService {
 	void pointplus(ReviewDto reviewDto);
 		// TODO Auto-generated method stub
 	double star(int pet_sitter_no);
+	List<ReviewDto> listAll(String type, String keyword, int start, int finish);
+	List<ReviewDto> getList(int start, int finish);
+	int getCount(String type, String keyword);
 		
 	//리뷰 별점 
 	

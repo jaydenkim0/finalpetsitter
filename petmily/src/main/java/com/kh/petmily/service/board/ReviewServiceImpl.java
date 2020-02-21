@@ -40,6 +40,20 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDao.star(pet_sitter_no);
 		
 	}
+	@Override
+	public List<ReviewDto> listAll(String type, String keyword, int start, int finish) {
+		return reviewDao.listall(type,keyword,start,finish);
+	}
+	@Override
+	public List<ReviewDto> getList(int start, int finish) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int getCount(String type, String keyword) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 

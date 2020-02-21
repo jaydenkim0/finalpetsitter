@@ -78,6 +78,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  
    
 	</select>
+	
+	<!-- 리뷰 이용자만 작성자표시-->
+  
+  <!-- 게시글 검색 목록 조회 -->
+	<select id="reviewlistAll" parameterType="map" resultType="ReviewDto">
+		select*from (
+		select rownum as rn, A.* from(
+		select
+		faq_no,faq_title,faq_head,faq_content,wdate,member_id
+		from FAQ
+		where
+		${type} like '%'||#{keyword}||'%'
+		order by faq_no desc, wdate desc
+		) A
+		)
+		where rn between #{start} and #{finish}
+	</select>
+	
+	
+
  	
 </mapper>
 
