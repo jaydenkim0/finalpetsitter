@@ -20,6 +20,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -303,6 +304,12 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int blackcount(String id) {
 		return memberDao.blackcount(id);
+	}
+
+	//내가 쓴 리뷰
+	@Override
+	public List<ReviewSitterDto> myreview(String id) {
+		return memberDao.myreview(id);
 	}
 	}
 

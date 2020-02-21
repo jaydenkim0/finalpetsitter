@@ -27,6 +27,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -258,27 +259,6 @@ public class MemberController {
 	}
 
 		
-		//내정보보기
-		@GetMapping("/mylist")
-		public String mylist(
-				HttpSession session,
-				Model model) {
-			
-			String id = (String) session.getAttribute("id");
-			
-			MemberDto list = memberService.mylist(id);
-			model.addAttribute("mylist",list);
-			
-			//해당 회원의 회원 이미지 번호 구해오기
-			Integer member_image_no = memberService.member_image_no(id);
-			model.addAttribute("member_image_no",member_image_no);
-			
-			List<PetImagePetDto> petlist = memberService.mylistpet(id);
-			model.addAttribute("mylistpet",petlist);
-			
-			return "member/mylist";
-		}
-		
 		//아이디중복검사
 		@RequestMapping(value="idCheck",method = RequestMethod.GET)
 		@ResponseBody
@@ -434,7 +414,7 @@ public class MemberController {
 			}
 			
 			return "redirect:mylist";
-		}
+		}	
 		
 		//마이페이지 연결
 		@GetMapping("/mypage")
@@ -442,15 +422,50 @@ public class MemberController {
 			return "member/mypage";
 		}
 		
+		//내정보보기
+		@GetMapping("/mylist")
+		public String mylist(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			return "member/mylist";
+		}
+		
 		//내가 쓴 리뷰 페이지 연결
 		@GetMapping("/myreview")
-		public String myreview() {
+		public String myreview(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			List<ReviewSitterDto> review = memberService.myreview(id);
+			
+			model.addAttribute("review",review);
+			
 			return "member/myreview";
 		}
 		
 		//내 예약 조회 페이지 연결
 		@GetMapping("/myreservation")
-		public String myreservation() {
+		public String myreservation(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
 			return "member/myreservation";
 		}
 	}
