@@ -35,13 +35,13 @@
 			<td>
 				<c:choose>
 					<c:when test="${reviewlist.review_star==3 }">
-						<img src="/petmily/resources/img/3.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/3.png" style="width: auto; height: 20px;">
 					</c:when>
 					<c:when test="${reviewlist.review_star==2 }">
-						<img src="/petmily/resources/img/2.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/2.png" style="width: auto; height: 20px;">
 					</c:when>
 					<c:otherwise>
-						<img src="/petmily/resources/img/1.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/1.png" style="width: auto; height: 20px;">
 					</c:otherwise>
 				</c:choose>
 			</td>
@@ -49,5 +49,16 @@
 		</tr>
 	</c:forEach>
 </table>
+
+<div class="row" >
+	<!-- 네비게이터(navigator) -->
+	<jsp:include page="/WEB-INF/views/board/care/navigator_content.jsp">
+		<jsp:param name="pno" value="${pno}"/>
+		<jsp:param name="count" value="${count}"/>
+		<jsp:param name="navsize" value="${navsize}"/>
+		<jsp:param name="pagesize" value="${pagesize}"/>
+		<jsp:param name="care_board_no" value="${care_board_no }"/>
+	</jsp:include>
+</div><br><br><br><br>
 
 </div>

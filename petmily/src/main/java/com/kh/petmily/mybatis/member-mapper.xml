@@ -295,18 +295,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 내가 쓴 리뷰 -->
-	<select id="myreview" parameterType="String" resultType="reviewSitterDto">
-		select 
-			R.*,
-			P.sitter_id
-		from 
-			review R
-				inner join pet_sitter P
-				on R.review_sitter_no=P.pet_sitter_no
-		where
-			R.review_writer=#{id}
-		order by
-			R.review_wdate desc
+	<select id="myreview" parameterType="map" resultType="reviewSitterDto">
+		select*from (
+			select rownum as rn, A.* from(		
+				select 
+					R.*,
+					P.sitter_id
+				from 
+					review R
+						inner join pet_sitter P
+						on R.review_sitter_no=P.pet_sitter_no
+				where
+					R.review_writer=#{id}
+				order by
+					R.review_wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 내가 쓴 리뷰 개수 세기 -->
+	<select id="getmyreviewCount" parameterType="String" resultType="int">
+		select count(*) from review where review_writer=#{id}
 	</select>
 </mapper>
 

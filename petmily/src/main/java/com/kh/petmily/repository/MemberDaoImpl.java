@@ -241,8 +241,18 @@ public class MemberDaoImpl implements MemberDao {
 
 	//내가 쓴 리뷰
 	@Override
-	public List<ReviewSitterDto> myreview(String id) {
-		return sqlSession.selectList("member.myreview",id);
+	public List<ReviewSitterDto> myreview(String id,int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start",start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.myreview",map);
+	}
+
+	//내가 쓴 리뷰 개수 세기
+	@Override
+	public int getmyreviewCount(String id) {
+		return sqlSession.selectOne("member.getmyreviewCount",id);
 	}
 
 

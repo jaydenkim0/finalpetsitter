@@ -110,7 +110,10 @@ public interface MemberService {
 	int blackcount(String id);
 
 	//내가 쓴 리뷰
-	List<ReviewSitterDto> myreview(String id);
+	List<ReviewSitterDto> myreview(String id,int start, int finish);
+
+	//내가 쓴 리뷰 개수 세기
+	int getmyreviewCount(String id);
 
 
 }
