@@ -1,6 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<head>
+
+<style>
+li{
+  	list-style-type:none;
+  	float:left;
+  	margin-left:20px;	
+}
+</style>
+
+</head>
+
+<body>
+
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
 
@@ -50,9 +64,9 @@
 	</c:forEach>
 </table>
 
-<div class="row" >
+<div class="row">
 	<!-- 네비게이터(navigator) -->
-	<jsp:include page="/WEB-INF/views/board/care/navigator_content.jsp">
+	<jsp:include page="/WEB-INF/views/member/navigator_myreview.jsp">
 		<jsp:param name="pno" value="${pno}"/>
 		<jsp:param name="count" value="${count}"/>
 		<jsp:param name="navsize" value="${navsize}"/>
@@ -62,3 +76,5 @@
 </div><br><br><br><br>
 
 </div>
+
+</body>

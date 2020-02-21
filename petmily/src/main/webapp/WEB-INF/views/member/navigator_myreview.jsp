@@ -43,10 +43,10 @@
 	<c:if test="${startBlock > 1}">
 		<c:choose>
 			<c:when test="${isSearch}">
-				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
+				<li><a href="${context}/member/myreview?type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${startBlock-1}">이전</a></li>
+				<li><a href="${context}/member/myreview?pno=${startBlock-1}">이전</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -59,10 +59,10 @@
 			<c:otherwise>
 				<c:choose>
 					<c:when test="${isSearch}">
-						<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${i}">${i}</a></li>
+						<li><a href="${context}/member/myreview?type=${type}&keyword=${keyword}&pno=${i}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${i}">${i}</a></li>
+						<li><a href="${context}/member/myreview?pno=${i}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:otherwise>
@@ -73,10 +73,10 @@
     <c:if test="${finishBlock+1 < pageCount}">
     	<c:choose>
 			<c:when test="${isSearch}">
-				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
+				<li><a href="${context}/member/myreview?type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${context}/board/care/content?care_board_no=${care_board_no }&pno=${finishBlock+1}">다음</a></li>	
+				<li><a href="${context}/member/myreview?pno=${finishBlock+1}">다음</a></li>	
 			</c:otherwise>
 		</c:choose>
 	</c:if>

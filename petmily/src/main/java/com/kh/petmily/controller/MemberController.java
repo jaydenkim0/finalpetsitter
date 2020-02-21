@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -461,7 +462,8 @@ public class MemberController {
 		@GetMapping("/myreview")
 		public String myreview(
 				HttpSession session,
-				Model model) {
+				Model model,
+				HttpServletRequest req) {
 			
 			String id = (String) session.getAttribute("id");
 			
