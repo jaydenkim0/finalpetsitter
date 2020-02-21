@@ -85,6 +85,7 @@
 
 
 <h1>펫시터 견적확인 페이지</h1>
+
 		<c:forEach var="rlist" items="${reservationList}">
 			<span>예약 번호 : ${rlist.reservation_no}</span><br>
 			<span>예약 회원 : ${rlist.member_id}</span><br>
@@ -125,5 +126,6 @@
 			</form>
 		</c:forEach>
 		
+		<span>예약 이용 시간 : ${usageTime}시간</span><br>
 		<span>예약 총 금액 :${payMent}</span><br><br>
-		
+
