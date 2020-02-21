@@ -20,6 +20,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.MemberDao;
 
 @Service
@@ -299,10 +300,22 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.isBlack(id);
 	}
 
-	//경고횟순
+	//경고횟수
 	@Override
 	public int blackcount(String id) {
 		return memberDao.blackcount(id);
+	}
+
+	//내가 쓴 리뷰
+	@Override
+	public List<ReviewSitterDto> myreview(String id, int start, int finish) {
+		return memberDao.myreview(id,start,finish);
+	}
+
+	//내가 쓴 리뷰 개수 세기
+	@Override
+	public int getmyreviewCount(String id) {
+		return memberDao.getmyreviewCount(id);
 	}
 	}
 
