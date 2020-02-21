@@ -122,6 +122,7 @@ public class MemberController {
 		return "member/login";		
 	}
 	
+	// 로그인 검사
 	@PostMapping("/login")
 	public String login(
 			@ModelAttribute MemberDto memberDto, 
@@ -129,8 +130,7 @@ public class MemberController {
 			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
-		if(find == null) {
-			
+		if(find == null) {// 아이디가 없으면  -> 에러			
 			return"redirect:/member/login?error"; 
 		}else { //아이디가 있으면 --> 비밀번호 매칭검사
 				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
@@ -150,8 +150,7 @@ public class MemberController {
 									blackcount = 0;
 								}
 								model.addAttribute("blackcount",blackcount);
-								return "redirect:/";		
-		
+								return "redirect:/";				
 			}else { // 비밀번호 불일치
 				    return "redirect:/login?error";		
 			}
