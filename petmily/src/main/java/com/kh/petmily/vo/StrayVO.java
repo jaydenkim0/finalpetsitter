@@ -23,6 +23,12 @@ public class StrayVO {
 	private String stray_content;
 	private String wdate;
 	private String writedate; 
+	private int replycount;
+	
+	//-------------------------------------
+	private int groupno, //원글 번호
+	superno, //원글에 대한 순서 (답글 포함)
+	depth; //답글 계층
 	
 	public String getWritedateWithFormat()throws Exception{
 		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
@@ -31,4 +37,6 @@ public class StrayVO {
 		String time = write.format(date);
 		return time;
 	}
+	
+	
 }

@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,8 @@ import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
+import com.kh.petmily.service.MemberService;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 
@@ -43,6 +47,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private AdminEmailService amailService;
+	@Autowired
+	private MemberService memberService;
 	
 	// 메인페이지
 	@GetMapping("/")
@@ -72,23 +78,38 @@ public class AdminController {
 		return "admin/registInfo";
 	}
 	
-	//////////////////////////////////////////////////////////////////
-	
-	// 예약 현황
-	@GetMapping("/reservationstatus")
-	public String reservationstatus() {
-		
-		return "admin/reservationstatus";
-	}
+	//////////////////////////////////////////////////////////////////////
 
+	@GetMapping("/reservationstatusdetail")
+	public String reservationstatusdetail(
+			@RequestParam int reservation_no,
+			Model model) {
+		// 결제에 대한 단일 정보 : accountVO
+		AccountVO acountVO = adminService.reservationstatusdetail(reservation_no);
+		// 결제 가격이름정보 : payifoDto
+		// 펫시터 이름 : petsitterVO
+		int pet_sitter_no = acountVO.getReservation_sitter_no();
+		PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
+		String sitter_id = petsitter.getSitter_id();		
+		List<PayinfoDto> list =  adminService.payinfoName(reservation_no);
+		model.addAttribute("acountOne", acountVO)
+		 		  .addAttribute("payinfo", list)
+		 		  .addAttribute("usage_time",list.get(0).getUsage_time())
+		 		  .addAttribute("sitter_id", sitter_id);		
+		return "admin/reservationstatusdetail";		
+	}	
+		
+	/////////////////////////////////////////////////////////////////////
 	
 	// 회원 디테일 페이지 연결
 	@GetMapping("/memberdetail")
 	public String memberdetail(@RequestParam String id,
 												MemberVO memberVO,												 
 												 Model model) {				
+		Integer member_image_no = memberService.member_image_no(id);
 		model.addAttribute("member", memberVO = adminService.getMemberdetail(id))
-				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id));
+				  .addAttribute("pets", (List<PetDto>)adminService.getPets(id))		
+				  .addAttribute("member_image_no",member_image_no);
 		return "admin/member/memberdetail";			
 	}
 	
@@ -279,8 +300,7 @@ public class AdminController {
 				  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailsleep";		
 	}
-	
-	
+		
 	
 	/////////////////////////////////////////////////////////////////
 	
@@ -295,30 +315,28 @@ public class AdminController {
 	}
 				// 펫시터 블랙리스트 등록 메소드(이메일 전송)
 				@PostMapping("/sitter_blackListpage")
-				@ResponseBody
-				@Transactional
+				@ResponseBody	
 				public String sitter_blackListpage(@ModelAttribute PetsitterDto petsitterDto,
 						@RequestParam String black_content) {		
-					adminService.blackSitter(petsitterDto, black_content);
 					String sitter_id = petsitterDto.getSitter_id();
 					PetsitterVO blacksitter =adminService.PetsitterSearchOne(sitter_id);
 					String id = blacksitter.getSitter_id();
 					String email = blacksitter.getEmail();
 					String grade = blacksitter.getGrade();
 					String result =amailService.blackListAddEmail(id, email, grade, black_content);					
+					adminService.blackSitter(petsitterDto, black_content);
 					return result ;		
 				}	
+				
 	// 블랙리스트 회원 등록
 	@GetMapping("/member_blacklist_content")
-	public String member_blacklist_content(@RequestParam String id, Model model) {
-		
+	public String member_blacklist_content(@RequestParam String id, Model model) {		
 		model.addAttribute("id", id);
 		return "admin/member_blacklist_contetnt";
 	}	
 				// 회원 블랙리스트 등록 메소드 (이메일 전송)
 				@PostMapping("/member_blackListpage")
-				@ResponseBody
-				@Transactional
+				@ResponseBody	
 				public String member_blackListpage(@RequestParam String id,
 						 								@RequestParam String black_content) {						
 					MemberVO blackmember =adminService.getMemberdetail(id);
@@ -352,8 +370,7 @@ public class AdminController {
 		adminService.petsittersecession(sitter_id);
 		adminService.blackListgradechange(sitter_id);
 		return "redirect:blackList";	
-	}
-			
+	}			
 	
 				
 	// 블랙리스트 불러오기
@@ -367,7 +384,7 @@ public class AdminController {
 	}
 	
 	// 블랙리스트 여부 검사 (요청 파라미터 신청시)
-	// 카운터 2회 이상은 탈퇴
+	// 카운터 2회 이상은 탈퇴<?>
 	@GetMapping("/blackLsitcheck")	
 	public void blackLsitcheck(@RequestParam String id,
 												Model model) {
@@ -384,6 +401,7 @@ public class AdminController {
 		// 블랙리스트 디테일 불러오기 -> view로 쏴주기	
 		model.addAttribute("blackListdetail", (PetsitterVO)adminService.blackListdetail(id))
 				  .addAttribute("blacklistcontent", (List<BlackListContentDto>)adminService.blacklistcontent(id));
+		
 		return "admin/blacklistdetail";		
 	}
 	
@@ -417,19 +435,28 @@ public class AdminController {
 		.addAttribute("feesList", (List<PayinfoDto>)adminService.getFeesList());
 		return "admin/accountoption";		
 	}
-	// 가격 정보 등록
-	@PostMapping("/accountoption")
-	public String accountOtion(@ModelAttribute PayinfoDto payinfoDto) {	
-		adminService.accountOtionAdd(payinfoDto);
-		return "redirect:/admin/accountoption";		
-	}
-	// 가격 정보 삭제
-	@GetMapping("/accountoptiondelete")
-	public String accountoptiondelete(
-			@RequestParam int payinfo_no) {
-		adminService.accountoptiondelete(payinfo_no);
-		return "redirect:/admin/accountoption";
-	}
+					// 가격 정보 등록
+					@PostMapping("/accountoption")
+					public String accountOtion(@ModelAttribute PayinfoDto payinfoDto) {	
+						adminService.accountOtionAdd(payinfoDto);
+						return "redirect:/admin/accountoption";		
+					}
+					// 가격 정보 삭제
+					@GetMapping("/accountoptiondelete")
+					public String accountoptiondelete(
+							@RequestParam int payinfo_no) {
+						adminService.accountoptiondelete(payinfo_no);
+						return "redirect:/admin/accountoption";
+					}
+					// 가격 정보 수정
+					@PostMapping("/accountoptionupdate")					
+					public String accountoptionupdate(
+							@ModelAttribute PayinfoDto payinfoDto	) {						
+						adminService.accountoptionupdate(payinfoDto);
+						return "redirect:/admin/accountoption";
+					}
 	
 
+	
+	
 }

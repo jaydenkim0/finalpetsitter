@@ -47,17 +47,39 @@
 		<tr>
 			<th>글번호</th>
 			<th>작성자</th>
-			<th>말머리</th>
 			<th>제목</th>
 			<th>게시일자</th>
 		</tr>
 		<c:forEach var="row" items="${list}">
 			<tr>
 				<td>${row.qna_no}</td>
-				<td>${row.qna_writer}</td>
-				<td>${row.qna_title}</td>
-				<td><a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a>
-				</td>
+				<td>${row.qna_writer}
+				<td align="left">
+					<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 -->
+						<c:forEach var="i" begin="1" end="${row.depth}">
+							&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						
+						<!-- 답글은 이미지를 추가 -->
+						<c:if test="${row.depth > 0}">
+						 <img src="${context}/resources/img/reply.png" width="20" height="10">
+						</c:if>
+						<font color="blue">
+								[${row.qna_title}]
+						</font>					
+						<a href="view?qna_no=${row.qna_no}">
+							<!-- 제목 출력 -->
+							${row.qna_head}
+						</a>
+						
+						<c:if test="${row.replycount > 0}">
+							<!-- 댓글수 출력 -->
+							<font color="red">
+								[${row.replycount}]
+							</font>
+						</c:if>
+					</td>
+<%-- 				<a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a> --%>
 				<td>${row.writedateWithFormat}</td>
 			</tr>
 		</c:forEach>

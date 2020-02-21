@@ -53,7 +53,6 @@
 		<tr>
 			<th>글번호</th>
 			<th>작성자</th>
-			<th>말머리</th>
 			<th>제목</th>
 			<th>게시일자</th>
 		</tr>
@@ -61,9 +60,15 @@
 			<tr>
 				<td>${row.faq_no}</td>
 				<td>${row.member_id}</td>
-				<td>${row.faq_title}</td>
-				<td><a href="${context}/board/faq/view?faq_no=${row.faq_no}">${row.faq_head}</a>
-				</td>
+				<td align="left">
+				<font color="blue">
+								[${row.faq_title}]
+						</font>					
+						<a href="view?faq_no=${row.faq_no}">
+							<!-- 제목 출력 -->
+							${row.faq_head}
+						</a>
+					</td>
 				<td>${row.writedateWithFormat}</td>
 			</tr>
 		</c:forEach>

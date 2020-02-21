@@ -7,6 +7,8 @@ import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
@@ -19,6 +21,12 @@ public interface PetsitterService {
 	int countlocation(String cityKeyword, String areaKeyword);
 	List<PetDto> getPet(String id);
 	
-	void reservation(ReservationVO reservationVO);//예약 등록
+	void reservation(int reservation_no,ReservationVO reservationVO);//예약 등록
 	PetsitterVO get(int pet_sitter_no);//펫시터 단일 조회
+	List<ReservationListVO> getReservation(int reservation_no);//펫시터 예약 조회
+	
+	// 예약 상태 승인으로 변경
+	void reservationStatusUpdate(int reservation_no);
+	// 예약 내용 삭제
+	void reservationDelete(int reservation_no);
 }

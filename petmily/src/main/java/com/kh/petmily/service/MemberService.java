@@ -1,21 +1,19 @@
 package com.kh.petmily.service;
 
 
-import java.util.Map;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 
 public interface MemberService {
 	
@@ -27,7 +25,7 @@ public interface MemberService {
 	MemberDto mylist(String id);
 	
 	//반려동물조회
-	List<PetDto> mylistpet(String id);
+	List<PetImagePetDto> mylistpet(String id);
 
 	//최종로그인업데이트
 	void updatelastlogin(String id);
@@ -74,7 +72,7 @@ public interface MemberService {
 	int pet_no(String pet_name,String pet_age, String pet_type);
 
 	//펫정보 가지고오기
-	PetDto getpet(String pet_no);
+	PetImagePetDto getpet(String pet_no);
 
 	//펫정보수정
 	void petchange(PetDto petDto);
@@ -103,6 +101,12 @@ public interface MemberService {
 	//펫 존재여부에 따라 멤버의 반려동물여부 값 바꾸기
 	void pet_Yes(String id);
 	void pet_No(String id);
+
+	//블랙리스트인지 검사
+	int isBlack(String id);
+
+	//경고횟수
+	int blackcount(String id);
 
 
 }

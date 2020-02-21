@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</insert>
 	
 	<select id = "login" parameterType="memberDto" resultType="memberDto">
-		select * from member where id=#{id} and pw=#{pw}
+		select * from member where id=#{id}
 	</select>
 	
 	<!-- 내정보조회 -->
@@ -55,8 +55,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 반려동물조회 -->
-	<select id="mylistpet" parameterType="String" resultType="petDto">
-		select * from pet where member_id=#{id}
+	<select id="mylistpet" parameterType="String" resultType="petImagePetDto">
+		select 
+			P.pet_no,
+			P.member_id,
+			P.name,
+			P.age,
+			P.type,
+			P.ect,
+			I.pet_image_no,
+			I.savename,
+			I.filetype,
+			I.filesize,
+			I.uploadname
+		from 
+			pet P
+			 	left outer join pet_image I
+				on P.pet_no=I.pet_image_pet_no
+		where 
+			P.member_id=#{id}
 	</select>
 	
 	<!-- 최종로그인 일시 업데이트 -->
@@ -161,8 +178,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펫정보 가지고오기 -->
-	<select id="getpet" parameterType="String" resultType="petDto">
-		select * from pet where pet_no=#{pet_no}
+	<select id="getpet" parameterType="String" resultType="petImagePetDto">			
+		select 
+			P.pet_no,
+			P.member_id,
+			P.name,
+			P.age,
+			P.type,
+			P.ect,
+			I.pet_image_no,
+			I.savename,
+			I.filetype,
+			I.filesize,
+			I.uploadname
+		from 
+			pet P
+			 	left outer join pet_image I
+				on P.pet_no=I.pet_image_pet_no
+		where 
+			P.pet_no=#{pet_no}
 	</select>
 	
 	<!-- 펫정보수정 -->
@@ -249,6 +283,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="pet_No" parameterType="String">
 		update member set pets='아니오' where id=#{id}
 	</update>
+	
+	<!-- 블랙리스트인지 검사 -->
+	<select id="isBlack" parameterType="String" resultType="int">
+		select count(*) from blacklist where black_id=#{id}
+	</select>
+	
+	<!-- 경고횟수 -->
+	<select id="blackcount" parameterType="String" resultType="int">
+		select black_count from blacklist where black_id=#{id}
+	</select>
 </mapper>
 
 

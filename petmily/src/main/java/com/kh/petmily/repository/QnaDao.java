@@ -1,6 +1,9 @@
 package com.kh.petmily.repository;
 
 import java.util.List;
+
+import org.springframework.ui.Model;
+
 import com.kh.petmily.vo.QnaVO;
 
 public interface QnaDao {
@@ -20,5 +23,6 @@ public interface QnaDao {
 		List<QnaVO> getList(int start, int finish);
 		//게시글 번호 구해오기
 		int getSequence();
-
+		//게시글 답글
+		void createReply(QnaVO qnaVO);
 }

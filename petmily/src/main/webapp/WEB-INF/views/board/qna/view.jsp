@@ -194,7 +194,7 @@
 						<button class="reply_edit_btn">완료</button> 
 						<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">
 							<button class="replyDelete_submit">삭제</button>
-						</a>
+						</a>						
 						</th>
 					</tr>
 				</c:if>
@@ -232,6 +232,8 @@
 	
 	<a href="${context}/board/qna/list">
 	<button type="button">문의게시판 목록</button></a>
+	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+	<button type="button">답글쓰기</button></a>
 	</td>
 	</tr>
 	</table>

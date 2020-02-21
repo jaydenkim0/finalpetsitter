@@ -47,7 +47,6 @@
 		<tr>
 			<th>글번호</th>
 			<th>작성자</th>
-			<th>말머리</th>
 			<th>제목</th>
 			<th>게시일자</th>
 		</tr>
@@ -62,17 +61,30 @@
 						<td>비회원</td>
 					</c:otherwise>
 				</c:choose>
-				<c:choose>
-					<c:when test="${row.stray_title ne '완료글'}">
-						<td>${row.stray_title}
-					</c:when>
-					<c:otherwise>
-						<td style="color: red">${row.stray_title}</td>
-					</c:otherwise>
-				</c:choose>
-				<td><a
-					href="${context}/board/stray/view?stray_no=${row.stray_no}">${row.stray_head}</a>
-				</td>
+					<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 -->
+						<td align="left">
+						<c:forEach var="i" begin="1" end="${row.depth}">
+							&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						
+						<!-- 답글은 이미지를 추가 -->
+						<c:if test="${row.depth > 0}">
+						 <img src="${context}/resources/img/reply.png" width="20" height="10">
+						</c:if>
+						<font color="blue">
+								[${row.stray_title}]
+						</font>	
+						<a href="view?stray_no=${row.stray_no}">
+							<!-- 제목 출력 -->
+							${row.stray_head}
+						</a>
+						<c:if test="${row.replycount > 0}">
+							<!-- 댓글수 출력 -->
+							<font color="red">
+								[${row.replycount}]
+							</font>
+						</c:if>
+					</td>
 				<td>${row.writedateWithFormat}</td>
 			</tr>
 		</c:forEach>

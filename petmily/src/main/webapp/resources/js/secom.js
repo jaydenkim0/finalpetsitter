@@ -98,7 +98,7 @@ function sha256(ascii) {
 //목표 : 화면에 존재하는 
 //모든 form에 있는 input[type=password]가 전송될 때 암호화
 $(function(){
-	$("form").submit(function(e){
+	$("form.secure-form").submit(function(e){
 		e.preventDefault();//기본작업 중지
 		//this : 폼
 		
@@ -109,6 +109,7 @@ $(function(){
 			$(this).val(text);
 		});
 		
+		console.log(this);
 		//보낸다(자바스크립트 명령)
 		this.submit();
 	});

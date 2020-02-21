@@ -67,6 +67,9 @@ textarea[name=faq_content] {
 
 	<h2>Save the Pets !</h2>
 	<form method="post" action="insert" enctype="multipart/form-data">
+		<c:if test="${param.superno>0}">
+		<input type="hidden" name="superno" value="${param.superno}">
+		</c:if>
 		<input type="hidden" name="stray_writer" value="${sessionScope.id}">
 		<table border="1" width="70%">
 			<tr>
@@ -74,14 +77,18 @@ textarea[name=faq_content] {
 				<th><select name="stray_title">
 						<option>임시보호</option>
 						<option>입양관련</option>
-						<option>반려동물을 찾습니다</option>
-						<option>주인을 찾습니다</option>
+						<option>반려동물찾습니다</option>
+						<option>주인찾습니다</option>
 						<option>완료글</option>
 				</select>
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input name="stray_head" id="stray_head" size="80"
+				<td>
+				<c:if test="${param.superno > 0}">
+				<input type="text" name="qna_head" value="RE:" id="stray_head" size="75">
+				</c:if>
+				<input name="stray_head" id="stray_head" size="80"
 					placeholder="글 제목 입력"></td>
 			</tr>
 			<tr>

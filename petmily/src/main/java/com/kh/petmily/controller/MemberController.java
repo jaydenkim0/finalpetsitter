@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
+import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -49,6 +51,9 @@ public class MemberController {
 		
 	@Autowired
 	private CertDao certDao;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	
 	@GetMapping("/input")
@@ -78,7 +83,14 @@ public class MemberController {
 			@RequestParam String pet_ect,
 			@RequestParam MultipartFile member_image,
 			@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
-		memberService.regist(memberDto);
+		
+		// 비밀번호 암호화 후 다시 저장
+		String orgin= memberDto.getPw();
+		String result = encoder.encode(orgin);
+		memberDto.setPw(result);
+		// 회원 가입
+		memberService.regist(memberDto);	
+		
 		
 		if(member_image.isEmpty()==false) {
 			memberService.member_image_regist(id,member_image);
@@ -111,20 +123,38 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDto memberDto, HttpSession session) {
+	public String login(
+			@ModelAttribute MemberDto memberDto, 
+			HttpSession session,
+			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
+		if(find == null) {
+			
+			return"redirect:/member/login?error"; 
+		}else { //아이디가 있으면 --> 비밀번호 매칭검사
+				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
+					if (correct == true) {// 비밀번호 일치
+								session.setAttribute("id", find.getId());
+								session.setAttribute("grade", find.getGrade());
+								String id = find.getId();
+								memberService.updatelastlogin(id);
+								
+								//블랙리스트인지 검사
+								int isBlack = memberService.isBlack(id);								
+								int blackcount;
+								if(isBlack>0) {
+									//경고횟수
+									blackcount = memberService.blackcount(id);
+								}else {
+									blackcount = 0;
+								}
+								model.addAttribute("blackcount",blackcount);
+								return "redirect:/";		
 		
-		if(find == null) { //로그인 실패
-		return"redirect:/login?error"; 
-		
-		}
-		else { //로그인 성공
-		session.setAttribute("id", find.getId());
-		session.setAttribute("grade", find.getGrade());
-		String id = find.getId();
-		memberService.updatelastlogin(id);
-		return "redirect:/";
+			}else { // 비밀번호 불일치
+				    return "redirect:/login?error";		
+			}
 		}
 	}
 
@@ -257,7 +287,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylist";
@@ -310,7 +340,7 @@ public class MemberController {
 			model.addAttribute("pet_no",pet_no);
 			
 			//동물정보 가져오기
-			PetDto pet = memberService.getpet(pet_no);
+			PetImagePetDto pet = memberService.getpet(pet_no);
 			model.addAttribute("pet",pet);
 			return "member/petchange";
 		}
@@ -328,7 +358,7 @@ public class MemberController {
 			Integer member_image_no = memberService.member_image_no(id);
 			model.addAttribute("member_image_no",member_image_no);
 			
-			List<PetDto> petlist = memberService.mylistpet(id);
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
 			model.addAttribute("mylistpet",petlist);
 			
 			return "member/mylistchange";
@@ -392,9 +422,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";
@@ -411,9 +441,9 @@ public class MemberController {
 			String id = (String) session.getAttribute("id");
 			int count = memberService.pet_exist(id);
 			if(count==0) {
-				memberService.pet_Yes(id);
-			}else {
 				memberService.pet_No(id);
+			}else {
+				memberService.pet_Yes(id);
 			}
 			
 			return "redirect:mylist";

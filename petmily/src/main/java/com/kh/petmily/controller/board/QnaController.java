@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -55,6 +56,7 @@ public class QnaController {
 		int pagesize = 10;
 		int navsize=10;
 		int pno;
+		
 		try{
 			pno =  Integer.parseInt(req.getParameter("pno"));
 			if(pno <= 0) throw new Exception();
@@ -81,7 +83,6 @@ public class QnaController {
 		int count = qnaService.getCount(type, keyword);
 		
 		//뷰에서 필요한 데이터를 첨부(5개)
-		//System.out.println(list.size());
 		model.addAttribute("pno", pno);
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -94,19 +95,34 @@ public class QnaController {
 	@GetMapping("/write")
 	public String write() {
 		return "board/qna/write";
-	}
-	//게시글 작성 처리
+		}
+	//게시글 작성 처리(+답변 글)
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute QnaVO qnaVO,
 			HttpSession session,
+			@RequestParam(required = false, defaultValue = "0") int superno,
 			@RequestParam List<MultipartFile> qna_file) throws Exception{
 		String qna_writer = (String)session.getAttribute("qna_writer");
+	
 		int no = qnaDao.getSequence();
-		qnaVO.setQna_no(no);
-		qnaService.create(qnaVO);
-		qnaService.uploadFile(no,qna_file);
+		
+		if(superno == 0) {
+			qnaVO.setQna_no(no);
+			qnaService.create(qnaVO);
+			qnaService.uploadFile(no,qna_file);
+		}
+		else {
+			QnaVO target = qnaDao.read(superno);
+			qnaVO.setQna_no(no);
+			qnaVO.setSuperno(target.getQna_no());
+			qnaVO.setGroupno(target.getGroupno());
+			qnaVO.setDepth(target.getDepth());
+			qnaService.create(qnaVO);
+			qnaService.uploadFile(superno,qna_file);
+		}
 		return "redirect:list";
 	}
+	
 	//게시글 상세내용 조회
 	@GetMapping("/view")
 	public String view(@ModelAttribute QnaVO qnaVO, 
@@ -172,5 +188,11 @@ public class QnaController {
 		qnaReplyService.replyDelete(qnaReplyVO);
 		model.addAttribute("qna_no", origin);
 		return "redirect:/board/qna/view";
+	}
+	//댓글 카운트
+	@RequestMapping("/replyCal")
+	@ResponseBody
+	public void replyCal(@ModelAttribute QnaReplyVO qnaReplyVO) {
+	qnaReplyService.replyCal(qnaReplyVO);
 	}
 }

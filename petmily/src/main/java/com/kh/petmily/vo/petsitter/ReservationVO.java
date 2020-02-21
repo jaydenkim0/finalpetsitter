@@ -12,7 +12,6 @@ public class ReservationVO {
 	private int reservation_no;
 	private String member_id; 
 	private int reservation_sitter_no; 
-	private String matching_type; 
 	private String matching_time; 
 	private String pet_name; 
 	private String ect; 
@@ -22,4 +21,5 @@ public class ReservationVO {
 	private List<Integer> payinfo_no;
 	private int pay_reservation_no;
 	private int usage_time;
+	
 }

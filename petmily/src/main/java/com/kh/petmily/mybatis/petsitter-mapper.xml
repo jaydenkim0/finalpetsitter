@@ -185,6 +185,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
 		<result column="nick" property="nick"/>
 		<result column="info" property="info"/>
+		<result column="member_image_no" property="member_image_no"/>
+		<result column="member_image_member_id" property="member_image_member_id"/>
 		
 		<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap"></collection>
 	</resultMap>
@@ -193,14 +195,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="locationListAll" resultMap="sitter" parameterType="map">
 		select * from (
         	select rownum rn, A.* from(
-        		select distinct petsitter.* from petsitter inner join (
-					select * from location 
-					<if test="cityKeyword != '' and areaKeyword != ''">
-						where city = #{cityKeyword} and area = #{areaKeyword}
-					</if>
-            	)L on petsitter.pet_sitter_no = L.location_sitter_no)A         
+        	     select B.* from( 
+	        		select distinct petsitter.*, M.* from petsitter inner join (
+						select * from location 
+						<if test="cityKeyword != '' and areaKeyword != ''">
+							where city = #{cityKeyword} and area = #{areaKeyword}
+						</if>
+	            	)L on petsitter.pet_sitter_no = L.location_sitter_no
+		          left outer join member_image M on petsitter.id = m.member_image_member_id	
+		         )B
+            	)A         
 			where sitter_status = '정상' order by pet_sitter_no desc)
-        where rn between #{start} and #{end}
+        where rn between #{start} and #{end} order by rn
 	</select>
 	
 	<select id="getLocationListMap" resultType="locationDto" parameterType="int">
@@ -252,8 +258,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{reservationPayDto.usage_time})
 			</foreach>
 	</insert>	
+		
+<!-- 펫시터 예약 조회 -->
+	<!-- 예약 정보 조회 -->
+		<resultMap type="reservationListVO" id="reservation">
+		<result column="reservation_no" property="reservation_no"/>
+		<result column="reservation_sitter_no" property="reservation_sitter_no"/>
+		<result column="member_id" property="member_id"/>
+		<result column="matching_time" property="matching_time"/>
+		<result column="pet_name" property="pet_name"/>
+		<result column="usage_time" property="usage_time"/>
+		<result column="payname" property="payname"/>
+		<result column="pet_no" property="pet_no"/>
+		<result column="age" property="age"/>
+		<result column="type" property="type"/>
+		<result column="pet_ect" property="pet_ect"/>
+		<result column="pet_image_no" property="pet_image_no"/>
+		<result column="pet_image_pet_no" property="pet_image_pet_no"/>
+		
+		<collection column="reservation_no" javaType="List" ofType="ReservationAllVO" property="list" select="getReservationMap"></collection>
+	</resultMap>
+	
+	<select id="getReservation" resultMap="reservation" parameterType="map">
+		select * from (
+		    select A.* from(
+		        select B.* from (
+		            select c.* from(
+		                select distinct R.*, p.pet_no,p.age,p.type,p.ect pet_ect,g.pet_image_no,g.pet_image_pet_no from reservation R inner join (
+		                    select * from reservationall
+		                )V on r.reservation_no = v.pay_reservation_no
+		                inner join pet P on r.member_id = p.member_id
+		            inner join pet_image G on p.pet_no = g.pet_image_pet_no
+		            )C
+		        )B
+		    )A where reservation_no = #{reservation_no} order by reservation_no desc
+		 )
+	</select>
+	
+	<select id="getReservationMap" resultType="reservationAllVO" parameterType="int">
+		select * from reservationall where reservation_no= #{reservation_no}
+	</select>
+	
+		
+	<!-- 견적 승인시 예약 상태	 '대기'->'승인'으로 변경  -->
+	<update id="reservationStatusUpdate" parameterType="int">
+		update reservation	set status = '승인' 
+		where reservation_no = #{reservation_no} 
+	</update>
+	
+	<!-- 견적 거절시 테이블에서 해당 내용 삭제 -->
+	<delete id="reservationDelete" parameterType="int">
+		delete reservation 
+		where reservation_no = #{reservation_no} 
+	</delete>
+	
 </mapper>
-
 
 
 
