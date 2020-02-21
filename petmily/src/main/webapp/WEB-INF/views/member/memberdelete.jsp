@@ -4,7 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 	<!-- 프론트엔드 암호화 불러오기 -->
-	<script src="${pageContext.request.contextPath}/res/js/secom.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/secom.js"></script>
     
     
 <head>
