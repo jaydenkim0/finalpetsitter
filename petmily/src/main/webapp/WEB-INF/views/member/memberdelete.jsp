@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+	<!-- 프론트엔드 암호화 불러오기 -->
+	<script src="${pageContext.request.contextPath}/res/js/secom.js"></script>
+    
+    
 <head>
 
 <style>
@@ -33,7 +40,7 @@
 <!-- 비밀번호 검사 모달창 -->
 <div class="modal">
 	<div class="modal-view">
-		<form action="memberdelete" method="post"> 
+		<form action="memberdelete" class="secure-form"  method="post"> 
 			<table align="center">
 				<tr>
 					<td align="center">비밀번호 입력</td>

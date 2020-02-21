@@ -300,8 +300,7 @@ public class AdminController {
 				  .addAttribute("sitterBankimg", (BankImageDto)adminService.sitterBankimge(pet_sitter_no));
 		return "admin/petsitter/petsitterdetailsleep";		
 	}
-	
-	
+		
 	
 	/////////////////////////////////////////////////////////////////
 	
