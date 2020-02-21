@@ -39,7 +39,8 @@ public class PayController {
 	private PayDao payDao;
 	
 	@Autowired
-	private PetsitterService petsitterService;
+	private PetsitterService petsitterService;	
+
 	
 	@GetMapping("/account")
 	public String account(@RequestParam int reservation_no,
@@ -117,4 +118,7 @@ public class PayController {
 		KakaoPayRevokeReturnVO kpayRevokeReturnVO = payService.revoke(pay_no);
 		return "redirect:list";
 	}
+	
+
+	
 }

@@ -72,6 +72,8 @@ public class MemberController {
 			return "fail";
 		}
 	}
+	
+	// 이메일 변경하기 위해서 이메일 전달
 	@PostMapping("/input")
 	public String input(@RequestParam String email) throws MessagingException {
 		emailService.sendChangePasswordMail(email);
