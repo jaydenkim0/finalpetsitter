@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
 
 <h1>내가 쓴 리뷰</h1>
@@ -34,13 +35,13 @@
 			<td>
 				<c:choose>
 					<c:when test="${reviewlist.review_star==3 }">
-						<img src="/petmily/resources/img/3점.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/3.png" style="width: 100%; height: auto;">
 					</c:when>
 					<c:when test="${reviewlist.review_star==2 }">
-						<img src="/petmily/resources/img/2점.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/2.png" style="width: 100%; height: auto;">
 					</c:when>
 					<c:otherwise>
-						<img src="/petmily/resources/img/1점.png" style="width: 100%; height: auto;">
+						<img src="/petmily/resources/img/1.png" style="width: 100%; height: auto;">
 					</c:otherwise>
 				</c:choose>
 			</td>
