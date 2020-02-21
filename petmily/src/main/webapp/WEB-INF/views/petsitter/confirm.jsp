@@ -127,5 +127,5 @@
 		</c:forEach>
 		
 		<span>예약 이용 시간 : ${usageTime}시간</span><br>
-		<span>예약 총 금액 :${payMent}</span><br><br>
+		<span>예약 총 금액 :${payMent}원</span><br><br>
 
