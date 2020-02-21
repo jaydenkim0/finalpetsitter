@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ReservationListVO {
 	//예약
 	private int reservation_no;
+	private int reservation_sitter_no; 
 	private String member_id; 
 	private String matching_time; 
 	private String pet_name; 
@@ -17,6 +18,8 @@ public class ReservationListVO {
 	
 	//예약 내역
 	private String payname; // 금액 이름
+
+	private int usage_time;//사용 시간
 	
 	//펫 정보
 	private int pet_no;

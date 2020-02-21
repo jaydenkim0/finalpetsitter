@@ -11,7 +11,12 @@
 	<table>
 			<tbody>
 				<tr>			
-					<td>아이디 : ${petsitter.sitter_id}</td>					
+					<td>					
+					아이디 : ${petsitter.sitter_id} | 
+					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${petsitter.sitter_id}">
+					회원정보 보기
+					</a>
+					</td>					
 				</tr>
 				<tr>			
 					<td>닉네임 : ${petsitter.nick}</td>					

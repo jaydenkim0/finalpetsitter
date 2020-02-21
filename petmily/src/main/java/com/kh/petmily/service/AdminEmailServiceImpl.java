@@ -146,7 +146,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	//////////////////////////////////////////////////////////////////////////////////////////	
 
 	@Override
-	public String PaymentReqEMail(String id, String memberemail, int sitter_no) throws MessagingException {			
+	public String PaymentReqEMail(String id, String memberemail, int sitter_no, int reservation_no) throws MessagingException {			
 		try {
 					MimeMessage message = sender.createMimeMessage();	
 					MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");				
@@ -161,6 +161,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 											.path("/petsitter/paymentlogin")
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
+											.queryParam("reservation_no", reservation_no)
 											.toUriString();					
 					
 					StringBuffer buffer = new StringBuffer();
@@ -186,7 +187,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	
 	// step2-2 펫시터가 견적을 거부하면 반려사유와 함께 취소이메일 전달
 	@Override
-	public String NoestimateEMail(String id, String memberemail, String content) {
+	public String NoestimateEMail(String id, String memberemail, String content, String sitter_id) {
 		try {	
 							
 					// 메세지 객체 생성
@@ -194,11 +195,11 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					// 정보설정 : 대상정보(email, 제목, 내용)
 					String[] to = {memberemail};
 					message.setTo(to);		
-					message.setSubject("[PetMily] 신고내용이 접수되어 전달드립니다");		
+					message.setSubject("[PetMily] 견적서가 반려되어 전달드립니다");		
 					message.setText(
 							" 안녕하세요 "+ id +" 회원님"
 							+ "\n 언제나 펫밀리와 함께 해주셔서 감사합니다"
-							+ "\n 신청하신 서비스는 아래와 같은 내용으로 반려가 되었습니다 "
+							+ "\n 신청하신 서비스는"+ sitter_id +" 펫시터님의 아래와 같은 내용으로 반려가 되었습니다 "
 							+ "\n"
 							+ "\n - 반려 사유 :  "
 							+ "\n " + content
@@ -247,7 +248,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 							+ "\n 문의가 있으신 경우는 문의 게시판을 이용해주시거나 "
 							+ "\n 상담센터로 연락주시면 감사하겠습니다.");			
 					sender.send(membermessage);
-					
+										
 					// 펫시터 메세지 객체 생성 
 					SimpleMailMessage sittermessage = new SimpleMailMessage();
 					String[] tositter= {sitteremail};

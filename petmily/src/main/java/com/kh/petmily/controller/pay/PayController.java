@@ -45,20 +45,25 @@ public class PayController {
 	public String account(@RequestParam int reservation_no,
 			Model model) {
 		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);
-		//최종 결제 금액 구하기
-		int payMent = 0;
-		for(ReservationListVO vo : reservationList) {
-			List<ReservationAllVO> all = vo.getList();
-			for(ReservationAllVO allVO : all) {
-					int usagetime = allVO.getUsage_time();
-					int oneHour = usagetime * 10000;
-					int payment = allVO.getPayment();
-					payMent = oneHour + payment;				
+				List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);		
+				//최종 결제 금액 구하기
+				int payMent = 0;
+				int totalTime =0;
+				for(ReservationListVO vo : reservationList) {
+					List<ReservationAllVO> all = vo.getList();
+					totalTime = all.get(0).getUsage_time();
+					
+					for(ReservationAllVO allVO : all) {
+						int usagetime = allVO.getUsage_time();
+						int oneHour = usagetime * 10000;
+						int payment = allVO.getPayment();
+						payMent = oneHour + payment;				
+					}
 				}
-		}
-			model.addAttribute("reservationList", reservationList)
-			.addAttribute("payMent", payMent);
+				
+				model.addAttribute("reservationList", reservationList)
+					.addAttribute("payMent", payMent)
+					.addAttribute("usageTime", totalTime);
 			return "pay/account";
 	}
 	@PostMapping("/account")

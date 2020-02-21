@@ -17,6 +17,7 @@
         <th>예약 번호</th>
         <th>예약 날짜</th>
         <th>예약 회원</th>
+        <th>펫시터번호</th>
         <th>이용 시간</th>
         <th>예약 스킬</th>
         <th>예약 총 금액</th>
@@ -29,6 +30,9 @@
       <td>
       <input type="text" name="partner_user_id" value="${rlist.member_id}" readonly>
       </td>
+      <td>
+       <input type="text" name="item_name" value="${rlist.reservation_sitter_no}" readonly>
+      </td>
    <c:forEach var="skill" items="${rlist.list}">     
       <td>
       <input type="text" name="quantity" value="${skill.usage_time}" readonly>시간</td>
@@ -37,7 +41,7 @@
      </td>
       </c:forEach>
       <td>
-      <input type="text" name="total_amount" value="9900" readonly>원</td>
+      <input type="text" name="total_amount" value="${payMent}" readonly>원</td>
       </tr>
  </table>
 </form>
@@ -54,11 +58,8 @@
 	<!-- usage_time_start -->
 	<input type="text" name="quantity" value="1" placeholder="수량"><br><br>
 	<!-- payMent -->
-	<input type="text" name="total_amount" value="9900" placeholder="총 가격"><br><br>
-	<!-- hidden type -->
-	<input type="text" name="vat_amount" value="990" placeholder="부가세"><br><br>
-	<!--  -->
-	<input type="text" name="tax_free_amount" value="0" placeholder="비과세"><br><br>
+	<input type="text" name="total_amount" value="${payMent}" placeholder="총 가격"><br><br>
+	
 	<input type="submit" value="최종 결제하기">
 </form>
 </c:forEach>
