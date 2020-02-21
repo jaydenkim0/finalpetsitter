@@ -38,6 +38,10 @@
 		<button>내정보관리</button>
 	</a>
 	
+	<a href="member/mypage">
+		<button>마이페이지</button>
+	</a>
+	
 	<a href="member/logout">
 			<br><br><input type="button" value="로그아웃">
 	</a>

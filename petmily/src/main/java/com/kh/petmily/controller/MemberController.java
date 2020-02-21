@@ -52,13 +52,78 @@ public class MemberController {
 	private CertDao certDao;
 
 	
+	
+	@GetMapping("/validate")	
+	@ResponseBody
+	public String validate(
+			HttpSession session, @RequestParam String cert) {
+		String value = (String)session.getAttribute("cert");
+		session.removeAttribute("cert");
+		if(value.equals(cert)) {
+			return "success";
+		}
+		else {
+			return "fail";
+		}
+	}
+	@PostMapping("/input")
+	public String input(@RequestParam String email) throws MessagingException {
+		emailService.sendChangePasswordMail(email);
+		return "redirect:result";
+	}
+	
+	@GetMapping("/result")
+	public String result() {
+		return "member/result";
+	}
+	
+	
+	@GetMapping("/change")
+	public String change(
+			@RequestParam() String cert,
+			@RequestParam() String email,
+			HttpServletResponse response,
+			Model model) {
+//			필요한 작업
+//			- 사용자가 이메일에서 링크를 누르면 이곳으로 들어온다.
+//			- 들어오면서 정상적인 링크라면 
+//				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
+//			- 위의 두 파라미터를 받아서 DB에 검증을 실시
+//			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
+		model.addAttribute("email", email);
+		boolean enter = certDao.check(email, cert);
+		log.info("enter = {}", enter);
+		certDao.delete(email);
+		if(!enter) {
+			//에러 코드 송출
+			response.setStatus(403);
+		}
+		return "member/change";
+	}
+	
+	
+	@GetMapping("/send")
+	@ResponseBody//내가 반환하는 내용이 곧 결과물
+	public String send(@RequestParam String email, HttpSession session) {
+//		인증번호를 세션이든 DB든 어디에 저장
+//		String cert = "123456";
+		String cert = randomService.generateCertificationNumber(6);
+		session.setAttribute("cert", cert);
+		return emailService.sendCertMessage(email, cert);
+	}
+	
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemberDto memberDto) {		
+		memberService.pwchange(memberDto);
+		return "/";
+	}
+	
 	@GetMapping("/input")
 		public String input() {
 			return "member/input";	
 	}
 	
 	
-
 	//  회원가입
 	//  regist로 이동
 	@GetMapping("/regist")
@@ -111,6 +176,7 @@ public class MemberController {
 		return "member/login";		
 	}
 	
+	//로그인 제출
 	@PostMapping("/login")
 	public String login(
 			@ModelAttribute MemberDto memberDto, 
@@ -168,17 +234,6 @@ public class MemberController {
 		return memberService.pet_image(pet_image_no);
 	}
 
-
-	@GetMapping("/send")
-	@ResponseBody//내가 반환하는 내용이 곧 결과물
-	public String send(@RequestParam String email, HttpSession session) {
-//		인증번호를 세션이든 DB든 어디에 저장
-//		String cert = "123456";
-		String cert = randomService.generateCertificationNumber(6);
-		session.setAttribute("cert", cert);
-		return emailService.sendCertMessage(email, cert);
-	}
-	
 	//아이디찾기-GetMapping
 	@GetMapping("/findid")
 	public String findid() {
@@ -202,61 +257,6 @@ public class MemberController {
 		return "member/findid_result";
 	}
 
-	
-	@GetMapping("/validate")	
-	@ResponseBody
-	public String validate(
-			HttpSession session, @RequestParam String cert) {
-		String value = (String)session.getAttribute("cert");
-		session.removeAttribute("cert");
-		if(value.equals(cert)) {
-			return "success";
-		}
-		else {
-			return "fail";
-		}
-	}
-		@PostMapping("/input")
-		public String input(@RequestParam String email) throws MessagingException {
-			emailService.sendChangePasswordMail(email);
-			return "redirect:result";
-		}
-		
-		@GetMapping("/result")
-		public String result() {
-			return "member/result";
-		}
-		
-		
-		@GetMapping("/change")
-		public String change(
-				@RequestParam() String cert,
-				@RequestParam() String email,
-				HttpServletResponse response,
-				Model model) {
-//			필요한 작업
-//			- 사용자가 이메일에서 링크를 누르면 이곳으로 들어온다.
-//			- 들어오면서 정상적인 링크라면 
-//				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
-//			- 위의 두 파라미터를 받아서 DB에 검증을 실시
-//			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
-			model.addAttribute("email", email);
-			boolean enter = certDao.check(email, cert);
-			log.info("enter = {}", enter);
-			certDao.delete(email);
-			if(!enter) {
-				//에러 코드 송출
-				response.setStatus(403);
-			}
-			return "member/change";
-		}
-
-		@PostMapping("/change")
-		public String change(@ModelAttribute MemberDto memberDto) {		
-			memberService.pwchange(memberDto);
-			return "/";
-		}
-		
 		
 		//내정보보기
 		@GetMapping("/mylist")
@@ -350,6 +350,7 @@ public class MemberController {
 			return "member/mylistchange";
 		}
 		
+		//회원정보 수정 제출
 		@PostMapping("/mylistchange")
 		public String edit(
 				@ModelAttribute MemberDto memberDto,
@@ -433,6 +434,24 @@ public class MemberController {
 			}
 			
 			return "redirect:mylist";
+		}
+		
+		//마이페이지 연결
+		@GetMapping("/mypage")
+		public String mypage() {
+			return "member/mypage";
+		}
+		
+		//내가 쓴 리뷰 페이지 연결
+		@GetMapping("/myreview")
+		public String myreview() {
+			return "member/myreview";
+		}
+		
+		//내 예약 조회 페이지 연결
+		@GetMapping("/myreservation")
+		public String myreservation() {
+			return "member/myreservation";
 		}
 	}
 
