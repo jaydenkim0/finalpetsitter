@@ -18,6 +18,7 @@ public class ReservationListVO {
 	
 	//예약 내역
 	private String payname; // 금액 이름
+
 	private int usage_time;//사용 시간
 	
 	//펫 정보

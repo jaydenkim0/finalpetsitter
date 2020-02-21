@@ -160,6 +160,55 @@
          });
      });
 	</script>
+	
+<!-- 에디터 삽입 -->
+<link
+	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
+	rel="stylesheet">
+<style>
+textarea[name=faq_content] {
+	width: 100%;
+	height: 150px;
+}
+</style>
+
+<script
+	src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
+<!-- languages (Basic Language: English/en) -->
+<script
+	src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+<script>
+	function loadEditor() {
+		var editor = SUNEDITOR.create((document
+				.querySelector('textarea[name=info]')), {
+			//언어 설정
+			lang : SUNEDITOR_LANG['ko'],
+
+			//버튼 목록
+			buttonList : [
+					[ 'font', 'fontSize', 'fontColor' ],
+					[ 'underline', 'italic', 'bold', 'paragraphStyle',
+							'formatBlock' ], [ 'align', 'table' ]
+
+			],
+			font : [ '굴림', '궁서', 'binggrae', 'Verdana', 'Arial' ],
+			fontSize : [ '8', '9', '10', '11', '12', '14', '16', '18', '20',
+					'22', '24', '26', '28', '36', '48', '72' ],
+			fontColor : [],
+		});
+
+		//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
+		editor.onKeyUp = function(e) {
+			var info = document
+					.querySelector("textarea[name=info]");
+			info.value = editor.getContents();
+		}
+	}
+
+	//윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
+	window.onload = loadEditor;
+</script>
+<!-- 에디터 끝 -->
     
 <h1>펫시터 가입 페이지</h1>
 <!-- 
@@ -222,8 +271,13 @@
 	
 <!-- 펫시터 소개글 -->	
 	<div>
-		<label for="info-text">펫밀리 기본 정보</label>
-		<textarea id="info-text" name="info" required></textarea>
+		<table width="60%">
+			<tr>
+				<th><label for="info-text">펫밀리 기본 정보</label></th>
+					<td colspan="2"><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
+					</textarea></td>
+			</tr>
+			</table>
 	</div>
 <!--반려동물 경험 -->
 	<div>

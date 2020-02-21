@@ -8,6 +8,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.board.ReviewService;
 import com.kh.petmily.service.petsitter.PetsitterService;
+import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
@@ -113,8 +115,7 @@ public class PetsitterController {
 				  .addAttribute("count", count)
 				  .addAttribute("cityKeyword", cityKeyword)
 				  .addAttribute("areaKeyword", areaKeyword)
-				  .addAttribute("navi", navi);
-		
+				  .addAttribute("navi", navi);		
 		return "petsitter/list";
 	}
 	
@@ -182,7 +183,7 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
 		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);
+		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);		
 		//최종 결제 금액 구하기
 		int payMent = 0;
 		int totalTime =0;
@@ -204,16 +205,30 @@ public class PetsitterController {
 		return "petsitter/confirm";
 	}
 	
-	
+	// 펫시터가 견적신청서를 확인하고 승인 및 반려를 하는 내용
 	@PostMapping("/confirm")
-	public String confirm(String id, 
-									    String memberemail, 
-									    String content , 
-									    int sitter_no) throws MessagingException {
-		//승인(회원/펫시터) -> 예약확정메일 / 거절(회원/펫시터) -> 예약 거절 메일
-//		String result = aemailService.PaymentReqEMail(id, memberemail, sitter_no);		
-		// 거절(content 포함해서 전달 받아야함)
-		String result = aemailService.NoestimateEMail(id, memberemail, content);
+	@ResponseBody
+	public String confirm(@RequestParam String id, 									
+									    @RequestParam(required = false) String content, 
+									    @RequestParam int sitter_no,
+									    @RequestParam String check,
+									    @RequestParam int reservation_no
+			) throws MessagingException {
+		int pet_sitter_no = sitter_no; 
+		PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
+		String sitter_id = petsitterVO.getId();
+		MemberVO memberVO = adminService.getMemberdetail(id);
+		String memberemail = memberVO.getEmail();
+		String result;
+		if(check.equals("승인")) {	//승인(회원에게 결제 주소 전달)
+				result = aemailService.PaymentReqEMail(id, memberemail, sitter_no, reservation_no);
+				// 예약 상태 승인으로 변경
+				petsitterService.reservationStatusUpdate(reservation_no);
+		}else {	// 거절(content 포함해서 이메일 전송)
+				result = aemailService.NoestimateEMail(id, memberemail, content, sitter_id);
+				// 예약 내용 삭제
+				petsitterService.reservationDelete(reservation_no);
+		}
 		return result;
 	}
 }
