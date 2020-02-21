@@ -6,6 +6,10 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=534248faec0557257f5c7cc9e504a2da&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- 프론트엔드 암호화 불러오기 -->
+	<script src="${pageContext.request.contextPath}/res/js/secom.js"></script>
+	
     <script>
         $(function(){
         	jQuery('#selectBox').change(function(){
@@ -160,7 +164,7 @@
 	
 	<h2>회원가입</h2>
 	
-	<form action="regist" method="post" onsubmit="onsubmit_petnamecheck();" enctype="multipart/form-data">
+	<form action="regist" method="post"  class="secure-form" enctype="multipart/form-data">
 	<table border="1">
 		<tr>
 			<th>아이디</th>
@@ -290,7 +294,7 @@
 		
 		<tr> 
 			<th colspan="2">
-				<input type="submit" value="가입하기" id="submit">
+				<input type="submit" value="가입하기">
 				<input type="reset" value="지우기">
 			</th>
 		</tr>

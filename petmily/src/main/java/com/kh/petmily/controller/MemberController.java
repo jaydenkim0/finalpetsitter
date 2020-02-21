@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,9 @@ public class MemberController {
 		
 	@Autowired
 	private CertDao certDao;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	
 	@GetMapping("/input")
@@ -79,7 +83,14 @@ public class MemberController {
 			@RequestParam String pet_ect,
 			@RequestParam MultipartFile member_image,
 			@RequestParam MultipartFile pet_image) throws IllegalStateException,IOException{
-		memberService.regist(memberDto);
+		
+		// 비밀번호 암호화 후 다시 저장
+		String orgin= memberDto.getPw();
+		String result = encoder.encode(orgin);
+		memberDto.setPw(result);
+		// 회원 가입
+		memberService.regist(memberDto);	
+		
 		
 		if(member_image.isEmpty()==false) {
 			memberService.member_image_regist(id,member_image);
@@ -118,29 +129,32 @@ public class MemberController {
 			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
+		if(find == null) {
+			
+			return"redirect:/member/login?error"; 
+		}else { //아이디가 있으면 --> 비밀번호 매칭검사
+				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
+					if (correct == true) {// 비밀번호 일치
+								session.setAttribute("id", find.getId());
+								session.setAttribute("grade", find.getGrade());
+								String id = find.getId();
+								memberService.updatelastlogin(id);
+								
+								//블랙리스트인지 검사
+								int isBlack = memberService.isBlack(id);								
+								int blackcount;
+								if(isBlack>0) {
+									//경고횟수
+									blackcount = memberService.blackcount(id);
+								}else {
+									blackcount = 0;
+								}
+								model.addAttribute("blackcount",blackcount);
+								return "redirect:/";		
 		
-		if(find == null) { //로그인 실패
-		return"redirect:/member/login?error"; 
-		
-		}
-		else { //로그인 성공
-		session.setAttribute("id", find.getId());
-		session.setAttribute("grade", find.getGrade());
-		String id = find.getId();
-		memberService.updatelastlogin(id);
-		
-		//블랙리스트인지 검사
-		int isBlack = memberService.isBlack(id);
-		
-		int blackcount;
-		if(isBlack>0) {
-			//경고횟수
-			blackcount = memberService.blackcount(id);
-		}else {
-			blackcount = 0;
-		}
-		model.addAttribute("blackcount",blackcount);
-		return "redirect:/";
+			}else { // 비밀번호 불일치
+				    return "redirect:/login?error";		
+			}
 		}
 	}
 
