@@ -15,7 +15,8 @@ public class LocationDaoImpl implements LocationDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-
+	
+	//활동 지역  등록
 	@Override
 	public void registLocation(int no, List<LocationDto> location_name) {
 		List<LocationDto> locationList = new ArrayList<>();
@@ -31,11 +32,19 @@ public class LocationDaoImpl implements LocationDao {
 		sqlSession.insert("petsitter.registLocation", locationList);
 		
 	}
-
+	
+	//활동 지역 목록 조회
 	@Override
 	public List<LocationDto> getLocationList(int pet_sitter_no) {
 		List<LocationDto> locationList = sqlSession.selectList("petsitter.getLocationList", pet_sitter_no);
 		return locationList;
+	}
+
+	//활동 지역 삭제
+	@Override
+	public void deleteLocation(int pet_sitter_no) {
+		sqlSession.delete("petsitter.deleteLocation", pet_sitter_no);
+		
 	}
 	
 }

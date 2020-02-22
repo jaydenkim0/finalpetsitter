@@ -169,8 +169,13 @@ public class PetsitterServiceImpl implements PetsitterService {
 
 
 	@Override
-	public PetsitterVO get(int pet_sitter_no) {
-		PetsitterVO petsitterVO = petsitterDao.get(pet_sitter_no);
+	public PetsitterVO noGet(int pet_sitter_no) {
+		PetsitterVO petsitterVO = petsitterDao.noGet(pet_sitter_no);
+		return petsitterVO;
+	}
+	@Override
+	public PetsitterVO idGet(String id) {
+		PetsitterVO petsitterVO = petsitterDao.idGet(id);
 		return petsitterVO;
 	}
 	@Override
@@ -187,6 +192,45 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public void reservationDelete(int reservation_no) {
 		reservationDao.reservationDelete(reservation_no);		
+	}
+	@Override
+	public void update(PetsitterRegistVO vo) throws IllegalStateException, IOException {
+		
+		//펫시터 번호 설정
+		int pet_sitter_no = vo.getPet_sitter_no();
+		//펫시터 Dto 설정
+		PetsitterDto petsitterDto = PetsitterDto.builder()
+												.pet_sitter_no(pet_sitter_no)
+												.sitter_id(vo.getSitter_id())
+												.info(vo.getInfo())
+												.sitter_pets(vo.getSitter_pets())
+												.sitter_matching_type(vo.getSitter_matching_type())
+												.sitter_bankname(vo.getSitter_bankname())
+												.sitter_bank_account(vo.getSitter_bank_account())
+												.build();
+		
+		//펫시터 기본 정보 등록
+		petsitterDao.updatePetsitter(petsitterDto);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경 ,활동지역 삭제
+		skillsDao.deleteSkills(pet_sitter_no);
+		carePetTypeDao.deleteType(pet_sitter_no);
+		careConditionDao.deleteCondition(pet_sitter_no);
+		locationDao.deleteLocation(pet_sitter_no);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  등록
+		skillsDao.registSkills(pet_sitter_no,vo.getSkills_name());
+		carePetTypeDao.registType(pet_sitter_no,vo.getCare_name());
+		careConditionDao.registCondition(pet_sitter_no,vo.getCare_condition_name());
+		
+		//펫시터 소개 이미지,신분증,증빙서류 등록
+		petSitterFileService.uploadInfo(pet_sitter_no, vo.getInfo_image());
+		petSitterFileService.uploadBank(pet_sitter_no, vo.getBank_image());
+		
+		
+		//지역 정보 삭제
+		//지역 정보 등록
+		locationDao.registLocation(pet_sitter_no,vo.getLocation_name());
 	}
 	
 	

@@ -139,9 +139,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 <!-- 펫시터 단일 조회 -->
-	<select id="get" parameterType="int" resultType="petsitterVO">
+	<select id="noGet" parameterType="int" resultType="petsitterVO">
 		select * from petsitter where pet_sitter_no=#{pet_sitter_no}
 	</select>
+	
+	<select id="idGet" parameterType="String" resultType="petsitterVO">
+		select * from petsitter where id=#{id}
+	</select>
+	
 <!-- 펫시터 전체 조회 -->
 	<select id="getListAll" resultType="petsitterVO">
 		select * from petsitter where sitter_status='정상' order by pet_sitter_no desc
@@ -312,6 +317,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where reservation_no = #{reservation_no} 
 	</delete>
 	
+<!-- 펫시터 정보 수정 -->
+	<!-- 펫시터 기본 정보 -->
+	<update id="update" parameterType="petsitterDto">
+		update pet_sitter set
+			info = #{info},
+			sitter_pets = #{sitter_pets},
+			sitter_matching_type = #{sitter_matching_type},
+			sitter_bankname = #{sitter_bankname},
+			sitter_bank_account = #{sitter_bank_account}
+		where pet_sitter_no = #{pet_sitter_no}
+	</update>
+	
+	<!-- 펫시터 스킬 -->
+	<delete id="deleteSkills" parameterType="int">
+		delete skills where skills_sitter_no = #{skills_sitter_no}
+	</delete>
+	
+	<!-- 펫시터 돌봄 가능 동물 -->
+	<delete id="deleteType" parameterType="int">
+		delete care_pet_type where care_sitter_no = #{care_sitter_no}
+	</delete>
+	
+	<!-- 펫시터 돌봄 환경 -->
+	<delete id="deleteCondition" parameterType="int">
+		delete care_condition where condition_sitter_no = #{condition_sitter_no}
+	</delete>
+
+	<!-- 펫시터 돌봄 환경 -->
+	<delete id="deleteLocation" parameterType="int">
+		delete location where location_sitter_no = #{location_sitter_no}
+	</delete>
+
 </mapper>
 
 

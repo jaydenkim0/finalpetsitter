@@ -74,9 +74,20 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	}
 
 	@Override
-	public PetsitterVO get(int pet_sitter_no) {
-		PetsitterVO petsitterVO = sqlSession.selectOne("petsitter.get", pet_sitter_no);
+	public PetsitterVO noGet(int pet_sitter_no) {
+		PetsitterVO petsitterVO = sqlSession.selectOne("petsitter.noGet", pet_sitter_no);
 		return petsitterVO;
+	}
+	@Override
+	public PetsitterVO idGet(String id) {
+		PetsitterVO petsitterVO = sqlSession.selectOne("petsitter.idGet", id);
+		return petsitterVO;
+	}
+
+	@Override
+	public void updatePetsitter(PetsitterDto petsitterDto) {
+		sqlSession.update("petsitter.update", petsitterDto);
+		
 	}
 	
 }

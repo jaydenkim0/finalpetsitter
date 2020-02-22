@@ -136,11 +136,37 @@ public class PetsitterController {
 	
 	//회원 정보 페이지
 	@GetMapping("/info")
-	public String info(@RequestParam int pet_sitter_no, Model model) {
+	public String info(HttpSession session,Model model) {
+		//세션의 아이디 가져오기
+		String id = (String) session.getAttribute("id");
+		//아이디로 펫시터 번호 조회
+		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+		//펫시터 번호로 펫시터 정보 조회
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
-		model.addAttribute("petsitterList", petsitterList)
-		.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
-		return "petsitter/content";
+		
+		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
+			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
+		
+		return "petsitter/info";
+	}
+	
+	//펫시터 정보 수정 페이지
+	@GetMapping("/update")
+	public String update(@RequestParam int pet_sitter_no,Model model) {
+		//펫시터 번호로 펫시터 정보 조회
+		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
+		
+		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
+			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
+				
+		return "petsitter/update";
+	}
+	@PostMapping("/update")
+	public String update(@ModelAttribute PetsitterRegistVO vo) throws IllegalStateException, IOException {
+		petsitterService.update(vo);
+		return "redirect:info";
 	}
 	
 	//견적 요청 페이지
@@ -160,7 +186,7 @@ public class PetsitterController {
 	@ResponseBody()
 	public String estimate(@ModelAttribute ReservationVO reservationVO) throws MessagingException {
 		//petsitterVO에서 펫시터 이메일 불러오기
-		PetsitterVO petsitterVO = petsitterService.get(reservationVO.getReservation_sitter_no());
+		PetsitterVO petsitterVO = petsitterService.noGet(reservationVO.getReservation_sitter_no());
 		
 		// 이메일 보내기
 		String id = reservationVO.getMember_id();
