@@ -13,8 +13,11 @@ import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
 
 public interface PetsitterService {
+//등록(C)
 	//펫시터 전체 항목 등록 
 	void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException;
+
+//조회(R)	
 	//펫시터 전체 항목 조회
 	List<PetsitterGetListVO> getList(int pet_sitter_no);
 	// 리스트 불러오기
@@ -31,11 +34,18 @@ public interface PetsitterService {
 	PetsitterVO idGet(String id);
 	//펫시터 예약 조회
 	List<ReservationListVO> getReservation(int reservation_no);
+	
+//수정(U)	
 	// 예약 상태 승인으로 변경
 	void reservationStatusUpdate(int reservation_no);
-	// 예약 내용 삭제
-	void reservationDelete(int reservation_no);
-	
 	//펫시터 전체 항목 수정
 	void update(PetsitterRegistVO vo) throws IllegalStateException, IOException;
+	//펫시터 상태 변경
+	void updateStatus(int pet_sitter_no, String sitter_status);
+	
+//삭제(D)	
+	// 예약 내용 삭제
+	void reservationDelete(int reservation_no);
+
+	
 }

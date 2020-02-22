@@ -361,9 +361,8 @@ textarea[name=faq_content] {
 	
 <!-- 활동 지역 -->
 	<div class="location">
-		<button id="add-btn">추가</button>
-	    <div class="template">
 	    <h5>기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</h5>
+	    <div class="template">
 	        <select class="region" name="location_name[0].city">
 	            <option>지역을 선택하세요</option>
 	        </select>
@@ -371,6 +370,7 @@ textarea[name=faq_content] {
 	        <select class="section" name="location_name[0].area">
 	            <option>구를 선택하세요</option>
 	        </select>
+		<button id="add-btn">추가</button>
 	    </div>
 	    <div id="result"></div>
 	</div>

@@ -348,7 +348,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteLocation" parameterType="int">
 		delete location where location_sitter_no = #{location_sitter_no}
 	</delete>
-
+	
+	<!-- 펫시터 상태 변경 (정상/휴면) -->
+	<update id="updateStatus" parameterType="map">
+		update pet_sitter set 
+			<if test="sitter_status == '휴면'">
+				sitter_status = '휴면' 
+			</if>
+			
+			<if test="sitter_status == '정상'">
+				sitter_status = '정상' 
+			</if>
+		where pet_sitter_no = #{pet_sitter_no}
+	</update>
 </mapper>
 
 

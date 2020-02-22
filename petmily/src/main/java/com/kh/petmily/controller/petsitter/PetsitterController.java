@@ -150,6 +150,11 @@ public class PetsitterController {
 		
 		return "petsitter/info";
 	}
+	@PostMapping("/info")
+	public String info(@RequestParam int pet_sitter_no, @RequestParam String sitter_status) {
+		petsitterService.updateStatus(pet_sitter_no, sitter_status);
+			return "redirect:info";
+	}
 	
 	//펫시터 정보 수정 페이지
 	@GetMapping("/update")

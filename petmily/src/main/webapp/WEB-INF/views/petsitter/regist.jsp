@@ -273,11 +273,13 @@ textarea[name=faq_content] {
 	<div>
 		<table width="60%">
 			<tr>
-				<th><label for="info-text">펫밀리 기본 정보</label></th>
-					<td colspan="2"><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
-					</textarea></td>
+				<td><label for="info-text">펫밀리 기본 정보</label></td>
+			<tr>
+				<td><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
+				</textarea></td>
+			<tr>
 			</tr>
-			</table>
+		</table>
 	</div>
 <!--반려동물 경험 -->
 	<div>
@@ -366,7 +368,6 @@ textarea[name=faq_content] {
 	
 <!-- 활동 지역 -->
 	<div class="location">
-		<button id="add-btn">추가</button>
 	    <div class="template">
 	        <select class="region" name="location_name[0].city">
 	            <option>지역을 선택하세요</option>
@@ -375,6 +376,7 @@ textarea[name=faq_content] {
 	        <select class="section" name="location_name[0].area">
 	            <option>구를 선택하세요</option>
 	        </select>
+		<button id="add-btn">추가</button>
 	    </div>
 	    <div id="result"></div>
 	</div>

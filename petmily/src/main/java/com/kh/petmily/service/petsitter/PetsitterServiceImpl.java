@@ -232,6 +232,11 @@ public class PetsitterServiceImpl implements PetsitterService {
 		//지역 정보 등록
 		locationDao.registLocation(pet_sitter_no,vo.getLocation_name());
 	}
+	@Override
+	public void updateStatus(int pet_sitter_no, String sitter_status) {
+		petsitterDao.updateStatus(pet_sitter_no, sitter_status);
+		
+	}
 	
 	
 

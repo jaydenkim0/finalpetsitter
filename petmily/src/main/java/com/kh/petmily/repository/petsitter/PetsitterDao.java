@@ -31,4 +31,6 @@ public interface PetsitterDao {
 	List<PetDto> getPet(String id);
 	//펫시터 정보 수정
 	void updatePetsitter(PetsitterDto petsitterDto);
+	//펫시터 상태 변경
+	void updateStatus(int pet_sitter_no, String sitter_status);
 }
