@@ -90,49 +90,49 @@
 			    		<th>이미지</th>
 			    		<td>
 			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
-			    			<input type="file" name="member_image" multiple accept="image/*">
+			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
 			    	</c:if>
 			    	<tr>
 			    		<th>성명</th>
 			    		<td>
-			    			<input type="text"  name="name" value=${member.name}>
+			    			<input type="text"  name="name" value="${member.name}">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>닉네임</th>
 			    		<td>
-			    			<input type="text"  name="nick" value=${member.nick}>
+			    			<input type="text"  name="nick" value="${member.nick}">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>이메일</th>
 			    		<td>
-			    			<input type="text" name="email" value=${member.email}>
+			    			<input type="text" name="email" value="${member.email}">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>전화번호</th>
 			    		<td>
-			    			<input type="text"  name="phone" value=${member.phone}>
+			    			<input type="text"  name="phone" value="${member.phone}">
 			    		</td>
 			    	</tr>
 					<tr>
 						<th rowspan="3">주소</th>
 						<td>
-							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value=${member.post}>
+							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value="${member.post}">
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소" value=${member.basic_addr}>
+							<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소" value="${member.basic_addr}">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value=${member.extra_addr}>
+							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}">
 						</td>
 					</tr>
 					<tr>

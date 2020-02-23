@@ -41,8 +41,8 @@
 
 <body>
 <h1>돌봄방 생성</h1>
+<form action="write" method="post">
 <table border="1">
-	<form action="write" method="post">
 		<tr>
 			<th>작성자 아이디</th>
 			<td><input type="text" readonly value=${id } name="care_member_id"></td>
@@ -50,7 +50,7 @@
 		<tr>
 			<th>펫시터 아이디</th>
 			<td>
-				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()">
+				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()" required>
 				<datalist id="depList">
 					<c:forEach var="data" items="${list }">
 						<option value="${data }">${data }</option>
@@ -61,18 +61,18 @@
 		</tr>
 		<tr>
 			<th>방 제목</th>
-			<td><input type="text" name="care_board_content"></td>
+			<td><input type="text" name="care_board_content" required></td>
 		</tr>
 		<tr>
 			<th>방 비밀번호</th>
-			<td><input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자"></td>
+			<td><input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required></td>
 		</tr>
 		<tr>
 			<th colspan="2">
 				<input type="submit" value="생성" id="submit">
 			</th>
 		</tr>
-	</form>
 </table>
+</form>
 </body>
 

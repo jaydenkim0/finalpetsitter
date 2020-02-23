@@ -520,6 +520,19 @@ public class MemberController {
 			
 			return "member/myreservation";
 		}
+		
+		//내 리뷰 상세보기 페이지 연결
+		@GetMapping("/myreview_content")
+		public String myreview_content(
+				@RequestParam int review_no,
+				Model model) {
+			
+			ReviewSitterDto review = memberService.myreview_content(review_no);
+			
+			model.addAttribute("review",review);
+			
+			return "member/myreview_content";
+		}
 	}
 
 

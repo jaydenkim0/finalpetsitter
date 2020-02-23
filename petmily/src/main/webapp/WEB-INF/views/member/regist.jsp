@@ -233,7 +233,7 @@
 		<tr>
 			<th>프로필사진</th>
 			<td>
-				<input type="file" name="member_image" multiple accept="image/*">
+				<input type="file" name="member_image" accept="image/*">
 			</td>
 		</tr>
 		
@@ -285,7 +285,7 @@
 					<tr>
 						<th>이미지 첨부</th>
 						<td>
-							<input type="file" name="pet_image" multiple accept="image/*">
+							<input type="file" name="pet_image" accept="image/*">
 						</td>
 					</tr>
 				</table>
