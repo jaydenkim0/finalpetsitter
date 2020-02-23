@@ -90,7 +90,7 @@
 			    		<th>이미지</th>
 			    		<td>
 			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
-			    			<input type="file" name="member_image" multiple accept="image/*">
+			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
 			    	</c:if>
