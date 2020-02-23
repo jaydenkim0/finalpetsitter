@@ -32,6 +32,15 @@ public class MemberDto {
 	private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 	private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
 
+	public String getPhoneWithFormat() {
+		if(phone != null) {
+			return phone.substring(0,3)+"-"+phone.substring(3,7)+"-"+phone.substring(7,11);
+		}
+		else {
+			return"";
+		}
+	}
+	
 	public String getTotal_joindateWithFormat() throws ParseException {
 		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 		Date date = read.parse(joindate);
@@ -56,7 +65,7 @@ public class MemberDto {
 	
 	public String getTotal_addr() {
 		if(post != null && basic_addr != null && extra_addr != null) {
-			return "{"+getPost()+"}"+""+getBasic_addr()+""+getExtra_addr();
+			return "{"+getPost()+"}"+" "+getBasic_addr()+" "+getExtra_addr();
 		}
 		else {
 			return"";

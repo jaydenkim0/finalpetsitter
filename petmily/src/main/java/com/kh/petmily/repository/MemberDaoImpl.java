@@ -255,5 +255,11 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.getmyreviewCount",id);
 	}
 
+	//리뷰 상세보기
+	@Override
+	public ReviewSitterDto myreview_content(int review_no) {
+		return sqlSession.selectOne("member.myreview_content",review_no);
+	}
+
 
 }

@@ -52,7 +52,7 @@ function no_image2(){
 	</tr>
 	<tr>
 		<th>전화번호&emsp;</th>
-		<td>${mylist.phone }</td>
+		<td>${mylist.phoneWithFormat }</td>
 	</tr>
 	<tr>
 		<th>주소&emsp;</th>

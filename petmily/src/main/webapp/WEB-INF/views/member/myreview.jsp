@@ -42,7 +42,7 @@ li{
 			</c:choose>
 			</td>
 			<td>
-				<a href="review_content?review_no=${reviewlist.review_no }">
+				<a href="myreview_content?review_no=${reviewlist.review_no }">
 					${reviewlist.review_title }
 				</a>
 			</td>
