@@ -317,6 +317,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getmyreviewCount" parameterType="String" resultType="int">
 		select count(*) from review where review_writer=#{id}
 	</select>
+	
+	<!-- 리뷰 상세보기 -->
+	<select id="myreview_content" parameterType="int" resultType="reviewSitterDto">
+		select 
+			R.*,
+			P.sitter_id
+		from 
+			review R
+				inner join pet_sitter P
+				on R.review_sitter_no=P.pet_sitter_no
+		where
+			R.review_no=#{review_no}	
+	</select>
 </mapper>
 
 

@@ -317,5 +317,11 @@ public class MemberServiceImpl implements MemberService {
 	public int getmyreviewCount(String id) {
 		return memberDao.getmyreviewCount(id);
 	}
+
+	//리뷰 상세보기
+	@Override
+	public ReviewSitterDto myreview_content(int review_no) {
+		return memberDao.myreview_content(review_no);
+	}
 	}
 

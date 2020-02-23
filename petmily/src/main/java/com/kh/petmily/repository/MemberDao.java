@@ -120,5 +120,8 @@ public interface MemberDao {
 	//내가 쓴 리뷰 개수 세기
 	int getmyreviewCount(String id);
 
+	//리뷰 상세보기
+	ReviewSitterDto myreview_content(int review_no);
+
 
 }
