@@ -86,6 +86,25 @@ public class MemberController {
 	}
 	
 	
+
+	
+	// 비밀번호 변경화면
+	@GetMapping("/input")
+	public String input() {
+		return "member/input";	
+	}
+	
+	// 비밀번호 변경 이메일 발송
+	@GetMapping("/send")
+	@ResponseBody//내가 반환하는 내용이 곧 결과물
+	public String send(@RequestParam String email, HttpSession session) {
+		//		인증번호를 세션이든 DB든 어디에 저장
+		String cert = randomService.generateCertificationNumber(6);
+		session.setAttribute("cert", cert);
+		return emailService.sendCertMessage(email, cert);
+	}
+	
+	// 비밀번호 변경 페이지 (이메일에서 접속 가능)
 	@GetMapping("/change")
 	public String change(
 			@RequestParam() String cert,
@@ -111,6 +130,7 @@ public class MemberController {
 		return "member/change";
 	}
 	
+	// 비밀번호 변경 기능
 	@PostMapping("/change")
 	public String change(@ModelAttribute MemberDto memberDto) {			
 		String origin = memberDto.getPw();
@@ -118,22 +138,6 @@ public class MemberController {
 		memberDto.setPw(result);		
 		memberService.pwchange(memberDto);
 		return "redirect:/";
-	}
-	
-	@GetMapping("/send")
-	@ResponseBody//내가 반환하는 내용이 곧 결과물
-	public String send(@RequestParam String email, HttpSession session) {
-//		인증번호를 세션이든 DB든 어디에 저장
-//		String cert = "123456";
-		String cert = randomService.generateCertificationNumber(6);
-		session.setAttribute("cert", cert);
-		return emailService.sendCertMessage(email, cert);
-	}
-	
-	
-	@GetMapping("/input")
-		public String input() {
-			return "member/input";	
 	}
 	
 	
@@ -213,11 +217,7 @@ public class MemberController {
 		}else { //아이디가 있으면 --> 비밀번호 매칭검사
 			
 				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
-				
-				System.out.println("입력한 비밀번호(프론트 암호화) = " + memberDto.getPw());
-				System.out.println("가져온 비밀번호(백엔드 암호화) = " + find.getPw());
-				System.out.println("correct = "+ correct);
-				
+				System.out.println("correct = "+ correct);				
 					if (correct == true) {// 비밀번호 일치
 								session.setAttribute("id", find.getId());
 								session.setAttribute("grade", find.getGrade());
