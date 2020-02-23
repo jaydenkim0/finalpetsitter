@@ -25,13 +25,14 @@ public class CheckPwController {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	
+	// 비밀번호 화인 페이지로 이동
 	@GetMapping("/login")
 	public String logincheck(			
 			@RequestParam String id,				
 			@RequestParam(required = false) int reservation_no,
 			@RequestParam int sitter_no,
-			Model model) {
-		
+			Model model) {		
 		model.addAttribute("id", id)
 				  .addAttribute("reservation_no", reservation_no)
 				  .addAttribute("sitter_no", sitter_no);
