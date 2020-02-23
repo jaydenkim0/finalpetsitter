@@ -50,7 +50,7 @@
 		<tr>
 			<th>펫시터 아이디</th>
 			<td>
-				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()">
+				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()" required>
 				<datalist id="depList">
 					<c:forEach var="data" items="${list }">
 						<option value="${data }">${data }</option>
@@ -61,11 +61,11 @@
 		</tr>
 		<tr>
 			<th>방 제목</th>
-			<td><input type="text" name="care_board_content"></td>
+			<td><input type="text" name="care_board_content" required></td>
 		</tr>
 		<tr>
 			<th>방 비밀번호</th>
-			<td><input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자"></td>
+			<td><input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required></td>
 		</tr>
 		<tr>
 			<th colspan="2">

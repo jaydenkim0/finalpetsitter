@@ -302,7 +302,7 @@ function no_image2(){
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<textarea name="care_reply_content" required class="val" id="care_reply_content" style="resize:vertical;">${replyimagelist.care_reply_content }</textarea>
+                	<textarea name="care_reply_content" required class="val">${replyimagelist.care_reply_content }</textarea>
 				</form>				
 			</th>
 		</tr>
