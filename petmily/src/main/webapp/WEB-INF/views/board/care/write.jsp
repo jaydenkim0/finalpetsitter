@@ -41,8 +41,8 @@
 
 <body>
 <h1>돌봄방 생성</h1>
+<form action="write" method="post">
 <table border="1">
-	<form action="write" method="post">
 		<tr>
 			<th>작성자 아이디</th>
 			<td><input type="text" readonly value=${id } name="care_member_id"></td>
@@ -72,7 +72,7 @@
 				<input type="submit" value="생성" id="submit">
 			</th>
 		</tr>
-	</form>
 </table>
+</form>
 </body>
 
