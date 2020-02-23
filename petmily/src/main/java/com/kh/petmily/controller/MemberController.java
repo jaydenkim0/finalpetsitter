@@ -98,6 +98,8 @@ public class MemberController {
 //				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
 //			- 위의 두 파라미터를 받아서 DB에 검증을 실시
 //			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
+		System.out.println("email = " + email);
+		System.out.println("cert = " + cert);
 		model.addAttribute("email", email);
 		boolean enter = certDao.check(email, cert);
 		log.info("enter = {}", enter);
@@ -109,6 +111,14 @@ public class MemberController {
 		return "member/change";
 	}
 	
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemberDto memberDto) {			
+		String origin = memberDto.getPw();
+		String result = encoder.encode(origin);
+		memberDto.setPw(result);		
+		memberService.pwchange(memberDto);
+		return "redirect:/";
+	}
 	
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
@@ -120,11 +130,6 @@ public class MemberController {
 		return emailService.sendCertMessage(email, cert);
 	}
 	
-	@PostMapping("/change")
-	public String change(@ModelAttribute MemberDto memberDto) {		
-		memberService.pwchange(memberDto);
-		return "/";
-	}
 	
 	@GetMapping("/input")
 		public String input() {
@@ -200,10 +205,19 @@ public class MemberController {
 			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
-		if(find == null) {// 아이디가 없으면  -> 에러			
+		
+		System.out.println("아이디가 있나요? = "+find);
+		
+		if(find == null) {// 아이디가 없으면  -> 에러	
 			return"redirect:/member/login?error"; 
 		}else { //아이디가 있으면 --> 비밀번호 매칭검사
+			
 				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
+				
+				System.out.println("입력한 비밀번호(프론트 암호화) = " + memberDto.getPw());
+				System.out.println("가져온 비밀번호(백엔드 암호화) = " + find.getPw());
+				System.out.println("correct = "+ correct);
+				
 					if (correct == true) {// 비밀번호 일치
 								session.setAttribute("id", find.getId());
 								session.setAttribute("grade", find.getGrade());
@@ -222,7 +236,7 @@ public class MemberController {
 								model.addAttribute("blackcount",blackcount);
 								return "redirect:/";				
 			}else { // 비밀번호 불일치
-				    return "redirect:/login?error";		
+				    return "redirect:/member/login?error";		
 			}
 		}
 	}
