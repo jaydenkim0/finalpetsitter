@@ -23,6 +23,7 @@ public class ReservationListVO {
 	private String payname; // 금액 이름
 
 	private int usage_time;//사용 시간
+	private int start_time;//시작 시간
 	
 	//펫 정보
 	private int pet_no;

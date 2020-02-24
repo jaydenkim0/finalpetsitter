@@ -35,7 +35,7 @@ public interface PetsitterService {
 	//펫시터 단일 조회(아이디)
 	PetsitterVO idGet(String id);
 	//펫시터 예약 조회
-	List<ReservationListVO> getReservation(int reservation_no);
+	ReservationListVO getReservation(int reservation_no);
 	//각각 펫시터 예약 번호로 각각 펫시터 예약 조회
 	List<ReservationListVO> getreservationList(int pet_sitter_no);
 	
@@ -51,8 +51,5 @@ public interface PetsitterService {
 //삭제(D)	
 	// 예약 내용 삭제
 	void reservationDelete(int reservation_no);
-	
-
-
 	
 }

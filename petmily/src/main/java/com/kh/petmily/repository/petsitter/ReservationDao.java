@@ -16,7 +16,7 @@ public interface ReservationDao {
 	//예약 금액,사용 시간 등록
 	void registPay(List<Integer>payinfo_no, ReservationPayDto reservationPayDto);
 	//펫시터 예약 조회
-	List<ReservationListVO> getReservation(int reservation_no);
+	ReservationListVO getReservation(int reservation_no);
 	// 예약 상태 승인으로 변경
 	void reservationStatusUpdate(int reservation_no);
 	// 예약 내용 삭제
