@@ -259,17 +259,17 @@ public class PetsitterController {
 	
 	
 	//펫시터 예약 조회
-	@GetMapping("/reservation")
-	public String reservation(HttpSession session,Model model) {
-		//세션의 아이디 가져오기
-		String id = (String) session.getAttribute("id");
-		//아이디로 펫시터 번호 조회
-		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
-		System.out.println(pet_sitter_no);
-		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);
-		
-		System.out.println("예약="+reservationList.toString());
+//	@GetMapping("/reservation")
+//	public String reservation(HttpSession session,Model model) {
+//		//세션의 아이디 가져오기
+//		String id = (String) session.getAttribute("id");
+//		//아이디로 펫시터 번호 조회
+//		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+//		System.out.println(pet_sitter_no);
+//		//회원아이디 -펫시터 아이디
+//		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);
+//		
+//		System.out.println("예약="+reservationList.toString());
 		
 //		//최종 결제 금액 구하기
 //		int payMent = 0;
@@ -289,7 +289,6 @@ public class PetsitterController {
 //		model.addAttribute("reservationList", reservationList)
 //				.addAttribute("payMent", payMent)
 //				.addAttribute("usageTime", totalTime);
-	
-		return "petsitter/reservation";
-	}
+//	
+// 	}
 }
