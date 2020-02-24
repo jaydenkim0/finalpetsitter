@@ -121,8 +121,12 @@ public class PetsitterController {
 	public String content(@RequestParam int pet_sitter_no,
 									HttpSession session,
 									Model model) throws Exception {
-		
+		// 세션에서 로그인한 아이디 가지고오기
 		String id = (String) session.getAttribute("id");
+		int count = petsitterService.petscheck(id);
+		System.out.println("아이디가 들ㅇ왔나요? = "+ id);
+		System.out.println("count가 들ㅇ왔나요? = "+ count);
+		
 		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
 		double star = reviewService.star(pet_sitter_no);
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
@@ -130,7 +134,7 @@ public class PetsitterController {
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
 		model.addAttribute("reviewstar",star);
 		model.addAttribute("list",list);
-		model.addAttribute("petscheck", petsitterService.petscheck(id));
+		model.addAttribute("petscheck",count);		
 		return "petsitter/content";
 	}
 	
@@ -243,8 +247,7 @@ public class PetsitterController {
 									    @RequestParam int sitter_no,
 									    @RequestParam String check,
 									    @RequestParam int reservation_no
-			) throws MessagingException {
-		System.out.println("들어왔나? = "+sitter_no);
+			) throws MessagingException {	
 		int pet_sitter_no = sitter_no; 
 		PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
 		String sitter_id = petsitterVO.getId();

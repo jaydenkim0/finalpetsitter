@@ -36,11 +36,12 @@
  
 	<!-- 펫시터 정보 -->
 	<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+
 	
 
 		<!-- 펫시터 견적 신청 버튼 -->
 		<c:choose>
-			<c:when test="${petscheck eq 0}">
+			<c:when test="${petscheck == 0}">
 				<h3 style="color: blue;">등록하신 펫 정보가 없습니다</h3>
 				<h3 style="color: blue;">펫이 등록되어 있어야 펫시터에게 견적요청이 가능합니다</h3>
 				<h3 style="color: blue;">펫을 등록하신후에 견적요청을 진행해 주시기 바랍니다</h3>
@@ -49,6 +50,7 @@
 				<a href="estimate?pet_sitter_no=${petsitter.pet_sitter_no}"><button>펫시터 견적 신청</button></a><br><br>
 			</c:otherwise>			
 		</c:choose>
+		
 		<span>닉네임 : ${petsitter.nick}</span><br>
 		<span>별점: <fmt:formatNumber value="${reviewstar}" pattern=".00"/>개<br></span>
 		<div class="star-wrap" data-limit="3" data-unitsize="40" data-point="${reviewstar}" data-image="http://www.sysout.co.kr/file/image/288" data-readonly></div><br>
