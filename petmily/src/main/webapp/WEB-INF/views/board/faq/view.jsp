@@ -3,43 +3,62 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$("btndelete").click(function() {
-			if (confirm("삭제하시겠습니까?")) {
-				document.form1.action = "${context}/board/faq/delete";
-				document.form1.submit();
-			}
-		});
-		$("btnupdate").click(function() {
-			var faq_title = $("faq_title").val();
-			var faq_head = $("faq_head").val();
-			var faq_content = $("faq_content").val();
-			if (faq_title = "") {
-				alert("말머리를 선택하세요")
-				document.form1.faq_title.focus();
-				return;
-			}
-			if (faq_head = "") {
-				alert("제목을 입력하세요")
-				document.form1.faq_head.focus();
-				return;
-			}
-			if (faq_content = "") {
-				alert("내용을 입력하세요")
-				document.form1.faq_content.focus();
-				return;
-			}
-			document.form1.action = "${context}/board/faq/update"
-			document.form1.submit();
-		});
-	});
-</script>
-<div align="center">
-	<h2>게시글 상세 보기</h2>
-		<table border="1" width="70%">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
+    <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+        
+    <script>        
+        $(function(){
+            var options = {
+                //el(element) : 에디터가 될 영역
+                el:document.querySelector(".naver-viewer"),
+                
+                viewer:true,
+
+                //height : 생성될 에디터의 높이
+                height:'auto',
+            };
+
+            var viewer = tui.Editor.factory(options);
+
+            //생성된 뷰어에 초기값 표시
+            console.log(document.querySelector(".naver-viewer + input[type=hidden]"));
+            var text = document.querySelector(".naver-viewer + input[type=hidden]").value;
+            viewer.setValue(text);//값 설정
+        });
+    </script>
+
+
+<style>
+        .notice_table {
+            width: 80%;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            margin-left: auto; 
+            margin-right: auto;
+          }
+          th, td {
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+          }
+        div{
+            padding: 30px;
+        }
+        hr {
+        width: 80%;
+        }
+</style>
+
+	<h2 align="center">게시글 상세 보기</h2>
+		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
 				<td>글 번호 : ${faqVO.faq_no}</td>
@@ -61,7 +80,6 @@
 				<td>제목 : ${faqVO.faq_head}</td>
 			</tr>
 
-			<tr>
 			<c:forEach var="faqImage" items="${faqImageList}">
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
 				<tr>
@@ -71,9 +89,15 @@
 				</tr>
 			</c:if>
 		</c:forEach>
-				<td >${faqVO.faq_content}</td>
+			<tr>
+				<td>
+					<div class="naver-viewer"></div>  
+					<input type="hidden" name="faq_content" value="${faqVO.faq_content}">  
+				</td>
 			</tr>
+	
 	<tr>
+	
 	<td align="right">
 		
 		<c:if test="${sessionScope.id eq faqVO.member_id}">
@@ -90,4 +114,3 @@
 	</td>
 </tr>
 </table>
-</div>

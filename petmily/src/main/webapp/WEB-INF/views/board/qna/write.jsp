@@ -6,10 +6,24 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<!-- 에디터 불러오기 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
-	rel="stylesheet">
+<!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+ <!-- 네이버 토스트에디터 종료 -->
+    
+
 <style>
 textarea[name=faq_content] {
 	width: 100%;
@@ -17,42 +31,36 @@ textarea[name=faq_content] {
 }
 </style>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
-<script>
-	function loadEditor() {
-		var editor = SUNEDITOR.create((document
-				.querySelector('textarea[name=qna_content]')), {
-			//언어 설정
-			lang : SUNEDITOR_LANG['ko'],
+    <script>
+        $(function(){
+            //생성은 항상 옵션 먼저 + 나중에 생성
+            var options = {
+                //대상
+                el:document.querySelector(".naver-editor"),
+                //미리보기 스타일(vertical / horizontal)
+                previewStyle:"horizontal",
+                //입력 스타일
+                initialEditType:"wysiwyg",
+                //높이
+                height:"300px"
+            };
 
-			//버튼 목록
-			buttonList : [
-					[ 'font', 'fontSize', 'fontColor' ],
-					[ 'underline', 'italic', 'bold', 'paragraphStyle',
-							'formatBlock' ], [ 'align', 'table' ]
+            var editor = tui.Editor.factory(options);
 
-			],
-			font : [ '굴림', '궁서', 'binggrae', 'Verdana', 'Arial' ],
-			fontSize : [ '8', '9', '10', '11', '12', '14', '16', '18', '20',
-					'22', '24', '26', '28', '36', '48', '72' ],
-			fontColor : [],
-		});
+            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+            editor.on("change", function(){
+                var text = editor.getValue();//에디터에 입력된 값을 불러온다
+                document.querySelector(".naver-editor + input[type=hidden]").value = text;
+            });
+        });
+    </script>
 
-		//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-		editor.onKeyUp = function(e) {
-			var qna_content = document
-					.querySelector("textarea[name=qna_content]");
-			qna_content.value = editor.getContents();
-		}
+<style>
+	.tabl {
+	width: 60%;
+	margin: auto;
 	}
-
-	//윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-	window.onload = loadEditor;
-</script>
+</style>
 
 <c:choose>
 	<c:when test="${sessionScope.id eq null }">
@@ -63,47 +71,49 @@ textarea[name=faq_content] {
 	<a href="${context}/member/logout">로그아웃</a>
 	</c:otherwise>
 </c:choose>
-<div align="center">
 
-	<h2>문의글 작성</h2>
+
+<div align="center" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
+		<h2>문의글 작성</h2>
 		<c:if test="${param.superno>0}">
-		<input type="hidden" name="superno" value="${param.superno}">
+			<input type="hidden" name="superno" value="${param.superno}">
 		</c:if>
-		
+
 		<input type="hidden" name="qna_writer" value="${sessionScope.id}">
-		<table border="1" width="70%">
-			<tr>
-				<th>말머리
-				<th><select name="qna_title">
-						<option>펫시터 질문</option>
-						<option>유저 질문</option>
-						<option>기타 질문</option>
-						<option>신고합니다</option>
-				</select>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td>
-				<c:if test="${param.superno > 0}">
-				<input type="text" name="qna_head" value="RE:" id="qna_head" size="75">
-				</c:if>
-				<input name="qna_head" id="qna_head" size="80"
-					placeholder="글 제목 입력"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><textarea name="qna_content" id="qna_content"
-						required rows="15" cols="100" style="resize: vertical;"
-						placeholder="글 내용 입력"></textarea></td>
-			</tr>
-			<tr>
-				<th>이미지 첨부</th>
-				<td><input type="file" id="qna_file" name="qna_file" multiple accept="image/*"></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit" value="확인">
-					<input type="reset" value="초기화"></td>
-			</tr>
-		</table>
+		<div class="form-group">
+			<label for="qna_title">말머리</label> <select name="qna_title">
+				<option>펫시터 질문</option>
+				<option>유저 질문</option>
+				<option>기타 질문</option>
+				<option>신고합니다</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			<label for="qna_head">제목</label>
+			<c:if test="${param.superno > 0}">
+				<input class="form-control" type="text" name="qna_head" value="RE:"
+					id="qna_head" size="75">
+			</c:if>
+			<input class="form-control" name="qna_head" id="qna_head" size="80"
+				placeholder="글 제목 입력">
+		</div>
+
+		<div class="form-group">
+			<label for="qna_content">내용</label>
+			<div class="naver-editor"></div>
+			<input type="hidden" name="qna_content" value="">
+		</div>
+
+		<div class="form-group">
+			<label for="qna_file">이미지 첨부</label> <input class="form-control"
+				type="file" id="qna_file" name="qna_file" multiple accept="image/*">
+		</div>
+
+		<div class="form-group">
+			<input type="submit" value="확인"> 
+			<input type="reset" value="초기화">
+		</div>
 	</form>
 </div>

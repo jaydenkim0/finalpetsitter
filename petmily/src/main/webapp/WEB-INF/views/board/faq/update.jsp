@@ -2,103 +2,103 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+<!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
 
-<!-- 에디터 불러오기 -->
-<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+
 <style>
-    textarea[name=faq_content]{
-        width:100%;
-        height:150px;
-    }
+	.tabl {
+	width: 60%;
+	margin: auto;
+	}
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+
 <script>
-    function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector('textarea[name=faq_content]')),{
-            //언어 설정
-            lang: SUNEDITOR_LANG['ko'],
-            
-            //버튼 목록
-            buttonList:[
-            	 ['font','fontSize','fontColor'],
-                 ['underline','italic', 'bold','paragraphStyle','formatBlock'],
-                 ['align','table']
+        $(function(){
+            //생성은 항상 옵션 먼저 + 나중에 생성
+            var options = {
+                //대상
+                el:document.querySelector(".naver-editor"),
+                //미리보기 스타일(vertical / horizontal)
+                previewStyle:"horizontal",
+                //입력 스타일
+                initialEditType:"wysiwyg",
+                //높이
+                height:"300px",
+                
+                hooks: {
+                    'addImageBlobHook': function(blob, callback) {
+                        //이미지 블롭을 이용해 서버 연동 후 콜백실행
+                        //callback('이미지URL');
+                        console.log("이미지 업로드");
+                    }
+                }
+            };
 
-              ],
-              font:[
-                 '굴림','궁서','binggrae','Verdana','Arial'
-             ],
-             fontSize:[
-             '8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'
-             ],
-             fontColor:[
-          ],
+            var editor = tui.Editor.factory(options);
+
+            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+            editor.on("change", function(){
+                var text = editor.getValue();//에디터에 입력된 값을 불러온다
+                document.querySelector(".naver-editor + input[type=hidden]").value = text;  
+            });
+            var text = document.querySelector(".naver-editor + input[type=hidden]").value;
+            editor.setValue(text);//값 설정
         });
-        
-    	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-	    editor.onKeyUp = function(e){
-	    	var faq_content = document.querySelector("textarea[name=faq_content]");
-	    	faq_content.value = editor.getContents();
-	    }
-    }
+    </script>
     
-    //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-    window.onload = loadEditor;
-</script>
+<c:choose>
+	<c:when test="${sessionScope.id eq null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href="${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+</c:choose>
 
-<div align="center">
+<div align="center" class="tabl">
 <form name="update" method="post" action="${context}/board/faq/update">
+	<h2>공지글 수정</h2>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
-	<table border="1" width="90%">
-	<tr>
-		<th>글 번호</th>
-		<td>${faqVO.faq_no}</td>
-	</tr>
-	
-	<tr>
-		<th>작성자</th>
-		<td>${faqVO.member_id}</td>
-	</tr>
-	
-	<tr>
-		<th>작성일자</th>
-		<td>${faqVO.writedateWithFormat}</td>
-	</tr>
 
-	<tr>
-		<th>말머리</th>
-	<td>
+	<div class="form-group">
+		<label for="faq_title">말머리</label>
 		<select name="faq_title" value="${faqVO.faq_title}">
 			<option>전체공지</option>
 			<option>펫시터공지</option>
 			<option>유저공지</option>
 		</select>
-	</td>
-	</tr>
+	</div>
 
-	<tr>
-	<th>제목 :</th>
-	<td>
-		<input name="faq_head" value="${faqVO.faq_head}" type="text">
-	</td>
-	</tr>
+	<div class="form-group">
+		<label for="faq_head">제목</label>
+		<input class="form-control" name="faq_head" id="faq_head" placeholder="${faqVO.faq_head}">
+	</div>
 
-	<tr>
-	<th>내용 :</th>
-	<td colspan="2">
-		<textarea name="faq_content"  id="faq_content" required rows="15" cols="100"  type="text">${faqVO.faq_content}</textarea>
-	</td>
-	</tr>
-</table>
+	<div class="form-group">
+	<div class="naver-editor"></div>
+	 <input type="hidden" name="faq_content" value="${faqVO.faq_content}">
+	 </div>
 
-	<div>
+	<div class="form-group">
 		<input type="submit" value="수정"> 
 		<input type="reset"value="초기화">
 		<a href="${context}/board/faq/list"> 
 		<input type="button" value="목록으로"></a>
 	</div>
 </form>
+</div>

@@ -26,76 +26,106 @@
 				+ "&type-${map.type}" + "&keyword=${map.keyword}";
 	}
 </script>
-<h1>Save the Pets !</h1>
-<br>
-<%-- <c:if test="${not empty sessionScope.id}"> --%>
-<a href="${context}/board/stray/write">
-	<button type="button" id="btnwrite">글쓰기</button>
-</a>
-<br>
-<br>
-<%-- </c:if> --%>
-<form method="get" action="${context}/board/stray/list">
-	<select name="type" class="input-item">
-		<option value="stray_writer">작성자</option>
-		<option value="stray_head">제목</option>
-	</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
-	<input type="submit" value="조회">
-</form>
-<section>
-	<table border="1" width="100%">
-		<tr>
-			<th>글번호</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>게시일자</th>
-		</tr>
-		<c:forEach var="row" items="${list}">
+
+<style>
+.page-navigator li {
+	display: inline-block;
+}
+
+.notice_table {
+	width: 80%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+}
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.right_mar {
+	margin-right: 10%;
+}
+
+.page-navigator li {
+	display: inline-block;
+}
+
+.page-navigator li.active>a {
+	color: #1482e0;
+}
+</style>
+
+<div align="center">
+	<h1>Save the Pets !</h1>
+
+	<section>
+			<table class="notice_table" >
 			<tr>
-				<td>${row.stray_no}</td>
-				<c:choose>
-					<c:when test="${not empty row.stray_writer}">
-						<td>${row.stray_writer}</td>
-					</c:when>
-					<c:otherwise>
-						<td>비회원</td>
-					</c:otherwise>
-				</c:choose>
-					<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 -->
-						<td align="left">
-						<c:forEach var="i" begin="1" end="${row.depth}">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-						</c:forEach>
-						
-						<!-- 답글은 이미지를 추가 -->
-						<c:if test="${row.depth > 0}">
-						 <img src="${context}/resources/img/reply.png" width="20" height="10">
-						</c:if>
-						<font color="blue">
-								[${row.stray_title}]
-						</font>	
-						<a href="view?stray_no=${row.stray_no}">
-							<!-- 제목 출력 -->
-							${row.stray_head}
-						</a>
-						<c:if test="${row.replycount > 0}">
-							<!-- 댓글수 출력 -->
-							<font color="red">
-								[${row.replycount}]
-							</font>
-						</c:if>
-					</td>
-				<td>${row.writedateWithFormat}</td>
+				<th>글번호</th>
+				<th>작성자</th>
+				<th>제목</th>
+				<th>게시일자</th>
 			</tr>
-		</c:forEach>
-	</table>
-	<div class="row">
-		<!-- 네비게이터(navigator) -->
-		<jsp:include page="/WEB-INF/views/board/stray/navigator.jsp">
-			<jsp:param name="pno" value="${pno}" />
-			<jsp:param name="count" value="${count}" />
-			<jsp:param name="navsize" value="${navsize}" />
-			<jsp:param name="pagesize" value="${pagesize}" />
-		</jsp:include>
-	</div>
-</section>
+			<c:forEach var="row" items="${list}">
+				<tr>
+					<td>${row.stray_no}</td>
+					<c:choose>
+						<c:when test="${not empty row.stray_writer}">
+							<td>${row.stray_writer}</td>
+						</c:when>
+						<c:otherwise>
+							<td>비회원</td>
+						</c:otherwise>
+					</c:choose>
+					<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 -->
+					<td align="left"><c:forEach var="i" begin="1"
+							end="${row.depth}">
+							&nbsp;&nbsp;&nbsp;&nbsp;
+						</c:forEach> <!-- 답글은 이미지를 추가 --> <c:if test="${row.depth > 0}">
+							<img src="${context}/resources/img/reply.png" width="20"
+								height="10">
+						</c:if> <font color="#1482e0"> [${row.stray_title}] </font> <a
+						href="view?stray_no=${row.stray_no}"> <!-- 제목 출력 -->
+							${row.stray_head}
+					</a> <c:if test="${row.replycount > 0}">
+							<!-- 댓글수 출력 -->
+							<font color="red"> [${row.replycount}] </font>
+						</c:if></td>
+					<td>${row.writedateWithFormat}</td>
+				</tr>
+			</c:forEach>
+		</table>
+
+		<br>
+
+		<div align="right" class="right_mar">
+			<a href="${context}/board/stray/write">
+				<button type="button" id="btnwrite">글쓰기</button>
+			</a>
+		</div>
+
+		<div class="row">
+			<!-- 네비게이터(navigator) -->
+			<jsp:include page="/WEB-INF/views/board/stray/navigator.jsp">
+				<jsp:param name="pno" value="${pno}" />
+				<jsp:param name="count" value="${count}" />
+				<jsp:param name="navsize" value="${navsize}" />
+				<jsp:param name="pagesize" value="${pagesize}" />
+			</jsp:include>
+		</div>
+
+		<form method="get" action="${context}/board/stray/list">
+			<select name="type" class="input-item">
+				<option value="stray_writer">작성자</option>
+				<option value="stray_head">제목</option>
+			</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
+			<input type="submit" value="조회">
+		</form>
+	</section>
