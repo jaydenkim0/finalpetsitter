@@ -51,12 +51,12 @@ public class ReservationDaoImpl implements ReservationDao {
 		sqlSession.insert("petsitter.registPay", payinfoList);
 	}
 	
-	//예약 목록 조회
+	//예약 목록 단일 조회(예약번호)
 	@Override
 	public ReservationListVO getReservation(int reservation_no) {
-//		return sqlSession.selectList("petsitter.getReservation", reservation_no);
 		return sqlSession.selectOne("petsitter.getReservation", reservation_no);
 	}
+	
 
 	// 예약 상태 승인으로 변경
 	@Override
@@ -75,6 +75,11 @@ public class ReservationDaoImpl implements ReservationDao {
 		//펫시터 예약 번호 가져오기
 		List<Integer> reservation_no = sqlSession.selectList("petsitter.getReservationNo", pet_sitter_no);
 		return reservation_no;
+	}
+
+	@Override
+	public List<ReservationListVO> getReservationSitter(int pet_sitter_no) {
+		return sqlSession.selectList("petsitter.getReservationSitter", pet_sitter_no);
 	}
 	
 	
