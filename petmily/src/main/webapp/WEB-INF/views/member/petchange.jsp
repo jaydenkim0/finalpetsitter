@@ -25,7 +25,7 @@ function no_image() {
 					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 25%; height: auto;" onerror="no_image()" id="pet_image">
 				</c:otherwise>
 			</c:choose>
-				<input type="file" name="pet_image" multiple accept="image/*">
+				<input type="file" name="pet_image" accept="image/*">
 			</td>
 		</tr>
 		<tr>

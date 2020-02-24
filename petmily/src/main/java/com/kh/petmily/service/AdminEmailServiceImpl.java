@@ -158,10 +158,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 					String url = ServletUriComponentsBuilder
 											.fromCurrentContextPath()
 											.port(8080)
-											.path("/petsitter/paymentlogin")
-											//	     pay/account --> 결제버튼
-											//     pay/success --->결제완료
-											//     pay/list ---->결제리스트
+											.path("/check/login")										
 											.queryParam("id", id)
 											.queryParam("sitter_no", sitter_no)
 											.queryParam("reservation_no", reservation_no)

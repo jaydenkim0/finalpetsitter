@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +29,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
@@ -56,13 +58,85 @@ public class MemberController {
 	private BCryptPasswordEncoder encoder;
 
 	
-	@GetMapping("/input")
-		public String input() {
-			return "member/input";	
+	
+	@GetMapping("/validate")	
+	@ResponseBody
+	public String validate(
+			HttpSession session, @RequestParam String cert) {
+		String value = (String)session.getAttribute("cert");
+		session.removeAttribute("cert");
+		if(value.equals(cert)) {
+			return "success";
+		}
+		else {
+			return "fail";
+		}
 	}
 	
+	///////////////////////////////////////////////////
 	
-
+	// 비밀번호 변경화면
+	@GetMapping("/input")
+	public String input() {
+		return "member/input";	
+	}	
+	// 이메일 변경하기 위해서 이메일 전달
+	@PostMapping("/input")
+	public String input(@RequestParam String email) throws MessagingException {
+		emailService.sendChangePasswordMail(email);
+		return "redirect:result";
+	}
+	// 비밀번호 변경 이메일 발송
+	@GetMapping("/send")
+	@ResponseBody//내가 반환하는 내용이 곧 결과물
+	public String send(@RequestParam String email, HttpSession session) {
+		//		인증번호를 세션이든 DB든 어디에 저장
+		String cert = randomService.generateCertificationNumber(6);
+		session.setAttribute("cert", cert);
+		return emailService.sendCertMessage(email, cert);
+	}
+	// 이메일 전달 완료후 이메일 확인해달라는 페이지
+	@GetMapping("/result")
+	public String result() {
+		return "member/result";
+	}	
+	// 비밀번호 변경 페이지 (이메일에서 접속 가능)
+	@GetMapping("/change")
+	public String change(
+			@RequestParam() String cert,
+			@RequestParam() String email,
+			HttpServletResponse response,
+			Model model) {
+//			필요한 작업
+//			- 사용자가 이메일에서 링크를 누르면 이곳으로 들어온다.
+//			- 들어오면서 정상적인 링크라면 
+//				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
+//			- 위의 두 파라미터를 받아서 DB에 검증을 실시
+//			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
+		System.out.println("email = " + email);
+		System.out.println("cert = " + cert);
+		model.addAttribute("email", email);
+		boolean enter = certDao.check(email, cert);
+		log.info("enter = {}", enter);
+		certDao.delete(email);
+		if(!enter) {
+			//에러 코드 송출
+			response.setStatus(403);
+		}
+		return "member/change";
+	}	
+	// 비밀번호 변경 기능
+	@PostMapping("/change")
+	public String change(@ModelAttribute MemberDto memberDto) {			
+		String origin = memberDto.getPw();
+		String result = encoder.encode(origin);
+		memberDto.setPw(result);		
+		memberService.pwchange(memberDto);
+		return "redirect:/";
+	}
+	
+	///////////////////////////////////////////////////	
+	
 	//  회원가입
 	//  regist로 이동
 	@GetMapping("/regist")
@@ -122,6 +196,8 @@ public class MemberController {
 		return "member/login";		
 	}
 	
+
+	// 로그인 검사 후 제출
 	@PostMapping("/login")
 	public String login(
 			@ModelAttribute MemberDto memberDto, 
@@ -129,11 +205,15 @@ public class MemberController {
 			Model model) {
 							
 		MemberDto find = memberService.login(memberDto);
-		if(find == null) {
-			
+		
+		System.out.println("아이디가 있나요? = "+find);
+		
+		if(find == null) {// 아이디가 없으면  -> 에러	
 			return"redirect:/member/login?error"; 
 		}else { //아이디가 있으면 --> 비밀번호 매칭검사
+			
 				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
+				System.out.println("correct = "+ correct);				
 					if (correct == true) {// 비밀번호 일치
 								session.setAttribute("id", find.getId());
 								session.setAttribute("grade", find.getGrade());
@@ -150,10 +230,9 @@ public class MemberController {
 									blackcount = 0;
 								}
 								model.addAttribute("blackcount",blackcount);
-								return "redirect:/";		
-		
+								return "redirect:/";				
 			}else { // 비밀번호 불일치
-				    return "redirect:/login?error";		
+				    return "redirect:/member/login?error";		
 			}
 		}
 	}
@@ -182,17 +261,6 @@ public class MemberController {
 		return memberService.pet_image(pet_image_no);
 	}
 
-
-	@GetMapping("/send")
-	@ResponseBody//내가 반환하는 내용이 곧 결과물
-	public String send(@RequestParam String email, HttpSession session) {
-//		인증번호를 세션이든 DB든 어디에 저장
-//		String cert = "123456";
-		String cert = randomService.generateCertificationNumber(6);
-		session.setAttribute("cert", cert);
-		return emailService.sendCertMessage(email, cert);
-	}
-	
 	//아이디찾기-GetMapping
 	@GetMapping("/findid")
 	public String findid() {
@@ -216,82 +284,6 @@ public class MemberController {
 		return "member/findid_result";
 	}
 
-	
-	@GetMapping("/validate")	
-	@ResponseBody
-	public String validate(
-			HttpSession session, @RequestParam String cert) {
-		String value = (String)session.getAttribute("cert");
-		session.removeAttribute("cert");
-		if(value.equals(cert)) {
-			return "success";
-		}
-		else {
-			return "fail";
-		}
-	}
-		@PostMapping("/input")
-		public String input(@RequestParam String email) throws MessagingException {
-			emailService.sendChangePasswordMail(email);
-			return "redirect:result";
-		}
-		
-		@GetMapping("/result")
-		public String result() {
-			return "member/result";
-		}
-		
-		
-		@GetMapping("/change")
-		public String change(
-				@RequestParam() String cert,
-				@RequestParam() String email,
-				HttpServletResponse response,
-				Model model) {
-//			필요한 작업
-//			- 사용자가 이메일에서 링크를 누르면 이곳으로 들어온다.
-//			- 들어오면서 정상적인 링크라면 
-//				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
-//			- 위의 두 파라미터를 받아서 DB에 검증을 실시
-//			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
-			model.addAttribute("email", email);
-			boolean enter = certDao.check(email, cert);
-			log.info("enter = {}", enter);
-			certDao.delete(email);
-			if(!enter) {
-				//에러 코드 송출
-				response.setStatus(403);
-			}
-			return "member/change";
-		}
-
-		@PostMapping("/change")
-		public String change(@ModelAttribute MemberDto memberDto) {		
-			memberService.pwchange(memberDto);
-			return "/";
-		}
-		
-		
-		//내정보보기
-		@GetMapping("/mylist")
-		public String mylist(
-				HttpSession session,
-				Model model) {
-			
-			String id = (String) session.getAttribute("id");
-			
-			MemberDto list = memberService.mylist(id);
-			model.addAttribute("mylist",list);
-			
-			//해당 회원의 회원 이미지 번호 구해오기
-			Integer member_image_no = memberService.member_image_no(id);
-			model.addAttribute("member_image_no",member_image_no);
-			
-			List<PetImagePetDto> petlist = memberService.mylistpet(id);
-			model.addAttribute("mylistpet",petlist);
-			
-			return "member/mylist";
-		}
 		
 		//아이디중복검사
 		@RequestMapping(value="idCheck",method = RequestMethod.GET)
@@ -364,6 +356,7 @@ public class MemberController {
 			return "member/mylistchange";
 		}
 		
+		//회원정보 수정 제출
 		@PostMapping("/mylistchange")
 		public String edit(
 				@ModelAttribute MemberDto memberDto,
@@ -447,6 +440,94 @@ public class MemberController {
 			}
 			
 			return "redirect:mylist";
+		}	
+		
+		//마이페이지 연결
+		@GetMapping("/mypage")
+		public String mypage() {
+			return "member/mypage";
+		}
+		
+		//내정보보기
+		@GetMapping("/mylist")
+		public String mylist(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			MemberDto list = memberService.mylist(id);
+			model.addAttribute("mylist",list);
+			
+			//해당 회원의 회원 이미지 번호 구해오기
+			Integer member_image_no = memberService.member_image_no(id);
+			model.addAttribute("member_image_no",member_image_no);
+			
+			List<PetImagePetDto> petlist = memberService.mylistpet(id);
+			model.addAttribute("mylistpet",petlist);
+			
+			return "member/mylist";
+		}
+		
+		//내가 쓴 리뷰 페이지 연결
+		@GetMapping("/myreview")
+		public String myreview(
+				HttpSession session,
+				Model model,
+				HttpServletRequest req) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			
+			int pagesize=10;
+			int navsize=10;
+			int pno;
+			try {
+				pno = Integer.parseInt(req.getParameter("pno"));
+				if(pno <=0) throw new Exception();
+			}
+			catch(Exception e) {
+				pno=1;
+			}
+			int finish = pno * pagesize;
+			int start = finish - (pagesize - 1);
+			
+			int count = memberService.getmyreviewCount(id);
+			
+			List<ReviewSitterDto> review = memberService.myreview(id,start,finish);
+			
+			model.addAttribute("review",review);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("navsize",navsize);
+			model.addAttribute("pno",pno);
+			model.addAttribute("count",count);
+			
+			return "member/myreview";
+		}
+		
+		//내 예약 조회 페이지 연결
+		@GetMapping("/myreservation")
+		public String myreservation(
+				HttpSession session,
+				Model model) {
+			
+			String id = (String) session.getAttribute("id");
+			
+			return "member/myreservation";
+		}
+		
+		//내 리뷰 상세보기 페이지 연결
+		@GetMapping("/myreview_content")
+		public String myreview_content(
+				@RequestParam int review_no,
+				Model model) {
+			
+			ReviewSitterDto review = memberService.myreview_content(review_no);
+			
+			model.addAttribute("review",review);
+			
+			return "member/myreview_content";
 		}
 	}
 
