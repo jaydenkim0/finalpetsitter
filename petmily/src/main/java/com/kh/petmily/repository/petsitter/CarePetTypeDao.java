@@ -5,6 +5,10 @@ import java.util.List;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 
 public interface CarePetTypeDao {
+	//돌봄가능 동물 등록
 	void registType(int no, List<Integer>care_name);
+	//돌봄가능 동물 목록 조회
 	List<CarePetTypeNameDto> getPetTypeList(int pet_sitter_no);
+	//돌봄가능 동물 삭제
+	void deleteType(int pet_sitter_no);	
 }

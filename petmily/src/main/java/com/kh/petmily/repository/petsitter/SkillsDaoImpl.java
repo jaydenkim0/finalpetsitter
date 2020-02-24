@@ -42,4 +42,10 @@ public class SkillsDaoImpl implements SkillsDao {
 		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", pet_sitter_no);
 		return skillsList;
 	}
+	
+	@Override
+	public void deleteSkills(int pet_sitter_no) {
+		sqlSession.delete("petsitter.deleteSkills", pet_sitter_no);
+		
+	}
 }

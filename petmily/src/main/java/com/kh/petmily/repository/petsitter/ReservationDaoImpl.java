@@ -18,17 +18,20 @@ public class ReservationDaoImpl implements ReservationDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//예약 번호 시퀀스 구하기
 	@Override
 	public int getSequenceReservation() {
 		int res_no = sqlSession.selectOne("petsitter.getSequenceReservation");
 		return res_no;
 	}
-
+	
+	//예약 등록
 	@Override
 	public void registReservation(ReservationDto reservationDto) {
 		sqlSession.insert("petsitter.registReservation", reservationDto);
 	}
-
+	
+	//예약 금액(예약 이름) 등록
 	@Override
 	public void registPay(List<Integer>payinfo_no,ReservationPayDto reservationPayDto) {
 		
@@ -45,7 +48,7 @@ public class ReservationDaoImpl implements ReservationDao {
 		sqlSession.insert("petsitter.registPay", payinfoList);
 	}
 	
-	
+	//예약 목록 조회
 	@Override
 	public List<ReservationListVO> getReservation(int reservation_no) {
 		return sqlSession.selectList("petsitter.getReservation", reservation_no);
@@ -60,6 +63,13 @@ public class ReservationDaoImpl implements ReservationDao {
 	@Override
 	public void reservationDelete(int reservation_no) {
 		sqlSession.delete("petsitter.reservationDelete", reservation_no);
+	}
+
+	//펫시터 예약 번호 조회  
+	@Override
+	public List<Integer> getReservationNo(int pet_sitter_no) {
+		List<Integer> reservation_no = sqlSession.selectList("petsitter.getReservationNo", pet_sitter_no);
+		return reservation_no;
 	}
 	
 	
