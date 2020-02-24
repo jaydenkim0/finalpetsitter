@@ -2,6 +2,7 @@ package com.kh.petmily.service.board;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,18 +42,20 @@ public class ReviewServiceImpl implements ReviewService{
 		
 	}
 	@Override
-	public List<ReviewDto> listAll(String type, String keyword, int start, int finish) {
-		return reviewDao.listall(type,keyword,start,finish);
+	public List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception {
+		return reviewDao.listAll(type,keyword,start,finish);
+	}
+//	@Override
+//	public List<ReviewDto> getList(int start, int finish) {
+//	
+//	}
+	@Override
+	public int getCount(String type, String keyword) throws Exception {
+		return reviewDao.getCount(type,keyword);
 	}
 	@Override
 	public List<ReviewDto> getList(int start, int finish) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public int getCount(String type, String keyword) {
-		// TODO Auto-generated method stub
-		return 0;
+	    return reviewDao.getList(start,finish);
 	}
 
 

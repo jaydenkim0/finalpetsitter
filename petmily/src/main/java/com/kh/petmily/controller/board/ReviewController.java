@@ -61,7 +61,7 @@ public class ReviewController {
 //		reviewService.insert(reviewDto);
 		reviewDao.insert(reviewDto);
 		reviewService.pointplus(reviewDto);
-		return "redirect:/petsitter/list";
+		return "redirect:/board/review/list";
 	}
 
 ////-리뷰 목록----------------------------------------------------------------------------	
@@ -112,24 +112,7 @@ public class ReviewController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 //리뷰 시터조회목록----------------------------------------------------------------------------	
 	@GetMapping("/listsearch")
 	public String listSearch(Model model, @RequestParam int review_sitter_no) throws Exception {

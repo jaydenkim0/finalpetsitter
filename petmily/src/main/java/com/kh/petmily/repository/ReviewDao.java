@@ -25,7 +25,17 @@ public interface ReviewDao {
 	
 	// 별점평균 불러오기
 	double star(int pet_sitter_no);
-	List<ReviewDto> listall(String type, String keyword, int start, int finish);
+	
+	
+	
+	public int getCount(String type, String keyword) throws Exception;
+	
+	List<ReviewDto> getList(int start, int finish);
+	
+	int getSequence();
+	
+	List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception;
+	
 	
 	
 	
