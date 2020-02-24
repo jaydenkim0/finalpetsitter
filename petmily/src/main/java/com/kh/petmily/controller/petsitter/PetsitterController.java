@@ -1,4 +1,3 @@
-  
 package com.kh.petmily.controller.petsitter;
 
 import java.io.IOException;
@@ -8,7 +7,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PetDto;
-import com.kh.petmily.repository.petsitter.ReservationDao;
-
-
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
@@ -54,11 +50,10 @@ public class PetsitterController {
 	//관리자 서비스
 	@Autowired
 	private AdminService adminService;
-	//나중에 수정할  것(펫시터 서비스)
-	@Autowired
-	private ReservationDao reservationDao;	
+	//회원 서비스
 	@Autowired
 	private MemberService memberService;
+	//리뷰 서비스
 	@Autowired
 	private ReviewService reviewService;
 
@@ -91,38 +86,46 @@ public class PetsitterController {
 			return memberService.pet_image(pet_image_no);
 		}
 	
-	//펫시터 검색(조회) 페이지
+		
+	//펫시터 검색(조회) 리스트 페이지
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
-						@RequestParam(defaultValue="", required = false) String areaKeyword,
-						@RequestParam(defaultValue = "1", required = false) int curPage,
+							   @RequestParam(defaultValue="", required = false) String areaKeyword,
+							   @RequestParam(defaultValue = "1", required = false) int curPage,								 
 																                            Model model) {
 		
-		// 레코드의 갯수 계산
+		// 레코드의 갯수 계산		
 		int count = petsitterService.countlocation(cityKeyword, areaKeyword);
 		
+			
 		// 페이지 나누기 관련 처리
 		NaviVO navi = new NaviVO(count, curPage);
 		
 		int start = navi.getPageBegin();
 		int end = navi.getPageEnd();
+	
+		//펫시터 정보	
+		model.addAttribute("list",(List<SitterlocationVO>)petsitterService.locationListAll(start, end, cityKeyword, areaKeyword));
 		
-		//펫시터 정보
-		List<SitterlocationVO> list = petsitterService.locationListAll(start, end, cityKeyword, areaKeyword);
 		
 		// 리스트 불러오기
-		model.addAttribute("list", list)
-				  .addAttribute("count", count)
-				  .addAttribute("cityKeyword", cityKeyword)
-				  .addAttribute("areaKeyword", areaKeyword)
-				  .addAttribute("navi", navi);		
+		model.addAttribute("count", count)
+				  .addAttribute("navi", navi);			
+		model.addAttribute("city", cityKeyword)
+				.addAttribute("area", areaKeyword);			  
 		return "petsitter/list";
 	}
 	
 	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
 	public String content(@RequestParam int pet_sitter_no,
+									HttpSession session,
 									Model model) throws Exception {
+		// 세션에서 로그인한 아이디 가지고오기
+		String id = (String) session.getAttribute("id");
+		int count = petsitterService.petscheck(id);
+		System.out.println("아이디가 들ㅇ왔나요? = "+ id);
+		System.out.println("count가 들ㅇ왔나요? = "+ count);
 		
 		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
 		double star = reviewService.star(pet_sitter_no);
@@ -131,6 +134,7 @@ public class PetsitterController {
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
 		model.addAttribute("reviewstar",star);
 		model.addAttribute("list",list);
+		model.addAttribute("petscheck",count);		
 		return "petsitter/content";
 	}
 	
@@ -144,10 +148,12 @@ public class PetsitterController {
 		//펫시터 번호로 펫시터 정보 조회
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		
+			System.out.println("petsitterList 확인 = "+petsitterList);
+		
 		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
 			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
-		
+		model.addAttribute("black_petsitter_count", petsitterService.black_petsitter_count(id));
 		return "petsitter/info";
 	}
 	@PostMapping("/info")
@@ -210,26 +216,26 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
 		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);		
+		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);		
 		//최종 결제 금액 구하기
 		int payMent = 0;
-		int totalTime =0;
-		String date = null;
-		for(ReservationListVO vo : reservationList) {
-			List<ReservationAllVO> all = vo.getList();
-			totalTime = all.get(0).getUsage_time();
+	
+			List<ReservationAllVO> all = reservationList.getList();
+			int totalTime = all.get(0).getUsage_time();
+			int startTime = all.get(0).getStart_time();
 			
 			for(ReservationAllVO allVO : all) {
 				int usagetime = allVO.getUsage_time();
 				int oneHour = usagetime * 10000;
 				int payment = allVO.getPayment();
+				
 				payMent = oneHour + payment;			
 			}
-		}
 		
 		model.addAttribute("reservationList", reservationList)
 			.addAttribute("payMent", payMent)
-			.addAttribute("usageTime", totalTime);
+			.addAttribute("usageTime", totalTime)
+		.addAttribute("startTime", startTime);
 		return "petsitter/confirm";
 	}
 	
@@ -241,7 +247,7 @@ public class PetsitterController {
 									    @RequestParam int sitter_no,
 									    @RequestParam String check,
 									    @RequestParam int reservation_no
-			) throws MessagingException {
+			) throws MessagingException {	
 		int pet_sitter_no = sitter_no; 
 		PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
 		String sitter_id = petsitterVO.getId();
@@ -262,36 +268,36 @@ public class PetsitterController {
 	
 	
 	//펫시터 예약 조회
-	@GetMapping("/reservation")
-	public String reservation(HttpSession session,Model model) {
-		//세션의 아이디 가져오기
-		String id = (String) session.getAttribute("id");
-		//아이디로 펫시터 번호 조회
-		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+//	@GetMapping("/reservation")
+//	public String reservation(HttpSession session,Model model) {
+//		//세션의 아이디 가져오기
+//		String id = (String) session.getAttribute("id");
+//		//아이디로 펫시터 번호 조회
+//		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+//		System.out.println(pet_sitter_no);
+//		//회원아이디 -펫시터 아이디
+//		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);
+//		
+//		System.out.println("예약="+reservationList.toString());
 		
-		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);	
-		
-		System.out.println("예약="+reservationList.toString());
-		//최종 결제 금액 구하기
-		int payMent = 0;
-		int totalTime =0;
-		for(ReservationListVO vo : reservationList) {
-			List<ReservationAllVO> all = vo.getList();
-			totalTime = all.get(0).getUsage_time();
-			
-			for(ReservationAllVO allVO : all) {
-				int usagetime = allVO.getUsage_time();
-				int oneHour = usagetime * 10000;
-				int payment = allVO.getPayment();
-				payMent = oneHour + payment;				
-			}
-		}
-		
-		model.addAttribute("reservationList", reservationList)
-				.addAttribute("payMent", payMent)
-				.addAttribute("usageTime", totalTime);
-	
-		return "petsitter/reservation";
-	}
+//		//최종 결제 금액 구하기
+//		int payMent = 0;
+//		int totalTime =0;
+//		for(ReservationListVO vo : reservationList) {
+//			List<ReservationAllVO> all = vo.getList();
+//			totalTime = all.get(0).getUsage_time();
+//			
+//			for(ReservationAllVO allVO : all) {
+//				int usagetime = allVO.getUsage_time();
+//				int oneHour = usagetime * 10000;
+//				int payment = allVO.getPayment();
+//				payMent = oneHour + payment;				
+//			}
+//		}
+//		
+//		model.addAttribute("reservationList", reservationList)
+//				.addAttribute("payMent", payMent)
+//				.addAttribute("usageTime", totalTime);
+//	
+// 	}
 }

@@ -33,4 +33,11 @@ public interface PetsitterDao {
 	void updatePetsitter(PetsitterDto petsitterDto);
 	//펫시터 상태 변경
 	void updateStatus(int pet_sitter_no, String sitter_status);
+	
+	// 펫시터 블랙리스트 카운트 여부
+	int black_petsitter_count(String id);
+	
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	int petscheck(String id);
+
 }

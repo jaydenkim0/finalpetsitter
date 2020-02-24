@@ -206,8 +206,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							where city = #{cityKeyword} and area = #{areaKeyword}
 						</if>
 	            	)L on petsitter.pet_sitter_no = L.location_sitter_no
-		          left outer join member_image M on petsitter.id = m.member_image_member_id	
-		         )B
+		          left outer join member_image M on petsitter.id = m.member_image_member_id			
+		         )B		         
             	)A         
 			where sitter_status = '정상' order by pet_sitter_no desc)
         where rn between #{start} and #{end} order by rn
@@ -223,13 +223,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	         select * from (
 	            select distinct petsitter.* from 
 	                petsitter inner join (
-	                    select * from location 
+	                    select * from location 	                    
 	                    <if test="cityKeyword != '' and areaKeyword != ''">
 	                        where city = #{cityKeyword}
 	                        and area = #{areaKeyword}
-	            		</if>     
+	            		</if>            		     
 	            )L on petsitter.pet_sitter_no = L.location_sitter_no) 
-	    where sitter_status = '정상')
+	    where sitter_status = '정상') 	
 	</select>	
 		
 		
@@ -257,7 +257,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			into reservationpay values(
 				#{reservationPayDto.payinfo_no},
 				#{reservationPayDto.pay_reservation_no},
-				#{reservationPayDto.usage_time})
+				#{reservationPayDto.usage_time},
+				#{reservationPayDto.start_time})
 			</foreach>
 	</insert>	
 
@@ -271,6 +272,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="matching_time" property="matching_time"/>
 		<result column="pet_name" property="pet_name"/>
 		<result column="usage_time" property="usage_time"/>
+		<result column="start_time" property="start_time"/>
 		<result column="payname" property="payname"/>
 		<result column="pet_no" property="pet_no"/>
 		<result column="age" property="age"/>
@@ -354,6 +356,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete location where location_sitter_no = #{location_sitter_no}
 	</delete>
 	
+	<!-- 통장 이미지 삭제 -->
+	<delete id="deleteBankImage" parameterType="int">
+		delete bank_image where bank_sitter_no=#{bank_sitter_no}
+	</delete>
+	
 	<!-- 펫시터 상태 변경 (정상/휴면) -->
 	<update id="updateStatus" parameterType="map">
 		update pet_sitter set 
@@ -366,6 +373,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		where pet_sitter_no = #{pet_sitter_no}
 	</update>
+	
+	
+	
+	<!-- 펫시터 블랙리스트 카운트 여부 -->
+	<select id="black_petsitter_count" parameterType="String"
+	resultType="int">
+		select count(*) from blacklistcontent 
+		where black_content_id = #{id}
+		and black_content_grade = 'petsitter'	
+	</select>
+	
+	<!-- 회원이 펫을 갖고 있는지 카운터로 확인 -->
+	<select id="petscheck" parameterType="String" resultType="int">
+		select count(*) from pet where member_id = #{id}
+	</select>
+	
+	
 </mapper>
 
 

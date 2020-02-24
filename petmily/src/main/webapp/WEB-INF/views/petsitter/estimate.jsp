@@ -144,7 +144,7 @@ $(function(){
 	</div>	    
     <div>
 		<label for="time_start">돌봄 시작 시간</label>
-		<select id="time_start" name="usage_time_start" >
+		<select id="time_start" name="start_time" >
             <option value="">시작 시간을 선택</option>
 			<option value="6">오전 6시(06:00)</option>
 			<option value="7">오전 7시(07:00)</option>
@@ -168,7 +168,7 @@ $(function(){
     
     <div>
 		<label for="time_end">돌봄 시작 시간</label>
-		<select id="time_end" name="usage_time_start">
+		<select id="time_end" name="end_time">
             <option value="">끝나는 시간을 선택</option>
 			<option value="6">오전 6시(06:00)</option>
 			<option value="7">오전 7시(07:00)</option>

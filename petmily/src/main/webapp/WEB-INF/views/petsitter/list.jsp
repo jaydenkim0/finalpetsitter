@@ -49,41 +49,45 @@
     </script>
 	
 	<h1>펫시터 정보 조회</h1>
-
+	<!-- 기존 지역으로 검색  -->
 		<form method="post" action="${pageContext.request.contextPath}/petsitter/list">
 			 <div class="location">
 			    <div class="template">
 			        <select class="region" name="cityKeyword">
-			            <option>지역을 선택하세요</option>
+			            <option>지역을 선택하세요</option>			          
 			        </select>
 			        
 			        <select class="section" name="areaKeyword">
 			            <option>구를 선택하세요</option>
 			        </select>
-
+			
 			    	<input type="submit" value="검색">
 			    </div>
 			    <div id="result"></div>
 			</div>
-		</form>
-		
+		</form>		
+
 		
 		<h4>${count}개의 게시물이 있습니다.</h4>
 	
-		<c:forEach var="petsitter" items="${list}">
-			<!-- 펫시터 정보 -->
-			<c:if test="${petsitter.member_image_no > 0}">
-				<img src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image"><br>
-			</c:if>	
-				<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
-				<span>닉네임 : ${petsitter.nick}</span></a>
-				<br>
-			<span>소개글 : ${petsitter.info}</span><br>
-			<c:forEach var="location" items="${petsitter.list}">
-				<span>지역 : ${location.city} ${location.area}</span><br>
-			</c:forEach>
-			<hr>
+	
+	
+		<c:forEach var="petsitter" items="${list}">				
+			<!-- 펫시터 정보 -->			
+					<c:if test="${petsitter.member_image_no > 0}">
+						<img src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image"><br>
+					</c:if>	
+						<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
+						<span>닉네임 : ${petsitter.nick}</span></a>
+						<br>
+					<span>소개글 : ${petsitter.info}</span><br>
+					<c:forEach var="location" items="${petsitter.list}">
+						<span>지역 : ${location.city} ${location.area}</span><br>
+					</c:forEach>
+					<hr>
 		</c:forEach>
+	
+	
 	
 		<!-- 페이징 -->
 		<table>

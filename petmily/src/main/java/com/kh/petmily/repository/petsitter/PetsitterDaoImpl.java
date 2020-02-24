@@ -75,6 +75,7 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		return sqlSession.selectOne("petsitter.countlocation", param);
 	}
 
+	
 	//펫시터 펫 정보 조회
 	@Override
 	public List<PetDto> getPet(String id) {
@@ -109,5 +110,19 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		param.put("sitter_status", sitter_status);
 		sqlSession.update("petsitter.updateStatus", param);
 	}
-	
+
+	// 펫시터 블랙리스트 카운트 여부
+	@Override
+	public int black_petsitter_count(String id) {		
+		return sqlSession.selectOne("petsitter.black_petsitter_count", id) ;
+	}
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	@Override
+	public int petscheck(String id) {	
+		return sqlSession.selectOne("petsitter.petscheck", id);
+	}
+
+
+
+
 }

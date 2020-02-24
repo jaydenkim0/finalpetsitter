@@ -27,6 +27,7 @@ import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
@@ -79,13 +80,15 @@ public class AdminController {
 	}
 	
 	//////////////////////////////////////////////////////////////////////
-
+	
+	// 예약 디테일 페이지
 	@GetMapping("/reservationstatusdetail")
 	public String reservationstatusdetail(
 			@RequestParam int reservation_no,
 			Model model) {
 		// 결제에 대한 단일 정보 : accountVO
 		AccountVO acountVO = adminService.reservationstatusdetail(reservation_no);
+		List<PayDto> payDto = adminService.paydetail(reservation_no);
 		// 결제 가격이름정보 : payifoDto
 		// 펫시터 이름 : petsitterVO
 		int pet_sitter_no = acountVO.getReservation_sitter_no();
@@ -93,6 +96,7 @@ public class AdminController {
 		String sitter_id = petsitter.getSitter_id();		
 		List<PayinfoDto> list =  adminService.payinfoName(reservation_no);
 		model.addAttribute("acountOne", acountVO)
+				  .addAttribute("payinfomation", payDto)
 		 		  .addAttribute("payinfo", list)
 		 		  .addAttribute("usage_time",list.get(0).getUsage_time())
 		 		  .addAttribute("sitter_id", sitter_id);		

@@ -1,7 +1,9 @@
 package com.kh.petmily.repository.petsitter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,7 @@ public class ReservationDaoImpl implements ReservationDao {
 												.payinfo_no(payno)
 												.pay_reservation_no(reservationPayDto.getPay_reservation_no())
 												.usage_time(reservationPayDto.getUsage_time())
+												.start_time(reservationPayDto.getStart_time())
 												.build());
 		}
 		System.out.println(payinfoList.toString());		
@@ -50,8 +53,9 @@ public class ReservationDaoImpl implements ReservationDao {
 	
 	//예약 목록 조회
 	@Override
-	public List<ReservationListVO> getReservation(int reservation_no) {
-		return sqlSession.selectList("petsitter.getReservation", reservation_no);
+	public ReservationListVO getReservation(int reservation_no) {
+//		return sqlSession.selectList("petsitter.getReservation", reservation_no);
+		return sqlSession.selectOne("petsitter.getReservation", reservation_no);
 	}
 
 	// 예약 상태 승인으로 변경
@@ -68,6 +72,7 @@ public class ReservationDaoImpl implements ReservationDao {
 	//펫시터 예약 번호 조회  
 	@Override
 	public List<Integer> getReservationNo(int pet_sitter_no) {
+		//펫시터 예약 번호 가져오기
 		List<Integer> reservation_no = sqlSession.selectList("petsitter.getReservationNo", pet_sitter_no);
 		return reservation_no;
 	}

@@ -20,6 +20,7 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
@@ -584,6 +585,11 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<PayinfoDto> payinfoName(int reservation_no) {	
 		return sqlSession.selectList("admin.payinfoName", reservation_no);
+	}
+
+	@Override
+	public List<PayDto> paydetail(int reservation_no) {		
+		return sqlSession.selectList("admin.paydetail", reservation_no);
 	}
 
 

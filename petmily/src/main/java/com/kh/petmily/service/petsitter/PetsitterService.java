@@ -35,7 +35,7 @@ public interface PetsitterService {
 	//펫시터 단일 조회(아이디)
 	PetsitterVO idGet(String id);
 	//펫시터 예약 조회
-	List<ReservationListVO> getReservation(int reservation_no);
+	ReservationListVO getReservation(int reservation_no);
 	//각각 펫시터 예약 번호로 각각 펫시터 예약 조회
 	List<ReservationListVO> getreservationList(int pet_sitter_no);
 	
@@ -51,6 +51,10 @@ public interface PetsitterService {
 //삭제(D)	
 	// 예약 내용 삭제
 	void reservationDelete(int reservation_no);
-
+	
+	// 펫시터 블랙리스트 카운트 여부
+	int black_petsitter_count(String id);
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	int petscheck(String id);
 	
 }
