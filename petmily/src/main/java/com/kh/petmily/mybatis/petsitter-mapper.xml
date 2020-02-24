@@ -385,8 +385,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 회원이 펫을 갖고 있는지 카운터로 확인 -->
-	<select id="">
-		select count(*) form pet where id = #{id}
+	<select id="petscheck" parameterType="String" resultType="int">
+		select count(*) from pet where member_id = #{id}
 	</select>
 	
 	
