@@ -302,7 +302,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getReservationSitter" resultMap="reservation" parameterType="map">
 		select  distinct 
-		    R.* , p.pet_no,p.age,p.type,p.ect pet_ect,pi.pet_image_no,pi.pet_image_pet_no
+		    R.* , 
+		    p.pet_no, p.age, p.type, p.ect pet_ect,
+		    pi.pet_image_no, pi.pet_image_pet_no
 		        from reservation R 
 		            inner join ( 
 		                select * from reservationall 

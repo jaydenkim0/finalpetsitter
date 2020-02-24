@@ -13,15 +13,22 @@
 				<span>예약 스킬 : ${skill.payname}</span><br>
 			</c:forEach>
 			
+			
+			
 			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${rlist.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
 			<br><span>반려동물 이름 : ${rlist.pet_name}</span><br>
 			<span>반려동물 나이 : ${rlist.age}살</span><br>
 			<span>반려동물 종류 : ${rlist.type}</span><br>
 			<span>반려동물 특이사항 : ${rlist.pet_ect}</span><br>
-			
-			<span>예약 총 금액 :${payMent}원</span><br><br>
-	</c:forEach>
-		
+			<hr>			
+	</c:forEach>	
+			<c:forEach var="pay" items="${payList}">
+				<span>결제 상태 : ${pay.status}</span>
+				<span>총 ${pay.total_amount}원</span>
+			</c:forEach>
+
+	
+	
 		
 		
 		
