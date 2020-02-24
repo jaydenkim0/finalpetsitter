@@ -68,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		     <typeAlias type="com.kh.petmily.vo.petsitter.ReservationVO" alias="reservationVO"/>	
 		     <typeAlias type="com.kh.petmily.vo.petsitter.ReservationAllVO" alias="reservationAllVO"/>	
 		     <typeAlias type="com.kh.petmily.vo.petsitter.ReservationListVO" alias="reservationListVO"/>	
-
+		     <typeAlias type="com.kh.petmily.entity.ReviewSitterDto" alias="reviewSitterDto"/>
+		     
 	</typeAliases>
 </configuration>

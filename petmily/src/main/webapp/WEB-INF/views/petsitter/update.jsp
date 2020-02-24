@@ -210,30 +210,20 @@ textarea[name=faq_content] {
 </script>
 <!-- 에디터 끝 -->
     
-<h1>펫시터 가입 페이지</h1>
-<!-- 
-	받아야하는 목록 : 
-		sitter_id,info,sitter_pets,care_condition,sitter_terms_agree
--->
-<form action="regist" method="post" enctype="multipart/form-data">
+<h1>펫시터 정보 수정</h1>
+
+<form action="update" method="post" enctype="multipart/form-data">
 
 <!-- 회원 아이디 -->
 	<input type="hidden" name="sitter_id" value="${id}">
-	<h1>${id}</h1>
+<!-- 펫시터 번호 -->
+	<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}">
+	<h1>${pet_sitter_no}</h1>
 	
 <!-- 소개 이미지 파일 -->	
 	<label for="info_image">소개 이미지</label>
 	<input type="file" id="info_image" name="info_image" multiple accept="image/*">
 	
-<!-- 신분증 이미지 파일 -->	
-	<label for="id_card_file">신분증</label>
-	<input type="file" id="id_card_file" name="id_card_file" multiple accept="image/*" required>
-	
-<!-- 증빙서류 이미지 파일 -->	
-	<label for="license_file">증빙 서류</label>
-	<input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
-	
-
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
 	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
@@ -274,12 +264,12 @@ textarea[name=faq_content] {
 		<table width="60%">
 			<tr>
 				<td><label for="info-text">펫밀리 기본 정보</label></td>
-			<tr>
-				<td><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
-				</textarea></td>
-			<tr>
 			</tr>
-		</table>
+			<tr>
+					<td><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
+					</textarea></td>
+			</tr>
+			</table>
 	</div>
 <!--반려동물 경험 -->
 	<div>
@@ -302,6 +292,7 @@ textarea[name=faq_content] {
 	
 <!-- 스킬 -->
 	<div class="skill">
+	<h5>기존의 스킬에 상관 없이 지금 가능한 스킬을 선택해주세요.</h5>
         <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
         <label for="sick" id="nameTo1">투약</label>
         
@@ -319,6 +310,7 @@ textarea[name=faq_content] {
 
 <!-- 돌봄 가능 동물 종류 -->
     <div class="type">
+    <h5>기존의 돌봄 가능한 동물에 상관 없이 지금 돌봄 가능한 동물을 선택해주세요.</h5>
         <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
         <label for="dog">강아지</label>
         
@@ -342,6 +334,7 @@ textarea[name=faq_content] {
 
 <!-- 돌봄 환경 -->
     <div class="condition">
+    <h5>기존의 돌봄 환경에 상관 없이 지금 돌봄 환경을 선택해주세요.</h5>
         <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
         <label for="apt">아파트</label>
         
@@ -368,6 +361,7 @@ textarea[name=faq_content] {
 	
 <!-- 활동 지역 -->
 	<div class="location">
+	    <h5>기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</h5>
 	    <div class="template">
 	        <select class="region" name="location_name[0].city">
 	            <option>지역을 선택하세요</option>
@@ -382,7 +376,6 @@ textarea[name=faq_content] {
 	</div>
 		
 	<div>
-		<input type="submit" value="펫시터 등록">
-		<h5>다음 단계로 진행하면 펫밀리 신청 약관 에 동의하는 것으로 간주됩니다.</h5>
+		<input type="submit" value="수정">
 	</div>
 </form>

@@ -264,7 +264,7 @@ function no_image2(){
 					<input type="hidden" name="care_reply_writer" value="${id }">
 					<textarea name="care_reply_content" required id="care_reply_content"
 					style="resize:vertical;"placeholder="글 내용 입력"></textarea>
-					<input type="file" name="care_image" multiple accept="image/*">
+					<input type="file" name="care_image" accept="image/*">
 				</td>
 				<td align="right">
 					<input type="submit" value="등록" class="reply_regist_btn">
