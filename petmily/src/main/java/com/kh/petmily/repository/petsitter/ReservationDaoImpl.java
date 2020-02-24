@@ -69,7 +69,7 @@ public class ReservationDaoImpl implements ReservationDao {
 	@Override
 	public List<Integer> getReservationNo(int pet_sitter_no) {
 		List<Integer> reservation_no = sqlSession.selectList("petsitter.getReservationNo", pet_sitter_no);
-		returnreservation_no;
+		return reservation_no;
 	}
 	
 	
