@@ -30,9 +30,9 @@
 <!--     <input type="text" name="review_star"></div> -->
    <select name="review_star" required>
    <option value="">선택</option>
-   <option value=3>좋음(3)★★★</option>
-   <option value=2>보통(2)★★</option>
-   <option value=1>나쁨(1)★</option>
+   <option value="3">좋음(3)★★★</option>
+   <option value="2">보통(2)★★</option>
+   <option value="1">나쁨(1)★</option>
    </select></div>
    <br>
     

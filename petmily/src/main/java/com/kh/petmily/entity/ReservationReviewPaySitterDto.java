@@ -3,6 +3,17 @@ package com.kh.petmily.entity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.kh.petmily.entity.CareDto.CareDtoBuilder;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ReservationReviewPaySitterDto {
 	
 	//Reservation과 Petsitter table view 생성했음.------------------------
@@ -15,13 +26,14 @@ public class ReservationReviewPaySitterDto {
 	private String pet_name; // 돌봄 서비스 받을 반려동물이름
 	private String ect; // 기타정보
 	private String reservation_status; // '대기', '승인' 만 입력가능, 승인시 정산을 거쳐서 결제처리 가능 
-
+	private int gap;
+	
 	public String getTotalMatchingTime()throws Exception{
 		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 		Date date = read.parse(matching_time);
 		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
 		String time = write.format(date);
-		return time;	
+		return time;
 	}
 	
 	//Petsitter

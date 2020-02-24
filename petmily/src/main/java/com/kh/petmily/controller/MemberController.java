@@ -544,7 +544,7 @@ public class MemberController {
 		public String myreservation(
 				HttpSession session,
 				Model model,
-				HttpServletRequest req) {
+				HttpServletRequest req) throws Exception {
 			
 			String id = (String) session.getAttribute("id");
 			
@@ -567,7 +567,7 @@ public class MemberController {
 			//멤버+예약+결제+리뷰 합친 예약.
 			List<ReservationReviewPaySitterDto> reservation_list = memberService.myreservation(id,start,finish);
 			
-			model.addAttribute("reservation",reservation_list);
+			model.addAttribute("reservation_list",reservation_list);
 			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("navsize",navsize);

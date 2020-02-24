@@ -45,10 +45,19 @@ li{
 						</c:otherwise>
 					</c:choose>					
 				</td>
-				<td>${reservation.pay_status }</td>
 				<td>
 					<c:choose>
-						<c:when test="${reservation.pay_status=='완료' }">
+						<c:when test="${reservation.pay_status !='완료' }">
+							결제 미완료
+						</c:when>
+						<c:otherwise>
+							${reservation.pay_status }
+						</c:otherwise>
+					</c:choose>									
+				</td>
+				<td>
+					<c:choose>
+						<c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
 							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}">리뷰쓰기</a>
 						</c:when>
 						<c:otherwise>

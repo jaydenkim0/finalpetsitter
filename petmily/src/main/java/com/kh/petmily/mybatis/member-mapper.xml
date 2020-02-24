@@ -343,10 +343,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				select
 					RS.*,
 					P.status pay_status,
-					R.review_no
+					R.review_no,
+					to_date(to_char(RS.matching_time, 'YYYY/MM/DD'), 'YYYY/MM/DD') - to_date(to_char(sysdate, 'YYYY/MM/DD'), 'YYYY/MM/DD') gap
 				from 
 					reservationsitter RS
-						left outer join pay P on RS.reservation_no=P.pay_no
+						left outer join pay P on RS.reservation_no=P.partner_order_id
 						left outer join Review R on RS.reservation_no=R.review_reservation_no 
 				where
 					RS.member_id=#{id} and RS.reservation_status='승인'
