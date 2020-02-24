@@ -15,8 +15,7 @@
 		<!-- 펫시터 번호 변수 등록 -->
 		<c:set var="pet_sitter_no" value="${petsitter.pet_sitter_no}"></c:set>
 		<!-- 펫시터 상태 변수 등록 -->
-		<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>
-			
+		<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>		
 			<span>펫시터 번호 : ${petsitter.pet_sitter_no}</span><br>
 			<span>아이디 : ${petsitter.sitter_id}</span><br>
 			<span>닉네임 : ${petsitter.nick}</span><br>
@@ -62,19 +61,27 @@
 	</c:forEach>
 </c:forEach>
 
+
 <form action="info" method="post">
 <input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}"> 
 <!-- 펫시터 상태 변경 (휴면 -> 정상 / 정상 -> 휴면) -->
-	<c:choose>
-	
-		<c:when test="${sitter_status eq '휴면'}">
-		<button name="sitter_status" value="정상">휴면 해제</button>
+	<c:choose >
+		<c:when test="${black_petsitter_count > 0}">
+					<h4>펫시터 경고를 받아 휴면 상태 조정이 불가합니다</h4>
+					<h4>자세한 내용은 문의 게시판 및 상담센터로 연락 부탁드립니다</h4>
 		</c:when>
-		
 		<c:otherwise>
-		<button name="sitter_status" value="휴면">휴면 신청</button>
+					<c:choose>	
+					<c:when test="${sitter_status eq '휴면'}">
+					<button name="sitter_status" value="정상">휴면 해제</button>
+					</c:when>
+					
+					<c:otherwise>
+					<button name="sitter_status" value="휴면">휴면 신청</button>
+					</c:otherwise>
+				</c:choose>
 		</c:otherwise>
-	</c:choose>
+	</c:choose>	
 </form>
 
 <a href="update?pet_sitter_no=${pet_sitter_no}"><button id="updateInfo_btn">정보 수정</button></a>

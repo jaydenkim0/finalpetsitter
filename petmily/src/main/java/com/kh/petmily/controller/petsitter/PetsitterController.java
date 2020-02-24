@@ -141,10 +141,12 @@ public class PetsitterController {
 		//펫시터 번호로 펫시터 정보 조회
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		
+			System.out.println("petsitterList 확인 = "+petsitterList);
+		
 		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
 			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
-		
+		model.addAttribute("black_petsitter_count", petsitterService.black_petsitter_count(id));
 		return "petsitter/info";
 	}
 	@PostMapping("/info")

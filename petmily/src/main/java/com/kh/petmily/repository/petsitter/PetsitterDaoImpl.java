@@ -111,6 +111,12 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		sqlSession.update("petsitter.updateStatus", param);
 	}
 
+	// 펫시터 블랙리스트 카운트 여부
+	@Override
+	public int black_petsitter_count(String id) {		
+		return sqlSession.selectOne("petsitter.black_petsitter_count", id) ;
+	}
+
 
 
 
