@@ -20,6 +20,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.MemberDao;
 
@@ -322,6 +323,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ReviewSitterDto myreview_content(int review_no) {
 		return memberDao.myreview_content(review_no);
+	}
+
+	//내 승인된 예약의 개수
+	@Override
+	public int getmyreservationCount(String id) {
+		return memberDao.getmyreservationCount(id);
+	}
+
+	//멤버+예약+결제+리뷰 합친 예약.
+	@Override
+	public List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish) {
+		return memberDao.myreservation(id,start,finish);
 	}
 	}
 

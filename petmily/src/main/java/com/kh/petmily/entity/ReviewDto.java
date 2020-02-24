@@ -1,5 +1,8 @@
 package com.kh.petmily.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +24,15 @@ public class ReviewDto {
 	private String review_content; // 리뷰내용
 	private int review_star; //리뷰 평점
 	private String review_wdate;//리뷰 작성시간
+	private int review_reservation_no;//reservation table의 reservation_no
+	
+	public String getwritedateWithFormat()throws Exception{
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(review_wdate);
+		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+		String time = write.format(date);
+		return time;
+		
+	}
+	
 }

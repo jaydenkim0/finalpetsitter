@@ -23,6 +23,7 @@ public class ReviewSitterDto {
 	private String review_content; // 리뷰내용
 	private int review_star; //리뷰 평점
 	private String review_wdate;//리뷰 작성시간
+	private int review_reservation_no;//reservation table의 reservation_no
 	
 	private String sitter_id;//join해서 구해온 sitter id
 	
