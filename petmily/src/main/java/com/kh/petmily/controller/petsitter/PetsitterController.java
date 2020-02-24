@@ -1,4 +1,3 @@
-  
 package com.kh.petmily.controller.petsitter;
 
 import java.io.IOException;
@@ -54,11 +53,10 @@ public class PetsitterController {
 	//관리자 서비스
 	@Autowired
 	private AdminService adminService;
-	//나중에 수정할  것(펫시터 서비스)
-	@Autowired
-	private ReservationDao reservationDao;	
+	//회원 서비스
 	@Autowired
 	private MemberService memberService;
+	//리뷰 서비스
 	@Autowired
 	private ReviewService reviewService;
 
@@ -210,13 +208,13 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
 		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);		
+		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);		
 		//최종 결제 금액 구하기
 		int payMent = 0;
 		int totalTime =0;
 		String date = null;
-		for(ReservationListVO vo : reservationList) {
-			List<ReservationAllVO> all = vo.getList();
+	
+			List<ReservationAllVO> all = reservationList.getList();
 			totalTime = all.get(0).getUsage_time();
 			
 			for(ReservationAllVO allVO : all) {
@@ -225,7 +223,6 @@ public class PetsitterController {
 				int payment = allVO.getPayment();
 				payMent = oneHour + payment;			
 			}
-		}
 		
 		model.addAttribute("reservationList", reservationList)
 			.addAttribute("payMent", payMent)
@@ -268,29 +265,30 @@ public class PetsitterController {
 		String id = (String) session.getAttribute("id");
 		//아이디로 펫시터 번호 조회
 		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
-		
+		System.out.println(pet_sitter_no);
 		//회원아이디 -펫시터 아이디
-		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);	
+		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);
 		
 		System.out.println("예약="+reservationList.toString());
-		//최종 결제 금액 구하기
-		int payMent = 0;
-		int totalTime =0;
-		for(ReservationListVO vo : reservationList) {
-			List<ReservationAllVO> all = vo.getList();
-			totalTime = all.get(0).getUsage_time();
-			
-			for(ReservationAllVO allVO : all) {
-				int usagetime = allVO.getUsage_time();
-				int oneHour = usagetime * 10000;
-				int payment = allVO.getPayment();
-				payMent = oneHour + payment;				
-			}
-		}
 		
-		model.addAttribute("reservationList", reservationList)
-				.addAttribute("payMent", payMent)
-				.addAttribute("usageTime", totalTime);
+//		//최종 결제 금액 구하기
+//		int payMent = 0;
+//		int totalTime =0;
+//		for(ReservationListVO vo : reservationList) {
+//			List<ReservationAllVO> all = vo.getList();
+//			totalTime = all.get(0).getUsage_time();
+//			
+//			for(ReservationAllVO allVO : all) {
+//				int usagetime = allVO.getUsage_time();
+//				int oneHour = usagetime * 10000;
+//				int payment = allVO.getPayment();
+//				payMent = oneHour + payment;				
+//			}
+//		}
+//		
+//		model.addAttribute("reservationList", reservationList)
+//				.addAttribute("payMent", payMent)
+//				.addAttribute("usageTime", totalTime);
 	
 		return "petsitter/reservation";
 	}

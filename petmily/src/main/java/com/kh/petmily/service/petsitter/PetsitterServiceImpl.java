@@ -180,8 +180,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 		return petsitterVO;
 	}
 	@Override
-	public List<ReservationListVO> getReservation(int reservation_no) {
-		List<ReservationListVO> reservationList = reservationDao.getReservation(reservation_no);
+	public ReservationListVO getReservation(int reservation_no) {
+		ReservationListVO reservationList = reservationDao.getReservation(reservation_no);
 		return reservationList;
 	}
 	// 예약 상태 승인으로 변경
@@ -194,6 +194,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public void reservationDelete(int reservation_no) {
 		reservationDao.reservationDelete(reservation_no);		
 	}
+	
+	//펫시터 정보 수정
 	@Override
 	public void update(PetsitterRegistVO vo) throws IllegalStateException, IOException {
 		
@@ -223,8 +225,11 @@ public class PetsitterServiceImpl implements PetsitterService {
 		skillsDao.registSkills(pet_sitter_no,vo.getSkills_name());
 		carePetTypeDao.registType(pet_sitter_no,vo.getCare_name());
 		careConditionDao.registCondition(pet_sitter_no,vo.getCare_condition_name());
+	
+		//펫시터 통장 사본  삭제
+		petSitterFileService.deleteBankImage(pet_sitter_no);
 		
-		//펫시터 소개 이미지,신분증,증빙서류 등록
+		//펫시터 소개 이미지,통장 사본 이미지 등록
 		petSitterFileService.uploadInfo(pet_sitter_no, vo.getInfo_image());
 		petSitterFileService.uploadBank(pet_sitter_no, vo.getBank_image());
 		
@@ -249,19 +254,19 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public List<ReservationListVO> getreservationList(int pet_sitter_no) {
 		//펫시터가 가진 예약 번호 구해오기
 		List<Integer> noList = reservationDao.getReservationNo(pet_sitter_no);
+		List<ReservationListVO> list = new ArrayList<>();
 		
-		//예약 정보를 담은 리스트 생성
-		List<ReservationListVO> reservation = new ArrayList<>();
-		
-		//예약 번호로 펫시터가 가진 모든 예약 조회
+		ReservationListVO vo;
 		for(Integer i : noList) {
 			int reservation_no = noList.get(i);
-			System.out.println("예약 번호="+reservation_no);
+			System.out.println("예약 번호"+reservation_no);
 			
-			reservation.addAll(reservationDao.getReservation(reservation_no));	
-			System.out.println(reservation.toString());
+			vo = reservationDao.getReservation(reservation_no);
+			list.add(vo);
+			System.out.println("리스트"+list.toString());
 		}
-		return reservation;
+		
+		return list;
 	}
 	
 	

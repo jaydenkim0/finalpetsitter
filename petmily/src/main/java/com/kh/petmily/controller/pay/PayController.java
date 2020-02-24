@@ -46,12 +46,12 @@ public class PayController {
 	public String account(@RequestParam int reservation_no,
 			Model model) {
 		//회원아이디 -펫시터 아이디
-				List<ReservationListVO> reservationList = petsitterService.getReservation(reservation_no);		
+				ReservationListVO reservationList = petsitterService.getReservation(reservation_no);		
 				//최종 결제 금액 구하기
 				int payMent = 0;
 				int totalTime =0;
-				for(ReservationListVO vo : reservationList) {
-					List<ReservationAllVO> all = vo.getList();
+				
+					List<ReservationAllVO> all = reservationList.getList();
 					totalTime = all.get(0).getUsage_time();
 					
 					for(ReservationAllVO allVO : all) {
@@ -60,7 +60,6 @@ public class PayController {
 						int payment = allVO.getPayment();
 						payMent = oneHour + payment;				
 					}
-				}
 				
 				model.addAttribute("reservationList", reservationList)
 					.addAttribute("payMent", payMent)

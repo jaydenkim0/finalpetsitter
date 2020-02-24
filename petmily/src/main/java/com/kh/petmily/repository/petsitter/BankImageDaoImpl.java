@@ -17,4 +17,10 @@ public class BankImageDaoImpl implements BankImageDao {
 		sqlSession.insert("petsitter.registBank", bankImageDto);
 	}
 
+	@Override
+	public void deleteBankImage(int pet_sitter_no) {
+		sqlSession.delete("petsitter.deleteBankImage", pet_sitter_no);
+		
+	}
+
 }
