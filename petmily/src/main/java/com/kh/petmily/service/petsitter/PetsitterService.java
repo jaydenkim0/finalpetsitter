@@ -51,6 +51,8 @@ public interface PetsitterService {
 //삭제(D)	
 	// 예약 내용 삭제
 	void reservationDelete(int reservation_no);
+	
+
 
 	
 }
