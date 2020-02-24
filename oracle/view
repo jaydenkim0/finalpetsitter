@@ -201,4 +201,26 @@ select * from info_image where info_image_no = 46;
 
 
 -------------------------------------------------------------------------------------------- 
-        
+--예약 + 펫시터
+
+
+--뷰 생성
+create or replace view reservationsitter as
+	select
+		R.reservation_no,
+		R.member_id,
+		R.reservation_sitter_no,
+		R.matching_time,
+		R.pet_name,
+		R.ect,
+		R.status reservation_status,
+		P.sitter_id
+	from reservation R
+		inner join Petsitter P 
+			on R.reservation_sitter_no = P.pet_sitter_no;
+
+--뷰 삭제
+drop view reservationsitter;        
+
+
+-------------------------------------------------------------------------------------------- 
