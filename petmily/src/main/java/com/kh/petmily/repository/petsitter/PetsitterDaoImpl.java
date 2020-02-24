@@ -116,6 +116,11 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	public int black_petsitter_count(String id) {		
 		return sqlSession.selectOne("petsitter.black_petsitter_count", id) ;
 	}
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	@Override
+	public int petscheck(String id) {	
+		return sqlSession.selectOne("petsitter.petscheck", id);
+	}
 
 
 
