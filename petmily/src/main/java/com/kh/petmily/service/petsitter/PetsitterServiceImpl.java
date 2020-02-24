@@ -124,18 +124,16 @@ public class PetsitterServiceImpl implements PetsitterService {
 	}
 
 
-
+	// 지역 검색
 	@Override
 	public List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword) {
 		return petsitterDao.locationListAll(start, end, cityKeyword, areaKeyword) ;
 	}
 
-
 	@Override
 	public int countlocation(String cityKeyword, String areaKeyword) {		
 		return petsitterDao.countlocation(cityKeyword, areaKeyword) ;
 	}
-
 
 
 	@Override
@@ -263,6 +261,8 @@ public class PetsitterServiceImpl implements PetsitterService {
 		}
 		return reservation;
 	}
+
+
 	
 	
 

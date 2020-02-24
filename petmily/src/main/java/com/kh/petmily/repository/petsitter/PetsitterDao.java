@@ -33,4 +33,5 @@ public interface PetsitterDao {
 	void updatePetsitter(PetsitterDto petsitterDto);
 	//펫시터 상태 변경
 	void updateStatus(int pet_sitter_no, String sitter_status);
+
 }

@@ -206,8 +206,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							where city = #{cityKeyword} and area = #{areaKeyword}
 						</if>
 	            	)L on petsitter.pet_sitter_no = L.location_sitter_no
-		          left outer join member_image M on petsitter.id = m.member_image_member_id	
-		         )B
+		          left outer join member_image M on petsitter.id = m.member_image_member_id			
+		         )B		         
             	)A         
 			where sitter_status = '정상' order by pet_sitter_no desc)
         where rn between #{start} and #{end} order by rn
@@ -223,13 +223,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	         select * from (
 	            select distinct petsitter.* from 
 	                petsitter inner join (
-	                    select * from location 
+	                    select * from location 	                    
 	                    <if test="cityKeyword != '' and areaKeyword != ''">
 	                        where city = #{cityKeyword}
 	                        and area = #{areaKeyword}
-	            		</if>     
+	            		</if>            		     
 	            )L on petsitter.pet_sitter_no = L.location_sitter_no) 
-	    where sitter_status = '정상')
+	    where sitter_status = '정상') 	
 	</select>	
 		
 		
