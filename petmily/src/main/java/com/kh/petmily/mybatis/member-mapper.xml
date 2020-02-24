@@ -341,14 +341,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from (
 			select rownum as rn, A.* from(
 				select
-				
+					RS.*,
+					P.status pay_status,
+					R.review_no
 				from 
-				
+					reservationsitter RS
+						left outer join pay P on RS.reservation_no=P.pay_no
+						left outer join Review R on RS.reservation_no=R.review_reservation_no 
 				where
-					reservation RE
-						
+					RS.member_id=#{id} and RS.reservation_status='승인'
 				order by 
-					RE.matching_time desc
+					RS.matching_time desc
 			) A
 		) where rn between #{start} and #{finish}
 	</select>
