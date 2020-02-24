@@ -7,7 +7,6 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PetDto;
-import com.kh.petmily.repository.petsitter.ReservationDao;
-
-
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
@@ -89,31 +86,33 @@ public class PetsitterController {
 			return memberService.pet_image(pet_image_no);
 		}
 	
-	//펫시터 검색(조회) 페이지
+		
+	//펫시터 검색(조회) 리스트 페이지
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
-						@RequestParam(defaultValue="", required = false) String areaKeyword,
-						@RequestParam(defaultValue = "1", required = false) int curPage,
+							   @RequestParam(defaultValue="", required = false) String areaKeyword,
+							   @RequestParam(defaultValue = "1", required = false) int curPage,								 
 																                            Model model) {
 		
-		// 레코드의 갯수 계산
+		// 레코드의 갯수 계산		
 		int count = petsitterService.countlocation(cityKeyword, areaKeyword);
 		
+			
 		// 페이지 나누기 관련 처리
 		NaviVO navi = new NaviVO(count, curPage);
 		
 		int start = navi.getPageBegin();
 		int end = navi.getPageEnd();
+	
+		//펫시터 정보	
+		model.addAttribute("list",(List<SitterlocationVO>)petsitterService.locationListAll(start, end, cityKeyword, areaKeyword));
 		
-		//펫시터 정보
-		List<SitterlocationVO> list = petsitterService.locationListAll(start, end, cityKeyword, areaKeyword);
 		
 		// 리스트 불러오기
-		model.addAttribute("list", list)
-				  .addAttribute("count", count)
-				  .addAttribute("cityKeyword", cityKeyword)
-				  .addAttribute("areaKeyword", areaKeyword)
-				  .addAttribute("navi", navi);		
+		model.addAttribute("count", count)
+				  .addAttribute("navi", navi);			
+		model.addAttribute("city", cityKeyword)
+				.addAttribute("area", areaKeyword);			  
 		return "petsitter/list";
 	}
 	

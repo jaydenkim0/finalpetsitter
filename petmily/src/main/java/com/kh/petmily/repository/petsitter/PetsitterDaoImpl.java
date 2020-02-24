@@ -75,6 +75,7 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		return sqlSession.selectOne("petsitter.countlocation", param);
 	}
 
+	
 	//펫시터 펫 정보 조회
 	@Override
 	public List<PetDto> getPet(String id) {
@@ -109,5 +110,8 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		param.put("sitter_status", sitter_status);
 		sqlSession.update("petsitter.updateStatus", param);
 	}
-	
+
+
+
+
 }
