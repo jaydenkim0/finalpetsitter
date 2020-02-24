@@ -14,5 +14,5 @@ public class ReservationPayDto {
 		private int payinfo_no;
 		private int pay_reservation_no;
 		private int usage_time;
-		String start_time;
+		private int start_time;
 }
