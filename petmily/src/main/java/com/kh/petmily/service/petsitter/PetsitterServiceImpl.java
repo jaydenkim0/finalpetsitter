@@ -157,6 +157,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 		ReservationPayDto reservationPayDto = ReservationPayDto.builder()
 																.pay_reservation_no(reservation_no)
 																.usage_time(reservationVO.getUsage_time())
+																.start_time(reservationVO.getStart_time())
 																.build();
 		//예약 등록
 		reservationDao.registReservation(reservationDto);

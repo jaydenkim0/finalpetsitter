@@ -44,6 +44,7 @@ public class ReservationDaoImpl implements ReservationDao {
 												.payinfo_no(payno)
 												.pay_reservation_no(reservationPayDto.getPay_reservation_no())
 												.usage_time(reservationPayDto.getUsage_time())
+												.start_time(reservationPayDto.getStart_time())
 												.build());
 		}
 		System.out.println(payinfoList.toString());		

@@ -88,8 +88,8 @@
 			<span>예약 번호 : ${reservationList.reservation_no}</span><br>
 			<span>예약 회원 : ${reservationList.member_id}</span><br>
 			<span>예약 날짜 : ${reservationList.matching_time}</span><br>
-			<span>이용 시간 : ${reservationList.usage_time}시간</span><br>
-			<span>시작 시간 : ${reservationList.start_time}시</span><br>
+			<span>이용 시간 : ${usageTime}시간</span><br>
+			<span>시작 시간 : ${startTime}시</span><br>
 			
 			<c:forEach var="skill" items="${reservationList.list}">
 				<span>예약 스킬 : ${skill.payname}</span><br>

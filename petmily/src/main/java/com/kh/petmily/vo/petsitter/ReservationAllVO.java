@@ -23,6 +23,7 @@ public class ReservationAllVO {
 	private int payinfo_no;
 	private int pay_reservation_no;
 	private int usage_time;
+	private int start_time;
 	
 	//예약 내역
 	private String payname; // 금액 이름
