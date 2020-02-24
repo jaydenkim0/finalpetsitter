@@ -52,4 +52,7 @@ public interface PetsitterService {
 	// 예약 내용 삭제
 	void reservationDelete(int reservation_no);
 	
+	// 펫시터 블랙리스트 카운트 여부
+	int black_petsitter_count(String id);
+	
 }

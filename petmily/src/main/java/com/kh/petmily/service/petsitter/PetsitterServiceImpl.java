@@ -268,6 +268,12 @@ public class PetsitterServiceImpl implements PetsitterService {
 		return list;
 	}
 
+	// 펫시터 블랙리스트 카운트 여부
+	@Override
+	public int black_petsitter_count(String id) {		
+		return petsitterDao.black_petsitter_count(id) ;
+	}
+
 
 	
 	
