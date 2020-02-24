@@ -254,6 +254,18 @@ public class PetsitterServiceImpl implements PetsitterService {
 		return reservationDao.getReservationSitter(pet_sitter_no);
 	}
 
+	// 펫시터 블랙리스트 카운트 여부
+	@Override
+	public int black_petsitter_count(String id) {		
+		return petsitterDao.black_petsitter_count(id) ;
+	}
+	
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	@Override
+	public int petscheck(String id) {
+		return petsitterDao.petscheck(id) ;
+	}
+
 
 	
 	

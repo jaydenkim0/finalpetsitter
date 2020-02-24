@@ -387,6 +387,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		where pet_sitter_no = #{pet_sitter_no}
 	</update>
+	
+	
+	
+	<!-- 펫시터 블랙리스트 카운트 여부 -->
+	<select id="black_petsitter_count" parameterType="String"
+	resultType="int">
+		select count(*) from blacklistcontent 
+		where black_content_id = #{id}
+		and black_content_grade = 'petsitter'	
+	</select>
+	
+	<!-- 회원이 펫을 갖고 있는지 카운터로 확인 -->
+	<select id="petscheck" parameterType="String" resultType="int">
+		select count(*) from pet where member_id = #{id}
+	</select>
+	
+	
 </mapper>
 
 
