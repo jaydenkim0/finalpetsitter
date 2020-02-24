@@ -73,27 +73,19 @@ public class MemberController {
 		}
 	}
 	
+	///////////////////////////////////////////////////
+	
+	// 비밀번호 변경화면
+	@GetMapping("/input")
+	public String input() {
+		return "member/input";	
+	}	
 	// 이메일 변경하기 위해서 이메일 전달
 	@PostMapping("/input")
 	public String input(@RequestParam String email) throws MessagingException {
 		emailService.sendChangePasswordMail(email);
 		return "redirect:result";
 	}
-	
-	@GetMapping("/result")
-	public String result() {
-		return "member/result";
-	}
-	
-	
-
-	
-	// 비밀번호 변경화면
-	@GetMapping("/input")
-	public String input() {
-		return "member/input";	
-	}
-	
 	// 비밀번호 변경 이메일 발송
 	@GetMapping("/send")
 	@ResponseBody//내가 반환하는 내용이 곧 결과물
@@ -103,7 +95,11 @@ public class MemberController {
 		session.setAttribute("cert", cert);
 		return emailService.sendCertMessage(email, cert);
 	}
-	
+	// 이메일 전달 완료후 이메일 확인해달라는 페이지
+	@GetMapping("/result")
+	public String result() {
+		return "member/result";
+	}	
 	// 비밀번호 변경 페이지 (이메일에서 접속 가능)
 	@GetMapping("/change")
 	public String change(
@@ -128,8 +124,7 @@ public class MemberController {
 			response.setStatus(403);
 		}
 		return "member/change";
-	}
-	
+	}	
 	// 비밀번호 변경 기능
 	@PostMapping("/change")
 	public String change(@ModelAttribute MemberDto memberDto) {			
@@ -140,6 +135,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	///////////////////////////////////////////////////	
 	
 	//  회원가입
 	//  regist로 이동
