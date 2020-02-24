@@ -273,6 +273,12 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public int black_petsitter_count(String id) {		
 		return petsitterDao.black_petsitter_count(id) ;
 	}
+	
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	@Override
+	public int petscheck(String id) {
+		return petsitterDao.petscheck(id) ;
+	}
 
 
 	

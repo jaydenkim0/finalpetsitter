@@ -383,6 +383,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where black_content_id = #{id}
 		and black_content_grade = 'petsitter'	
 	</select>
+	
+	<!-- 회원이 펫을 갖고 있는지 카운터로 확인 -->
+	<select id="">
+		select count(*) form pet where id = #{id}
+	</select>
+	
+	
 </mapper>
 
 

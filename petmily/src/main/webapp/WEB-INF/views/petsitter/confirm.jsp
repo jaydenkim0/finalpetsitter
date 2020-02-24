@@ -104,7 +104,7 @@
 			<!-- 승인시 -->
 			<form class="confirm_apply" action="confirm" method="post">
 					<input type="hidden" name="id" value="${reservationList.member_id}">
-					<input type="hidden" name="sitter_no" value="${reservationListt.reservation_sitter_no}">
+					<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
 					<input type="hidden" name="check" value="승인">
 					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">
 					<button id="approval_btn">승인</button>

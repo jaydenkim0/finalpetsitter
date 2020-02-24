@@ -119,8 +119,10 @@ public class PetsitterController {
 	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
 	public String content(@RequestParam int pet_sitter_no,
+									HttpSession session,
 									Model model) throws Exception {
 		
+		String id = (String) session.getAttribute("id");
 		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
 		double star = reviewService.star(pet_sitter_no);
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
@@ -128,6 +130,7 @@ public class PetsitterController {
 			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
 		model.addAttribute("reviewstar",star);
 		model.addAttribute("list",list);
+		model.addAttribute("petscheck", petsitterService.petscheck(id));
 		return "petsitter/content";
 	}
 	
@@ -241,6 +244,7 @@ public class PetsitterController {
 									    @RequestParam String check,
 									    @RequestParam int reservation_no
 			) throws MessagingException {
+		System.out.println("들어왔나? = "+sitter_no);
 		int pet_sitter_no = sitter_no; 
 		PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
 		String sitter_id = petsitterVO.getId();
