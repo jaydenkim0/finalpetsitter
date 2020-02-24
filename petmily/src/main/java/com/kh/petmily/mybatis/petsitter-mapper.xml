@@ -146,6 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="idGet" parameterType="String" resultType="petsitterVO">
 		select * from petsitter where id=#{id}
 	</select>
+
 	
 <!-- 펫시터 전체 조회 -->
 	<select id="getListAll" resultType="petsitterVO">
@@ -184,7 +185,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from petsitterpets where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
-
 	<!-- 펫시터 서치 리스트 -->
 		<resultMap type="petsitterLocationSearchVO" id="sitter">
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
@@ -195,7 +195,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap"></collection>
 	</resultMap>
-		
 		
 	<select id="locationListAll" resultMap="sitter" parameterType="map">
 		select * from (
@@ -234,8 +233,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 		
 		
-		
-		
 <!-- 펫시터 견적 요청 -->
 	<!-- 예약 번호 구하기 -->
 	<select id="getSequenceReservation" resultType="int">
@@ -263,6 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{reservationPayDto.usage_time})
 			</foreach>
 	</insert>	
+
 		
 <!-- 펫시터 예약 조회 -->
 	<!-- 예약 정보 조회 -->
@@ -304,7 +302,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservationall where reservation_no= #{reservation_no}
 	</select>
 	
-		
+	<!-- 펫시터 예약 번호 조회 -->
+	<select id="getReservationNo" parameterType="int" resultType="List">
+		select reservation_no from reservation where reservation_sitter_no = #{reservation_sitter_no}
+	</select>
+	
+	
+<!-- 견적 메일 발송 후 처리 -->
 	<!-- 견적 승인시 예약 상태	 '대기'->'승인'으로 변경  -->
 	<update id="reservationStatusUpdate" parameterType="int">
 		update reservation	set status = '승인' 
@@ -315,7 +319,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="reservationDelete" parameterType="int">
 		delete reservation 
 		where reservation_no = #{reservation_no} 
-	</delete>
+	</delete>	
+			
 	
 <!-- 펫시터 정보 수정 -->
 	<!-- 펫시터 기본 정보 -->

@@ -197,11 +197,7 @@ public class PetsitterController {
 		String id = reservationVO.getMember_id();
 		String sitteremail = petsitterVO.getEmail();
 		int sitter_no = reservationVO.getReservation_sitter_no();
-		
-		int reservation_no = reservationDao.getSequenceReservation();
-		
-		System.out.println(reservationVO.toString());
-		System.out.println(reservation_no);
+		int reservation_no = petsitterService.getSequenceReservation();
 		
 		String result = aemailService.estimateEMail(id, sitteremail, sitter_no, reservation_no);
 		
@@ -261,5 +257,40 @@ public class PetsitterController {
 				petsitterService.reservationDelete(reservation_no);
 		}
 		return result;
+	}
+	
+	
+	//펫시터 예약 조회
+	@GetMapping("/reservation")
+	public String reservation(HttpSession session,Model model) {
+		//세션의 아이디 가져오기
+		String id = (String) session.getAttribute("id");
+		//아이디로 펫시터 번호 조회
+		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+		
+		//회원아이디 -펫시터 아이디
+		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);	
+		
+		System.out.println("예약="+reservationList.toString());
+		//최종 결제 금액 구하기
+		int payMent = 0;
+		int totalTime =0;
+		for(ReservationListVO vo : reservationList) {
+			List<ReservationAllVO> all = vo.getList();
+			totalTime = all.get(0).getUsage_time();
+			
+			for(ReservationAllVO allVO : all) {
+				int usagetime = allVO.getUsage_time();
+				int oneHour = usagetime * 10000;
+				int payment = allVO.getPayment();
+				payMent = oneHour + payment;				
+			}
+		}
+		
+		model.addAttribute("reservationList", reservationList)
+				.addAttribute("payMent", payMent)
+				.addAttribute("usageTime", totalTime);
+	
+		return "petsitter/reservation";
 	}
 }

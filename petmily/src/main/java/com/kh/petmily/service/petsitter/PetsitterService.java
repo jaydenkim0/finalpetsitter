@@ -16,6 +16,8 @@ public interface PetsitterService {
 //등록(C)
 	//펫시터 전체 항목 등록 
 	void regist(PetsitterRegistVO vo) throws IllegalStateException, IOException;
+	//예약 등록
+	void reservation(int reservation_no,ReservationVO reservationVO);
 
 //조회(R)	
 	//펫시터 전체 항목 조회
@@ -26,14 +28,17 @@ public interface PetsitterService {
 	int countlocation(String cityKeyword, String areaKeyword);
 	//펫시터 펫 정보 조회
 	List<PetDto> getPet(String id);
-	//예약 등록
-	void reservation(int reservation_no,ReservationVO reservationVO);
+	//예약 번호 구해오기
+	int getSequenceReservation();
 	//펫시터 단일 조회(펫시터 번호)
 	PetsitterVO noGet(int pet_sitter_no);
 	//펫시터 단일 조회(아이디)
 	PetsitterVO idGet(String id);
 	//펫시터 예약 조회
 	List<ReservationListVO> getReservation(int reservation_no);
+	//각각 펫시터 예약 번호로 각각 펫시터 예약 조회
+	List<ReservationListVO> getreservationList(int pet_sitter_no);
+	
 	
 //수정(U)	
 	// 예약 상태 승인으로 변경

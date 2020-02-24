@@ -93,6 +93,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 		locationDao.registLocation(no,vo.getLocation_name());
 		
 	}
+	
 	@Override
 	public List<PetsitterGetListVO> getList(int pet_sitter_no) {
 		//펫시터 기본 정보 조회
@@ -236,6 +237,31 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public void updateStatus(int pet_sitter_no, String sitter_status) {
 		petsitterDao.updateStatus(pet_sitter_no, sitter_status);
 		
+	}
+
+	@Override
+	public int getSequenceReservation() {
+		int reservation_no = reservationDao.getSequenceReservation();
+		return reservation_no;
+	}
+
+	@Override
+	public List<ReservationListVO> getreservationList(int pet_sitter_no) {
+		//펫시터가 가진 예약 번호 구해오기
+		List<Integer> noList = reservationDao.getReservationNo(pet_sitter_no);
+		
+		//예약 정보를 담은 리스트 생성
+		List<ReservationListVO> reservation = new ArrayList<>();
+		
+		//예약 번호로 펫시터가 가진 모든 예약 조회
+		for(Integer i : noList) {
+			int reservation_no = noList.get(i);
+			System.out.println("예약 번호="+reservation_no);
+			
+			reservation.addAll(reservationDao.getReservation(reservation_no));	
+			System.out.println(reservation.toString());
+		}
+		return reservation;
 	}
 	
 	
