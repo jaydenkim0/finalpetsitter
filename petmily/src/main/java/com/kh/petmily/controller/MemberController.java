@@ -565,9 +565,9 @@ public class MemberController {
 			int count = memberService.getmyreservationCount(id);
 			
 			//멤버+예약+결제+리뷰 합친 예약.
-			List<ReservationReviewPaySitterDto> reservation = memberService.myreservation(id,start,finish);
+			List<ReservationReviewPaySitterDto> reservation_list = memberService.myreservation(id,start,finish);
 			
-			model.addAttribute("reservation",reservation);
+			model.addAttribute("reservation",reservation_list);
 			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("navsize",navsize);
