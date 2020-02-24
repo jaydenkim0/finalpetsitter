@@ -139,9 +139,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 <!-- 펫시터 단일 조회 -->
-	<select id="get" parameterType="int" resultType="petsitterVO">
+	<select id="noGet" parameterType="int" resultType="petsitterVO">
 		select * from petsitter where pet_sitter_no=#{pet_sitter_no}
 	</select>
+	
+	<select id="idGet" parameterType="String" resultType="petsitterVO">
+		select * from petsitter where id=#{id}
+	</select>
+
+	
 <!-- 펫시터 전체 조회 -->
 	<select id="getListAll" resultType="petsitterVO">
 		select * from petsitter where sitter_status='정상' order by pet_sitter_no desc
@@ -179,7 +185,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from petsitterpets where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
-
 	<!-- 펫시터 서치 리스트 -->
 		<resultMap type="petsitterLocationSearchVO" id="sitter">
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
@@ -190,7 +195,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap"></collection>
 	</resultMap>
-		
 		
 	<select id="locationListAll" resultMap="sitter" parameterType="map">
 		select * from (
@@ -229,8 +233,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>	
 		
 		
-		
-		
 <!-- 펫시터 견적 요청 -->
 	<!-- 예약 번호 구하기 -->
 	<select id="getSequenceReservation" resultType="int">
@@ -258,6 +260,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{reservationPayDto.usage_time})
 			</foreach>
 	</insert>	
+
 		
 <!-- 펫시터 예약 조회 -->
 	<!-- 예약 정보 조회 -->
@@ -299,7 +302,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservationall where reservation_no= #{reservation_no}
 	</select>
 	
-		
+	<!-- 펫시터 예약 번호 조회 -->
+	<select id="getReservationNo" parameterType="int" resultType="List">
+		select reservation_no from reservation where reservation_sitter_no = #{reservation_sitter_no}
+	</select>
+	
+	
+<!-- 견적 메일 발송 후 처리 -->
 	<!-- 견적 승인시 예약 상태	 '대기'->'승인'으로 변경  -->
 	<update id="reservationStatusUpdate" parameterType="int">
 		update reservation	set status = '승인' 
@@ -310,8 +319,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="reservationDelete" parameterType="int">
 		delete reservation 
 		where reservation_no = #{reservation_no} 
+	</delete>	
+			
+	
+<!-- 펫시터 정보 수정 -->
+	<!-- 펫시터 기본 정보 -->
+	<update id="update" parameterType="petsitterDto">
+		update pet_sitter set
+			info = #{info},
+			sitter_pets = #{sitter_pets},
+			sitter_matching_type = #{sitter_matching_type},
+			sitter_bankname = #{sitter_bankname},
+			sitter_bank_account = #{sitter_bank_account}
+		where pet_sitter_no = #{pet_sitter_no}
+	</update>
+	
+	<!-- 펫시터 스킬 -->
+	<delete id="deleteSkills" parameterType="int">
+		delete skills where skills_sitter_no = #{skills_sitter_no}
 	</delete>
 	
+	<!-- 펫시터 돌봄 가능 동물 -->
+	<delete id="deleteType" parameterType="int">
+		delete care_pet_type where care_sitter_no = #{care_sitter_no}
+	</delete>
+	
+	<!-- 펫시터 돌봄 환경 -->
+	<delete id="deleteCondition" parameterType="int">
+		delete care_condition where condition_sitter_no = #{condition_sitter_no}
+	</delete>
+
+	<!-- 펫시터 돌봄 환경 -->
+	<delete id="deleteLocation" parameterType="int">
+		delete location where location_sitter_no = #{location_sitter_no}
+	</delete>
+	
+	<!-- 펫시터 상태 변경 (정상/휴면) -->
+	<update id="updateStatus" parameterType="map">
+		update pet_sitter set 
+			<if test="sitter_status == '휴면'">
+				sitter_status = '휴면' 
+			</if>
+			
+			<if test="sitter_status == '정상'">
+				sitter_status = '정상' 
+			</if>
+		where pet_sitter_no = #{pet_sitter_no}
+	</update>
 </mapper>
 
 

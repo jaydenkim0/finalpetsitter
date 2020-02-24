@@ -94,7 +94,7 @@
 			<span>예약 스킬 : ${skill.payname}</span><br>
 			</c:forEach>
 			
-			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${list.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${rlist.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
 			<br><span>반려동물 이름 : ${rlist.pet_name}</span><br>
 			<span>반려동물 나이 : ${rlist.age}살</span><br>
 			<span>반려동물 종류 : ${rlist.type}</span><br>
