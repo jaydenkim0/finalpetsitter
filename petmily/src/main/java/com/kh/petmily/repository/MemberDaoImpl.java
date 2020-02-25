@@ -92,8 +92,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	//회원탈퇴처리
 	@Override
-	public void memberdelete(MemberDto memberDto) {
-		sqlSession.delete("member.memberdelete",memberDto);
+	public void memberdelete(String id) {
+		sqlSession.delete("member.memberdelete",id);
 	}
 
 	//회원 탈퇴되었는지 검사

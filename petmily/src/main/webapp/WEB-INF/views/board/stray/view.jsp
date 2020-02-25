@@ -6,6 +6,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -135,23 +141,65 @@
 <!-- 댓글 영역 끝 -->
 
 <style>
-        .notice_table {
-            width: 80%;
-            border-top: 1px solid #444444;
-            border-collapse: collapse;
-            margin-left: auto; 
-            margin-right: auto;
-          }
-          th, td {
-            border-bottom: 1px solid #444444;
-            padding: 10px;
-          }
-        div{
-            padding: 30px;
-        }
-        hr {
-        width: 80%;
-        }
+.notice_table {
+	width: 80%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: #BDBDBD;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.td2 {
+	text-align: right;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div {
+	padding: 30px;
+}
+
+hr {
+	width: 80%;
+}
+
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 </style>
 
 <c:choose>
@@ -282,36 +330,36 @@
 			<td align="right">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin"
-					value="${strayVO.stray_no}"><br> <input type="text"
-					id="reply_writer" name="reply_writer" value="${sessionScope.id}"
+					value="${strayVO.stray_no}"><br> 
+					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}"
 					readonly>
 					<textarea name="content" requistray placeholder="내용 입력" rows="4"
 					cols="100"></textarea>
-				<br>
-					<input type="submit" value="등록">
+				<br><br>
+					<input type="submit" value="등록" class="btn hover3">
 				</form>
 			</td>
 		</tr>
 	
 		<tr>
-			<td align="right">
+			<td class="td2">
 			<c:if
 				test="${sessionScope.id eq strayVO.stray_writer || grade eq 'admin'}">
 					<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 					<a
 					href="${context}/board/stray/update?stray_no=${strayVO.stray_no}">
-						<button type="button" id="btnupdate">게시글 수정</button>
+						<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button>
 					</a>
 					<a
 					href="${context}/board/stray/delete?stray_no=${strayVO.stray_no}">
-						<button type="button" id="btndelete">게시글 삭제</button>
+						<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button>
 					</a>
 				</c:if> 
 				<a href="${context}/board/stray/list">
-					<button type="button">게시판 목록</button>
+					<button type="button" class="btn hover3">게시판 목록</button>
 		</a>
 				<a href="${context}/board/stray/write?superno=${strayVO.stray_no}">
-				<button type="button">답글쓰기</button></a>
+				<button type="button" class="btn hover3">답글쓰기</button></a>
 			</td>
 	</tr>
 </table>

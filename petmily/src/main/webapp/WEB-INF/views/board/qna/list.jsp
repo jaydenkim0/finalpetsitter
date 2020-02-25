@@ -78,6 +78,7 @@ a {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
+	font-size : 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
