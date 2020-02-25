@@ -43,7 +43,7 @@
       </td>
       <td>
       <input type="hidden" name="total_amount" value="${payMent}" readonly>
-      ${payMent}원
+   	${payMent}원
       </td>
       </tr>
  </table>

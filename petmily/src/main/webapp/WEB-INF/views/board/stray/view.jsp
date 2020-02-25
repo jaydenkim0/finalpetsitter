@@ -174,9 +174,7 @@
 											<c:when test="${not empty sessionScope.id}">
 				${reply.reply_writer}
 			</c:when>
-											<c:otherwise>
-			비회원
-			</c:otherwise>
+			<c:otherwise>비회원</c:otherwise>
 										</c:choose> <c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
 										</c:if></th>

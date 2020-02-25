@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 
 <!-- 네비게이터(navigator) -->
-<!-- 
-	반드시 받아야 하는 데이터 : type, keyword, pno, count, navsize, pagesize
- -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <style>
 .page-navigator li {
@@ -45,10 +43,10 @@
 		<c:choose>
 			<c:when test="${isSearch}">
 				<li><a
-					href="${uri}?type=${type}&keyword=${keyword}&pno=${startBlock-1}">이전</a></li>
+					href="${uri}?type=${type}&keyword=${keyword}&pno=${startBlock-1}">&lt;</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${uri}?pno=${startBlock-1}">이전</a></li>
+				<li><a href="${uri}?pno=${startBlock-1}">&lt;</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
@@ -76,10 +74,10 @@
 		<c:choose>
 			<c:when test="${isSearch}">
 				<li><a
-					href="${uri}?type=${type}&keyword=${keyword}&pno=${finishBlock+1}">다음</a></li>
+					href="${uri}?type=${type}&keyword=${keyword}&pno=${finishBlock+1}">&gt;</a></li>
 			</c:when>
 			<c:otherwise>
-				<li><a href="${uri}?pno=${finishBlock+1}">다음</a></li>
+				<li><a href="${uri}?pno=${finishBlock+1}">&gt;</a></li>
 			</c:otherwise>
 		</c:choose>
 	</c:if>
