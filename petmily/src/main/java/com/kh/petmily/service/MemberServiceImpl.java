@@ -346,5 +346,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish) {
 		return memberDao.myreservation(id,start,finish);
 	}
+	
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	@Override
+	public MemberDto passwordfind(String email, String id) {	
+		return memberDao.passwordfind(email, id);
+	}
 	}
 

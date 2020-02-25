@@ -83,9 +83,17 @@ public class MemberController {
 	}	
 	// 이메일 변경하기 위해서 이메일 전달
 	@PostMapping("/input")
-	public String input(@RequestParam String email) throws MessagingException {
-		emailService.sendChangePasswordMail(email);
-		return "redirect:result";
+	@ResponseBody
+	public String input(@RequestParam String email,
+									@RequestParam String id ) throws MessagingException {
+		MemberDto find = memberService.passwordfind(email, id);
+		System.out.println("아이디 및 이메일로 찾는 아이디가 있는지?"+find);
+		if (find != null) {
+			emailService.sendChangePasswordMail(email, id);
+			return "success";				
+		}else {
+			return "fail";
+		}
 	}
 	// 비밀번호 변경 이메일 발송
 	@GetMapping("/send")
@@ -104,8 +112,9 @@ public class MemberController {
 	// 비밀번호 변경 페이지 (이메일에서 접속 가능)
 	@GetMapping("/change")
 	public String change(
-			@RequestParam() String cert,
-			@RequestParam() String email,
+			@RequestParam String cert,
+			@RequestParam String email,
+			@RequestParam String id,
 			HttpServletResponse response,
 			Model model) {
 //			필요한 작업
@@ -116,7 +125,8 @@ public class MemberController {
 //			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
 		System.out.println("email = " + email);
 		System.out.println("cert = " + cert);
-		model.addAttribute("email", email);
+		model.addAttribute("email", email)
+				  .addAttribute("id", id);
 		boolean enter = certDao.check(email, cert);
 		log.info("enter = {}", enter);
 		certDao.delete(email);
@@ -133,6 +143,7 @@ public class MemberController {
 		String result = encoder.encode(origin);
 		memberDto.setPw(result);		
 		memberService.pwchange(memberDto);
+		System.out.println(memberDto);
 		return "redirect:/";
 	}
 	

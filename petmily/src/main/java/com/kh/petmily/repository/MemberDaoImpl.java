@@ -277,5 +277,13 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("member.myreservation",map);
 	}
 
+	@Override
+	public MemberDto passwordfind(String email, String id) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("email", email);
+		map.put("id", id);
+		return sqlSession.selectOne("member.passwordfind", map);
+	}
+
 
 }
