@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -277,5 +278,20 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("member.myreservation",map);
 	}
 
+	//내가 만든 돌봄방 개수
+	@Override
+	public int getmycareboardCount(String id) {
+		return sqlSession.selectOne("member.getmycareboardCount",id);
+	}
+
+	//내가 만든 돌봄방 정보
+	@Override
+	public List<CarePetsitterDto> mycareboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.mycareboard",map);
+	}
 
 }

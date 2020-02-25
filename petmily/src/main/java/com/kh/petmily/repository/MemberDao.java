@@ -3,6 +3,7 @@ package com.kh.petmily.repository;
 import java.io.IOException;
 import java.util.List;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -129,6 +130,12 @@ public interface MemberDao {
 
 	//멤버+예약+결제+리뷰 합친 예약.
 	List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish);
+
+	//내가 만든 돌봄방 개수
+	int getmycareboardCount(String id);
+
+	//내가 만든 돌봄방 정보
+	List<CarePetsitterDto> mycareboard(String id, int start, int finish);
 
 
 }

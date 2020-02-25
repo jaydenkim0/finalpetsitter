@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -559,7 +560,41 @@ public class MemberController {
 		
 		//내가 쓴 돌봄게시판 연결
 		@GetMapping("/mycareboard")
-		public String mycareboard() {
+		public String mycareboard(
+				HttpSession session,
+				Model model,
+				HttpServletRequest req) throws Exception {
+			
+			String id = (String) session.getAttribute("id");
+			String grade = (String) session.getAttribute("grade");
+			
+			int pagesize=10;
+			int navsize=10;
+			int pno;
+			try {
+				pno = Integer.parseInt(req.getParameter("pno"));
+				if(pno <=0) throw new Exception();
+			}
+			catch(Exception e) {
+				pno=1;
+			}
+			int finish = pno * pagesize;
+			int start = finish - (pagesize - 1);
+			
+			//내가 만든 돌봄방 개수
+			int count = memberService.getmycareboardCount(id);
+			
+			//돌봄방 정보
+			List<CarePetsitterDto> careboard_list = memberService.mycareboard(id,start,finish);
+			
+			model.addAttribute("id",id);
+			model.addAttribute("grade",grade);
+			model.addAttribute("careboard_list",careboard_list);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("navsize",navsize);
+			model.addAttribute("pno",pno);
+			model.addAttribute("count",count);
+			
 			return "member/mycareboard";
 		}
 		

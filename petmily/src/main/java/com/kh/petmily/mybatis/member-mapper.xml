@@ -357,6 +357,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) where rn between #{start} and #{finish}
 	</select>
 	
+	<!-- 내가 만든 돌봄방 개수 -->
+	<select id="getmycareboardCount" parameterType="String" resultType="int">
+		select count(*) from care_board where care_member_id=#{id}
+	</select>
+	
+	<!-- 내가 만든 돌봄방 정보 -->
+	<select id="mycareboard" parameterType="map" resultType="carePetsitterDto">
+		select * from (
+			select rownum as rn, A.* from(
+				select
+					CD.*,
+					PS.sitter_id
+				from 
+					care_board CD
+						left outer join pet_sitter PS on PS.pet_sitter_no=CD.care_sitter_no 
+				where
+					CD.care_member_id=#{id}
+				order by 
+					CD.wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
 </mapper>
 
 

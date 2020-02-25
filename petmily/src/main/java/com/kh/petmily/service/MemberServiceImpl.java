@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -335,6 +336,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish) {
 		return memberDao.myreservation(id,start,finish);
+	}
+
+	//내가 만든 돌봄방 개수
+	@Override
+	public int getmycareboardCount(String id) {
+		return memberDao.getmycareboardCount(id);
+	}
+
+	//내가 만든 돌봄방 정보
+	@Override
+	public List<CarePetsitterDto> mycareboard(String id, int start, int finish) {
+		return memberDao.mycareboard(id,start,finish);
 	}
 	}
 

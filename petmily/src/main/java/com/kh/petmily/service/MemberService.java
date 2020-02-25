@@ -9,6 +9,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -124,5 +125,12 @@ public interface MemberService {
 
 	//멤버+예약+결제+리뷰 합친 예약.
 	List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish);
+
+	//내가 만든 돌봄방 개수
+	int getmycareboardCount(String id);
+
+	//돌봄방 정보
+	List<CarePetsitterDto> mycareboard(String id, int start, int finish);
+
 
 }
