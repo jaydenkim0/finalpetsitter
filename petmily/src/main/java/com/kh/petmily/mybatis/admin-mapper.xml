@@ -586,7 +586,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<select id="getAccountreservationList" resultType="accountVO" parameterType="Map">
 				select * from (
 					select rownum rn, A.* from(
-						select * from reservationlist 
+						select * from reservation
 							<if test="searchOption != null and keyword != null">
 								where ${searchOption} like '%'||#{keyword}||'%'
 							</if>
@@ -596,7 +596,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</select>
 			<!-- 예약 페이징 카운트 -->
 			<select id="countAriclegetAccount" resultType="int" parameterType="Map">
-				select count(*) from reservationlist
+				select count(*) from reservation
 					<if test="searchOption != null and keyword != null">
 						where ${searchOption} like '%'||#{keyword}||'%'
 					</if>			

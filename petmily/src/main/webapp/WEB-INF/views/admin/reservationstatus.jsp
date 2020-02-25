@@ -74,29 +74,9 @@
 				</h4>
 				</a>					
 			</c:when>
-			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '대기' }">
-				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
-				<h4 >
-					예약 번호 : ${reservation.reservation_no} |
-					신청 회원 : ${reservation.member_id} |		
-					견적 상태 : ${reservation.status} |
-					결제 상테 : ${reservation.kakaopaystatus} |
-				</h4>
-				</a>	
-			</c:when>
-				<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '완료' }">
+				<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '준비' || '완료' || '취소'}">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
-					예약 번호 : ${reservation.reservation_no} |
-					신청 회원 : ${reservation.member_id} |		
-					견적 상태 : ${reservation.status} |
-					결제 상테 : ${reservation.kakaopaystatus} |
-				</h4>
-				</a>	
-			</c:when>
-			<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '취소' }">
-				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
-				<h4 style="background:#ea4b4b; color: white;">
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : ${reservation.status} |
