@@ -484,24 +484,6 @@ public class MemberController {
 			return "member/myreview_content";
 		}
 		
-		//내가 쓴 돌봄게시판 연결
-		@GetMapping("/mycareboard")
-		public String mycareboard() {
-			return "member/mycareboard";
-		}
-		
-		//내가 쓴 문의/신고 게시판 연결
-		@GetMapping("/myfaqboard")
-		public String myfaqboard() {
-			return "member/myfaqboard";
-		}
-		
-		//내가 쓴 Save the Pets! 게시판 연결
-		@GetMapping("/mystrayboard")
-		public String mystrayboard() {
-			return "member/mystrayboard";
-		}
-		
 		//내가 쓴 리뷰 페이지 연결
 		@GetMapping("/myreview")
 		public String myreview(
@@ -530,7 +512,6 @@ public class MemberController {
 			List<ReviewSitterDto> review = memberService.myreview(id,start,finish);
 			
 			model.addAttribute("review",review);
-			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("navsize",navsize);
 			model.addAttribute("pno",pno);
@@ -569,12 +550,29 @@ public class MemberController {
 			
 			model.addAttribute("reservation_list",reservation_list);
 			model.addAttribute("pagesize",pagesize);
-			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("navsize",navsize);
 			model.addAttribute("pno",pno);
 			model.addAttribute("count",count);
 			
 			return "member/myreservation";
+		}
+		
+		//내가 쓴 돌봄게시판 연결
+		@GetMapping("/mycareboard")
+		public String mycareboard() {
+			return "member/mycareboard";
+		}
+		
+		//내가 쓴 문의/신고 게시판 연결
+		@GetMapping("/myfaqboard")
+		public String myfaqboard() {
+			return "member/myfaqboard";
+		}
+		
+		//내가 쓴 Save the Pets! 게시판 연결
+		@GetMapping("/mystrayboard")
+		public String mystrayboard() {
+			return "member/mystrayboard";
 		}
 		
 	}
