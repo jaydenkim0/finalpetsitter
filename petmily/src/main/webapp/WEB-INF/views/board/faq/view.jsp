@@ -4,6 +4,13 @@
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+ <!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+ 
  <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -38,26 +45,78 @@
 
 
 <style>
-        .notice_table {
-            width: 80%;
-            border-top: 1px solid #444444;
-            border-collapse: collapse;
-            margin-left: auto; 
-            margin-right: auto;
-          }
-          th, td {
-            border-bottom: 1px solid #444444;
-            padding: 10px;
-          }
-        div{
-            padding: 30px;
-        }
-        hr {
-        width: 80%;
-        }
+.notice_table {
+	width: 80%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: #BDBDBD;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.td2 {
+	text-align: right;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div {
+	padding: 30px;
+}
+
+hr {
+	width: 80%;
+}
+
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 </style>
 
-	<h2 align="center">게시글 상세 보기</h2>
+<c:choose>
+	<c:when test="${sessionScope.id eq null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href="${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+</c:choose>
+
+<h2 align="center">게시글 상세 보기</h2>
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -98,19 +157,19 @@
 	
 	<tr>
 	
-	<td align="right">
+	<td class="td2">
 		
 		<c:if test="${sessionScope.id eq faqVO.member_id}">
 		<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 		<a href="${context}/board/faq/update?faq_no=${faqVO.faq_no}">
-		<button type="button" id="btnupdate">게시글 수정</button></a>
+		<button type="button" id="btnupdate" class="btn hover3" >게시글 수정</button></a>
 		
 		<a href="${context}/board/faq/delete?faq_no=${faqVO.faq_no}">
-		<button type="button" id="btndelete">게시글 삭제</button></a>
+		<button type="button" class="btn hover3"  id="btndelete">게시글 삭제</button></a>
 		</c:if>
 		
 		<a href="${context}/board/faq/list">
-		<button type="button">공지게시판 목록</button></a>
+		<button type="button" class="btn hover3" >공지게시판 목록</button></a>
 	</td>
 </tr>
 </table>

@@ -29,6 +29,58 @@
 	width: 60%;
 	margin: auto;
 }
+a {
+	text-decoration: none;
+	color: black;
+}
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.input-file{
+	width: 100%;
+	height: 35px;
+	border-style : none;
+}
+
+select {
+	width: 100%;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
 </style>
 
 <!-- 네이버 에디터 설정 -->
@@ -79,9 +131,9 @@
 	</c:otherwise>
 </c:choose>
 
-<div align="center" class="tabl">
+<div align="left" class="tabl">
 	<form name="update" method="post" action="${context}/board/stray/update">
-		<h2>게시글 수정</h2>
+		<h2 align="center">게시글 수정</h2>
 		<input type="hidden" name="member_id" value="${sessionScope.id}">
 		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 
@@ -107,10 +159,10 @@
 				value="${strayVO.stray_content}">
 		</div>
 
-		<div class="form-group">
-			<input type="submit" value="수정"> <input type="reset"
-				value="초기화"> <a href="${context}/board/stray/list"> 
-			<input type="button" value="목록으로"></a>
+		<div class="form-group" align="center">
+			<input type="submit" value="수정" class="btn hover3" > 
+			<input type="reset" value="초기화"> <a href="${context}/board/stray/list"> 
+			<input type="button" value="목록으로" class="btn hover3" ></a>
 		</div>
 	</form>
 </div>
