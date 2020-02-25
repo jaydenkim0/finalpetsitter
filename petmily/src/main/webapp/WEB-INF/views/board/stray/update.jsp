@@ -57,8 +57,7 @@
 		var editor = tui.Editor.factory(options);
 
 		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
-		editor
-				.on(
+		editor.on(
 						"change",
 						function() {
 							var text = editor.getValue();//에디터에 입력된 값을 불러온다
