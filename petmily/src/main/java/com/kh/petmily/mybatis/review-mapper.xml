@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{review_content},
 		#{review_star},
 		sysdate)
+	
 	</insert>
 <!-- 	리뷰 리스트 -->
 <!-- 	<select id="reviewlist"  resultType="reviewDto"> -->
@@ -84,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   
   <!-- 게시글 검색 목록 조회 -->
-	<select id="listAll" parameterType="map" resultType="reviewDto">
+	<select id="reviewlistAll" parameterType="map" resultType="reviewDto">
 		select*from (
 		select rownum as rn, A.* from(
 		select
@@ -117,6 +118,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSequence" resultType="int">
 		select review_no_seq.nextval
 		from dual
+	</select>
+
+	<select id="getReviewInfo" parameterType="int"
+	resultType="reservationDto">
+		select * from reservation where reservation_no = #{reservation_no}
 	</select>
 
 </mapper>
