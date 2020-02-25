@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 @Repository
 public class ReviewDaoImpl implements ReviewDao{
@@ -90,10 +91,10 @@ public class ReviewDaoImpl implements ReviewDao{
 		return sqlSession.selectList("review.reviewlistAll",map);
 	}
 	@Override
-	public List<ReviewDto> getRes(int review_reservation_no) throws Exception{
-		return sqlSession.selectOne("review.reviewinsert",review_reservation_no);
-		
+	public ReservationDto getReviewInfo(int reservation_no) {
+		return sqlSession.selectOne("review.getReviewInfo", reservation_no);
 	}
+	
 	
 	
 

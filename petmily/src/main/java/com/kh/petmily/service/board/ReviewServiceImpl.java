@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.repository.ReviewDao;
 @Service
@@ -58,8 +59,8 @@ public class ReviewServiceImpl implements ReviewService{
 	    return reviewDao.getList(start,finish);
 	}
 	@Override
-	public List<ReviewDto> get(int review_reservation_no) throws Exception{
-		return reviewDao.getRes(review_reservation_no);
+	public ReservationDto getReviewInfo(int reservation_no) {	
+		return reviewDao.getReviewInfo(reservation_no);
 	}
 
 

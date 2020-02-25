@@ -29,6 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareReplyDto;
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.page.FaqPage;
 import com.kh.petmily.repository.ReviewDao;
@@ -51,16 +52,16 @@ public class ReviewController {
 	
 //-리뷰 작성----------------------------------------------------------------------------	
 	@GetMapping("/insert")
-	public String insert(int review_reservation_no, Model model) throws Exception {
-		List<ReviewDto>list = reviewService.get(review_reservation_no);
-		model.addAttribute("list",list);	
+	public String insert(@RequestParam int reservation_no, 
+								Model model) {
+		ReservationDto review = reviewService.getReviewInfo(reservation_no);
+		model.addAttribute("review",review);
 		return"board/review/insert";
 	}
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ReviewDto reviewDto) throws Exception {
-//		System.out.println(reviewDto);
-//		reviewService.insert(reviewDto);
+
 		reviewDao.insert(reviewDto);
 		reviewService.pointplus(reviewDto);
 		return "redirect:/board/review/list";

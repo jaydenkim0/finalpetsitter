@@ -23,8 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{review_content},
 		#{review_star},
 		sysdate)
-		where review_reservation_no=#{review_reservation_no}
-		order by review_reservation_no desc
+	
 	</insert>
 <!-- 	리뷰 리스트 -->
 <!-- 	<select id="reviewlist"  resultType="reviewDto"> -->
@@ -119,6 +118,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getSequence" resultType="int">
 		select review_no_seq.nextval
 		from dual
+	</select>
+
+	<select id="getReviewInfo" parameterType="int"
+	resultType="reservationDto">
+		select * from reservation where reservation_no = #{reservation_no}
 	</select>
 
 </mapper>

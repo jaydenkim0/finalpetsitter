@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.repository.ReviewDao;
 import com.kh.petmily.vo.FaqVO;
@@ -26,7 +27,10 @@ public interface ReviewService {
 	List<ReviewDto> getList(int start, int finish);
 	
 	public int getCount(String type, String keyword) throws Exception;
-	List<ReviewDto> get(int review_reservation_no) throws Exception;
+	
+	// 리뷰 작성시 펫시터 Id 보여주기
+	ReservationDto getReviewInfo(int reservation_no);
+
 		
 	//리뷰 별점 
 	
