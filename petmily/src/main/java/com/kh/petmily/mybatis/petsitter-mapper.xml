@@ -300,6 +300,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 )
 	</select>
 	
+	<select id="getReservationSitter" resultMap="reservation" parameterType="map">
+		select  distinct 
+		    R.* , 
+		    p.pet_no, p.age, p.type, p.ect pet_ect,
+		    pi.pet_image_no, pi.pet_image_pet_no
+		        from reservation R 
+		            inner join ( 
+		                select * from reservationall 
+		            )V on r.reservation_no = v.pay_reservation_no
+		            inner join pet P on r.member_id = p.member_id
+		            inner join pet_image PI on p.pet_no = pi.pet_image_pet_no
+		where r.reservation_sitter_no = 61 order by r.reservation_no desc
+	</select>
+	
 	<select id="getReservationMap" resultType="reservationAllVO" parameterType="int">
 		select * from reservationall where reservation_no= #{reservation_no}
 	</select>
@@ -389,6 +403,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from pet where member_id = #{id}
 	</select>
 	
+	<!-- 펫시터 가입시 체크박스 내용 불러오기 -->
+	<select id="getCarePetTypeList" resultType="carePetTypeNameDto">
+		select * from care_pet_type_name order by care_type_no asc
+	</select>
+	<select id="getSkillNameList" resultType="skillNameDto">
+		select * from skill_name order by skill_no asc
+	</select>
+	<select id="getCareConditionName" resultType="careConditionNameDto">
+		select * from care_condition_name order by care_condition_no asc
+	</select>
 	
 </mapper>
 

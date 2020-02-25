@@ -17,11 +17,11 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Repository
 public class MemberDaoImpl implements MemberDao {
 
@@ -259,6 +259,22 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public ReviewSitterDto myreview_content(int review_no) {
 		return sqlSession.selectOne("member.myreview_content",review_no);
+	}
+
+	//내 승인된 예약의 개수
+	@Override
+	public int getmyreservationCount(String id) {
+		return sqlSession.selectOne("member.getmyreservationCount",id);
+	}
+
+	//멤버+예약+결제+리뷰 합친 예약.
+	@Override
+	public List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.myreservation",map);
 	}
 
 

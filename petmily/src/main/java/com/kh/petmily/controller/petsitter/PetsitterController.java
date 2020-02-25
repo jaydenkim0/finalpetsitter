@@ -2,6 +2,7 @@ package com.kh.petmily.controller.petsitter;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -19,13 +20,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
+import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.board.ReviewService;
+import com.kh.petmily.service.kakao.PayService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
@@ -56,18 +63,24 @@ public class PetsitterController {
 	//리뷰 서비스
 	@Autowired
 	private ReviewService reviewService;
+	//결제 서비스
+	@Autowired
+	private PayService payService;
 
 	
 
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
-	public String regist() {
+	public String regist(Model model) {
+		model.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+				  .addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+				  .addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 		return "petsitter/regist";
 	}
 	
 	@PostMapping("/regist")
 	public String regist(@ModelAttribute PetsitterRegistVO vo) throws IllegalStateException, IOException{
-		petsitterService.regist(vo);
+		petsitterService.regist(vo);	
 		return "redirect:../";
 	}
 	
@@ -170,7 +183,10 @@ public class PetsitterController {
 		
 		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
 			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
-			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))//펫시터 소개 이미지
+			.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+			.addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+			.addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 				
 		return "petsitter/update";
 	}
@@ -216,7 +232,7 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
 		//회원아이디 -펫시터 아이디
-		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);		
+		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);
 		//최종 결제 금액 구하기
 		int payMent = 0;
 	
@@ -268,36 +284,45 @@ public class PetsitterController {
 	
 	
 	//펫시터 예약 조회
-//	@GetMapping("/reservation")
-//	public String reservation(HttpSession session,Model model) {
-//		//세션의 아이디 가져오기
-//		String id = (String) session.getAttribute("id");
-//		//아이디로 펫시터 번호 조회
-//		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
-//		System.out.println(pet_sitter_no);
-//		//회원아이디 -펫시터 아이디
-//		List<ReservationListVO> reservationList = petsitterService.getreservationList(pet_sitter_no);
-//		
-//		System.out.println("예약="+reservationList.toString());
+	@GetMapping("/reservation")
+	public String reservation(HttpSession session,Model model) {
+		//세션의 아이디 가져오기
+		String id = (String) session.getAttribute("id");
+		//아이디로 펫시터 번호 조회
+		int pet_sitter_no = petsitterService.idGet(id).getPet_sitter_no();
+		//펫시터 번호로 예약 정보 조회
+		List<ReservationListVO> reservationList = petsitterService.getReservationSitter(pet_sitter_no);
 		
-//		//최종 결제 금액 구하기
-//		int payMent = 0;
-//		int totalTime =0;
-//		for(ReservationListVO vo : reservationList) {
-//			List<ReservationAllVO> all = vo.getList();
-//			totalTime = all.get(0).getUsage_time();
-//			
-//			for(ReservationAllVO allVO : all) {
-//				int usagetime = allVO.getUsage_time();
-//				int oneHour = usagetime * 10000;
-//				int payment = allVO.getPayment();
-//				payMent = oneHour + payment;				
-//			}
-//		}
-//		
-//		model.addAttribute("reservationList", reservationList)
-//				.addAttribute("payMent", payMent)
-//				.addAttribute("usageTime", totalTime);
-//	
-// 	}
+	
+		
+		//시작시간,총 시간 가져오기
+		int totalTime = 0;
+		int startTime = 0;
+		
+		//예약 번호 가져오기
+		int partner_order_id = 0;
+		List<PayDto> payList = new ArrayList<>();
+				
+		for(ReservationListVO vo : reservationList) {
+			partner_order_id = vo.getReservation_no();
+			System.out.println("!!!!!!!!!!예약 번호 : "+partner_order_id);
+			
+			
+			List<ReservationAllVO> all = vo.getList();			
+			totalTime = all.get(0).getUsage_time();
+			startTime = all.get(0).getStart_time();
+			
+			//예약 번호로 결제 정보 조회
+			payList.addAll(payService.getPay(partner_order_id));					
+		}		
+		System.out.println("결제 정보:"+payList);
+		
+		model.addAttribute("reservationList", reservationList)
+				.addAttribute("payList", payList)
+				.addAttribute("usageTime", totalTime)
+				.addAttribute("startTime", startTime);
+		
+		return "petsitter/reservation";
+	
+ 	}
 }

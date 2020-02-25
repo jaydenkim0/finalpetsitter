@@ -5,17 +5,41 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
+    <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+    
+<!-- 네이버 에디터 영역 -->
+   <script>        
+        $(function(){
+            var options = {
+                //el(element) : 에디터가 될 영역
+                el:document.querySelector(".naver-viewer"),
+                
+                viewer:true,
 
+                //height : 생성될 에디터의 높이
+                height:'auto',
+            };
+
+            var viewer = tui.Editor.factory(options);
+
+            //생성된 뷰어에 초기값 표시
+            console.log(document.querySelector(".naver-viewer + input[type=hidden]"));
+            var text = document.querySelector(".naver-viewer + input[type=hidden]").value;
+            viewer.setValue(text);//값 설정
+        });
+    </script>
+    
+
+<!-- 댓글 작성 영역 -->
 <script>
 	// 댓글 작성
 	$(function() {
@@ -109,9 +133,39 @@
 	});
 </script>
 
-<div align="center">
-	<h2>게시글 상세 보기</h2>
-		<table border="1" width="80%">
+<style>
+        .notice_table {
+            width: 80%;
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+            margin-left: auto; 
+            margin-right: auto;
+          }
+          th, td {
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+          }
+        div{
+            padding: 30px;
+        }
+        hr {
+        width: 80%;
+        }
+</style>
+
+<c:choose>
+	<c:when test="${sessionScope.id eq null }">
+		<a href="${context}/member/login">로그인</a>
+	</c:when>
+	<c:otherwise>
+	${sessionScope.id}님이 로그인 중입니다.
+	<a href="${context}/member/logout">로그아웃</a>
+	</c:otherwise>
+</c:choose>
+
+
+	<h2 align="center">게시글 상세 보기</h2>
+		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
 				<td>글번호 : ${qnaVO.qna_no}</td>
@@ -142,7 +196,11 @@
 				</tr>
 			</c:if>
 		</c:forEach>
-				<td>${qnaVO.qna_content}</td>
+				<tr>
+				<td>
+					<div class="naver-viewer"></div>  
+					<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+				</td>
 			</tr>
 
 
@@ -161,7 +219,8 @@
 	<div class="grandmother">
 		<table width="100%" class="mother">
 			<tr>
-				<th align="left" width="100"> ${reply.reply_writer}</th>
+				<th align="left" width="100"> 
+				${reply.reply_writer}</th>
 				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
 				</c:if>
@@ -199,7 +258,6 @@
 					</tr>
 				</c:if>
 			</tr>
-		</td>
 		</table>
 	</div>
 	</td>
@@ -234,8 +292,8 @@
 	<button type="button">문의게시판 목록</button></a>
 	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
 	<button type="button">답글쓰기</button></a>
-	</td>
+		</td>
 	</tr>
-	</table>
-</div>
+</table>
+
 	

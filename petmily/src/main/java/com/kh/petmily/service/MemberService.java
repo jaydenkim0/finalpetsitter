@@ -14,6 +14,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 
 public interface MemberService {
@@ -118,5 +119,10 @@ public interface MemberService {
 	//리뷰 상세보기
 	ReviewSitterDto myreview_content(int review_no);
 
+	//내 승인된 예약의 개수
+	int getmyreservationCount(String id);
+
+	//멤버+예약+결제+리뷰 합친 예약.
+	List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish);
 
 }

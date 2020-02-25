@@ -226,7 +226,7 @@ textarea[name=faq_content] {
 	
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
-	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
+	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
 	
 <!-- 통장 계좌 -->
 	<div>
@@ -292,70 +292,28 @@ textarea[name=faq_content] {
 	
 <!-- 스킬 -->
 	<div class="skill">
-	<h5>기존의 스킬에 상관 없이 지금 가능한 스킬을 선택해주세요.</h5>
-        <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
-        <label for="sick" id="nameTo1">투약</label>
-        
-        <input type="checkbox" id="old" value="2" name="skills_name" data-skills="노령견테어">
-        <label for="old" id="nameTo2">노령견케어</label>
-        
-        <input type="checkbox" id="kitten"  value="3" name="skills_name" data-skills="키튼케어">
-        <label for="kitten" id="nameTo3">키튼케어</label>
-        
-        <input type="checkbox" id="walking"  value="4" name="skills_name" data-skills="도그워킹">
-        <label for="walking" id="nameTo4">도그워킹</label>
-        
-        <div id="skills_text"></div>
+		<c:forEach var="skillnames" items="${skillname}">
+	        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+	        <label  >${skillnames.skill_name}</label>
+        </c:forEach>   	        
+	        <div id="skills_text"></div>
     </div>
 
 <!-- 돌봄 가능 동물 종류 -->
-    <div class="type">
-    <h5>기존의 돌봄 가능한 동물에 상관 없이 지금 돌봄 가능한 동물을 선택해주세요.</h5>
-        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
-        <label for="dog">강아지</label>
-        
-        <input type="checkbox" id="cat" value="2" name="care_name" data-animal="고양이">
-        <label for="cat">고양이</label>
-        
-        <input type="checkbox" id="fish"  value="3" name="care_name" data-animal="물고기">
-        <label for="fish">물고기</label>
-        
-        <input type="checkbox" id="rabbit"  value="4" name="care_name" data-animal="토끼">
-        <label for="rabbit">토끼</label>
-        
-        <input type="checkbox" id="hamster" value="5" name="care_name" data-animal="햄스터">
-        <label for="hamster">햄스터</label>
-        
-        <input type="checkbox" id="reptiles" value="6" name="care_name" data-animal="파충류">
-        <label for="reptiles">파충류</label>        
-        
+    <div class="type">  
+    	<c:forEach var="carepettypes" items="${carepettype}">
+	        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+	        <label for="x">${carepettypes.care_type}</label>
+        </c:forEach>        
         <div id="care_pet_type_text"></div>
     </div>
 
 <!-- 돌봄 환경 -->
     <div class="condition">
-    <h5>기존의 돌봄 환경에 상관 없이 지금 돌봄 환경을 선택해주세요.</h5>
-        <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
-        <label for="apt">아파트</label>
-        
-        <input type="checkbox" id="villa" value="2" name="care_condition_name" data-condition="빌라">
-        <label for="villa">빌라</label>
-        
-        <input type="checkbox" id="oneroom"  value="3" name="care_condition_name" data-condition="원룸">
-        <label for="oneroom">원룸</label>
-        
-        <input type="checkbox" id="housing"  value="4" name="care_condition_name" data-condition="주택">
-        <label for="housing">주택</label>
-        
-        <input type="checkbox" id="baby" value="5" name="care_condition_name" data-condition="아기있음">
-        <label for="baby">아기있음</label>
-        
-        <input type="checkbox" id="smoking" value="6" name="care_condition_name" data-condition="흡연자">
-        <label for="smoking">흡연자</label>   
-        
-        <input type="checkbox" id="x" value="7" name="care_condition_name" data-condition="해당사항없음">
-        <label for="x">해당사항없음</label>   
-        
+    	<c:forEach var="c" items="${careconname}">    		
+	        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+	        <label >${c.care_condition_name}</label>
+        </c:forEach>        
         <div id="care_condition_text"></div>
     </div>
 	
