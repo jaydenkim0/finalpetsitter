@@ -57,6 +57,10 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewDto> getList(int start, int finish) {
 	    return reviewDao.getList(start,finish);
 	}
+	@Override
+	public List<ReviewDto> get(int review_reservation_no) throws Exception{
+		return reviewDao.getRes(review_reservation_no);
+	}
 
 
 

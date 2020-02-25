@@ -89,6 +89,11 @@ public class ReviewDaoImpl implements ReviewDao{
 		map.put("finish",finish);
 		return sqlSession.selectList("review.reviewlistAll",map);
 	}
+	@Override
+	public List<ReviewDto> getRes(int review_reservation_no) throws Exception{
+		return sqlSession.selectOne("review.reviewinsert",review_reservation_no);
+		
+	}
 	
 	
 

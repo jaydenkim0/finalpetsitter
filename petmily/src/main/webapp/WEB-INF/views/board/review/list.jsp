@@ -5,7 +5,7 @@
  <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
- 
+ <c:set var="admin" value="${grade eq 'admin'}"></c:set>
  <c:choose>
 	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
@@ -40,6 +40,8 @@
 <!-- 	<br> -->
 <!-- 	<br> -->
 <%-- </c:if> --%>
+
+<c:if test="${sessionScope.grade eq 'admin'}">
 <form method="get" action="${context}/board/review/list">
 	<select name="type" class="input-item">
 	<option value="review_writer">작성자</option>
@@ -48,6 +50,8 @@
 	</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
 	<input type="submit" value="조회">
 </form>
+
+</c:if>
 
 
 
@@ -79,9 +83,16 @@
 <%-- 	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}"> --%>
 <!-- 	<button type="button" id="btnupdate">수정</button> -->
 </a>
-<a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
+
+<c:if test="${sessionScope.grade eq 'admin'}">
+	<a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
 	<button type="button" id="btndelete">삭제</button>
-	</a>
+	<br>
+	<br>
+</c:if>
+<%-- <a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}"> --%>
+<!-- 	<button type="button" id="btndelete">삭제</button> -->
+<!-- 	</a> -->
 	</td>
 </tr>
 </c:forEach>

@@ -35,6 +35,7 @@ public interface ReviewDao {
 	int getSequence();
 	
 	List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception;
+	List<ReviewDto> getRes(int review_reservation_no) throws Exception;
 	
 	
 	

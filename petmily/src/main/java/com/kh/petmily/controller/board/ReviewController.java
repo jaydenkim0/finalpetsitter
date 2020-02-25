@@ -51,7 +51,9 @@ public class ReviewController {
 	
 //-리뷰 작성----------------------------------------------------------------------------	
 	@GetMapping("/insert")
-	public String insert() {
+	public String insert(int review_reservation_no, Model model) throws Exception {
+		List<ReviewDto>list = reviewService.get(review_reservation_no);
+		model.addAttribute("list",list);	
 		return"board/review/insert";
 	}
 

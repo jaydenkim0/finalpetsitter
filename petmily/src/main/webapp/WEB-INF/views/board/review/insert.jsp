@@ -69,20 +69,20 @@
     <td>${id}</td>  
     </tr>
     <tr>
-    <th>팻시터번호:</th>
+    <th>팻시터번호</th>
     <td> <input type="text" name="review_sitter_no" required></td>
     </tr>
     <tr>
-  	<th>제목:</th>
+  	<th>제목</th>
   	<td><input type="text" name="review_title" required></td>
   	</tr>
   	<tr>
-    <th>내용:</th>
+    <th>내용</th>
     <td><textarea name="review_content" id="review_content" rows="15" cols="100" 
     				style="resize:vertical;" placeholder="글내용입력" required></textarea> </td>
     </tr>
     <tr>				
-    <th>별점:</th>
+    <th>별점</th>
     <!--     <input type="text" name="review_star"></div> -->
       
    <td>
