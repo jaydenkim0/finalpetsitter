@@ -8,19 +8,19 @@
 
     
         
-	<h3>로그인 체크</h3>
-	
+	<div align="center">
+	<h3>로그인 체크</h3>	
 	<h4>아이디 : ${id}</h4>
-	
-	<form action="${pageContext.request.contextPath}/check/login"  class="secure-form" method="post">
-		<input type="hidden" name="id" value="${id}">
-		<input type="hidden" name="reservation_no" value="${reservation_no}">
-		<input type="hidden" name="sitter_no" value="${sitter_no}">
-		<input type="hidden" name="go" value="/pay/account">	
-		<input type="password" name="pw" placeholder="비밀번호" required>
-		<input type="submit" value="로그인">	
-	</form>
-		<c:if test="${param.error!=null }">
-			<h5>입력하신 정보가 일치하지 않습니다</h5>
-		</c:if>	
-		
+		<form action="${pageContext.request.contextPath}/check/login"  class="secure-form" method="post">
+			<input type="hidden" name="id" value="${id}">
+			<input type="hidden" name="reservation_no" value="${reservation_no}">
+			<input type="hidden" name="sitter_no" value="${sitter_no}">
+			<input type="hidden" name="go" value="/pay/account">	
+			<input type="hidden" name="back" value="/check/login">
+			<input type="password" name="pw" placeholder="비밀번호" required>
+			<input type="submit" value="로그인">	
+		</form>
+			<c:if test="${param.error!=null }">
+				<h5>입력하신 정보가 일치하지 않습니다</h5>
+			</c:if>	
+	</div>	

@@ -26,7 +26,7 @@
 						success:function(resp){
 							console.log(resp);
 							if(resp == "success"){
-								alert("이베일 발송 완료");								
+								alert("이메일 발송 완료");								
 								location.href = '${pageContext.request.contextPath}/admin/blackList';
 							}
 							else{
