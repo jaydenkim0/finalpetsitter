@@ -245,27 +245,13 @@ public class PetsitterServiceImpl implements PetsitterService {
 
 	@Override
 	public int getSequenceReservation() {
-		int reservation_no = reservationDao.getSequenceReservation();
-		return reservation_no;
+		return reservationDao.getSequenceReservation();
 	}
 
+
 	@Override
-	public List<ReservationListVO> getreservationList(int pet_sitter_no) {
-		//펫시터가 가진 예약 번호 구해오기
-		List<Integer> noList = reservationDao.getReservationNo(pet_sitter_no);
-		List<ReservationListVO> list = new ArrayList<>();
-		
-		ReservationListVO vo;
-		for(Integer i : noList) {
-			int reservation_no = noList.get(i);
-			System.out.println("예약 번호"+reservation_no);
-			
-			vo = reservationDao.getReservation(reservation_no);
-			list.add(vo);
-			System.out.println("리스트"+list.toString());
-		}
-		
-		return list;
+	public List<ReservationListVO> getReservationSitter(int pet_sitter_no) {
+		return reservationDao.getReservationSitter(pet_sitter_no);
 	}
 
 	// 펫시터 블랙리스트 카운트 여부

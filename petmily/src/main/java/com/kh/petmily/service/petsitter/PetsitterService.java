@@ -37,7 +37,7 @@ public interface PetsitterService {
 	//펫시터 예약 조회
 	ReservationListVO getReservation(int reservation_no);
 	//각각 펫시터 예약 번호로 각각 펫시터 예약 조회
-	List<ReservationListVO> getreservationList(int pet_sitter_no);
+	List<ReservationListVO> getReservationSitter(int pet_sitter_no);
 	
 	
 //수정(U)	

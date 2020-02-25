@@ -2,6 +2,7 @@ package com.kh.petmily.service.kakao;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -177,5 +178,10 @@ public class PayServiceImpl implements PayService{
 		payDao.insertRevoke(paycancelDto);
 		
 		return kpayRevokeReturnVO;
+	}
+
+	@Override
+	public List<PayDto> getPay(int partner_order_id) {
+		return payDao.getPay(partner_order_id);
 	}
 }
