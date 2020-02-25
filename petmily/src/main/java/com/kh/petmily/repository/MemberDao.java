@@ -3,6 +3,7 @@ package com.kh.petmily.repository;
 import java.io.IOException;
 import java.util.List;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -10,6 +11,8 @@ import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 public interface MemberDao {	
 	
@@ -46,7 +49,7 @@ public interface MemberDao {
 	int userIdCheck(String user_id);
 
 	//회원탈퇴처리
-	void memberdelete(MemberDto memberDto);
+	void memberdelete(String  id);
 
 	//회원 탈퇴되었는지 검사
 	int idExist(String id);
@@ -129,6 +132,30 @@ public interface MemberDao {
 
 	//멤버+예약+결제+리뷰 합친 예약.
 	List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish);
+
+	//내가 만든 돌봄방 개수
+	int getmycareboardCount(String id);
+
+	//내가 만든 돌봄방 정보
+	List<CarePetsitterDto> mycareboard(String id, int start, int finish);
+
+	//내가 올린 문의/신고 개수
+	int getmyqnaboardCount(String id);
+
+	//내가 올린 문의/신고 정보
+	List<QnaVO> myqnaboard(String id, int start, int finish);
+
+	//내가 올린 Save the Pets ! 개수
+	int getmystrayboardCount(String id);
+
+	//내가 Save the Pets ! 정보
+	List<StrayVO> mystrayboard(String id, int start, int finish);
+
+	//이메일중복검사
+	int emailCheck(String email);
+
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	MemberDto passwordfind(String email, String id);
 
 
 }

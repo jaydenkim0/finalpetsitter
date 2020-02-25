@@ -3,7 +3,43 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <html lang="en">
+
+<!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
+    <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+
+<!-- 네이버 에디터 영역 -->
+   <script>        
+        $(function(){
+            var options = {
+                //el(element) : 에디터가 될 영역
+                el:document.querySelector(".naver-viewer"),
+                
+                viewer:true,
+
+                //height : 생성될 에디터의 높이
+                height:'auto',
+            };
+
+            var viewer = tui.Editor.factory(options);
+
+            //생성된 뷰어에 초기값 표시
+            console.log(document.querySelector(".naver-viewer + input[type=hidden]"));
+            var text = document.querySelector(".naver-viewer + input[type=hidden]").value;
+            viewer.setValue(text);//값 설정
+        });
+    </script>
+<!-- 네이버 에디터 영역 종료 -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +91,8 @@
 		<span>닉네임 : ${petsitter.nick}</span><br>
 		<span>별점: <fmt:formatNumber value="${reviewstar}" pattern=".00"/>개<br></span>
 		<div class="star-wrap" data-limit="3" data-unitsize="40" data-point="${reviewstar}" data-image="http://www.sysout.co.kr/file/image/288" data-readonly></div><br>
-		<span>소개글 : ${petsitter.info}</span><br><br>
+		<div class="naver-viewer"></div> 
+		<input type="hidden" value="${petsitter.info}"><br><br>
 		<span>매칭 종류 : ${petsitter.sitter_matching_type}</span>
 	 
 	</c:forEach>

@@ -42,42 +42,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 		<!-- 어제 가입한 회원 수 -->
 		<select id="memberJoinall" resultType="int">
-			select count(*) from member where grade='member'
-			and joindate between 
-    		To_char(sysdate-1, 'YYYY/MM/DD') and 
-    		To_char(sysdate, 'YYYY/MM/DD')		
+			select 
+				count(*) 
+			from 
+				member 
+			where 
+				grade='member'
+				and joindate between 
+    				To_char(sysdate-1, 'YYYY/MM/DD') 
+    				and 
+    				To_char(sysdate, 'YYYY/MM/DD')		
 		</select>
 	
 		<!-- 어제 펫시터 신청 수  -->
 		<select id="petsitterApplyup" resultType="int">
-			select count(*) from petsitter where grade = 'member' 
-			and  joindate between 
-    		To_char(sysdate-1, 'YYYY/MM/DD') and 
-    		To_char(sysdate, 'YYYY/MM/DD')
+			select 
+				count(*) 
+			from 
+				petsitter 
+			where 
+				grade = 'member' 
+				and  joindate between 
+    				To_char(sysdate-1, 'YYYY/MM/DD') 
+    				and 
+    				To_char(sysdate, 'YYYY/MM/DD')
 		</select>
 		
 		<!-- 어제 신고 게시물의 수 -->
 		<select id="blackqnacount" resultType="int">
-			select count(*) from qna where qna_title = '신고합니다'
-			and  wdate between 
-    		To_char(sysdate-1, 'YYYY/MM/DD') and 
-    		To_char(sysdate, 'YYYY/MM/DD')
+			select 
+				count(*) 
+			from 
+				qna 
+			where 
+				qna_title = '신고합니다'
+				and  wdate between 
+    				To_char(sysdate-1, 'YYYY/MM/DD') 
+    				and 
+    				To_char(sysdate, 'YYYY/MM/DD')
 		</select>
 		
 		<!-- 어제 경고당한 회원 수 -->
 		<select id="blacklistmembercount" resultType="int">
-			select count(*) from blacklistcontent where black_content_grade = 'member' 
-	   		and black_wdate between 
-	   		To_char(sysdate-1, 'YYYY/MM/DD') and 
-	   		To_char(sysdate, 'YYYY/MM/DD')
+			select 
+				count(*) 
+			from 
+				blacklistcontent 
+			where 
+				black_content_grade = 'member' 
+	   			and black_wdate between 
+	   				To_char(sysdate-1, 'YYYY/MM/DD') 
+	   				and 
+	   				To_char(sysdate, 'YYYY/MM/DD')
 		</select>
 	
 		<!-- 어제 경고당한 펫시터 수 -->
 		<select id="blacklistpetsittercount" resultType="int">
-			select count(*) from blacklistcontent where black_content_grade = 'petsitter' 
-	   		and black_wdate between 
-	   		To_char(sysdate-1, 'YYYY/MM/DD') and 
-	   		To_char(sysdate, 'YYYY/MM/DD')
+			select 
+				count(*) 
+			from 
+				blacklistcontent 
+			where 
+				black_content_grade = 'petsitter' 
+	   			and black_wdate between 
+	   				To_char(sysdate-1, 'YYYY/MM/DD') 
+			   		and 
+			   		To_char(sysdate, 'YYYY/MM/DD')
 		</select>
 	
 		<!-- 저번달 매출 -->
@@ -621,6 +651,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where payinfo_no = #{payinfo_no}
 		</update>
 	
+	
+	<!-- test -->
+	<select id="test" resultType="qnaDto" parameterType="int">
+		select * from qna where qna_no = #{qna_no}
+	</select>
 </mapper>
 
 

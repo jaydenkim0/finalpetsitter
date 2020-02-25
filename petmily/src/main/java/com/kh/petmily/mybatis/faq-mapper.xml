@@ -9,38 +9,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 작성 -->
 	<insert id="faqinsert" parameterType="FaqVO">
 		insert into faq (
-		faq_no,
-		member_id,
-		faq_title,
-		faq_head,
-		faq_content,
-		wdate
-		)
-		values (
-		#{faq_no},
-		#{member_id},
-		#{faq_title},
-		#{faq_head},
-		#{faq_content},
-		sysdate
+			faq_no,
+			member_id,
+			faq_title,
+			faq_head,
+			faq_content,
+			wdate
+			)
+			values (
+			#{faq_no},
+			#{member_id},
+			#{faq_title},
+			#{faq_head},
+			#{faq_content},
+			sysdate
 		)
 	</insert>
 
 	<!-- 게시글 번호 받아오기 -->
 	<select id="getSequence" resultType="int">
-		select faq_no_seq.nextval
+		select 
+			faq_no_seq.nextval
 		from dual
 	</select>
 
 	<!-- 이미지 등록 -->
 	<insert id="faqfile" parameterType="faqfileDto">
 		insert into faq_file values(
-		faq_file_no_seq.nextval,
-		#{faq_faq_no},
-		#{uploadname},
-		#{savename},
-		#{filetype},
-		#{filesize}
+			faq_file_no_seq.nextval,
+			#{faq_faq_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize}
 		)
 	</insert>
 
@@ -60,28 +61,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="faqlistAll" parameterType="map" resultType="FaqVO">
 		select*from (
-		select rownum as rn, A.* from(
-		select
-		faq_no,faq_title,faq_head,faq_content,wdate,member_id
-		from FAQ
-		where
-		${type} like '%'||#{keyword}||'%'
-		order by faq_no desc, wdate desc
-		) A
-		)
+			select rownum as rn, A.* from(
+				select
+					faq_no,faq_title,faq_head,faq_content,wdate,member_id
+				from FAQ
+				where
+					${type} like '%'||#{keyword}||'%'
+				order by faq_no desc, wdate desc
+				) A
+			)
 		where rn between #{start} and #{finish}
 	</select>
 
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="FaqVO" parameterType="map">
 		select*from (
-		select rownum as rn, A.* from(
-		select*
-		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
-		from FAQ
-		order by faq_no desc, wdate desc
-		) A
-		) where rn between #{start}
+			select rownum as rn, A.* from(
+				select*
+				<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
+				from FAQ
+				order by faq_no desc, wdate desc
+				) A
+			) where rn between #{start}
 		and #{finish}
 	</select>
 
@@ -93,18 +94,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 상세보기 조회 -->
 	<select id="faqview" resultType="FaqVO">
-		select*from FAQ where faq_no=
-		#{faq_no}
+		select
+			*
+		from 
+			FAQ 
+		where faq_no = #{faq_no}
 	</select>
 
 	<!-- 게시글 수정 -->
 	<update id="faqupdate" parameterType="FaqVO">
-		update FAQ set
-		faq_title = #{faq_title},
-		faq_head = #{faq_head},
-		faq_content = #{faq_content}
-		where faq_no=
-		#{faq_no}
+		update 
+			FAQ 
+		set
+			faq_title = #{faq_title},
+			faq_head = #{faq_head},
+			faq_content = #{faq_content}
+			where faq_no=
+			#{faq_no}
 	</update>
 
 	<!-- 게시글 삭제 -->

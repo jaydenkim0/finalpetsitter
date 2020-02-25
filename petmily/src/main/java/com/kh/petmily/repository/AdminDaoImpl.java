@@ -24,6 +24,7 @@ import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
@@ -590,6 +591,12 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public List<PayDto> paydetail(int reservation_no) {		
 		return sqlSession.selectList("admin.paydetail", reservation_no);
+	}
+
+	//test
+	@Override
+	public QnaDto test(int qna_no) {	
+		return sqlSession.selectOne("admin.test", qna_no);
 	}
 
 

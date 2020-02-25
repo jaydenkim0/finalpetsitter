@@ -12,9 +12,11 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -23,6 +25,8 @@ import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.MemberDao;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -32,6 +36,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberDto memberDto;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@Override
 	public void regist(MemberDto memberDto) {
@@ -86,18 +93,18 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.mylistchange(memberDto);
 	}
 
-	//아이디중복검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return memberDao.userIdCheck(user_id);
-	}
-
 	//회원탈퇴처리
 	@Override
 	public void memberdelete(String id, String password) {
-		memberDto.setId(id);
-		memberDto.setPw(password);
-		memberDao.memberdelete(memberDto);
+		memberDto.setId(id);		
+		MemberDto find = memberDao.login(memberDto);		
+		if(find != null) {
+			boolean correct = encoder.matches(password, find.getPw());
+			if(correct == true) {// 비밀번호가 맞으면
+				memberDao.memberdelete(id);	
+				System.out.println("삭제되었습니다");
+			}			
+		}		
 	}
 
 	//회원 탈퇴되었는지 검사
@@ -335,6 +342,60 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish) {
 		return memberDao.myreservation(id,start,finish);
+	}
+
+	//내가 만든 돌봄방 개수
+	@Override
+	public int getmycareboardCount(String id) {
+		return memberDao.getmycareboardCount(id);
+	}
+
+	//내가 만든 돌봄방 정보
+	@Override
+	public List<CarePetsitterDto> mycareboard(String id, int start, int finish) {
+		return memberDao.mycareboard(id,start,finish);
+	}
+
+	//내가 올린 문의/신고 개수
+	@Override
+	public int getmyqnaboardCount(String id) {
+		return memberDao.getmyqnaboardCount(id);
+	}
+
+	//내가 올린 문의/신고 정보
+	@Override
+	public List<QnaVO> myqnaboard(String id, int start, int finish) {
+		return memberDao.myqnaboard(id,start,finish);
+	}
+
+	//내가 올린 Save the Pets ! 개수
+	@Override
+	public int getmystrayboardCount(String id) {
+		return memberDao.getmystrayboardCount(id);
+	}
+
+	//내가 Save the Pets ! 정보
+	@Override
+	public List<StrayVO> mystrayboard(String id, int start, int finish) {
+		return memberDao.mystrayboard(id,start,finish);
+	}
+	
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return memberDao.userIdCheck(user_id);
+	}
+
+	//이메일중복검사
+	@Override
+	public int emailCheck(String email) {
+		return memberDao.emailCheck(email);
+	}
+	
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	@Override
+	public MemberDto passwordfind(String email, String id) {	
+		return memberDao.passwordfind(email, id);
 	}
 	}
 
