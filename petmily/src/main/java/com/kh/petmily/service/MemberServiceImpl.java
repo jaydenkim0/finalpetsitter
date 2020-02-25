@@ -12,6 +12,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,6 +33,9 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MemberDto memberDto;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@Override
 	public void regist(MemberDto memberDto) {
@@ -95,9 +99,15 @@ public class MemberServiceImpl implements MemberService {
 	//회원탈퇴처리
 	@Override
 	public void memberdelete(String id, String password) {
-		memberDto.setId(id);
-		memberDto.setPw(password);
-		memberDao.memberdelete(memberDto);
+		memberDto.setId(id);		
+		MemberDto find = memberDao.login(memberDto);		
+		if(find != null) {
+			boolean correct = encoder.matches(password, find.getPw());
+			if(correct == true) {// 비밀번호가 맞으면
+				memberDao.memberdelete(id);	
+				System.out.println("삭제되었습니다");
+			}			
+		}		
 	}
 
 	//회원 탈퇴되었는지 검사

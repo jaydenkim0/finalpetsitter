@@ -117,8 +117,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 회원탈퇴처리 -->
-	<delete id="memberdelete" parameterType="memberDto">
-		delete from member where id=#{id} and pw=#{pw}
+	<delete id="memberdelete" parameterType="String">
+		delete from member where id=#{id} 
 	</delete>
 	
 	<!-- 회원 탈퇴되었는지 검사 -->

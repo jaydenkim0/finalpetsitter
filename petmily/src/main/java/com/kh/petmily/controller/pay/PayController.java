@@ -100,7 +100,7 @@ public class PayController {
 				.partner_user_id(kpayReadyVO.getPartner_user_id())
 				.pg_token(pg_token)
 				.build();
-		KakaoPaySuccessReturnVO result = payService.approve(data);
+		KakaoPaySuccessReturnVO result = payService.approve(data);		
 		model.addAttribute("result",result);
 		return "pay/success";
 	}
