@@ -23,7 +23,7 @@
 		
 		<br><hr><br>
 		<a href="findid">아이디 찾기</a><br>
-		<a href="input">비밀번호 찾기</a><br>
+		<a href="input">비밀번호 변경</a><br>
 		<a href="regist">회원가입</a>
 
 	</div>
