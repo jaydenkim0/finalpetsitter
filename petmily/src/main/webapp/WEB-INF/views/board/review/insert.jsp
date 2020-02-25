@@ -104,8 +104,9 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="review_sitter_no">펫시터번호</label> 
-		<input class="form-control" name="review_sitter_no"  value="${reservation.reservation_sitter_no}" required>
+		<label for="review_sitter_no">펫시터 아이디</label> 
+		<input type="hidden" name="review_sitter_no" value="${reservation.reservation_sitter_no}">
+		${sitter_id}
 	</div>
 
 
