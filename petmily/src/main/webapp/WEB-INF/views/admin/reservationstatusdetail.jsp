@@ -10,10 +10,18 @@
 			<tbody>			
 				<tr>
 					<tr>			
-						<td> 신청 회원 : ${acountOne.member_id}</td>					
+						<td> 신청 회원 : 
+							<a  href="${pageContext.request.contextPath}/admin/memberdetail?id=${acountOne.member_id}">
+								${acountOne.member_id}
+							</a>
+						</td>					
 					</tr>
 					<tr>			
-						<td> 견적승인 펫시터  : ${sitter_id}</td>					
+						<td> 견적승인 펫시터  :
+							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${acountOne.reservation_sitter_no}"> 
+								${sitter_id}
+							</a>
+						</td>					
 					</tr>
 					<tr>			
 						<td> 예약 시간 : ${acountOne.matching_time}</td>					
