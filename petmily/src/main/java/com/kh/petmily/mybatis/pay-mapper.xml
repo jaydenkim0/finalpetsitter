@@ -94,5 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getPay" parameterType="int" resultType="payDto">
 		select * from pay where partner_order_id =#{partner_order_id}
 	</select>
-	
+	<!-- 1시간 당 요금 가져오기 -->
+	<select id="getHourPayment" resultType="int">
+		select payment from payinfo where payname='1시간 금액'
+	</select>
 </mapper>

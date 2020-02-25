@@ -184,4 +184,9 @@ public class PayServiceImpl implements PayService{
 	public List<PayDto> getPay(int partner_order_id) {
 		return payDao.getPay(partner_order_id);
 	}
+
+	@Override
+	public int getHourPayment() {
+		return payDao.getHourPayment();
+	}
 }

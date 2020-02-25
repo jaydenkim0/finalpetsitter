@@ -132,22 +132,23 @@ public class PetsitterController {
 	//펫시터 (검색 후)상세 조회페이지
 	@GetMapping("/content")
 	public String content(@RequestParam int pet_sitter_no,
-									HttpSession session,
-									Model model) throws Exception {
+							HttpSession session,
+							Model model) throws Exception {
 		// 세션에서 로그인한 아이디 가지고오기
 		String id = (String) session.getAttribute("id");
 		int count = petsitterService.petscheck(id);
-		System.out.println("아이디가 들ㅇ왔나요? = "+ id);
-		System.out.println("count가 들ㅇ왔나요? = "+ count);
 		
 		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
 		double star = reviewService.star(pet_sitter_no);
+		
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
+		
 		model.addAttribute("petsitterList", petsitterList)
-			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));
-		model.addAttribute("reviewstar",star);
-		model.addAttribute("list",list);
-		model.addAttribute("petscheck",count);		
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))
+			.addAttribute("reviewstar",star)
+			.addAttribute("list",list)
+			.addAttribute("petscheck",count);		
+		
 		return "petsitter/content";
 	}
 	
@@ -231,19 +232,24 @@ public class PetsitterController {
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {
-		//회원아이디 -펫시터 아이디
+		//예약 정보  단일 조회
 		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);
+		
+		//1시간 당 금액 구하기
+		int hourPayment = payService.getHourPayment();
+		
 		//최종 결제 금액 구하기
 		int payMent = 0;
-	
 			List<ReservationAllVO> all = reservationList.getList();
+			
 			int totalTime = all.get(0).getUsage_time();
 			int startTime = all.get(0).getStart_time();
 			
 			for(ReservationAllVO allVO : all) {
+				
 				int usagetime = allVO.getUsage_time();
 				
-				int oneHour = usagetime * 10000;
+				int oneHour = usagetime * hourPayment;
 				int payment = allVO.getPayment();
 				
 				payMent = oneHour + payment;			
@@ -252,7 +258,7 @@ public class PetsitterController {
 		model.addAttribute("reservationList", reservationList)
 			.addAttribute("payMent", payMent)
 			.addAttribute("usageTime", totalTime)
-		.addAttribute("startTime", startTime);
+			.addAttribute("startTime", startTime);
 		return "petsitter/confirm";
 	}
 	
@@ -294,8 +300,6 @@ public class PetsitterController {
 		//펫시터 번호로 예약 정보 조회
 		List<ReservationListVO> reservationList = petsitterService.getReservationSitter(pet_sitter_no);
 		
-	
-		
 		//시작시간,총 시간 가져오기
 		int totalTime = 0;
 		int startTime = 0;
@@ -306,8 +310,6 @@ public class PetsitterController {
 				
 		for(ReservationListVO vo : reservationList) {
 			partner_order_id = vo.getReservation_no();
-			System.out.println("!!!!!!!!!!예약 번호 : "+partner_order_id);
-			
 			
 			List<ReservationAllVO> all = vo.getList();			
 			totalTime = all.get(0).getUsage_time();
