@@ -20,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
+import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
@@ -67,13 +71,20 @@ public class PetsitterController {
 
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
-	public String regist() {
+	public String regist(Model model) {
+		model.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+				  .addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+				  .addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());
+
+		System.out.println("케어가능 동물 리스트 = "+(List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList());
+		System.out.println("스킬 리스트 = "+(List<SkillNameDto>)petsitterService.getSkillNameList());
+		System.out.println("환경 리스트 = "+(List<CareConditionNameDto>)petsitterService.getCareConditionName());
 		return "petsitter/regist";
 	}
 	
 	@PostMapping("/regist")
 	public String regist(@ModelAttribute PetsitterRegistVO vo) throws IllegalStateException, IOException{
-		petsitterService.regist(vo);
+		petsitterService.regist(vo);	
 		return "redirect:../";
 	}
 	

@@ -8,8 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
+import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.MemberPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -120,6 +124,22 @@ public class PetsitterDaoImpl implements PetsitterDao {
 	@Override
 	public int petscheck(String id) {	
 		return sqlSession.selectOne("petsitter.petscheck", id);
+	}
+
+	//펫시터 가입시 체크박스 내용 불러오기
+	@Override
+	public List<CarePetTypeNameDto> getCarePetTypeList() {	
+		return sqlSession.selectList("petsitter.getCarePetTypeList");
+	}
+
+	@Override
+	public List<SkillNameDto> getSkillNameList() {
+		return sqlSession.selectList("petsitter.getSkillNameList");
+	}
+
+	@Override
+	public List<CareConditionNameDto> getCareConditionName() {
+		return sqlSession.selectList("petsitter.getCareConditionName");
 	}
 
 
