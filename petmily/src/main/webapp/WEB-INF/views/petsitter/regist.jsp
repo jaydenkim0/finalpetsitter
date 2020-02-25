@@ -3,6 +3,53 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>    
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/codemirror.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/github.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+<!-- 네이버 토스트에디터 종료 -->
+
+<!-- 네이버 토스트 에디터 스크립트 -->
+<script>
+	$(function() {
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			//대상
+			el : document.querySelector(".naver-editor"),
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px"
+		};
+
+		var editor = tui.Editor.factory(options);
+
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[type=hidden]").value = text;
+						});
+	});
+</script>
+<!-- 네이버 토스트 에디터 스크립트 종료 -->
 	<script>
 	 $(function(){
 //다중 선택 출력 스크립트 		 
@@ -165,50 +212,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
 	rel="stylesheet">
-<style>
-textarea[name=faq_content] {
-	width: 100%;
-	height: 150px;
-}
-</style>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
-<script>
-	function loadEditor() {
-		var editor = SUNEDITOR.create((document
-				.querySelector('textarea[name=info]')), {
-			//언어 설정
-			lang : SUNEDITOR_LANG['ko'],
-
-			//버튼 목록
-			buttonList : [
-					[ 'font', 'fontSize', 'fontColor' ],
-					[ 'underline', 'italic', 'bold', 'paragraphStyle',
-							'formatBlock' ], [ 'align', 'table' ]
-
-			],
-			font : [ '굴림', '궁서', 'binggrae', 'Verdana', 'Arial' ],
-			fontSize : [ '8', '9', '10', '11', '12', '14', '16', '18', '20',
-					'22', '24', '26', '28', '36', '48', '72' ],
-			fontColor : [],
-		});
-
-		//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-		editor.onKeyUp = function(e) {
-			var info = document
-					.querySelector("textarea[name=info]");
-			info.value = editor.getContents();
-		}
-	}
-
-	//윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-	window.onload = loadEditor;
-</script>
-<!-- 에디터 끝 -->
     
 <h1>펫시터 가입 페이지</h1>
 <!-- 
@@ -275,8 +279,10 @@ textarea[name=faq_content] {
 			<tr>
 				<td><label for="info-text">펫밀리 기본 정보</label></td>
 			<tr>
-				<td><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
-				</textarea></td>
+				<td>
+				<div class="naver-editor"></div>
+				<input type="hidden" name="info" value="" id="info-text">
+				</td>
 			<tr>
 			</tr>
 		</table>
@@ -382,7 +388,7 @@ textarea[name=faq_content] {
 	</div>
 		
 	<div>
-		<input type="submit" value="펫시터 등록">
 		<h5>다음 단계로 진행하면 펫밀리 신청 약관 에 동의하는 것으로 간주됩니다.</h5>
+		<input type="submit" value="펫시터 등록">
 	</div>
 </form>
