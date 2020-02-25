@@ -1,5 +1,9 @@
 package com.kh.petmily.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,5 +28,14 @@ public class QnaDto {
 	private int groupno, //원글 번호
 	superno, //원글에 대한 순서 (답글 포함)
 	depth; //답글 계층
+	
+	public String getWdateWithFormat() throws ParseException {
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(wdate);
+		//변환한 형식을 다시 원하는 형식의 문자열로 변환
+		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일 E요일 HH시 mm분");
+		String time = write.format(date);
+		return time;
+}
 	
 }

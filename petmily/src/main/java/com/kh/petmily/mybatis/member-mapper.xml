@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!--  비밀번호 변경 -->
 	<update id="pwchange" parameterType="memberDto">
-		update member set pw = #{pw} where email = #{email}
+		update member set pw = #{pw} where email = #{email} and id =#{id}
 	</update>
 
 	<!-- 내정보 수정 -->
@@ -110,11 +110,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="pet_regist" parameterType="petDto">
 		insert into pet values(pet_no_seq.nextval,#{member_id},#{name},#{age},#{type},#{ect})
 	</insert>
-	
-	<!-- 아이디 중복검사 -->
-	<select id="userIdCheck" parameterType="String" resultType="int">
-		select count(*) from member where id=#{user_id}
-	</select>
 
 	<!-- 회원탈퇴처리 -->
 	<delete id="memberdelete" parameterType="String">
@@ -355,6 +350,110 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					RS.matching_time desc
 			) A
 		) where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 내가 만든 돌봄방 개수 -->
+	<select id="getmycareboardCount" parameterType="String" resultType="int">
+		select count(*) from care_board where care_member_id=#{id}
+	</select>
+	
+	<!-- 내가 만든 돌봄방 정보 -->
+	<select id="mycareboard" parameterType="map" resultType="carePetsitterDto">
+		select * from (
+			select rownum as rn, A.* from(
+				select
+					CD.*,
+					PS.sitter_id
+				from 
+					care_board CD
+						left outer join pet_sitter PS on PS.pet_sitter_no=CD.care_sitter_no 
+				where
+					CD.care_member_id=#{id}
+				order by 
+					CD.wdate desc
+			) A
+		) where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 내가 올린 문의/신고 개수 -->
+	<select id="getmyqnaboardCount" parameterType="String" resultType="int">
+		select count(*) from qna where qna_writer=#{id}
+	</select>
+	
+	<!-- 내가 올린 문의/신고 정보 -->
+	<select id="myqnaboard" parameterType="map" resultType="QnaVO">
+	select*from (
+		select rownum as rn, A.* from(
+			select
+				qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+			(
+				select
+					Q.qna_no, Q.qna_writer, Q.qna_title, Q.qna_head, Q.qna_content,
+					Q.wdate, Q.groupno, Q.superno, Q.depth, QR.reply_no
+				from qna Q
+					left outer join qna_reply QR on Q.qna_no = QR.origin
+				connect by prior qna_no = superno
+				start with superno=0
+				order siblings by groupno desc, qna_no asc, wdate desc
+			)
+			where
+				qna_writer=#{id}
+			group by 
+		    	qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,
+		    	groupno, superno, depth
+		) A
+	)
+	where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 내가 올린 Save the Pets ! 개수 -->
+	<select id="getmystrayboardCount" parameterType="String" resultType="int">
+		select count(*) from stray_pet where stray_writer=#{id}
+	</select>
+	
+	<!-- 내가 Save the Pets ! 정보 -->
+	<select id="mystrayboard" parameterType="map" resultType="StrayVO">
+	select*from (
+		select rownum as rn, A.* from(
+			select
+				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+			(
+				select
+					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
+					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
+				from stray_pet S
+					left outer join stray_reply SR on S.stray_no = SR.origin
+				connect by prior stray_no = superno
+				start with superno=0
+				order siblings by groupno desc, stray_no asc, wdate desc
+			)
+			where
+				stray_writer=#{id}
+			group by 
+			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
+			    groupno, superno, depth
+			) A
+		)
+	where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 아이디 중복검사 -->
+	<select id="userIdCheck" parameterType="String" resultType="int">
+		select count(*) from member where id=#{user_id}
+	</select>
+	
+	<!-- 이메일중복검사 -->
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+	
+	<!-- 비밀번호 변경시  아이디와 이메일이 있는지 검색 -->
+	<select id="passwordfind" parameterType="Map" resultType="memberDto">
+		select * from member where id = #{id} and email = #{email}
 	</select>
 	
 </mapper>
