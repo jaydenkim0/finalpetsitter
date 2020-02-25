@@ -125,4 +125,7 @@ public interface MemberService {
 	//멤버+예약+결제+리뷰 합친 예약.
 	List<ReservationReviewPaySitterDto> myreservation(String id, int start, int finish);
 
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	MemberDto passwordfind(String email, String id);
+
 }

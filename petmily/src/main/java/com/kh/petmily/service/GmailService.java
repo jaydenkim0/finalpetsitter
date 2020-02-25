@@ -45,7 +45,7 @@ public class GmailService implements EmailService{
 
 //	@Transactional//이 표시가 붙은 메소드는 기능이 하나로 합쳐져서 실행관리
 	@Override
-	public void sendChangePasswordMail(String email) throws MessagingException {
+	public void sendChangePasswordMail(String email, String id) throws MessagingException {
 		//1. 랜덤번호를 3자리 생성
 		String cert = randomService.generateCertificationNumber(3);
 		
@@ -68,6 +68,7 @@ public class GmailService implements EmailService{
 									.path("/member/change")
 									.queryParam("cert", cert)
 									.queryParam("email", email)
+									.queryParam("id", id)
 									.toUriString();
 		
 		StringBuffer buffer = new StringBuffer();
