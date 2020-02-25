@@ -32,6 +32,8 @@ public class PetsitterVO {
 	private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 	private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
 	
+
+	
 	//petsitter
 	private int pet_sitter_no;
 	private String sitter_id; // member 테이블의 id 
@@ -43,7 +45,6 @@ public class PetsitterVO {
 	private String sitter_matching_type; // '방문서비스', '위탁서비스', '둘다' 만 작성가능
 	private String sitter_bankname; // 펫시터 은행
 	private String sitter_bank_account;  // 펫시터 계좌번호
-
 	
 	// blacklist 사용시 추가 컨텐츠
 	private int black_no;
@@ -92,7 +93,7 @@ public class PetsitterVO {
 	//은행 계좌 통합 
 	public String getTotal_account() {
 		if(sitter_bankname != null && sitter_bank_account != null) {
-			return "["+getSitter_bankname()+"}"+""+getSitter_bank_account();
+			return "["+getSitter_bankname()+"] "+""+getSitter_bank_account();
 		}
 		else {
 			return"";
@@ -100,12 +101,13 @@ public class PetsitterVO {
 	}
 	
 	//주소 통합
-	public String otal_addr() {
+	public String getTotal_addr() {
 		if(post != null && basic_addr != null && extra_addr != null) {
-			return "["+getPost()+"]"+""+getBasic_addr()+""+getExtra_addr();
+			return "["+getPost()+"] "+""+getBasic_addr()+""+getExtra_addr();
 		}
 		else {
 			return"";
 		}
 	}
+
 }

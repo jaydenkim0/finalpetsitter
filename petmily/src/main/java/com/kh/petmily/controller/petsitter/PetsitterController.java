@@ -242,6 +242,7 @@ public class PetsitterController {
 			
 			for(ReservationAllVO allVO : all) {
 				int usagetime = allVO.getUsage_time();
+				
 				int oneHour = usagetime * 10000;
 				int payment = allVO.getPayment();
 				

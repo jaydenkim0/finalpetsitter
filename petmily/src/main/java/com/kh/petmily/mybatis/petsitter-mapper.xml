@@ -342,11 +342,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 펫시터 기본 정보 -->
 	<update id="update" parameterType="petsitterDto">
 		update pet_sitter set
-			info = #{info},
-			sitter_pets = #{sitter_pets},
-			sitter_matching_type = #{sitter_matching_type},
-			sitter_bankname = #{sitter_bankname},
-			sitter_bank_account = #{sitter_bank_account}
+			<if test="info != ''">
+				info = #{info},
+			</if>  
+			<if test="sitter_pets != ''">
+				sitter_pets = #{sitter_pets},				
+			</if>  
+			
+			<if test="sitter_matching_type != ''">
+				sitter_matching_type = #{sitter_matching_type},								
+			</if>  
+			
+			<if test="sitter_bankname != ''">
+				sitter_bankname = #{sitter_bankname},								
+			</if>  
+			
+			<if test="sitter_bank_account != ''">
+				sitter_bank_account = #{sitter_bank_account}						
+			</if> 
 		where pet_sitter_no = #{pet_sitter_no}
 	</update>
 	
