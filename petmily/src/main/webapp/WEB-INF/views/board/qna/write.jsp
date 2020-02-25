@@ -92,12 +92,16 @@ textarea[name=faq_content] {
 
 		<div class="form-group">
 			<label for="qna_head">제목</label>
-			<c:if test="${param.superno > 0}">
-				<input class="form-control" type="text" name="qna_head" value="RE:"
-					id="qna_head" size="75">
-			</c:if>
-			<input class="form-control" name="qna_head" id="qna_head" size="80"
-				placeholder="글 제목 입력">
+			<c:choose>
+				<c:when test="${param.superno > 0}">
+					<input class="form-control" type="text" name="qna_head" value="RE:"
+						id="qna_head" size="75">
+				</c:when>
+				<c:otherwise>
+					<input class="form-control" name="qna_head" id="qna_head" size="75"
+						placeholder="글 제목 입력">
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<div class="form-group">
