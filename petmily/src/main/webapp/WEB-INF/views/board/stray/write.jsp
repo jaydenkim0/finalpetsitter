@@ -31,14 +31,60 @@
 
 
 <style>
-textarea[name=faq_content] {
-	width: 100%;
-	height: 150px;
-}
-
 .tabl {
 	width: 60%;
 	margin: auto;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.input-file{
+	width: 100%;
+	height: 35px;
+	border-style : none;
+}
+
+select {
+	width: 100%;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
 }
 </style>
 
@@ -81,7 +127,7 @@ textarea[name=faq_content] {
 	</c:otherwise>
 </c:choose>
 
-<div align="center" class="tabl">
+<div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
 		<h2>Save the Pets !</h2>
 
@@ -122,15 +168,14 @@ textarea[name=faq_content] {
 		</div>
 
 		<div class="form-group">
-			<label for="stray_file">이미지 첨부</label> <input class="form-control"
-				type="file" id="stray_file" name="stray_file" multiple
-				accept="image/*">
+			<label for="stray_file">이미지 첨부</label> 
+			<input class="input-file" type="file" id="stray_file" name="stray_file" multiple accept="image/*">
 		</div>
 
 
-	<div class="form-group">
-			<input type="submit" value="확인"> 
-			<input type="reset" value="초기화">
+	<div class="form-group" align="center">
+			<input type="submit" value="확인" class="btn hover3"> 
+			<input type="reset" value="초기화" class="btn hover3">
 		</div>
 	</form>
 </div>
