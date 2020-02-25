@@ -97,6 +97,7 @@
 	</div>
 
 
+	<input type="hidden" name="review_reservation_no" value="${reservation.reservation_no}">
 	<div class="form-group">
 		<label for="review_title">제목</label> 
 		<input class="form-control" name="review_title" id="review_title" placeholder="글 제목 입력" required>
@@ -104,7 +105,7 @@
 	
 	<div class="form-group">
 		<label for="review_sitter_no">펫시터번호</label> 
-		<input class="form-control" name="review_sitter_no" id="review_sitter_no" placeholder="펫시터번호" required>
+		<input class="form-control" name="review_sitter_no"  value="${reservation.reservation_sitter_no}" required>
 	</div>
 
 
@@ -114,7 +115,7 @@
 	 <input type="hidden" name="review_content" value="review_content" required></div>
 
     <div class="form-group" align="right">
-		<label for="review_reservation_no" >예약번호 : ${review.reservation_no}</label> 
+		<label for="review_reservation_no" >예약번호 : ${reservation.reservation_no}</label> 
 	  
 	</div>
 	

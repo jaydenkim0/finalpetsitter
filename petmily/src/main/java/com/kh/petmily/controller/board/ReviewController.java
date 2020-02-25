@@ -1,40 +1,23 @@
 package com.kh.petmily.controller.board;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.petmily.entity.CareDto;
-import com.kh.petmily.entity.CareReplyDto;
-import com.kh.petmily.entity.FaqDto;
 import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
-import com.kh.petmily.page.FaqPage;
 import com.kh.petmily.repository.ReviewDao;
 import com.kh.petmily.service.board.ReviewService;
-import com.kh.petmily.vo.FaqVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,14 +37,15 @@ public class ReviewController {
 	@GetMapping("/insert")
 	public String insert(@RequestParam int reservation_no, 
 								Model model) {
-		ReservationDto review = reviewService.getReviewInfo(reservation_no);
-		model.addAttribute("review",review);
+		ReservationDto reservationinfo = reviewService.getReviewInfo(reservation_no);
+		
+		model.addAttribute("reservation",reservationinfo);
 		return"board/review/insert";
 	}
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ReviewDto reviewDto) throws Exception {
-
+		System.out.println("무엇이 들어왔나 = "+reviewDto);
 		reviewDao.insert(reviewDto);
 		reviewService.pointplus(reviewDto);
 		return "redirect:/board/review/list";

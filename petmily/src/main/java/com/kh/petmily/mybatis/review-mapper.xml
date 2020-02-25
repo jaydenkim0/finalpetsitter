@@ -22,7 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{review_title},
 		#{review_content},
 		#{review_star},
-		sysdate)
+		sysdate,
+		#{review_reservation_no})
 	
 	</insert>
 <!-- 	리뷰 리스트 -->
