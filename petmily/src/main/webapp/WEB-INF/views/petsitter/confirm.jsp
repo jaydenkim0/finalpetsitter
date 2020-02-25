@@ -116,12 +116,12 @@
 					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">	
 					<button type="button" id="refusal_btn">거절사유작성</button>
 					<!-- 숨겨진 페이지 -->					
-								<div class="modalfade">			                    							  
-					                <label>거절 사유를 간단하게 작성해주세요</label>
-					                <input type="text" name="content"  required>
-					                <br/>
-					                <input type="submit" id="sendEmail"  value="거절">		            
-					            </div>
+					<div class="modalfade">			                    							  
+		                <label>거절 사유를 간단하게 작성해주세요</label>
+		                <input type="text" name="content"  required>
+		                <br/>
+		                <input type="submit" id="sendEmail"  value="거절">		            
+		            </div>
 			</form>
 		
 		<span>예약 이용 시간 : ${usageTime}시간</span><br>

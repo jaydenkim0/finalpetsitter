@@ -45,4 +45,9 @@ public class PayDaoImpl implements PayDao {
 		return sqlSession.selectList("pay.getPay", partner_order_id);
 	}
 
+	@Override
+	public int getHourPayment() {
+		return sqlSession.selectOne("pay.getHourPayment");
+	}
+
 }
