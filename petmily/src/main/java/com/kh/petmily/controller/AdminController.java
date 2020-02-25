@@ -419,7 +419,7 @@ public class AdminController {
 	@GetMapping("/blackList/comebackMember")
 	public String comebackMember(String black_id) {
 		adminService.gradeComback(black_id);		
-		return "redirect:/admin/member";		
+		return "redirect:/admin/list/member";		
 	}
 	
 
