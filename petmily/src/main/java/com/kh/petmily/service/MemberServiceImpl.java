@@ -89,12 +89,6 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.mylistchange(memberDto);
 	}
 
-	//아이디중복검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return memberDao.userIdCheck(user_id);
-	}
-
 	//회원탈퇴처리
 	@Override
 	public void memberdelete(String id, String password) {
@@ -374,6 +368,18 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<StrayVO> mystrayboard(String id, int start, int finish) {
 		return memberDao.mystrayboard(id,start,finish);
+	}
+	
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return memberDao.userIdCheck(user_id);
+	}
+
+	//이메일중복검사
+	@Override
+	public int emailCheck(String email) {
+		return memberDao.emailCheck(email);
 	}
 	}
 

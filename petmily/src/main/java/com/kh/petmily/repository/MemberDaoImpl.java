@@ -85,12 +85,6 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.insert("member.pet_regist",petDto);
 	}
 
-	//아이디중복검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return sqlSession.selectOne("member.userIdCheck",user_id);
-	}
-
 	//회원탈퇴처리
 	@Override
 	public void memberdelete(MemberDto memberDto) {
@@ -324,6 +318,18 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("start", start);
 		map.put("finish", finish);
 		return sqlSession.selectList("member.mystrayboard",map);
+	}
+	
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("member.userIdCheck",user_id);
+	}
+
+	//이메일중복검사
+	@Override
+	public int emailCheck(String email) {
+		return sqlSession.selectOne("member.emailCheck",email);
 	}
 
 }

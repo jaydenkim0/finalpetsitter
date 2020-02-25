@@ -290,6 +290,13 @@ public class MemberController {
 			return memberService.userIdCheck(user_id);
 		}
 
+		//이메일 중복검사
+		@RequestMapping(value="emailCheck",method=RequestMethod.GET)
+		@ResponseBody
+		public int emailCheck(@RequestParam("email") String email) {
+			return memberService.emailCheck(email);
+		}
+		
 		//회원탈퇴 비밀번호검사 페이지 연결
 		@GetMapping("/memberdelete")
 		public String memberdelete(

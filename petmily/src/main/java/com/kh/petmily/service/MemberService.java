@@ -49,6 +49,9 @@ public interface MemberService {
 	//아이디중복검사
 	int userIdCheck(String user_id);
 
+	//이메일중복검사
+	int emailCheck(String email);
+	
 	//회원탈퇴처리
 	void memberdelete(String id, String password);
 
@@ -145,6 +148,7 @@ public interface MemberService {
 
 	//내가 Save the Pets ! 정보
 	List<StrayVO> mystrayboard(String id, int start, int finish);
+
 
 
 }

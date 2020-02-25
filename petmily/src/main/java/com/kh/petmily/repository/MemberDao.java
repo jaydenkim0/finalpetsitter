@@ -151,5 +151,8 @@ public interface MemberDao {
 	//내가 Save the Pets ! 정보
 	List<StrayVO> mystrayboard(String id, int start, int finish);
 
+	//이메일중복검사
+	int emailCheck(String email);
+
 
 }
