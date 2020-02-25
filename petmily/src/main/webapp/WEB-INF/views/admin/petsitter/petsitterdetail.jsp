@@ -3,6 +3,41 @@
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
+   	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+	<!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
+    <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+    
+    
+     <script>        
+        $(function(){
+            var options = {
+                //el(element) : 에디터가 될 영역
+                el:document.querySelector(".naver-viewer"),
+                
+                viewer:true,
+
+                //height : 생성될 에디터의 높이
+                height:'auto',
+            };
+
+            var viewer = tui.Editor.factory(options);
+
+            //생성된 뷰어에 초기값 표시
+            console.log(document.querySelector(".naver-viewer + input[type=hidden]"));
+            var text = document.querySelector(".naver-viewer + input[type=hidden]").value;
+            viewer.setValue(text);//값 설정
+        });
+    </script>
+    
+    
+    
 	<h3> 펫시터 정보 </h3>
 	<!-- 현재 페이지에서 펫시터 상태 휴면으로 전환가능 -->
 	
@@ -39,7 +74,11 @@
 				</tr>
 				
 				<tr>			
-					<td> 펫시터 정보   : ${petsitter.info}</td>					
+					<td>
+						펫시터 정보   : 
+						<div class="naver-viewer"></div>  
+						<input type="hidden"  value="${petsitter.info}">  
+					 </td>					
 				</tr>
 				
 				<tr>			

@@ -7,14 +7,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +29,7 @@ import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
+import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
@@ -54,11 +53,13 @@ public class AdminController {
 	// 메인페이지
 	@GetMapping("/")
 	public String admin(Model model) {	
-		// 명목상 있는 페이지
+		int qna_no = 201;
+		model.addAttribute("test", (QnaDto)adminService.test(qna_no));
 		return "admin/main";		
 	}
 	
 	//////////////////////////////////////////////////////////////////
+	
 	
 	// 등록 현황으로 이동
 	@GetMapping("/registInfo")	
@@ -419,7 +420,7 @@ public class AdminController {
 	@GetMapping("/blackList/comebackMember")
 	public String comebackMember(String black_id) {
 		adminService.gradeComback(black_id);		
-		return "redirect:/admin/member";		
+		return "redirect:/admin/list/member";		
 	}
 	
 

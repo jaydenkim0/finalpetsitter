@@ -651,6 +651,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where payinfo_no = #{payinfo_no}
 		</update>
 	
+	
+	<!-- test -->
+	<select id="test" resultType="qnaDto" parameterType="int">
+		select * from qna where qna_no = #{qna_no}
+	</select>
 </mapper>
 
 

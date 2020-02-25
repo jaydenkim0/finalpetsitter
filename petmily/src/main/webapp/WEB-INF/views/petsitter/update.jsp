@@ -3,6 +3,23 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>    
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/codemirror.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/github.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+<!-- 네이버 토스트에디터 종료 -->	
+	
 	<script>
 	 $(function(){
 //다중 선택 출력 스크립트 		 
@@ -160,55 +177,42 @@
          });
      });
 	</script>
-	
-<!-- 에디터 삽입 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
-	rel="stylesheet">
-<style>
-textarea[name=faq_content] {
-	width: 100%;
-	height: 150px;
-}
-</style>
-
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script
-	src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+<!-- 네이버 토스트 에디터 스크립트 -->
 <script>
-	function loadEditor() {
-		var editor = SUNEDITOR.create((document
-				.querySelector('textarea[name=info]')), {
-			//언어 설정
-			lang : SUNEDITOR_LANG['ko'],
+        $(function(){
+            //생성은 항상 옵션 먼저 + 나중에 생성
+            var options = {
+                //대상
+                el:document.querySelector(".naver-editor"),
+                //미리보기 스타일(vertical / horizontal)
+                previewStyle:"horizontal",
+                //입력 스타일
+                initialEditType:"wysiwyg",
+                //높이
+                height:"300px",
+                
+                hooks: {
+                    'addImageBlobHook': function(blob, callback) {
+                        //이미지 블롭을 이용해 서버 연동 후 콜백실행
+                        //callback('이미지URL');
+                        console.log("이미지 업로드");
+                    }
+                }
+            };
 
-			//버튼 목록
-			buttonList : [
-					[ 'font', 'fontSize', 'fontColor' ],
-					[ 'underline', 'italic', 'bold', 'paragraphStyle',
-							'formatBlock' ], [ 'align', 'table' ]
+            var editor = tui.Editor.factory(options);
 
-			],
-			font : [ '굴림', '궁서', 'binggrae', 'Verdana', 'Arial' ],
-			fontSize : [ '8', '9', '10', '11', '12', '14', '16', '18', '20',
-					'22', '24', '26', '28', '36', '48', '72' ],
-			fontColor : [],
-		});
+            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+            editor.on("change", function(){
+                var text = editor.getValue();//에디터에 입력된 값을 불러온다
+                document.querySelector(".naver-editor + input[type=hidden]").value = text;  
+            });
+            var text = document.querySelector(".naver-editor + input[type=hidden]").value;
+            editor.setValue(text);//값 설정
+        });
+    </script>
+<!-- 네이버 토스트 에디터 스크립트 종료 -->	
 
-		//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-		editor.onKeyUp = function(e) {
-			var info = document
-					.querySelector("textarea[name=info]");
-			info.value = editor.getContents();
-		}
-	}
-
-	//윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-	window.onload = loadEditor;
-</script>
-<!-- 에디터 끝 -->
     
 <h1>펫시터 정보 수정</h1>
 
@@ -226,7 +230,7 @@ textarea[name=faq_content] {
 	
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
-	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
+	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
 	
 <!-- 통장 계좌 -->
 	<div>
@@ -266,8 +270,10 @@ textarea[name=faq_content] {
 				<td><label for="info-text">펫밀리 기본 정보</label></td>
 			</tr>
 			<tr>
-					<td><textarea id="info-text" name="info" required rows="15" cols="100" style="resize: vertical;">
-					</textarea></td>
+					<td>
+					<!-- value 수정 -->
+					<div class="naver-editor"></div>
+					 <input type="hidden" id="info-text" name="info" value=""></td>
 			</tr>
 			</table>
 	</div>
@@ -292,70 +298,28 @@ textarea[name=faq_content] {
 	
 <!-- 스킬 -->
 	<div class="skill">
-	<h5>기존의 스킬에 상관 없이 지금 가능한 스킬을 선택해주세요.</h5>
-        <input type="checkbox" id="sick" value="1" name="skills_name" data-skills="투약">
-        <label for="sick" id="nameTo1">투약</label>
-        
-        <input type="checkbox" id="old" value="2" name="skills_name" data-skills="노령견테어">
-        <label for="old" id="nameTo2">노령견케어</label>
-        
-        <input type="checkbox" id="kitten"  value="3" name="skills_name" data-skills="키튼케어">
-        <label for="kitten" id="nameTo3">키튼케어</label>
-        
-        <input type="checkbox" id="walking"  value="4" name="skills_name" data-skills="도그워킹">
-        <label for="walking" id="nameTo4">도그워킹</label>
-        
-        <div id="skills_text"></div>
+		<c:forEach var="skillnames" items="${skillname}">
+	        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+	        <label  >${skillnames.skill_name}</label>
+        </c:forEach>   	        
+	        <div id="skills_text"></div>
     </div>
 
 <!-- 돌봄 가능 동물 종류 -->
-    <div class="type">
-    <h5>기존의 돌봄 가능한 동물에 상관 없이 지금 돌봄 가능한 동물을 선택해주세요.</h5>
-        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
-        <label for="dog">강아지</label>
-        
-        <input type="checkbox" id="cat" value="2" name="care_name" data-animal="고양이">
-        <label for="cat">고양이</label>
-        
-        <input type="checkbox" id="fish"  value="3" name="care_name" data-animal="물고기">
-        <label for="fish">물고기</label>
-        
-        <input type="checkbox" id="rabbit"  value="4" name="care_name" data-animal="토끼">
-        <label for="rabbit">토끼</label>
-        
-        <input type="checkbox" id="hamster" value="5" name="care_name" data-animal="햄스터">
-        <label for="hamster">햄스터</label>
-        
-        <input type="checkbox" id="reptiles" value="6" name="care_name" data-animal="파충류">
-        <label for="reptiles">파충류</label>        
-        
+    <div class="type">  
+    	<c:forEach var="carepettypes" items="${carepettype}">
+	        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+	        <label for="x">${carepettypes.care_type}</label>
+        </c:forEach>        
         <div id="care_pet_type_text"></div>
     </div>
 
 <!-- 돌봄 환경 -->
     <div class="condition">
-    <h5>기존의 돌봄 환경에 상관 없이 지금 돌봄 환경을 선택해주세요.</h5>
-        <input type="checkbox" id="apt" value="1" name="care_condition_name" data-condition="아파트">
-        <label for="apt">아파트</label>
-        
-        <input type="checkbox" id="villa" value="2" name="care_condition_name" data-condition="빌라">
-        <label for="villa">빌라</label>
-        
-        <input type="checkbox" id="oneroom"  value="3" name="care_condition_name" data-condition="원룸">
-        <label for="oneroom">원룸</label>
-        
-        <input type="checkbox" id="housing"  value="4" name="care_condition_name" data-condition="주택">
-        <label for="housing">주택</label>
-        
-        <input type="checkbox" id="baby" value="5" name="care_condition_name" data-condition="아기있음">
-        <label for="baby">아기있음</label>
-        
-        <input type="checkbox" id="smoking" value="6" name="care_condition_name" data-condition="흡연자">
-        <label for="smoking">흡연자</label>   
-        
-        <input type="checkbox" id="x" value="7" name="care_condition_name" data-condition="해당사항없음">
-        <label for="x">해당사항없음</label>   
-        
+    	<c:forEach var="c" items="${careconname}">    		
+	        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+	        <label >${c.care_condition_name}</label>
+        </c:forEach>        
         <div id="care_condition_text"></div>
     </div>
 	

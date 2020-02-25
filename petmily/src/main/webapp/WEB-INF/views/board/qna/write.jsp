@@ -23,11 +23,61 @@
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
  <!-- 네이버 토스트에디터 종료 -->
     
-
 <style>
-textarea[name=faq_content] {
+.tabl {
+	width: 60%;
+	margin: auto;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.input-file{
 	width: 100%;
-	height: 150px;
+	height: 35px;
+	border-style : none;
+}
+
+select {
+	width: 100%;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
 }
 </style>
 
@@ -55,13 +105,6 @@ textarea[name=faq_content] {
         });
     </script>
 
-<style>
-	.tabl {
-	width: 60%;
-	margin: auto;
-	}
-</style>
-
 <c:choose>
 	<c:when test="${sessionScope.id eq null }">
 		<a href="${context}/member/login">로그인</a>
@@ -73,7 +116,7 @@ textarea[name=faq_content] {
 </c:choose>
 
 
-<div align="center" class="tabl">
+<div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
 		<h2>문의글 작성</h2>
 		<c:if test="${param.superno>0}">
@@ -92,12 +135,16 @@ textarea[name=faq_content] {
 
 		<div class="form-group">
 			<label for="qna_head">제목</label>
-			<c:if test="${param.superno > 0}">
-				<input class="form-control" type="text" name="qna_head" value="RE:"
-					id="qna_head" size="75">
-			</c:if>
-			<input class="form-control" name="qna_head" id="qna_head" size="80"
-				placeholder="글 제목 입력">
+			<c:choose>
+				<c:when test="${param.superno > 0}">
+					<input class="form-control" type="text" name="qna_head" value="RE:"
+						id="qna_head" size="75">
+				</c:when>
+				<c:otherwise>
+					<input class="form-control" name="qna_head" id="qna_head" size="75"
+						placeholder="글 제목 입력">
+				</c:otherwise>
+			</c:choose>
 		</div>
 
 		<div class="form-group">
@@ -107,13 +154,13 @@ textarea[name=faq_content] {
 		</div>
 
 		<div class="form-group">
-			<label for="qna_file">이미지 첨부</label> <input class="form-control"
-				type="file" id="qna_file" name="qna_file" multiple accept="image/*">
+			<label for="qna_file">이미지 첨부</label> 
+			<input class="input-file" type="file" id="qna_file" name="qna_file" multiple accept="image/*">
 		</div>
 
-		<div class="form-group">
-			<input type="submit" value="확인"> 
-			<input type="reset" value="초기화">
+		<div class="form-group" align="center">
+			<input type="submit" value="확인" class="btn hover3"> 
+			<input type="reset" value="초기화" class="btn hover3">
 		</div>
 	</form>
 </div>

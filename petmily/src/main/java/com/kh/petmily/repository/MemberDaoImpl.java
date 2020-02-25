@@ -87,8 +87,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	//회원탈퇴처리
 	@Override
-	public void memberdelete(MemberDto memberDto) {
-		sqlSession.delete("member.memberdelete",memberDto);
+	public void memberdelete(String id) {
+		sqlSession.delete("member.memberdelete",id);
 	}
 
 	//회원 탈퇴되었는지 검사
@@ -330,6 +330,15 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int emailCheck(String email) {
 		return sqlSession.selectOne("member.emailCheck",email);
+	}
+	
+	//이메일 변경전에 아이디와 이메일이 있는지 확인
+	@Override
+	public MemberDto passwordfind(String email, String id) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("email", email);
+		map.put("id", id);
+		return sqlSession.selectOne("member.passwordfind", map);
 	}
 
 }

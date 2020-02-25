@@ -403,6 +403,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from pet where member_id = #{id}
 	</select>
 	
+	<!-- 펫시터 가입시 체크박스 내용 불러오기 -->
+	<select id="getCarePetTypeList" resultType="carePetTypeNameDto">
+		select * from care_pet_type_name order by care_type_no asc
+	</select>
+	<select id="getSkillNameList" resultType="skillNameDto">
+		select * from skill_name order by skill_no asc
+	</select>
+	<select id="getCareConditionName" resultType="careConditionNameDto">
+		select * from care_condition_name order by care_condition_no asc
+	</select>
 	
 </mapper>
 

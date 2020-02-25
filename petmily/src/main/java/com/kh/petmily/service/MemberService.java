@@ -146,9 +146,10 @@ public interface MemberService {
 	//내가 올린 Save the Pets ! 개수
 	int getmystrayboardCount(String id);
 
-	//내가 Save the Pets ! 정보
+	//내가 쓴 Save the Pets ! 정보
 	List<StrayVO> mystrayboard(String id, int start, int finish);
 
-
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	MemberDto passwordfind(String email, String id);
 
 }

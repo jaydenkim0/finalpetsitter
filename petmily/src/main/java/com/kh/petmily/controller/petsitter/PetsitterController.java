@@ -20,9 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
+import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.ReviewDto;
+import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
@@ -67,13 +71,16 @@ public class PetsitterController {
 
 	//펫시터 가입 페이지
 	@GetMapping("/regist")
-	public String regist() {
+	public String regist(Model model) {
+		model.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+				  .addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+				  .addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 		return "petsitter/regist";
 	}
 	
 	@PostMapping("/regist")
 	public String regist(@ModelAttribute PetsitterRegistVO vo) throws IllegalStateException, IOException{
-		petsitterService.regist(vo);
+		petsitterService.regist(vo);	
 		return "redirect:../";
 	}
 	
@@ -176,7 +183,10 @@ public class PetsitterController {
 		
 		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
 			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
-			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))//펫시터 소개 이미지
+			.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+			.addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+			.addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 				
 		return "petsitter/update";
 	}

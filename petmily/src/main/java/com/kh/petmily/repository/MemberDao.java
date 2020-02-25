@@ -49,7 +49,7 @@ public interface MemberDao {
 	int userIdCheck(String user_id);
 
 	//회원탈퇴처리
-	void memberdelete(MemberDto memberDto);
+	void memberdelete(String  id);
 
 	//회원 탈퇴되었는지 검사
 	int idExist(String id);
@@ -153,6 +153,9 @@ public interface MemberDao {
 
 	//이메일중복검사
 	int emailCheck(String email);
+
+	// 이메일 변경전에 아이디와 이메일이 있는지 확인
+	MemberDto passwordfind(String email, String id);
 
 
 }

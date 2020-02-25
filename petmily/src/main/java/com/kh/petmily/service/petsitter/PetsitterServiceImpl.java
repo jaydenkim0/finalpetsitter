@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PetDto;
@@ -264,6 +265,20 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public int petscheck(String id) {
 		return petsitterDao.petscheck(id) ;
+	}
+
+	//펫시터 가입시 체크박스 내용 불러오기
+	@Override
+	public List<CarePetTypeNameDto> getCarePetTypeList() {		
+		return petsitterDao.getCarePetTypeList();
+	}
+	@Override
+	public List<SkillNameDto> getSkillNameList() {
+		return petsitterDao.getSkillNameList();
+	}
+	@Override
+	public List<CareConditionNameDto> getCareConditionName() {	
+		return petsitterDao.getCareConditionName();
 	}
 
 
