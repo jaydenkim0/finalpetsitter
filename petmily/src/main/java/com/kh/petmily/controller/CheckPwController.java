@@ -48,6 +48,7 @@ public class CheckPwController {
 			@RequestParam(required = false)  int reservation_no,
 			@RequestParam int sitter_no,
 			@RequestParam String go,
+			@RequestParam String back,
 			HttpSession session,		
 			Model model
 			) {
@@ -55,7 +56,7 @@ public class CheckPwController {
 		memberDto.setId(id);
 		MemberDto find = memberService.login(memberDto);
 		if(find == null ) {
-			return"redirect:/check/login?error"; 
+			return"redirect:"+back+"?id="+id+"&reservation_no="+reservation_no+"&sitter_no="+sitter_no+"&error"; 
 		}else {
 			boolean correct = encoder.matches(pw, find.getPw());
 			if(correct == true) {
@@ -67,7 +68,7 @@ public class CheckPwController {
 				System.out.println(go);
 				return "redirect:"+go;
 			}else {
-				return"redirect:/check/login?error"; 
+				return"redirect:"+back+"?id="+id+"&reservation_no="+reservation_no+"&sitter_no="+sitter_no+"&error"; 
 			}
 		}			
 	}

@@ -226,7 +226,7 @@ textarea[name=faq_content] {
 	
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
-	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
+	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
 	
 <!-- 통장 계좌 -->
 	<div>
