@@ -29,6 +29,7 @@ import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
+import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
@@ -469,6 +470,20 @@ public class MemberController {
 			return "member/mylist";
 		}
 		
+		
+		//내 리뷰 상세보기 페이지 연결
+		@GetMapping("/myreview_content")
+		public String myreview_content(
+				@RequestParam int review_no,
+				Model model) {
+			
+			ReviewSitterDto review = memberService.myreview_content(review_no);
+			
+			model.addAttribute("review",review);
+			
+			return "member/myreview_content";
+		}
+		
 		//내가 쓴 리뷰 페이지 연결
 		@GetMapping("/myreview")
 		public String myreview(
@@ -498,7 +513,6 @@ public class MemberController {
 			
 			model.addAttribute("review",review);
 			model.addAttribute("pagesize",pagesize);
-			model.addAttribute("pagesize",pagesize);
 			model.addAttribute("navsize",navsize);
 			model.addAttribute("pno",pno);
 			model.addAttribute("count",count);
@@ -510,25 +524,57 @@ public class MemberController {
 		@GetMapping("/myreservation")
 		public String myreservation(
 				HttpSession session,
-				Model model) {
+				Model model,
+				HttpServletRequest req) throws Exception {
 			
 			String id = (String) session.getAttribute("id");
+			
+			int pagesize=10;
+			int navsize=10;
+			int pno;
+			try {
+				pno = Integer.parseInt(req.getParameter("pno"));
+				if(pno <=0) throw new Exception();
+			}
+			catch(Exception e) {
+				pno=1;
+			}
+			int finish = pno * pagesize;
+			int start = finish - (pagesize - 1);
+			
+			//승인된 예약의 개수
+			int count = memberService.getmyreservationCount(id);
+			
+			//멤버+예약+결제+리뷰 합친 예약.
+			List<ReservationReviewPaySitterDto> reservation_list = memberService.myreservation(id,start,finish);
+			
+			model.addAttribute("reservation_list",reservation_list);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("navsize",navsize);
+			model.addAttribute("pno",pno);
+			model.addAttribute("count",count);
 			
 			return "member/myreservation";
 		}
 		
-		//내 리뷰 상세보기 페이지 연결
-		@GetMapping("/myreview_content")
-		public String myreview_content(
-				@RequestParam int review_no,
-				Model model) {
-			
-			ReviewSitterDto review = memberService.myreview_content(review_no);
-			
-			model.addAttribute("review",review);
-			
-			return "member/myreview_content";
+		//내가 쓴 돌봄게시판 연결
+		@GetMapping("/mycareboard")
+		public String mycareboard() {
+			return "member/mycareboard";
 		}
+		
+		//내가 쓴 문의/신고 게시판 연결
+		@GetMapping("/myfaqboard")
+		public String myfaqboard() {
+			return "member/myfaqboard";
+		}
+		
+		//내가 쓴 Save the Pets! 게시판 연결
+		@GetMapping("/mystrayboard")
+		public String mystrayboard() {
+			return "member/mystrayboard";
+		}
+		
 		//결제 비밀번호 확인
 		@GetMapping("/PayPw")
 		public String PayPw() {

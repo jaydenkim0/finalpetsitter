@@ -16,6 +16,7 @@
 <a href="board/qna/list"><button>문의게시판</button></a>
 <a href="board/faq/list"><button>공지사항게시판</button></a>
 <a href="petsitter/list"><button>펫시터 조회</button></a>
+<a href="board/stray/list"><button>Save the Pets!</button></a>
 
 
 <p>로그인 아이디 : ${id} </p>
