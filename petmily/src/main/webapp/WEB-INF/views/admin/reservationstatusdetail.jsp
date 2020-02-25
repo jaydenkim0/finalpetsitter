@@ -27,20 +27,27 @@
 					<tr>			
 						<td> 견적 신청 상태 : ${acountOne.status}</td>					
 					</tr>
-					<tr>			
-						<td> 결제 신청 상태 : ${acountOne.kakaopaystatus}</td>					
-					</tr>
+					
+					<c:if test="${payinfo != null }">				
+						<c:forEach var="pay" items="${payinfomation}">
+							<tr>			
+								<td> 결제 신청 상태 : ${pay.status}</td>					
+							</tr>
+							<tr>			
+								<td> 결제 시간 : ${pay.process_time}</td>					
+							</tr>							
+						</c:forEach>
+					</c:if>
+					
 					<tr>			
 						<td> 신청 내용  : ${acountOne.ect}</td>					
-					</tr>					
-					<tr>			
-						<td> 결제 시간 : ${acountOne.pay_joindate}</td>					
-					</tr>		
-					
+					</tr>	
+										
 					<c:forEach var="paynameAll" items="${payinfo}">
 						<tr>			
 							<td> 요청 서비스 : ${paynameAll.payname}</td>					
 						</tr>		
 					</c:forEach>
+					
 			</tbody>	
 	</table>

@@ -40,4 +40,9 @@ public class PayDaoImpl implements PayDao {
 		
 	}
 
+	@Override
+	public List<PayDto> getPay(int partner_order_id) {
+		return sqlSession.selectList("pay.getPay", partner_order_id);
+	}
+
 }

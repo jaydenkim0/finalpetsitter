@@ -20,6 +20,7 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
@@ -544,6 +545,11 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public List<PayinfoDto> payinfoName(int reservation_no) {	
 		return adminDao.payinfoName(reservation_no);
+	}
+	// 예약 디테일에 보여줄 pay 테이블 정보
+	@Override
+	public  List<PayDto> paydetail(int reservation_no) {	
+		return adminDao.paydetail(reservation_no);
 	}
 
 

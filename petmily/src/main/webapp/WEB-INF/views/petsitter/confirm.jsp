@@ -33,7 +33,7 @@
 						success:function(resp){
 							console.log(resp);
 							if(resp == "success"){
-								alert("이베일 발송 완료");
+								alert("이메일 발송 완료");
 								location.reload();
 							}
 							else{
@@ -67,7 +67,7 @@
 					success:function(resp){
 						console.log(resp);
 						if(resp == "success"){
-							alert("이베일 발송 완료");
+							alert("이메일 발송 완료");
 							location.reload();
 						}
 						else{
@@ -85,35 +85,35 @@
 
 
 <h1>펫시터 견적확인 페이지</h1>
-		<c:forEach var="rlist" items="${reservationList}">
-			<span>예약 번호 : ${rlist.reservation_no}</span><br>
-			<span>예약 회원 : ${rlist.member_id}</span><br>
-			<span>예약 날짜 : ${rlist.matching_time}</span><br>
-			<span>이용 시간 : ${list.usage_time}시간</span><br>
-			<c:forEach var="skill" items="${rlist.list}">
-			<span>예약 스킬 : ${skill.payname}</span><br>
+			<span>예약 번호 : ${reservationList.reservation_no}</span><br>
+			<span>예약 회원 : ${reservationList.member_id}</span><br>
+			<span>예약 날짜 : ${reservationList.matching_time}</span><br>
+			<span>시작 시간 : ${startTime}시</span><br>
+			
+			<c:forEach var="skill" items="${reservationList.list}">
+				<span>예약 스킬 : ${skill.payname}</span><br>
 			</c:forEach>
 			
-			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${list.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
-			<br><span>반려동물 이름 : ${rlist.pet_name}</span><br>
-			<span>반려동물 나이 : ${rlist.age}살</span><br>
-			<span>반려동물 종류 : ${rlist.type}</span><br>
-			<span>반려동물 특이사항 : ${rlist.pet_ect}</span><br><br>
+			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${reservationList.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+			<br><span>반려동물 이름 : ${reservationList.pet_name}</span><br>
+			<span>반려동물 나이 : ${reservationList.age}살</span><br>
+			<span>반려동물 종류 : ${reservationList.type}</span><br>
+			<span>반려동물 특이사항 : ${reservationList.pet_ect}</span><br><br>
 			
 			<!-- 승인시 -->
 			<form class="confirm_apply" action="confirm" method="post">
-					<input type="hidden" name="id" value="${rlist.member_id}">
-					<input type="hidden" name="sitter_no" value="${rlist.reservation_sitter_no}">
+					<input type="hidden" name="id" value="${reservationList.member_id}">
+					<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
 					<input type="hidden" name="check" value="승인">
-					<input type="hidden" name="reservation_no" value="${rlist.reservation_no}">
+					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">
 					<button id="approval_btn">승인</button>
 			</form>
 			<!-- 거절 -->
 			<form class="confirm_refusal" action="confirm" method="post">
-			<input type="hidden" name="id" value="${rlist.member_id}">
-					<input type="hidden" name="sitter_no" value="${rlist.reservation_sitter_no}">
+			<input type="hidden" name="id" value="${reservationList.member_id}">
+					<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
 					<input type="hidden" name="check" value="거절">	
-					<input type="hidden" name="reservation_no" value="${rlist.reservation_no}">	
+					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">	
 					<button type="button" id="refusal_btn">거절사유작성</button>
 					<!-- 숨겨진 페이지 -->					
 								<div class="modalfade">			                    							  
@@ -123,7 +123,6 @@
 					                <input type="submit" id="sendEmail"  value="거절">		            
 					            </div>
 			</form>
-		</c:forEach>
 		
 		<span>예약 이용 시간 : ${usageTime}시간</span><br>
 		<span>예약 총 금액 :${payMent}원</span><br><br>

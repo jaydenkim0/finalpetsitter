@@ -529,6 +529,29 @@ public class MemberController {
 			
 			return "member/myreview_content";
 		}
+		//결제 비밀번호 확인
+		@GetMapping("/PayPw")
+		public String PayPw() {
+			return "member/PayPw";		
+		}
+		
+		@PostMapping("/PayPw")
+		public String PayPw(@ModelAttribute MemberDto memberDto, HttpSession session) {
+								
+			MemberDto find = memberService.login(memberDto);
+			
+			if(find == null) { //로그인 실패
+			return"redirect:/PayPw?error"; 
+			
+			}
+			else { //로그인 성공
+			session.setAttribute("id", find.getId());
+			session.setAttribute("grade", find.getGrade());
+			String id = find.getId();
+			memberService.updatelastlogin(id);
+			return "redirect:/";
+			}
+		}
 	}
 
 
