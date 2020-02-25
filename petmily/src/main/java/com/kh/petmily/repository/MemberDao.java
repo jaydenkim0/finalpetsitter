@@ -11,6 +11,8 @@ import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 public interface MemberDao {	
 	
@@ -136,6 +138,18 @@ public interface MemberDao {
 
 	//내가 만든 돌봄방 정보
 	List<CarePetsitterDto> mycareboard(String id, int start, int finish);
+
+	//내가 올린 문의/신고 개수
+	int getmyqnaboardCount(String id);
+
+	//내가 올린 문의/신고 정보
+	List<QnaVO> myqnaboard(String id, int start, int finish);
+
+	//내가 올린 Save the Pets ! 개수
+	int getmystrayboardCount(String id);
+
+	//내가 Save the Pets ! 정보
+	List<StrayVO> mystrayboard(String id, int start, int finish);
 
 
 }

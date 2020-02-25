@@ -24,6 +24,8 @@ import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.MemberDao;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -348,6 +350,30 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<CarePetsitterDto> mycareboard(String id, int start, int finish) {
 		return memberDao.mycareboard(id,start,finish);
+	}
+
+	//내가 올린 문의/신고 개수
+	@Override
+	public int getmyqnaboardCount(String id) {
+		return memberDao.getmyqnaboardCount(id);
+	}
+
+	//내가 올린 문의/신고 정보
+	@Override
+	public List<QnaVO> myqnaboard(String id, int start, int finish) {
+		return memberDao.myqnaboard(id,start,finish);
+	}
+
+	//내가 올린 Save the Pets ! 개수
+	@Override
+	public int getmystrayboardCount(String id) {
+		return memberDao.getmystrayboardCount(id);
+	}
+
+	//내가 Save the Pets ! 정보
+	@Override
+	public List<StrayVO> mystrayboard(String id, int start, int finish) {
+		return memberDao.mystrayboard(id,start,finish);
 	}
 	}
 

@@ -19,7 +19,12 @@ li{
 
 <div align="center">
 
-<h1>내가 만든 돌봄방</h1>
+<h1>내 돌봄방</h1>
+
+<br><br>
+<c:if test="${not empty id}">
+<a href="${context }/board/care/write"><button>방 만들기</button></a><br><br>
+</c:if>
 
 <table width="100%" border="1">
 	<tr>

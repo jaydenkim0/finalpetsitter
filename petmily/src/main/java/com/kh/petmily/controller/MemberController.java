@@ -36,6 +36,8 @@ import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -115,11 +117,8 @@ public class MemberController {
 //				cert라는 파라미터와 email이라는 파라미터를 가지고 온다
 //			- 위의 두 파라미터를 받아서 DB에 검증을 실시
 //			- 위의 인증결과와 무관하게 해당 이메일의 인증정보를 모두 삭제
-		System.out.println("email = " + email);
-		System.out.println("cert = " + cert);
 		model.addAttribute("email", email);
 		boolean enter = certDao.check(email, cert);
-		log.info("enter = {}", enter);
 		certDao.delete(email);
 		if(!enter) {
 			//에러 코드 송출
@@ -208,14 +207,11 @@ public class MemberController {
 							
 		MemberDto find = memberService.login(memberDto);
 		
-		System.out.println("아이디가 있나요? = "+find);
-		
 		if(find == null) {// 아이디가 없으면  -> 에러	
 			return"redirect:/member/login?error"; 
 		}else { //아이디가 있으면 --> 비밀번호 매칭검사
 			
-				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());
-				System.out.println("correct = "+ correct);				
+				boolean correct = encoder.matches(memberDto.getPw(), find.getPw());		
 					if (correct == true) {// 비밀번호 일치
 								session.setAttribute("id", find.getId());
 								session.setAttribute("grade", find.getGrade());
@@ -599,14 +595,78 @@ public class MemberController {
 		}
 		
 		//내가 쓴 문의/신고 게시판 연결
-		@GetMapping("/myfaqboard")
-		public String myfaqboard() {
-			return "member/myfaqboard";
+		@GetMapping("/myqnaboard")
+		public String myfaqboard(
+				HttpSession session,
+				Model model,
+				HttpServletRequest req) throws Exception {
+			
+			String id = (String) session.getAttribute("id");
+			
+			int pagesize=10;
+			int navsize=10;
+			int pno;
+			try {
+				pno = Integer.parseInt(req.getParameter("pno"));
+				if(pno <=0) throw new Exception();
+			}
+			catch(Exception e) {
+				pno=1;
+			}
+			int finish = pno * pagesize;
+			int start = finish - (pagesize - 1);
+			
+			//내가 올린 문의/신고 개수
+			int count = memberService.getmyqnaboardCount(id);
+			
+			//내가 올린문의/신고 정보
+			List<QnaVO> qnaboard_list = memberService.myqnaboard(id,start,finish);
+			
+			model.addAttribute("id",id);
+			model.addAttribute("qnaboard_list",qnaboard_list);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("navsize",navsize);
+			model.addAttribute("pno",pno);
+			model.addAttribute("count",count);
+			
+			return "member/myqnaboard";
 		}
 		
 		//내가 쓴 Save the Pets! 게시판 연결
 		@GetMapping("/mystrayboard")
-		public String mystrayboard() {
+		public String mystrayboard(
+				HttpSession session,
+				Model model,
+				HttpServletRequest req) throws Exception {
+			
+			String id = (String) session.getAttribute("id");
+			
+			int pagesize=10;
+			int navsize=10;
+			int pno;
+			try {
+				pno = Integer.parseInt(req.getParameter("pno"));
+				if(pno <=0) throw new Exception();
+			}
+			catch(Exception e) {
+				pno=1;
+			}
+			int finish = pno * pagesize;
+			int start = finish - (pagesize - 1);
+			
+			//내가 올린 Save the Pets ! 개수
+			int count = memberService.getmystrayboardCount(id);
+			
+			//내가 Save the Pets ! 정보
+			List<StrayVO> strayboard_list = memberService.mystrayboard(id,start,finish);
+			
+			model.addAttribute("id",id);
+			model.addAttribute("strayboard_list",strayboard_list);
+			model.addAttribute("pagesize",pagesize);
+			model.addAttribute("navsize",navsize);
+			model.addAttribute("pno",pno);
+			model.addAttribute("count",count);
+			
 			return "member/mystrayboard";
 		}
 		

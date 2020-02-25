@@ -20,8 +20,8 @@ import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
-
-import lombok.extern.slf4j.Slf4j;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -292,6 +292,38 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("start", start);
 		map.put("finish", finish);
 		return sqlSession.selectList("member.mycareboard",map);
+	}
+
+	//내가 올린 문의/신고 개수
+	@Override
+	public int getmyqnaboardCount(String id) {
+		return sqlSession.selectOne("member.getmyqnaboardCount",id);
+	}
+
+	//내가 올린 문의/신고 정보
+	@Override
+	public List<QnaVO> myqnaboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.myqnaboard",map);
+	}
+
+	//내가 올린 Save the Pets ! 개수
+	@Override
+	public int getmystrayboardCount(String id) {
+		return sqlSession.selectOne("member.getmystrayboardCount",id);
+	}
+
+	//내가 Save the Pets ! 정보
+	@Override
+	public List<StrayVO> mystrayboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.mystrayboard",map);
 	}
 
 }

@@ -380,6 +380,72 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) where rn between #{start} and #{finish}
 	</select>
 	
+	<!-- 내가 올린 문의/신고 개수 -->
+	<select id="getmyqnaboardCount" parameterType="String" resultType="int">
+		select count(*) from qna where qna_writer=#{id}
+	</select>
+	
+	<!-- 내가 올린 문의/신고 정보 -->
+	<select id="myqnaboard" parameterType="map" resultType="QnaVO">
+	select*from (
+		select rownum as rn, A.* from(
+			select
+				qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+			(
+				select
+					Q.qna_no, Q.qna_writer, Q.qna_title, Q.qna_head, Q.qna_content,
+					Q.wdate, Q.groupno, Q.superno, Q.depth, QR.reply_no
+				from qna Q
+					left outer join qna_reply QR on Q.qna_no = QR.origin
+				connect by prior qna_no = superno
+				start with superno=0
+				order siblings by groupno desc, qna_no asc, wdate desc
+			)
+			where
+				qna_writer=#{id}
+			group by 
+		    	qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,
+		    	groupno, superno, depth
+		) A
+	)
+	where rn between #{start} and #{finish}
+	</select>
+	
+	<!-- 내가 올린 Save the Pets ! 개수 -->
+	<select id="getmystrayboardCount" parameterType="String" resultType="int">
+		select count(*) from stray_pet where stray_writer=#{id}
+	</select>
+	
+	<!-- 내가 Save the Pets ! 정보 -->
+	<select id="mystrayboard" parameterType="map" resultType="StrayVO">
+	select*from (
+		select rownum as rn, A.* from(
+			select
+				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+			(
+				select
+					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
+					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
+				from stray_pet S
+					left outer join stray_reply SR on S.stray_no = SR.origin
+				connect by prior stray_no = superno
+				start with superno=0
+				order siblings by groupno desc, stray_no asc, wdate desc
+			)
+			where
+				stray_writer=#{id}
+			group by 
+			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
+			    groupno, superno, depth
+			) A
+		)
+	where rn between #{start} and #{finish}
+	</select>
+	
 </mapper>
 
 
