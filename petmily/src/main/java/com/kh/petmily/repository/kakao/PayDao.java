@@ -20,5 +20,7 @@ public interface PayDao {
 	
 	//예약 번호로 결제 정보 조회
 	List<PayDto> getPay(int partner_order_id);
+	//1시간 당 금액 조회
+	int getHourPayment();
 
 }

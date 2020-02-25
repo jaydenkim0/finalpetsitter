@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.CarePetsitterDto;
 import com.kh.petmily.entity.MemberDto;
 import com.kh.petmily.entity.MemberImageDto;
 import com.kh.petmily.entity.PetDto;
@@ -19,8 +20,8 @@ import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
-
-import lombok.extern.slf4j.Slf4j;
+import com.kh.petmily.vo.QnaVO;
+import com.kh.petmily.vo.StrayVO;
 
 @Repository
 public class MemberDaoImpl implements MemberDao {
@@ -82,12 +83,6 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void pet_regist(PetDto petDto) {
 		sqlSession.insert("member.pet_regist",petDto);
-	}
-
-	//아이디중복검사
-	@Override
-	public int userIdCheck(String user_id) {
-		return sqlSession.selectOne("member.userIdCheck",user_id);
 	}
 
 	//회원탈퇴처리
@@ -277,6 +272,67 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("member.myreservation",map);
 	}
 
+	//내가 만든 돌봄방 개수
+	@Override
+	public int getmycareboardCount(String id) {
+		return sqlSession.selectOne("member.getmycareboardCount",id);
+	}
+
+	//내가 만든 돌봄방 정보
+	@Override
+	public List<CarePetsitterDto> mycareboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.mycareboard",map);
+	}
+
+	//내가 올린 문의/신고 개수
+	@Override
+	public int getmyqnaboardCount(String id) {
+		return sqlSession.selectOne("member.getmyqnaboardCount",id);
+	}
+
+	//내가 올린 문의/신고 정보
+	@Override
+	public List<QnaVO> myqnaboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.myqnaboard",map);
+	}
+
+	//내가 올린 Save the Pets ! 개수
+	@Override
+	public int getmystrayboardCount(String id) {
+		return sqlSession.selectOne("member.getmystrayboardCount",id);
+	}
+
+	//내가 Save the Pets ! 정보
+	@Override
+	public List<StrayVO> mystrayboard(String id, int start, int finish) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("finish", finish);
+		return sqlSession.selectList("member.mystrayboard",map);
+	}
+	
+	//아이디중복검사
+	@Override
+	public int userIdCheck(String user_id) {
+		return sqlSession.selectOne("member.userIdCheck",user_id);
+	}
+
+	//이메일중복검사
+	@Override
+	public int emailCheck(String email) {
+		return sqlSession.selectOne("member.emailCheck",email);
+	}
+	
+	//이메일 변경전에 아이디와 이메일이 있는지 확인
 	@Override
 	public MemberDto passwordfind(String email, String id) {
 		Map<String,Object> map = new HashMap<>();
@@ -284,6 +340,5 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("id", id);
 		return sqlSession.selectOne("member.passwordfind", map);
 	}
-
 
 }

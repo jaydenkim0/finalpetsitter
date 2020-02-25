@@ -35,6 +35,9 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 	//증빙서류 파일 등록
 	@Override
 	public void uploadLicense(int no, MultipartFile license_file) throws IllegalStateException, IOException {
+		if(license_file.isEmpty()) {
+			return;
+		}
 		LicenseFileDto licenseFileDto = LicenseFileDto.builder()
 				.license_sitter_no(no)//파일 올린 시터 번호
 				.uploadname(license_file.getOriginalFilename())//업로드한 이름
@@ -54,11 +57,16 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 		license_file.transferTo(target);//파일 저장
 		
 		licenseFileDao.uploadLicense(licenseFileDto);//DB에 등록
+		
 	}
 
 	//신분증 파일 등록
 	@Override
 	public void uploadId(int no, MultipartFile id_card_file) throws IllegalStateException, IOException {
+		if(id_card_file.isEmpty()) {
+			return;
+		}
+		
 		IdCardFileDto idCardFileDto = IdCardFileDto.builder()
 				.id_card_sitter_no(no)
 				.uploadname(id_card_file.getOriginalFilename())//업로드한 이름
@@ -82,7 +90,9 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 	//소개이미지 파일 등록
 	@Override
 	public void uploadInfo(int no, List<MultipartFile> info_image) throws IllegalStateException, IOException {
-		
+		if(info_image.get(0).isEmpty()) {
+			return;
+		}
 		List<InfoImageDto> list =new ArrayList<>();
 		
 		//폴더 생성
@@ -114,7 +124,10 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 	//통장 사본 파일 등록
 	@Override
 	public void uploadBank(int no, MultipartFile bank_image) throws IllegalStateException, IOException {
-
+		if(bank_image.isEmpty()) {
+			return;
+		}
+		
 		BankImageDto bankImageDto = BankImageDto.builder()
 				.bank_sitter_no(no)
 				.uploadname(bank_image.getOriginalFilename())//업로드한 이름

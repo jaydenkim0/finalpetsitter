@@ -58,16 +58,16 @@
 			<span>이름 : ${petsitter.name}</span><br>	
 			<span>이메일 : ${petsitter.email}</span><br>	
 			<span>핸드폰 : ${petsitter.phone}</span><br>	
-	<%-- 		<span>주소 : ${petsitter.getTotal_addr}</span><br>	 --%>
+			<span>주소 : ${petsitter.total_addr}</span><br>	
 			<span>포인트 : ${petsitter.point}</span><br>	
 			<span>반려동물 여부 : ${petsitter.pets}</span><br>	
-	<%-- 		<span>가입일 : ${petsitter.getPetsitterdateWithFormat}</span><br> --%>
+			<span>가입일 : ${petsitter.petsitterdateWithFormat}</span><br>
 			<div class="naver-viewer"></div> 
 			<input type="hidden" value="${petsitter.info}"><br>
 			<span>반려동물 경험 여부 : ${petsitter.sitter_pets}</span><br>
 			<span>상태 : ${petsitter.sitter_status}</span><br>
 			<span>매칭 종류 : ${petsitter.sitter_matching_type}</span><br>
-	<%-- 		<span>은행 및 계좌 : ${petsitter.getTotal_account}</span><br><br> --%>
+			<span>은행 및 계좌 : ${petsitter.total_account}</span><br><br>
 	</c:forEach>
 	
 	<!-- 펫시터 반려동물 정보 -->

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -17,22 +18,27 @@
  <!-- 네이버 에디터 영역 -->
    <script>        
         $(function(){
-            var options = {
-                //el(element) : 에디터가 될 영역
-                el:document.querySelector(".naver-viewer"),
-                
-                viewer:true,
+        	//document.querySelectorAll은 우측 선택자에 해당하는 모든 태그를 다 불러옴
+        	//.forEach는 불러온 대상을 iteration 하는 반복 명령(한개씩 다시 불러와서 tag이라고 부름)
+        	document.querySelectorAll(".naver-viewer").forEach(function(tag){
+        		var options = {
+					//el(element) : 에디터가 될 영역
+					el:tag,
+                       
+                    viewer:true,
 
-                //height : 생성될 에디터의 높이
-                height:'auto',
-            };
+                     //height : 생성될 에디터의 높이
+                     height:'auto',
+				};
 
-            var viewer = tui.Editor.factory(options);
+				var viewer = tui.Editor.factory(options);
 
-            //생성된 뷰어에 초기값 표시
-            console.log(document.querySelector(".naver-viewer + input[type=hidden]"));
-            var text = document.querySelector(".naver-viewer + input[type=hidden]").value;
-            viewer.setValue(text);//값 설정
+				//생성된 뷰어에 초기값 표시
+                var text = $(tag).next("input[type=hidden]").val();
+                viewer.setValue(text);//값 설정
+        	});
+        	
+            
         });
     </script>
 <!-- 네이버 에디터 영역 종료 -->  

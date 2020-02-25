@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.kh.petmily.entity.FaqDto;
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.repository.ReviewDao;
 import com.kh.petmily.vo.FaqVO;
@@ -18,14 +19,18 @@ public interface ReviewService {
 	
 	// 리뷰 작성시 포인트 업
 	void pointplus(ReviewDto reviewDto);
-		// TODO Auto-generated method stub
+	//별점 평균	
 	double star(int pet_sitter_no);
-			
+	//검색조회		
 	List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception;
 	
 	List<ReviewDto> getList(int start, int finish);
 	
 	public int getCount(String type, String keyword) throws Exception;
+	
+	// 리뷰 작성시 펫시터 Id 보여주기
+	ReservationDto getReviewInfo(int reservation_no);
+
 		
 	//리뷰 별점 
 	

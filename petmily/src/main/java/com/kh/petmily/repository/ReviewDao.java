@@ -2,6 +2,7 @@ package com.kh.petmily.repository;
 
 import java.util.List;
 
+import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
 
 
@@ -35,6 +36,10 @@ public interface ReviewDao {
 	int getSequence();
 	
 	List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception;
+	
+	
+	ReservationDto getReviewInfo(int reservation_no);
+
 	
 	
 	

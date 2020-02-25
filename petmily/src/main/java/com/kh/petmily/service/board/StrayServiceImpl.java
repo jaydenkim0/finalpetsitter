@@ -135,7 +135,7 @@ public class StrayServiceImpl implements StrayService{
 	@Override
 	public void update(StrayVO strayVO) {
 		strayDao.update(strayVO);
-		
+		 
 	}
 
 	@Override

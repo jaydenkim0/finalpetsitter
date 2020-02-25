@@ -341,7 +341,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 펫시터 정보 수정 -->
 	<!-- 펫시터 기본 정보 -->
 	<update id="update" parameterType="petsitterDto">
-		update pet_sitter set
+		update pet_sitter set  
 			info = #{info},
 			sitter_pets = #{sitter_pets},
 			sitter_matching_type = #{sitter_matching_type},
