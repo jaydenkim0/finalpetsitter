@@ -74,11 +74,7 @@ public class PetsitterController {
 	public String regist(Model model) {
 		model.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
 				  .addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
-				  .addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());
-
-		System.out.println("케어가능 동물 리스트 = "+(List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList());
-		System.out.println("스킬 리스트 = "+(List<SkillNameDto>)petsitterService.getSkillNameList());
-		System.out.println("환경 리스트 = "+(List<CareConditionNameDto>)petsitterService.getCareConditionName());
+				  .addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 		return "petsitter/regist";
 	}
 	
@@ -187,7 +183,10 @@ public class PetsitterController {
 		
 		model.addAttribute("petsitterList", petsitterList)//펫시터 정보
 			.addAttribute("pet_sitter_no", pet_sitter_no)//펫시터 번호
-			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no));//펫시터 소개 이미지
+			.addAttribute("sitterInfoimageList", adminService.sitterInfoimageAll(pet_sitter_no))//펫시터 소개 이미지
+			.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+			.addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+			.addAttribute("careconname", (List<CareConditionNameDto>)petsitterService.getCareConditionName());	
 				
 		return "petsitter/update";
 	}
