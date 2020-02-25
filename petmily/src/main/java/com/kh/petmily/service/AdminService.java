@@ -16,6 +16,7 @@ import com.kh.petmily.entity.IdCardFileDto;
 import com.kh.petmily.entity.InfoImageDto;
 import com.kh.petmily.entity.LicenseFileDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
@@ -219,6 +220,8 @@ public interface AdminService {
 	AccountVO reservationstatusdetail(int reservation_no);
 	// 예약 디테일 페이지에 보여줄 결제 정보
 	List<PayinfoDto> payinfoName(int reservation_no);
+	// 예약 디테일에 보여줄 pay 테이블 정보
+	List<PayDto> paydetail(int reservation_no);
 	
 
 

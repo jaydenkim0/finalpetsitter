@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
-<c:forEach var="rlist" items="${reservationList}">
  	<form action=account method="post">
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
@@ -15,7 +14,7 @@
         <th>예약 날짜</th>
         <th>예약 회원</th>
         <th>펫시터번호</th>
-      <c:forEach var="skill" items="${rlist.list}">     
+      <c:forEach var="skill" items="${reservationList.list}">     
         <th >예약 스킬</th>
        </c:forEach>
         <th>이용 시간</th>
@@ -23,19 +22,19 @@
       </tr>
       <tr>
       <td>
-      <input type="hidden" name="partner_order_id" value="${rlist.reservation_no}" readonly>
-      ${rlist.reservation_no}
+      <input type="hidden" name="partner_order_id" value="${reservationList.reservation_no}" readonly>
+      ${reservationList.reservation_no}
       </td>
-      <td>${rlist.matching_time}</td>
+      <td>${reservationList.matching_time}</td>
       <td>
-      <input type="hidden" name="partner_user_id" value="${rlist.member_id}" readonly>
-      ${rlist.member_id}
+      <input type="hidden" name="partner_user_id" value="${reservationList.member_id}" readonly>
+      ${reservationList.member_id}
       </td>
       <td>
-       <input type="hidden" name="item_name" value="${rlist.reservation_sitter_no}" readonly>
-       ${rlist.reservation_sitter_no}
+       <input type="hidden" name="item_name" value="${reservationList.reservation_sitter_no}" readonly>
+       ${reservationList.reservation_sitter_no}
       </td>
-   	<c:forEach var="skill" items="${rlist.list}">     
+   	<c:forEach var="skill" items="${reservationList.list}">     
      <td >${skill.payname}</td>
       </c:forEach>
       <td>
@@ -44,7 +43,7 @@
       </td>
       <td>
       <input type="hidden" name="total_amount" value="${payMent}" readonly>
-      ${payMent}원
+   	${payMent}원
       </td>
       </tr>
  </table>
@@ -64,4 +63,3 @@
             <input type="submit" value="결제">
         </div>
 </form>
-</c:forEach>       

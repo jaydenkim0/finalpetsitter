@@ -134,7 +134,7 @@
 </script>
 <script>
     function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector("#care_reply_content")),{
+        var editor = SUNEDITOR.create((document.querySelector("#care_reply_content"),document.querySelector("#care_reply_change")),{
             //언어 설정
             lang: SUNEDITOR_LANG['ko'],
             
@@ -159,12 +159,15 @@
 	    editor.onKeyUp = function(e){
 	    	var care_content = document.querySelector("#care_reply_content");
 	    	care_content.value = editor.getContents();
+	    	var care_content2 = document.querySelector("#care_reply_change");
+	    	care_content2.value = editor.getContents();
 	    }
     }
     
     //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
     window.onload = loadEditor;
 </script>
+
 <script>
 function no_image1(){
 	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
@@ -302,7 +305,7 @@ function no_image2(){
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<textarea name="care_reply_content" id="care_reply_content" required class="val" value="${replyimagelist.care_reply_content }"></textarea>
+                	<textarea name="care_reply_content" id="care_reply_change" required class="val">${replyimagelist.care_reply_content }</textarea>
 				</form>				
 			</th>
 		</tr>

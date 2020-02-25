@@ -135,6 +135,11 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 		
 		bankImageDao.uploadBank(bankImageDto);//DB에 등록
 	}
+
+	@Override
+	public void deleteBankImage(int pet_sitter_no) {
+		bankImageDao.deleteBankImage(pet_sitter_no);
+	}
 	
 
 }

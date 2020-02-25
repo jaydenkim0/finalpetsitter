@@ -15,7 +15,7 @@ public class CarePetTypeDaoImpl implements CarePetTypeDao {
 
 	@Autowired
 	private SqlSession sqlSession;
-
+	//돌봄 가능 동물 등록
 	@Override
 	public void registType(int no, List<Integer> care_name) {
 		List<CarePetTypeDto> petList = new ArrayList<>();
@@ -29,13 +29,19 @@ public class CarePetTypeDaoImpl implements CarePetTypeDao {
 		sqlSession.insert("petsitter.registType", petList);
 		
 	}
-
+	
+	//돌봄 가능 동물 목록 조회
 	@Override
 	public List<CarePetTypeNameDto> getPetTypeList(int pet_sitter_no) {
 		List<CarePetTypeNameDto> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", pet_sitter_no);
 		return petTypeList;
 	}
-	
+	//돌봄 가능 동물 삭제
+	@Override
+	public void deleteType(int pet_sitter_no) {
+		sqlSession.delete("petsitter.deleteType", pet_sitter_no);
+		
+	}
 	
 
 }

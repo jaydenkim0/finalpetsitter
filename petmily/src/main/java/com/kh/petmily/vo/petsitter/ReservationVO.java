@@ -21,5 +21,6 @@ public class ReservationVO {
 	private List<Integer> payinfo_no;
 	private int pay_reservation_no;
 	private int usage_time;
+	private int start_time;
 	
 }

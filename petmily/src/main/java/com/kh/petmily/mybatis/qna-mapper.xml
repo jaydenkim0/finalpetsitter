@@ -13,22 +13,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		qna_writer,
 		qna_title,
 		qna_head,
-		qna_content,
 		wdate,
 		superno,
 		groupno,
-		depth
+		depth,
+		qna_content
 		)
 		values (
 		#{qna_no},
 		#{qna_writer},
 		#{qna_title},
 		#{qna_head},
-		#{qna_content},
 		sysdate,
 		#{superno},
 		#{groupno},
-		#{depth}
+		#{depth},
+		#{qna_content}
 		)
 	</insert>
 

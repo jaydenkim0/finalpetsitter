@@ -93,6 +93,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 		locationDao.registLocation(no,vo.getLocation_name());
 		
 	}
+	
 	@Override
 	public List<PetsitterGetListVO> getList(int pet_sitter_no) {
 		//펫시터 기본 정보 조회
@@ -123,18 +124,16 @@ public class PetsitterServiceImpl implements PetsitterService {
 	}
 
 
-
+	// 지역 검색
 	@Override
 	public List<SitterlocationVO> locationListAll(int start, int end, String cityKeyword, String areaKeyword) {
 		return petsitterDao.locationListAll(start, end, cityKeyword, areaKeyword) ;
 	}
 
-
 	@Override
 	public int countlocation(String cityKeyword, String areaKeyword) {		
 		return petsitterDao.countlocation(cityKeyword, areaKeyword) ;
 	}
-
 
 
 	@Override
@@ -158,6 +157,7 @@ public class PetsitterServiceImpl implements PetsitterService {
 		ReservationPayDto reservationPayDto = ReservationPayDto.builder()
 																.pay_reservation_no(reservation_no)
 																.usage_time(reservationVO.getUsage_time())
+																.start_time(reservationVO.getStart_time())
 																.build();
 		//예약 등록
 		reservationDao.registReservation(reservationDto);
@@ -169,13 +169,18 @@ public class PetsitterServiceImpl implements PetsitterService {
 
 
 	@Override
-	public PetsitterVO get(int pet_sitter_no) {
-		PetsitterVO petsitterVO = petsitterDao.get(pet_sitter_no);
+	public PetsitterVO noGet(int pet_sitter_no) {
+		PetsitterVO petsitterVO = petsitterDao.noGet(pet_sitter_no);
 		return petsitterVO;
 	}
 	@Override
-	public List<ReservationListVO> getReservation(int reservation_no) {
-		List<ReservationListVO> reservationList = reservationDao.getReservation(reservation_no);
+	public PetsitterVO idGet(String id) {
+		PetsitterVO petsitterVO = petsitterDao.idGet(id);
+		return petsitterVO;
+	}
+	@Override
+	public ReservationListVO getReservation(int reservation_no) {
+		ReservationListVO reservationList = reservationDao.getReservation(reservation_no);
 		return reservationList;
 	}
 	// 예약 상태 승인으로 변경
@@ -188,6 +193,80 @@ public class PetsitterServiceImpl implements PetsitterService {
 	public void reservationDelete(int reservation_no) {
 		reservationDao.reservationDelete(reservation_no);		
 	}
+	
+	//펫시터 정보 수정
+	@Override
+	public void update(PetsitterRegistVO vo) throws IllegalStateException, IOException {
+		
+		//펫시터 번호 설정
+		int pet_sitter_no = vo.getPet_sitter_no();
+		//펫시터 Dto 설정
+		PetsitterDto petsitterDto = PetsitterDto.builder()
+												.pet_sitter_no(pet_sitter_no)
+												.sitter_id(vo.getSitter_id())
+												.info(vo.getInfo())
+												.sitter_pets(vo.getSitter_pets())
+												.sitter_matching_type(vo.getSitter_matching_type())
+												.sitter_bankname(vo.getSitter_bankname())
+												.sitter_bank_account(vo.getSitter_bank_account())
+												.build();
+		
+		//펫시터 기본 정보 등록
+		petsitterDao.updatePetsitter(petsitterDto);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경 ,활동지역 삭제
+		skillsDao.deleteSkills(pet_sitter_no);
+		carePetTypeDao.deleteType(pet_sitter_no);
+		careConditionDao.deleteCondition(pet_sitter_no);
+		locationDao.deleteLocation(pet_sitter_no);
+		
+		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  등록
+		skillsDao.registSkills(pet_sitter_no,vo.getSkills_name());
+		carePetTypeDao.registType(pet_sitter_no,vo.getCare_name());
+		careConditionDao.registCondition(pet_sitter_no,vo.getCare_condition_name());
+	
+		//펫시터 통장 사본  삭제
+		petSitterFileService.deleteBankImage(pet_sitter_no);
+		
+		//펫시터 소개 이미지,통장 사본 이미지 등록
+		petSitterFileService.uploadInfo(pet_sitter_no, vo.getInfo_image());
+		petSitterFileService.uploadBank(pet_sitter_no, vo.getBank_image());
+		
+		
+		//지역 정보 삭제
+		//지역 정보 등록
+		locationDao.registLocation(pet_sitter_no,vo.getLocation_name());
+	}
+	@Override
+	public void updateStatus(int pet_sitter_no, String sitter_status) {
+		petsitterDao.updateStatus(pet_sitter_no, sitter_status);
+		
+	}
+
+	@Override
+	public int getSequenceReservation() {
+		return reservationDao.getSequenceReservation();
+	}
+
+
+	@Override
+	public List<ReservationListVO> getReservationSitter(int pet_sitter_no) {
+		return reservationDao.getReservationSitter(pet_sitter_no);
+	}
+
+	// 펫시터 블랙리스트 카운트 여부
+	@Override
+	public int black_petsitter_count(String id) {		
+		return petsitterDao.black_petsitter_count(id) ;
+	}
+	
+	// 회원이 펫을 갖고 있는지 카운터로 확인
+	@Override
+	public int petscheck(String id) {
+		return petsitterDao.petscheck(id) ;
+	}
+
+
 	
 	
 

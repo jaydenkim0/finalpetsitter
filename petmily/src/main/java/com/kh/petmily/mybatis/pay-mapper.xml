@@ -89,5 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	<select id="getSequence" resultType="int"> -->
 <!-- 		select pay_no_seq.nextval from dual -->
 <!-- 	</select> -->
+
+	<!-- 예약 번호로 결제 정보 조회 -->
+	<select id="getPay" parameterType="int" resultType="payDto">
+		select * from pay where partner_order_id =#{partner_order_id}
+	</select>
 	
 </mapper>
