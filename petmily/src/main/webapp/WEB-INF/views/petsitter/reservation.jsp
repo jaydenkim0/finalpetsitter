@@ -20,13 +20,14 @@
 			<span>반려동물 나이 : ${rlist.age}살</span><br>
 			<span>반려동물 종류 : ${rlist.type}</span><br>
 			<span>반려동물 특이사항 : ${rlist.pet_ect}</span><br>
+	
+		<c:forEach var="pay" items="${payList}">
+			<span>결제 상태 : ${pay.status}</span>
+			<span>총 ${pay.total_amount}원</span>
+		</c:forEach>
+
 			<hr>			
 	</c:forEach>	
-			<c:forEach var="pay" items="${payList}">
-				<span>결제 상태 : ${pay.status}</span>
-				<span>총 ${pay.total_amount}원</span>
-			</c:forEach>
-
 	
 	
 		

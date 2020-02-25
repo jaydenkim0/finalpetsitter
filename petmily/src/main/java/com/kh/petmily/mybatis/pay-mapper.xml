@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 	</select> -->
 
 	<!-- 예약 번호로 결제 정보 조회 -->
-	<select id="getPay" parameterType="int" resultType="List">
+	<select id="getPay" parameterType="int" resultType="payDto">
 		select * from pay where partner_order_id =#{partner_order_id}
 	</select>
 	

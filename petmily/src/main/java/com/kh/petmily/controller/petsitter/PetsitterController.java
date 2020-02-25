@@ -283,6 +283,7 @@ public class PetsitterController {
 		//펫시터 번호로 예약 정보 조회
 		List<ReservationListVO> reservationList = petsitterService.getReservationSitter(pet_sitter_no);
 		
+	
 		
 		//시작시간,총 시간 가져오기
 		int totalTime = 0;
@@ -297,17 +298,14 @@ public class PetsitterController {
 			System.out.println("!!!!!!!!!!예약 번호 : "+partner_order_id);
 			
 			
-			List<ReservationAllVO> all = vo.getList();
-			
+			List<ReservationAllVO> all = vo.getList();			
 			totalTime = all.get(0).getUsage_time();
 			startTime = all.get(0).getStart_time();
 			
 			//예약 번호로 결제 정보 조회
-//			payList = payService.getPay(partner_order_id);			
-//			System.out.println("결제 정보:"+payList.toString());
-		}
-		
-		
+			payList.addAll(payService.getPay(partner_order_id));					
+		}		
+		System.out.println("결제 정보:"+payList);
 		
 		model.addAttribute("reservationList", reservationList)
 				.addAttribute("payList", payList)
