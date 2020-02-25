@@ -25,7 +25,7 @@
 </a>
 <br><br><hr><br>
 <a href="myreservation">
-	<button>내 예약 조회</button>
+	<button>내 예약 조회 / 리뷰쓰기</button>
 </a>
 <br><br><hr><br>
 <h2>내가 쓴 글</h2>
@@ -34,8 +34,8 @@
 	<button>돌봄방</button>
 </a>
 &emsp;
-<a href="myfaqboard">
-	<button>문의/신고</button>
+<a href="myqnaboard">
+	<button>문의 / 신고</button>
 </a>
 &emsp;
 <a href="mystrayboard">

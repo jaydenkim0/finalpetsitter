@@ -39,7 +39,7 @@
  					}
  				});
             });
-        	
+
         	$("#selectBox").change(function(){	
         		$(".petnamecheck").hide();
         		$(".petagecheck").hide();
@@ -88,6 +88,7 @@
         	});
         	
         	$(".emailcheck").hide();
+        	$(".emailexist").hide();
         	$(".email").blur(function(){
         		$("#submit").attr("disabled",true);
         		var email = $(".email").val();
@@ -95,10 +96,39 @@
         		var c = regex.test(email);
         		if(!c){
         			$(".emailcheck").show();
-        			$("#submit").attr("disabled",true);
+        			
+	        			$.ajax({
+	     					url:'${pageContext.request.contextPath}/member/emailCheck?email='+email,
+	     					type:'get',
+	     					success : function(data){
+	     						if(data == 0) {
+									$(".emailexist").hide();
+	     							$("#submit").attr("disabled",false);
+	     						}else{
+	     							$(".emailexist").show();
+	     							$("#submit").attr("disabled",true);
+	     						}
+	     					}
+	     				});
+	        			
         		}else{
         			$(".emailcheck").hide();
         			$("#submit").attr("disabled",false);
+        			
+        			$.ajax({
+     					url:'${pageContext.request.contextPath}/member/emailCheck?email='+email,
+     					type:'get',
+     					success : function(data){
+     						if(data == 0) {
+								$(".emailexist").hide();
+     							$("#submit").attr("disabled",false);
+     						}else{
+     							$(".emailexist").show();
+     							$("#submit").attr("disabled",true);
+     						}
+     					}
+     				});
+        			
         		}
         	});
         });
@@ -198,6 +228,7 @@
 			<td>
 				<input type="text" name="email" placeholder="이메일" required class="email">
 				<p class="emailcheck">이메일 형식이 잘못되었습니다</p>
+				<p class="emailexist">이미 존재하는 이메일입니다</p>
 			</td>
 		</tr>
 		

@@ -9,44 +9,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 작성 -->
 	<insert id="strayinsert" parameterType="StrayVO">
 		insert into stray_pet (
-		stray_no,
-		stray_writer,
-		stray_title,
-		stray_head,
-		stray_content,
-		wdate,
-		superno,
-		groupno,
-		depth
+			stray_no,
+			stray_writer,
+			stray_title,
+			stray_head,
+			stray_content,
+			wdate,
+			superno,
+			groupno,
+			depth
 		)
 		values (
-		#{stray_no},
-		#{stray_writer},
-		#{stray_title},
-		#{stray_head},
-		#{stray_content},
-		sysdate,
-		#{superno},
-		#{groupno},
-		#{depth}
+			#{stray_no},
+			#{stray_writer},
+			#{stray_title},
+			#{stray_head},
+			#{stray_content},
+			sysdate,
+			#{superno},
+			#{groupno},
+			#{depth}
 		)
 	</insert>
 
 	<!-- 게시글 번호 받아오기 -->
 	<select id="getSequence" resultType="int">
-		select stray_no_seq.nextval
+		select 
+			stray_no_seq.nextval
 		from dual
 	</select>
 
 	<!-- 이미지 등록 -->
 	<insert id="strayfile" parameterType="strayfileDto">
-		insert into stray_file values(
-		stray_file_no_seq.nextval,
-		#{stray_stray_no},
-		#{uploadname},
-		#{savename},
-		#{filetype},
-		#{filesize}
+		insert into 
+			stray_file 
+		values(
+			stray_file_no_seq.nextval,
+			#{stray_stray_no},
+			#{uploadname},
+			#{savename},
+			#{filetype},
+			#{filesize}
 		)
 	</insert>
 
@@ -66,36 +69,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 등록 -->
 	<insert id="writeReply" parameterType="StrayReplyVO">
 		insert into stray_reply(
-		reply_no,
-		origin,
-		reply_writer,
-		content,
-		wdate
+			reply_no,
+			origin,
+			reply_writer,
+			content,
+			wdate
 		)
 		values(
-		reply_no_seq.nextval,
-		#{origin},
-		#{reply_writer},
-		#{content},
-		sysdate
+			reply_no_seq.nextval,
+			#{origin},
+			#{reply_writer},
+			#{content},
+			sysdate
 		)
 	</insert>
 
 	<!-- 댓글 조회 -->
 	<select id="readReply" resultType="StrayReplyVO">
 		select
-		reply_no,
-		reply_writer,
-		content,
-		wdate
-		from stray_reply where origin = #{origin}
+			reply_no,
+			reply_writer,
+			content,
+			wdate
+		from 
+			stray_reply 
+		where 
+			origin = #{origin}
 	</select>
 
 	<!-- 댓글 수정 -->
 	<update id="replyUpdate" parameterType="StrayReplyVO">
-		update stray_reply set
-		content =#{content}
-		where reply_no = #{reply_no}
+		update 
+			stray_reply 
+		set
+			content =#{content}
+		where 
+			reply_no = #{reply_no}
 	</update>
 
 	<!-- 댓글 삭제 -->
@@ -105,55 +114,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="straylistAll" parameterType="map" resultType="StrayVO">
-		 select*from (
-	select rownum as rn, A.* from(
-	select
-	stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
-	depth, count(reply_no) replycount
-	from
-	(
-	select
-	S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
-	S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
-	from stray_pet S
-	left outer join stray_reply SR on S.stray_no = SR.origin
-	connect by prior stray_no = superno
-	start with superno=0
-	order siblings by groupno desc, stray_no asc, wdate desc
-	)
-	where
-	${type} like '%'||#{keyword}||'%'
-	group by 
-    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
-    groupno, superno, depth
-	) A
-	)
+	select*from (
+		select rownum as rn, A.* from(
+			select
+				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+				(
+				select
+					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
+					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
+				from stray_pet S
+					left outer join stray_reply SR on S.stray_no = SR.origin
+				connect by prior stray_no = superno
+				start with superno=0
+				order siblings by groupno desc, stray_no asc, wdate desc
+				)
+			where
+				${type} like '%'||#{keyword}||'%'
+			group by 
+			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
+			    groupno, superno, depth
+			) A
+		)
 	where rn between #{start} and #{finish}
 	</select>
 
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="StrayVO" parameterType="map">
 	select*from (
-	select rownum as rn, A.* from(
-	select
-	stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
-	depth, count(reply_no) replycount
-	from
-	(
-	select
-	S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
-	S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
-	from stray_pet S
-	left outer join stray_reply SR on S.stray_no = SR.origin
-	connect by prior stray_no = superno
-	start with superno=0
-	order siblings by groupno desc, stray_no asc, wdate desc
-	)
-	group by 
-    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
-    groupno, superno, depth
-	) A
-	)
+		select rownum as rn, A.* from(
+			select
+				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
+				depth, count(reply_no) replycount
+			from
+				(
+				select
+					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
+					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
+				from stray_pet S
+					left outer join stray_reply SR on S.stray_no = SR.origin
+				connect by prior stray_no = superno
+				start with superno=0
+				order siblings by groupno desc, stray_no asc, wdate desc
+				)
+			group by 
+			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
+			    groupno, superno, depth
+			) A
+		)
 	where rn between #{start} and #{finish}
 	</select>
 
@@ -165,25 +174,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 상세보기 조회 -->
 	<select id="strayview" resultType="StrayVO">
-		select*from stray_pet where stray_no=
-		#{stray_no}
+		select*from 
+			stray_pet 
+		where stray_no=#{stray_no}
 	</select>
 
 	<!-- 게시글 수정 -->
 	<update id="strayupdate" parameterType="StrayVO">
-		update stray_pet set
-		stray_title = #{stray_title},
-		stray_head =
-		#{stray_head},
-		stray_content = #{stray_content}
-		where stray_no=
-		#{stray_no}
+		update 
+			stray_pet 
+		set
+			stray_title = #{stray_title},
+			stray_head = #{stray_head},
+			stray_content = #{stray_content}
+			where stray_no= #{stray_no}
 	</update>
 	
 	<!-- 댓글 수 갱신 -->
 	<update id="replyCal" parameterType="QnaVO">
-	update stray_pet set replycount = (select count(*) from
-	stray_reply where origin = ?) where stray_no=?
+		update stray_pet 
+		set 
+			replycount = (
+				select 
+					count(*) 
+				from 
+					stray_reply 
+				where origin = ?
+				) 
+		where stray_no=?
 	</update>
 	
 
