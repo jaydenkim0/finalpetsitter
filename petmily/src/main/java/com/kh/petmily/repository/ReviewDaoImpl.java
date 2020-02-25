@@ -1,7 +1,8 @@
 package com.kh.petmily.repository;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +46,51 @@ public class ReviewDaoImpl implements ReviewDao{
 	return sqlSession.selectOne("review.reviewselect",review_no);
 	    
 	}
+	//포인트
 	@Override
 	public void pointplus(ReviewDto reviewDto) {
 		sqlSession.update("review.pointplus", reviewDto)	;
 	}
-
+	//별점
 	@Override
 	public double star(int pet_sitter_no) {
 		return sqlSession.selectOne("review.star", pet_sitter_no);		
 	}
+	
+	//
+	@Override
+	public int getCount(String type, String keyword) throws Exception{
+		Map<String, String> map = new HashMap<>();
+		map.put("type",type);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("review.getCount",map);
+	
+	}
+	@Override
+	public List<ReviewDto> getList(int start, int finish) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("start",start);
+		map.put("finish",finish);
+		return sqlSession.selectList("review.getList",map);
+	}
+	@Override
+	public int getSequence() {
+		int review_no = sqlSession.selectOne("review.getSequence");
+		return review_no;
+	}
+	
+	//게시글 검색 목록 조회
+	@Override
+	public List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put("type",type);
+		map.put("keyword",keyword);
+		map.put("start",start);
+		map.put("finish",finish);
+		return sqlSession.selectList("review.reviewlistAll",map);
+	}
+	
+	
 
 		
 	}

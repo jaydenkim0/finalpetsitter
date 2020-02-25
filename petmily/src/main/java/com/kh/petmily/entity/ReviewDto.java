@@ -21,4 +21,6 @@ public class ReviewDto {
 	private String review_content; // 리뷰내용
 	private int review_star; //리뷰 평점
 	private String review_wdate;//리뷰 작성시간
+	private String review_reservation_no;
+	
 }
