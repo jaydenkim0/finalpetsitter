@@ -106,6 +106,7 @@ select {
                 var text = editor.getValue();//에디터에 입력된 값을 불러온다
                 document.querySelector(".naver-editor + input[type=hidden]").value = text;  
             });
+          //에디터에서 불러온 값 변경
             var text = document.querySelector(".naver-editor + input[type=hidden]").value;
             editor.setValue(text);//값 설정
         });
