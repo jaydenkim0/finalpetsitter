@@ -231,115 +231,133 @@
 <!-- 통장 사본 이미지 파일 -->	
 	<label for="id_card_file">통장 사본 이미지</label>
 	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
-	
+
 <!-- 통장 계좌 -->
-	<div>
-		<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
-		<label for="bankName">은행</label>
-			<select id="bankName" name="sitter_bankname"> 
-				<option value="" selected disabled hidden >은행선택</option>
-				<option>기업은행</option>
-				<option>국민은행</option>
-				<option>우리은행</option>
-				<option>신한은행</option>
-				<option>KEB하나은행</option>
-				<option>농협은행</option>
-				<option>SC제일은행</option>
-				<option>한국씨티은행</option>
-				<option>우체국</option>
-				<option>경남은행</option>
-				<option>광주은행</option>
-				<option>대구은행</option>
-				<option>산업은행</option>
-				<option>새마을금고</option>
-				<option>수협</option>
-				<option>신협</option>
-				<option>전북은행</option>
-				<option>제주은행</option>
-				<option>카카오뱅크</option>
-				<option>케이뱅크</option>
-			</select>	
-			<label for="bank_account">계좌 번호</label>
-			<input type="text" id="bank_account" name="sitter_bank_account" required>	
-	</div>
-	
-<!-- 펫시터 소개글 -->	
-	<div>
-		<table width="60%">
-			<tr>
-				<td><label for="info-text">펫밀리 기본 정보</label></td>
-			</tr>
-			<tr>
-					<td>
-					<!-- value 수정 -->
-					<div class="naver-editor"></div>
-					 <input type="hidden" id="info-text" name="info" value=""></td>
-			</tr>
-			</table>
-	</div>
-<!--반려동물 경험 -->
-	<div>
-		<label for="yn">반려동물 키워본 경험 유무</label>
-		<select id="yn" name="sitter_pets">
-			<option>예</option>
-			<option>아니오</option>
-		</select>
-	</div>
-	
-<!-- 매칭(돌봄) 종류 -->
-	<div>
-		<label for="mt">가능한 돌봄 종류</label>
-		<select id="mt" name="sitter_matching_type">
-			<option>방문서비스</option>
-			<option>위탁서비스</option>
-			<option>둘다</option>
-		</select>
-	</div>
-	
-<!-- 스킬 -->
-	<div class="skill">
-		<c:forEach var="skillnames" items="${skillname}">
-	        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
-	        <label  >${skillnames.skill_name}</label>
-        </c:forEach>   	        
-	        <div id="skills_text"></div>
-    </div>
-
-<!-- 돌봄 가능 동물 종류 -->
-    <div class="type">  
-    	<c:forEach var="carepettypes" items="${carepettype}">
-	        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
-	        <label for="x">${carepettypes.care_type}</label>
-        </c:forEach>        
-        <div id="care_pet_type_text"></div>
-    </div>
-
-<!-- 돌봄 환경 -->
-    <div class="condition">
-    	<c:forEach var="c" items="${careconname}">    		
-	        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
-	        <label >${c.care_condition_name}</label>
-        </c:forEach>        
-        <div id="care_condition_text"></div>
-    </div>
-	
-<!-- 활동 지역 -->
-	<div class="location">
-	    <h5>기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</h5>
-	    <div class="template">
-	        <select class="region" name="location_name[0].city">
-	            <option>지역을 선택하세요</option>
-	        </select>
-	        
-	        <select class="section" name="location_name[0].area">
-	            <option>구를 선택하세요</option>
-	        </select>
-		<button id="add-btn">추가</button>
-	    </div>
-	    <div id="result"></div>
-	</div>
+<c:forEach var="rlist" items="${petsitterList}">
+	<c:forEach var="list" items="${rlist.petsitterVO}">	
+		<div>
+			<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
+			<label for="bankName">은행</label>
+				<select id="bankName" name="sitter_bankname"> 
+					<option value="${list.sitter_bankname}">${list.sitter_bankname}</option>
+					<option>기업은행</option>
+					<option>국민은행</option>
+					<option>우리은행</option>
+					<option>신한은행</option>
+					<option>KEB하나은행</option>
+					<option>농협은행</option>
+					<option>SC제일은행</option>
+					<option>한국씨티은행</option>
+					<option>우체국</option>
+					<option>경남은행</option>
+					<option>광주은행</option>
+					<option>대구은행</option>
+					<option>산업은행</option>
+					<option>새마을금고</option>
+					<option>수협</option>
+					<option>신협</option>
+					<option>전북은행</option>
+					<option>제주은행</option>
+					<option>카카오뱅크</option>
+					<option>케이뱅크</option>
+				</select>	
+				<label for="bank_account">계좌 번호</label>
+				<input type="text" id="bank_account" name="sitter_bank_account" value="${list.sitter_bank_account}">	
+		</div>
 		
-	<div>
-		<input type="submit" value="수정">
-	</div>
+	<!-- 펫시터 소개글 -->	
+		<div>
+			<label for="info-text">펫밀리 기본 정보</label>
+			<div class="naver-editor"></div>
+			<input type="hidden" id="info-text" name="info" value="${list.info}">
+		</div>
+	<!--반려동물 경험 -->
+		<div>
+			<label for="yn">반려동물 키워본 경험 유무</label>
+			<select id="yn" name="sitter_pets">
+				<c:if test="${list.sitter_pets eq '예'}">
+						<option>${list.sitter_pets}</option>
+						<option>아니오</option>
+				</c:if>
+				<c:if test="${list.sitter_pets eq '아니오'}">
+					<option>${list.sitter_pets}</option>
+					<option>예</option>								
+				</c:if>
+			</select>
+		</div>
+		
+	<!-- 매칭(돌봄) 종류 -->
+		<div>
+			<label for="mt">가능한 돌봄 종류</label>
+			<select id="mt" name="sitter_matching_type">
+				<c:choose>
+					<c:when test="${list.sitter_matching_type eq '방문서비스'}">
+						<option>${list.sitter_matching_type}</option>
+						<option>위탁서비스</option>			
+						<option>둘다</option>	
+					</c:when>
+					
+					<c:when test="${list.sitter_matching_type eq '위탁서비스'}">
+						<option>${list.sitter_matching_type}</option>
+						<option>방문서비스</option>
+						<option>둘다</option>	
+					</c:when>
+					
+					<c:otherwise>
+						<option>${list.sitter_matching_type}</option>
+						<option>방문서비스</option>
+						<option>위탁서비스</option>	
+					</c:otherwise>
+				</c:choose>
+			</select>
+		</div>
+		
+	<!-- 스킬 -->
+		<div class="skill">
+			<c:forEach var="skillnames" items="${skillname}">
+		        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+		        <label  >${skillnames.skill_name}</label>
+	        </c:forEach>   	        
+		        <div id="skills_text"></div>
+	    </div>
+	
+	<!-- 돌봄 가능 동물 종류 -->
+	    <div class="type">  
+	    	<c:forEach var="carepettypes" items="${carepettype}">
+		        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+		        <label>${carepettypes.care_type}</label>
+	        </c:forEach>        
+	        <div id="care_pet_type_text"></div>
+	    </div>
+	
+	<!-- 돌봄 환경 -->
+	    <div class="condition">
+	    	<c:forEach var="c" items="${careconname}">    		
+		        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+		        <label >${c.care_condition_name}</label>
+	        </c:forEach>        
+	        <div id="care_condition_text"></div>
+	    </div>
+		
+	<!-- 활동 지역 -->
+		<div class="location">
+		    <h5>기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</h5>
+		    <div class="template">
+		        <select class="region" name="location_name[0].city">
+		            <option>지역을 선택하세요</option>
+		        </select>
+		        
+		        <select class="section" name="location_name[0].area">
+		            <option>구를 선택하세요</option>
+		        </select>
+			<button id="add-btn">추가</button>
+		    </div>
+		    <div id="result"></div>
+		</div>
+			
+		<div>
+			<input type="submit" value="수정">
+		</div>
+	</c:forEach>
+</c:forEach>
 </form>
