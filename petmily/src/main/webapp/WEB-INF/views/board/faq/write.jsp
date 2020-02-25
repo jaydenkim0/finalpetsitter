@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- 에디터 불러오기 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
-	rel="stylesheet">
 
 <!-- BootStrap CDN -->
 <link rel="stylesheet"
