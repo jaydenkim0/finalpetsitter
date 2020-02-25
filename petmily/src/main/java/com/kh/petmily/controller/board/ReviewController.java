@@ -36,10 +36,12 @@ public class ReviewController {
 //-리뷰 작성----------------------------------------------------------------------------	
 	@GetMapping("/insert")
 	public String insert(@RequestParam int reservation_no, 
+									@RequestParam String sitter_id,
 								Model model) {
 		ReservationDto reservationinfo = reviewService.getReviewInfo(reservation_no);
 		
-		model.addAttribute("reservation",reservationinfo);
+		model.addAttribute("reservation",reservationinfo)
+				  .addAttribute("sitter_id", sitter_id);
 		return"board/review/insert";
 	}
 

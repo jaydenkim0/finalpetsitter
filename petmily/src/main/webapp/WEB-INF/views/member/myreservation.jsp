@@ -58,7 +58,7 @@ li{
 				<td>
 					<c:choose>
 						<c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
-							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}">리뷰쓰기</a>
+							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">리뷰쓰기</a>
 						</c:when>
 						<c:otherwise>
 							리뷰작성불가
