@@ -7,28 +7,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="pay">
 	
 	<!-- 
-		결제 준비 등록 구문
-		
+		결제 준비 등록 구문		
 	-->
+<!-- 	<insert id="ready" parameterType="payDto"> -->
+<!-- 		insert into pay( -->
+<!-- 			pay_no, tid, cid, process_time, partner_order_id, -->
+<!-- 			partner_user_id, item_name, quantity, total_amount, -->
+<!-- 			status -->
+<!-- 		)  -->
+<!-- 		values( -->
+<!-- 			pay_no_seq.nextval, -->
+<!-- 			#{tid}, -->
+<!-- 			#{cid}, -->
+<!-- 			to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'), -->
+<!-- 			#{partner_order_id}, -->
+<!-- 			#{partner_user_id}, -->
+<!-- 			#{item_name}, -->
+<!-- 			#{quantity}, -->
+<!-- 			#{total_amount}, -->
+<!-- 			'준비' -->
+<!-- 		) -->
+<!-- 	</insert> -->
+	
 	<insert id="ready" parameterType="payDto">
-		insert into pay(
-			pay_no, tid, cid, process_time, partner_order_id,
-			partner_user_id, item_name, quantity, total_amount,
-			status
-		) 
-		values(
-			pay_no_seq.nextval,
-			#{tid},
-			#{cid},
-			to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'),
-			#{partner_order_id},
-			#{partner_user_id},
-			#{item_name},
-			#{quantity},
-			#{total_amount},
-			'준비'
-		)
-	</insert>
+		merge into pay using dual on (partner_order_id = #{partner_order_id})
+		
+		when matched then
+			
+			update set 
+			process_time = to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS')
+			where partner_order_id = #{partner_order_id}
+			
+		when not matched then
+		
+			insert ( 
+	 			pay_no, tid, cid, process_time, partner_order_id, 
+	 			partner_user_id, item_name, quantity, total_amount, 
+	 			status 
+	 		)  
+	 		values( 
+	 			pay_no_seq.nextval, 
+	 			#{tid}, 
+				#{cid}, 
+				to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'), 
+				#{partner_order_id}, 
+				#{partner_user_id}, 
+	 			#{item_name}, 
+				#{quantity}, 
+			#{total_amount}, 
+				'준비' 
+			)	
+	 </insert>
 	
 	<!-- 
 		결제 성공시 추가할 데이터 구문
