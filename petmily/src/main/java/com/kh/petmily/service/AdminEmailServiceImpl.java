@@ -222,13 +222,8 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// step3 결제가 완료되면 회원과 펫시터에게 결제완료 이메일 전달
 	//////////////////////////////////////////////////////////////////////////////////////////	
 	@Override
-	public String paymentApplyEMail(String id, 
-													        String email,
-													        int total_amount,
-													        String sitter_id, 
-													        String sitteremail,
-													        List<PayinfoDto> list) {
-		try {								
+	public void  paymentApplymemberEMail(String id, String email, int total_amount) {
+									
 					// 회원 메세지 객체 생성
 					SimpleMailMessage membermessage = new SimpleMailMessage ();
 					// 정보설정 : 대상정보(email, 제목, 내용)
@@ -248,42 +243,40 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 							+ "\n 상담센터로 연락주시면 감사하겠습니다.");			
 					sender.send(membermessage);
 										
-					// 펫시터 메세지 객체 생성 
-					SimpleMailMessage sittermessage = new SimpleMailMessage();
-					String[] tositter= {sitteremail};
-					sittermessage.setTo(tositter);
-					sittermessage.setSubject("[PetMily] "+ sitter_id +" 펫시터님 예약이 완료되었습니다 " );
-					
-					StringBuffer buffer = new StringBuffer();				
-					
-					buffer.append(" 안녕하세요  "+ sitter_id +" 펫시터님");
-					buffer.append("\n 언제나 펫밀리와 함께 해주셔서 감사합니다");
-					buffer.append("\n 견적 승인하신 서비스 결제가 완료되었습니다 ");
-					buffer.append("\n ");
-					buffer.append("\n "+ id +" 회원님이 요청한 서비스 내역은 아래와 같습니다");					
-						for(PayinfoDto service : list) {
-							buffer.append(service.getPayment());
-						}					
-					buffer.append("\n ");
-					buffer.append("\n 신청한 이용시간은 "+list.get(0).getUsage_time()+"");
-					buffer.append("\n ");
-					buffer.append("\n ");
-					buffer.append("\n 문의가 있으신 경우는 문의 게시판을 이용해주시거나 ");
-					buffer.append("\n 상담센터로 연락주시면 감사하겠습니다.");							
-					
-					membermessage.setText(buffer.toString());
-						
-					sender.send(sittermessage);
-					
-					return "success";			
-			}catch (Exception ex) {
-					ex.printStackTrace();
-					return "fail";
-			}
+				
+	}
+
+	@Override
+	public void paymentApplypetsitterEMail(String id,String sitter_id,   String sitter_email, List<PayinfoDto> list) {
+		// 펫시터 메세지 객체 생성 
+		SimpleMailMessage sittermessage = new SimpleMailMessage();
+		String[] tositter= {sitter_email};
+		sittermessage.setTo(tositter);
+		sittermessage.setSubject("[PetMily] "+ sitter_id +" 펫시터님 예약이 완료되었습니다 " );
+		
+		StringBuffer buffer = new StringBuffer();				
+		
+		buffer.append(" 안녕하세요  "+ sitter_id +" 펫시터님");
+		buffer.append("\n 언제나 펫밀리와 함께 해주셔서 감사합니다");
+		buffer.append("\n 견적 승인하신 서비스 결제가 완료되었습니다 ");
+		buffer.append("\n ");
+		buffer.append("\n "+ id +" 회원님이 요청한 서비스 내역은 아래와 같습니다");					
+			for(PayinfoDto service : list) {
+				buffer.append(service.getPayname()+"\n ");
+			}					
+		buffer.append("\n ");
+		buffer.append("\n 회원이 신청한 이용시간은 "+list.get(0).getUsage_time()+"시간 입니다");
+		buffer.append("\n ");
+		buffer.append("\n ");
+		buffer.append("\n 문의가 있으신 경우는 문의 게시판을 이용해주시거나 ");
+		buffer.append("\n 상담센터로 연락주시면 감사하겠습니다.");							
+		
+		sittermessage.setText(buffer.toString());
+			
+		sender.send(sittermessage);		
 	}
 
 
-	
 	
 	
 	

@@ -28,8 +28,8 @@ public interface AdminEmailService {
 	
 	
 	// 결제가 완료되면 회원과 펫시터에게 결제 완료 이메일 전달
-	String paymentApplyEMail(String id, String memberemail,
-	        int total_amount, String sitter_id, String sitteremail, List<PayinfoDto> list);
+	void paymentApplymemberEMail(String id, String email, int total_amount);
+	void paymentApplypetsitterEMail(String id, String sitter_id, String sitter_email, List<PayinfoDto> list);
 	
 	
 	
