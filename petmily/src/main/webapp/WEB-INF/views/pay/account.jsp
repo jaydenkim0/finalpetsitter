@@ -10,6 +10,23 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<script>
+$(function(){
+	$("input[id=check1]").change(function(){
+		
+		if($(this).prop("checked")){
+			$(".btn hover3").prop("disabled",false).text("결제 진행");
+		}
+		else{
+			$("btn hover3").prop("disabled",true).text("결제 방법을 선택해주세요.");
+		}
+	});
+	
+});
+
+
+</script>
+
 
 <style>
 .page-navigator li {
@@ -81,28 +98,17 @@ a {
 .hover1:hover {
 	background-color: #1482e0;
 }
-
-input {
-	width: 150px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
 .check1{
-	width: 10px;
-	height: 10px;
-	font-size: 8px;
+	width: 20px;
+	height: 20px;
+	font-size: 15px;
 	vertical-align: middle;
 	border-color: #BDBDBD;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
 }
-.check2{
+.pay{
 	width: 15px;
 	height: 15px;
 	font-size: 15px;
@@ -167,23 +173,23 @@ select {
 		</tr>
 	</table>
 	<br>
-	<div align="center" name="checkPay">
-	       	  <input type="checkbox"  id="check1">&nbsp;체크/신용카드&ensp;
-	          <input type="checkbox"  id="check1">&nbsp;핸드폰 결제&ensp;
-	          <input type="checkbox"   id="check1">&nbsp;실시간 계좌이체&ensp;
-	 	      <input type="checkbox"  id="check1">&nbsp;무통장 입금&ensp;
-	          <input type="checkbox"   id="check1">&nbsp;카카오페이&ensp;
-	        <br><br>
+	<div align="center">
+	       	  <input type="checkbox"  id="check1">&nbsp;체크/신용카드&nbsp;
+	          <input type="checkbox"  id="check1">&nbsp;핸드폰 결제&nbsp;
+	          <input type="checkbox"   id="check1">&nbsp;실시간 계좌이체&nbsp;
+	 	      <input type="checkbox"  id="check1">&nbsp;무통장 입금&nbsp;
+	          <input type="checkbox"   id="check1">&nbsp;카카오페이
+	        <br>
 	</div>       
 	
 	<hr>
 	<div align="center">
-		<input type="checkbox" class="check2">
+		<input type="checkbox" class="pay">
 		개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.
 	</div>
 	<hr>
 	<div align="center">
-		<input type="submit" value="결제" class="btn hover3" >
+		<input type="submit" value="결제" class="btn hover3">
 	</div>
 </section>
 </form>
