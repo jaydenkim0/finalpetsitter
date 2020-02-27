@@ -191,7 +191,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="nick" property="nick"/>
 		<result column="info" property="info"/>
 		<result column="member_image_no" property="member_image_no"/>
-		<result column="member_image_member_id" property="member_image_member_id"/>
+		<result column="member_image_member_id" property="member_image_member_id"/>	
 		
 		<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap"></collection>
 	</resultMap>

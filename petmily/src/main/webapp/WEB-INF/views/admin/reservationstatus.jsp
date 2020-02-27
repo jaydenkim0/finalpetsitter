@@ -38,9 +38,7 @@
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/reservationstatus">
 		<select name="searchOption" onchange="doChange(this, 'selTwo')">		
-			<option value="id"  >아이디</option>
-			<option value="name"  >이름</option>
-			<option value="nick"  >닉네임</option>
+			<option value="member_id"  >아이디</option>
 			<option value="reservation_no" >예약번호</option>
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
@@ -48,25 +46,27 @@
 	</form>
 	
 	
-	${count}개의 게시물이 있습니다.	
-
-
+	${count}개의 게시물이 있습니다.		
+ 	
+ 	
+ 	테스트 : ${reservation.statuslist}
+ 	
 	<!-- 리스트 내용 -->
 	<c:forEach var="reservation"  items="${list}">		
 		<c:choose>
-			<c:when test="${reservation.status eq '대기' && reservation.kakaopaystatus eq null }">
+			<c:when test="${reservation.status eq '대기' &&  empty reservation.statuslist}">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : 펫시터 견적 확인 중 |
-					결제 상테 : 결제 준비 |
+					결제 상테 : 펫시터 견적 확인 중 |
 				</h4>
 				</a>		
 			</c:when>	
-			<c:when test="${reservation.status eq '승인' && reservation.kakaopaystatus eq null }">
+			<c:when test="${reservation.status eq '승인' && empty reservation.statuslist}">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
-				<h4 style="background:#e4e4e4;">
+				<h4>
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : ${reservation.status} |
@@ -74,18 +74,23 @@
 				</h4>
 				</a>					
 			</c:when>
-				<c:when test="${reservation.status == '승인' && reservation.kakaopaystatus eq '준비' || '완료' || '취소'}">
+			<c:when test="${!empty reservation.statuslist}">
 				<a href="${pageContext.request.contextPath}/admin/reservationstatusdetail?reservation_no=${reservation.reservation_no}">
 				<h4>
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : ${reservation.status} |
-					결제 상테 : ${reservation.kakaopaystatus} 
+					결제 상테 : 
+					<c:forEach var="paystatus" items="${reservation.statuslist}">
+						${paystatus.status}
+					</c:forEach> 
 				</h4>
 				</a>	
 			</c:when>
-		</c:choose>
+		</c:choose>		
 	</c:forEach>		
+
+
 
 
 

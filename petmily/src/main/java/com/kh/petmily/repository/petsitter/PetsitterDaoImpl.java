@@ -149,8 +149,7 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		param.put("end", end);
 		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
-		return sqlSession.selectList("petsitter.SearchListAll", param);
-	
+		return sqlSession.selectList("petsitter.SearchListAll", param);	
 	}
 
 	@Override

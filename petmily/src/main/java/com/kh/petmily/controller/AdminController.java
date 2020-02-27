@@ -53,8 +53,7 @@ public class AdminController {
 	// 메인페이지
 	@GetMapping("/")
 	public String admin(Model model) {	
-		int qna_no = 201;
-		model.addAttribute("test", (QnaDto)adminService.test(qna_no));
+		
 		return "admin/main";		
 	}
 	
