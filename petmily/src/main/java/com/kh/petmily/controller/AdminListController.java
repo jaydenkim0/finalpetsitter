@@ -211,7 +211,8 @@ public class AdminListController {
 				  .addAttribute("count", count)
 				  .addAttribute("searchOption", searchOption)
 				  .addAttribute("keyword", keyword)
-				  .addAttribute("navi", navi);	
+				  .addAttribute("navi", navi);			
+			System.out.println("제발 나와라!!! = "+(List<AccountVO>)adminService.getAccountreservationList(start, end, searchOption, keyword));	
 		return "admin/reservationstatus";
 	}
 	

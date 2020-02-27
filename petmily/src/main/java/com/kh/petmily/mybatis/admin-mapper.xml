@@ -581,19 +581,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		
 		
-	<!-- 예약 리스트 -->
+	<!-- 예약 리스트 -->	
+		<resultMap type="accountVO" id="reservationList">
+			<result column="reservation_no" property="reservation_no" />
+			<result column="member_id" property="member_id" />
+			<result column="status" property="status"/>
+			<result column="reservation_no" property="partner_order_id"/>		
+		
+			<collection column="reservation_no" javaType="List" ofType="PayDto" property="statuslist" select="getPayStatusListMap"></collection>
+		</resultMap>
+	
 		<!-- 예약 리스트 -->
-			<select id="getAccountreservationList" resultType="accountVO" parameterType="Map">
+			<select id="getAccountreservationList" resultMap="reservationList" parameterType="Map">
 				select * from (
 					select rownum rn, A.* from(
-						select * from reservation
-							<if test="searchOption != null and keyword != null">
+						select DISTINCT
+                        R.*, P.partner_order_id from reservation R
+						left outer join (select * from pay) P
+                            on r.reservation_no = p.partner_order_id
+           					<if test="searchOption != null and keyword != null">
 								where ${searchOption} like '%'||#{keyword}||'%'
-							</if>
+							</if>		
 						order by reservation_no desc
 						)A
 					) where rn between #{start} and #{end}	
 			</select>
+			
+			<select id="getPayStatusListMap"  resultType="payDto" parameterType="int">		
+				select * from pay where partner_order_id = #{partner_order_id}
+			</select>
+			
+			
 			<!-- 예약 페이징 카운트 -->
 			<select id="countAriclegetAccount" resultType="int" parameterType="Map">
 				select count(*) from reservation
@@ -602,6 +620,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</if>			
 				order by reservation_no desc
 			</select>	
+			
+			
 			
 		<!-- 예약 디테일 페이지 정보 -->
 		<select id="reservationstatusdetail" parameterType="int" resultType="AccountVO">
