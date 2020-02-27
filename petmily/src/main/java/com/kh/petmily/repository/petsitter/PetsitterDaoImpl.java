@@ -142,6 +142,25 @@ public class PetsitterDaoImpl implements PetsitterDao {
 		return sqlSession.selectList("petsitter.getCareConditionName");
 	}
 
+	@Override
+	public List<SitterlocationVO> SearchListAll(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectList("petsitter.SearchListAll", param);
+	
+	}
+
+	@Override
+	public int countSearchList(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("petsitter.countSearchList", param);
+	}
+
 
 
 

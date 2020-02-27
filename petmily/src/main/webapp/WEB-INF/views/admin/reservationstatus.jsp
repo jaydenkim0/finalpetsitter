@@ -80,7 +80,7 @@
 					예약 번호 : ${reservation.reservation_no} |
 					신청 회원 : ${reservation.member_id} |		
 					견적 상태 : ${reservation.status} |
-					결제 상테 : ${reservation.kakaopaystatus} |
+					결제 상테 : ${reservation.kakaopaystatus} 
 				</h4>
 				</a>	
 			</c:when>

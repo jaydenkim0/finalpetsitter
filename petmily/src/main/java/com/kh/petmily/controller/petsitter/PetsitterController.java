@@ -100,7 +100,7 @@ public class PetsitterController {
 		}
 	
 		
-	//펫시터 검색(조회) 리스트 페이지
+	//펫시터 지역 검색(조회) 리스트 페이지
 	@RequestMapping("/list")
 	public String list(@RequestParam(defaultValue="",  required = false) String cityKeyword,
 							   @RequestParam(defaultValue="", required = false) String areaKeyword,
@@ -325,7 +325,28 @@ public class PetsitterController {
 				.addAttribute("usageTime", totalTime)
 				.addAttribute("startTime", startTime);
 		
-		return "petsitter/reservation";
-	
+		return "petsitter/reservation";	
  	}
+	
+	// 펫시터 닉네임, 아이디 검색(조회) 리스트 페이지
+	// 기존의 페이지 사용할지 결정 (list 페이지로 model 전달)
+		@RequestMapping("/searchlist")
+		public String SearchList(@RequestParam(defaultValue="sitter_id") String searchOption,
+								   @RequestParam(defaultValue="" ) String keyword,
+								   @RequestParam(defaultValue = "1") int curPage,								 
+																	                            Model model) {			
+			int count = petsitterService.countSearchList(searchOption, keyword);			
+			NaviVO navi = new NaviVO(count, curPage);			
+			int start = navi.getPageBegin();
+			int end = navi.getPageEnd();	
+			model.addAttribute("list",(List<SitterlocationVO>)petsitterService.SearchListAll(start, end, searchOption, keyword))			
+					  .addAttribute("count", count)
+					  .addAttribute("navi", navi)		
+					  .addAttribute("city", searchOption)
+					  .addAttribute("area", keyword);	
+			
+			System.out.println("나와라!! = "+(List<SitterlocationVO>)petsitterService.SearchListAll(start, end, searchOption, keyword));
+			return "petsitter/list";
+		}
+	
 }
