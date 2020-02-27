@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
@@ -210,12 +211,9 @@ public class AdminListController {
 				  .addAttribute("count", count)
 				  .addAttribute("searchOption", searchOption)
 				  .addAttribute("keyword", keyword)
-				  .addAttribute("navi", navi);		
-
-		System.out.println((List<AccountVO>) adminService.getAccountreservationList(start, end, searchOption, keyword));
+				  .addAttribute("navi", navi);	
 		return "admin/reservationstatus";
 	}
-
 	
 	
 	//////////////////////////////////////////////////////////////////

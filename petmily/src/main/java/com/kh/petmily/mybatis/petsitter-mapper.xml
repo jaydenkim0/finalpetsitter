@@ -185,7 +185,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from petsitterpets where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
-	<!-- 펫시터 서치 리스트 -->
+	<!-- 펫시터 지역 서치 리스트 -->
 		<resultMap type="petsitterLocationSearchVO" id="sitter">
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
 		<result column="nick" property="nick"/>
@@ -413,6 +413,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCareConditionName" resultType="careConditionNameDto">
 		select * from care_condition_name order by care_condition_no asc
 	</select>
+	
+	
+ 	<!-- 펫시터 닉네임 & 아이디 서치 리스트 --> 
+ 	<!-- resertMap 형태로 반환 -->
+		<resultMap type="petsitterLocationSearchVO" id="sitter2">
+			<result column="pet_sitter_no" property="pet_sitter_no"/>
+			<result column="nick" property="nick"/>
+			<result column="info" property="info"/>
+			<result column="member_image_no" property="member_image_no"/>
+			<result column="member_image_member_id" property="member_image_member_id"/>
+			
+			<collection column="pet_sitter_no" javaType="List" ofType="LocationDto" property="list" select="getLocationListMap2"></collection>
+		</resultMap>
+	
+	<!-- 기존 리스트의 항목 -->	
+	<select id="SearchListAll" resultMap="sitter2" parameterType="Map">
+		select * from (
+        	select rownum rn, A.* from(
+        	     select B.* from(         	     
+		        		select distinct petsitter.*, M.* from petsitter inner join
+		        		 (select * from location)L 
+		        		on petsitter.pet_sitter_no = L.location_sitter_no						
+		          left outer join member_image M on petsitter.id = m.member_image_member_id			
+		         )B	
+		         		<if test="searchOption != '' and keyword != ''">
+								  where ${searchOption} like '%'||#{keyword}||'%'
+						</if>		         
+            	)A         
+			where sitter_status = '정상' order by pet_sitter_no desc)
+        where rn between #{start} and #{end} order by rn
+	</select>	
+ 	<!-- 중복 등록된 지역을 따로 가지고 옴 --> 
+	<select id="getLocationListMap2" resultType="locationDto" parameterType="int">
+		select * from location where location_sitter_no = #{location_sitter_no}
+	</select>
+		
+	<!-- count -->
+	<select id="countSearchList" resultType="int" parameterType="Map">
+		select count(*) from(
+	         select * from (
+	            select distinct petsitter.* from 
+	                petsitter inner join 
+	                	(select * from location )L 
+	                    on petsitter.pet_sitter_no = L.location_sitter_no
+	                    <if test="searchOption != '' and keyword != ''">
+	                        where ${searchOption} like '%'||#{keyword}||'%'
+	            		</if>   
+           		) 
+	    where sitter_status = '정상') 	
+	</select>	
+		
+		
 	
 </mapper>
 

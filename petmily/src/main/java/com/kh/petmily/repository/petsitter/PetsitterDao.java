@@ -48,5 +48,9 @@ public interface PetsitterDao {
 	List<CarePetTypeNameDto> getCarePetTypeList();
 	List<SkillNameDto> getSkillNameList();
 	List<CareConditionNameDto> getCareConditionName();
+	
+	//	 펫시터 닉네임 아이디로 검색
+	List<SitterlocationVO> SearchListAll(int start, int end, String searchOption, String keyword);
+	int countSearchList(String searchOption, String keyword);
 
 }

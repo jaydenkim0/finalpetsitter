@@ -106,14 +106,21 @@
 			    </div>
 			    <div id="result"></div>
 			</div>
-		</form>		
-
+		</form>	
 		
+	<!-- 아이디 닉네임으로 검색 -->				
+		<form method="post" action="${pageContext.request.contextPath}/petsitter/searchlist">
+			<select name="searchOption">
+				<option value="nick">닉네임</option>
+				<option value="sitter_id">펫시터아이디</option>
+			</select>
+			<input type="text" name="keyword" placeholder="검색명을 입력해주세요">
+			<input type="submit" value="검색">		
+		</form>
+	
 		<h4>${count}개의 게시물이 있습니다.</h4>
 	
-	
-	
-		<c:forEach var="petsitter" items="${list}">				
+		<c:forEach var="petsitter" items="${list}">					
 			<!-- 펫시터 정보 -->			
 					<c:if test="${petsitter.member_image_no > 0}">
 						<img src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image"><br>

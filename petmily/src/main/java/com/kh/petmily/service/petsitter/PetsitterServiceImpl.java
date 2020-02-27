@@ -281,6 +281,17 @@ public class PetsitterServiceImpl implements PetsitterService {
 		return petsitterDao.getCareConditionName();
 	}
 
+	
+	//	 펫시터 닉네임 아이디로 검색
+	@Override
+	public List<SitterlocationVO> SearchListAll(int start, int end, String searchOption, String keyword) {		
+		return petsitterDao.SearchListAll(start, end, searchOption, keyword);
+	}
+	@Override
+	public int countSearchList(String searchOption, String keyword) {		
+		return petsitterDao.countSearchList(searchOption, keyword);
+	}
+
 
 	
 	
