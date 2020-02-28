@@ -128,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					left outer join stray_reply SR on S.stray_no = SR.origin
 				connect by prior stray_no = superno
 				start with superno=0
-				order siblings by groupno desc, stray_no asc, wdate desc
+				order siblings by groupno desc, stray_no desc, wdate desc
 				)
 			where
 				${type} like '%'||#{keyword}||'%'
@@ -156,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					left outer join stray_reply SR on S.stray_no = SR.origin
 				connect by prior stray_no = superno
 				start with superno=0
-				order siblings by groupno desc, stray_no asc, wdate desc
+				order siblings by groupno desc, stray_no desc, wdate desc
 				)
 			group by 
 			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
