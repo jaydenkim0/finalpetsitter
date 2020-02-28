@@ -10,22 +10,23 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<script>
-$(function(){
-	$("input[id=check1]").change(function(){
-		
-		if($(this).prop("checked")){
-			$(".btn hover3").prop("disabled",false).text("결제 진행");
-		}
-		else{
-			$("btn hover3").prop("disabled",true).text("결제 방법을 선택해주세요.");
-		}
-	});
-	
-});
+ <script>
+        $(function(){
+            $("input[name=agree]").change(function(){
+            	
+                if($(this).prop("checked")){
+                    $("#submit").prop("disabled", false)
+                                                .text("결제");
+                }
+                else{
+                    $("#submit").prop("disabled", true)
+                                                .text("이용 약관에 동의해주세요.");
+                }
 
+            });
+        });
 
-</script>
+    </script>
 
 
 <style>
@@ -76,7 +77,7 @@ a {
 
 .btn {
 	display: white;
-	width: 120px;
+	width: 150px;
 	height: 10x;
 	line-height: 20px;
 	border: 1px #3399dd solid;
@@ -86,6 +87,8 @@ a {
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .btn:hover {
@@ -173,23 +176,26 @@ select {
 		</tr>
 	</table>
 	<br>
-	<div align="center">
-	       	  <input type="checkbox"  id="check1">&nbsp;체크/신용카드&nbsp;
-	          <input type="checkbox"  id="check1">&nbsp;핸드폰 결제&nbsp;
-	          <input type="checkbox"   id="check1">&nbsp;실시간 계좌이체&nbsp;
-	 	      <input type="checkbox"  id="check1">&nbsp;무통장 입금&nbsp;
-	          <input type="checkbox"   id="check1">&nbsp;카카오페이
+	<div>
+	<div align="center" name="account">
+	       	  <input type="checkbox"  id="check1" name="account">&nbsp;체크/신용카드&nbsp;
+	          <input type="checkbox"  id="check1" name="account">&nbsp;핸드폰 결제&nbsp;
+	          <input type="checkbox"   id="check1" name="account">&nbsp;실시간 계좌이체&nbsp;
+	 	      <input type="checkbox"  id="check1" name="account">&nbsp;무통장 입금&nbsp;
+	          <input type="checkbox"   id="check1" name="account">&nbsp;카카오페이
 	        <br>
-	</div>       
-	
+	</div>
 	<hr>
+	<div>
 	<div align="center">
-		<input type="checkbox" class="pay">
-		개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.
+		<input type="checkbox" id="pay" name="agree">
+		<label name="agree">개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.</label>
 	</div>
 	<hr>
 	<div align="center">
-		<input type="submit" value="결제" class="btn hover3">
+		<button id="submit" disabled class="btn hover3">약관에 동의해주세요.</button>
 	</div>
+</div>
+</div>
 </section>
 </form>
