@@ -20,7 +20,7 @@
                 }
                 else{
                     $("#submit").prop("disabled", true)
-                                                .text("이용 약관에 동의해주세요.");
+                                                .text("약관에 동의해주세요.");
                 }
 
             });
