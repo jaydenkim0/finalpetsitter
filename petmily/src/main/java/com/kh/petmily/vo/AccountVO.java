@@ -1,5 +1,9 @@
 package com.kh.petmily.vo;
 
+import java.util.List;
+
+import com.kh.petmily.entity.PayDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -42,5 +46,6 @@ public class AccountVO {
 	// 사용시간
 	private int usage_time;
 
+	private List<PayDto> statuslist;
 
 }

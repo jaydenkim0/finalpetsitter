@@ -553,12 +553,7 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.paydetail(reservation_no);
 	}
 
-	
-	//test
-	@Override
-	public QnaDto test(int qna_no) {		
-		return adminDao.test(qna_no);
-	}
+
 
 
 

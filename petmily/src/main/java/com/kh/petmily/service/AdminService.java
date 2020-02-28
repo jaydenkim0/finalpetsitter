@@ -224,8 +224,7 @@ public interface AdminService {
 	// 예약 디테일에 보여줄 pay 테이블 정보
 	List<PayDto> paydetail(int reservation_no);
 	
-	//test
-	QnaDto test(int qna_no);
+
 	
 
 
