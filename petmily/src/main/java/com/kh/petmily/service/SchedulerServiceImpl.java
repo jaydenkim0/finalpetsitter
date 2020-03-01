@@ -20,7 +20,7 @@ public class SchedulerServiceImpl implements SchedulerService{
 	private AdminDao adminDao;
 	
 	@Override
-	@Scheduled(cron =" 0 0 9 1 * * " )
+	@Scheduled(cron =" 0 0 09 1 * * " )
 	public void accountPetsitter() {		
 		log.info("스케쥴 실행!");
 		// 1. 펫시터 아이디 구해오기(전월에 결제금액이 있는 펫시터만 구해오기)
