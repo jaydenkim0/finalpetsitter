@@ -68,6 +68,9 @@
 .page-navigator li {
 	display: inline-block;
 }
+table td img{
+	width:60px;
+}
 </style>
 <h1>리뷰 게시판</h1>
 <br>
@@ -79,75 +82,105 @@
 <!-- 	<br> -->
 <%-- </c:if> --%>
 
-<c:if test="${sessionScope.grade eq 'admin'}">
-<form method="get" action="${context}/board/review/list">
-	<select name="type" class="input-item">
-	<option value="review_writer">작성자</option>
-		<option value="review_title">제목</option>
-		<option value="review_content">내용</option>
-	</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
-	<input type="submit" value="조회">
-</form>
-
-</c:if>
-
-
+	<!-- 검색기능  -->
+	<c:if test="${sessionScope.grade eq 'admin'}">
+		<form method="get" action="${context}/board/review/list">
+			<select name="type" class="input-item">
+				<option value="review_writer">작성자</option>
+				<option value="sitter_id">펫시터</option>
+				<option value="review_title">제목</option>
+				<option value="review_content">내용</option>
+			</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
+			<input type="submit" value="조회">
+		</form>
+	</c:if>
 
 
 <section>
-<table border="1" width="100%">
-<tr>
-	<th>글번호</th>
-	<th>작성자</th>
-	<th>펫시터</th>
-	<th>제목</th>
-	<th>내용</th>
-	<th>별점</th>
-	<th>작성일</th>
-
-	 
 	
-</tr>
-<c:forEach var="reviewDto" items="${list}">
-<tr>
-	<td>${reviewDto.review_no}</td>
-	<td>${reviewDto.review_writer}</td>
-	<td>${reviewDto.sitter_id}</td>
-<td><a href="${context}/petsitter/content?pet_sitter_no=${reviewDto.review_sitter_no}">${reviewDto.review_title}</a></td>
-<%-- 	<td>${reviewDto.review_title}</td> --%>
-	<td>	
-	<div class="naver-viewer"></div>  
-	<input type="hidden" name="review_content" value="${reviewDto.review_content}">  
-	</td>
-	<td>${reviewDto.review_star}</td>
-	<td>${reviewDto.review_wdate}</td>
-	
-	<td width="40">
-<%-- 	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}"> --%>
-<!-- 	<button type="button" id="btnupdate">수정</button> -->
-</a>
+	<table border="1" width="100%">
+	<tr>
+		<th>글번호</th>
+		<th>작성자</th>
+		<th>펫시터</th>
+		<th>제목</th>
+		<th>내용</th>
+		<th>별점</th>
+		<th>작성일</th>	
+	</tr>
 
-<c:if test="${sessionScope.grade eq 'admin'}">
-	<a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
-	<button type="button" id="btndelete">삭제</button>
-	<br>
-	<br>
-</c:if>
-<%-- <a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}"> --%>
-<!-- 	<button type="button" id="btndelete">삭제</button> -->
-<!-- 	</a> -->
-	</td>
-</tr>
-</c:forEach>
-</table>
-<div class="row">
-<!-- 네비게이터(navigator) -->
-		<jsp:include page="/WEB-INF/views/board/review/navigator.jsp">
-			<jsp:param name="pno" value="${pno}" />
-			<jsp:param name="count" value="${count}" />
-			<jsp:param name="navsize" value="${navsize}" />
-			<jsp:param name="pagesize" value="${pagesize}" />
-		</jsp:include>
+	<c:forEach var="reviewDto" items="${list}">
+	<tr>
+		<td>${reviewDto.review_no}</td>
+		<td>
+			<c:choose>
+				<c:when test="${ !empty reviewDto.review_writer}">
+					${reviewDto.review_writer}		
+				</c:when>
+				<c:otherwise>
+					<small> 탈퇴한 회원 </small>
+				</c:otherwise>
+			</c:choose>	
+		</td>
+		<td>
+		<c:choose>
+				<c:when test="${ !empty reviewDto.sitter_id}">
+					${reviewDto.sitter_id}		
+				</c:when>
+				<c:otherwise>
+					<small> 탈퇴한 펫시터 </small>
+				</c:otherwise>
+		</c:choose>
+		</td>
+		<td><a href="${context}/petsitter/content?pet_sitter_no=${reviewDto.review_sitter_no}">${reviewDto.review_title}</a></td>
+		<%-- 	<td>${reviewDto.review_title}</td> --%>
+		<td>	
+			<div class="naver-viewer"></div>  
+			<input type="hidden" name="review_content" value="${reviewDto.review_content}">  
+		</td>
+		<td>
+			<c:choose>
+				<c:when test="${reviewDto.review_star eq 1}">
+					<img src="${pageContext.request.contextPath}/resources/img/1.png">
+				</c:when>
+				<c:when test="${reviewDto.review_star eq 2}">
+					<img src="${pageContext.request.contextPath}/resources/img/2.png">
+				</c:when>
+				<c:when test="${reviewDto.review_star eq 3}">
+					<img src="${pageContext.request.contextPath}/resources/img/3.png">
+				</c:when>			
+			</c:choose>		
+		</td>
+		<td>${reviewDto.review_wdate}</td>
+		
+		<td width="40">
+		<%-- 	<a href="/petmily/board/review/update?review_no=${reviewDto.review_no}"> --%>
+		<!-- 	<button type="button" id="btnupdate">수정</button> -->
+		</a>
+	
+			<c:if test="${sessionScope.grade eq 'admin'}">
+				<a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}">
+					<button type="button" id="btndelete">삭제</button>
+				<br><br>
+			</c:if>
+	
+		<%-- <a href="/petmily/board/review/delete?review_no=${reviewDto.review_no}"> --%>
+		<!-- 	<button type="button" id="btndelete">삭제</button> -->
+		<!-- 	</a> -->
+		</td>	
+	</tr>
+	</c:forEach>
+	</table>
+
+		<!-- 네비게이터(navigator) -->
+		<div class="row">
+			<jsp:include page="/WEB-INF/views/board/review/navigator.jsp">
+				<jsp:param name="pno" value="${pno}" />
+				<jsp:param name="count" value="${count}" />
+				<jsp:param name="navsize" value="${navsize}" />
+				<jsp:param name="pagesize" value="${pagesize}" />
+			</jsp:include>
 		</div>
-	</section>
+		
+</section>
 
