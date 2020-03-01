@@ -115,7 +115,12 @@ table td img{
 		<td>
 			<c:choose>
 				<c:when test="${ !empty reviewDto.review_writer}">
-					${reviewDto.review_writer}		
+					${reviewDto.review_writer}
+					<c:if test="${sessionScope.grade eq 'admin'}">
+						<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${reviewDto.review_writer}">
+							회원정보
+						</a>
+					</c:if>		
 				</c:when>
 				<c:otherwise>
 					<small> 탈퇴한 회원 </small>
@@ -125,7 +130,12 @@ table td img{
 		<td>
 		<c:choose>
 				<c:when test="${ !empty reviewDto.sitter_id}">
-					${reviewDto.sitter_id}		
+					${reviewDto.sitter_id}	
+					<c:if test="${sessionScope.grade eq 'admin'}">
+						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${reviewDto.review_sitter_no}">
+							펫시터정보
+						</a>	
+					</c:if>			
 				</c:when>
 				<c:otherwise>
 					<small> 탈퇴한 펫시터 </small>
