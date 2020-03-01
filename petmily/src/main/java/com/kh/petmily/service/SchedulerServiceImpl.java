@@ -10,6 +10,9 @@ import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.AccountVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class SchedulerServiceImpl implements SchedulerService{
 
@@ -17,8 +20,9 @@ public class SchedulerServiceImpl implements SchedulerService{
 	private AdminDao adminDao;
 	
 	@Override
-//	@Scheduled()
+	@Scheduled(cron =" 0 0 9 1 * * " )
 	public void accountPetsitter() {		
+		log.info("스케쥴 실행!");
 		// 1. 펫시터 아이디 구해오기(전월에 결제금액이 있는 펫시터만 구해오기)
 		List<AccountVO> list = adminDao.findpetsitteraccount();
 		for (AccountVO accountOne :list) {
