@@ -429,6 +429,7 @@ public class AdminController {
 	// 정산관리 페이지 연결
 	@GetMapping("/account")
 	public String account() {
+	// 정산리스트를 불러와서 먼저 찍어줄 것인지 아니면 다른 방법으로 찍어서 보여줄 것인지.. 확인
 		return "admin/account";		
 	}
 	

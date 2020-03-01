@@ -42,10 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select
 		*
 		from
-		REVIEW
+		reviewallinfo
 	    where review_sitter_no=#{review_sitter_no}
 		order by review_no desc
 	</select>
+	
 	<!-- 리뷰 수정 -->
 	<update id="reviewupdate" parameterType="reviewDto" >
 		update REVIEW set	
@@ -67,8 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!--  	리뷰 찾기 -->
-	<select id="reviewselect" parameterType="int" resultType="reviewDto">
-		
+	<select id="reviewselect" parameterType="int" resultType="reviewDto">		
 		select * from review where review_no=#{review_no}
 	</select>
 
@@ -79,8 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  NVL (AVG(review_star),0)
 	     from 
 	  REVIEWSTAR
-	  where pet_sitter_no = #{pet_sitter_no}
-	    
+	  where pet_sitter_no = #{pet_sitter_no}	    
 	</select>
 	
 
@@ -91,7 +90,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rownum as rn, A.* from(
 		select
 		review_no,review_writer,review_title,review_content,review_star,review_wdate
-		from REVIEW
+		from reviewallinfo
 		where
 		${type} like '%'||#{keyword}||'%'
 		order by review_no desc, review_wdate desc
@@ -105,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select rownum as rn, A.* from(
 		select*
 		<!-- faq_no,faq_title,faq_head,faq_content,wdate,member_id -->
-		from REVIEW
+		from reviewallinfo
 		order by review_no desc, review_wdate desc
 		) A
 		) where rn between #{start}

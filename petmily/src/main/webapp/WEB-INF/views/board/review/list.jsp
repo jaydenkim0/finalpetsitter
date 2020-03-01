@@ -99,7 +99,7 @@
 <tr>
 	<th>글번호</th>
 	<th>작성자</th>
-	<th>시터번호</th>
+	<th>펫시터</th>
 	<th>제목</th>
 	<th>내용</th>
 	<th>별점</th>
@@ -112,7 +112,7 @@
 <tr>
 	<td>${reviewDto.review_no}</td>
 	<td>${reviewDto.review_writer}</td>
-	<td>${reviewDto.review_sitter_no}</td>
+	<td>${reviewDto.sitter_id}</td>
 <td><a href="${context}/petsitter/content?pet_sitter_no=${reviewDto.review_sitter_no}">${reviewDto.review_title}</a></td>
 <%-- 	<td>${reviewDto.review_title}</td> --%>
 	<td>	
