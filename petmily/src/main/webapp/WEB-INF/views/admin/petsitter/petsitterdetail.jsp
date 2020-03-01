@@ -51,6 +51,10 @@
 					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${petsitter.sitter_id}">
 					회원정보 보기
 					</a>
+					|
+					<a href="${pageContext.request.contextPath}/petsitter/content?pet_sitter_no=${petsitter.pet_sitter_no}">
+					펫시터페이지 보기
+					</a>
 					</td>					
 				</tr>
 				<tr>			

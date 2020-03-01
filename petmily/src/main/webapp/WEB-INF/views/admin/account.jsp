@@ -19,3 +19,7 @@
 	<br>
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
 	<a href="${pageContext.request.contextPath}/admin/accountoption"><button>가격 옵션 설정</button></a>
+	
+	정산리스트 : 어떻게 보여줄 것인지 확인
+	
+	

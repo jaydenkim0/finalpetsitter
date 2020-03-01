@@ -586,8 +586,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="reservation_no" property="reservation_no" />
 			<result column="member_id" property="member_id" />
 			<result column="status" property="status"/>
-			<result column="reservation_no" property="partner_order_id"/>		
-		
+			<result column="reservation_no" property="partner_order_id"/>
+					
+			<!-- 
+				column : 리스트를 불러올 때 찾을 조건 컬럼을 지정해서 넣어 줌
+				javaType : 출력하는 자바 타입(String 등등)
+				ofType : Dto, VO 등등 타입 입력
+				property :  Dto, VO 등등 이름 입력
+				select : mybatis 샐행할 id 입력
+			  -->
 			<collection column="reservation_no" javaType="List" ofType="PayDto" property="statuslist" select="getPayStatusListMap"></collection>
 		</resultMap>
 	
@@ -607,6 +614,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					) where rn between #{start} and #{end}	
 			</select>
 			
+			<!-- resultMap 에 추가되는 속성을 List 로 찾아서 넣어줌 -->
 			<select id="getPayStatusListMap"  resultType="payDto" parameterType="int">		
 				select * from pay where partner_order_id = #{partner_order_id}
 			</select>
