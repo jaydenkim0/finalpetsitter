@@ -5,7 +5,7 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-	<c:set var="admin" value="${grade eq 'admin'}"></c:set>
+
 	<!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
