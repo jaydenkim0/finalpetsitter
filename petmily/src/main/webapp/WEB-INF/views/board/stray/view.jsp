@@ -278,11 +278,14 @@ hr {
 						<div class="grandmother">
 							<table width="100%" class="mother">
 								<tr>
-									<th align="left"><c:choose>
-											<c:when test="${not empty sessionScope.id}"> ${reply.reply_writer}</c:when>
-
+									<th align="left">
+									<c:choose>
+											<c:when test="${not empty sessionScope.id}"> 
+											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+											${reply.reply_writer}</c:when>
 											<c:otherwise>비회원</c:otherwise>
-										</c:choose> <c:if test="${strayVO.stray_writer == reply.reply_writer}">
+										</c:choose> 
+										<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
 										</c:if></th>
 

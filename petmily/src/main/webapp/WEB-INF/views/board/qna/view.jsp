@@ -267,11 +267,11 @@ hr {
 	<div class="grandmother">
 		<table width="100%" class="mother">
 			<tr>
-				<th align="left" width="100"> 
-				${reply.reply_writer}</th>
+				<th align="left"> 
+				<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">${reply.reply_writer}
 				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
-				</c:if>
+				</c:if></th>
 
 				<th align="left">
 				작성일 : ${reply.writedateWithFormat}</th>
