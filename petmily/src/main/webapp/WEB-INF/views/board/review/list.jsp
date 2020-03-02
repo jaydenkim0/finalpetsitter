@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
- <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
- <c:set var="admin" value="${grade eq 'admin'}"></c:set>
- <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
+    
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+	<c:set var="admin" value="${grade eq 'admin'}"></c:set>
+	<!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
@@ -40,9 +40,9 @@
                 viewer.setValue(text);//값 설정
         	}); 	            
         });
-    </script>
-    
+    </script>    
 	<!-- 네이버 에디터 영역 종료 --> 
+	
 	 <c:choose>
 		<c:when test="${sessionScope.id eq null }">
 			<a href="${context}/member/login">로그인</a>
@@ -86,7 +86,8 @@
 				<option value="sitter_id">펫시터</option>
 				<option value="review_title">제목</option>
 				<option value="review_content">내용</option>
-			</select> <input class="input-item" name="keyword" placeholder="검색어" requierd>
+			</select>
+			<input class="input-item" name="keyword" placeholder="검색어" requierd>
 			<input type="submit" value="조회">
 		</form>
 	</c:if>
@@ -113,7 +114,7 @@
 					<c:when test="${ !empty reviewDto.review_writer}">
 						${reviewDto.review_writer}
 						<c:if test="${sessionScope.grade eq 'admin'}">
-							<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${reviewDto.review_writer}">
+							<a href="${context}/admin/memberdetail?id=${reviewDto.review_writer}">
 								회원정보
 							</a>
 						</c:if>		
@@ -128,7 +129,7 @@
 						<c:when test="${ !empty reviewDto.sitter_id}">
 							${reviewDto.sitter_id}	
 							<c:if test="${sessionScope.grade eq 'admin'}">
-								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${reviewDto.review_sitter_no}">
+								<a href="${context}/admin/petsitter/petsitterdetail?pet_sitter_no=${reviewDto.review_sitter_no}">
 									펫시터정보
 								</a>	
 							</c:if>			
@@ -146,13 +147,13 @@
 			<td>
 				<c:choose>
 					<c:when test="${reviewDto.review_star eq 1}">
-						<img src="${pageContext.request.contextPath}/resources/img/1.png">
+						<img src="${context}/resources/img/1.png">
 					</c:when>
 					<c:when test="${reviewDto.review_star eq 2}">
-						<img src="${pageContext.request.contextPath}/resources/img/2.png">
+						<img src="${context}/resources/img/2.png">
 					</c:when>
 					<c:when test="${reviewDto.review_star eq 3}">
-						<img src="${pageContext.request.contextPath}/resources/img/3.png">
+						<img src="${context}/resources/img/3.png">
 					</c:when>			
 				</c:choose>		
 			</td>
@@ -161,7 +162,7 @@
 			
 			<td width="40">	
 				<c:if test="${sessionScope.grade eq 'admin'}">
-					<a href="${pageContext.request.contextPath}/board/review/delete?review_no=${reviewDto.review_no}">
+					<a href="${context}/board/review/delete?review_no=${reviewDto.review_no}">
 						<button type="button" id="btndelete">삭제</button>
 					</a>					
 				</c:if>
