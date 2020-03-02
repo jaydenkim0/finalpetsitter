@@ -42,7 +42,7 @@
 					<td> 등급 : ${member.grade}</td>					
 				</tr>					
 				<tr>			
-					<td> 포인트 : ${member.point}</td>					
+					<td> 포인트 : ${member.point} 점</td>					
 				</tr>		
 		</tbody>	
 	</table>
