@@ -22,10 +22,8 @@
                     $("#submit").prop("disabled", true)
                                                 .text("약관에 동의해주세요.");
                 }
-
             });
         });
-
     </script>
 
 
@@ -177,12 +175,12 @@ select {
 	</table>
 	<br>
 	<div>
-	<div align="center" name="account">
-	       	  <input type="checkbox"  id="check1" name="account">&nbsp;체크/신용카드&nbsp;
-	          <input type="checkbox"  id="check1" name="account">&nbsp;핸드폰 결제&nbsp;
-	          <input type="checkbox"   id="check1" name="account">&nbsp;실시간 계좌이체&nbsp;
-	 	      <input type="checkbox"  id="check1" name="account">&nbsp;무통장 입금&nbsp;
-	          <input type="checkbox"   id="check1" name="account">&nbsp;카카오페이
+	<div align="center" id="check1">
+	       	  <input type="checkbox" name="account">&nbsp;체크/신용카드&nbsp;
+	          <input type="checkbox"  name="account">&nbsp;핸드폰 결제&nbsp;
+	          <input type="checkbox"  name="account">&nbsp;실시간 계좌이체&nbsp;
+	 	      <input type="checkbox"  name="account">&nbsp;무통장 입금&nbsp;
+	          <input type="checkbox"  name="account">&nbsp;카카오페이
 	        <br>
 	</div>
 	<hr>
