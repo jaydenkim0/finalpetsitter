@@ -40,37 +40,50 @@
 	
 	${count}개의 게시물이 있습니다.	
 
-
-	<!-- 리스트 내용 -->
-		<c:forEach var="petsitterapply" items="${list}" >	
-			<c:choose>			
-					<c:when test="${petsitterapply.black_count >0 }">							
-						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}"
-						style="color:#ff8d00;">
-								<h4>
-									 Id : ${petsitterapply.id} |
-									이름: ${petsitterapply.name} |
-									닉네임 : ${petsitterapply.nick} |
-									전화번호: ${petsitterapply.phone} |
-									가입신청일 : ${petsitterapply.getPetsitterdateWithFormat()}
-									(${petsitterapply.black_count})					
-								</h4>						
-							</a>		
-					</c:when>
-					<c:otherwise>					
-						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">
-								<h4>
-									Id : ${petsitterapply.id} |
-									이름: ${petsitterapply.name} |
-									닉네임 : ${petsitterapply.nick} |
-									전화번호: ${petsitterapply.phone} |
-									가입신청일 : ${petsitterapply.getPetsitterdateWithFormat()}											
-								</h4>								
-							</a>	
-					</c:otherwise>	
-			</c:choose>			
-	</c:forEach>
-
+	<table>
+		<tr>
+			<th> 아이디 </th>
+			<th> 이름 </th>
+			<th> 닉네임 </th>
+			<th> 전화번호 </th>			
+			<th> 가입신청일 </th>
+			<th> 비고 </th>			
+		</tr>	 
+		<!-- 리스트 내용 -->
+			<c:forEach var="petsitterapply" items="${list}" >	
+				<c:choose>			
+						<c:when test="${petsitterapply.black_count >0 }">	
+							<tr>	
+								<td>				
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}"
+									style="color:#ff8d00;">							
+										${petsitterapply.id} 
+									</a>	
+								</td>			 
+								<td style="color:#ff8d00;">	${petsitterapply.name} </td>	
+								<td style="color:#ff8d00;">	${petsitterapply.nick} </td>	
+								<td style="color:#ff8d00;">	${petsitterapply.phone} </td>	
+								<td style="color:#ff8d00;">	${petsitterapply.getPetsitterdateWithFormat()}</td>	
+								<td style="color:#ff8d00;">	(${petsitterapply.black_count}) </td>														
+							</tr>		
+						</c:when>
+						<c:otherwise>	
+							<tr>		
+								<td>	
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">								
+										${petsitterapply.id} 
+									</a>	
+								</td>			
+								<td>	${petsitterapply.name} </td>
+								<td>	${petsitterapply.nick} </td>
+								<td>	${petsitterapply.phone} </td> 
+								<td>	${petsitterapply.getPetsitterdateWithFormat()} </td>											
+								<td>	</td>							
+							</tr>	
+						</c:otherwise>	
+				</c:choose>			
+		</c:forEach>
+	</table>
 
 
 	<!-- 페이징 -->

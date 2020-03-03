@@ -116,9 +116,9 @@ public class PayController {
 				.pg_token(pg_token)
 				.build();
 		KakaoPaySuccessReturnVO result = payService.approve(data);		
-		// 결제 이메일 발송지점??
 		model.addAttribute("result",result);
 		
+		// 결제 완료 이메일 발송
 		// 1. 결제 이메일 보내기위한 파라미터 준비
 		String id = kpayReadyVO.getPartner_user_id();// 회원 아이디 
 		MemberVO member = adminService.getMemberdetail(id);		

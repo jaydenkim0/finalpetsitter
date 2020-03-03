@@ -43,17 +43,30 @@
 	${count}개의 게시물이 있습니다.	
 
 
-	<!-- 리스트 내용 -->
-	<c:forEach var="blackreport" items="${list}">	
-					<a href="${pageContext.request.contextPath}/board/qna/view?qna_no=${blackreport.qna_no}">
-					<h4>
-						신고 게시글 번호 : ${blackreport.qna_no} |
-						신고 작성자 : ${blackreport.qna_writer} |
-						신고 제목 : ${blackreport.qna_head} |
-						신고 등록일 : ${blackreport.getWritedateWithFormat()}  	
-					</h4>
+	<table>
+		<tr>
+			<th> 게시글 번호</th>
+			<th> 작성자 </th>
+			<th> 제목 </th>
+			<th> 등록일 </th>
+		</tr>
+		<c:forEach var="blackreport" items="${list}">	
+			<tr>
+				<td>
+					<a href="${pageContext.request.contextPath}/board/qna/view?qna_no=${blackreport.qna_no}">			
+						${blackreport.qna_no} 
 					</a>		
-	</c:forEach>	
+				</td>			
+				<td>	${blackreport.qna_writer}	</td>
+				<td>	
+					<a href="${pageContext.request.contextPath}/board/qna/view?qna_no=${blackreport.qna_no}">
+						${blackreport.qna_head} 
+					</a>	 
+				</td>
+				<td>	${blackreport.getWritedateWithFormat()} </td> 
+			</tr>
+		</c:forEach>
+	</table>	
 
 
 

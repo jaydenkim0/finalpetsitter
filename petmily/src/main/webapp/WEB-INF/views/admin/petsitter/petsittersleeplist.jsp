@@ -40,33 +40,44 @@
 	
 	${count}개의 게시물이 있습니다.	
 
-
-	<!-- 리스트 내용 -->
-	<c:forEach var="petsitterSleepList" items="${list}">		
-		<c:choose>			
-					<c:when test="${petsitterSleepList.black_count  > 0}">				
+	<table>
+		<tr>
+			<th> 아이디 </th>
+			<th> 펫시터 상태 </th>
+			<th> 펫시터 서비스 유형 </th>
+			<th> 비고 </th>			
+		</tr>	 
+		<!-- 리스트 내용 -->
+		<c:forEach var="petsitterSleepList" items="${list}">		
+			<c:choose>			
+					<c:when test="${petsitterSleepList.black_count  > 0}">	
+						<tr>	
+							<td>	
 								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}"
-								style="color: red">
-								<h4>
-									ID : ${petsitterSleepList.sitter_id} |
-									펫시터 상태 : ${petsitterSleepList.sitter_status} |
-									펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
-									(${petsitterSleepList.black_count})		
-								</h4>
-								</a>			
+								style="color: red">							
+									${petsitterSleepList.sitter_id}
+								</a>		
+							</td>		
+							<td style="color: red">	${petsitterSleepList.sitter_status} </td>	
+							<td style="color: red">	${petsitterSleepList.sitter_matching_type} </td>	
+							<td style="color: red">	(${petsitterSleepList.black_count}) </td>								
+						</tr>			
 					</c:when>		
-					<c:otherwise>								
-								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">
-								<h4>
-									ID : ${petsitterSleepList.sitter_id} |
-									펫시터 상태 : ${petsitterSleepList.sitter_status} |
-									펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
-								</h4>
-								</a>				
+					<c:otherwise>		
+						<tr>	
+							<td>				
+								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">							
+									ID : ${petsitterSleepList.sitter_id} 
+								</a>		
+							</td>		
+							<td>	${petsitterSleepList.sitter_status} </td> 
+							<td>	${petsitterSleepList.sitter_matching_type} </td>
+							<td>	</td>
+						</tr>				
 					</c:otherwise>
 				</c:choose>	 		
-	</c:forEach>
-
+		</c:forEach>
+	</table>
 
 
 	<!-- 페이징 -->

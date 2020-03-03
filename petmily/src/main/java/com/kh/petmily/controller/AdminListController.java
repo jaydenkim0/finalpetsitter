@@ -196,9 +196,9 @@ public class AdminListController {
 	
 	// 예약 현황
 	@RequestMapping("/reservationstatus")
-	public String reservationstatus(@RequestParam(defaultValue = "reservation_no", required = false) String searchOption,
-			  @RequestParam(defaultValue = "", required = false) String keyword,
-			  @RequestParam(defaultValue = "1", required = false) int curPage,										
+	public String reservationstatus(@RequestParam(defaultValue = "reservation_no") String searchOption,
+			  @RequestParam(defaultValue = "") String keyword,
+			  @RequestParam(defaultValue = "1") int curPage,										
 			  Model model) {
 		// 레코드의 갯수 계산
 		int count = adminService.countAriclegetAccount(searchOption, keyword);		
@@ -212,7 +212,6 @@ public class AdminListController {
 				  .addAttribute("searchOption", searchOption)
 				  .addAttribute("keyword", keyword)
 				  .addAttribute("navi", navi);			
-			System.out.println("제발 나와라!!! = "+(List<AccountVO>)adminService.getAccountreservationList(start, end, searchOption, keyword));	
 		return "admin/reservationstatus";
 	}
 	
