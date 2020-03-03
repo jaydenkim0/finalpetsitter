@@ -4,10 +4,7 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
-<!-- languages (Basic Language: English/en) -->
-<script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script>
 	$(function(){
 
@@ -132,40 +129,50 @@
         });
 	});
 </script>
-<script>
-    function loadEditor(){
-        var editor = SUNEDITOR.create((document.querySelector("#care_reply_content"),document.querySelector("#care_reply_change")),{
-            //언어 설정
-            lang: SUNEDITOR_LANG['ko'],
-            
-            //버튼 목록
-            buttonList:[
-            	 ['font','fontSize','fontColor'],
-                 ['underline','italic', 'bold','paragraphStyle','formatBlock'],
-                 ['align','table']
 
-              ],
-              font:[
-                 '굴림','궁서','binggrae','Verdana','Arial'
-             ],
-             fontSize:[
-             '8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'
-             ],
-             fontColor:[
-          ],
-        });
-        
-    	//중요 : 키입력시마다 값을 원래위치(textarea)에 복사
-	    editor.onKeyUp = function(e){
-	    	var care_content = document.querySelector("#care_reply_content");
-	    	care_content.value = editor.getContents();
-	    	var care_content2 = document.querySelector("#care_reply_change");
-	    	care_content2.value = editor.getContents();
-	    }
-    }
-    
-    //윈도우 로딩 시 loadEditor를 실행하도록 설정(body에 onload 한 효과)
-    window.onload = loadEditor;
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/codemirror.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/github.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+<link rel="stylesheet" type="text/css"
+	href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script
+	src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+<!-- 네이버 토스트에디터 종료 -->
+
+<script>
+	$(function() {
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			//대상
+			el : document.querySelector(".naver-editor"),
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px"
+		};
+
+		var editor = tui.Editor.factory(options);
+
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[name=care_reply_content]").value = text;
+						});
+	});
 </script>
 
 <script>
@@ -197,7 +204,6 @@ function no_image2(){
 
 <body>
 
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <h1>돌봄 방 ${care_board_no }</h1><br>
 
 
@@ -265,8 +271,8 @@ function no_image2(){
 				<td>
 					<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 					<input type="hidden" name="care_reply_writer" value="${id }">
-					<textarea name="care_reply_content" required id="care_reply_content"
-					style="resize:vertical;"placeholder="글 내용 입력"></textarea>
+					<div class="naver-editor"></div>
+					<input type="hidden" name="care_reply_content" value="">
 					<input type="file" name="care_image" accept="image/*">
 				</td>
 				<td align="right">
