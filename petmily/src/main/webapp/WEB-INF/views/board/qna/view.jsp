@@ -244,22 +244,27 @@ hr {
 				</tr>
 			</c:if>
 		</c:forEach>
+		
 				<tr>
 				<td>
-					<div class="naver-viewer"></div>  
-					<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+		<c:choose>
+		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+			<div class="naver-viewer"></div>  
+			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+			</c:if>
+				<div class="naver-viewer"></div> 
+				<input type="hidden" name="faq_content" value="게시글 권한이 없습니다.">  
+		</c:when>
+		<c:otherwise>
+			<div class="naver-viewer"></div>  
+			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+		</c:otherwise>
+		</c:choose>
 				</td>
 			</tr>
 
 
-
-<!-- 댓글화면 -->
-<%-- <c:if test="${member_image_no>0"> --%>
-<%-- 	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image"> --%>
-<%-- </c:if> --%>
-<%-- <c:otherwise> --%>
-<!-- 	<img src="http://placehold.it/100x100"> -->
-<%-- </c:otherwise> --%>
 <c:forEach items="${replyList}" var="reply">
 <c:if test="${reply.content ne null}">
 <tr>
@@ -278,7 +283,16 @@ hr {
 			</tr>
 			
 			<tr class="reply_view">
-				<th class="content" colspan="2" align="left">${reply.content}</th>
+				<c:choose>
+					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+							<th class="content" colspan="2" align="left">${reply.content}</th>
+						</c:if>
+					</c:when>
+				<c:otherwise>
+				<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
+				</c:otherwise>
+		</c:choose>
 			</tr>
 			
 			<tr class="reply_edit">
@@ -316,13 +330,23 @@ hr {
 <!-- 댓글 등록 -->
 <tr>
 <td align="right">
-<form action="replywrite" method="post" class="reply_submit">
+	<c:choose>
+		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-		<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
-				<br><br>
-				 <input type="submit" value="등록" class="btn hover3">
+					<br><br>
+			 <input type="submit" value="등록" class="btn hover3">
 		</form>
+			</c:if>
+				</c:when>
+					<c:otherwise>
+						<textarea name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="100" ></textarea>
+					<br><br>
+				</c:otherwise>
+		</c:choose>
 		</td>
 	</tr>
 
