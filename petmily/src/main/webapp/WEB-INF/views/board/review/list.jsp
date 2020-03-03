@@ -81,6 +81,14 @@
 <style>
 .page-navigator li {
 	display: inline-block;
+	margin-left: 10px;
+ 	padding: 5px 10px; 
+	font-size:15px;
+	font-weight: 600;
+/* 	background: #white; */
+/* 	border: 1px solid #444444; */
+/* 	border-radius:100px; */
+
 }
 
 table td img {
@@ -88,18 +96,26 @@ table td img {
 }
 
 .review_table {
-	width: 80%;
+	width: 72%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color: #BDBDBD;
 }
 
-th, td {
+th {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
 	border-color: #BDBDBD;
 }
+
+td{
+    text-align: left;
+    border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+
 
 a {
 	text-decoration: none;
@@ -107,7 +123,7 @@ a {
 }
 
 .right_mar {
-	margin-right: 5%;
+	margin-right: 10%;
 }
 
 .page-navigator li {
@@ -188,7 +204,6 @@ select {
 	<h1>리뷰 게시판</h1>
 	<br>
 	<section>
-
 		<table class="review_table">
 			<tr>
 				<th>글번호</th>
@@ -232,9 +247,9 @@ select {
 						</c:choose></td>
 					<td><a
 						href="${context}/petsitter/content?pet_sitter_no=${reviewDto.review_sitter_no}">${reviewDto.review_title}</a></td>
-					<td>
+					<td width="300">
 						<div class="naver-viewer"></div> <input type="hidden"
-						name="review_content" value="${reviewDto.review_content}">
+						name="review_content" value="${reviewDto.review_content}" >
 					</td>
 					<td><c:choose>
 							<c:when test="${reviewDto.review_star eq 1}">
