@@ -43,23 +43,31 @@
     
 
     <div class="scrollbox">
-      <c:forEach var="memberblacklist" items="${MBlist}">      
-        <a href="blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 
-    	<h3>
-    		아이디 : ${memberblacklist.black_id},    	
-	    	이름 : ${memberblacklist.black_name},   	
-	    	전화번호 : ${memberblacklist.black_phone},    	
-	    	등급 : ${memberblacklist.black_grade} 
-	    	  (${memberblacklist.black_count})     	
-	    	</h3>
-	    	</a>  	
-    </c:forEach>
-   </div>
+    	<table>
+    		<tr>
+    			<td> 아이디 </td>
+    			<td> 이름 </td>
+    			<td> 전화번호 </td>
+    			<td> 등급 </td>
+    			<td> 경고 횟수 </td>
+    		</tr>
+			<c:forEach var="memberblacklist" items="${MBlist}"> 
+				<tr>
+					<td>     
+				        <a href="blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 	    
+				    		${memberblacklist.black_id},    	
+					    </a> 
+				    </td> 	
+				   	<td style="color:#ff8d00;"> ${memberblacklist.black_name} </td> 		
+				    <td style="color:#ff8d00;"> ${memberblacklist.black_phone} </td> 	    	
+				    <td style="color:#ff8d00;"> ${memberblacklist.black_grade} </td> 	
+				    <td style="color:#ff8d00;"> (${memberblacklist.black_count}) </td> 	    	
+			    </tr>	
+			</c:forEach>
+		</table>
+	</div>
     
-    
-    <br><br>
-    
-    <br><br>
+
     
     
 	<h3><a href="${pageContext.request.contextPath}/admin/list/blacklistsitter">경고 펫시터 리스트</a></h3>
@@ -67,21 +75,30 @@
 	
    
     <div class="scrollbox">
-    <c:forEach var="petblacklist" items="${PBlist}" >
-    	<a href="blackListdetail?id=${petblacklist.black_id}" style="color:red;">
-    	<h3>
-    		아이디 : ${petblacklist.black_id},    	
-		    이름 : ${petblacklist.black_name},    	
-		    전화번호 : ${petblacklist.black_phone},    	
-		    등급 : ${petblacklist.black_grade}	
-		    (${petblacklist.black_count})
-		    </h3>
-		    </a>
-    </c:forEach>
+    	<table>
+    		<tr>
+    			<td> 아이디 </td>
+    			<td> 이름 </td>
+    			<td> 전화번호 </td>
+    			<td> 등급 </td>
+    			<td> 경고 횟수 </td>
+    		</tr>
+		    <c:forEach var="petblacklist" items="${PBlist}" >
+		    	<tr>
+		    		<td>
+				    	<a href="blackListdetail?id=${petblacklist.black_id}" style="color:red;">		    	
+				    		${petblacklist.black_id},    	
+						 </a>
+					 </td>
+					 <td style="color:red;"> ${petblacklist.black_name}  </td>   	
+					 <td style="color:red;"> ${petblacklist.black_phone}  </td>    	
+					 <td style="color:red;"> ${petblacklist.black_grade}  </td>	
+					 <td style="color:red;"> (${petblacklist.black_count})  </td>					    
+				</tr>  
+		    </c:forEach>
+	    </table>
 	</div>
 	
 	
-    <br><br>
-
-    <br><br>
+  
 	

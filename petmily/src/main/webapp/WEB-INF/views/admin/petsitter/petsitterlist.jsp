@@ -35,39 +35,48 @@
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
 		<input type="submit" value="검색">
-	</form>
-	
+	</form>	
 	
 	${count}개의 게시물이 있습니다.	
 
-
+	<table>
+		<tr>
+			<th> 펫시터 아이디 </th>
+			<th> 펫시터 상태 </th>
+			<th> 펫시터 서비스 유형 </th>
+			<th> 비고 </th>			
+		</tr>	 	
 	<!-- 리스트 내용 -->
-	<c:forEach var="petsitter" items="${list}">	
-		<c:choose>			
-				<c:when test="${petsitter.black_count  > 0}">		
-					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}"
-					style="color: red">
-							<h4>
-								펫시터 ID : ${petsitter.sitter_id} |
-								펫시터 상태 : ${petsitter.sitter_status} |
-								펫시터 서비스 유형  : ${petsitter.sitter_matching_type} 
-								(${petsitter.black_count})								
-							</h4>
-					</a>
-				</c:when>	
-			<c:otherwise>
-					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-							<h4>
-								펫시터 ID : ${petsitter.sitter_id} |
-								펫시터 상태 : ${petsitter.sitter_status} |
-								펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
-							</h4>
-					</a>	
-			</c:otherwise>
-		</c:choose>						
-	</c:forEach>			
-
-
+		<c:forEach var="petsitter" items="${list}">	
+			<c:choose>			
+					<c:when test="${petsitter.black_count  > 0}">	
+						<tr>
+							<td>
+								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}"
+								style="color: red">							
+									${petsitter.sitter_id} 
+								</a>
+								</td>										
+								<td style="color: red">	${petsitter.sitter_status} </td>
+								<td style="color: red">	${petsitter.sitter_matching_type} 	</td>
+								<td style="color: red">	(${petsitter.black_count})	</td>						
+						</tr>
+					</c:when>	
+					<c:otherwise>
+						<tr>
+							<td>
+								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">							
+									${petsitter.sitter_id} 
+								</a>
+							</td>
+							<td> ${petsitter.sitter_status} </td>
+							<td>	${petsitter.sitter_matching_type} </td>
+							<td> </td>	
+						</tr>	
+					</c:otherwise>
+			</c:choose>						
+		</c:forEach>	
+	</table>	
 
 	<!-- 페이징 -->
 			<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
