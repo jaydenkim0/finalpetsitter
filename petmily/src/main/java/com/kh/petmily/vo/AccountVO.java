@@ -26,7 +26,7 @@ public class AccountVO {
 	
 	// 카카오페이 테이블
 	private int pay_no;
-	private String partner_order_id; //account 테이블의 acoount_no
+	private String partner_order_id; //reservation 테이블의 reservation_no
 	private String partner_user_id; // 돌봄서비스를 결제한 회원 member의 id 라 보면됨
 	private String tid; // 결제 고유번호
 	private String cid;  // 가맹점 코드 = TC0ONETIME
@@ -42,6 +42,9 @@ public class AccountVO {
 	private int account_reser_no; //reservation 테이블의 reservation_no
 	private String account_date; // 승인 받은 후 결제한 일자
 	private String account_info; // 결제 정보
+	
+	// 펫시터 정보
+	private String sitter_id;
 	
 	// 사용시간
 	private int usage_time;
