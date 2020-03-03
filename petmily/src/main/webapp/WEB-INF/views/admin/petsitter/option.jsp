@@ -4,15 +4,16 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	
 	<style>
-	a button{
-	 	background: #ad3a11;
+ 	a button{
+	 	background: #146fbd;
 	    padding: 7px 14px;
 	    color: #fff;
 	    border: 0;
 	    font-weight: bold;
+	    border-radius:3px;
 	 }
 	  a:hover button{
-	 	background: rgba(173, 58, 17, 0.78);
+	 	background: #10538c;
 	 }
 	 h2{
 	 	margin-top:35px;
@@ -45,18 +46,45 @@
 		margin-top:35px;
 	}
 	.resgis-btn form input[type="submit"]{
-		background: #ad3a11;
-		color:#fff;
-	    border: none;
+	 	background: #146fbd;
 	    padding: 7px 14px;
-	    font-weight:bold;
-	    vertical-align:middle;
+	    color: #fff;
+	    border: 0;
+	    font-weight: bold;
+	    border-radius:3px;
 	}
 	.resgis-btn form input[type="text"]{
-		background:#fff;
-		font-weight:normal;
-		border:1px solid #ddd;
-		height:32px;
+	 	background: #146fbd;
+	    padding: 7px 14px;
+	    color: #fff;
+	    border: 0;
+	    font-weight: bold;
+	    border-radius:3px;
+	}
+	 /***form search****/
+	 form{
+	 	margin-top:16px;
+	 } 
+	 form select{
+	 	height:30px;
+	 	line-height:30px;
+	 	vertical-align:middle;
+	 }
+	  form input[name="keyword"]{
+	  	height:30px;
+	  	line-height:30px;
+	  	color:#333;
+	  }
+	 form input[type="submit"]{
+	     background: #146fbd;
+	    color: #fff;
+	    /* padding: 7px 14px; */
+	    border: 0;
+	    border-radius: 3px;
+	    height: 30px;
+	    line-height: 30px;
+	    box-sizing: border-box;
+	    padding: 0 16px;
 	}
 	</style>
 	
@@ -126,6 +154,7 @@
 			</div>	
 		</c:forEach>
 	</div>
+	
 	<div style="padding-bottom:35px;" class="resgis-btn">
 	<!-- 등록하기 -->
 		<form action="${pageContext.request.contextPath}/admin/petsitter/option/petCareConditionI"  method="get">
