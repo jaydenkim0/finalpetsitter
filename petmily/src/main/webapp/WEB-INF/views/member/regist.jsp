@@ -96,24 +96,10 @@
         		var c = regex.test(email);
         		if(!c){
         			$(".emailcheck").show();
-        			
-	        			$.ajax({
-	     					url:'${pageContext.request.contextPath}/member/emailCheck?email='+email,
-	     					type:'get',
-	     					success : function(data){
-	     						if(data == 0) {
-									$(".emailexist").hide();
-	     							$("#submit").attr("disabled",false);
-	     						}else{
-	     							$(".emailexist").show();
-	     							$("#submit").attr("disabled",true);
-	     						}
-	     					}
-	     				});
+        			$("#submit").attr("disabled",true);
 	        			
         		}else{
         			$(".emailcheck").hide();
-        			$("#submit").attr("disabled",false);
         			
         			$.ajax({
      					url:'${pageContext.request.contextPath}/member/emailCheck?email='+email,
@@ -325,7 +311,7 @@
 		
 		<tr> 
 			<th colspan="2">
-				<input type="submit" value="가입하기">
+				<input type="submit" value="가입하기" id="submit">
 				<input type="reset" value="지우기">
 			</th>
 		</tr>
