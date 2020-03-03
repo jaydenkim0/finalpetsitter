@@ -37,7 +37,7 @@
 
 				//생성된 뷰어에 초기값 표시
                 var text = $(tag).next("input[type=hidden]").val();
-                viewer.setValue(text);//값 설정
+                viewer.setValue(text);//값 설정m
         	}); 	            
         });
     </script>    
