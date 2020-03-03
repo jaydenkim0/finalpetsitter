@@ -11,7 +11,18 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
  <script>
-        $(function(){
+//         	function pay(){
+//         		if($('#pay').css('display') == 'none'){
+//                     $('#pay').show();
+//                 }else{
+//                     $('#pay').hide();
+//                 }
+//              }
+       $(function(){
+    	   $('input[name=account]').bind('click',function() {
+    		    $('input[name=account]').not(this).prop("checked", false);
+    		  });
+    	   
             $("input[name=agree]").change(function(){
             	
                 if($(this).prop("checked")){
@@ -175,12 +186,12 @@ select {
 	</table>
 	<br>
 	<div>
-	<div align="center" id="check1">
-	       	  <input type="checkbox" name="account">&nbsp;체크/신용카드&nbsp;
-	          <input type="checkbox"  name="account">&nbsp;핸드폰 결제&nbsp;
-	          <input type="checkbox"  name="account">&nbsp;실시간 계좌이체&nbsp;
-	 	      <input type="checkbox"  name="account">&nbsp;무통장 입금&nbsp;
-	          <input type="checkbox"  name="account">&nbsp;카카오페이
+	<div align="center" onclick="pay()" name="account">
+	       	  <input type="checkbox"  id="check1" name="account">&nbsp;체크/신용카드&nbsp;
+	          <input type="checkbox"  id="check1" name="account">&nbsp;핸드폰 결제&nbsp;
+	          <input type="checkbox"  id="check1" name="account">&nbsp;실시간 계좌이체&nbsp;
+	 	      <input type="checkbox"  id="check1" name="account">&nbsp;무통장 입금&nbsp;
+	          <input type="checkbox"  id="check1" name="account">&nbsp;카카오페이
 	        <br>
 	</div>
 	<hr>
