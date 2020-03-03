@@ -19,14 +19,14 @@
 }
 
 .loginbox h1 {
-	width: 100%;
-	height: 100px;
+     
+	height: 140px;
 	font-size: 36px;
 	color: #1C1C1C;
 
-	padding-left: 40px;
+	padding-left: 20px;
 	box-sizing: border-box;
-	margin-bottom: 50px;
+	margin-bottom: 40px;
 	
 	
 	
@@ -37,7 +37,8 @@
 	height: 45px;
 	border: 1px solid #999;
 	box-sizing: border-box;
-	margin-bottom: 10px;
+	margin-bottom: 12px;
+	border-radius: 3px;
 	
 
 }
@@ -45,13 +46,16 @@
 .btnwrap {
 	width: 100%;
 	text-align: center;
+	
 }
 
 
 .btnwrap a {
-	width:400px;
-	border-top: 2px solid #eee;
-	text-decoration: none;
+	
+	width:300px;
+	border-top: 1px solid #eee;
+	padding-top:10px;
+	text-decoration:none;
 	color: #fff;
 	font-size: 12px;
 	
@@ -102,7 +106,7 @@ float:center;
 	<form action="login" class="secure-form" method="post">
 	  
 		<input class="block-item input-item" type="text" id="loginid"
-			name="id" placeholder="아이디" required> <br>
+			name="id" placeholder="아이디" required> 
 		<br> <input class="block-item input-item" type="password"
 			id="loginpw" name="pw" placeholder="비밀번호" required>
 		
@@ -114,7 +118,8 @@ float:center;
 		<br>
 		<div class="btnwrap">
 			 <input class="btn" type="submit" value="로그인" id="loginbtn"><br><br><br><br>
-			 <a href="findid">아이디찾기&nbsp;|</a><a href="input">&nbsp;비밀번호 찾기&nbsp;</a><a href="regist">|회원가입</a> 
+			 <a href="findid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a><a href="input">&nbsp;비밀번호 찾기&nbsp;</a><a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> 
 		</div>
 	</form>
 	<c:if test="${param.error!=null }">
