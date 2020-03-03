@@ -64,6 +64,7 @@
     
     
 	<h1>펫시터 관리페이지</h1>
+	
 	<br>
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
 	<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
@@ -74,44 +75,61 @@
 	
 	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitter">펫시터 리스트</a> </h2>	
 
-
 	<div class="scrollbox">
-	<c:forEach var="petsitter" items="${petsitterList}">	
-		<c:choose>			
-				<c:when test="${petsitter.black_count  > 0}">		
-					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}"
-					style="color: red">
-							<h4>
-								펫시터 ID : ${petsitter.sitter_id} |
-								펫시터 상태 : ${petsitter.sitter_status} |
-								펫시터 서비스 유형  : ${petsitter.sitter_matching_type} 
-								(${petsitter.black_count})								
-							</h4>
-					</a>							
-					<!-- 펫시터 상태 변경 버튼 -->			
-					<form action="petstatus" method=post>			
-							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-							<input type="hidden" name="sitter_status" value="휴면">					
-							<button type="submit" >펫시터  휴면 변경</button>						
-					</form>
-				</c:when>	
-			<c:otherwise>
-					<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">
-							<h4>
-								펫시터 ID : ${petsitter.sitter_id} |
-								펫시터 상태 : ${petsitter.sitter_status} |
-								펫시터 서비스 유형  : ${petsitter.sitter_matching_type}
-							</h4>
-					</a>							
-					<!-- 펫시터 상태 변경 버튼 -->			
-					<form action="petstatus" method=post>			
-							<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
-							<input type="hidden" name="sitter_status" value="휴면">					
-							<button type="submit" >펫시터  휴면 변경</button>						
-					</form>
-			</c:otherwise>
-		</c:choose>						
-	</c:forEach>			
+	<table>
+		<tr>
+			<th> 펫시터 아이디 </th>
+			<th> 펫시터 상태 </th>
+			<th> 펫시터 서비스 유형 </th>
+			<th> 비고 </th>			
+			<th> 버튼 </th>
+		</tr>	 	
+			<c:forEach var="petsitter" items="${petsitterList}">	
+				<c:choose>			
+						<c:when test="${petsitter.black_count  > 0}">		
+						<tr>
+							<td>
+								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}"
+								style="color: red;">															
+										${petsitter.sitter_id} 
+								</a>
+							</td>								
+							<td style="color: red;"> ${petsitter.sitter_status} </td>	
+							<td style="color: red;"> ${petsitter.sitter_matching_type} </td>	
+							<td style="color: red;"> (${petsitter.black_count}) </td>	
+							<td>		
+							<!-- 펫시터 상태 변경 버튼 -->	
+								<form action="petstatus" method=post>			
+										<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+										<input type="hidden" name="sitter_status" value="휴면">					
+										<button type="submit" >펫시터  휴면 변경</button>						
+								</form>
+							</td>	
+						</tr>		
+						</c:when>	
+					<c:otherwise>
+						<tr>
+							<td>
+								<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${petsitter.pet_sitter_no}">															
+										${petsitter.sitter_id} 
+								</a>
+							</td>								
+							<td>	${petsitter.sitter_status} </td>	
+							<td>	${petsitter.sitter_matching_type} </td>	
+							<td> </td>	
+							<td>		
+							<!-- 펫시터 상태 변경 버튼 -->	
+								<form action="petstatus" method=post>			
+										<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
+										<input type="hidden" name="sitter_status" value="휴면">					
+										<button type="submit" >펫시터  휴면 변경</button>						
+								</form>
+							</td>	
+						</tr>		
+					</c:otherwise>
+				</c:choose>						
+			</c:forEach>
+		</table>			
 	</div>
 	
 	<br><br>
@@ -127,58 +145,60 @@
 		회원이 펫시터로 승인요청시 맴버일때 경고 받은 회원은 주황색으로 표시
 	 -->			
 	<div class="scrollbox">
-	<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
-			<c:choose>			
-					<c:when test="${petsitterapply.black_count >0 }">							
-						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}"
-						style="color:#ff8d00;">
-								<h4>
-									 Id : ${petsitterapply.id} |
-									이름: ${petsitterapply.name} |
-									닉네임 : ${petsitterapply.nick} |
-									전화번호: ${petsitterapply.phone} |
-									가입신청일 : ${petsitterapply.getPetsitterdateWithFormat()}
-									(${petsitterapply.black_count})					
-								</h4>						
-							</a>			
-			<%-- 		<!-- 펫시터 승인 버튼 -->			
-							<form action="apply" method="post">
-										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
-										<button type="submit" > 펫시터 승인</button>
-							</form>			 --%>	
-							<!-- 펫시터 거부 버튼 -->
-					 		<form   class="petnegative"  action="negative" method="post">
-										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">
-										<input type="hidden" name="email" value="${petsitterapply.email}">
-										<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
-										<button type="submit" id="nega-btn"> 펫시터 거부</button>
-							</form> 		
-					</c:when>
-					<c:otherwise>					
-						<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">
-								<h4>
-									Id : ${petsitterapply.id} |
-									이름: ${petsitterapply.name} |
-									닉네임 : ${petsitterapply.nick} |
-									전화번호: ${petsitterapply.phone} |
-									가입신청일 : ${petsitterapply.getPetsitterdateWithFormat()}											
-								</h4>								
-							</a>			
-				<%-- 	<!-- 펫시터 승인 버튼 -->			
-							<form action="apply" method="post">
-										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">	
-										<button type="submit" > 펫시터 승인</button>
-							</form>				
-							<!-- 펫시터 거부 버튼 -->
-					 		<form   class="petnegative"  action="negative" method="post">
-										<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">
-										<input type="hidden" name="email" value="${petsitterapply.email}">
-										<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
-										<button type="submit" id="nega-btn"> 펫시터 거부</button>
-							</form> 	 --%>			
-					</c:otherwise>	
-			</c:choose>			
-	</c:forEach>
+	<table>
+		<tr>
+			<th> 아이디 </th>
+			<th> 이름 </th>
+			<th> 닉네임 </th>
+			<th> 전화번호 </th>			
+			<th> 가입신청일 </th>
+			<th> 비고 </th>
+			<th> 버튼 </th>
+		</tr>	 		
+		<c:forEach var="petsitterapply" items="${petsitterApplyList}" >	
+				<c:choose>			
+						<c:when test="${petsitterapply.black_count >0 }">		
+							<tr>	
+								<td>			
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}"
+									style="color:#ff8d00;">								
+										${petsitterapply.id} 
+									</a>			
+								</td>				 
+								<td style="color:#ff8d00;">	${petsitterapply.name}</td>	 
+								<td style="color:#ff8d00;">	${petsitterapply.nick}	 </td>	 
+								<td style="color:#ff8d00;">	${petsitterapply.phone}	</td>	 
+								<td style="color:#ff8d00;">	${petsitterapply.getPetsitterdateWithFormat()}</td>	
+								<td style="color:#ff8d00;">	(${petsitterapply.black_count})	</td>						
+								<td>
+									<!-- 펫시터 거부 버튼 -->
+							 		<form   class="petnegative"  action="negative" method="post">
+												<input type="hidden" name="sitter_id" value="${petsitterapply.sitter_id}">
+												<input type="hidden" name="email" value="${petsitterapply.email}">
+												<input type="hidden" name="pet_sitter_no" value="${petsitterapply.pet_sitter_no}">			
+												<button type="submit" id="nega-btn"> 펫시터 거부</button>
+									</form> 	
+								</td>			
+							</tr>							
+						</c:when>
+						<c:otherwise>			
+							<tr>
+								<td>
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailapply?pet_sitter_no=${petsitterapply.pet_sitter_no}">									
+										${petsitterapply.id}
+									</a>				
+								</td>			
+								<td> ${petsitterapply.name} </td> 
+								<td>	${petsitterapply.nick} </td> 
+								<td>	${petsitterapply.phone} </td>
+								<td>	${petsitterapply.getPetsitterdateWithFormat()} </td>		
+								<td> </td>
+								<td> </td>									
+							</tr>									
+						</c:otherwise>	
+				</c:choose>			
+		</c:forEach>
+	</table>
 	</div>
 	
 	<br><br>
@@ -193,48 +213,60 @@
 		펫시터 경고를 받게 되면 바로 펫시터 상태가 '휴면'으로 변경되어 검색 노출이 안됨
 	 -->
 	<div class="scrollbox">
-	<c:forEach var="petsitterSleepList" items="${petsittersleepList}">		
-			<c:choose>			
-				<c:when test="${petsitterSleepList.black_count  > 0}">				
-							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}"
-							style="color: red">
-							<h4>
-								ID : ${petsitterSleepList.sitter_id} |
-								펫시터 상태 : ${petsitterSleepList.sitter_status} |
-								펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
-								(${petsitterSleepList.black_count})		
-							</h4>
-							</a>		
-				<%-- 	<!-- 블랙리스트 등록 펫시터는 삭제 버튼 노출 -->
-							<form action="sitter_delete" method="get">			
-										<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">	
-										<input type="hidden" name="sitter_no" value="${petsitterSleepList.pet_sitter_no}">			
-							<button type="submit" >경고 펫시터 탈퇴</button>						
-							</form>	 --%>	
-							<!-- 펫시터 상태 변경 버튼 -->
-							<form action="petstatus" method=post>			
-										<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">
-										<input type="hidden" name="sitter_status" value="정상">					
-										<button type="submit" >펫시터 정상 변경</button>						
-							</form>			
-				</c:when>		
-				<c:otherwise>								
-							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">
-							<h4>
-								ID : ${petsitterSleepList.sitter_id} |
-								펫시터 상태 : ${petsitterSleepList.sitter_status} |
-								펫시터 서비스 유형 : ${petsitterSleepList.sitter_matching_type}
-							</h4>
-							</a>	
-							<!-- 펫시터 상태 변경 버튼 -->
-							<form action="petstatus" method=post>			
-									<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">
-									<input type="hidden" name="sitter_status" value="정상">					
-									<button type="submit" >펫시터 정상 변경</button>						
-							</form>				
-				</c:otherwise>
-			</c:choose>	 		
-	</c:forEach>
+	<table>
+		<tr>
+			<th> 아이디 </th>
+			<th> 펫시터 상태 </th>
+			<th> 펫시터 서비스 유형 </th>
+			<th> 비고 </th>			
+			<th> 버튼 </th>	
+		</tr>	 	
+		<c:forEach var="petsitterSleepList" items="${petsittersleepList}">		
+				<c:choose>			
+					<c:when test="${petsitterSleepList.black_count  > 0}">		
+							<tr>
+								<td>
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}"
+									style="color: red">							
+										${petsitterSleepList.sitter_id} 
+									</a>		
+								</td>	
+								<td style="color: red">	${petsitterSleepList.sitter_status} </td>
+								<td style="color: red">	${petsitterSleepList.sitter_matching_type} </td>
+								<td style="color: red">	(${petsitterSleepList.black_count}) </td>								
+								<td>				
+								<!-- 펫시터 상태 변경 버튼 -->
+									<form action="petstatus" method=post>			
+												<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">
+												<input type="hidden" name="sitter_status" value="정상">					
+												<button type="submit" >펫시터 정상 변경</button>						
+									</form>
+								</td>
+							</tr>				
+					</c:when>		
+					<c:otherwise>		
+							<tr>	
+								<td>			
+									<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetailsleep?pet_sitter_no=${petsitterSleepList.pet_sitter_no}">							
+										${petsitterSleepList.sitter_id} 
+									</a>	
+								</td>	
+								<td>	${petsitterSleepList.sitter_status} </td>
+								<td> ${petsitterSleepList.sitter_matching_type}</td>
+								<td>		</td>						
+								<td>
+								<!-- 펫시터 상태 변경 버튼 -->
+									<form action="petstatus" method=post>			
+											<input type="hidden" name="sitter_id" value="${petsitterSleepList.sitter_id}">
+											<input type="hidden" name="sitter_status" value="정상">					
+											<button type="submit" >펫시터 정상 변경</button>						
+									</form>	
+								</td>	
+							</tr>			
+					</c:otherwise>
+				</c:choose>	 		
+		</c:forEach>
+	</table>
 	</div>
 	
 	<br><br>
