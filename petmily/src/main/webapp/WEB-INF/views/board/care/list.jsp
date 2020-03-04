@@ -218,7 +218,7 @@ $(function(){
 
 
 
-
+<br>
 <div class="row" >
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/board/care/navigator_list.jsp">

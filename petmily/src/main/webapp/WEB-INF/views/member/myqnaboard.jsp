@@ -143,6 +143,7 @@ select {
 		</c:if>
 	</div>
 
+<br>
 <div class="row">
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/member/navigator_myqnaboard.jsp">

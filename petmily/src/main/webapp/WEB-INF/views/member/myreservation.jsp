@@ -154,6 +154,7 @@ select {
 		</c:forEach>
 	</table>
 
+<br>
 <div class="row">
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/member/navigator_myreservation.jsp">
