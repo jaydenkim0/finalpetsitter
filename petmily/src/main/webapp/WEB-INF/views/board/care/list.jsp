@@ -32,6 +32,9 @@ a {
 	text-decoration: none;
 	color: #1482e0;
 }
+a:hover{
+	color:black;
+}
 
 .right_mar {
 	margin-right: 10%;
@@ -109,8 +112,9 @@ $(function(){
 <body>
 
 <div align="center">
+<br>
 <h1>돌봄게시판</h1>
-
+<br>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="type" value="${param.type}"></c:set>
 <c:set var="keyword" value="${param.keyword}"></c:set> 
@@ -195,12 +199,12 @@ $(function(){
 <br>
 
 <c:if test="${fn:length(list)<1 }">
-	<hr>
+<br>
 	<p>검색결과가 없습니다</p>
 </c:if>
 <c:if test="${isSearch }">
-	<hr>
-	<a href="list"><button>목록으로</button></a>
+<br>
+	<a href="list"><button class="btn hover3">목록으로</button></a>
 </c:if>
 
 

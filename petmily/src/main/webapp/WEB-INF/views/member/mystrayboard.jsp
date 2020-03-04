@@ -99,8 +99,9 @@ select {
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <div align="center">
+<br>
 <h1>나의 Save the Pets ! 게시글</h1>
-
+<br>
 <section>
 <table class="notice_table">
 	<tr>
