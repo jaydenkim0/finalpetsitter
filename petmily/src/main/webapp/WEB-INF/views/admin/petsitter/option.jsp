@@ -36,31 +36,20 @@
      	border-right:0;
      	margin-right:0;
      }
-    .regis-form > div form input{
-    	background: #f2f2f2;
+    .regis-form > div form input{    
 	    border: none;
-	    padding: 7px 14px;
-	    margin-top:12px;
 	}
 	.resgis-btn{
 		margin-top:35px;
 	}
 	.resgis-btn form input[type="submit"]{
 	 	background: #146fbd;
-	    padding: 7px 14px;
 	    color: #fff;
 	    border: 0;
 	    font-weight: bold;
 	    border-radius:3px;
 	}
-	.resgis-btn form input[type="text"]{
-	 	background: #146fbd;
-	    padding: 7px 14px;
-	    color: #fff;
-	    border: 0;
-	    font-weight: bold;
-	    border-radius:3px;
-	}
+
 	 /***form search****/
 	 form{
 	 	margin-top:16px;
