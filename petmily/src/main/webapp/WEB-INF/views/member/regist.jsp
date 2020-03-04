@@ -403,14 +403,8 @@ p{
 		
 		<tr> 
 			<th colspan="2">
-<<<<<<< HEAD
-				<input type="submit" value="가입하기" id="submit">
-				<input type="reset" value="지우기">
-=======
 			<br><br>
 				<input type="submit" value="회원가입" id="registbtn">
-				
->>>>>>> refs/remotes/origin/master
 			</th>
 		</tr>
 	</table>
