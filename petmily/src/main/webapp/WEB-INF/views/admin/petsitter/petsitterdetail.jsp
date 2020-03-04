@@ -214,6 +214,7 @@
 			</div>
 			</tbody>	
 	</table>
+	
 		<div class="box-container">
 			<!-- 펫시터가 업로드한 사진 받아오기 -->
 			<!-- 
@@ -244,7 +245,7 @@
 			
 		<c:choose>			
 			<c:when test="${petsitter.black_count == 0 || petsitter.black_count == null}">	
-				<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 상태 변경 -->
+				<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 상태 변경 -->l
 				<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
 						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
 						<input type="hidden" name="sitter_status" value="휴면">					

@@ -174,8 +174,8 @@
 			</c:forEach>		
 	</table>
 
-	<div class="page-nivi-container">
 	<!-- 페이징 -->
+	<div class="page-nivi-container">
 			<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
 			<c:if test="${navi.curBlock > 1}">
 				<a href="javascript:list('1')">[처음]</a>
@@ -204,8 +204,8 @@
 			<c:if test="${navi.curPage <= navi.totPage}">
 				<a href="javascript:list('${navi.totPage}')">[끝]</a>
 			</c:if>	
-	<!-- 페이징 -->
 	</div>
+	<!-- 페이징 -->
 
 	 
 	 
