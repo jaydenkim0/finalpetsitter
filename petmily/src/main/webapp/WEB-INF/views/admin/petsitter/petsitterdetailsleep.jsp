@@ -36,20 +36,87 @@
         });
     </script>
     
-     
-     
+     <style>
+    img{
+    	max-width:50%;
+    }
+    .box-container{
+    	padding: 17px 10px;
+	    border-bottom: 1px dashed #ddd;
+	    
+    }
+    .box-container:nth-of-type(even){
+    	background: #f2f2f2;
+    }
     
-	<h3> 펫시터 휴면 디테일페이지 </h3>
-	<!-- 
-		휴면이 되는 사유
-		1. 본인이 쉬기위해 검색 노출을 잠시 내려놓기
-		2. 경고 펫시터일경우 일단 강제로 휴면으로 전환됨(경고 받을 때마다 강제 휴면)
-			- 경고 받은 휴면일 경우는 펫시터가 휴면을 풀지 못함
-	-->
-	
-	
-	<a href="${pageContext.request.contextPath}/admin/petsitter"><button>펫시터페이지로 이동</button></a>
-	
+    .box-container h4,
+    .box-container h3{
+    	margin-top:0;
+    }
+    /***button***/
+    a{
+     	color:#333;
+     }
+	 a button,
+	 button{
+	 	background: #146fbd;
+	    padding: 7px 14px;
+	    color: #fff;
+	    border: 0;
+	    font-weight: bold;
+	    border-radius:3px;
+	 }
+	  a:hover button,
+	  button:hover{
+	 	background: #10538c;
+	 }
+	 /***table****/
+	 table{
+		 width: 100%;
+	    border-top: 2px solid #808080;
+	    margin-top: 17px;
+	    border-bottom: 2px solid #808080;
+	    /* padding: 17px 0; */
+	    margin-bottom: 17px;
+	    border-collapse:collapse;
+    }
+    table tr{
+    	border-bottom: 1px solid #ddd;
+    	/*text-align:center;*/
+    }
+    
+    table tr th {
+	    background: rgba(20, 111, 189, 0.2);
+	    border-bottom: 1px solid #ddd;
+	    padding: 10px 0;
+	    border-right: 1px solid #fff;
+	    color:#333;
+	}
+	table tr th:last-child,
+	table tr td:last-child{
+		border-right:0;
+	}
+	table tr td {
+	    border-right: 1px solid #ddd;
+	    padding: 10px 0;
+	    color:#333;
+	    padding-left:15px;
+	}
+	table tr td a{
+		color:#333;
+	}
+    </style>    
+     
+    <div class="box-container first">    
+		<h3> 펫시터 휴면 디테일페이지 </h3>
+		<!-- 
+			휴면이 되는 사유
+			1. 본인이 쉬기위해 검색 노출을 잠시 내려놓기
+			2. 경고 펫시터일경우 일단 강제로 휴면으로 전환됨(경고 받을 때마다 강제 휴면)
+				- 경고 받은 휴면일 경우는 펫시터가 휴면을 풀지 못함
+		-->		
+		<a href="${pageContext.request.contextPath}/admin/petsitter"><button>펫시터페이지로 이동</button></a>
+	</div>	
 	
 	<table>
 			<tbody>
@@ -63,8 +130,7 @@
 					<td>이메일 : ${petsitter.email}</td>					
 				</tr>
 				<tr>			
-					<td>우편번호 : ${petsitter.post}</td>
-					<td>주소 : ${petsitter.basic_addr}, ${petsitter.extra_addr}</td>						
+					<td>우편번호 : ${petsitter.post} | 주소 : ${petsitter.basic_addr}, ${petsitter.extra_addr}</td>						
 				</tr>
 				<tr>			
 					<td> 반려동물 경험 유무   : ${petsitter.sitter_pets}</td>					
@@ -108,46 +174,44 @@
 			
 		
 			
-			<hr>
+
 				
-		
+		<div class="box-container">
 				<!-- 서비스 가능지역  -->
 				<h4>서비스 가능지역</h4>
-				<c:forEach var="petlocation" items="${petlocation}">
-					
+				<c:forEach var="petlocation" items="${petlocation}">					
 					광역시 : ${petlocation.city}, 
-					지역 : ${petlocation.area}
-			
+					지역 : ${petlocation.area}			
 				</c:forEach>
-				
-			<hr>
-			
+		</div>			
+		
+		<div class="box-container">	
 				<!-- 돌봄 가능 동물종류  -->
 				<h4>돌봄 가능 동물 종류</h4>
 				<c:forEach var="pettypename" items="${pettypename}">
 					 ${pettypename.care_type}
 				</c:forEach>
-				
-			<hr>
-				
+		</div>		
+		
+		<div class="box-container">		
 				<!-- 서비스 가능 스킬  -->
 				<h4> 서비스 가능 스킬 </h4>
 				<c:forEach var="petskill" items="${petskill}">
 					${petskill.skill_name}
 				</c:forEach>
-				
-			<hr>
-			
+		</div>		
+		
+		<div class="box-container">		
 				<!-- 펫시터 환경  -->
 				<h4>펫시터 돌봄 가능 환경</h4>
 				<c:forEach var="petcondition" items="${petcondition}">
 					${petcondition.care_condition_name}
-				</c:forEach>
-				
-			<hr>
-			</tbody>	
+				</c:forEach>				
+		</div>
+		</tbody>	
 	</table>				
 
+		<div class="box-container">
 			<!-- 펫시터가 업로드한 사진 받아오기 -->
 			<!-- 
 				소개이미지
@@ -157,16 +221,22 @@
 			<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
 				 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"> 
 			</c:forEach>
+			</div>
+			<div class="box-container">
 			<!-- 신분증 -->
 			<h3>신분증이미지</h3>
 				<img src="${pageContext.request.contextPath}/admin/petsitter/sitteridcardimage?id_image_no=${sitterIdcardimg.id_image_no}"> 
+			</div>
+			<div class="box-container">
 			<!-- 증빙서류 -->
 			<h3>증빙서류이미지</h3>
 				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterlicenseimage?license_image_no=${sitterLicenseimg.license_image_no}">			
+			</div>
+			<div class="box-container">	
 			<!-- 통장사본 -->
 			<h3>통장사본</h3>
 				<img src="${pageContext.request.contextPath}/admin/petsitter/sitterbankimage?bank_image_no=${sitterBankimg.bank_image_no}">	
-			 	
+			 </div>	
 
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<html lang="ko">
+
 <head>
 <link rel="stylesheet" href="css/styles.css">
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
@@ -85,13 +85,9 @@ body{
 
 .loginbox img
 {
-
 width:90px;
 height:140px;
 float:center;
-
-
-
 }
 
 </style>
@@ -119,7 +115,7 @@ float:center;
 		<div class="btnwrap">
 			 <input class="btn" type="submit" value="로그인" id="loginbtn"><br><br><br><br>
 			 <a href="findid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a><a href="input">&nbsp;비밀번호 찾기&nbsp;</a><a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a><a href="input">&nbsp;비밀번호 변경&nbsp;</a><a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> 
 		</div>
 	</form>
 	<c:if test="${param.error!=null }">

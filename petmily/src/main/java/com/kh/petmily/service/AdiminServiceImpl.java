@@ -552,8 +552,11 @@ public class AdiminServiceImpl implements AdminService {
 	public  List<PayDto> paydetail(int reservation_no) {	
 		return adminDao.paydetail(reservation_no);
 	}
-
-
+	// 결제 취소 버튼 유무 확인
+	@Override
+	public int paymentcanclecheck(int reservation_no) {
+		return adminDao.paymentcanclecheck(reservation_no);
+	}
 
 
 
