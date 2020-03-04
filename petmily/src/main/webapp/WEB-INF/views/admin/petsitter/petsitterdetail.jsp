@@ -35,6 +35,7 @@
             viewer.setValue(text);//값 설정
         });
     </script>
+    
     <style>
     img{
     	max-width:50%;

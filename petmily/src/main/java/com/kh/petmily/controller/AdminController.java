@@ -33,9 +33,13 @@ import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
+import com.kh.petmily.service.kakao.PayService;
+import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 
 
 @Controller
@@ -48,6 +52,10 @@ public class AdminController {
 	private AdminEmailService amailService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PayService payService;
+	@Autowired
+	private PetsitterService petsitterService;
 	
 	// 메인페이지
 	@GetMapping("/")
@@ -96,9 +104,32 @@ public class AdminController {
 		List<PayinfoDto> list =  adminService.payinfoName(reservation_no);
 		model.addAttribute("acountOne", acountVO)
 				  .addAttribute("payinfomation", payDto)
-		 		  .addAttribute("payinfo", list)
-		 		  .addAttribute("usage_time",list.get(0).getUsage_time())
+		 		  .addAttribute("payinfo", list)		 	
 		 		  .addAttribute("sitter_id", sitter_id);		
+		//예약 정보  단일 조회
+		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);				
+		//1시간 당 금액 구하기
+		int hourPayment = payService.getHourPayment();		
+		//최종 결제 금액 구하기
+		int payMent = 0;
+			List<ReservationAllVO> all = reservationList.getList();
+			// 이용시간
+			int totalTime = all.get(0).getUsage_time();
+			// 이용 시작 시간
+			int startTime = all.get(0).getStart_time();
+			
+			for(ReservationAllVO allVO : all) {				
+				int usagetime = allVO.getUsage_time();				
+				int oneHour = usagetime * hourPayment;
+				int payment = allVO.getPayment();				
+				payMent = oneHour + payment;			
+			}
+			model.addAttribute("payMent", payMent)
+			.addAttribute("usageTime", totalTime)
+			.addAttribute("startTime", startTime);
+		// 결제 취소 버튼 유무 확인
+			model.addAttribute("status", adminService.paymentcanclecheck(reservation_no));
+		
 		return "admin/reservationstatusdetail";		
 	}	
 		
@@ -116,8 +147,7 @@ public class AdminController {
 		return "admin/member/memberdetail";			
 	}
 	
-	
-	
+		
 	// 펫시터관리 페이지 연결
 	@GetMapping("/petsitter")
 	public String petsitter(Model model) {					
@@ -428,7 +458,13 @@ public class AdminController {
 	// 정산관리 페이지 연결
 	@GetMapping("/account")
 	public String account() {
-	// 정산리스트를 불러와서 먼저 찍어줄 것인지 아니면 다른 방법으로 찍어서 보여줄 것인지.. 확인
+	// 0. 전체 날자기준으로 통합
+	// 1. 토탈 결제금액 (sum)
+	// 2. 토탈 취소금액 (sum)
+	// 3. 견적 신청 수 : (count)
+	// 4. 견적 대기 수 : (count)
+	// 5. 결제 완료 수 : (count)
+	// 6. 결제 취소 수 : (count)
 		return "admin/account";		
 	}
 	
