@@ -587,17 +587,17 @@ public class AdminDaoImpl implements AdminDao {
 	public List<PayinfoDto> payinfoName(int reservation_no) {	
 		return sqlSession.selectList("admin.payinfoName", reservation_no);
 	}
-
+	// 예약 디테일 페이지
 	@Override
 	public List<PayDto> paydetail(int reservation_no) {		
 		return sqlSession.selectList("admin.paydetail", reservation_no);
 	}
-
-	//test
+	// 결제 취소 버튼 유무 확인
 	@Override
-	public QnaDto test(int qna_no) {	
-		return sqlSession.selectOne("admin.test", qna_no);
+	public int paymentcanclecheck(int reservation_no) {
+		return sqlSession.selectOne("admin.paymentcanclecheck", reservation_no);
 	}
+
 
 
 

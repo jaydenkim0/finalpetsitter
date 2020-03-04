@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
 li{
@@ -11,6 +12,19 @@ li{
   	margin-left:20px;
   }
 </style>
+
+<script>
+$(function(){
+	
+	console.log('${password}');
+	console.log($.type('${password}'));
+	
+	if('${password}'=='x'){
+		window.alert("비밀번호가 일치하지 않습니다.");
+	}
+	
+});
+</script>
 
 </head>
 

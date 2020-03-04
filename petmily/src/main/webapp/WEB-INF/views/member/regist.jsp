@@ -170,119 +170,210 @@
 	    }
 	</script>
     <style>
-    	.pet{display:none;}
-    	.petnamecheck{display:none;}
+  .pet{display:none;}
+  .petnamecheck{display:none;}
+
+    input{
+		width:400px;
+		BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+		background-color:#FAFAFA;
+}
+	body{
+		background-color:#FAFAFA;
+}
+   .regist{
+		font-weight:bold;
+		font-size:14pt;
+}
+
+ #registbtn {
+		width: 220px;
+		height: 60px;
+		border: none;
+		background-color: #1482e0;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+		position: relative;
+		top: 1px;
+	}
+#adrbtn {
+		width: 110px;
+		height: 40px;
+		border: none;
+		background-color: #1482e0;
+		border-radius: 20px;
+		color: #fff;
+		font-size: 12px;
+		font-weight: bold;
+		position: relative;
+	}
+td{
+	font-weight:bold;
+	}
+select{
+	width:130px;
+	padding: .4em .4em;
+	border: 1px solid #999;
+	font-family : inherit;
+	}
+	.regist label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #1C1C1C;
+  font-size: 9pt;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #BDBDBD;
+  cursor: pointer;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.regist label:hover {
+  background-color: gray;
+}
+
+.regist label:active {
+  background-color: #FAFAFA;
+}
+
+.regist input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+p{
+  color:#FE2E64;
+}
+	
     </style>
 </head>
 
 <body>
-<div align="center">
-	
-	<h2>회원가입</h2>
+<br><br>
+<div align="center" class="regist">
+
+	<h1>회원가입</h1><Br><Br>
 	
 	<form action="regist" method="post"  class="secure-form" enctype="multipart/form-data">
-	<table border="1">
+	<table>
 		<tr>
-			<th>아이디</th>
-			<td>
-				<input type="text" name="id" placeholder="아이디" required id="user_id">
+			
+			<td>아이디<br>
+				<input type="text" name="id" placeholder="영문 숫자 조합 4-12자리" required id="user_id"><Br><Br>
 				<div id="id_check"></div>
 			</td>
 		</tr>
 		<tr>
-			<th>비밀번호</th>
-			<td>
-				<input type="password" name="pw" placeholder="비밀번호" required>
+			
+			<td>비밀번호<br>
+				<input type="password" name="pw" placeholder="영문 숫자 특수문자 조합 8-20자리" required><Br><Br>
 			</td>
 		</tr>
 		<tr>
-			<th>이름</th>
-			<td>
-				<input type="text" name="name" placeholder="이름" required>
-			</td>
-		</tr>
-		
-		<tr>
-			<th>닉네임</th>
-			<td>
-				<input type="text" name="nick" placeholder="닉네임" required>
+			
+			<td>이름<br>
+				<input type="text" name="name" placeholder="실명을 입력하세요" required><Br><Br>
 			</td>
 		</tr>
 		
 		<tr>
-			<th>이메일</th>
-			<td>
-				<input type="text" name="email" placeholder="이메일" required class="email">
+			
+			<td>닉네임<br>
+				<input type="text" name="nick" placeholder="영문 최대 30글자 ,한글 최대 10글자" required><Br><Br>
+			</td>
+		</tr>
+		
+		<tr>
+			
+			<td>이메일<br>
+				<input type="text" name="email" placeholder="이메일 주소 입력" required class="email">
 				<p class="emailcheck">이메일 형식이 잘못되었습니다</p>
-				<p class="emailexist">이미 존재하는 이메일입니다</p>
+				<p class="emailexist">이미 존재하는 이메일입니다</p><Br><Br>
 			</td>
 		</tr>
 		
 		
 		<tr>
-			<th>전화번호</th>
-			<td>
-				<input type="tel" name="phone" placeholder="전화번호" required class="phone">
-				<p class="phonecheck">00000000000(숫자 11개) 형식으로 작성해주세요</p>
+			
+			<td>휴대폰번호<br>
+				<input type="tel" name="phone" placeholder="휴대폰번호 - 를 제외한 숫자 입력" required class="phone">
+				<p class="phonecheck">00000000000(숫자 11개) 형식으로 작성해주세요</p><br><br>
 			</td>
 		</tr>
 		
 		<tr>
-			<th rowspan="3">주소</th>
-			<td>
+			
+			<td>주소<br>
 				<input type="text" id="sample6_postcode" name="post" placeholder="우편번호">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
+				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" id="adrbtn"><br>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소">
+				<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소"><Br>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소">
+				<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"><Br><Br>
 			</td>
 		</tr>
 		
 		<!-- 사진첨부 -->
 		
 		<tr>
-			<th>프로필사진</th>
-			<td>
-				<input type="file" name="member_image" accept="image/*">
+			
+			<td>프로필사진<br><Br>
+			 <label for="ex_file">파일 선택</label>
+				<input type="file" name="member_image" accept="image/*" id="ex_file" ><Br><Br>
 			</td>
 		</tr>
 		
 		
 		<tr>
-			<th colspan="2">반려동물이 있으신가요?		
+			<th colspan="2" align="left">반려동물 여부<br><br>
 			 		<select name="pets" id="selectBox">
 			 			<option value="아니오">아니오</option>			 		
 			 			<option value="예">예</option>
-			 		</select>
+			 		</select><br><br>
 			</th>
 		</tr>		
 		<tr class="pet">
 			<th colspan="2">
 				<table>
 					<tr>
-						<th>이름</th>
-						<td>
-							<input type="text" name="pet_name" class="petname">
-							<p class="petnamecheck">이름은 필수 입력 항목입니다.</p>
+						
+						<td>반려동물 이름<br>
+							<input type="text" name="pet_name" class="petname" placeholder="반려동물 이름 입력">
+							<p class="petnamecheck">이름은 필수 입력 항목입니다.</p><Br><Br>
 						</td>
 					</tr>
 					<tr>
-						<th>나이</th>
-						<td>
-							<input type="number" name="pet_age" class="petage">
-							<p class="petagecheck">숫자를 입력해주세요</p>
+						
+						<td>반려동물 나이<br>
+							<input type="number" name="pet_age" class="petage" placeholder="반려동물 나이">
+							<p class="petagecheck">숫자를 입력해주세요</p><Br><Br>
 						</td>
 					</tr>
 					<tr>
-						<th>동물종</th>
-						<td>
+						
+						<td>반려동물 동물 종류<br><Br>
 							<select name="pet_type">
 			 					<option>강아지</option>			 		
 			 					<option>고양이</option>
@@ -290,19 +381,20 @@
 			 					<option>토끼</option>
 			 					<option>햄스터</option>			 		
 			 					<option>파충류</option>
-			 				</select>
+			 				</select><Br><br>
 						</td>
 					</tr>
 					<tr>
-						<th>상세설명</th>
-						<td>
-							<textarea name="pet_ect"></textarea>
+						
+						<td>반려동물 상세정보<br><br>
+							<textarea name="pet_ect" placeholder="반려동물 소개"></textarea><Br><Br>
 						</td>
 					</tr>
 					<tr>
-						<th>이미지 첨부</th>
-						<td>
-							<input type="file" name="pet_image" accept="image/*">
+						
+						<td>반려동물 사진<br><br>
+						 <label for="ex_file">파일 선택</label>
+							<input type="file" name="pet_image" accept="image/*" id="ex_file"><Br><Br>
 						</td>
 					</tr>
 				</table>
@@ -311,8 +403,14 @@
 		
 		<tr> 
 			<th colspan="2">
+<<<<<<< HEAD
 				<input type="submit" value="가입하기" id="submit">
 				<input type="reset" value="지우기">
+=======
+			<br><br>
+				<input type="submit" value="회원가입" id="registbtn">
+				
+>>>>>>> refs/remotes/origin/master
 			</th>
 		</tr>
 	</table>

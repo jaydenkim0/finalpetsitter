@@ -21,13 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.CareConditionNameDto;
-import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;

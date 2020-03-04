@@ -35,6 +35,7 @@
             viewer.setValue(text);//값 설정
         });
     </script>
+    
     <style>
     img{
     	max-width:50%;
@@ -117,13 +118,12 @@
 			<tbody>
 				<tr>			
 					<td>					
-					아이디 : ${petsitter.sitter_id} | 
+					아이디 : ${petsitter.sitter_id} 
 					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${petsitter.sitter_id}">
-					회원정보 보기
-					</a>
-					|
+						<button> 회원정보 보기 </button>
+					</a>			
 					<a href="${pageContext.request.contextPath}/petsitter/content?pet_sitter_no=${petsitter.pet_sitter_no}">
-					펫시터페이지 보기
+						<button> 펫시터페이지 보기 </button> 
 					</a>
 					</td>					
 				</tr>
@@ -180,11 +180,9 @@
 			<div class="box-container">
 				<!-- 서비스 가능지역  -->
 				<h4>서비스 가능지역</h4>
-				<c:forEach var="petlocation" items="${petlocation}">
-					
+				<c:forEach var="petlocation" items="${petlocation}">					
 					광역시 : ${petlocation.city}, 
-					지역 : ${petlocation.area}
-			
+					지역 : ${petlocation.area}			
 				</c:forEach>
 				
 			</div>
@@ -214,6 +212,7 @@
 			</div>
 			</tbody>	
 	</table>
+	
 		<div class="box-container">
 			<!-- 펫시터가 업로드한 사진 받아오기 -->
 			<!-- 
@@ -244,7 +243,7 @@
 			
 		<c:choose>			
 			<c:when test="${petsitter.black_count == 0 || petsitter.black_count == null}">	
-				<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 상태 변경 -->
+				<!-- 일반 펫시터에게 보여줄 내용 : 펫시터 상태 변경 -->l
 				<form action="${pageContext.request.contextPath}/admin/petstatus" method=post>			
 						<input type="hidden" name="sitter_id" value="${petsitter.sitter_id}">
 						<input type="hidden" name="sitter_status" value="휴면">					

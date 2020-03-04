@@ -200,11 +200,6 @@
 		};
 
 		var editor = tui.Editor.factory(options);
-
-// 		editor.focus();
-// 		var first = $(tag).next(document.querySelector("input[target=_blank]")).value;
-// 		console.log(first);
-// 		editor.setValue(first);
 		
 		 var first = $(tag).next("input[target=_blank]").val();
          editor.setValue(first);//값 설정

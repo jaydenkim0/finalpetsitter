@@ -9,7 +9,8 @@
 			location.href="${pageContext.request.contextPath}/admin/list/member?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
 			}
 	</script>
-          <style>
+	
+    <style>
      a{
      	color:#333;
      }
