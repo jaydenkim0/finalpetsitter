@@ -7,14 +7,15 @@
 	
 	 <style>
 	 a button{
-	 	background: #ad3a11;
+	 	background: #146fbd;
 	    padding: 7px 14px;
 	    color: #fff;
 	    border: 0;
 	    font-weight: bold;
+	    border-radius:3px;
 	 }
 	  a:hover button{
-	 	background: rgba(173, 58, 17, 0.78);
+	 	background: #10538c;
 	 }
 	 h3{
 	 	padding:20px;

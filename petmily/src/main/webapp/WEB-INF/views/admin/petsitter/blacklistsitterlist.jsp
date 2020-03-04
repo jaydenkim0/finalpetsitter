@@ -39,18 +39,31 @@
 	
 	${count}개의 게시물이 있습니다.	
 
-
-	<!-- 리스트 내용 -->
+	
 	 ※경고 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
-    <c:forEach var="petblacklist" items="${list}" >
-    	<a href="${pageContext.request.contextPath}/admin/blackListdetail?id=${petblacklist.black_id}" style="color:red;">
-    	<h3>아이디 : ${petblacklist.black_id},    	
-		    이름 : ${petblacklist.black_name},    	
-		    전화번호 : ${petblacklist.black_phone},    	
-		    등급 : ${petblacklist.black_grade}	
-		    </h3>
-		    </a>
-    </c:forEach>
+	 
+	<table>
+   		<tr>
+   			<td> 아이디 </td>
+   			<td> 이름 </td>
+   			<td> 전화번호 </td>
+   			<td> 등급 </td>
+   			<td> 경고 횟수 </td>
+   		</tr>
+	    <c:forEach var="petblacklist" items="${list}" >
+	    	<tr>
+	    		<td>
+			    	<a href="${pageContext.request.contextPath}/admin/blackListdetail?id=${petblacklist.black_id}" style="color:red;">
+			    		${petblacklist.black_id},    	
+				    </a>
+				</td>
+				<td style="color:red;"> ${petblacklist.black_name} </td>   	
+				<td style="color:red;"> ${petblacklist.black_phone} </td>    	
+				<td style="color:red;"> ${petblacklist.black_grade} </td>	
+				<td style="color:red;"> (${petblacklist.black_count}) </td>	
+			</tr>    
+	    </c:forEach>
+    </table>
 
 
 

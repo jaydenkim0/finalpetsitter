@@ -34,24 +34,33 @@
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
 		<input type="submit" value="검색">
-	</form>
-	
+	</form>	
 	
 	${count}개의 게시물이 있습니다.	
 
-
-	<!-- 리스트 내용 -->
 	※경고 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
-	<c:forEach var="memberblacklist" items="${list}">      
-        <a href="${pageContext.request.contextPath }/admin/blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 
-    	<h3>아이디 : ${memberblacklist.black_id},    	
-	    	이름 : ${memberblacklist.black_name},   	
-	    	전화번호 : ${memberblacklist.black_phone},    	
-	    	등급 : ${memberblacklist.black_grade},      	
-	    	</h3>
-	    	</a>  	
-    </c:forEach>
-
+	<table>
+   		<tr>
+   			<td> 아이디 </td>
+   			<td> 이름 </td>
+   			<td> 전화번호 </td>
+   			<td> 등급 </td>
+   			<td> 경고 횟수 </td>
+   		</tr>
+		<c:forEach var="memberblacklist" items="${list}">
+		     <tr> 
+		     	<td>
+			        <a href="${pageContext.request.contextPath }/admin/blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 
+			    		${memberblacklist.black_id},    	
+			    	</a>
+			    </td>	  	
+				 <td style="color:#ff8d00;"> ${memberblacklist.black_name} </td> 	
+				 <td style="color:#ff8d00;"> ${memberblacklist.black_phone} </td>    	
+				 <td style="color:#ff8d00;"> ${memberblacklist.black_grade} </td>  
+				 <td style="color:#ff8d00;"> (${memberblacklist.black_count})  </td>    	
+		    </tr>	
+	    </c:forEach>
+    </table>
 
 
 	<!-- 페이징 -->
