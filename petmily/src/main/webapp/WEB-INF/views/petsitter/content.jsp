@@ -143,7 +143,7 @@
 		          	<c:forEach var="reviewDto" items="${list}">
 						<tr>
 					<%-- 	<td>${reviewDto.review_no}</td> --%>
-						<td align="center">${reviewDto.review_writer}</td>
+						<td align="center"><img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: auto; height: auto;" onerror="no_image2()" id="2"> ${reviewDto.review_writer}</td>
 					<%-- 	<td align="center">${reviewDto.review_sitter_no}</td> --%>
 						<td align="center">${reviewDto.review_title}</td>
 						<td align="center">${reviewDto.review_content}</td>

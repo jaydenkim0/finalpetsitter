@@ -43,10 +43,69 @@
 
 <style>
   textarea[name=review_content]{
-       width:100%;
-       height:150px;
+       width:60%;
+       height:100px;
+       margin:auto;
     } 
-</style>
+    
+ .tabl {
+	width: 50%;
+	margin: auto;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.input-file{
+	width: 100%;
+	height: 35px;
+	border-style : none;
+}
+
+select {
+	width: 9%;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+	
+}
+</style>  
+
 
 <script>
 	$(function() {
@@ -76,26 +135,21 @@
 	});
 </script>
    
-
-    <div align = "center" class="tabl">
+    <div align ="left" class="tabl">
     <form method="post" action="insert" enctype="multipart/form-data">
+    	<br>
     	<h2>리뷰 작성</h2>
-	<input type="hidden" name="review_writer" value="${id}">
-	<div class="form-group" align="right">
-		<label for="review_star">별점</label> 
+    	<br>
+		<div class="form-group" align="left">
+		<label for="review_star">별점</label> <br>
 		<select name="review_star" required>
 			<option value="">선택</option>
-			<option value=3>좋음(★★★)</option>
-			<option value=2>보통(★★)</option>
-			<option value=1>나쁨(★)</option>
+			<option value=3>☆ ☆ ☆</option>
+			<option value=2>☆ ☆</option>
+			<option value=1>☆</option>
 		</select>
 	</div>
 	
-		<div class="form-group" align="right">
-		<label for="review_writer" >작성자 ID : ${id}</label> 
-	  
-	</div>
-
 
 	<input type="hidden" name="review_reservation_no" value="${reservation.reservation_no}">
 	<div class="form-group">
@@ -104,26 +158,27 @@
 	</div>
 	
 	<div class="form-group">
-		<label for="review_sitter_no">펫시터 아이디</label> 
-		<input type="hidden" name="review_sitter_no" value="${reservation.reservation_sitter_no}">
-		${sitter_id}
-	</div>
-
-
-	<div class="form-group">
 	<label for="review_content">내용</label>
 	<div class="naver-editor"></div>
 	 <input type="hidden" name="review_content" value="review_content" required></div>
-
+   <input type="hidden" name="review_writer" value="${id}">
+		<div class="form-group" align="right">
+		<label for="review_writer" >작성자 ID : ${id}</label> 
+	  	</div>
+    <div class="form-group" align="right">
+		<label for="review_sitter_no">펫시터 ID:</label> 
+		<input type="hidden" name="review_sitter_no" value="${reservation.reservation_sitter_no}">
+		${sitter_id}
+	</div>
     <div class="form-group" align="right">
 		<label for="review_reservation_no" >예약번호 : ${reservation.reservation_no}</label> 
 	  
 	</div>
 	
 
-<div class="form-group">
-		<input type="submit" value="확인">
-		<input type="reset" value="초기화">
+<div class="form-group" align="center">
+		<input type="submit" value="확인" class="btn hover3">
+		<input type="reset" value="초기화" class="btn hover3">
 </div>
 </form>
 </div>

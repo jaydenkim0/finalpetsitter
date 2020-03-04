@@ -7,19 +7,46 @@
   
 	
 	 <style>
-	 a button{
-	 	background: #ad3a11;
+ 		a button{
+	 	background: #146fbd;
 	    padding: 7px 14px;
 	    color: #fff;
 	    border: 0;
 	    font-weight: bold;
+	    border-radius:3px;
+		 }
+		  a:hover button{
+		 	background: #10538c;
+		 }
+		 h3{
+		 	padding:20px;
+		 }	 
+		 	 /***form search****/
+	 form{
+	 	margin-top:16px;
+	 } 
+	 form select{
+	 	height:30px;
+	 	line-height:30px;
+	 	vertical-align:middle;
 	 }
-	  a:hover button{
-	 	background: rgba(173, 58, 17, 0.78);
-	 }
-	 h3{
-	 	padding:20px;
-	 }	 
+	  form input[name="keyword"],
+	  form input{
+	  	height:30px;
+	  	line-height:30px;
+	  	color:#333;
+	  }
+	 form input[type="submit"]{
+	     background: #146fbd;
+	    color: #fff;
+	    /* padding: 7px 14px; */
+	    border: 0;
+	    border-radius: 3px;
+	    height: 30px;
+	    line-height: 30px;
+	    box-sizing: border-box;
+	    padding: 0 16px;
+	}
 	 </style>
 	
 									
