@@ -1,0 +1,35 @@
+/*font_KR*/
+@font-face{
+    font-family:NotosanBlack;
+    src:url("../font/Notosan/NotoSansCJKkr-Black.otf");
+}
+@font-face{
+    font-family:NotosanB;
+    src:url("../font/Notosan/NotoSansCJKkr-Bold.otf");
+}
+@font-face{
+    font-family:NotosanM;
+    src:url("../font/Notosan/NotoSansCJKkr-Medium.otf");
+}
+@font-face{
+    font-family:NotosanR;
+    src:url("../font/Notosan/NotoSansCJKkr-Regular.otf");
+}
+@font-face{
+    font-family:NotosanL;
+    src:url("../font/Notosan/NotoSansCJKkr-Light.otf");
+}
+
+/*font_EN*/
+@font-face{
+    font-family: GothamBlcak;
+    src: url("../font/Gotham/GOTHAM-BLACK.TTF");
+}
+@font-face{
+    font-family: GothamMedium;
+    src: url("../font/Gotham/Gotham-Medium.otf");
+}
+@font-face{
+    font-family: GothamThin;
+    src: url("../font/Gotham/Gotham-Thin.otf");
+}
