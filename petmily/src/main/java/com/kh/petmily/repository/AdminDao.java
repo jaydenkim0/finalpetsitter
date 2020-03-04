@@ -235,13 +235,9 @@ public interface AdminDao {
 	List<PayinfoDto> payinfoName(int reservation_no);
 	// 예약 디테일에 보여줄 pay 테이블 정보
 	 List<PayDto> paydetail(int reservation_no);
+	// 결제 취소 버튼 유무 확인
+	int paymentcanclecheck(int reservation_no);
 
-	 
-	 //test
-	QnaDto test(int qna_no);
-
-
-	
 
 
 	
