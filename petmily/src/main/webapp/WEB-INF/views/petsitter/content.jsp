@@ -17,7 +17,7 @@
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
 
-<!-- 네이버 에디터 영역 -->
+	<!-- 네이버 에디터 영역 -->
    <script>        
         $(function(){
             var options = {

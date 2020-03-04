@@ -85,16 +85,16 @@
 			<tbody>			
 				<tr>
 					<tr>			
-						<td> 신청 회원 : ${acountOne.member_id} |
+						<td> 신청 회원 : ${acountOne.member_id} 
 							<a  href="${pageContext.request.contextPath}/admin/memberdetail?id=${acountOne.member_id}">
-								회원 정보
+								<button> 회원 정보 </button>
 							</a>
 						</td>					
 					</tr>
 					<tr>			
-						<td> 견적승인 펫시터 : ${sitter_id} |
+						<td> 견적승인 펫시터 : ${sitter_id} 
 							<a href="${pageContext.request.contextPath}/admin/petsitter/petsitterdetail?pet_sitter_no=${acountOne.reservation_sitter_no}"> 
-								펫시터 정보
+								<button> 펫시터 정보 </button>
 							</a>
 						</td>					
 					</tr>
@@ -113,24 +113,23 @@
 					<tr>			
 						<td> 견적 신청 상태 : ${acountOne.status}</td>					
 					</tr>
-					
-					<c:if test="${payinfo != null }">				
-						<c:forEach var="pay" items="${payinfomation}">
-							<tr>			
-								<td> 결제 신청 상태 : ${pay.status}</td>	
-								<c:if test="${pay.status eq '완료' and status eq 0}">							
+						<c:if test="${payinfo != null }">				
+							<c:forEach var="pay" items="${payinfomation}">				
+								<tr>			
+									<td> 결제 신청 상태 : ${pay.status}</td>	
+									<c:if test="${pay.status eq '완료' and status eq 0}">							
 										<!-- 결제 취소 버튼 -->
-										<form action="${pageContext.request.contextPath}/pay/revoke" method="get">
-											<input type="hidden" name="pay_no" value="${pay.pay_no}">										
-											<button>결제 취소</button>
-										</form>						
-								</c:if>						
-						</tr>						
-						<tr>			
-								<td> 승인 시간 : ${pay.process_time}</td>					
-						</tr>							
-						</c:forEach>
-					</c:if>
+									<form action="${pageContext.request.contextPath}/admin/revoke" method="get">
+										<input type="hidden" name="pay_no" value="${pay.pay_no}">										
+										<button>결제 취소</button>
+									</form>											
+									</c:if>							
+								</tr>						
+							<tr>			
+									<td> 승인 시간 : ${pay.process_time}</td>					
+							</tr>							
+							</c:forEach>
+						</c:if>
 					
 					<tr>			
 						<td> 신청 내용  : ${acountOne.ect}</td>					

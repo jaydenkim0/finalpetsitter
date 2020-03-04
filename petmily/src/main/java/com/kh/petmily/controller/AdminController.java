@@ -2,6 +2,7 @@ package com.kh.petmily.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import com.kh.petmily.service.kakao.PayService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationAllVO;
 import com.kh.petmily.vo.petsitter.ReservationListVO;
@@ -133,6 +135,11 @@ public class AdminController {
 		return "admin/reservationstatusdetail";		
 	}	
 		
+	@GetMapping("/revoke")
+	public String revoke(@RequestParam int pay_no) throws URISyntaxException {
+		KakaoPayRevokeReturnVO kpayRevokeReturnVO = payService.revoke(pay_no);
+		return "redirect:/admin/list/reservationstatus";
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	// 회원 디테일 페이지 연결
