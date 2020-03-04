@@ -8,12 +8,6 @@ html {
   box-sizing: inherit;
 }
 
-html,
-body {
-/*   background-color: black; */
-/*   height: 5000px; */
-}
-
 html, body, div, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, ol, ul, li, form, legend, label, table, header, footer, nav, section, figure {
   margin: 0;
   padding: 0;
@@ -33,20 +27,14 @@ body {
   width: 90%;
   margin-left: 200px;
   margin-right: auto;
-  max-width: 1200px;
+  width: 90%;
+  max-width: 1500px;
 }
 
 .hero .container:after {
   content: "";
   display: table;
   clear: both;
-}
-
-.hero .container {
-  margin-left: 200px;
-  margin-right: auto;
-  width: 90%;
-  max-width: 1200px;
 }
 
 .hero * {
@@ -317,7 +305,8 @@ body {
 }
 
 #masthead-search {
-  float: right;
+  float: left;
+  margin-left: 890px;
   margin-top: 0.625em;
   width: 100%;
   max-width: 14em;
@@ -406,6 +395,106 @@ body {
 #masthead.is-active #masthead-search :-ms-input-placeholder {
    color: #b4b9ba
 }
+
+#masthead-login{
+  float: right;
+  margin-top: 0.625em;
+  margin-left: 0px;
+  width: 100%;
+  max-width: 14em;
+  position: relative;
+  -webkit-appearance: none;
+
+  color: white;
+  overflow:hidden; 
+  text-overflow:ellipsis; 
+  white-space:nowrap;
+}
+.color #masthead-login{
+color: black;
+}  
+#masthead-login #login_btn{
+  font-size: 20px;
+  margin-top: 0.7em;
+  background-color: #ffffff;
+  background-color: rgba(10, 8, 8, 0);
+  border-style: none;
+}
+
+#masthead-login #login_btn a{
+  text-decoration: none;
+  color: white;
+}
+
+#masthead-login #login_btn a:hover{
+  text-decoration: none;
+    color:#4edec5;
+  }
+
+.color #masthead-login #login_btn a{
+    text-decoration: none;
+    color: black;
+  }
+.color #masthead-login #login_btn a:hover{
+  text-decoration: none;
+    color:#4edec5;
+  }
+
+#masthead-login .img_box {
+  width: 50px;
+  height: 50px; 
+  border-radius: 70%;
+  overflow: hidden;
+  margin-left: 5px;
+  margin-top: 0px;
+
+/*  이미지와 닉네임 나란히 배치  */
+  float: left;
+  clear: both;
+}
+#masthead-login .profile {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+#masthead-login #member{
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  margin-left: 15px;
+  margin-right: 15px;
+  top: 10px;
+}
+
+#masthead.is-active #masthead-login #member {
+    color: black;
+}
+
+
+.color #masthead-login #member{
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  margin-left: 15px;
+  margin-right: 15px;
+  top: 15px;
+}
+
+/* .color #masthead-login #member {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  margin-top: 10px;
+} */
+
+#masthead-login #member:hover{
+  color:#4edec5;
+}
+.color #masthead-login #member:hover{
+  color:#4edec5;
+}
+
 
 #masthead .col {
   opacity: 0;

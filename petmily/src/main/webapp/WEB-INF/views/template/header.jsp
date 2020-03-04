@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set> 
 
-
-       <div class="hero">
+   <!-- 헤더 시작 -->
+            <div class="hero">
                 <header id="masthead" role="banner">
                   <div class="container">
                   
@@ -18,45 +20,92 @@
                   <form id="masthead-search">
                       <input type="search" name="s" aria-labelledby="search-label" placeholder="| 펫밀리 찾기" class="draw">
                       <button type="submit">&rarr;</button>
-                  </form>        
+                  </form>  
+            
+            <!-- 로그인 -->
+            <div id="masthead-login">
+                <c:choose>
+	                <c:when test="${empty id}">
+	                	<button id="login_btn"><a href="member/login">로그인</a></button>                
+	                </c:when>
+					<c:otherwise>
+					   <!-- 프로필 이미지 -->
+		                <div class="img_box" style="background: #f5f5f5">
+		                    <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
+		                </div>
+		
+		                <!-- 회원 닉네임 -->
+		                <a id="member" href="member/mypage">${id}</a>
+					</c:otherwise>
+                </c:choose>
+            </div>
                     
             <!-- 네비게이션 시작 -->
                     <nav id="site-nav" role="navigation">
-                      <div class="col">
-                        <h4>펫밀리 지원</h4>
-                        <ul>
-                          <li><a href="#">펫밀리를 지원해보세요.</a></li>
-                        </ul>            
-                      </div>
+                    <c:choose>
+                    	<c:when test="${grade!='petsitter'}">
+                    		<div class="col">
+		                       <h4>펫밀리 지원</h4>
+		                       <ul>
+		                         <li><a href="petsitter/regist">펫밀리를 지원해보세요.</a></li>
+		                       </ul>            
+		                     </div>
+                    	</c:when>
+                    	
+                    	<c:otherwise>
+                    		<div class="col">
+		                       <h4>펫밀리 정보</h4>
+		                       <ul>
+		                         <li><a href="petsitter/info">펫밀리 정보를 조회해보세요.</a></li>
+		                         <li><a href="petsitter/reservation">펫밀리 예약 정보를 조회해보세요.</a></li>
+		                       </ul>            
+		                     </div>
+                    	</c:otherwise>
+                    </c:choose>
+           	
                       <div class="col">
                         <h4>펫밀리 토크</h4>
                         <ul>
-                          <li><a href="#">펫밀리와 대화 해보세요.</a></li>
+                          <li><a href="board/care/list">펫밀리와 대화 해보세요.</a></li>
                         </ul> 
-                      </div>
-                      <div class="col">
-                        <h4>펫밀리 둘러보기</h4>
-                        <ul>
-                          <li><a href="#">펫밀리를 찾아보세요.</a></li>
-                        </ul>             
-                      </div>
-                      <div class="col">
-                        <h4>게시판</h4>
-                        <ul>
-                          <li><a href="#">공지사항</a></li>
-                          <li><a href="#">문의사항</a></li>
-                          <li><a href="#">세이브더 펫</a></li>
-                        </ul>               
                       </div>
                       
                       <div class="col">
-                        <h4>관리자</h4>
+                        <h4>펫밀리 둘러보기</h4>
                         <ul>
-                          <li><a href="#">펫시터 관리</a></li>
-                          <li><a href="#">회원 관리</a></li>
-                          <li><a href="#">신고 회원 관리</a></li>
+                          <li><a href="petsitter/list">펫밀리를 찾아보세요.</a></li>
+                        </ul>             
+                      </div>
+                      
+                      <div class="col">
+                        <h4>게시판</h4>
+                        <ul>
+                          <li><a href="board/faq/list">공지사항</a></li>
+                          <li><a href="board/qna/list">문의사항</a></li>
+                          <li><a href="board/stray/list">세이브더 펫</a></li>
                         </ul>               
                       </div>
+                      
+					<c:if test="${not empty id}">
+						<div class="col">
+						  <h4></h4>
+						  <ul>
+						    <li><a href="member/logout">로그아웃</a></li>
+						  </ul>               
+						</div>
+					</c:if>
+                      
+                      <c:if test="${grade=='admin'}">
+	                      <div class="col">
+	                        <h4>관리자</h4>
+	                        <ul>
+	                          <li><a href="#">펫시터 관리</a></li>
+	                          <li><a href="#">회원 관리</a></li>
+	                          <li><a href="#">신고 회원 관리</a></li>
+	                        </ul>               
+	                      </div>
+					</c:if>
+					
                   </nav>
                 </div>
               </header>
