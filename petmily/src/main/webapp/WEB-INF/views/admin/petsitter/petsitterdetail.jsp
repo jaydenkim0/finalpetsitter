@@ -118,13 +118,12 @@
 			<tbody>
 				<tr>			
 					<td>					
-					아이디 : ${petsitter.sitter_id} | 
+					아이디 : ${petsitter.sitter_id} 
 					<a href="${pageContext.request.contextPath}/admin/memberdetail?id=${petsitter.sitter_id}">
-					회원정보 보기
-					</a>
-					|
+						<button> 회원정보 보기 </button>
+					</a>			
 					<a href="${pageContext.request.contextPath}/petsitter/content?pet_sitter_no=${petsitter.pet_sitter_no}">
-					펫시터페이지 보기
+						<button> 펫시터페이지 보기 </button> 
 					</a>
 					</td>					
 				</tr>
@@ -181,11 +180,9 @@
 			<div class="box-container">
 				<!-- 서비스 가능지역  -->
 				<h4>서비스 가능지역</h4>
-				<c:forEach var="petlocation" items="${petlocation}">
-					
+				<c:forEach var="petlocation" items="${petlocation}">					
 					광역시 : ${petlocation.city}, 
-					지역 : ${petlocation.area}
-			
+					지역 : ${petlocation.area}			
 				</c:forEach>
 				
 			</div>

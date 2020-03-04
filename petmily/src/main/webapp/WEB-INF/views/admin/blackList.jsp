@@ -5,21 +5,11 @@
     
     
     
-    <style>
-	.scrollbox{
-	    height: auto;
-    	max-height: 500px;
-	    background: rgba(202, 82, 38, 0.1);
-	    width: 70%;
-	    padding: 20px;
-	    overflow-y: auto;
-	    box-shadow: inset 1px 1px 7px rgba(0,0,0,0.1);
-	}
+        <style>
      a{
      	color:#333;
      }
-	 a button,
-	 button{
+	 a button{
 	 	background: #146fbd;
 	    padding: 7px 14px;
 	    color: #fff;
@@ -27,8 +17,7 @@
 	    font-weight: bold;
 	    border-radius:3px;
 	 }
-	  a:hover button,
-	  button:hover{
+	  a:hover button{
 	 	background: #10538c;
 	 }
 	 h3{
@@ -102,6 +91,7 @@
 		color: #333;
 	}
 	 </style>
+	 
        <!-- 
     	이용약관에
     	-> 차단 회원 및 페시터가 되면 2년간 정보가 보관되며
@@ -121,11 +111,11 @@
     <div class="scrollbox">
     	<table>
     		<tr>
-    			<td> 아이디 </td>
-    			<td> 이름 </td>
-    			<td> 전화번호 </td>
-    			<td> 등급 </td>
-    			<td> 경고 횟수 </td>
+    			<th> 아이디 </th>
+    			<th> 이름 </th>
+    			<th> 전화번호 </th>
+    			<th> 등급 </th>
+    			<th> 경고 횟수 </th>
     		</tr>
 			<c:forEach var="memberblacklist" items="${MBlist}"> 
 				<tr>
@@ -153,11 +143,11 @@
     <div class="scrollbox">
     	<table>
     		<tr>
-    			<td> 아이디 </td>
-    			<td> 이름 </td>
-    			<td> 전화번호 </td>
-    			<td> 등급 </td>
-    			<td> 경고 횟수 </td>
+    			<th> 아이디 </th>
+    			<th> 이름 </th>
+    			<th> 전화번호 </th>
+    			<th> 등급 </th>
+    			<th> 경고 횟수 </th>
     		</tr>
 		    <c:forEach var="petblacklist" items="${PBlist}" >
 		    	<tr>

@@ -119,11 +119,11 @@
 	 
 	<table>
    		<tr>
-   			<td> 아이디 </td>
-   			<td> 이름 </td>
-   			<td> 전화번호 </td>
-   			<td> 등급 </td>
-   			<td> 경고 횟수 </td>
+   			<th> 아이디 </th>
+   			<th> 이름 </th>
+   			<th> 전화번호 </th>
+   			<th> 등급 </th>
+   			<th> 경고 횟수 </th>
    		</tr>
 	    <c:forEach var="petblacklist" items="${list}" >
 	    	<tr>
