@@ -143,6 +143,15 @@
 	href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
 
 <script src="https://code.jquery.com/jquery-latest.js"></script>
+<script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+
+
+
+
+<!-- 편집기 writer -->
+
+
+
 <script
 	src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
 <!-- 네이버 토스트에디터 종료 -->
@@ -152,7 +161,7 @@
 		//생성은 항상 옵션 먼저 + 나중에 생성
 		var options = {
 			//대상
-			el : document.querySelector(".naver-editor"),
+			el : document.querySelector(".naver-editor-top"),
 			//미리보기 스타일(vertical / horizontal)
 			previewStyle : "horizontal",
 			//입력 스타일
@@ -170,10 +179,86 @@
 						function() {
 							var text = editor.getValue();//에디터에 입력된 값을 불러온다
 							document
-									.querySelector(".naver-editor + input[name=care_reply_content]").value = text;
+									.querySelector(".naver-editor + input[target=_top]").value = text;
 						});
 	});
 </script>
+
+<script>
+	$(function() {
+		
+		document.querySelectorAll(".naver-editor").forEach(function(tag){
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			el:tag,
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px"
+		};
+
+		var editor = tui.Editor.factory(options);
+
+// 		editor.focus();
+// 		var first = $(tag).next(document.querySelector("input[target=_blank]")).value;
+// 		console.log(first);
+// 		editor.setValue(first);
+		
+		 var first = $(tag).next("input[target=_blank]").val();
+         editor.setValue(first);//값 설정
+         
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[target=_blank]").value = text;
+						});
+		});
+	});
+</script>
+
+
+
+
+
+
+<!-- 뷰어 -->
+
+
+<!-- 네이버 에디터 영역 -->
+   <script>        
+        $(function(){
+        	//document.querySelectorAll은 우측 선택자에 해당하는 모든 태그를 다 불러옴
+        	//.forEach는 불러온 대상을 iteration 하는 반복 명령(한개씩 다시 불러와서 tag이라고 부름)
+        	document.querySelectorAll(".naver-viewer").forEach(function(tag){
+        		var options = {
+					//el(element) : 에디터가 될 영역
+					el:tag,
+                       
+                    viewer:true,
+
+                     //height : 생성될 에디터의 높이
+                     height:'auto',
+				};
+
+				var viewer = tui.Editor.factory(options);
+
+				//생성된 뷰어에 초기값 표시
+                var text = $(tag).next("input[name=reply_content]").val();
+                viewer.setValue(text);//값 설정
+        	});
+        	
+            
+        });
+    </script>
+<!-- 네이버 에디터 영역 종료 --> 
+
+
 
 <script>
 function no_image1(){
@@ -271,8 +356,8 @@ function no_image2(){
 				<td>
 					<input type="hidden" name="care_reply_board_no" value="${list.care_board_no }">
 					<input type="hidden" name="care_reply_writer" value="${id }">
-					<div class="naver-editor"></div>
-					<input type="hidden" name="care_reply_content" value="">
+					<div class="naver-editor-top"></div>
+					<input type="hidden" name="care_reply_content" value="" target="_top">
 					<input type="file" name="care_image" accept="image/*">
 				</td>
 				<td align="right">
@@ -304,14 +389,22 @@ function no_image2(){
 			</c:choose>
 			<th align="right">${replyimagelist.wdateWithFormat }</th>
 		</tr>
+		
+		<!-- 댓글 수정전 보여주는 tr -->
 		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">${replyimagelist.care_reply_content }</th>
+			<th class="content" colspan="2" align="left">
+				<div class="naver-viewer"></div>  
+				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
+			</th>
 		</tr>
+		
+		<!-- 댓글 수정중 보여주는 tr -->
 		<tr class="reply_edit">
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<textarea name="care_reply_content" id="care_reply_change" required class="val">${replyimagelist.care_reply_content }</textarea>
+                	<div class="naver-editor"></div>
+					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
 				</form>				
 			</th>
 		</tr>
