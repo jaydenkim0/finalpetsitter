@@ -45,16 +45,49 @@
 			});	
     </script>
 
-<div align="center">
+<style>
+input{
+	width:400px;
+	BORDER-BOTTOM: teal 1px solid;
+	BORDER-LEFT: medium none;
+	BORDER-RIGHT: medium none;
+	BORDER-TOP: medium none;
+	FONT-SIZE: 12pt;
+	BORDER-STYLE:none;     
+	border-bottom:solid 1px #cacaca;
+	border-collapse:collapse;
+	HEIGHT:40PX;
+	background-color:#FAFAFA;
+}
+
+#pwchange{
+	background-color:#BDBDBD;
+	width: 300px;
+	height: 40px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	BORDER-RADIUS:3PX;
+}
+.change{
+	font-size:14pt;
+}
+body{
+	background-color:#FAFAFA;
+}
+</style>
+
+
+<div align="center" class="change">
 
 <br><br>
 <h1>비밀번호 변경</h1>
-<br>
+<br><br>
 
 <form class="emailsend"  action="input" method="post">
-	<input type="text" name="id" placeholder="아이디 입력" required><br><br>
-	<input type="email" name="email" placeholder="이메일 입력" required><br><br>
-	<input id="pwchange" type="submit" value="이메일 보내기">
+	<input type="text" name="id" placeholder="아이디 입력" required><br><br><br>
+	<input type="email" name="email" placeholder="이메일 입력" required><br><br><br>
+	<input id="pwchange" type="submit" value="이메일 전송" >
 </form>
 
 	<c:if test="${param.error != null}">
