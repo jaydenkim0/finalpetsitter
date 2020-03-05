@@ -1,25 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- BootStrap CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- jquery js -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+ 
+  
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+<%-- <c:set var="context" value="${pageContext.request.contextPath}"></c:set> --%>
+<%-- <c:choose> --%>
+<%-- 	<c:when test="${sessionScope.id eq null }"> --%>
+<%-- 		<a href="${context}/member/login">로그인</a> --%>
+<%-- 	</c:when> --%>
+<%-- 	<c:otherwise> --%>
+<%-- 	${sessionScope.id}님이 로그인 중입니다. --%>
+<%-- 	<a href="${context}/member/logout">로그아웃</a> --%>
+<%-- 	</c:otherwise> --%>
+<%-- </c:choose> --%>
 
 <script>
 	$(document).ready(function() {
@@ -37,6 +83,7 @@
 .page-navigator li {
 	display: inline-block;
 }
+
 
 .notice_table {
 	width: 80%;
@@ -111,10 +158,35 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 }
+<!-- header style -->
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section001{
+	padding-top:150px;
+	}
 </style>
+
+<!-- header 불러오기 -->
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
+<section class="section-content">
 
 <div align="center">
 	<h1>Save the Pets !</h1>
+
 
 	<section>
 		<table class="notice_table">
@@ -139,11 +211,20 @@ select {
 					<td align="left"><c:forEach var="i" begin="1"
 							end="${row.depth}">
 							&nbsp;&nbsp;&nbsp;&nbsp;
-						</c:forEach> <!-- 답글은 이미지를 추가 --> <c:if test="${row.depth > 0}">
+						</c:forEach> <!-- 답글은 이미지를 추가 --> 
+						<c:if test="${row.depth > 0}">
 							<img src="${context}/resources/img/reply.png" width="20"
 								height="10">
-						</c:if> <font color="#1482e0"> [${row.stray_title}] </font> <a
-						href="view?stray_no=${row.stray_no}"> <!-- 제목 출력 -->
+						</c:if>
+						<c:choose>
+						<c:when test="${strayVO.stray_title ne '완료글'}">
+						<font color="#1482e0"> [${row.stray_title}] </font>
+						</c:when>
+						<c:otherwise>
+							<td style="color: red">말머리 : ${strayVO.stray_title}</td>
+							</c:otherwise>
+						</c:choose> 
+						<a href="view?stray_no=${row.stray_no}"> <!-- 제목 출력 -->
 							${row.stray_head}
 					</a> <c:if test="${row.replycount > 0}">
 							<!-- 댓글수 출력 -->
@@ -172,7 +253,7 @@ select {
 			</jsp:include>
 		</div>
 
-	<div>
+	<div align="center">
 		<form method="get" action="${context}/board/stray/list">
 			<select name="type" class="input-item">
 				<option value="stray_writer">작성자</option>
@@ -181,5 +262,10 @@ select {
 			<input class="input-item" name="keyword" placeholder="검색어" requierd>
 			<input type="submit" value="조회" class="btn hover3" >
 		</form>
+		</div>
 	</section>
 </div>
+</section>
+<br>
+      <!-- footer 불러오기 -->
+     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
