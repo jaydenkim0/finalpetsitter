@@ -10,16 +10,70 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 <style>
-.page-navigator li {
-	display: inline-block;
+
+
+
+
+.page-navigator li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
 }
 
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color : #BDBDBD;
+.restab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
 }
+
+
+
+td{
+   
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   border-color: #BDBDBD;
+    padding: 10px;
+   text-align: center;
+  
+}
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+button{
+   display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   
+	}
+
+	.button:hover{
+	color: white;
+	}
+
+	
+	.hover:hover{
+	background-color: #1482e0;
+	}
+  
+
+
+
 
 th, td {
 	border-bottom: 1px solid #444444;
@@ -40,9 +94,7 @@ a:hover{
 	margin-right: 10%;
 }
 
-.page-navigator li {
-	display: inline-block;
-}
+
 
 .page-navigator li.active>a {
 	color: #1482e0;
@@ -91,7 +143,9 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 	}
+
 </style>
+
 
 </head>
 
@@ -107,7 +161,11 @@ select {
 	<p>리뷰 작성 시 500p 지급</p>
 	<section>
 	
-	<table class="notice_table">
+
+	<table  class="restab">
+
+	
+
 		<tr>
 			<td>예약번호</td>
 			<td>예약일자</td>
@@ -142,10 +200,11 @@ select {
 				<td>
 					<c:choose>
 						<c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
-							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">리뷰쓰기</a>
+							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">
+							<button class="button hover">리뷰 작성</button></a>
 						</c:when>
 						<c:otherwise>
-							리뷰작성불가
+							작성불가
 						</c:otherwise>
 					</c:choose>		
 					

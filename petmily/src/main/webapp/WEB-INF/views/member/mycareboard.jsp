@@ -9,9 +9,53 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <style>
-.page-navigator li {
-	display: inline-block;
+
+
+li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
+   list-style-type:none;
+   margin-left:20px;	
 }
+
+
+    .caretab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+button{
+  display: white;
+   width: 90px;
+   height: 40px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   
+ 
+}
+
+
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+
+
+
 
 .care_table {
 	width: 80%;
@@ -90,7 +134,9 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 	}
+
 </style>
+
 
 </head>
 
@@ -99,11 +145,21 @@ select {
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <div align="center">
-<br>
-<h1>내 돌봄방</h1>
-<br>
+
+
+<h1>나의 돌봄방</h1>
+
+<br><br>
+<c:if test="${not empty id}">
+<a href="${context }/board/care/write"><button>방 만들기</button></a><br><br>
+</c:if>
+
 <section>
-<table class="care_table">
+<table class="caretab" >
+
+
+
+
 	<tr>
 		<td>방번호</td>
 		<td>펫시터</td>
@@ -181,5 +237,4 @@ select {
 
 </section>
 </div>
-
 </body>

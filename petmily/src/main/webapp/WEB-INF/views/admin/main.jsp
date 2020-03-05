@@ -23,7 +23,6 @@
 	 
 	 </style>
 	 
-	<h1>관리자 메인페이지</h1>
 	
 	
 	<a href="registInfo"><button> 등록 현황</button></a>
@@ -36,7 +35,9 @@
 		<a href="${pageContext.request.contextPath}/admin/list/petsitterapply"><button>펫시터 신청 관리 (리스트)</button></a>	
 		<a href="${pageContext.request.contextPath}/admin/list/petsittersleep"><button>휴면 펫시터 관리 (리스트)</button></a>	
 	<a href="blackList"><button>경고 회원 및 펫시터 관리</button></a>
+	<a href="${pageContext.request.contextPath}"><button>펫시터 메인페이지로 이동</button></a>
 	
+	<h1>관리자 메인페이지</h1>
 
 	
 	<h3>

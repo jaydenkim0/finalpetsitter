@@ -259,6 +259,7 @@ select{
 }
 p{
   color:#FE2E64;
+  font-size:12px;
 }
 	
     </style>
