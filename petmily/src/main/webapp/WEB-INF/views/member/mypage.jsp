@@ -26,7 +26,7 @@
 </style>
 <body>
 <h1>마이 페이지 </h1>
-<fieldset style="width:70px; height:750px;">
+<fieldset style="width:70px; height:750px; border:2 solid;padding:5; border-top-color: #1482e0;border-right-color: #1482e0;border-left-color: #1482e0;border-bottom-color:#1482e0;">
 <legend>메뉴</legend>
 
 
