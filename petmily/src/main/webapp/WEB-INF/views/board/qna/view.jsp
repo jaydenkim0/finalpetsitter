@@ -10,7 +10,65 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- jquery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+ <!-- 
+기본 CSS
+:	index css,
+	font css
+-->
+    <!-- index css -->
+    <link rel="stylesheet" href="${context}/resources/css/index.css" />
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+    
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
 
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+ 
+  
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+	
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -199,18 +257,30 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
+<!-- header style -->
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section001{
+	padding-top:150px;
+	}
 </style>
+<!-- header 불러오기 -->
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
-
+<section class="section-content">
 
 	<h2 align="center">게시글 상세 보기</h2>
 		<table class="notice_table">
@@ -244,22 +314,27 @@ hr {
 				</tr>
 			</c:if>
 		</c:forEach>
+		
 				<tr>
 				<td>
-					<div class="naver-viewer"></div>  
-					<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+		<c:choose>
+		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+			<div class="naver-viewer"></div>  
+			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+			</c:if>
+				<div class="naver-viewer"></div> 
+				<input type="hidden" name="faq_content" value="게시글 권한이 없습니다.">  
+		</c:when>
+		<c:otherwise>
+			<div class="naver-viewer"></div>  
+			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
+		</c:otherwise>
+		</c:choose>
 				</td>
 			</tr>
 
 
-
-<!-- 댓글화면 -->
-<%-- <c:if test="${member_image_no>0"> --%>
-<%-- 	<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image"> --%>
-<%-- </c:if> --%>
-<%-- <c:otherwise> --%>
-<!-- 	<img src="http://placehold.it/100x100"> -->
-<%-- </c:otherwise> --%>
 <c:forEach items="${replyList}" var="reply">
 <c:if test="${reply.content ne null}">
 <tr>
@@ -267,18 +342,27 @@ hr {
 	<div class="grandmother">
 		<table width="100%" class="mother">
 			<tr>
-				<th align="left" width="100"> 
-				${reply.reply_writer}</th>
+				<th align="left"> 
+				<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">${reply.reply_writer}
 				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
-				</c:if>
+				</c:if></th>
 
 				<th align="left">
 				작성일 : ${reply.writedateWithFormat}</th>
 			</tr>
 			
 			<tr class="reply_view">
-				<th class="content" colspan="2" align="left">${reply.content}</th>
+				<c:choose>
+					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+							<th class="content" colspan="2" align="left">${reply.content}</th>
+						</c:if>
+					</c:when>
+				<c:otherwise>
+				<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
+				</c:otherwise>
+		</c:choose>
 			</tr>
 			
 			<tr class="reply_edit">
@@ -316,13 +400,23 @@ hr {
 <!-- 댓글 등록 -->
 <tr>
 <td align="right">
-<form action="replywrite" method="post" class="reply_submit">
+	<c:choose>
+		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-		<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
-				<br><br>
-				 <input type="submit" value="등록" class="btn hover3">
+					<br><br>
+			 <input type="submit" value="등록" class="btn hover3">
 		</form>
+			</c:if>
+				</c:when>
+					<c:otherwise>
+						<textarea name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="100" ></textarea>
+					<br><br>
+				</c:otherwise>
+		</c:choose>
 		</td>
 	</tr>
 
@@ -344,5 +438,8 @@ hr {
 		</td>
 	</tr>
 </table>
-
-	
+</section>
+<br>
+      <!-- footer 불러오기 -->
+     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
+ 

@@ -12,6 +12,66 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
+<!-- jquery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ 
+ <!-- 
+기본 CSS
+:	index css,
+	font css
+-->
+    <!-- index css -->
+    <link rel="stylesheet" href="${context}/resources/css/index.css" />
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+    
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+ 
+  
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+	
+
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -200,18 +260,31 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
+<!-- header style -->
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section001{
+	padding-top:150px;
+	}
 </style>
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
+<!-- header 불러오기 -->
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<section class="section-content">
 
 	<h2 align="center">Save the Pets !</h2>
 	<table class="notice_table">
@@ -238,12 +311,12 @@ hr {
 	<tr>
 		<c:choose>
 			<c:when test="${strayVO.stray_title ne '완료글'}">
-				<td>말머리 : ${strayVO.stray_title}</td>
+				<font color="#1482e0"> [${row.stray_title}] </font>
 			</c:when>
 			<c:otherwise>
 				<td style="color: red">말머리 : ${strayVO.stray_title}</td>
 			</c:otherwise>
-		</c:choose>
+		</c:choose> 
 	</tr>
 
 	<tr>
@@ -278,13 +351,18 @@ hr {
 						<div class="grandmother">
 							<table width="100%" class="mother">
 								<tr>
-									<th align="left"><c:choose>
-											<c:when test="${not empty sessionScope.id}"> ${reply.reply_writer}</c:when>
-
+									<th align="left">
+									<c:choose>
+											<c:when test="${not empty sessionScope.id}"> 
+											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+											${reply.reply_writer}
+											</c:when>
 											<c:otherwise>비회원</c:otherwise>
-										</c:choose> <c:if test="${strayVO.stray_writer == reply.reply_writer}">
+										</c:choose> 
+										<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
-										</c:if></th>
+										</c:if>
+										</th>
 
 									<th align="left">작성일 : ${reply.writedateWithFormat}</th>
 								</tr>
@@ -363,3 +441,7 @@ hr {
 			</td>
 	</tr>
 </table>
+</section>
+<br>
+      <!-- footer 불러오기 -->
+     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            

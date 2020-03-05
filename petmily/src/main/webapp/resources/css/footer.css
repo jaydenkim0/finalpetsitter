@@ -1,6 +1,9 @@
 /*footer.css*/
 
 .site-footer {
+  left:0;
+  right:0;	
+  buttom:0;
   padding: 4em 0;
   background: #f5f5f5; }
   @media (min-width: 768px) {
