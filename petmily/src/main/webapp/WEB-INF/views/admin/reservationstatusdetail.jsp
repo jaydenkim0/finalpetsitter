@@ -75,8 +75,11 @@
 	}
     </style>
 	
+	
+	
+   <a href="${pageContext.request.contextPath}/admin/list/reservationstatus"><button>예약 현황</button></a>	 
 	<div class="box-container first">
-		<h3>예약 디테일 페이지</h3>
+		<h4>예약 디테일 페이지</h4>
 	</div>
 	
 
