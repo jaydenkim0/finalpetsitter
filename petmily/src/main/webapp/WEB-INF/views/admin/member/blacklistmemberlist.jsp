@@ -97,9 +97,10 @@
 	}
 	 </style>
      
-	<h3> 경고 회원 리스트</h3>	
 	
-	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	<a href="${pageContext.request.contextPath}/admin/blackList"><button>경고 게시판으로 이동</button></a>
+	
+	<h4> 경고 회원 리스트</h4>	
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistmember">
