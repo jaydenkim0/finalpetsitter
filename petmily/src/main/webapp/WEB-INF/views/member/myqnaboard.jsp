@@ -62,16 +62,7 @@ a {
    color: #1482e0;
    transition: all 0.9s, color 0.3;
 
-.page-navigator li {
-	display: inline-block;
 
-}
-
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color : #BDBDBD;
 }
 
 th, td {
