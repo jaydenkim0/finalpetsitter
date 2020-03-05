@@ -45,6 +45,13 @@
         	Hakademy.PointManager.factory(".star-wrap");
         });
     </script>
+
+<!-- 
+기본 CSS
+:	font css
+-->
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
     
 <!-- 
 HEADER 이용 시 넣어야할 요소 

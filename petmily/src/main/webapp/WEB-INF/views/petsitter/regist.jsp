@@ -1,8 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set>    
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+
+<!-- 
+기본 CSS
+:	font css
+	regist css
+-->
+	<!-- regist css -->
+    <link rel="stylesheet" href="${context}/resources/css/regist.css"/>   
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+    
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+    <!-- header style -->
+    <style>
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:150px;
+	}
+	</style>
+
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
 <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
 <link rel="stylesheet" type="text/css"
@@ -76,23 +152,28 @@
              $(conditionCheck).each(function(i){ //돌봄환경
                  careConditionArray.push($(this).data("condition"));
              });
-
+				
+             
+             
                  $("#skills_text").empty();
                  for (var i in skillArray)
                  {
-                     $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+skillArray[i]).appendTo("#skills_text");
                  }
   
                  $("#care_pet_type_text").empty();
                  for (var i in carePetTypeArray)
                  {
-                     $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+carePetTypeArray[i]).appendTo("#care_pet_type_text");
                  }
 
                  $("#care_condition_text").empty();
                  for (var i in careConditionArray)
                  {
-                     $("<span>").text(careConditionArray[i]+"/").appendTo("#care_condition_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+careConditionArray[i]).appendTo("#care_condition_text");
                  }               
          });
          
@@ -141,7 +222,7 @@
              var section_len = $(".region").length; 
              console.log(section_len);
 
-             var test = $("<div>");
+             var test = $("<div>").addClass('location-div');
 
              var region = $("<select>");
                  region.addClass("region");
@@ -151,13 +232,7 @@
                  section.addClass("section");
                  section.attr("name","location_name["+section_len+"].area");
 
-                 var test11 = region.attr("name");
-                 console.log(test11);
-                 var test22 = section.attr("name");
-                 console.log(test22);
-
-
-             var button = $("<button>").text("삭제");  
+             var button = $("<button>").text("삭제").addClass('delete-btn');  
                    
              $.ajax({
                  url:"../resources/json/petmily_location.json",   
@@ -165,7 +240,6 @@
                  dataType:"json",       
                  success:function(resp){ 
                  for(var n in resp){
-                     // console.log(n);
                      $("<option>").text(n).appendTo(region);
                      region.appendTo(test);   
                  }
@@ -209,147 +283,200 @@
 	</script>
 	
 <!-- 에디터 삽입 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
 
-    
-<h1>펫시터 가입 페이지</h1>
-<!-- 
-	받아야하는 목록 : 
-		sitter_id,info,sitter_pets,care_condition,sitter_terms_agree
--->
-<form action="regist" method="post" enctype="multipart/form-data">
-
-<!-- 회원 아이디 -->
-	<input type="hidden" name="sitter_id" value="${id}">
-	<h1>${id}</h1>
+<!-- header 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
-<!-- 소개 이미지 파일 -->	
-	<label for="info_image">소개 이미지</label>
-	<input type="file" id="info_image" name="info_image" multiple accept="image/*">
+<section class="section-content">  
+	<div class="regist-wrap" align="center">
+	   <form action="regist" method="post" enctype="multipart/form-data">
+	   <div id="align-left">
+	    <h1>펫밀리 가입</h1>
+	        <div id="step1">
+	            <img src="${context}/resources/img/step.png" alt="step1">
+	        </div>
+	        <br><br>
 	
-<!-- 신분증 이미지 파일 -->	
-	<label for="id_card_file">신분증</label>
-	<input type="file" id="id_card_file" name="id_card_file" multiple accept="image/*" required>
-	
-<!-- 증빙서류 이미지 파일 -->	
-	<label for="license_file">증빙 서류</label>
-	<input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
-	
-
-<!-- 통장 사본 이미지 파일 -->	
-	<label for="id_card_file">통장 사본 이미지</label>
-	<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
-	
-<!-- 통장 계좌 -->
-	<div>
-		<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
-		<label for="bankName">은행</label>
-			<select id="bankName" name="sitter_bankname"> 
-				<option value="" selected disabled hidden >은행선택</option>
-				<option>기업은행</option>
-				<option>국민은행</option>
-				<option>우리은행</option>
-				<option>신한은행</option>
-				<option>KEB하나은행</option>
-				<option>농협은행</option>
-				<option>SC제일은행</option>
-				<option>한국씨티은행</option>
-				<option>우체국</option>
-				<option>경남은행</option>
-				<option>광주은행</option>
-				<option>대구은행</option>
-				<option>산업은행</option>
-				<option>새마을금고</option>
-				<option>수협</option>
-				<option>신협</option>
-				<option>전북은행</option>
-				<option>제주은행</option>
-				<option>카카오뱅크</option>
-				<option>케이뱅크</option>
-			</select>	
-			<label for="bank_account">계좌 번호</label>
-			<input type="text" id="bank_account" name="sitter_bank_account" required>	
-	</div>
-	
-<!-- 펫시터 소개글 -->	
-	<div>
-		<table width="60%">
-			<tr>
-				<td><label for="info-text">펫밀리 기본 정보</label></td>
-			<tr>
-				<td>
-				<div class="naver-editor"></div>
-				<input type="hidden" name="info" value="" id="info-text">
-				</td>
-			<tr>
-			</tr>
-		</table>
-	</div>
-<!--반려동물 경험 -->
-	<div>
-		<label for="yn">반려동물 키워본 경험 유무</label>
-		<select id="yn" name="sitter_pets">
-			<option>예</option>
-			<option>아니오</option>
-		</select>
-	</div>
-	
-<!-- 매칭(돌봄) 종류 -->
-	<div>
-		<label for="mt">가능한 돌봄 종류</label>
-		<select id="mt" name="sitter_matching_type">
-			<option>방문서비스</option>
-			<option>위탁서비스</option>
-			<option>둘다</option>
-		</select>
-	</div>
-	
-<!-- 스킬 -->
-	<div class="skill">
-		<c:forEach var="skillnames" items="${skillname}">
-	        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
-	        <label  >${skillnames.skill_name}</label>
-        </c:forEach>   	        
-	        <div id="skills_text"></div>
-    </div>
-
-<!-- 돌봄 가능 동물 종류 -->
-    <div class="type">  
-    	<c:forEach var="carepettypes" items="${carepettype}">
-	        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
-	        <label for="x">${carepettypes.care_type}</label>
-        </c:forEach>        
-        <div id="care_pet_type_text"></div>
-    </div>
-
-<!-- 돌봄 환경 -->
-    <div class="condition">
-    	<c:forEach var="c" items="${careconname}">    		
-	        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
-	        <label >${c.care_condition_name}</label>
-        </c:forEach>        
-        <div id="care_condition_text"></div>
-    </div>
-	
-<!-- 활동 지역 -->
-	<div class="location">
-	    <div class="template">
-	        <select class="region" name="location_name[0].city">
-	            <option>지역을 선택하세요</option>
-	        </select>
+	    <!-- 회원 아이디 -->
+	        <input type="hidden" name="sitter_id" value="${id}">
 	        
-	        <select class="section" name="location_name[0].area">
-	            <option>구를 선택하세요</option>
-	        </select>
-		<button id="add-btn">추가</button>
+	        <!-- 펫시터 소개글 -->	
+	        <div>
+	            <table width="60%">
+	                <tr>
+	                    <td><label for="info-text" id="large-text">펫밀리 소개</label></td>
+	                    
+	                <tr>
+	                    <td>
+	                        <span id="medium-text">*본인에 대해 소개해 주세요</span>
+	                        <span id="small-text">-본인 자랑 및 경험 환영</span>
+	                    </td>
+	                </tr>    
+	                <tr>
+	                    <td><hr></td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <div class="naver-editor"></div>
+	                        <input type="hidden" name="info" value="" id="info-text">
+	                    </td>
+	                </tr>
+	            </table>
+	        </div>
+	
+	        <br><br>
+	        <!-- 스킬 -->
+	        <div class="skill">
+	            <label id="large-text">펫밀리 스킬</label><br>
+	            <hr>
+	            <c:forEach var="skillnames" items="${skillname}">
+		            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+		            <label for="${skillnames.skill_name}">${skillnames.skill_name}</label>
+	            </c:forEach>   	        
+		        <div id="skills_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 돌봄 가능 동물 종류 -->
+	        <div class="type">
+	            <label id="large-text">펫밀리 돌봄가능 동물 종류</label><br>
+	            <hr>
+	            <c:forEach var="carepettypes" items="${carepettype}">
+	                <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+	                <label for="${carepettypes.care_type}">${carepettypes.care_type}</label>
+	            </c:forEach>        
+	            <div id="care_pet_type_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 돌봄 환경 -->
+	        <div class="condition">
+	            <label id="large-text">펫밀리 돌봄 환경</label><br>
+	            <hr>
+	            <c:forEach var="c" items="${careconname}">    		
+	                <input id="${c.care_condition_name}" type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+	                <label for="${c.care_condition_name}">${c.care_condition_name}</label>
+	            </c:forEach>        
+	            <div id="care_condition_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 통장 계좌 -->
+	        <div>
+	            <label for="bankName">
+	                <span id="large-text">펫밀리 입금 은행 계좌</span><br>
+	                <span id="medium-text">*은행 계좌 번호는 -제외한 숫자만 입력해주세요.</span>
+	            </label><br>
+	            <hr>
+	
+	                <select id="bankName" name="sitter_bankname"> 
+	                    <option value="" selected disabled hidden>은행</option>
+	                    <option>기업은행</option>
+	                    <option>국민은행</option>
+	                    <option>우리은행</option>
+	                    <option>신한은행</option>
+	                    <option>KEB하나은행</option>
+	                    <option>농협은행</option>
+	                    <option>SC제일은행</option>
+	                    <option>한국씨티은행</option>
+	                    <option>우체국</option>
+	                    <option>경남은행</option>
+	                    <option>광주은행</option>
+	                    <option>대구은행</option>
+	                    <option>산업은행</option>
+	                    <option>새마을금고</option>
+	                    <option>수협</option>
+	                    <option>신협</option>
+	                    <option>전북은행</option>
+	                    <option>제주은행</option>
+	                    <option>카카오뱅크</option>
+	                    <option>케이뱅크</option>
+	                </select>	
+	                <input type="text" id="bank_account" name="sitter_bank_account" required placeholder="  계좌번호">	
+	        </div>
+	        
+	        <br><br>
+	        <!--반려동물 경험 -->
+	        <div>
+	            <label for="yn" id="large-text">펫밀리 동물 경험 여부</label><br>
+	            <hr>
+	            <select id="yn" name="sitter_pets">
+	                <option value="" selected disabled hidden>동물 경험 여부</option>
+	                <option>예</option>
+	                <option>아니오</option>
+	            </select>
+	        </div>
+	        
+	        <br><br>
+	        <!-- 매칭(돌봄) 종류 -->
+	        <div>
+	            <label for="mt" id="large-text">펫밀리 돌봄 가능한 종류</label><br>
+	            <hr>
+	            <select id="mt" name="sitter_matching_type">
+	                <option value="" selected disabled hidden>돌봄 가능 종류</option>
+	                <option>방문서비스</option>
+	                <option>위탁서비스</option>
+	                <option>둘다</option>
+	            </select>
+	        </div>
+	        
+	        <br><br>
+	        <!-- 활동 지역 -->
+	        <div class="location">
+	            <label for="mt" id="large-text">펫밀리 활동 지역</label><br>
+	            <hr>
+	            <div class="template">
+	                <select class="region" name="location_name[0].city">
+	                    <option>지역을 선택하세요</option>
+	                </select>
+	                
+	                <select class="section" name="location_name[0].area">
+	                    <option>구를 선택하세요</option>
+	                </select>
+	            <button id="add-btn">추가</button>
+	            </div>
+	            <div id="result"></div>
+	        </div>
+	        <br>
+	        
+	        
+	        <div class="file_input">
+	        <!-- 소개 이미지 파일 -->	
+	        <label for="info_image" id="large-text">펫밀리 소개 이미지</label><br>
+	        <hr>      
+	            <input type="file" id="info_image" name="info_image" multiple accept="image/*">
+	        </div>
+	        <br><br>
+	        
+	        <!-- 신분증 이미지 파일 -->	
+	        <label for="id_card_file" id="large-text">펫밀리 신분증</label><br>
+	        <hr>
+	        <input type="file" id="id_card_file" name="id_card_file" multiple accept="image/*" required>
+	        <br><br>
+	        
+	        <!-- 증빙서류 이미지 파일 -->	
+	        <label for="license_file" id="large-text">펫밀리 증빙 서류</label><br>
+	        <hr> 
+	        <input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
+	        <br><br>
+	
+	        <!-- 통장 사본 이미지 파일 -->	
+	        <label for="id_card_file" id="large-text">펫밀리 통장 사본 이미지</label><br>
+	        <hr>
+	        <input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
+	        <br><br> <br><br>
 	    </div>
-	    <div id="result"></div>
+	
+	
+	        <div align="center">
+	            <h5>다음 단계로 진행하면 펫밀리 신청 약관 에 동의하는 것으로 간주됩니다.</h5>
+	            <input id="regist_btn" type="submit" value="펫밀리 가입">
+	        </div>
+	</form>
 	</div>
-		
-	<div>
-		<h5>다음 단계로 진행하면 펫밀리 신청 약관 에 동의하는 것으로 간주됩니다.</h5>
-		<input type="submit" value="펫시터 등록">
-	</div>
-</form>
+</section>
+
+	<br><br>
+	<!-- footer 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
