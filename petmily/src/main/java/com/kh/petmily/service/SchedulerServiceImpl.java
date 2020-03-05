@@ -14,7 +14,7 @@ public class SchedulerServiceImpl implements SchedulerService{
 	private AdminDao adminDao;
 	
 	@Override
-	@Scheduled()
+//	@Scheduled()
 	public void accountPetsitter() {
 		// 1. 펫시터 아이디 구해오기
 		// 2. 펫시터 결제건수 구해오기
