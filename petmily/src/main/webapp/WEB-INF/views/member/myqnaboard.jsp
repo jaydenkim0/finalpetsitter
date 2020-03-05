@@ -5,11 +5,63 @@
 
 <style>
 li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
   	list-style-type:none;
-  	float:left;
-  	margin-left:20px;	
+   	margin-left:20px;
+}
+
+
+table td img {
+   width: 60px;
+}
+
+.qnatab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+
+
+td{
+   
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   border-color: #BDBDBD;
+    padding: 10px;
+   text-align: center;
+  
+}
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+.right_mar {
+   margin-right: 20%;
+}
+ button{
+    display: white;
+   width: 80px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
 }
 </style>
+
 
 </head>
 
@@ -19,9 +71,9 @@ li{
 
 <div align="center">
 
-<h1>내가 쓴 문의/신고 게시글</h1>
+<h1>나의 신고 문의 내역</h1>
 
-<table width="100%" border="1">
+<table CLASS="qnatab">
 	<tr>
 		<td>글번호</td>
 		<td>제목</td>

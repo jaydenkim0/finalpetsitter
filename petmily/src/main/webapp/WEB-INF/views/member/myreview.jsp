@@ -4,12 +4,56 @@
 <head>
 
 <style>
-li{
-  	list-style-type:none;
-  	float:left;
-  	margin-left:20px;	
+.page-navigator li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
 }
+.page-navigator li {
+   display: inline-block;
+}
+
+.page-navigator li.active>a {
+   color: #1482e0;
+}
+table td img {
+   width: 60px;
+}
+
+.review_table {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+
+
+td{
+   
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   border-color: #BDBDBD;
+    padding: 10px;
+   text-align: center;
+  
+}
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+.right_mar {
+   margin-right: 10%;
+}
+
+
 </style>
+
 
 </head>
 
@@ -18,9 +62,9 @@ li{
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
 
-<h1>내가 쓴 리뷰</h1>
+<h1>나의 리뷰</h1>
 
-<table width="100%" border="1">
+<table  class="review_table">
 	<tr>
 		<td>리뷰번호</td>
 		<td>펫시터</td>

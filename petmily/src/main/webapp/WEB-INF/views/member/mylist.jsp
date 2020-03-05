@@ -26,83 +26,114 @@ function no_image2(){
 </script>
 <style>
 	th{
-		text-align: right;
+		width:100px;
+		text-align: left;
+		
+		
 	}
+	
+
+	img {
+    border-radius: 75px; 
+	
+	}
+	td{
+	width:200px;
+	text-align:left;
+	}
+
+
+  button, #updatebtn,#cancel{
+   display: white;
+   width: 100px;
+   height: 40px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   
+   }
+   
+   .button:hover{
+	color: white;
+	}
+
+	
+	.hover:hover{
+	background-color: #1482e0;
+	}
+   
+   
+
+  
+   
+   }
+body{
+background-color:#FAFAFA;
+}   
+
+	
 </style>
+<body>
 <div align="center">
-<h1>내정보조회</h1>
-<table width="100%">
+
+<h1>${mylist.name }님의 PETMILY 기본정보</h1>
+<br>
+<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 150px; height: 150px;" onerror="no_image2()" id="2">
+<br><br><br>
+<table >
 	<tr>
-		<th width="50%">아이디&emsp;</th>
-		<td width="50%">${mylist.id }</td>
+		<th>아이디&emsp;</th><td >${mylist.id }</td><th>이름&emsp;</th><td>${mylist.name }<br></td>
+		
+	</tr>
+	
+	<tr>
+		<th>닉네임&emsp;</th><td>${mylist.nick }</td><th>휴대폰번호&emsp;</th><td>${mylist.phoneWithFormat }</td>
+			</tr>
+	
+	<tr>
+		<th>주소&emsp;</th>		<td>${mylist.total_addr }</td>	<th>포인트&emsp;</th>		<td>${mylist.point }점</td>
 	</tr>
 	<tr>
-		<th>프로필사진&emsp;</th>
-		<td>
-			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="2">
-		</td>
-	</tr>
-	<tr>
-		<th>이름&emsp;</th>
-		<td>${mylist.name }</td>
-	</tr>
-	<tr>
-		<th>닉네임&emsp;</th>
-		<td>${mylist.nick }</td>
-	</tr>
-	<tr>
-		<th>전화번호&emsp;</th>
-		<td>${mylist.phoneWithFormat }</td>
-	</tr>
-	<tr>
-		<th>주소&emsp;</th>
-		<td>${mylist.total_addr }</td>
-	</tr>
-	<tr>
-		<th>포인트&emsp;</th>
-		<td>${mylist.point }점</td>
-	</tr>
-	<tr>
-		<th>가입일&emsp;</th>
-		<td>${mylist.total_joindateWithFormat }</td>
-	</tr>
-	<tr>
-		<th>최종로그인&emsp;</th>
-		<td>${mylist.final_loginWithFormat }</td>
+		<th>가입일&emsp;</th>		<td>${mylist.total_joindateWithFormat }</td>	<th>최종로그인&emsp;</th>		<td>${mylist.final_loginWithFormat }</td>
 	</tr>
 	<tr>
 		<th>반려동물&emsp;</th>
 		<td>${mylistpet.size() }마리</td>
 	</tr>
 </table>
+
 <br>
 <!-- 정보수정 -->
 <form action="mylistchange" method="get">
 	<input type="hidden" name="id" value="${mylist.id}">
-	<input type="submit" value="정보수정">
+<input type="submit" value="정보수정" id="updatebtn" >
 </form>
 
-<c:if test="${mylist.pets eq '예'}">
+
+    <h3>반려동물 정보</h3>
 <div align="center">
+<c:if test="${mylist.pets eq '예'}">
 	<c:forEach var="pet"  items="${mylistpet }">
-	<br><hr><br>
-	<table width="100%">
-		<tr>
-			<th width="50%">이름&emsp;</th>
-			<td width="50%">${pet.name }</td>
-		</tr>
-		<tr>
-			<th>펫프로필사진&emsp;</th>
-			<td>
-				<c:choose>
+	
+	
+	<c:choose>
 					<c:when test="${pet.pet_image_no<1 }">
 						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 20%; height: auto;">
 					</c:when>
 					<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;">			
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100px; height: 100px;" >			
 					</c:otherwise>
-				</c:choose>
-			</td>
+				</c:choose>		
+			<table>
+			
+		<tr>
+			<th width="50%">이름&emsp;</th>
+			<td width="50%">${pet.name }</td>
 		</tr>
 		<tr>
 			<th>나이&emsp;</th>
@@ -118,14 +149,16 @@ function no_image2(){
 		</tr>
 	</table>
 	<br>
-		<a href="petchange?pet_no=${pet.pet_no }"><button>펫정보수정</button></a>
-		<a href="pet_delete?pet_no=${pet.pet_no }"><button>삭제</button></a>
+	<a href="petchange?pet_no=${pet.pet_no }"><button >펫 정보수정</button></a>
+		<a href="pet_delete?pet_no=${pet.pet_no }"><button >삭제</button></a>
 	<br>
 	</c:forEach>
+	</c:if>
 </div>
-</c:if>
+
+
+
 <br>
-<hr>
 <br>
 <button id="add_btn">펫 추가</button>
 <div id="add_content">
@@ -170,10 +203,11 @@ function no_image2(){
 			</td>
 		</tr>
 	</table>
-				<input type="submit" value="펫추가">
+				<input type="submit" value="펫추가" id="updatebtn">
 				<input type="reset" value="취소" id="cancel">
 </form>
 </div>
 <br><br><br>
 
 </div>
+</body>

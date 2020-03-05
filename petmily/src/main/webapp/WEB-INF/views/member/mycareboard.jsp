@@ -4,12 +4,53 @@
 <head>
 
 <style>
+
 li{
-  	list-style-type:none;
-  	float:left;
-  	margin-left:20px;	
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
+   list-style-type:none;
+   margin-left:20px;	
 }
+
+.caretab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+button{
+  display: white;
+   width: 90px;
+   height: 40px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   
+ 
+}
+
+
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+
+
+
 </style>
+
 
 </head>
 
@@ -19,14 +60,14 @@ li{
 
 <div align="center">
 
-<h1>내 돌봄방</h1>
+<h1>나의 돌봄방</h1>
 
 <br><br>
 <c:if test="${not empty id}">
 <a href="${context }/board/care/write"><button>방 만들기</button></a><br><br>
 </c:if>
 
-<table width="100%" border="1">
+<table class="caretab" >
 	<tr>
 		<td>방번호</td>
 		<td>펫시터</td>

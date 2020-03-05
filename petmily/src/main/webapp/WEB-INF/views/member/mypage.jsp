@@ -1,47 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<head>
-
 <style>
-	hr{
-		width:25%;
+	
+	
+	button{
+   font:13px;
+   width: 120px;
+   height: 40px;
+   text-align: center;
+   box-shadow: 0;
+   cursor: pointer;
+   color:#1482e0;
+   
 	}
+	.button:hover{
+	color: white;
+	}
+	.hover:hover{
+	border: 1px solid #1482e0;
+    background-color:#1482e0;
+	
+	}
+	
+	
 </style>
-
-</head>
-
 <body>
+<h1>마이 페이지 </h1>
+<fieldset style="width:70px; height:750px;">
+<legend>메뉴</legend>
 
-<div align="center">
-
-<h1>마이페이지</h1>
 
 <a href="mylist">
-	<button>내정보</button>
-</a>
-<br><br><hr><br>
+	<button class="button hover"> 정보 조회</button>
+</a><br><br>
 <a href="myreview">
-	<button>내가 쓴 리뷰</button>
-</a>
-<br><br><hr><br>
+	<button class="button hover"> 리뷰 조회</button>
+</a><br><br>
+
 <a href="myreservation">
-	<button>내 예약 조회 / 리뷰쓰기</button>
-</a>
-<br><br><hr><br>
-<h2>내가 쓴 글</h2>
-<br>
+	<button class="button hover"> 예약 조회 </button>
+</a><br><br>
+
+
 <a href="mycareboard">
-	<button>돌봄방</button>
-</a>
-&emsp;
+	<button class="button hover"> 돌봄 방 </button>
+</a><br><br>
+
+
 <a href="myqnaboard">
-	<button>문의 / 신고</button>
-</a>
-&emsp;
+	<button class="button hover"> 신고 / 문의 </button>
+</a><br><br>
+
+
 <a href="mystrayboard">
-	<button>Save the Pets ! </button>
+	<button class="button hover">Save the Pets!</button>
 </a>
 
-</div>
 
+</fieldset>
 </body>
