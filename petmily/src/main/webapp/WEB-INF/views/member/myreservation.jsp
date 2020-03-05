@@ -3,7 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 
+<!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
 <style>
+
 
 
 
@@ -14,12 +21,6 @@
    font-size:15px;
    font-weight: 600;	
 }
-
-
-.page-navigator li.active>a {
-   color: #1482e0;
-}
-
 
 .restab {
    width: 72%;
@@ -72,6 +73,77 @@ button{
   
 
 
+
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+	border-color : #BDBDBD;
+}
+
+a {
+	text-decoration: none;
+	color: #1482e0;
+}
+
+a:hover{
+	color: black;
+}
+.right_mar {
+	margin-right: 10%;
+}
+
+
+
+.page-navigator li.active>a {
+	color: #1482e0;
+}
+
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align:middle; 
+	border-color : #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+select {
+	width: 80px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align:middle; 
+	border-color : #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+	}
+
 </style>
 
 
@@ -81,13 +153,19 @@ button{
 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
-
+<br>
 	<h1>예약 조회</h1>
 	
+	<br>
 	<p>리뷰는 결제 후 이용날짜 다음날부터 작성 가능합니다.</p>
 	<p>리뷰 작성 시 500p 지급</p>
+	<section>
 	
+
 	<table  class="restab">
+
+	
+
 		<tr>
 			<td>예약번호</td>
 			<td>예약일자</td>
@@ -135,6 +213,7 @@ button{
 		</c:forEach>
 	</table>
 
+<br>
 <div class="row">
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/member/navigator_myreservation.jsp">
@@ -144,8 +223,9 @@ button{
 		<jsp:param name="pagesize" value="${pagesize}"/>
 		<jsp:param name="care_board_no" value="${care_board_no }"/>
 	</jsp:include>
-</div><br><br><br><br>
+</div>
 	
+</section>
 </div>
 
 </body>

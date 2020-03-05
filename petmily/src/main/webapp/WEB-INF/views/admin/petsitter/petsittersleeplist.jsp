@@ -97,9 +97,10 @@
 	}
 	 </style>
      
-	<h3>휴면 펫시터 리스트</h3>	
 	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	
+	<h4>휴면 펫시터 리스트</h4>	
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/petsittersleep">

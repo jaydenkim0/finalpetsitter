@@ -27,6 +27,7 @@ import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.AccountVO;
+import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -596,6 +597,20 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int paymentcanclecheck(int reservation_no) {
 		return sqlSession.selectOne("admin.paymentcanclecheck", reservation_no);
+	}
+
+	@Override
+	public CalculateVO getCalculateAllinfor(int type) {		
+		System.out.println("Dao_tpye = "+type);
+		return  CalculateVO.builder()
+					.totalPayment(sqlSession.selectOne("admin.getTotalPayment", type))
+					.totalCancelPayment(sqlSession.selectOne("admin.getTotalCancelPayment", type))
+					.reservatToTalCount(sqlSession.selectOne("admin.getReservatToTalCount", type))
+					.reservatApplyToTalCount(sqlSession.selectOne("admin.getReservatApplyToTalCount", type))
+					.reservatWaitToTalCount(sqlSession.selectOne("admin.getReservatWaitToTalCount", type))
+					.totalPaymentCount(sqlSession.selectOne("admin.getTotalPaymentCount", type))
+					.totalPaymentCancelCount(sqlSession.selectOne("admin.getTotalPaymentCancelCount", type))
+					.build();			
 	}
 
 

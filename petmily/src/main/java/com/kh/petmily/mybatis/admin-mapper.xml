@@ -623,6 +623,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<!-- resultMap 에 추가되는 속성을 List 로 찾아서 넣어줌 -->
 			<select id="getPayStatusListMap"  resultType="payDto" parameterType="int">		
 				select * from pay where partner_order_id = #{partner_order_id}
+				order by pay_no asc
 			</select>
 			
 			
@@ -651,6 +652,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<select id="paydetail" parameterType="int"
 		resultType="payDto">
 			select * from pay where partner_order_id = #{reservation_no}
+			order by pay_no asc
 		</select>
 		<!--	결제 취소 버튼 유무 확인  -->
 		<select id="paymentcanclecheck" parameterType="int"
@@ -692,40 +694,145 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where payinfo_no = #{payinfo_no}
 		</update>
 		
-	<!-- 정산 페이지 -->
-		<!-- 토탈 결제금액 -->	
-		<select id="getTotalPayment">
-			select  sum(total_amount) from pay where status='완료'
+	<!-- 정산 페이지 -->	
+		<!-- 토탈 결제금액
+			==, eq, !=, or, and
+		 -->	
+		<select id="getTotalPayment"  parameterType="int" resultType="int" >
+			select   NVL(sum(total_amount), 0) totalPayment from pay where status='완료'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type eq 1">				    
+    				and  PROCESS_TIME between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type eq 2">
+					and  PROCESS_TIME between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type eq 3">
+					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+				</when>
+			</choose>	
 		</select>
 		<!-- 토탈 취소금액 -->	
-		<select id="getTotalCancelPayment">
-			select  sum(total_amount) from pay where status='취소'
+		<select id="getTotalCancelPayment" parameterType="int" resultType="int">
+			select   NVL(sum(total_amount), 0) totalCancelPayment from pay where status='취소'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				and  PROCESS_TIME between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					and  PROCESS_TIME between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421		
+				</when>
+			</choose>	
 		</select>
 		<!-- 견적 신청 수 : -->	
-		<select id="getReservatToTalCount">
-			select count(*) from reservation		
+		<select id="getReservatToTalCount" parameterType="int" resultType="int">
+			select  NVL(count(*), 0) reservatToTalCount from reservation	
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				where  reservation_wdate between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					where  reservation_wdate between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					where  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+				</when>
+			</choose>	
 		</select>
 		<!-- 견적 승인 수 : -->
-		<select id="getReservatApplyToTalCount">
-			select count(*) from reservation where status='승인'
+		<select id="getReservatApplyToTalCount" parameterType="int" resultType="int">
+			select  NVL(count(*), 0) reservatApplyToTalCount from reservation where status='승인'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				and  reservation_wdate between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					and  reservation_wdate between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					and  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+				</when>
+			</choose>		
 		</select>
 		<!-- 견적 대기 수 : -->	
-		<select id="getReservatWaitToTalCount">
-			select count(*) from reservation where status='대기'
+		<select id="getReservatWaitToTalCount" parameterType="int" resultType="int">
+			select  NVL(count(*), 0) reservatWaitToTalCount from reservation where status='대기'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				and  reservation_wdate between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					and  reservation_wdate between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					and  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+				</when>
+			</choose>		
 		</select>
 		<!-- 결제 완료 수 : -->	
-		<select id="getTotalPaymentCount">
-			select count(total_amount) from pay where status='완료'
+		<select id="getTotalPaymentCount" parameterType="int" resultType="int">
+			select  NVL(count(total_amount), 0) totalPaymentCount from pay where status='완료'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				and  PROCESS_TIME between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					and  PROCESS_TIME between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421				
+				</when>
+			</choose>	
 		</select>
 		<!-- 결제 취소 수 : -->	
-		<select id="getTotalPaymentCancelCount">
-			select count(total_amount) from pay where status='취소'
+		<select id="getTotalPaymentCancelCount" parameterType="int" resultType="int">
+			select  NVL(count(total_amount), 0) totalPaymentCancelCount from pay where status='취소'
+			<choose>
+				<!-- 오늘 -->
+				<when test="type == 1">				    
+    				and  PROCESS_TIME between TRUNC(sysdate) and TRUNC(sysdate)+0.99999421
+    			</when>	
+				<!-- 어제 -->
+				<when test="type == 2">
+					and  PROCESS_TIME between TRUNC(sysdate-1) and TRUNC(sysdate-1)+0.99999421
+				</when>		
+				<!-- 저번 달 -->
+				<when test="type == 3">
+					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
+					and TRUNC(LAST_DAY(sysdate))+0.99999421	
+				</when>
+			</choose>	
 		</select>
-	
-	<!-- test -->
-	<select id="test" resultType="qnaDto" parameterType="int">
-		select * from qna where qna_no = #{qna_no}
-	</select>
+
+
+
 </mapper>
 
 

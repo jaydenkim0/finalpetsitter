@@ -99,9 +99,16 @@
 	                      <div class="col">
 	                        <h4>관리자</h4>
 	                        <ul>
-	                          <li><a href="#">펫시터 관리</a></li>
-	                          <li><a href="#">회원 관리</a></li>
-	                          <li><a href="#">신고 회원 관리</a></li>
+	                          <li><a href="${context}/admin/registInfo">등록 현황</a></li>
+	                          <li><a href="${context}/admin/list/reservationstatus">예약 현황</a></li>
+	                          <li><a href="${context}/admin/account">정산 관리</a></li>
+	                          <li><a href="${context}/board/review/list">리뷰 관리</a></li>
+	                          <li><a href="${context}/admin/list/member">회원 관리</a></li>
+	                          <li><a href="${context}/admin/petsitter">펫시터 (모아보기)</a></li>
+	                          <li><a href="${context}/admin/list/petsitter">펫시터 관리</a></li>
+	                          <li><a href="${context}/admin/list/petsitterapply">펫시터 신청</a></li>
+	                          <li><a href="${context}/adminlist/petsittersleep">펫시터 휴면</a></li>
+                         	  <li><a href="${context}/admin/blackList">경고 게시판</a></li>	                                
 	                        </ul>               
 	                      </div>
 					</c:if>

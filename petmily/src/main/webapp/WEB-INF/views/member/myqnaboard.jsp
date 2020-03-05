@@ -2,8 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
-
+<!-- BootStrap CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
 <style>
+
 li{
    display: inline-block;
    margin-left: 10px;
@@ -14,10 +20,6 @@ li{
    	margin-left:20px;
 }
 
-
-table td img {
-   width: 60px;
-}
 
 .qnatab {
    width: 72%;
@@ -59,7 +61,86 @@ a {
    cursor: pointer;
    color: #1482e0;
    transition: all 0.9s, color 0.3;
+
+.page-navigator li {
+	display: inline-block;
+
 }
+
+.notice_table {
+	width: 80%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color : #BDBDBD;
+}
+
+th, td {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+	border-color : #BDBDBD;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+.right_mar {
+	margin-right: 10%;
+}
+
+.page-navigator li {
+	display: inline-block;
+}
+
+.page-navigator li.active>a {
+	color: #1482e0;
+}
+
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align:middle; 
+	border-color : #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+select {
+	width: 80px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align:middle; 
+	border-color : #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+	}
 </style>
 
 
@@ -71,9 +152,17 @@ a {
 
 <div align="center">
 
+
 <h1>나의 신고 문의 내역</h1>
 
+<section>
 <table CLASS="qnatab">
+
+
+
+
+
+
 	<tr>
 		<td>글번호</td>
 		<td>제목</td>
@@ -111,11 +200,12 @@ a {
 	<div align="right" class="right_mar">
 		<c:if test="${not empty sessionScope.id}">
 			<a href="${context}/board/qna/write">
-				<button type="button" id="btnwrite">글쓰기</button>
+				<button type="button" id="btnwrite" class="btn hover3">글쓰기</button>
 			</a>
 		</c:if>
 	</div>
 
+<br>
 <div class="row">
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/member/navigator_myqnaboard.jsp">
@@ -125,7 +215,9 @@ a {
 		<jsp:param name="pagesize" value="${pagesize}"/>
 		<jsp:param name="care_board_no" value="${care_board_no }"/>
 	</jsp:include>
-</div><br><br><br><br>
+</div>
+
+</section>
 
 </div>
 
