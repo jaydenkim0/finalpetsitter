@@ -2,13 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -39,7 +32,7 @@ HEADER 이용 시 넣어야할 요소
       });
     </script>
  
-  
+	
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -57,7 +50,16 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-	
+<!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/github.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/tui-color-picker.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor.min.css">
+    <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/dist/tui-editor-contents.min.css">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
+
 <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
 <link rel="stylesheet" type="text/css"
 	href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -147,10 +149,10 @@ select {
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	</style>
 
 <!-- 네이버 에디터 설정 -->
 <script>

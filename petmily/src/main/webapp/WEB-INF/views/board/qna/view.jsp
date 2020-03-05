@@ -3,26 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
- <!-- 
-기본 CSS
-:	index css,
-	font css
--->
-    <!-- index css -->
-    <link rel="stylesheet" href="${context}/resources/css/index.css" />
-    <!-- font css -->
-    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
-    
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -50,7 +33,7 @@ HEADER 이용 시 넣어야할 요소
       });
     </script>
  
-  
+	
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -68,7 +51,6 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-	
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -214,6 +196,13 @@ th, td {
 	border-color: #BDBDBD;
 }
 
+.th3, .td3 {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
 .td2 {
 	text-align: right;
 	border-bottom: 1px solid #444444;
@@ -228,9 +217,9 @@ a {
 	margin-right: auto;
 }
 
-div {
-	padding: 30px;
-}
+/* div { */
+/* 	padding: 30px; */
+/* } */
 
 hr {
 	width: 80%;
@@ -273,10 +262,11 @@ hr {
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	</style>
+
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
@@ -310,13 +300,9 @@ hr {
 			<c:if test="${qnafileDto.qna_file_no ne 0}">
 				<tr>
 					<td><img src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}" width="200" height="100">
-					</td>
-				</tr>
 			</c:if>
 		</c:forEach>
-		
-				<tr>
-				<td>
+
 		<c:choose>
 		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
 			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
@@ -346,10 +332,9 @@ hr {
 				<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">${reply.reply_writer}
 				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 					<font color="red">(작성자)</font>
-				</c:if></th>
-
-				<th align="left">
-				작성일 : ${reply.writedateWithFormat}</th>
+				</c:if>
+				<br>
+				<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
 			</tr>
 			
 			<tr class="reply_view">
@@ -358,9 +343,11 @@ hr {
 						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<th class="content" colspan="2" align="left">${reply.content}</th>
 						</c:if>
+						<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
 					</c:when>
 				<c:otherwise>
-				<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
+				<th class="content" colspan="2" align="left">${reply.content}
+				</th>
 				</c:otherwise>
 		</c:choose>
 			</tr>
@@ -405,16 +392,24 @@ hr {
 			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
+			<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
 					<br><br>
 			 <input type="submit" value="등록" class="btn hover3">
 		</form>
 			</c:if>
+				<textarea name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="100" ></textarea>
 				</c:when>
 					<c:otherwise>
-						<textarea name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="100" ></textarea>
+						<form action="replywrite" method="post" class="reply_submit">
+		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
+				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
 					<br><br>
+			 <input type="submit" value="등록" class="btn hover3">
+		</form>
+					<br>
 				</c:otherwise>
 		</c:choose>
 		</td>
