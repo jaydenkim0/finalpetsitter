@@ -100,9 +100,10 @@
 	 </style>
     
      
-	<h3>신고 게시판 내용</h3>
 	
-	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	<a href="${pageContext.request.contextPath}/admin/blackList"><button>경고 게시판으로 이동</button></a>
+	
+	<h4>신고 게시판 내용</h4>
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/blackreport">
