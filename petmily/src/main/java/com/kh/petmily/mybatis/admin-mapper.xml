@@ -831,6 +831,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</choose>	
 		</select>
 
+		<!-- 정산 리스트 -->
+		<select id="getAccountList" resultType="accountDto" parameterType="Map">
+			select * from (
+				select rownum rn, A.* from(
+					select * from account
+						<if test="searchOption != null and keyword != null">
+							where ${searchOption} like '%'||#{keyword}||'%'
+						</if>
+					order by ACCOUNT_TOTAL_PAY, ACCOUNT_DATE desc
+					)A
+				) where rn between #{start} and #{end}	
+		</select>
+		<!-- 정산 페이징 카운트 -->
+		<select id="countAricleAccount" resultType="int" parameterType="Map">
+			select count(*) from account				
+				<if test="searchOption != null and keyword != null">
+					where ${searchOption} like '%'||#{keyword}||'%'
+				</if>			
+			order by ACCOUNT_TOTAL_PAY, ACCOUNT_DATE desc
+		</select>	
+		
 
 
 </mapper>

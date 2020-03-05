@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 	
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   
 	
@@ -78,12 +78,12 @@
 
      					
 	
-	<h3>가격 옵션 설정</h3>
 	
 	<a href="${pageContext.request.contextPath}/admin/account"><button> 정산 페이지로 이동</button></a>
 	
+	<h4>가격 옵션 설정</h4>
 	
-	<h3> 가격 리스트 </h3>
+	<h4> 가격 리스트 </h4>
 	<hr>
 		<c:forEach var="accountList" items="${accountlist}" >
 			

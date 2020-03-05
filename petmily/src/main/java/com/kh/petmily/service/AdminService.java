@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
 
+import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
@@ -229,6 +230,11 @@ public interface AdminService {
 	
 	// 정산 페이지 기본 정보
 	CalculateVO getCalculateAllinfor(int type);
+	
+	// 정산 페이징 리스트
+	List<AccountDto> getAccountList(int start, int end, String searchOption, String keyword);
+	// 정산 페이징 카운트
+	int countAricleAccount(String searchOption, String keyword);
 
 
 

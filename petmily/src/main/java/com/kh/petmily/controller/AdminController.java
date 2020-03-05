@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
@@ -40,6 +41,7 @@ import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationAllVO;
@@ -469,7 +471,11 @@ public class AdminController {
 	@RequestMapping("/account")
 	public String account(Model model,
 			@RequestParam(defaultValue = "1") int type,
-			@RequestParam(defaultValue = "오늘") String SearchType) {
+			@RequestParam(defaultValue = "오늘") String SearchType,
+			@RequestParam(defaultValue = "account_sitter_id") String searchOption,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage
+			) {
 		// 0. 전체 날자기준으로 통합
 		// 1. 토탈 결제금액 (sum)
 		// 2. 토탈 취소금액 (sum)
@@ -478,10 +484,21 @@ public class AdminController {
 		// 5. 견적 대기 수 : (count)
 		// 6. 결제 완료 수 : (count)
 		// 7. 결제 취소 수 : (count)		
-		System.out.println("tpye = "+type);
 		model.addAttribute("totalInfo", (CalculateVO) adminService.getCalculateAllinfor(type))
-				  .addAttribute("SearchType", SearchType);	
-		
+				  .addAttribute("SearchType", SearchType);			
+		// 정산리스트 불러오기
+			// 레코드의 갯수 계산
+			int count = adminService.countAricleAccount(searchOption, keyword);		
+			// 페이지 나누기 관련 처리
+			NaviVO navi = new NaviVO(count, curPage);	
+			int start = navi.getPageBegin();
+			int end = navi.getPageEnd();		
+			// 리스트 불러오기
+			model.addAttribute("list", (List<AccountDto>) adminService.getAccountList(start, end, searchOption, keyword))
+					  .addAttribute("count", count)
+					  .addAttribute("searchOption", searchOption)
+					  .addAttribute("keyword", keyword)
+					  .addAttribute("navi", navi);		
 		return "admin/account";		
 	}
 
