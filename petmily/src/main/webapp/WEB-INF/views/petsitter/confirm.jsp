@@ -8,10 +8,12 @@
 <!-- 
 기본 CSS
 :	font css
+	confirm css
 -->
     <!-- font css -->
     <link rel="stylesheet" href="${context}/resources/css/font.css"/>
-     	
+    <!-- confirm css -->
+    <link rel="stylesheet" href="${context}/resources/css/confirm.css"/>   	
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -158,48 +160,105 @@ FOOTER 이용 시 넣어야할 요소
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 <section class="section-content">
-<h1>펫시터 견적확인 페이지</h1>
-			<span>예약 번호 : ${reservationList.reservation_no}</span><br>
-			<span>예약 회원 : ${reservationList.member_id}</span><br>
-			<span>예약 날짜 : ${reservationList.matching_time}</span><br>
-			<span>시작 시간 : ${startTime}시</span><br>
+	<div class="confirm-wrap" align="center">
+			<div id="align-left">
+				<h1>펫시터 견적확인 페이지</h1>
+					<div id="step1">
+						<img src="img/estimate_step2.png" alt="step1">
+					</div>
+					
+					<br><br>
+					<span id="large-text">예약 번호</span><br>
+					<hr>
+					<span>${reservationList.reservation_no}</span>
+
+					<br><br>
+					<span id="large-text">예약 회원</span><br>
+					<hr>
+					<span id="large-text">${reservationList.member_id}</span>
+
+					<br><br>
+					<span id="large-text">예약 날짜</span><br>
+					<hr>
+					<span>${reservationList.matching_time}</span>
+
+					<br><br>
+					<span id="large-text">시작 시간</span><br>
+					<hr>
+					<span>${startTime}시</span>
+					
+					<br><br>
+					<c:forEach var="skill" items="${reservationList.list}">
+						<span id="large-text">예약 스킬</span><br> 
+						<hr>	
+						<span>${skill.payname}</span>
+					</c:forEach>
+					
+					<br><br>
+					<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${reservationList.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+					<br>
+
+					<span id="large-text">예약한 반려동물 이름</span><br> 
+					<hr>
+					<span>${reservationList.pet_name}</span>
+					
+					<br><br>
+					<span id="large-text">예약한 반려동물 나이</span><br> 
+					<hr>
+					<span>${reservationList.age}살</span>
+
+					<br><br>
+					<span id="large-text">예약한 반려동물 종류</span><br> 
+					<hr>
+					<span>${reservationList.type}</span>
+					
+					<br><br>
+					<span id="large-text">예약한 반려동물 특이사항</span><br> 
+					<hr>
+					<span>${reservationList.pet_ect}</span>
 			
-			<c:forEach var="skill" items="${reservationList.list}">
-				<span>예약 스킬 : ${skill.payname}</span><br>
-			</c:forEach>
+					<br><br>
+					<span id="large-text">예약 이용 시간</span><br> 
+					<hr>
+					<span>${usageTime}시간</span>
+
+					<br><br>
+					<hr>
+					<div align="right">
+						<span id="extra-large-text">총 ${payMent}원</span><br> 
+					</div>
+			</div>
 			
-			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${reservationList.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
-			<br><span>반려동물 이름 : ${reservationList.pet_name}</span><br>
-			<span>반려동물 나이 : ${reservationList.age}살</span><br>
-			<span>반려동물 종류 : ${reservationList.type}</span><br>
-			<span>반려동물 특이사항 : ${reservationList.pet_ect}</span><br><br>
-			
-			<!-- 승인시 -->
-			<form class="confirm_apply" action="confirm" method="post">
-					<input type="hidden" name="id" value="${reservationList.member_id}">
-					<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
-					<input type="hidden" name="check" value="승인">
-					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">
-					<button id="approval_btn">승인</button>
-			</form>
-			<!-- 거절 -->
-			<form class="confirm_refusal" action="confirm" method="post">
-			<input type="hidden" name="id" value="${reservationList.member_id}">
-					<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
-					<input type="hidden" name="check" value="거절">	
-					<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">	
-					<button type="button" id="refusal_btn">거절사유작성</button>
-					<!-- 숨겨진 페이지 -->					
-					<div class="modalfade">			                    							  
-		                <label>거절 사유를 간단하게 작성해주세요</label>
-		                <input type="text" name="content"  required>
-		                <br/>
-		                <input type="submit" id="sendEmail"  value="거절">		            
-		            </div>
-			</form>
-		
-		<span>예약 이용 시간 : ${usageTime}시간</span><br>
-		<span>예약 총 금액 :${payMent}원</span><br><br>
+				<br><br>
+				<div align="center">
+				<!-- 승인시 -->
+				<form class="confirm_apply" action="confirm" method="post">
+						<input type="hidden" name="id" value="${reservationList.member_id}">
+						<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
+						<input type="hidden" name="check" value="승인">
+						<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">
+						<button id="approval_btn">승인</button>
+				</form>
+				<!-- 거절 -->
+				<form class="confirm_refusal" action="confirm" method="post">
+					<input type="submit" id="sendEmail"  value="거절">	
+					
+						
+						<input type="hidden" name="id" value="${reservationList.member_id}">
+						<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
+						<input type="hidden" name="check" value="거절">	
+						<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">	
+						
+						<br>
+						<button type="button" id="refusal_btn">거절 사유 작성</button>
+	
+						<!-- 숨겨진 페이지 -->					
+						<div class="modalfade">			                    							  
+							<input id="refusal_text" type="text" name="content" placeholder="  거절 사유" required>
+						</div>
+				</form>
+			</div>
+	</div>
 </section>
 
 	<br><!-- footer 불러오기 -->

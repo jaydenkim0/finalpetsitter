@@ -1,0 +1,95 @@
+/*confirm.css*/
+#step1 img{
+    margin-top: -25px;
+    width: 50rem;
+}
+
+.confirm-wrap {
+    text-align: left;
+    font-family: NotosanL;
+}
+
+.confirm-wrap h1{
+    font-family: NotosanBlack;
+}
+
+.confirm-wrap #large-text{
+    font-family: NotosanB;
+    font-size: 16px;
+}
+.confirm-wrap #medium-text{
+    font-size: 13px;
+}
+.confirm-wrap #extra-large-text{
+    font-family: NotosanBlack;
+    font-size: 20px;
+    margin-right: 550px;
+}
+
+#align-left{
+    margin-left: 550px;
+}
+
+.confirm-wrap hr {
+    margin-inline-start: 0;
+    width: 790px;
+}
+
+/*btn style*/
+.confirm-wrap #approval_btn{
+    float: left;
+    margin-left: 750px;
+    width: 190px;
+    height: 50px;
+    font-size: 10pt;
+    font-family: NotosanR;
+    color: white;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 6px;
+}
+
+.confirm-wrap #sendEmail{
+    float: right;
+    margin-right: 750px;
+    width: 190px;
+    height: 50px;
+    font-size: 10pt;
+    font-family: NotosanR;
+    color: white;
+    text-align: center;
+    background: #b1b1b1;
+    border: solid 2px #b1b1b1;
+    border-radius: 6px;
+}
+
+.confirm-wrap #refusal_btn{
+    margin-top: 30px;
+    width: 200px;
+    height: 30px;
+    font-size: 10pt;
+    font-family: NotosanR;
+    color: white;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 6px;
+}
+
+.confirm-wrap #approval_btn:hover,
+.confirm-wrap #sendEmail:hover,
+.confirm-wrap #refusal_btn:hover
+{
+    background-color: #4edec5;
+    border: solid 2px #4edec5;
+}
+
+.confirm-wrap #refusal_text{
+border: 1px solid #b1b1b1;
+height: 26.5px;
+width: 200px;
+margin-left: 5px;
+margin-top: 3px;
+}
+
