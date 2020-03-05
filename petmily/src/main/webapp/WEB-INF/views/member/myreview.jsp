@@ -147,9 +147,9 @@ select {
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
 
-
+<Br>
 <h1>나의 리뷰</h1>
-
+<Br><Br>
 <section>
 <table  class="review_table">
 

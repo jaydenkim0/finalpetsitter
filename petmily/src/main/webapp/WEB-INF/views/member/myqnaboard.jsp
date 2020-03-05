@@ -143,9 +143,9 @@ select {
 
 <div align="center">
 
-
+<br><br>
 <h1>나의 신고 문의 내역</h1>
-
+<br><br>
 <section>
 <table CLASS="qnatab">
 
