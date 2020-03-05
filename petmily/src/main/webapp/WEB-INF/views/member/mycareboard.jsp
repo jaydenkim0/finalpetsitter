@@ -217,11 +217,7 @@ select {
 </table>
 
 <br>
-<div align="right" class="right_mar">
-<c:if test="${not empty id}">
-<a href="${context }/board/care/write"><button class="btn hover3">방 만들기</button></a><br><br>
-</c:if>
-</div>
+
 
 <br>
 <div class="row">
