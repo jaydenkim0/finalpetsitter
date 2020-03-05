@@ -173,7 +173,7 @@ FOOTER 이용 시 넣어야할 요소
 	  position: absolute;
 	  top: 0;
 	  width: 100%;
-	  height: 100px;
+	  height: 130px;
 	  background-color: #fff;
 	  opacity: 100;
 	  transition: opacity 0.3s ease;
