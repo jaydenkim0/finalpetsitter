@@ -76,8 +76,8 @@
     </style>    
     
     <div class="box-container first">    
-		<h3>블랙리스트 정보 디테일 페이지</h3>	
 		<a href="${pageContext.request.contextPath}/admin/blackList"><button>블랙리스트 페이지로 이동</button></a>	
+		<h3>블랙리스트 정보 디테일 페이지</h3>	
 	</div>
 	
 	<c:choose>			

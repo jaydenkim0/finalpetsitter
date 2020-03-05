@@ -248,7 +248,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			TO_DATE(#{matching_time},'YY/MM/DD'),
 			#{pet_name},
 			#{ect},
-			'대기')
+			'대기',
+			sysdate)
 	</insert>	
 	
 	<!-- 금액/시간 등록 -->

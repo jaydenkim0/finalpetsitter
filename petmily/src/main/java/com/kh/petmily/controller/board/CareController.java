@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.petmily.entity.CareDto;
 import com.kh.petmily.entity.CareImageDto;
@@ -272,15 +273,17 @@ public class CareController {
 	public String care_board_password(
 			@RequestParam String care_board_no,
 			@RequestParam String care_pw,
-			Model model) {
+			Model model,
+			RedirectAttributes redirectAttributes) {
 		careDto.setCare_pw(care_pw);
 		careDto.setCare_board_no(Integer.parseInt(care_board_no));
 		int result = careService.care_board_password(careDto);
-		model.addAttribute("care_board_no",care_board_no);
 		if(result==0) {
+			redirectAttributes.addFlashAttribute("password", "x");
 			return "redirect:/board/care/list";
 		}else{
-			return "redirect:/board/care/content";
+//			model.addAttribute("care_board_no",care_board_no);
+			return "redirect:/board/care/content?care_board_no="+care_board_no;
 		}
 	}
 	

@@ -139,17 +139,18 @@
 	}
 	 </style>
     
-	<h1>펫시터 관리페이지</h1>
 	
 	<br>
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
 	<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
 	
-	<br><br>
+	<h4>펫시터 관리페이지</h4>
+
+
 	<hr>
 	<br><br>
-	
-	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitter">펫시터 리스트</a> </h2>	
+
+	<a href="${pageContext.request.contextPath}/admin/list/petsitter"><button>펫시터 관리 (리스트)</button></a> 	
 
 	<div class="scrollbox">
 	<table>
@@ -212,7 +213,7 @@
 	<hr>
 	<br><br>
 	
-	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsitterapply">펫시터 신청 리스트</a>  </h2>	
+	<a href="${pageContext.request.contextPath}/admin/list/petsitterapply"><button> 펫시터 신청 관리 (리스트) </button></a> 
 	
 
 	<!-- 
@@ -281,7 +282,7 @@
 	<hr>
 	<br><br>
 	
-	<h2> <a href="${pageContext.request.contextPath}/admin/list/petsittersleep"> 휴면 펫시터 리스트</a>  </h2>	
+	<a href="${pageContext.request.contextPath}/admin/list/petsittersleep"> <button> 휴면 펫시터 관리 (리스트) </button></a> 
 
 	<!-- 
 		조건 1 일반 휴면 펫시터 (black_content 가 null 값이면 일반회원)
