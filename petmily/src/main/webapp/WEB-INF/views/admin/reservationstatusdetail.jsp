@@ -114,21 +114,24 @@
 						<td> 견적 신청 상태 : ${acountOne.status}</td>					
 					</tr>
 						<c:if test="${payinfo != null }">				
+							
 							<c:forEach var="pay" items="${payinfomation}">				
-								<tr>			
+								<tr>
 									<td> 결제 신청 상태 : ${pay.status}</td>	
 									<c:if test="${pay.status eq '완료' and status eq 0}">							
 										<!-- 결제 취소 버튼 -->
 									<form action="${pageContext.request.contextPath}/admin/revoke" method="get">
-										<input type="hidden" name="pay_no" value="${pay.pay_no}">										
+										<input type="hidden" name="pay_no" value="${pay.pay_no}">			
+										<input type="hidden" name="reservation_no" value="${pay.partner_order_id}">							
 										<button>결제 취소</button>
 									</form>											
-									</c:if>							
+									</c:if>		
 								</tr>						
 							<tr>			
 									<td> 승인 시간 : ${pay.process_time}</td>					
 							</tr>							
 							</c:forEach>
+							
 						</c:if>
 					
 					<tr>			

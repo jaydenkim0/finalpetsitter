@@ -22,6 +22,7 @@ public class ReservationDto {
 	private String ect; // 기타정보
 	private String status; // '대기', '승인' 만 입력가능, 승인시 정산을 거쳐서 결제처리 가능 
 	private String TotalMatchingTime;
+	private String reservation_wdate;
 	
 	//매칭타임 시간 합치기
 			public String getTotalMatchingTimeWithFormat()throws Exception{

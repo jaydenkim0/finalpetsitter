@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,7 @@ import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.kakao.PayService;
 import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
+import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -136,9 +138,10 @@ public class AdminController {
 	}	
 		
 	@GetMapping("/revoke")
-	public String revoke(@RequestParam int pay_no) throws URISyntaxException {
+	public String revoke(@RequestParam int pay_no,
+									  @RequestParam int reservation_no) throws URISyntaxException {
 		KakaoPayRevokeReturnVO kpayRevokeReturnVO = payService.revoke(pay_no);
-		return "redirect:/admin/list/reservationstatus";
+		return "redirect:/admin/reservationstatusdetail?reservation_no="+reservation_no;
 	}
 	/////////////////////////////////////////////////////////////////////
 	
@@ -463,17 +466,25 @@ public class AdminController {
 	
 	
 	// 정산관리 페이지 연결
-	@GetMapping("/account")
-	public String account() {
-	// 0. 전체 날자기준으로 통합
-	// 1. 토탈 결제금액 (sum)
-	// 2. 토탈 취소금액 (sum)
-	// 3. 견적 신청 수 : (count)
-	// 4. 견적 대기 수 : (count)
-	// 5. 결제 완료 수 : (count)
-	// 6. 결제 취소 수 : (count)
+	@RequestMapping("/account")
+	public String account(Model model,
+			@RequestParam(defaultValue = "1") int type,
+			@RequestParam(defaultValue = "오늘") String SearchType) {
+		// 0. 전체 날자기준으로 통합
+		// 1. 토탈 결제금액 (sum)
+		// 2. 토탈 취소금액 (sum)
+		// 3. 견적 신청 수 : (count)
+		// 4. 견적 승인 수 : (count)		
+		// 5. 견적 대기 수 : (count)
+		// 6. 결제 완료 수 : (count)
+		// 7. 결제 취소 수 : (count)		
+		System.out.println("tpye = "+type);
+		model.addAttribute("totalInfo", (CalculateVO) adminService.getCalculateAllinfor(type))
+				  .addAttribute("SearchType", SearchType);	
+		
 		return "admin/account";		
 	}
+
 	
 	// 가격 정보 페이지 연결
 	@GetMapping("/accountoption")

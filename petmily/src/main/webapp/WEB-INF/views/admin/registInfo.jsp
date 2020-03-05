@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+    
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+ 	
  	<style>
 	 a button{
 	 	background: #146fbd;
@@ -15,8 +18,7 @@
 	 }
 	 h3{
 	 	padding:20px;
-	 }
-	 
+	 }	 
 	 </style>
 	 
 	 <h3> 등록 현황 </h3>
@@ -45,4 +47,7 @@
 	<h3>	어제 신고 게시글 수 : ${listBqna} 회</h3>
 	<h3 style="background: #bbbbbb;"> 어제 경고 당한 회원의 수 :  ${listBm} 명</h3>
 	<h3 style="background:rgba(96, 125, 139, 0.7);"> 어제 경고 당한 펫시터의 수 : ${listBs} 명</h3> 
+	
+	
+     
 	
