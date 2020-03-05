@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.petmily.repository.StrayDao;
+import com.kh.petmily.service.board.CareService;
 import com.kh.petmily.service.board.StrayReplyService;
 import com.kh.petmily.service.board.StrayService;
 import com.kh.petmily.vo.QnaReplyVO;
@@ -45,6 +46,9 @@ public class StrayController {
 	
 	@Autowired
 	StrayReplyService strayReplyService;
+	
+	@Autowired
+	CareService careService;
 	
 	
 	private List<MultipartFile>getStray_no;
@@ -195,4 +199,10 @@ public class StrayController {
 		public void replyCal(@ModelAttribute StrayReplyVO strayReplyVO) {
 		strayReplyService.replyCal(strayReplyVO);
 		}
+		//회원이미지 가져오기(src로 주소)
+		@GetMapping("/member/image")
+		public ResponseEntity<ByteArrayResource> member_image(
+		@RequestParam String member_image_member_id) throws UnsupportedEncodingException,IOException{
+		return careService.member_image(member_image_member_id);
+				}
 	}
