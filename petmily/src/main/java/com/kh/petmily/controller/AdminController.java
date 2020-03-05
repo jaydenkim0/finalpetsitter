@@ -2,8 +2,10 @@ package com.kh.petmily.controller;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.util.List;
 
+import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +35,15 @@ import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.MemberService;
+import com.kh.petmily.service.kakao.PayService;
+import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
+import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
+import com.kh.petmily.vo.petsitter.ReservationAllVO;
+import com.kh.petmily.vo.petsitter.ReservationListVO;
 
 
 @Controller
@@ -48,6 +56,10 @@ public class AdminController {
 	private AdminEmailService amailService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PayService payService;
+	@Autowired
+	private PetsitterService petsitterService;
 	
 	// 메인페이지
 	@GetMapping("/")
@@ -96,12 +108,41 @@ public class AdminController {
 		List<PayinfoDto> list =  adminService.payinfoName(reservation_no);
 		model.addAttribute("acountOne", acountVO)
 				  .addAttribute("payinfomation", payDto)
-		 		  .addAttribute("payinfo", list)
-		 		  .addAttribute("usage_time",list.get(0).getUsage_time())
+		 		  .addAttribute("payinfo", list)		 	
 		 		  .addAttribute("sitter_id", sitter_id);		
+		//예약 정보  단일 조회
+		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);				
+		//1시간 당 금액 구하기
+		int hourPayment = payService.getHourPayment();		
+		//최종 결제 금액 구하기
+		int payMent = 0;
+			List<ReservationAllVO> all = reservationList.getList();
+			// 이용시간
+			int totalTime = all.get(0).getUsage_time();
+			// 이용 시작 시간
+			int startTime = all.get(0).getStart_time();
+			
+			for(ReservationAllVO allVO : all) {				
+				int usagetime = allVO.getUsage_time();				
+				int oneHour = usagetime * hourPayment;
+				int payment = allVO.getPayment();				
+				payMent = oneHour + payment;			
+			}
+			model.addAttribute("payMent", payMent)
+			.addAttribute("usageTime", totalTime)
+			.addAttribute("startTime", startTime);
+		// 결제 취소 버튼 유무 확인
+			model.addAttribute("status", adminService.paymentcanclecheck(reservation_no));
+		
 		return "admin/reservationstatusdetail";		
 	}	
 		
+	@GetMapping("/revoke")
+	public String revoke(@RequestParam int pay_no,
+									  @RequestParam int reservation_no) throws URISyntaxException {
+		KakaoPayRevokeReturnVO kpayRevokeReturnVO = payService.revoke(pay_no);
+		return "redirect:/admin/reservationstatusdetail?reservation_no="+reservation_no;
+	}
 	/////////////////////////////////////////////////////////////////////
 	
 	// 회원 디테일 페이지 연결
@@ -116,8 +157,7 @@ public class AdminController {
 		return "admin/member/memberdetail";			
 	}
 	
-	
-	
+		
 	// 펫시터관리 페이지 연결
 	@GetMapping("/petsitter")
 	public String petsitter(Model model) {					
@@ -426,11 +466,25 @@ public class AdminController {
 	
 	
 	// 정산관리 페이지 연결
-	@GetMapping("/account")
-	public String account() {
-	// 정산리스트를 불러와서 먼저 찍어줄 것인지 아니면 다른 방법으로 찍어서 보여줄 것인지.. 확인
+	@RequestMapping("/account")
+	public String account(Model model,
+			@RequestParam(defaultValue = "1") int type,
+			@RequestParam(defaultValue = "오늘") String SearchType) {
+		// 0. 전체 날자기준으로 통합
+		// 1. 토탈 결제금액 (sum)
+		// 2. 토탈 취소금액 (sum)
+		// 3. 견적 신청 수 : (count)
+		// 4. 견적 승인 수 : (count)		
+		// 5. 견적 대기 수 : (count)
+		// 6. 결제 완료 수 : (count)
+		// 7. 결제 취소 수 : (count)		
+		System.out.println("tpye = "+type);
+		model.addAttribute("totalInfo", (CalculateVO) adminService.getCalculateAllinfor(type))
+				  .addAttribute("SearchType", SearchType);	
+		
 		return "admin/account";		
 	}
+
 	
 	// 가격 정보 페이지 연결
 	@GetMapping("/accountoption")

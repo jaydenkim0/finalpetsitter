@@ -1,0 +1,126 @@
+/* index.css */
+.section h2{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    font-family: NotosanBlack;
+    font-size: 40pt;
+}
+.section h3{
+    margin-left: 200px;
+    font-family: NotosanL;
+    font-size: 10pt;
+}
+
+.s0 {
+    background-image: url('../img/index01.jpg');
+    background-size: cover;
+}
+.s2 {
+    background-image: url('../img/index02.png');
+    background-size: cover;
+    color: black;
+}
+.s3 {
+    background-image: url('../img/index03.png');
+    background-size: cover;
+    color: black;
+}
+
+#fp-nav ul li a span {
+    background-color: #fff;
+
+}
+
+.s2 h3{
+    display: none;
+}
+.s2 h2{
+    display: none;
+}
+.s3 h3{
+    display: none;
+}
+.s3 h2{
+    display: none;
+}
+
+#reservation_btn{
+    margin-left: 200px;
+    width: 180px;
+    height: 50px;
+    font-size: 12pt;
+    font-family: NotosanR;
+    color: white;
+    line-height: 50px;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 30px;
+      
+}
+.s0 #about{
+    color: white;
+}
+
+/* review.css */
+.s1{
+    color: black;
+}
+
+.s1 #ti{
+    margin-bottom: 0px;
+}
+.s1 #co{
+    margin-top: 5px;
+}
+
+/* title */
+.s1 .review_title h3{
+    margin: 5px 30px 15px;
+    overflow:hidden; 
+    text-overflow:ellipsis; 
+    white-space:nowrap;
+}
+
+.owl-carousel {
+    margin-left: 180px;
+}
+
+.owl-carousel .item{
+/*    text-align:center; */
+    background: white; 
+    height:250px; 
+/*    line-height:inherit; */
+    margin:10px;
+}
+
+.owl-carousel .item .img_box {
+    width: 60px;
+    height: 60px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 15px;
+    margin-top: 0px;
+    
+/*  이미지와 닉네임 나란히 배치  */
+    float: left;
+    clear: both;
+}
+
+.owl-carousel .item .profile {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+
+}
+.owl-carousel .item #nick{
+    margin: 7px;
+}
+
+.owl-carousel .item p{
+    margin: 0px 30px 15px; 
+    overflow: hidden;
+    display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+}

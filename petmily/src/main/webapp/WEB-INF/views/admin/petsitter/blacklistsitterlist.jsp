@@ -97,9 +97,10 @@
 	}
 	 </style>
      
-	<h3> 경고 펫시터 리스트</h3>	
 	
-	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	<a href="${pageContext.request.contextPath}/admin/blackList"><button>경고 게시판으로 이동</button></a>
+	
+	<h4> 경고 펫시터 리스트</h4>	
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistsitter">
@@ -119,11 +120,11 @@
 	 
 	<table>
    		<tr>
-   			<td> 아이디 </td>
-   			<td> 이름 </td>
-   			<td> 전화번호 </td>
-   			<td> 등급 </td>
-   			<td> 경고 횟수 </td>
+   			<th> 아이디 </th>
+   			<th> 이름 </th>
+   			<th> 전화번호 </th>
+   			<th> 등급 </th>
+   			<th> 경고 횟수 </th>
    		</tr>
 	    <c:forEach var="petblacklist" items="${list}" >
 	    	<tr>

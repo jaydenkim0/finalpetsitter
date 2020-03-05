@@ -148,12 +148,6 @@ public class PayController {
 			@RequestParam  String sitter_id, 
 			@RequestParam  String sitter_email, 
 			@RequestParam int reservation_no) {
-		System.out.println("잘 들어왔나? = "+id);
-		System.out.println(email);
-		System.out.println(total_amount);
-		System.out.println(sitter_id);
-		System.out.println(sitter_email);	
-		System.out.println("reservation_no = "+reservation_no);
 		 List<PayinfoDto> list = adminService.payinfoName(reservation_no);
 		aemailService.paymentApplymemberEMail(id, email, total_amount);
 		aemailService.paymentApplypetsitterEMail(id, sitter_id, sitter_email, list);

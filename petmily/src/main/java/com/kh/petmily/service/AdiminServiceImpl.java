@@ -28,6 +28,7 @@ import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.AccountVO;
+import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -552,8 +553,17 @@ public class AdiminServiceImpl implements AdminService {
 	public  List<PayDto> paydetail(int reservation_no) {	
 		return adminDao.paydetail(reservation_no);
 	}
+	// 결제 취소 버튼 유무 확인
+	@Override
+	public int paymentcanclecheck(int reservation_no) {
+		return adminDao.paymentcanclecheck(reservation_no);
+	}
 
-
+	// 정산 페이지 기본 정보
+	@Override
+	public CalculateVO getCalculateAllinfor(int type) {		
+		return adminDao.getCalculateAllinfor(type);
+	}
 
 
 
