@@ -26,8 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.kh.petmily.entity.CareReplyImageDto;
 import com.kh.petmily.repository.QnaDao;
+import com.kh.petmily.service.board.CareService;
 import com.kh.petmily.service.board.QnaReplyService;
 import com.kh.petmily.service.board.QnaService;
 import com.kh.petmily.vo.QnaFileVO;
@@ -48,6 +49,9 @@ public class QnaController {
 	
 	@Autowired
 	QnaReplyService qnaReplyService;
+	
+	@Autowired
+	CareService careService;
 
 	private List<MultipartFile> getQna_no;
 	//게시글 목록
@@ -194,5 +198,12 @@ public class QnaController {
 	@ResponseBody
 	public void replyCal(@ModelAttribute QnaReplyVO qnaReplyVO) {
 	qnaReplyService.replyCal(qnaReplyVO);
+	
 	}
+	//회원이미지 가져오기(src로 주소)
+		@GetMapping("/member/image")
+		public ResponseEntity<ByteArrayResource> member_image(
+		@RequestParam String member_image_member_id) throws UnsupportedEncodingException,IOException{
+		return careService.member_image(member_image_member_id);
+		}
 }
