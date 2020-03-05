@@ -28,6 +28,7 @@
                 <c:choose>
 	                <c:when test="${empty id}">
 	                	<button id="login_btn"><a href="${context}/member/login">로그인</a></button>                
+	                	<button id="login_btn"><a href="${context}">HOME</a></button>           
 	                </c:when>
 					<c:otherwise>
 					   <!-- 프로필 이미지 -->
@@ -37,12 +38,13 @@
 		
 		                <!-- 회원 닉네임 -->
 		                <a id="member" href="${context}/member/mypage">${id}</a>
+		                <a id="member" href="${context}" style="margin-left:8px;">HOME</a>
 					</c:otherwise>
                 </c:choose>
             </div>
                     
             <!-- 네비게이션 시작 -->
-                    <nav id="site-nav" role="navigation">
+                    <nav id="site-nav" role="navigation">	                     
                     <c:choose>
                     	<c:when test="${grade!='petsitter'}">
                     		<div class="col">
@@ -109,7 +111,6 @@
 						<div class="col">
 						  <h4></h4>
 						  <ul>
-						    <li><a href="${context}">홈으로</a></li>
 						    <li><a href="${context}/member/logout">로그아웃</a></li>
 						  </ul>               
 						</div>
