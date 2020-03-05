@@ -97,9 +97,10 @@
 	}
 	 </style>
      
-	<h3>회원 리스트</h3>	
 	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	
+	<h4>회원 리스트</h4>	
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/member">
@@ -114,7 +115,7 @@
 	</form>
 	
 	
-	${count}개의 게시물이 있습니다.	
+	${count} 명의 등록 회원이 있습니다.	
 
 	<table>
 		<tr>

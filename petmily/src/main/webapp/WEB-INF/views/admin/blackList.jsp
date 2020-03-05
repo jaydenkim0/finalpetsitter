@@ -104,7 +104,8 @@
     <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
     <br>
     
-    <h3><a href="${pageContext.request.contextPath}/admin/list/blacklistmember">경고 회원 리스트</a></h3>
+    <br>
+    <a href="${pageContext.request.contextPath}/admin/list/blacklistmember"><button> 경고 회원 관리 (리스트) </button></a>
     ※경고 회원은 회원 리스트에서 <span style="color:#ff8d00;">주황색</span>으로 표시
     
 
@@ -136,7 +137,7 @@
 
     
     
-	<h3><a href="${pageContext.request.contextPath}/admin/list/blacklistsitter">경고 펫시터 리스트</a></h3>
+	<a href="${pageContext.request.contextPath}/admin/list/blacklistsitter"><button> 경고 펫시터 관리 (리스트) </button></a>
 	※경고 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
 	
    
