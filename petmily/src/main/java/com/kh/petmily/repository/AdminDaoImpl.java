@@ -632,6 +632,12 @@ public class AdminDaoImpl implements AdminDao {
 		param.put("keyword", keyword);
 		return sqlSession.selectOne("admin.countAricleAccount", param);
 	}
+	
+	// account 테이블 정산 계산 후 인서트
+	@Override
+	public void setaccountPetsitter(AccountDto accountDto) {	
+		sqlSession.insert("admin.setaccountPetsitter", accountDto);
+	}
 
 
 

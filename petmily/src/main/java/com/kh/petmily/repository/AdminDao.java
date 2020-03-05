@@ -248,6 +248,10 @@ public interface AdminDao {
 	// 정산 페이징 카운트
 	int countAricleAccount(String searchOption, String keyword);
 
+	
+	//스케쥴러 : account 인서트
+	void setaccountPetsitter(AccountDto accountDto);
+
 
 
 	

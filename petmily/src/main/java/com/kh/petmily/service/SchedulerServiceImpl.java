@@ -16,8 +16,9 @@ public class SchedulerServiceImpl implements SchedulerService{
 	@Override
 //	@Scheduled()
 	public void accountPetsitter() {
-		// 1. 펫시터 아이디 구해오기
-		// 2. 펫시터 결제건수 구해오기
+		
+		// 1. 펫시터 아이디 구해오기(전월에 결제금액이 있는 펫시터만 구해오기)
+		// 2. 펫시터 결제건수 구해오기 (완료된 금액에 취소된 금액 더하기)
 		// 3. 펫시터 최종 매출 금액 구해오기
 		// 4. 펫시터 수수료 구해오기
 	
@@ -31,7 +32,7 @@ public class SchedulerServiceImpl implements SchedulerService{
 				.account_fees(2)
 				.build();			
 		// account에 저장하기
-//		adminDao.setaccountPetsitter(accountDto);
+		adminDao.setaccountPetsitter(accountDto);
 	}
 
 }

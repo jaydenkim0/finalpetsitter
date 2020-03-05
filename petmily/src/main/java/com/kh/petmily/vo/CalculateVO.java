@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CalculateVO {
 	
-	// Account 정산 페이지 
+	// Account 정산 페이지  잔달 파라미터
 	private int totalPayment;	// 토탈 결제 금액
 	private int totalCancelPayment; // 토탈 취소 금액
 	private int reservatToTalCount; // 견적 신청 수
@@ -25,7 +25,7 @@ public class CalculateVO {
 	private String account_sitter_id; //pet_sitter 테이블의 sitter_id
 	private int account_count; // 전월 결제 건 수 
 	private int account_total_pay; // 전월 토탈 금액
-	private int account_fees; // 전월 적용 수수료
+	private double account_fees; // 전월 적용 수수료
 	private String account_date; // 전월 정산 일자
 
 }

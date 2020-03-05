@@ -711,8 +711,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type eq 3">
-					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+					and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')		
 				</when>
 			</choose>	
 		</select>
@@ -730,8 +730,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421		
+					and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')	
 				</when>
 			</choose>	
 		</select>
@@ -749,8 +749,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					where  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+					where reservation_wdate between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')	
 				</when>
 			</choose>	
 		</select>
@@ -768,8 +768,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					and  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+					and reservation_wdate between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')		
 				</when>
 			</choose>		
 		</select>
@@ -787,8 +787,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					and  reservation_wdate between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421			
+					and reservation_wdate between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')	
 				</when>
 			</choose>		
 		</select>
@@ -806,8 +806,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421				
+					and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')			
 				</when>
 			</choose>	
 		</select>
@@ -825,8 +825,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</when>		
 				<!-- 저번 달 -->
 				<when test="type == 3">
-					and  PROCESS_TIME between TRUNC(add_months(sysdate, -1) + 1) - to_char(sysdate, 'DD') 
-					and TRUNC(LAST_DAY(sysdate))+0.99999421	
+					and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+     				and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')
 				</when>
 			</choose>	
 		</select>
@@ -852,7 +852,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			order by ACCOUNT_TOTAL_PAY, ACCOUNT_DATE desc
 		</select>	
 		
+	
 
+		
+	<!-- 1. 펫시터 중에서 결제 있는 사람 리스트 -->
+	<select id="findpetsitteraccount" resultType="int">
+		select * from accountlist where kakaopaystatus='완료'					
+	    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+	    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')    
+	</select>
+	
+	<!-- reservation_sitter_no	로 펫시터 아이디 가져오기 -->
+	<select id="1" resultType="String" parameterType="int">
+		select sitter_id from pet_sitter where pet_sitter_no = #{reservation_sitter_no}		
+	</select>
+	
+	<!-- 2. 전월 결제건수 구해오기( account_count ) -->
+	<select id="2" resultType="int" parameterType="int">
+		select NVL(count(*), 0) from accountlist account_count where kakaopaystatus='완료'	 and reservation_sitter_no = #{reservation_sitter_no}		
+	    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+	    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')    	
+	</select>
+	
+	<!-- 전월 결제금액 구해오기 / 결제 금액 + 취소 금액 = 최종 결제 금액 ( account_total_pay ) -->
+		<!-- 3-1. 전월 결제금액 구해오기 (결제 완료) -->
+		<select id="3" resultType="int" parameterType="int">
+			select NVL(sum(total_amount), 0) from accountlist where kakaopaystatus='완료'	 and reservation_sitter_no = #{reservation_sitter_no}					
+		    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+		    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')     
+		</select>
+		<!-- 3-2. 전월 결제금액 구해오기 (결제 취소) -->
+		<select id="4" resultType="int" parameterType="int">
+			select NVL(sum(total_amount), 0) from accountlist where kakaopaystatus='취소' and reservation_sitter_no = #{reservation_sitter_no}					
+		    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
+		    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')    
+		</select>
+
+
+	<!-- 적용 수수료 구해오기 1 -->
+	<select id="5" resultType="double">
+		select payment from payinfo where payname='중계 수수료'
+	</select>
+
+
+	<!-- account 테이블 정산 계산 후 인서트 -->
+	<insert id="setaccountPetsitter" parameterType="accountDto">
+		insert into account values(
+		account_no_seq.nextval, 
+		#{account_sitter_id},
+		#{account_count},
+		#{account_total_pay},
+		#{account_fees},
+		sysdate		
+		)
+	</insert>
 
 </mapper>
 
