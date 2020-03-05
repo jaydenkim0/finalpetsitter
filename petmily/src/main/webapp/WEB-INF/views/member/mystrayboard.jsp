@@ -12,16 +12,62 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 <style>
-.page-navigator li {
-	display: inline-block;
+
+
+li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
+   	list-style-type:none;
+   	margin-left:20px;	
+
+}
+.straytab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
 }
 
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color : #BDBDBD;
+
+
+td{
+   
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   border-color: #BDBDBD;
+    padding: 10px;
+   text-align: center;
+  
 }
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+.right_mar {
+   margin-right: 20%;
+   }
+   
+ button{
+    display: white;
+   width: 80px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   
+}
+
 
 th, td {
 	border-bottom: 1px solid #444444;
@@ -90,7 +136,9 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 	}
+
 </style>
+
 
 </head>
 
@@ -99,11 +147,15 @@ select {
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <div align="center">
-<br>
-<h1>나의 Save the Pets ! 게시글</h1>
-<br>
+
+
+<h1>나의 Save the Pets ! </h1>
+
 <section>
-<table class="notice_table">
+<table class="straytab" >
+
+
+
 	<tr>
 		<td>글번호</td>
 		<td>제목</td>
@@ -159,6 +211,7 @@ select {
 </div>
 
 </section>
+
 </div>
 
 </body>

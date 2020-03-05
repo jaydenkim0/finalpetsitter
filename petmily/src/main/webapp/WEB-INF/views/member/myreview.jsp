@@ -9,9 +9,58 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <style>
+
+.page-navigator li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
+}
 .page-navigator li {
 	display: inline-block;
+
 }
+
+
+.page-navigator li.active>a {
+   color: #1482e0;
+}
+table td img {
+   width: 60px;
+}
+
+.review_table {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+
+
+td{
+   
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   border-color: #BDBDBD;
+    padding: 10px;
+   text-align: center;
+  
+}
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+.right_mar {
+   margin-right: 10%;
+}
+
+
+=======
 
 .notice_table {
 	width: 80%;
@@ -87,7 +136,9 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 	}
+>>>>>>> refs/remotes/origin/master
 </style>
+
 
 </head>
 
@@ -95,11 +146,14 @@ select {
 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <div align="center">
-<br>
-<h1>내가 쓴 리뷰</h1>
-<br>
+
+
+<h1>나의 리뷰</h1>
+
 <section>
-<table class="notice_table">
+<table  class="review_table">
+
+
 	<tr>
 		<td>리뷰번호</td>
 		<td>펫시터</td>
