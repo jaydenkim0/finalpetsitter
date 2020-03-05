@@ -98,7 +98,8 @@ float:center;
  <body>
  
 <div  class="loginbox" align="center">
-	<h1><img src="${context}/resources/img/Logo.png" ></h1>
+	<h1><a href="${context}"><img src="${context}/resources/img/Logo.png" ></a>
+	</h1>
 	<form action="login" class="secure-form" method="post">
 	  
 		<input class="block-item input-item" type="text" id="loginid"

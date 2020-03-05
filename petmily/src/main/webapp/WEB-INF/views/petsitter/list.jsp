@@ -57,7 +57,7 @@ HEADER 이용 시 넣어야할 요소
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
 	</style>
@@ -258,7 +258,6 @@ FOOTER 이용 시 넣어야할 요소
 			</tr>
 		</table>
 	</section><br>
-	
 	
 		 <!-- footer 불러오기 -->
          <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>      
