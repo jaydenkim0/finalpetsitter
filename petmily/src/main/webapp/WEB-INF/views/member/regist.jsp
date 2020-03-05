@@ -276,7 +276,7 @@ p{
 			
 			<td>아이디<br>
 				<input type="text" name="id" placeholder="영문 숫자 조합 4-12자리" required id="user_id"><Br><Br>
-				<div id="id_check"></div>
+				<div id="id_check"><br></div>
 			</td>
 		</tr>
 		<tr>
