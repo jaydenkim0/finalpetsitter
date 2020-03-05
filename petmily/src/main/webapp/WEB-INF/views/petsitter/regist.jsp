@@ -152,23 +152,28 @@ FOOTER 이용 시 넣어야할 요소
              $(conditionCheck).each(function(i){ //돌봄환경
                  careConditionArray.push($(this).data("condition"));
              });
-
+				
+             
+             
                  $("#skills_text").empty();
                  for (var i in skillArray)
                  {
-                     $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+skillArray[i]).appendTo("#skills_text");
                  }
   
                  $("#care_pet_type_text").empty();
                  for (var i in carePetTypeArray)
                  {
-                     $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+carePetTypeArray[i]).appendTo("#care_pet_type_text");
                  }
 
                  $("#care_condition_text").empty();
                  for (var i in careConditionArray)
                  {
-                     $("<span>").text(careConditionArray[i]+"/").appendTo("#care_condition_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+careConditionArray[i]).appendTo("#care_condition_text");
                  }               
          });
          
@@ -217,7 +222,7 @@ FOOTER 이용 시 넣어야할 요소
              var section_len = $(".region").length; 
              console.log(section_len);
 
-             var test = $("<div>");
+             var test = $("<div>").addClass('location-div');
 
              var region = $("<select>");
                  region.addClass("region");
@@ -227,13 +232,7 @@ FOOTER 이용 시 넣어야할 요소
                  section.addClass("section");
                  section.attr("name","location_name["+section_len+"].area");
 
-                 var test11 = region.attr("name");
-                 console.log(test11);
-                 var test22 = section.attr("name");
-                 console.log(test22);
-
-
-             var button = $("<button>").text("삭제");  
+             var button = $("<button>").text("삭제").addClass('delete-btn');  
                    
              $.ajax({
                  url:"../resources/json/petmily_location.json",   
@@ -241,7 +240,6 @@ FOOTER 이용 시 넣어야할 요소
                  dataType:"json",       
                  success:function(resp){ 
                  for(var n in resp){
-                     // console.log(n);
                      $("<option>").text(n).appendTo(region);
                      region.appendTo(test);   
                  }
@@ -333,8 +331,8 @@ FOOTER 이용 시 넣어야할 요소
 	            <label id="large-text">펫밀리 스킬</label><br>
 	            <hr>
 	            <c:forEach var="skillnames" items="${skillname}">
-		            <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
-		            <label  >${skillnames.skill_name}</label>
+		            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+		            <label for="${skillnames.skill_name}">${skillnames.skill_name}</label>
 	            </c:forEach>   	        
 		        <div id="skills_text"></div>
 	        </div>
@@ -345,8 +343,8 @@ FOOTER 이용 시 넣어야할 요소
 	            <label id="large-text">펫밀리 돌봄가능 동물 종류</label><br>
 	            <hr>
 	            <c:forEach var="carepettypes" items="${carepettype}">
-	                <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
-	                <label for="x">${carepettypes.care_type}</label>
+	                <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+	                <label for="${carepettypes.care_type}">${carepettypes.care_type}</label>
 	            </c:forEach>        
 	            <div id="care_pet_type_text"></div>
 	        </div>
@@ -357,8 +355,8 @@ FOOTER 이용 시 넣어야할 요소
 	            <label id="large-text">펫밀리 돌봄 환경</label><br>
 	            <hr>
 	            <c:forEach var="c" items="${careconname}">    		
-	                <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
-	                <label >${c.care_condition_name}</label>
+	                <input id="${c.care_condition_name}" type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+	                <label for="${c.care_condition_name}">${c.care_condition_name}</label>
 	            </c:forEach>        
 	            <div id="care_condition_text"></div>
 	        </div>
@@ -445,26 +443,26 @@ FOOTER 이용 시 넣어야할 요소
 	        
 	        <div class="file_input">
 	        <!-- 소개 이미지 파일 -->	
-	        <label for="info_image" id="large-text">소개 이미지</label><br>
+	        <label for="info_image" id="large-text">펫밀리 소개 이미지</label><br>
 	        <hr>      
 	            <input type="file" id="info_image" name="info_image" multiple accept="image/*">
 	        </div>
 	        <br><br>
 	        
 	        <!-- 신분증 이미지 파일 -->	
-	        <label for="id_card_file" id="large-text">신분증</label><br>
+	        <label for="id_card_file" id="large-text">펫밀리 신분증</label><br>
 	        <hr>
 	        <input type="file" id="id_card_file" name="id_card_file" multiple accept="image/*" required>
 	        <br><br>
 	        
 	        <!-- 증빙서류 이미지 파일 -->	
-	        <label for="license_file" id="large-text">증빙 서류</label><br>
+	        <label for="license_file" id="large-text">펫밀리 증빙 서류</label><br>
 	        <hr> 
 	        <input type="file" id="license_file" name="license_file" multiple accept="image/*" required>
 	        <br><br>
 	
 	        <!-- 통장 사본 이미지 파일 -->	
-	        <label for="id_card_file" id="large-text">통장 사본 이미지</label><br>
+	        <label for="id_card_file" id="large-text">펫밀리 통장 사본 이미지</label><br>
 	        <hr>
 	        <input type="file" id="bank_image" name="bank_image" multiple accept="image/*" required>
 	        <br><br> <br><br>
