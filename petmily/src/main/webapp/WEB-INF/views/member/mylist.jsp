@@ -119,11 +119,11 @@ a{
 
    position: relative;
    left: 550px;
-   bottom:800px;
+   bottom:780px;
 }
 #add_btn{
 position: relative;
-   left: 510px;
+   left: 1400px;
    bottom:965px;
 }
 h2{
@@ -138,6 +138,13 @@ padding-left:20%;
    left: 100px;
    bottom:550px;
 }
+select{
+	width:100px;
+	padding: .4em .4em;
+	border: 1px solid #999;
+	font-family : inherit;
+	}
+
 </style>
 <body>
 <div align="left">
@@ -168,8 +175,12 @@ padding-left:20%;
 <!-- 	</tr> -->
 <table class="tab1">
 	<tr>
+		<th>Pets :</th>
+		<td>${mylistpet.size() }마리</td>
+	</tr>
+	<tr>
 		<th>Point :</th>
-		<td>${mylist.point }</td>
+		<td>${mylist.point}점</td>
 	</tr>
 	<tr>
 		<th>JoinDate :</th>		
@@ -179,14 +190,10 @@ padding-left:20%;
 			<th>LastLogin :</th>		
 			<td>${mylist.final_loginWithFormat }</td>
 	</tr>
-	<tr>
-		<th>Pets :</th>
-		<td>${mylistpet.size() }마리</td>
-	</tr>
 </table>
 
 
-<hr width="700px" align="center" color="#1482e0" class="hr1">
+<hr width="700px" align="center" color="#1482e0"  class="hr1">
 
 <table class="tab2">
 
@@ -253,30 +260,31 @@ padding-left:20%;
 <br>
 <br>
 <button id="add_btn">펫 추가</button>
-<div id="add_content">
+<div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
 	<input type="hidden" name="member_id" value="${mylist.id }">
 	<table class="tab4">
 		<tr>
-			<th width="50%">이미지&emsp;</th>
+			<th width="50%">Picture :</th>
 			<td width="50%">
-				<input type="file" name="pet_image" multiple accept="image/*">
+			   
+				<input type="file" name="pet_image" multiple accept="image/*" >
 			</td>
 		</tr>
 		<tr>
-			<th>이름</th>
+			<th>Name :</th>
 			<td>
 				<input type="text" name="name" required>
 			</td>
 		</tr>
 		<tr>
-			<th>나이</th>
+			<th>Age :</th>
 			<td>
 				<input type="number" name="age" >
 			</td>
 		</tr>
 		<tr>
-			<th>동물종</th>
+			<th>Type :</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
@@ -289,16 +297,16 @@ padding-left:20%;
 			</td>
 		</tr>
 		<tr>
-			<th>소개</th>
+			<th>Etc :</th>
 			<td>
 				<textarea name="ect"></textarea>
 			</td>
 		</tr>
 		<tr>
-		    <th>
-				<input type="submit" value="펫추가" id="updatebtn"><br>
+		    <th></th>
+			<td><input type="submit" value="펫추가" id="updatebtn">
 				<input type="reset" value="취소" id="cancel">
-			</th>
+			</td>
 			</tr>
 	</table>
 </form>
