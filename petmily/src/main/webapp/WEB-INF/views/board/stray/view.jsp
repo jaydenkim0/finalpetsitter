@@ -180,6 +180,10 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+* {
+	box-sizing: border-box;
+}
+
 .notice_table {
 	width: 80%;
 	border-top: 1px solid #444444;
@@ -187,9 +191,10 @@ FOOTER 이용 시 넣어야할 요소
 	border-color: #BDBDBD;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 50px;
 }
 
-th, td {
+.tr1 {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: left;
@@ -210,9 +215,18 @@ a {
 	margin-right: auto;
 }
 
-
 hr {
 	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
 }
 
 .btn {
@@ -223,7 +237,7 @@ hr {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -236,26 +250,43 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+
+textarea {
+	width: 1250px;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.con{
+height: 400px;
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -266,44 +297,42 @@ hr {
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
-		<td>글번호 : ${strayVO.stray_no}</td>
+		<td>No : ${strayVO.stray_no}</td>
 	</tr>
 
 	<tr>
-		<td>게시일자 : ${strayVO.writedateWithFormat}</td>
+		<td>Date : ${strayVO.writedateWithFormat}</td>
 	</tr>
 
 	<tr>
 		<c:choose>
 			<c:when test="${not empty row.stray_writer}">
-				<td>작성자 : ${strayVO.stray_writer}</td>
+				<td>Name : ${strayVO.stray_writer}</td>
 			</c:when>
 			<c:otherwise>
-				<td>작성자 : 비회원</td>
+				<td>Name :  비회원</td>
 			</c:otherwise>
 		</c:choose>
 	</tr>
 
-	<tr>
+	<tr class="tr1">
+		<td>Subject : 
 		<c:choose>
 			<c:when test="${strayVO.stray_title ne '완료글'}">
-				<font color="#1482e0"> [${row.stray_title}] </font>
+				<font color="#1482e0">[${strayVO.stray_title}]</font>
 			</c:when>
 			<c:otherwise>
-				<td style="color: red">말머리 : ${strayVO.stray_title}</td>
+				<td style="color: red">[${strayVO.stray_title}]</td>
 			</c:otherwise>
 		</c:choose> 
+		${strayVO.stray_head}</td>
 	</tr>
 
-	<tr>
-		<td>제목 : ${strayVO.stray_head}</td>
-	</tr>
-
-	<tr>
+	<tr class="tr1">
 		<c:forEach var="strayImage" items="${strayImageList}">
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
-					<td><img
+					<td class="td1"><img
 						src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
 						width="200" height="100"></td>
 				</tr>
@@ -313,16 +342,19 @@ hr {
 
 
 
-		<tr>
+		<tr class="tr1">
 		<td>
-					<div class="naver-viewer"></div>  
-					<input type="hidden" name="stray_content"
-			value="${strayVO.stray_content}">  
+			<div class="con">
+					<div class="naver-viewer"></div>
+					<input type="hidden" name="stray_content" value="${strayVO.stray_content}">  
+			</div>
 				</td>
-			</tr><!-- 댓글화면 -->
+			</tr>
+			
+			<!-- 댓글화면 -->
 		<c:forEach items="${replyList}" var="reply">
 			<c:if test="${reply.content ne null}">
-				<tr>
+				<tr class="tr1">
 					<td>
 						<div class="grandmother">
 							<table width="100%" class="mother">
@@ -338,9 +370,7 @@ hr {
 										<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
 										</c:if>
-										</th>
-
-									<th align="left">작성일 : ${reply.writedateWithFormat}</th>
+									<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
 								</tr>
 
 								<tr class="reply_view">
@@ -381,16 +411,17 @@ hr {
 
 		<!-- 댓글 등록 -->
 	<tr>
-			<td align="right">
+			<td align="right" class="td2">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin"
-					value="${strayVO.stray_no}"><br> 
-					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}"
-					readonly>
-					<textarea name="content" requistray placeholder="내용 입력" rows="4"
-					cols="100"></textarea>
-				<br><br>
-					<input type="submit" value="등록" class="btn hover3">
+					value="${strayVO.stray_no}"><br>
+					<div align="left">
+					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
+					<br>
+					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
+					<input type="submit" value="등록" class="btn hover3" align="right">
+					<br><br>
+					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 				</form>
 			</td>
 		</tr>

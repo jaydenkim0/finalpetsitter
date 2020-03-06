@@ -181,7 +181,7 @@ hr {
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
-				<td>No.&nbsp;&nbsp;${faqVO.faq_no}</td>
+				<td>No : &nbsp;&nbsp;${faqVO.faq_no}</td>
 			</tr>
 
 			<tr>
