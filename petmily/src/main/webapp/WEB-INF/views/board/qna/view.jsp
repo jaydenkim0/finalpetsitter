@@ -207,151 +207,187 @@
 
 
 
-	<style>
-	.notice_table {
-		width: 80%;
-		border-top: 1px solid #444444;
-		border-collapse: collapse;
-		border-color: #BDBDBD;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	th, td {
-		border-bottom: 1px solid #444444;
-		padding: 10px;
-		text-align: left;
-		border-color: #BDBDBD;
-	}
-	
-	.th3, .td3 {
-		border-bottom: 1px solid #444444;
-		padding: 10px;
-		text-align: left;
-		border-color: #BDBDBD;
-	}
-	
-	.td2 {
-		text-align: right;
-		border-bottom: 1px solid #444444;
-		padding: 10px;
-		border-color: #BDBDBD;
-	}
-	
-	a {
-		text-decoration: none;
-		color: black;
-		margin-left: auto;
-		margin-right: auto;
-	}
-	
-	/* div { */
-	/* 	padding: 30px; */
-	/* } */
-	
-	hr {
-		width: 80%;
-	}
-	
-	.btn {
-		display: white;
-		width: 120px;
-		height: 10x;
-		line-height: 20px;
-		border: 1px #3399dd solid;
-		background-color: white;
-		text-align: center;
-		font-size : 12px;
-		cursor: pointer;
-		color: #1482e0;
-		transition: all 0.9s, color 0.3;
-	}
-	
-	.btn:hover {
-		color: white;
-	}
-	
-	.hover3:hover {
-		background-color: #1482e0;
-	}
-	<!-- header style -->
-		#masthead:after {
-		  content: '';
-		  position: absolute;
-		  top: 0;
-		  width: 100%;
-		  height: 130px;
-		  background-color: #fff;
-		  opacity: 100;
-		  transition: opacity 0.3s ease;
-		}
-		
-		#masthead.is-active{
-		 background-color: #fff;
-		}
-		
-		.section-content{
-		padding-top:150px;
-		}
-		</style>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+.notice_table {
+	width: 80%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: #BDBDBD;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+.tr1 {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.td2 {
+	text-align: right;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+hr {
+	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
+}
+
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+textarea {
+	width: 1250px;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.con{
+height: 400px;
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
 
-	<h2 align="center">게시글 상세 보기</h2>
+	<h2 align="center">QnA</h2>
 		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
-				<td>글번호 : ${qnaVO.qna_no}</td>
+				<td>No : ${qnaVO.qna_no}</td>
 			</tr>
 
 			<tr>
-				<td>게시일자 : ${qnaVO.writedateWithFormat}</td>
+				<td>Date : ${qnaVO.writedateWithFormat}</td>
 			</tr>
 
 			<tr>
-				<td>작성자 : ${qnaVO.qna_writer}</td>
+				<td>Name : ${qnaVO.qna_writer}</td>
 			</tr>
 
 			<tr>
 				<td>말머리 : ${qnaVO.qna_title}</td>
 			</tr>
 
-			<tr>
-				<td>제목 : ${qnaVO.qna_head}</td>
-			</tr>
-			
-			<tr>
-		<c:forEach var="qnaImage" items="${qnaImageList}">
-			<c:if test="${qnafileDto.qna_file_no ne 0}">
-				<tr>
-					<td><img src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}" width="200" height="100">
-			</c:if>
-		</c:forEach>
-
-		<c:choose>
-		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-			<div class="naver-viewer"></div>  
-			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
-			</c:if>
-				<div class="naver-viewer"></div> 
-				<input type="hidden" name="faq_content" value="게시글 권한이 없습니다.">  
-		</c:when>
-		<c:otherwise>
-			<div class="naver-viewer"></div>  
-			<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">  
-		</c:otherwise>
-		</c:choose>
-				</td>
+			<tr class="tr1">
+				<td>Subject : 
+				<font color="#1482e0">[${qnaVO.qna_title}]</font>
+				${qnaVO.qna_head}</td>
 			</tr>
 
+		<tr class="tr1">
+			<c:forEach var="qnaImage" items="${qnaImageList}">
+				<c:if test="${qnafileDto.qna_file_no ne 0}">
+					<tr>
+						<td class="td1"><img
+							src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}"
+							width="200" height="100"></td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		
+		<tr class="tr1">
+			<td><c:choose>
+					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
+						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+							<div class="con">
+							<div class="naver-viewer"></div>
+							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
+						</div>
+						</c:if>
+<!-- 						<div class="con"> -->
+<!-- 							<div class="naver-viewer"></div> -->
+<!-- 							<input type="hidden" name="qna_content" value="게시글 권한이 없습니다."> -->
+<!-- 						</div> -->
+					</c:when>
+					<c:otherwise>
+						<div class="con">
+							<div class="naver-viewer"></div>
+							<input type="hidden" name="qna_content" value="게시글 권한이 없습니다.">
+						</div>
+<!-- 						<div class="naver-viewer"></div> -->
+<!-- 						<input type="hidden" name="qna_content" -->
+<%-- 							value="${qnaVO.qna_content}"> --%>
+					</c:otherwise>
+				</c:choose></td>
+		</tr>
+
+<!-- 댓글화면 -->
 
 <c:forEach items="${replyList}" var="reply">
 <c:if test="${reply.content ne null}">
-<tr>
+<tr class="tr1">
 	<td>
 	<div class="grandmother">
 		<table width="100%" class="mother">
@@ -371,15 +407,16 @@
 						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<th class="content" colspan="2" align="left">${reply.content}</th>
 						</c:if>
-						<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
+<!-- 						<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th> -->
 					</c:when>
 				<c:otherwise>
-				<th class="content" colspan="2" align="left">${reply.content}
-				</th>
+<%-- 				<th class="content" colspan="2" align="left">${reply.content}</th>  --%>
+	<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
 				</c:otherwise>
 		</c:choose>
 			</tr>
-			
+		
+		<!-- 댓글 수정 -->	
 			<tr class="reply_edit">
 				<td align="right">
 				<th colspan="2" align="left">
@@ -391,9 +428,7 @@
 					</form>
 				</th>
 
-			<!-- 댓글 수정 -->
-			<c:if
-				test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+			<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
 				<tr>
 					<th colspan="2" align="right">
 						<button class="reply_view_btn">수정</button>
@@ -420,23 +455,35 @@
 			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-			<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
-					<br><br>
-			 <input type="submit" value="등록" class="btn hover3">
+			<div align="left">
+			<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
+			<br>
+				<textarea align="left"  name="content" required placeholder="내용 입력" rows="4" cols="150" ></textarea>
+				 <input type="submit" value="등록" class="btn hover3">
+				<br><br>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 		</form>
 			</c:if>
-				<textarea name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="100" ></textarea>
+<!-- 				<textarea align="left"  name="content" required placeholder="작성 권한이 없습니다." rows="4" cols="150" ></textarea> -->
 				</c:when>
 					<c:otherwise>
-						<form action="replywrite" method="post" class="reply_submit">
-		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-				<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
-					<br><br>
+				<div align="left">
+					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
+				<br>
+				<textarea align="left"  name="content"  readonly placeholder="작성 권한이 없습니다." rows="4" cols="150" ></textarea>
 			 <input type="submit" value="등록" class="btn hover3">
-		</form>
+					<br><br>
+			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
+<!-- 			<form action="replywrite" method="post" class="reply_submit"> -->
+<%-- 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>  --%>
+<!-- 				<div align="left"> -->
+<%-- 					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left"> --%>
+<!-- 				<br> -->
+<!-- 				<textarea name="content" required placeholder="내용 입력" rows="4" cols="150" ></textarea> -->
+<!-- 			 <input type="submit" value="등록" class="btn hover3"> -->
+<!-- 					<br><br> -->
+<%-- 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div> --%>
+<!-- 		</form> -->
 					<br>
 				</c:otherwise>
 		</c:choose>

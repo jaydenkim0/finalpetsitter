@@ -334,7 +334,8 @@ header style -->#masthead:after {
 				<tr>
 					<td class="td1">
 					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
-						width="200" height="100"></td>
+						width="200" height="100">
+						</td>
 				</tr>
 			</c:if>
 		</c:forEach>
@@ -377,6 +378,7 @@ header style -->#masthead:after {
 									<th class="content" colspan="2" align="left">${reply.content}</th>
 								</tr>
 
+				<!-- 댓글 수정 -->
 								<tr class="reply_edit">
 									<td align="right">
 									<th colspan="2" align="left">
@@ -389,9 +391,8 @@ header style -->#masthead:after {
 										</form>
 									</th>
 
-									<!-- 댓글 수정 -->
-									<c:if
-										test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+
+									<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
 										<tr>
 											<th colspan="2" align="right">
 												<button class="reply_view_btn">수정</button>
