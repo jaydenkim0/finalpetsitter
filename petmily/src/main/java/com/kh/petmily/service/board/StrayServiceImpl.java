@@ -83,7 +83,7 @@ public class StrayServiceImpl implements StrayService{
 		}
 		
 		List<StrayFileDto>list = new ArrayList<>();
-		File dir = new File("D:/upload/stray");
+		File dir = new File("D:/upload/kh2c/stray");
 		dir.mkdirs();
 		
 		for(MultipartFile mf : stray_file) {

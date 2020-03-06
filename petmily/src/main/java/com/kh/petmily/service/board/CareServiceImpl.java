@@ -127,7 +127,7 @@ public class CareServiceImpl implements CareService{
 				.uploadname(care_image.getOriginalFilename())
 				.build();
 		
-		File dir = new File("C:/upload/care_image");
+		File dir = new File("D:/upload/kh2c/care_image");
 		
 		File target = new File(dir,careImageDto.getSavename());
 		dir.mkdirs();
