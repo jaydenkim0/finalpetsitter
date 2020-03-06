@@ -3,26 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- jquery js -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-  
- <!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
- <!-- 
-기본 CSS
-:	index css,
-	font css
--->
-    <!-- index css -->
-    <link rel="stylesheet" href="${context}/resources/css/index.css" />
-    <!-- font css -->
-    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
-    
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -49,8 +33,9 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
- 
-  
+
+	
+
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -67,9 +52,6 @@ FOOTER 이용 시 넣어야할 요소
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-	
- 
  
  <script>
        $(function(){
@@ -105,6 +87,15 @@ FOOTER 이용 시 넣어야할 요소
 	margin-left: auto;
 	margin-right: auto;
 }
+.account_table {
+	width: 90%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: transparent;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 
 th {
 	border-bottom: 1px solid #444444;
@@ -195,7 +186,7 @@ select {
 	border-radius: 4px;
 }
 <!-- header style -->
-	#masthead:after {
+#masthead:after {
 	  content: '';
 	  position: absolute;
 	  top: 0;
@@ -210,20 +201,29 @@ select {
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	.section-content::after{
+		content:"";
+		display:block;
+		clear:both;
+	}
+	</style>
 
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
   
 <section class="section-content">
+	<h1 align="center">Check Please !</h1>
+<div style="float: left; width: 20%;">
+ <img src="${context}/resources/img/board.png"  align="right" width="60%" height="20%"> 
+</div>
+<div style="float: left; width: 70%;">
 <form action=account method="post">
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
-	<h1 align="center">견적 내용</h1>
 	
 	<section>
 	<hr>
@@ -238,7 +238,6 @@ select {
 			</c:forEach>
 			<th>예약 시작 시간</th>
 			<th>이용 시간</th>
-			<th>예약 총 금액</th>
 		</tr>
 		<tr>
 			<td><input type="hidden" name="partner_order_id"
@@ -257,8 +256,19 @@ select {
 			<td>${startTime}시</td>
 			<td><input type="hidden" name="quantity" value="${usageTime}"
 				readonly> ${usageTime}시간</td>
-			<td><input type="hidden" name="total_amount" value="${payMent}"
-				readonly> ${payMent}원</td>
+	</tr>
+	</table>
+	
+	<table class="account_table" >
+	<tr>
+	<th>Total</th>
+	</tr>
+	<tr>
+			<td>
+			<h4>
+			<input type="hidden" name="total_amount" value="${payMent}"
+				readonly> ${payMent}원</h4>
+			</td>
 		</tr>
 	</table>
 	<br>
@@ -287,8 +297,10 @@ select {
 </form>
 
 <br>
+</div>
+
 </section>
+
 
       <!-- footer 불러오기 -->
      <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
-
