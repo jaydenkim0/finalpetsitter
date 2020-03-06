@@ -1,6 +1,4 @@
 /* account.css */
-
-
 .page-navigator li {
 	display: inline-block;
 }
@@ -110,4 +108,25 @@ select {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
+}
+input[type="checkbox"] {
+  display:none;
+  vertical-align: middle;
+}
+input[type="checkbox"] + label::before {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid #BDBDBD;
+  background-color: #fff;
+  display: block;
+  content: "";
+  float: left;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+input[type="checkbox"]:checked+label::before {
+  box-shadow: inset 0px 0px 0px 3px #fff;
+  background-color: #BDBDBD;
+  vertical-align: middle;
 }

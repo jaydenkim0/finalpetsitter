@@ -76,6 +76,39 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+th {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+	font-size: 15px;
+	border-color: #BDBDBD;
+}
+.btn {
+	display: white;
+	width: 150px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+.hover1:hover {
+	background-color: #1482e0;
+}
 <!-- header style -->
 #masthead:after {
 	  content: '';
@@ -107,8 +140,7 @@ FOOTER 이용 시 넣어야할 요소
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
   
 <section class="section-content">
-	<h1 align="center">Check Please !</h1>
-<div style="float: left; width: 20%;">
+<div style="float: left; width: 20%; margin-top: 80px">
  <img src="${context}/resources/img/board.png"  align="right" width="60%" height="20%"> 
 </div>
 <div style="float: left; width: 70%;">
@@ -116,6 +148,7 @@ FOOTER 이용 시 넣어야할 요소
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
 	
+	<h1 align="left" style="margin-left:70px;'">Check Please !</h1>
 	<section>
 	<hr>
 	<table class="notice_table" >
@@ -151,32 +184,37 @@ FOOTER 이용 시 넣어야할 요소
 	</table>
 	
 	<table class="account_table" >
-	<tr>
-	<th>Total</th>
-	</tr>
-	<tr>
+		<tr>
 			<td>
-			<h4>
+			<br>
+			<h4 align="center">
 			<input type="hidden" name="total_amount" value="${payMent}"
-				readonly> ${payMent}원</h4>
+				readonly> Total : ${payMent}원</h4>
+				<br>
 			</td>
 		</tr>
 	</table>
 	<br>
-	<div>
+	<div align="center">
+	<h2 style="font-size: 20px;'">About Payment</h2>
 	<div align="center" onclick="pay()" name="account">
-	       	  <input type="checkbox"  id="check1" name="account">&nbsp;체크/신용카드&nbsp;
-	          <input type="checkbox"  id="check1" name="account">&nbsp;핸드폰 결제&nbsp;
-	          <input type="checkbox"  id="check1" name="account">&nbsp;실시간 계좌이체&nbsp;
-	 	      <input type="checkbox"  id="check1" name="account">&nbsp;무통장 입금&nbsp;
-	          <input type="checkbox"  id="check1" name="account">&nbsp;카카오페이
+	       	  <input type="checkbox"  id="credit" name="account">
+	       	  <label for="credit">체크/신용카드&emsp;</label>
+	          <input type="checkbox"  id="phone" name="account">
+	          <label for="phone">핸드폰 결제&emsp;</label>
+	          <input type="checkbox"  id="account" name="account">
+	 	     <label for="account">실시간 계좌이체&emsp;</label>
+	 	      <input type="checkbox"  id="noname" name="account">
+	          <label for="noname">무통장 입금&emsp;</label>
+	          <input type="checkbox"  id="kakao" name="account">
+	      	 <label for="kakao">카카오페이</label>
 	        <br>
 	</div>
 	<hr>
 	<div>
 	<div align="center">
 		<input type="checkbox" id="pay" name="agree">
-		<label name="agree">개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.</label>
+		<label name="agree" for="pay">개인정보 제 3자 제공 동의, 결제 대행 서비스 이용 약관 등 모든 약관에 동의합니다.</label>
 	</div>
 	<hr>
 	<div align="center">
