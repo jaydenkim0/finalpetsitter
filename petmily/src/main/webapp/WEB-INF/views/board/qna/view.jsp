@@ -359,13 +359,11 @@ header style -->#masthead:after {
 		
 		<tr class="tr1">
 			<td><c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<div class="con">
 							<div class="naver-viewer"></div>
 							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
 						</div>
-						</c:if>
 					</c:when>
 					<c:otherwise>
 					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
@@ -377,10 +375,10 @@ header style -->#masthead:after {
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${qnaVO.qna_title ne '신고합니다'}">
-					<div class="con">
-					<div class="naver-viewer"></div>
-					<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
-					</div>
+				<div class="con">
+							<div class="naver-viewer"></div>
+							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
+						</div>
 				</c:if>
 				</td>
 		</tr>
@@ -405,21 +403,19 @@ header style -->#masthead:after {
 			
 			<tr class="reply_view">
 				<c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<th class="content" colspan="2" align="left">${reply.content}</th>
-						</c:if>
 					</c:when>
 				<c:otherwise>
-					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
+				<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
 					<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
 					</c:if>
 				</c:otherwise>
 		</c:choose>
-	<c:if test="${qnaVO.qna_title ne '신고합니다'}">
+		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
 			<th class="content" colspan="2" align="left">${reply.content}</th>
 		</c:if>
-			</tr>
+		</tr>
 		
 		<!-- 댓글 수정 -->	
 			<tr class="reply_edit">
@@ -456,8 +452,7 @@ header style -->#masthead:after {
 <tr>
 <td align="right">
 	<c:choose>
-		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-		<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+		<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 			<div align="left">
@@ -468,11 +463,10 @@ header style -->#masthead:after {
 				<br><br>
 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 		</form>
-		</c:if>
 				</c:when>
+				
 					<c:otherwise>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-					<c:if test="${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
+					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
 				<div align="left">
 					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
 				<br>
@@ -482,8 +476,8 @@ header style -->#masthead:after {
 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 					<br>
 					</c:if>
-					</c:when>
 				</c:otherwise>
+				
 		</c:choose>
 		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
 		<form action="replywrite" method="post" class="reply_submit">
