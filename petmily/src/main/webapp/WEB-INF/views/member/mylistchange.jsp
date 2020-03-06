@@ -85,7 +85,6 @@
 	
 	padding: 10px;
 	text-align: center;
-	
 	width:300px;
 	}
 	input{
@@ -94,9 +93,10 @@
 	
 	}
 	table{
-   padding-top:100px;
+   padding-top:50px;
 	width:410px;
 	border-color : #BDBDBD;
+	
 	}
 	
 	button {
@@ -109,20 +109,21 @@
     font:13px;
    }
   .out{
-   padding-left:140px;
+   padding-left:923px;
    }
+  
 	</style>
 
 	<body>
-		
+		<div class="mychange" align="center">
 			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
-			    <table class="mychange">
+			    <table>
 			    	<c:if test="${member_image_no>0 }">
 			    	<tr>
 			    		<th></th>
 			    		<td>
-			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 150px; height: 150px;" onerror="no_image2()" id="member_image">
+			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="member_image">
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
@@ -175,7 +176,7 @@
 					</tr>
 			    </table>
 			</form>
-			
+			</div>
 
 			<div class="out" >
 			<a href="memberdelete?id=${member.id}"><button>탈퇴</button></a>
