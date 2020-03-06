@@ -65,15 +65,17 @@ FOOTER 이용 시 넣어야할 요소
 	
 	.section-content{
 	padding-top:200px;
+	padding-left:300px;
 	}
+	
 	button{
-  
    width: 100px;
    height: 50px;
    text-align: center;
-   box-shadow: 0;
    cursor: pointer;
    color:#1482e0;
+   font-size:10pt;
+   border-radius:3pt;
    
 	}
 	.button:hover{
@@ -87,12 +89,12 @@ FOOTER 이용 시 넣어야할 요소
 
 	
 </style>
-<head><!-- header 불러오기 -->
+
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-</head>
+
 <section class="section-content">
-<body>
+
 <h3>마이 페이지 </h3>
 <Br>
 <a href="mylist">
@@ -120,11 +122,10 @@ FOOTER 이용 시 넣어야할 요소
 <a href="mystrayboard">
 	<button class="button hover">Save the Pets!</button>
 </a>
-</body>
+
 
 </section>
 <br><br><br>
-<footer>
+
 <br><!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>   
-</footer>
