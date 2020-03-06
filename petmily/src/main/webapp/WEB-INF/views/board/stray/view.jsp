@@ -332,8 +332,8 @@ header style -->#masthead:after {
 		<c:forEach var="strayImage" items="${strayImageList}">
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
-					<td class="td1"><img
-						src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
+					<td class="td1">
+					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
 						width="200" height="100"></td>
 				</tr>
 			</c:if>

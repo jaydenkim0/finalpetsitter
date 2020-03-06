@@ -89,9 +89,10 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
- *{
-            box-sizing: border-box;
-        }
+ * {
+	box-sizing: border-box;
+}
+
 .notice_table {
 	width: 80%;
 	border-top: 1px solid #444444;
@@ -99,10 +100,10 @@ FOOTER 이용 시 넣어야할 요소
 	border-color: #BDBDBD;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top : 50px;
+	margin-top: 50px;
 }
 
-th, td {
+.tr1 {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: left;
@@ -123,12 +124,18 @@ a {
 	margin-right: auto;
 }
 
-/* div { */
-/* 	padding: 30px; */
-/* } */
-
 hr {
 	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
 }
 
 .btn {
@@ -139,7 +146,7 @@ hr {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -152,26 +159,43 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
-<!-- header style -->
-#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+
+textarea {
+	width: 1250px;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.con{
+height: 400px;
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -192,24 +216,27 @@ hr {
 				<td>Name : ${faqVO.member_id}</td>
 			</tr>
 			
-			<tr>
+			<tr class="tr1">
 				<td>Subject : <font color="#1482e0">[${faqVO.faq_title}]</font>
 				${faqVO.faq_head}</td>
 			</tr>
 
+		<tr class="tr1">
 			<c:forEach var="faqImage" items="${faqImageList}">
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
 				<tr>
-					<td>
+					<td class="td1">
 					<img src="${context}/board/faq/view/file_view?faq_file_no=${faqImage.faq_file_no}" width="200" height="100">
 					</td>
 				</tr>
 			</c:if>
 		</c:forEach>
-			<tr>
+			<tr class="tr1">
 				<td>
+				<div class="con">
 					<div class="naver-viewer"></div>  
 					<input type="hidden" name="faq_content" value="${faqVO.faq_content}">  
+				</div>
 				</td>
 			</tr>
 	
