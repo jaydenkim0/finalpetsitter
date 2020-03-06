@@ -124,7 +124,7 @@ public class AdminController {
 				  .addAttribute("payinfomation", payDto)
 		 		  .addAttribute("payinfo", list)		 	
 		 		  .addAttribute("sitter_id", sitter_id);		
-		//예약 정보  단일 조회
+		//예약 정보  단일 조회 (금액정보만 확인하기 위해 가지고 온 구문)
 		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);				
 		//1시간 당 금액 구하기
 		int hourPayment = payService.getHourPayment();		
@@ -146,17 +146,17 @@ public class AdminController {
 			.addAttribute("usageTime", totalTime)
 			.addAttribute("startTime", startTime);
 		// 결제 취소 버튼 유무 확인
-			model.addAttribute("status", adminService.paymentcanclecheck(reservation_no));
-		
+			model.addAttribute("status", adminService.paymentcanclecheck(reservation_no));		
 		return "admin/reservationstatusdetail";		
 	}	
-		
+	// 결제 취소	(예약 디테일 페이지에서 확인)
 	@GetMapping("/revoke")
 	public String revoke(@RequestParam int pay_no,
 									  @RequestParam int reservation_no) throws URISyntaxException {
 		KakaoPayRevokeReturnVO kpayRevokeReturnVO = payService.revoke(pay_no);
 		return "redirect:/admin/reservationstatusdetail?reservation_no="+reservation_no;
 	}
+	
 	/////////////////////////////////////////////////////////////////////
 	
 	// 회원 디테일 페이지 연결
@@ -401,8 +401,7 @@ public class AdminController {
 					adminService.blackMember(id, black_content);			
 					return result ;		
 				}
-				
-				
+								
 				
 	// 블랙리스트 회원 탈퇴(회원탈퇴)
 	// 블랙리스트 + 멤버 테이블에서 완전삭제
@@ -472,9 +471,23 @@ public class AdminController {
 		return "redirect:/admin/list/member";		
 	}
 	
-
-	///////////////////////////////////////////////////////////////
+	// 신고게시판에서 신고하기
+	@GetMapping("declaration")
+	public String declaration(
+			@RequestParam String grade,
+			@RequestParam String id,
+			Model model) {
+		// 신고하려는 내용이
+		if(grade.equals("member")) {// 회원이라면
+			model.addAttribute("id", id);			
+			return "admin/member_blacklist_contetnt";
+		}else {// 펫시터라면
+			model.addAttribute("sitter_id", id);		
+			return "admin/sitter_blacklist_content";		
+		}		
+	}
 	
+	///////////////////////////////////////////////////////////////	
 	
 	// 정산관리 페이지 연결
 	@RequestMapping("/account")
