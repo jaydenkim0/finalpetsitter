@@ -67,9 +67,9 @@ FOOTER 이용 시 넣어야할 요소
 	padding-top:200px;
 	}
 	button{
-   font:13px;
-   width: 120px;
-   height: 40px;
+  
+   width: 100px;
+   height: 50px;
    text-align: center;
    box-shadow: 0;
    cursor: pointer;
