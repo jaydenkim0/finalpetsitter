@@ -90,6 +90,16 @@
 	input{
 	width:180px;
 	height:35px;
+	BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+	
 	
 	}
 	table{
@@ -100,17 +110,23 @@
 	}
 	
 	button {
-	width: 60px;
-	height: 30px;
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
    text-align: center;
-   
+   font-size: 12px;
    cursor: pointer;
-   
-    font:13px;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
    }
   .out{
-   padding-left:923px;
+   padding-left:913px;
    }
+  
   
 	</style>
 
@@ -119,15 +135,15 @@
 			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
 			    <table>
-			    	<c:if test="${member_image_no>0 }">
 			    	<tr>
-			    		<th></th>
-			    		<td>
+			    		<th>Image</th>
+			    	
+			    		<td>	<c:if test="${member_image_no>0 }">
 			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="member_image">
+			    	</c:if>
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
-			    	</c:if>
 			    	<tr>
 			    		<th>Name</th>
 			    		<td>
@@ -172,6 +188,9 @@
 					<tr>
 						<th colspan="2">
 							<button type="submit" >수정</button>
+								<a href="mylist">
+				<button type="button">취소</button>
+			</a>
 						</th>
 					</tr>
 			    </table>
@@ -186,9 +205,7 @@
 			</c:if>
 
 			
-			<a href="mylist">
-				<button type="button">취소</button>
-			</a>
+		
 			</div>
 	</body>
 	

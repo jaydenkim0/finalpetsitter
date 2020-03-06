@@ -9,15 +9,31 @@ function no_image() {
 </script>
 </head>
 <style>
- .chtab{
- width:35%;
- }
+
+ 
+
+	#petchbtn{
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+	
+	}
+	}
 </style>
 <body>
-
+<div class="chtab">
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
-	<table border="1" class="chtab" align="center">
+	<table >
 		<tr>
 			<th>이미지</th>
 			<td>
@@ -33,19 +49,19 @@ function no_image() {
 			</td>
 		</tr>
 		<tr>
-			<th>이름</th>
+			<th>Image</th>
 			<td>
 				<input type="text" name="name" value=${pet.name }>
 			</td>
 		</tr>
 		<tr>
-			<th>나이</th>
+			<th>Age</th>
 			<td>
 				<input type="number" name="age" value=${pet.age }>
 			</td>
 		</tr>
 		<tr>
-			<th>동물 종류</th>
+			<th>Type</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
@@ -59,17 +75,19 @@ function no_image() {
 			</td>
 		</tr>
 		<tr>
-			<th>설명</th>
+			<th>etc</th>
 			<td>
 				<textarea name="ect">${pet.ect }</textarea>
 			</td>
 		</tr>
+		
 		<tr>
+		
 			<th colspan="2">
-				<input type="submit" value="펫정보수정">
+				<input type="submit" value="수정" id="petchbtn">
 			</th>
 		</tr>
 	</table>
 </form>
-
+</div>
 </body>
