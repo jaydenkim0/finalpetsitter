@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- jquery js -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
 
-<!-- 
-HEADER 이용 시 넣어야할 요소 
-:	jquery js,
-	header css, 
-	header script
--->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+ 
+
+	<!-- 
+	HEADER 이용 시 넣어야할 요소 
+	:	jquery js,
+		header css, 
+		header script
+	-->
   <!-- header css -->
   <link rel="stylesheet" href="${context}/resources/css/header.css">
    <!-- header script -->
@@ -32,16 +35,38 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
- 
+ 	
+ 	<script type="text/javascript">
+	/*  관리자 신고 아이디 검사 */
+	$(function(){			
+		$("#id").blur(function(){
+			var user_id = $("#id").val();				
+				$.ajax({
+					url:'${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
+					type:'get',
+					success : function(data){
+						if(data == 0) {
+							$("#id_check").text("존재하지 않는 아이디입니다");
+							$('#id_check').css('color', 'red');
+						}else{
+							$("#id_check").text("신고가능한 아이디입니다");
+							$('#id_check').css('color', 'red');
+							$("#bbb").attr("disabled", false);
+						}
+ 					}
+ 				});   
+			});    
+	  });
+	</script>
 	
-<!-- 
-FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
--->
+	<!-- 
+	FOOTER 이용 시 넣어야할 요소 
+	:	jquery js,
+		footer css, 
+		Required meta tags, 
+		Bootstrap CSS,
+		아이콘을 사용하기 위해 추가로 불러오는 CSS
+	-->
   	<!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
@@ -62,7 +87,7 @@ FOOTER 이용 시 넣어야할 요소
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
     
-<!-- 네이버 에디터 영역 -->
+	<!-- 네이버 에디터 영역 -->
    <script>        
         $(function(){
             var options = {
@@ -85,187 +110,190 @@ FOOTER 이용 시 넣어야할 요소
     </script>
     
 
-<!-- 댓글 작성 영역 -->
-<script>
-	// 댓글 작성
-	$(function() {
-		$(".reply_submit").submit(function(e) {
-			e.preventDefault();
-
-			var url = $(this).attr("action");
-			var method = $(this).attr("method");
-
-			var data = $(this).serialize();
-
-			$.ajax({
-				url : url,
-				type : method,
-				data : data,
-				success : function(resp) {
-				}
-			});
-			window.location.reload();
-		});
-		//댓글 삭제
-		$(".replyDelete_btn").click(
-				function(e) {
-					e.preventDefault();
-
-					var url = $(this).parentsUntil(".mother").find(
-							".replyDelete_submit").attr("action");
-					var method = $(this).parentsUntil("mother").find(
-							".replyDelete_submit").attr("method");
-					var data = $(this).parentsUntil(".mother").find(
-							".replyDelete_submit").serialize();
-
-					$.ajax({
-						url : url,
-						type : method,
-						data : data
-					});
-
-					$(this).parentsUntil(".grandmother").hide();
+	<!-- 댓글 작성 영역 -->
+	<script>
+		// 댓글 작성
+		$(function() {
+			$(".reply_submit").submit(function(e) {
+				e.preventDefault();
+	
+				var url = $(this).attr("action");
+				var method = $(this).attr("method");
+	
+				var data = $(this).serialize();
+	
+				$.ajax({
+					url : url,
+					type : method,
+					data : data,
+					success : function(resp) {
+					}
 				});
-
-		// 댓글 수정
-		$(".reply_edit").hide();
-		$(".reply_edit_btn").hide();
-
-		$(".reply_view_btn").click(function() {
-			$(this).hide();
-			$(this).parentsUntil(".mother").find(".reply_view").hide();
-			$(this).next(".reply_edit_btn").show();
-			$(this).parentsUntil(".mother").find(".reply_edit").show();
-		});
-
-		var textoriginal = $(this).parentsUntil(".mother").find(".content")
-				.val();
-		$(this).parentsUntil(".mother").find("textarea").text(textoriginal);
-
-		$(".reply_edit_btn")
-				.click(
-						function(e) {
-							var text = $(this).parentsUntil(".mother").find(
-									"textarea").val();
-
-							e.preventDefault();
-
-							var url = $(this).parentsUntil(".mother").find(
-									".reply_change_submit").attr("action");
-							var method = $(this).parentsUntil(".mother").find(
-									".reply_change_submit").attr("method");
-							var data = $(this).parentsUntil(".mother").find(
-									".reply_change_submit").serialize();
-							console.log(url, method, data);
-
-							$.ajax({
-								url : url,
-								type : method,
-								data : data
-							});
-
-							$(this).hide();
-							$(this).parentsUntil(".mother").find(".reply_edit")
-									.hide();
-							$(this).parentsUntil(".mother").find(".reply_view")
-									.show();
-							$(this).parentsUntil(".mother").find(
-									".reply_view_btn").show();
-							$(this).parentsUntil(".mother").find(".content")
-									.text('');
-							$(this).parentsUntil(".mother").find(".content")
-									.text(text);
+				window.location.reload();
+			});
+			//댓글 삭제
+			$(".replyDelete_btn").click(
+					function(e) {
+						e.preventDefault();
+	
+						var url = $(this).parentsUntil(".mother").find(
+								".replyDelete_submit").attr("action");
+						var method = $(this).parentsUntil("mother").find(
+								".replyDelete_submit").attr("method");
+						var data = $(this).parentsUntil(".mother").find(
+								".replyDelete_submit").serialize();
+	
+						$.ajax({
+							url : url,
+							type : method,
+							data : data
 						});
-	});
-</script>
+	
+						$(this).parentsUntil(".grandmother").hide();
+					});
+	
+			// 댓글 수정
+			$(".reply_edit").hide();
+			$(".reply_edit_btn").hide();
+	
+			$(".reply_view_btn").click(function() {
+				$(this).hide();
+				$(this).parentsUntil(".mother").find(".reply_view").hide();
+				$(this).next(".reply_edit_btn").show();
+				$(this).parentsUntil(".mother").find(".reply_edit").show();
+			});
+	
+			var textoriginal = $(this).parentsUntil(".mother").find(".content")
+					.val();
+			$(this).parentsUntil(".mother").find("textarea").text(textoriginal);
+	
+			$(".reply_edit_btn")
+					.click(
+							function(e) {
+								var text = $(this).parentsUntil(".mother").find(
+										"textarea").val();
+	
+								e.preventDefault();
+	
+								var url = $(this).parentsUntil(".mother").find(
+										".reply_change_submit").attr("action");
+								var method = $(this).parentsUntil(".mother").find(
+										".reply_change_submit").attr("method");
+								var data = $(this).parentsUntil(".mother").find(
+										".reply_change_submit").serialize();
+								console.log(url, method, data);
+	
+								$.ajax({
+									url : url,
+									type : method,
+									data : data
+								});
+	
+								$(this).hide();
+								$(this).parentsUntil(".mother").find(".reply_edit")
+										.hide();
+								$(this).parentsUntil(".mother").find(".reply_view")
+										.show();
+								$(this).parentsUntil(".mother").find(
+										".reply_view_btn").show();
+								$(this).parentsUntil(".mother").find(".content")
+										.text('');
+								$(this).parentsUntil(".mother").find(".content")
+										.text(text);
+							});
+		});
+	</script>
 
-<style>
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
-}
 
-.th3, .td3 {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
-}
 
-.td2 {
-	text-align: right;
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	border-color: #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* div { */
-/* 	padding: 30px; */
-/* } */
-
-hr {
-	width: 80%;
-}
-
-.btn {
-	display: white;
-	width: 120px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
+	<style>
+	.notice_table {
+		width: 80%;
+		border-top: 1px solid #444444;
+		border-collapse: collapse;
+		border-color: #BDBDBD;
+		margin-left: auto;
+		margin-right: auto;
 	}
 	
-	#masthead.is-active{
-	 background-color: #fff;
+	th, td {
+		border-bottom: 1px solid #444444;
+		padding: 10px;
+		text-align: left;
+		border-color: #BDBDBD;
 	}
 	
-	.section-content{
-	padding-top:150px;
+	.th3, .td3 {
+		border-bottom: 1px solid #444444;
+		padding: 10px;
+		text-align: left;
+		border-color: #BDBDBD;
 	}
-	</style>
+	
+	.td2 {
+		text-align: right;
+		border-bottom: 1px solid #444444;
+		padding: 10px;
+		border-color: #BDBDBD;
+	}
+	
+	a {
+		text-decoration: none;
+		color: black;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	/* div { */
+	/* 	padding: 30px; */
+	/* } */
+	
+	hr {
+		width: 80%;
+	}
+	
+	.btn {
+		display: white;
+		width: 120px;
+		height: 10x;
+		line-height: 20px;
+		border: 1px #3399dd solid;
+		background-color: white;
+		text-align: center;
+		font-size : 12px;
+		cursor: pointer;
+		color: #1482e0;
+		transition: all 0.9s, color 0.3;
+	}
+	
+	.btn:hover {
+		color: white;
+	}
+	
+	.hover3:hover {
+		background-color: #1482e0;
+	}
+	<!-- header style -->
+		#masthead:after {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  width: 100%;
+		  height: 130px;
+		  background-color: #fff;
+		  opacity: 100;
+		  transition: opacity 0.3s ease;
+		}
+		
+		#masthead.is-active{
+		 background-color: #fff;
+		}
+		
+		.section-content{
+		padding-top:150px;
+		}
+		</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -417,19 +445,35 @@ hr {
 
 <tr>
 	<td class="td2">
-
-	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-		<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-		<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
-		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-		<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
-	</c:if>
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+				<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+				<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+				<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
+				<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+				<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
+			</c:if>
 	
-	<a href="${context}/board/qna/list">
-	<button type="button" class="btn hover3">문의게시판 목록</button></a>
-	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
-	<button type="button" class="btn hover3">답글쓰기</button></a>
+			<a href="${context}/board/qna/list">
+			<button type="button" class="btn hover3">문의게시판 목록</button></a>
+			<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+			<button type="button" class="btn hover3">답글쓰기</button></a>
+			
+			<!-- 신고 버튼 -->
+			<c:if test="${sessionScope.grade eq 'admin'}">
+				<br><br>
+				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
+				<form action="${context}/admin/declaration" method="get">
+					<select name="grade" required>
+						<option value="" selected disabled hidden>선택하세요</option>
+						<option value="petsitter"> 펫시터 </option>			
+						<option value="member"> 회원 </option>
+					</select>
+					<input id="id" type="text"  name="id" placeholder="아이디" required> 
+					<input  id="bbb"  type="submit" value="경고 등록" disabled>
+				</form>
+				<div id="id_check"></div>
+			</c:if>
+			
 		</td>
 	</tr>
 </table>
