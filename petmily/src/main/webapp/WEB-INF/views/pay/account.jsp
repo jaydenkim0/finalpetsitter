@@ -5,7 +5,8 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jquery js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/account.css">
 
 <!-- 
 HEADER 이용 시 넣어야할 요소 
@@ -75,116 +76,6 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
-.page-navigator li {
-	display: inline-block;
-}
-
-.notice_table {
-	width: 90%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
-}
-.account_table {
-	width: 90%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: transparent;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-
-th {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-	font-size: 15px;
-	border-color: #BDBDBD;
-}
-td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-	font-size: 12px;
-	border-color: #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-.right_mar {
-	margin-right: 10%;
-}
-
-.page-navigator li {
-	display: inline-block;
-}
-
-.page-navigator li.active>a {
-	color: #1482e0;
-}
-
-.btn {
-	display: white;
-	width: 150px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size: 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-.hover1:hover {
-	background-color: #1482e0;
-}
-.check1{
-	width: 20px;
-	height: 20px;
-	font-size: 15px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
-.pay{
-	width: 15px;
-	height: 15px;
-	font-size: 15px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
-select {
-	width: 80px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
 <!-- header style -->
 #masthead:after {
 	  content: '';
