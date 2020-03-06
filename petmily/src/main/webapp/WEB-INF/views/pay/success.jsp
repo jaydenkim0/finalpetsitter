@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
@@ -81,6 +82,13 @@ FOOTER 이용 시 넣어야할 요소
 	padding-top:150px;
 	}
 </style>
+
+<!-- 메일전송 -->
+    <script>
+       $(document).ready(function() {      
+          $("#gosendemail").submit();
+       });
+   </script> 
 	
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
