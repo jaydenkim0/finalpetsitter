@@ -661,8 +661,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			partner_order_id = #{reservation_no}
 		</select>
 		
-		
-		
+				
 		
 		
 	<!-- 정산관리 -->

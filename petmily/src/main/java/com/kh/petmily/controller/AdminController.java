@@ -66,7 +66,19 @@ public class AdminController {
 	// 메인페이지
 	@GetMapping("/")
 	public String admin(Model model) {	
-		
+		// 총 등록수 (회원 + 펫시터 + 관리자)
+		model.addAttribute("mtotal", adminService.memberTotal())	
+				  .addAttribute("member", adminService.memberTotal() -  
+						  adminService.petsitterTotal() - adminService.admimTotal())		
+				  .addAttribute("ptotal", adminService.petsitterTotal())		
+				  .addAttribute("atotal", adminService.admimTotal())
+				  .addAttribute("mlist", adminService.memberJoinall())
+				  .addAttribute("slist", adminService.petsitterApplyup())
+				  .addAttribute("mlist+slist", adminService.memberJoinall() + 
+						  adminService.petsitterApplyup())
+				  .addAttribute("listBqna", adminService.blackqnacount())
+				  .addAttribute("listBm", adminService.blacklistmembercount())
+				  .addAttribute("listBs", adminService.blacklistpetsittercount());	
 		return "admin/main";		
 	}
 	
@@ -224,15 +236,13 @@ public class AdminController {
 				//skill_name
 				// 펫시터 스킬 등록
 				@GetMapping("/petsitter/option/petSkillNameI")
-				public String petSkillNameI(@RequestParam String skill_name) {
-					System.out.println("skill_name = "+ skill_name);
+				public String petSkillNameI(@RequestParam String skill_name) {				
 					adminService.petSkillNameI(skill_name);
 					return "redirect:/admin/petsitter/option";						
 				}
 				// 펫시터 스킬 삭제
 				@GetMapping("/petsitter/option/petSkillNameD")
-				public String petSkillNameD (@RequestParam int skill_no) {
-					System.out.println("skill_no = "+ skill_no);
+				public String petSkillNameD (@RequestParam int skill_no) {			
 					adminService.petSkillNameD(skill_no);
 					return "redirect:/admin/petsitter/option";		
 				}
@@ -388,8 +398,7 @@ public class AdminController {
 					String email = blackmember.getEmail();
 					String grade = blackmember.getGrade();
 					String result = amailService.blackListAddEmail(id, email, grade, black_content);		
-					adminService.blackMember(id, black_content);
-					System.out.println(blackmember);
+					adminService.blackMember(id, black_content);			
 					return result ;		
 				}
 				
