@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
@@ -600,8 +601,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 
 	@Override
-	public CalculateVO getCalculateAllinfor(int type) {		
-		System.out.println("Dao_tpye = "+type);
+	public CalculateVO getCalculateAllinfor(int type) {
 		return  CalculateVO.builder()
 					.totalPayment(sqlSession.selectOne("admin.getTotalPayment", type))
 					.totalCancelPayment(sqlSession.selectOne("admin.getTotalCancelPayment", type))
@@ -611,6 +611,32 @@ public class AdminDaoImpl implements AdminDao {
 					.totalPaymentCount(sqlSession.selectOne("admin.getTotalPaymentCount", type))
 					.totalPaymentCancelCount(sqlSession.selectOne("admin.getTotalPaymentCancelCount", type))
 					.build();			
+	}
+
+	// 정산 페이징 리스트
+	@Override
+	public List<AccountDto> getAccountList(int start, int end, String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		param.put("start", start);
+		param.put("end", end);		
+		return sqlSession.selectList("admin.getAccountList", param);
+	}
+
+	// 정산 페이징 카운트
+	@Override
+	public int countAricleAccount(String searchOption, String keyword) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchOption", searchOption);
+		param.put("keyword", keyword);
+		return sqlSession.selectOne("admin.countAricleAccount", param);
+	}
+	
+	// account 테이블 정산 계산 후 인서트
+	@Override
+	public void setaccountPetsitter(AccountDto accountDto) {	
+		sqlSession.insert("admin.setaccountPetsitter", accountDto);
 	}
 
 

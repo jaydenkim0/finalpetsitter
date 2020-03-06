@@ -38,7 +38,7 @@ public class FaqFileDaoImpl implements FaqFileDao{
 	//게시글 이미지 실제로 가져오기(사진정보 한장씩)
 	@Override
 	public byte[] physicalFaqImage(String savename) throws IOException {
-		File file = new File("D:/upload/faq",savename);
+		File file = new File("D:/upload/kh2c/faq",savename);
 		byte[]data = FileUtils.readFileToByteArray(file);
 		return data;
 	}

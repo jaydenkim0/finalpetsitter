@@ -35,7 +35,7 @@ public class AccountVO {
 	private int quantity; // 수량, 돌봄서비스는 수령이 없기때문에 기본값 1적용
 	private int total_amount; // 상품 가격
 	private int tax_free_amount;
-	private String pay_joindate; // 준비, 완료, 취소 시간
+	private String pay_joindate; // 준비, 완료, 취소 시간	
 	private String kakaopaystatus; // 준비', '완료', '취소' 만 입력가능
 	private String aid; // 결제 이후에 발급되는 정보
 	

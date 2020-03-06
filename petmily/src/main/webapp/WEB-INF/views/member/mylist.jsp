@@ -37,7 +37,6 @@ function no_image2(){
 	width:400px;
 	text-align:left;
 	color:gray;
-	font-size:12pt;
 	font-weight:bold;
 	}
 
@@ -73,70 +72,71 @@ padding-top:3%;
  font-size:15pt;
 }
 .tab1{
-height:150px;
+height:70px;
+font-size:9pt;
 
 }
 .tab2{
    padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:580px;
-   height:150px;
+   bottom:515px;
+   height:200px;
 }
 .tab3{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:550px;
+   bottom:485px;
    height:170px;
 }
 .tab4{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:600px;
+   bottom:535px;
    height:150px;
 }
 .hr1{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:580px;
+   bottom:515px;
    }
 .hr2{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:570px;
+   bottom:505px;
 }
 .img2{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:560px;
+   bottom:495px;
 }
 a{
 
    position: relative;
    left: 550px;
-   bottom:780px;
+   bottom:715px;
 }
 #add_btn{
 position: relative;
    left: 1400px;
-   bottom:965px;
+   bottom:900px;
 }
 h2{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:800px;
+   bottom:780px;
 }
 h1{
 padding-left:20%;
    position: relative;
    left: 100px;
-   bottom:550px;
+   bottom:485px;
 }
 select{
 	width:100px;
@@ -174,14 +174,7 @@ select{
 <%-- 		<td>${mylist.name }</td> --%>
 <!-- 	</tr> -->
 <table class="tab1">
-	<tr>
-		<th>Pets :</th>
-		<td>${mylistpet.size() }마리</td>
-	</tr>
-	<tr>
-		<th>Point :</th>
-		<td>${mylist.point}점</td>
-	</tr>
+	
 	<tr>
 		<th>JoinDate :</th>		
 		<td>${mylist.total_joindateWithFormat }</td>
@@ -209,10 +202,18 @@ select{
 		<th>Email :</th>
 		<td>${mylist.email }</td>
 		</tr>
+		<tr>
+		<th>Pets :</th>
+		<td>${mylistpet.size() }마리</td>
+	</tr>
+	<tr>
+		<th>Point :</th>
+		<td>${mylist.point}점</td>
+	</tr>
 </table>
 
 <h2>About</h2>
-<h1>Pets</h1>
+<h1>Pet</h1>
 
 <hr width="700px" align="center" color="#1482e0" class="hr2">
 <div align="left">
@@ -265,7 +266,7 @@ select{
 	<input type="hidden" name="member_id" value="${mylist.id }">
 	<table class="tab4">
 		<tr>
-			<th width="50%">Picture :</th>
+			<th width="50%">Image :</th>
 			<td width="50%">
 			   
 				<input type="file" name="pet_image" multiple accept="image/*" >

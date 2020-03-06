@@ -8,21 +8,25 @@ function no_image() {
  }
 </script>
 </head>
-
+<style>
+ .chtab{
+ width:35%;
+ }
+</style>
 <body>
 
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
-	<table border="1" width="100%">
+	<table border="1" class="chtab" align="center">
 		<tr>
 			<th>이미지</th>
 			<td>
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-					<img src="/petmily/resources/img/기본프로필.jpeg">
+					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100px; height: 100px;">
 				</c:when>
 				<c:otherwise>	
-					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 25%; height: auto;" onerror="no_image()" id="pet_image">
+					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100px; height: 100px;" onerror="no_image()" id="pet_image">
 				</c:otherwise>
 			</c:choose>
 				<input type="file" name="pet_image" accept="image/*">
@@ -41,7 +45,7 @@ function no_image() {
 			</td>
 		</tr>
 		<tr>
-			<th>동물종</th>
+			<th>동물 종류</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
