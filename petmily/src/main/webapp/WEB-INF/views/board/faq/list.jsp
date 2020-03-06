@@ -34,27 +34,8 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
-    <!-- header style -->
-    <style>
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
+
 	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
 
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
@@ -76,15 +57,7 @@ FOOTER 이용 시 넣어야할 요소
 	
 		   
 <c:set var="admin" value="${grade eq 'admin'}"></c:set>
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${sessionScope.id eq null }"> --%>
-<%-- 		<a href="${context}/member/login">로그인</a> --%>
-<%-- 	</c:when> --%>
-<%-- 	<c:otherwise> --%>
-<%-- 	${sessionScope.id}님이 로그인 중입니다. --%>
-<%-- 	<a href="${context}/member/logout">로그아웃</a> --%>
-<%-- 	</c:otherwise> --%>
-<%-- </c:choose> --%>
+
 <script>
 	$(document).ready(function() {
 		$("#btnWrite").click(function() {
@@ -97,6 +70,9 @@ FOOTER 이용 시 넣어야할 요소
 	}
 </script>
 <style>
+ *{
+            box-sizing: border-box;
+        }
 
 .page-navigator li {
 	display: inline-block;
@@ -178,7 +154,7 @@ select {
 	}
 	
  <!-- header style -->
-	#masthead:after {
+#masthead:after {
 	  content: '';
 	  position: absolute;
 	  top: 0;
@@ -193,10 +169,10 @@ select {
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	</style>
 
 		<!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -204,8 +180,8 @@ select {
 
 
 <section class="section-content">
-<div align="center">
-<h1>공지사항 게시판</h1>
+<div align="center" >
+<h1>공지사항</h1>
 
 <section>
 	<table class="notice_table" >

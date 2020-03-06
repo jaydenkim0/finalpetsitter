@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
 <!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -38,7 +33,7 @@ HEADER 이용 시 넣어야할 요소
       });
     </script>
  
-  
+	
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -139,10 +134,10 @@ select {
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	</style>
 
 
 <!-- 네이버 에디터 설정 -->
@@ -179,16 +174,6 @@ select {
             editor.setValue(text);//값 설정
         });
     </script>
-
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${sessionScope.id eq null }"> --%>
-<%-- 		<a href="${context}/member/login">로그인</a> --%>
-<%-- 	</c:when> --%>
-<%-- 	<c:otherwise> --%>
-<%-- 	${sessionScope.id}님이 로그인 중입니다. --%>
-<%-- 	<a href="${context}/member/logout">로그아웃</a> --%>
-<%-- 	</c:otherwise> --%>
-<%-- </c:choose> --%>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
