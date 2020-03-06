@@ -288,7 +288,7 @@ $(function(){
 				    <div class="skill">
 			            <label id="large-text">돌봄 시 이용할 스킬</label><br>
 			            <hr>
-				        <input type="checkbox" id="sick" value="5" name="payinfo_no" data-skills="투약">
+<!-- 				        <input type="checkbox" id="sick" value="5" name="payinfo_no" data-skills="투약">
 				        <label for="sick">투약</label>
 				        
 				        <input type="checkbox" id="old" value="6" name="payinfo_no" data-skills="노령견테어">
@@ -298,8 +298,11 @@ $(function(){
 				        <label for="kitten" >키튼케어</label>
 				        
 				        <input type="checkbox" id="walking"  value="4" name="payinfo_no" data-skills="도그워킹">
-				        <label for="walking" >도그워킹</label>
-				        
+				        <label for="walking" >도그워킹</label> -->
+			            <c:forEach var="skillnames" items="${skillname}">
+				            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+				            <label for="${skillnames.skill_name}">${skillnames.skill_name}</label>
+			            </c:forEach>   	 				        
 				        <div id="skills_text"></div>
 			        </div>
 			        
@@ -308,7 +311,7 @@ $(function(){
 				    <div class="type">
 			            <label id="large-text">돌봄 반려동물 종류</label><br>
 			            <hr>
-				        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
+<!-- 				        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
 				        <label for="dog">강아지</label>
 				        
 				        <input type="checkbox" id="cat" value="2" name="care_name" data-animal="고양이">
@@ -324,7 +327,11 @@ $(function(){
 				        <label for="hamster">햄스터</label>
 				        
 				        <input type="checkbox" id="reptiles" value="6" name="care_name" data-animal="파충류">
-				        <label for="reptiles">파충류</label>        
+				        <label for="reptiles">파충류</label>       -->
+				      <c:forEach var="carepettypes" items="${carepettype}">
+		             	  <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+		           	      <label for="${carepettypes.care_type}">${carepettypes.care_type}</label>
+	          		  </c:forEach>      
 				        
 				        <div id="care_pet_type_text"></div>
 				    </div><br>

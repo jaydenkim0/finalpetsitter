@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  
@@ -81,27 +82,34 @@ FOOTER 이용 시 넣어야할 요소
 	padding-top:150px;
 	}
 </style>
+
+<!-- 메일전송 -->
+    <script>
+       $(document).ready(function() {      
+          $("#gosendemail").submit();
+       });
+   </script> 
 	
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
   <section class="section-content">
-	<div align="center">
-	<h2>결제 완료 !</h2>
-	<a href="${context}/member/myreservation">
-	<button type="button">내 예약 목록</button></a>
-	</div>
-	
-	<form id="gosendemail" action="${pageContext.request.contextPath}/pay/paysuccessSendEmail" method="post">
-		<input type="hidden" name="id" value="${id}">
-		<input type="hidden" name="email" value="${email}">
-		<input type="hidden" name="total_amount" value="${total_amount}">
-		<input type="hidden" name="sitter_id" value="${sitter_id}">
-		<input type="hidden" name="sitter_email" value="${sitter_email}">
-		<input type="hidden" name="reservation_no" value="${reservation_no}">
-	</form>
-</section>
-<br>
+		<div align="center">
+		<h2>결제 완료 !</h2>
+		<a href="${context}/member/myreservation">
+		<button type="button">내 예약 목록</button></a>
+		</div>
+		
+		<form id="gosendemail" action="${pageContext.request.contextPath}/pay/paysuccessSendEmail" method="post">
+			<input type="hidden" name="id" value="${id}">
+			<input type="hidden" name="email" value="${email}">
+			<input type="hidden" name="total_amount" value="${total_amount}">
+			<input type="hidden" name="sitter_id" value="${sitter_id}">
+			<input type="hidden" name="sitter_email" value="${sitter_email}">
+			<input type="hidden" name="reservation_no" value="${reservation_no}">
+		</form>
+	</section>
+	<br>
       <!-- footer 불러오기 -->
      <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
  

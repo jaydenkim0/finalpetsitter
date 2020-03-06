@@ -40,14 +40,33 @@
 			});
    	 </script>
 	
-	<h3>회원 경고 사유 작성</h3>
+		 <style>
+		 button{
+		 	background: #146fbd;
+		    padding: 7px 14px;
+		    color: #fff;
+		    border: 0;
+		    font-weight: bold;
+		    border-radius:3px;
+		 }
+		 button:hover{
+		 	background: #10538c;
+		 }
+		 h4{
+		 	padding:20px;
+		 }	 
+		 </style> 		 
 	
-	<br>	
+	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
 	<br>		
 	
+	<h4>회원 경고 사유를 작성해주세요</h4>
+
+	<h4> 신고하실 회원의 아이디는 ${id} 입니다 </h4>
+	
 	<form class="petnegative" action="member_blackListpage" method="post">				
 		<input type="hidden" name="id" value="${id}">
-		<textarea cols="100" rows="50" name="black_content"></textarea>
-		<input type="submit" value="등록하기" id="nega-btn">
+		<textarea cols="150" rows="20" name="black_content"></textarea>
+		<button style="display: block;"> 등록하기 </button>
 	</form>
