@@ -200,7 +200,7 @@ public class MemberServiceImpl implements MemberService {
 				.uploadname(member_image.getOriginalFilename())
 				.build();
 		
-		File dir = new File("C:/upload/member_image");
+		File dir = new File("D:/upload/kh2c/member_image");
 		
 		File target = new File(dir,memberImageDto.getSavename());
 		dir.mkdirs();
@@ -222,7 +222,7 @@ public class MemberServiceImpl implements MemberService {
 				.uploadname(member_image.getOriginalFilename())
 				.build();
 		
-		File dir = new File("C:/upload/member_image");
+		File dir = new File("D:/upload/kh2c/member_image");
 		
 		File target = new File(dir,memberImage.getSavename());
 		dir.mkdirs();
@@ -244,7 +244,7 @@ public class MemberServiceImpl implements MemberService {
 				.uploadname(pet_image.getOriginalFilename())
 				.build();
 		
-		File dir = new File("C:/upload/pet_image");
+		File dir = new File("D:/upload/kh2c/pet_image");
 		
 		File target = new File(dir,petImage.getSavename());
 		dir.mkdirs();
@@ -270,7 +270,7 @@ public class MemberServiceImpl implements MemberService {
 				.uploadname(pet_image.getOriginalFilename())
 				.build();
 		
-		File dir = new File("D:\\upload\\kh2c/pet_image");
+		File dir = new File("D:/upload/kh2c/pet_image");
 		
 		File target = new File(dir,petImageDto.getSavename());
 		dir.mkdirs();

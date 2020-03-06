@@ -34,7 +34,7 @@ public class StrayFileDaoImpl implements StrayFileDao {
 
 	@Override
 	public byte[] physicalStrayImage(String savename) throws IOException {
-		File file = new File("D:/upload/stray",savename);
+		File file = new File("D:/upload/kh2c/stray",savename);
 		byte[]data = FileUtils.readFileToByteArray(file);
 		return data;
 	}

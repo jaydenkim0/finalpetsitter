@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
@@ -40,6 +41,7 @@ import com.kh.petmily.service.petsitter.PetsitterService;
 import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
+import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
 import com.kh.petmily.vo.petsitter.ReservationAllVO;
@@ -64,7 +66,19 @@ public class AdminController {
 	// 메인페이지
 	@GetMapping("/")
 	public String admin(Model model) {	
-		
+		// 총 등록수 (회원 + 펫시터 + 관리자)
+		model.addAttribute("mtotal", adminService.memberTotal())	
+				  .addAttribute("member", adminService.memberTotal() -  
+						  adminService.petsitterTotal() - adminService.admimTotal())		
+				  .addAttribute("ptotal", adminService.petsitterTotal())		
+				  .addAttribute("atotal", adminService.admimTotal())
+				  .addAttribute("mlist", adminService.memberJoinall())
+				  .addAttribute("slist", adminService.petsitterApplyup())
+				  .addAttribute("mlist+slist", adminService.memberJoinall() + 
+						  adminService.petsitterApplyup())
+				  .addAttribute("listBqna", adminService.blackqnacount())
+				  .addAttribute("listBm", adminService.blacklistmembercount())
+				  .addAttribute("listBs", adminService.blacklistpetsittercount());	
 		return "admin/main";		
 	}
 	
@@ -222,15 +236,13 @@ public class AdminController {
 				//skill_name
 				// 펫시터 스킬 등록
 				@GetMapping("/petsitter/option/petSkillNameI")
-				public String petSkillNameI(@RequestParam String skill_name) {
-					System.out.println("skill_name = "+ skill_name);
+				public String petSkillNameI(@RequestParam String skill_name) {				
 					adminService.petSkillNameI(skill_name);
 					return "redirect:/admin/petsitter/option";						
 				}
 				// 펫시터 스킬 삭제
 				@GetMapping("/petsitter/option/petSkillNameD")
-				public String petSkillNameD (@RequestParam int skill_no) {
-					System.out.println("skill_no = "+ skill_no);
+				public String petSkillNameD (@RequestParam int skill_no) {			
 					adminService.petSkillNameD(skill_no);
 					return "redirect:/admin/petsitter/option";		
 				}
@@ -386,8 +398,7 @@ public class AdminController {
 					String email = blackmember.getEmail();
 					String grade = blackmember.getGrade();
 					String result = amailService.blackListAddEmail(id, email, grade, black_content);		
-					adminService.blackMember(id, black_content);
-					System.out.println(blackmember);
+					adminService.blackMember(id, black_content);			
 					return result ;		
 				}
 				
@@ -469,7 +480,11 @@ public class AdminController {
 	@RequestMapping("/account")
 	public String account(Model model,
 			@RequestParam(defaultValue = "1") int type,
-			@RequestParam(defaultValue = "오늘") String SearchType) {
+			@RequestParam(defaultValue = "오늘") String SearchType,
+			@RequestParam(defaultValue = "account_sitter_id") String searchOption,
+			@RequestParam(defaultValue = "") String keyword,
+			@RequestParam(defaultValue = "1") int curPage
+			) {
 		// 0. 전체 날자기준으로 통합
 		// 1. 토탈 결제금액 (sum)
 		// 2. 토탈 취소금액 (sum)
@@ -478,10 +493,21 @@ public class AdminController {
 		// 5. 견적 대기 수 : (count)
 		// 6. 결제 완료 수 : (count)
 		// 7. 결제 취소 수 : (count)		
-		System.out.println("tpye = "+type);
 		model.addAttribute("totalInfo", (CalculateVO) adminService.getCalculateAllinfor(type))
-				  .addAttribute("SearchType", SearchType);	
-		
+				  .addAttribute("SearchType", SearchType);			
+		// 정산리스트 불러오기
+			// 레코드의 갯수 계산
+			int count = adminService.countAricleAccount(searchOption, keyword);		
+			// 페이지 나누기 관련 처리
+			NaviVO navi = new NaviVO(count, curPage);	
+			int start = navi.getPageBegin();
+			int end = navi.getPageEnd();		
+			// 리스트 불러오기
+			model.addAttribute("list", (List<AccountDto>) adminService.getAccountList(start, end, searchOption, keyword))
+					  .addAttribute("count", count)
+					  .addAttribute("searchOption", searchOption)
+					  .addAttribute("keyword", keyword)
+					  .addAttribute("navi", navi);		
 		return "admin/account";		
 	}
 

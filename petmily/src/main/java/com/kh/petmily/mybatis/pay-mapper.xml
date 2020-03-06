@@ -63,48 +63,69 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		결제 성공시 추가할 데이터 구문
 	-->
 	<insert id="success" parameterType="payDto">
-		insert into pay(
-			pay_no, tid, cid, process_time, partner_order_id,
-			partner_user_id, item_name, quantity, total_amount,
-			status, aid
-		) 
-		values(
-			pay_no_seq.nextval,
-			#{tid},
-			#{cid},
-			to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'),
-			#{partner_order_id},
-			#{partner_user_id},
-			#{item_name},
-			#{quantity},
-			#{total_amount},
-			'완료',
-			#{aid}
-		)
+
+		merge into pay using dual on (partner_order_id = #{partner_order_id})
+		
+		when matched then
+			
+			update set 
+			process_time = to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS')
+			where partner_order_id = #{partner_order_id}
+			
+		when not matched then
+		
+			insert ( 
+	 			pay_no, tid, cid, process_time, partner_order_id, 
+	 			partner_user_id, item_name, quantity, total_amount, 
+	 			status, aid 
+	 		)  
+	 		values( 
+	 			pay_no_seq.nextval, 
+	 			#{tid}, 
+				#{cid}, 
+				to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'), 
+				#{partner_order_id}, 
+				#{partner_user_id}, 
+	 			#{item_name}, 
+				#{quantity}, 
+			#{total_amount}, 
+				'완료' ,
+				#{aid}
+			)	
 	</insert>
 	
 	<!-- 
 		결제 취소시 추가할 데이터 구문
 	-->
 	<insert id="revoke" parameterType="payDto">
-		insert into pay(
-			pay_no, tid, cid, process_time, partner_order_id,
-			partner_user_id, item_name, quantity, total_amount,
-			status, aid
-		) 
-		values(
-			pay_no_seq.nextval,
-			#{tid},
-			#{cid},
-			to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'),
-			#{partner_order_id},
-			#{partner_user_id},
-			#{item_name},
-			#{quantity},
-			#{total_amount},
-			'취소',
-			#{aid}
-		)
+		merge into pay using dual on (partner_order_id = #{partner_order_id})
+		
+		when matched then
+			
+			update set 
+			process_time = to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS')
+			where partner_order_id = #{partner_order_id}
+			
+		when not matched then
+		
+			insert ( 
+	 			pay_no, tid, cid, process_time, partner_order_id, 
+	 			partner_user_id, item_name, quantity, total_amount, 
+	 			status, aid 
+	 		)  
+	 		values( 
+	 			pay_no_seq.nextval, 
+	 			#{tid}, 
+				#{cid}, 
+				to_date(#{process_time}, 'YYYY-MM-DD"T"HH24:MI:SS'), 
+				#{partner_order_id}, 
+				#{partner_user_id}, 
+	 			#{item_name}, 
+				#{quantity}, 
+			#{total_amount}, 
+				'취소' ,
+				#{aid}
+			)	
 	</insert>
 	 
 	<select id="list" resultType="payDto">
