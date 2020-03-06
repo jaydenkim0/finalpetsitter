@@ -33,7 +33,7 @@ public class QnaFileDaoImpl implements QnaFileDao{
 	//게시글 이미지 실제로 가져오기(사진정보 한장씩)
 	@Override
 	public byte[] physicalQnaImage(String savename) throws IOException{
-		File file = new File("D:/upload/qna",savename);
+		File file = new File("D:/upload/kh2cqna",savename);
 		byte[]data = FileUtils.readFileToByteArray(file);
 		return data;
 	}

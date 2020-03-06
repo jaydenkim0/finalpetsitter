@@ -91,7 +91,7 @@ public class FaqServiceImpl implements FaqService {
 		}
 		
 		List<FaqFileDto>list = new ArrayList<>();
-		File dir = new File("D:/upload/faq");
+		File dir = new File("D:/upload/kh2c/faq");
 		dir.mkdirs();
 		
 		for(MultipartFile mf : faq_file) {

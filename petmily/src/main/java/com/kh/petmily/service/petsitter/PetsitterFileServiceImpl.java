@@ -48,7 +48,7 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 		
 
 		//폴더 생성
-		File dir = new File("D:/upload/license");
+		File dir = new File("D:/upload/kh2c/license");
 		
 		//파일명 -> 시퀀스로 변경할 것!!
 		File target = new File(dir,licenseFileDto.getSavename());
@@ -76,7 +76,7 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 				.build();
 
 		//폴더 생성
-		File dir = new File("D:/upload/idCard");
+		File dir = new File("D:/upload/kh2c/idCard");
 		
 				//파일명 -> 시퀀스로 변경할 것!!
 		File target = new File(dir,idCardFileDto.getSavename());
@@ -96,7 +96,7 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 		List<InfoImageDto> list =new ArrayList<>();
 		
 		//폴더 생성
-		File dir = new File("D:/upload/info");
+		File dir = new File("D:/upload/kh2c/info");
 		dir.mkdirs();//디렉터리 생성
 		
 		for(MultipartFile mf : info_image) {			
@@ -138,7 +138,7 @@ public class PetsitterFileServiceImpl implements PetsitterFileService{
 		
 
 		//폴더 생성
-		File dir = new File("D:/upload/bank");
+		File dir = new File("D:/upload/kh2c/bank");
 		
 		//파일명 -> 시퀀스로 변경할 것!!
 		File target = new File(dir,bankImageDto.getSavename());
