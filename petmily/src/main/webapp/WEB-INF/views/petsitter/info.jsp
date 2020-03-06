@@ -37,89 +37,162 @@
     </script>
 <!-- 네이버 에디터 영역 종료 -->
 
-<h1>펫시터 정보 페이지</h1>
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
 
-<h3>소개이미지</h3>
-	<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
-		 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
-	</c:forEach>
-
-<c:forEach var="petsitterGetList" items="${petsitterList}">
-	<!-- 펫시터 정보 -->
-	<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}"><br>
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+    <!-- header style -->
+    <style>
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
 	
-		<!-- 펫시터 번호 변수 등록 -->
-		<c:set var="pet_sitter_no" value="${petsitter.pet_sitter_no}"></c:set>
-		<!-- 펫시터 상태 변수 등록 -->
-		<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>		
-			<span>펫시터 번호 : ${petsitter.pet_sitter_no}</span><br>
-			<span>아이디 : ${petsitter.sitter_id}</span><br>
-			<span>닉네임 : ${petsitter.nick}</span><br>
-			<span>이름 : ${petsitter.name}</span><br>	
-			<span>이메일 : ${petsitter.email}</span><br>	
-			<span>핸드폰 : ${petsitter.phone}</span><br>	
-			<span>주소 : ${petsitter.total_addr}</span><br>	
-			<span>포인트 : ${petsitter.point}</span><br>	
-			<span>반려동물 여부 : ${petsitter.pets}</span><br>	
-			<span>가입일 : ${petsitter.petsitterdateWithFormat}</span><br>
-			<div class="naver-viewer"></div> 
-			<input type="hidden" value="${petsitter.info}"><br>
-			<span>반려동물 경험 여부 : ${petsitter.sitter_pets}</span><br>
-			<span>상태 : ${petsitter.sitter_status}</span><br>
-			<span>매칭 종류 : ${petsitter.sitter_matching_type}</span><br>
-			<span>은행 및 계좌 : ${petsitter.total_account}</span><br><br>
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:150px;
+	}
+	</style>
+	
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+<!-- header 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+	
+<section class="section-content">
+	<h1>펫시터 정보 페이지</h1>
+	
+	<h3>소개이미지</h3>
+		<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
+			 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
+		</c:forEach>
+	
+	<c:forEach var="petsitterGetList" items="${petsitterList}">
+		<!-- 펫시터 정보 -->
+		<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}"><br>
+		
+			<!-- 펫시터 번호 변수 등록 -->
+			<c:set var="pet_sitter_no" value="${petsitter.pet_sitter_no}"></c:set>
+			<!-- 펫시터 상태 변수 등록 -->
+			<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>		
+				<span>펫시터 번호 : ${petsitter.pet_sitter_no}</span><br>
+				<span>아이디 : ${petsitter.sitter_id}</span><br>
+				<span>닉네임 : ${petsitter.nick}</span><br>
+				<span>이름 : ${petsitter.name}</span><br>	
+				<span>이메일 : ${petsitter.email}</span><br>	
+				<span>핸드폰 : ${petsitter.phone}</span><br>	
+				<span>주소 : ${petsitter.total_addr}</span><br>	
+				<span>포인트 : ${petsitter.point}</span><br>	
+				<span>반려동물 여부 : ${petsitter.pets}</span><br>	
+				<span>가입일 : ${petsitter.petsitterdateWithFormat}</span><br>
+				<div class="naver-viewer"></div> 
+				<input type="hidden" value="${petsitter.info}"><br>
+				<span>반려동물 경험 여부 : ${petsitter.sitter_pets}</span><br>
+				<span>상태 : ${petsitter.sitter_status}</span><br>
+				<span>매칭 종류 : ${petsitter.sitter_matching_type}</span><br>
+				<span>은행 및 계좌 : ${petsitter.total_account}</span><br><br>
+		</c:forEach>
+		
+		<!-- 펫시터 반려동물 정보 -->
+		<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
+			<c:if test="${petsitterPets.pets eq '예'}">
+			<c:if test="${petsitterPets.pet_no > 0}">
+			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image"><br>
+			</c:if>
+				<span>반려동물 이름 : ${petsitterPets.pet_name}</span><br>
+				<span>반려동물 나이 : ${petsitterPets.pet_age}</span><br>
+				<span>반려동물 종류 : ${petsitterPets.pet_type}</span><br>
+				<span>반려동물 기타 : ${petsitterPets.pet_ect}</span><br>
+			</c:if>
+		</c:forEach>
+		
+		<!-- 펫시터 능력 정보 -->
+		<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
+			<span>보유 스킬 : ${skillName.skill_name}</span><br>
+		</c:forEach>
+		<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
+			<span>돌봄 환경 : ${careConditionName.care_condition_name}</span><br>
+		</c:forEach>
+		<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
+			<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span><br>
+		</c:forEach>
+		<c:forEach var="location" items="${petsitterGetList.locationDto}">
+			<span>${location.city} ${location.area}</span><br><br>
+		</c:forEach>
 	</c:forEach>
 	
-	<!-- 펫시터 반려동물 정보 -->
-	<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
-		<c:if test="${petsitterPets.pets eq '예'}">
-		<c:if test="${petsitterPets.pet_no > 0}">
-		<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image"><br>
-		</c:if>
-			<span>반려동물 이름 : ${petsitterPets.pet_name}</span><br>
-			<span>반려동물 나이 : ${petsitterPets.pet_age}</span><br>
-			<span>반려동물 종류 : ${petsitterPets.pet_type}</span><br>
-			<span>반려동물 기타 : ${petsitterPets.pet_ect}</span><br>
-		</c:if>
-	</c:forEach>
 	
-	<!-- 펫시터 능력 정보 -->
-	<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
-		<span>보유 스킬 : ${skillName.skill_name}</span><br>
-	</c:forEach>
-	<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
-		<span>돌봄 환경 : ${careConditionName.care_condition_name}</span><br>
-	</c:forEach>
-	<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
-		<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span><br>
-	</c:forEach>
-	<c:forEach var="location" items="${petsitterGetList.locationDto}">
-		<span>${location.city} ${location.area}</span><br><br>
-	</c:forEach>
-</c:forEach>
+	<form action="info" method="post">
+	<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}"> 
+	<!-- 펫시터 상태 변경 (휴면 -> 정상 / 정상 -> 휴면) -->
+		<c:choose >
+			<c:when test="${black_petsitter_count > 0}">
+						<h4 style="color: red;">펫시터 경고를 받아 휴면 상태 조정이 불가합니다</h4>
+						<h4 style="color: red;">자세한 내용은 문의 게시판 및 상담센터로 연락 부탁드립니다</h4>
+			</c:when>
+			<c:otherwise>
+						<c:choose>	
+						<c:when test="${sitter_status eq '휴면'}">
+						<button name="sitter_status" value="정상">휴면 해제</button>
+						</c:when>
+						
+						<c:otherwise>
+						<button name="sitter_status" value="휴면">휴면 신청</button>
+						</c:otherwise>
+					</c:choose>
+			</c:otherwise>
+		</c:choose>	
+	</form>
+	
+	<a href="update?pet_sitter_no=${pet_sitter_no}"><button id="updateInfo_btn">정보 수정</button></a>
+</section>
 
-
-<form action="info" method="post">
-<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}"> 
-<!-- 펫시터 상태 변경 (휴면 -> 정상 / 정상 -> 휴면) -->
-	<c:choose >
-		<c:when test="${black_petsitter_count > 0}">
-					<h4 style="color: red;">펫시터 경고를 받아 휴면 상태 조정이 불가합니다</h4>
-					<h4 style="color: red;">자세한 내용은 문의 게시판 및 상담센터로 연락 부탁드립니다</h4>
-		</c:when>
-		<c:otherwise>
-					<c:choose>	
-					<c:when test="${sitter_status eq '휴면'}">
-					<button name="sitter_status" value="정상">휴면 해제</button>
-					</c:when>
-					
-					<c:otherwise>
-					<button name="sitter_status" value="휴면">휴면 신청</button>
-					</c:otherwise>
-				</c:choose>
-		</c:otherwise>
-	</c:choose>	
-</form>
-
-<a href="update?pet_sitter_no=${pet_sitter_no}"><button id="updateInfo_btn">정보 수정</button></a>
-
+	<br><!-- footer 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    

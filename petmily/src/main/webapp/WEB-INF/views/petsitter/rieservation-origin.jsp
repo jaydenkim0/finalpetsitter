@@ -79,140 +79,37 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-
-<style>
-* {
-    box-sizing: border-box;
-    font-family:NotosanR
-}
-        
-
-.page-navigator li {
-	display: inline-block;
-}
-
-.reservation_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color : #BDBDBD;
-}
-
-h1{
-	font-family:NotosanBlack
-}
-
-
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-	border-color : #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-.right_mar {
-	margin-right: 10%;
-}
-
-.page-navigator li {
-	display: inline-block;
-}
-
-.page-navigator li.active>a {
-	color: #1482e0;
-}
-
-.btn {
-	display: white;
-	width: 80px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-
-input {
-	width: 150px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
-
-select {
-	width: 80px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-	}
-
-.site-footer{
-	position:fixed;
-	bottom:0;
-}
-
-	</style>
-
-
 <!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+	
 <section class="section-content">   
-	<div align="center" >
-		<h1>펫시터 예약 조회</h1>
-		<br>
-		<table class="reservation_table" >
-			<c:forEach var="rlist" items="${reservationList}">
+	<h1>펫시터 예약 조회</h1>
+		<c:forEach var="rlist" items="${reservationList}">
+				<span>예약 번호 : ${rlist.reservation_no}</span><br>
+				<span>예약 회원 : ${rlist.member_id}</span><br>
+				<span>예약 날짜 : ${rlist.matching_time}</span><br>
+				<span>예약 이용 시간 : ${usageTime}시간</span><br>
+				<span>시작 시간 : ${startTime}시</span><br>
 				
-					<tr>
-						<th>예약 번호</th>
-						<th>예약 회원</th>
-						<th>예약 날짜</th>
-						<th>예약 이용 시간</th>
-						<th>시작 시간</th>
-						<c:forEach var="skill" items="${rlist.list}">
-							<th>예약 스킬</th>
-						</c:forEach>
-					</tr>
-					<tr>
-						<td>${rlist.reservation_no}</td>
-						<td>${rlist.member_id}</td>
-						<td>${rlist.totalMatchingTimeWithFormat}</td>
-						<td>${usageTime}시간</td>
-						<td>${startTime}시</td>
-						<c:forEach var="skill" items="${rlist.list}">
-							<td>${skill.payname}</td>
-						</c:forEach>
-					</tr>
+				<c:forEach var="skill" items="${rlist.list}">
+					<span>예약 스킬 : ${skill.payname}</span><br>
+				</c:forEach>
 				
+				
+				
+				<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${rlist.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+				<br><span>반려동물 이름 : ${rlist.pet_name}</span><br>
+				<span>반려동물 나이 : ${rlist.age}살</span><br>
+				<span>반려동물 종류 : ${rlist.type}</span><br>
+				<span>반려동물 특이사항 : ${rlist.pet_ect}</span><br>
+		
+			<c:forEach var="pay" items="${payList}">
+				<span>결제 상태 : ${pay.status}</span>
+				<span>총 ${pay.total_amount}원</span>
 			</c:forEach>
-		</table>
-	</div>	
+	
+				<hr>			
+		</c:forEach>	
 </section>
 
 	<br><!-- footer 불러오기 -->
