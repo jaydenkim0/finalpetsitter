@@ -3,14 +3,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- jquery js -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+ 
+	
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
@@ -141,6 +180,10 @@
 <!-- 댓글 영역 끝 -->
 
 <style>
+* {
+	box-sizing: border-box;
+}
+
 .notice_table {
 	width: 80%;
 	border-top: 1px solid #444444;
@@ -148,9 +191,10 @@
 	border-color: #BDBDBD;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 50px;
 }
 
-th, td {
+.tr1 {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: left;
@@ -171,12 +215,18 @@ a {
 	margin-right: auto;
 }
 
-div {
-	padding: 30px;
-}
-
 hr {
 	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
 }
 
 .btn {
@@ -187,7 +237,7 @@ hr {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -200,63 +250,92 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
+
+textarea {
+	width: 1250px;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #1E90FF;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.con{
+height: 400px;
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
 </style>
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
+<!-- header 불러오기 -->
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+<section class="section-content">
 
 	<h2 align="center">Save the Pets !</h2>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
-		<td>글번호 : ${strayVO.stray_no}</td>
+		<td>No : ${strayVO.stray_no}</td>
 	</tr>
 
 	<tr>
-		<td>게시일자 : ${strayVO.writedateWithFormat}</td>
+		<td>Date : ${strayVO.writedateWithFormat}</td>
 	</tr>
 
 	<tr>
 		<c:choose>
 			<c:when test="${not empty row.stray_writer}">
-				<td>작성자 : ${strayVO.stray_writer}</td>
+				<td>Name : ${strayVO.stray_writer}</td>
 			</c:when>
 			<c:otherwise>
-				<td>작성자 : 비회원</td>
+				<td>Name :  비회원</td>
 			</c:otherwise>
 		</c:choose>
 	</tr>
 
-	<tr>
+	<tr class="tr1">
+		<td>Subject : 
 		<c:choose>
 			<c:when test="${strayVO.stray_title ne '완료글'}">
-				<td>말머리 : ${strayVO.stray_title}</td>
+				<font color="#1482e0">[${strayVO.stray_title}]</font>
 			</c:when>
 			<c:otherwise>
-				<td style="color: red">말머리 : ${strayVO.stray_title}</td>
+				<td style="color: red">[${strayVO.stray_title}]</td>
 			</c:otherwise>
-		</c:choose>
+		</c:choose> 
+		${strayVO.stray_head}</td>
 	</tr>
 
-	<tr>
-		<td>제목 : ${strayVO.stray_head}</td>
-	</tr>
-
-	<tr>
+	<tr class="tr1">
 		<c:forEach var="strayImage" items="${strayImageList}">
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
-					<td><img
-						src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
-						width="200" height="100"></td>
+					<td class="td1">
+					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
+						width="200" height="100">
+						</td>
 				</tr>
 			</c:if>
 		</c:forEach>
@@ -264,35 +343,42 @@ hr {
 
 
 
-		<tr>
+		<tr class="tr1">
 		<td>
-					<div class="naver-viewer"></div>  
-					<input type="hidden" name="stray_content"
-			value="${strayVO.stray_content}">  
+			<div class="con">
+					<div class="naver-viewer"></div>
+					<input type="hidden" name="stray_content" value="${strayVO.stray_content}">  
+			</div>
 				</td>
-			</tr><!-- 댓글화면 -->
+			</tr>
+			
+			<!-- 댓글화면 -->
 		<c:forEach items="${replyList}" var="reply">
 			<c:if test="${reply.content ne null}">
-				<tr>
+				<tr class="tr1">
 					<td>
 						<div class="grandmother">
 							<table width="100%" class="mother">
 								<tr>
-									<th align="left"><c:choose>
-											<c:when test="${not empty sessionScope.id}"> ${reply.reply_writer}</c:when>
-
+									<th align="left">
+									<c:choose>
+											<c:when test="${not empty sessionScope.id}"> 
+											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+											${reply.reply_writer}
+											</c:when>
 											<c:otherwise>비회원</c:otherwise>
-										</c:choose> <c:if test="${strayVO.stray_writer == reply.reply_writer}">
+										</c:choose> 
+										<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
-										</c:if></th>
-
-									<th align="left">작성일 : ${reply.writedateWithFormat}</th>
+										</c:if>
+									<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
 								</tr>
 
 								<tr class="reply_view">
 									<th class="content" colspan="2" align="left">${reply.content}</th>
 								</tr>
 
+				<!-- 댓글 수정 -->
 								<tr class="reply_edit">
 									<td align="right">
 									<th colspan="2" align="left">
@@ -305,9 +391,8 @@ hr {
 										</form>
 									</th>
 
-									<!-- 댓글 수정 -->
-									<c:if
-										test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+
+									<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
 										<tr>
 											<th colspan="2" align="right">
 												<button class="reply_view_btn">수정</button>
@@ -327,16 +412,17 @@ hr {
 
 		<!-- 댓글 등록 -->
 	<tr>
-			<td align="right">
+			<td align="right" class="td2">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin"
-					value="${strayVO.stray_no}"><br> 
-					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}"
-					readonly>
-					<textarea name="content" requistray placeholder="내용 입력" rows="4"
-					cols="100"></textarea>
-				<br><br>
-					<input type="submit" value="등록" class="btn hover3">
+					value="${strayVO.stray_no}"><br>
+					<div align="left">
+					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
+					<br>
+					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
+					<input type="submit" value="등록" class="btn hover3" align="right">
+					<br><br>
+					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 				</form>
 			</td>
 		</tr>
@@ -363,3 +449,7 @@ hr {
 			</td>
 	</tr>
 </table>
+</section>
+<br>
+      <!-- footer 불러오기 -->
+     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            

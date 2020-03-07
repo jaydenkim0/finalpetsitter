@@ -3,25 +3,55 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<!-- BootStrap CDN -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<!-- jquery js -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<c:choose>
-	<c:when test="${sessionScope.id eq null }">
-		<a href="${context}/member/login">로그인</a>
-	</c:when>
-	<c:otherwise>
-	${sessionScope.id}님이 로그인 중입니다.
-	<a href="${context}/member/logout">로그아웃</a>
-	</c:otherwise>
-</c:choose>
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
 
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+ 
+	
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	
 <script>
 	$(document).ready(function() {
 		$("#btnWrite").click(function() {
@@ -35,6 +65,8 @@
 </script>
 
 <style>
+
+
 .page-navigator li {
 	display: inline-block;
 }
@@ -113,10 +145,33 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 	}
-</style>
+<!-- header style -->
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:150px;
+	}
+	</style>
 
+<!-- header 불러오기 -->
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+		
+<section class="section-content">
 <div align="center">
-	<h1>문의 게시판</h1>
+	<h1>문의사항</h1>
 
 	<section>
 		<table class="notice_table" >
@@ -148,7 +203,6 @@ select {
 							</font>
 						</c:if>
 					</td>
-					<%-- 				<a href="${context}/board/qna/view?qna_no=${row.qna_no}">${row.qna_head}</a> --%>
 					<td>${row.writedateWithFormat}</td>
 				</tr>
 		</c:forEach>
@@ -165,7 +219,7 @@ select {
 	</div>	
 
 
-		<div class="row">
+		<div>
 			<!-- 네비게이터(navigator) -->
 			<jsp:include page="/WEB-INF/views/board/qna/navigator.jsp">
 				<jsp:param name="pno" value="${pno}" />
@@ -175,6 +229,7 @@ select {
 			</jsp:include>
 		</div>
 		
+		<div align="center">
 		<form method="get" action="${context}/board/qna/list">
 			<select name="type" class="input-item">
 				<option value="qna_writer">작성자</option>
@@ -183,5 +238,11 @@ select {
 			<input class="input-item" name="keyword" placeholder="검색어" requierd>
 			<input type="submit" value="조회" class="btn hover3" >
 		</form>
+		</div>
 	</section>
-</div>
+</div>	
+</section>
+<br>
+
+	<!-- footer 불러오기 -->
+     <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            

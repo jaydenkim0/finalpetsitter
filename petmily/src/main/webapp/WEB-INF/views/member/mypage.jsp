@@ -1,47 +1,131 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<head>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 <style>
-	hr{
-		width:25%;
+#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
 	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:200px;
+	padding-left:300px;
+	}
+	
+	button{
+   width: 100px;
+   height: 50px;
+   text-align: center;
+   cursor: pointer;
+   color:#1482e0;
+   font-size:10pt;
+   border-radius:3pt;
+   
+	}
+	.button:hover{
+	color: white;
+	}
+	.hover:hover{
+	border: 1px solid #1482e0;
+    background-color:#1482e0;
+	
+	}
+
+	
 </style>
 
-</head>
+	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<body>
 
-<div align="center">
+<section class="section-content">
 
-<h1>마이페이지</h1>
-
+<h3>마이 페이지 </h3>
+<Br>
 <a href="mylist">
-	<button>내정보</button>
-</a>
-<br><br><hr><br>
+	<button class="button hover"> 정보 조회</button>
+</a><br><br>
 <a href="myreview">
-	<button>내가 쓴 리뷰</button>
-</a>
-<br><br><hr><br>
+	<button class="button hover"> 리뷰 조회</button>
+</a><br><br>
+
 <a href="myreservation">
-	<button>내 예약 조회 / 리뷰쓰기</button>
-</a>
-<br><br><hr><br>
-<h2>내가 쓴 글</h2>
-<br>
+	<button class="button hover"> 예약 조회 </button>
+</a><br><br>
+
+
 <a href="mycareboard">
-	<button>돌봄방</button>
-</a>
-&emsp;
+	<button class="button hover"> 돌봄 방 </button>
+</a><br><br>
+
+
 <a href="myqnaboard">
-	<button>문의 / 신고</button>
-</a>
-&emsp;
+	<button class="button hover"> 신고 / 문의 </button>
+</a><br><br>
+
+
 <a href="mystrayboard">
-	<button>Save the Pets ! </button>
+	<button class="button hover">Save the Pets!</button>
 </a>
 
-</div>
 
-</body>
+</section>
+<br><br><br>
+
+<br><!-- footer 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>   

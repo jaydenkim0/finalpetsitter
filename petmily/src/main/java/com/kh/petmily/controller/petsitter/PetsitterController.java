@@ -205,6 +205,8 @@ public class PetsitterController {
 		List<PetDto> petList = petsitterService.getPet(id);
 		model.addAttribute("petList", petList)
 				.addAttribute("reservation_sitter_no", pet_sitter_no);
+		model.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
+		 .addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList());
 		return "petsitter/estimate";
 	}
 	

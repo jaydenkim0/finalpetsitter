@@ -97,9 +97,10 @@
 	}
 	 </style>
      
-	<h3>펫시터 승인 리스트</h3>	
 	
 	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로 이동</button></a>
+	
+	<h4>펫시터 승인 리스트</h4>	
 	
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/list/petsitterdetailapply">
@@ -113,7 +114,7 @@
 	</form>
 	
 	
-	${count}개의 게시물이 있습니다.	
+	${count} 건의 펫시터 신청이 있습니다.	
 
 	<table>
 		<tr>

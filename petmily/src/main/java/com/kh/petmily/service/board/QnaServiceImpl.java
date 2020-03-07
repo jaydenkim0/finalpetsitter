@@ -103,7 +103,7 @@ public class QnaServiceImpl implements QnaService{
 			return;
 		}
 		List<QnaFileDto>list = new ArrayList<>();
-		File dir = new File("D:/upload/qna");
+		File dir = new File("D:/upload/kh2c/qna");
 		dir.mkdirs();
 		
 		for(MultipartFile mf : qna_file) {

@@ -421,15 +421,21 @@ color: black;
   border-style: none;
 }
 
+#masthead.is-active #masthead-login #login_btn a{
+    color: black;
+}
+
 #masthead-login #login_btn a{
   text-decoration: none;
   color: white;
 }
 
+
 #masthead-login #login_btn a:hover{
   text-decoration: none;
     color:#4edec5;
   }
+
 
 .color #masthead-login #login_btn a{
     text-decoration: none;

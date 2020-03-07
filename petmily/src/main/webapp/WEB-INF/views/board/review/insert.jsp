@@ -134,6 +134,13 @@ select {
 						});
 	});
 </script>
+<script>
+	function hamsu() {
+		alert("500포인트가 적립되었습니다.")
+	
+}
+
+</script>
    
     <div align ="left" class="tabl">
     <form method="post" action="insert" enctype="multipart/form-data">
@@ -177,7 +184,7 @@ select {
 	
 
 <div class="form-group" align="center">
-		<input type="submit" value="확인" class="btn hover3">
+		<input type="submit" value="확인" class="btn hover3" onclick="hamsu()">
 		<input type="reset" value="초기화" class="btn hover3">
 </div>
 </form>

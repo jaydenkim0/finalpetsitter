@@ -79,47 +79,81 @@
 	 }
 	</script>
 	</head>
+	<style>
+	
+	th ,td{
+	
+	padding: 10px;
+	text-align: center;
+	width:300px;
+	}
+	input{
+	width:180px;
+	height:35px;
+	
+	}
+	table{
+   padding-top:50px;
+	width:410px;
+	border-color : #BDBDBD;
+	
+	}
+	
+	button {
+	width: 60px;
+	height: 30px;
+   text-align: center;
+   
+   cursor: pointer;
+   
+    font:13px;
+   }
+  .out{
+   padding-left:923px;
+   }
+  
+	</style>
 
 	<body>
-		
+		<div class="mychange" align="center">
 			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
-			    <table border="1">
+			    <table>
 			    	<c:if test="${member_image_no>0 }">
 			    	<tr>
-			    		<th>이미지</th>
+			    		<th></th>
 			    		<td>
-			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 40%; height: auto;" onerror="no_image2()" id="member_image">
+			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="member_image">
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
 			    	</c:if>
 			    	<tr>
-			    		<th>성명</th>
+			    		<th>Name</th>
 			    		<td>
 			    			<input type="text"  name="name" value="${member.name}">
 			    		</td>
 			    	</tr>
 			    	<tr>
-			    		<th>닉네임</th>
+			    		<th>NickName</th>
 			    		<td>
 			    			<input type="text"  name="nick" value="${member.nick}">
 			    		</td>
 			    	</tr>
 			    	<tr>
-			    		<th>이메일</th>
+			    		<th>Email</th>
 			    		<td>
 			    			<input type="text" name="email" value="${member.email}">
 			    		</td>
 			    	</tr>
 			    	<tr>
-			    		<th>전화번호</th>
+			    		<th>Phone</th>
 			    		<td>
 			    			<input type="text"  name="phone" value="${member.phone}">
 			    		</td>
 			    	</tr>
 					<tr>
-						<th rowspan="3">주소</th>
+						<th rowspan="3">Address</th>
 						<td>
 							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value="${member.post}">
 							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
@@ -137,26 +171,25 @@
 					</tr>
 					<tr>
 						<th colspan="2">
-							<button type="submit" >회원정보수정</button>
+							<button type="submit" >수정</button>
 						</th>
 					</tr>
 			    </table>
 			</form>
-			
-			<hr>
-			
-			<a href="memberdelete?id=${member.id}"><button>회원탈퇴</button></a>
+			</div>
 
+			<div class="out" >
+			<a href="memberdelete?id=${member.id}"><button>탈퇴</button></a>
+ 
 			<c:if test="${not empty fail }">
 				<p>탈퇴 실패</p>
 			</c:if>
-			
-			<hr>
+
 			
 			<a href="mylist">
 				<button type="button">취소</button>
 			</a>
-		
+			</div>
 	</body>
 	
 </html>

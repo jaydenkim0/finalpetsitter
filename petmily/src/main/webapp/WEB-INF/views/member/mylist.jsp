@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+
 <script>
 	$(function(){
 		$("#add_content").hide();
@@ -25,133 +28,264 @@ function no_image2(){
 }
 </script>
 <style>
+	
 	th{
-		text-align: right;
+		width:135px;
+		text-align: left;
+		}
+	td{
+	width:400px;
+	text-align:left;
+	color:gray;
+	font-weight:bold;
 	}
+
+  button, #updatebtn,#cancel{
+   display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+   }
+
+   .button:hover{
+	color: white;
+	}
+	
+	.hover:hover{
+	background-color: #1482e0;
+	}
+      
+body{
+background-color:#FAFAFA;
+padding-left:10%;
+padding-top:3%;
+} 	
+.tab0{
+ font-size:15pt;
+}
+.tab1{
+height:70px;
+font-size:9pt;
+
+}
+.tab2{
+   padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:515px;
+   height:200px;
+}
+.tab3{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:485px;
+   height:170px;
+}
+.tab4{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:535px;
+   height:150px;
+}
+.hr1{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:515px;
+   }
+.hr2{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:505px;
+}
+.img2{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:495px;
+}
+a{
+
+   position: relative;
+   left: 550px;
+   bottom:715px;
+}
+#add_btn{
+position: relative;
+   left: 1400px;
+   bottom:900px;
+}
+h2{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:780px;
+}
+h1{
+padding-left:20%;
+   position: relative;
+   left: 100px;
+   bottom:485px;
+}
+select{
+	width:100px;
+	padding: .4em .4em;
+	border: 1px solid #999;
+	font-family : inherit;
+	}
+
 </style>
-<div align="center">
-<h1>내정보조회</h1>
-<table width="100%">
+<body>
+<div align="left">
+
+<br>
+<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 350px; height: 350px;" onerror="no_image2()" id="2">
+<br><br>
+<table class="tab0">
 	<tr>
-		<th width="50%">아이디&emsp;</th>
-		<td width="50%">${mylist.id }</td>
-	</tr>
-	<tr>
-		<th>프로필사진&emsp;</th>
-		<td>
-			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="2">
-		</td>
-	</tr>
-	<tr>
-		<th>이름&emsp;</th>
-		<td>${mylist.name }</td>
-	</tr>
-	<tr>
-		<th>닉네임&emsp;</th>
-		<td>${mylist.nick }</td>
-	</tr>
-	<tr>
-		<th>전화번호&emsp;</th>
-		<td>${mylist.phoneWithFormat }</td>
-	</tr>
-	<tr>
-		<th>주소&emsp;</th>
-		<td>${mylist.total_addr }</td>
-	</tr>
-	<tr>
-		<th>포인트&emsp;</th>
-		<td>${mylist.point }점</td>
-	</tr>
-	<tr>
-		<th>가입일&emsp;</th>
-		<td>${mylist.total_joindateWithFormat }</td>
-	</tr>
-	<tr>
-		<th>최종로그인&emsp;</th>
-		<td>${mylist.final_loginWithFormat }</td>
-	</tr>
-	<tr>
-		<th>반려동물&emsp;</th>
-		<td>${mylistpet.size() }마리</td>
+		<th>${mylist.nick }</th>
+		<td>${mylist.id }</td>
 	</tr>
 </table>
-<br>
+<hr width="350px" align="left" style="border: solid #dedede; border-width: 1px 0 0;">
 <!-- 정보수정 -->
 <form action="mylistchange" method="get">
 	<input type="hidden" name="id" value="${mylist.id}">
-	<input type="submit" value="정보수정">
+<input type="submit" value="수정" id="updatebtn" >
 </form>
 
-<c:if test="${mylist.pets eq '예'}">
-<div align="center">
-	<c:forEach var="pet"  items="${mylistpet }">
-	<br><hr><br>
-	<table width="100%">
+<!-- 	<tr> -->
+<!-- 		<th>아이디&emsp;</th> -->
+<%-- 		<td >${mylist.id }</td> --%>
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<th>이름&emsp;</th> -->
+<%-- 		<td>${mylist.name }</td> --%>
+<!-- 	</tr> -->
+<table class="tab1">
+	
+	<tr>
+		<th>JoinDate :</th>		
+		<td>${mylist.total_joindateWithFormat }</td>
+		</tr>
 		<tr>
-			<th width="50%">이름&emsp;</th>
+			<th>LastLogin :</th>		
+			<td>${mylist.final_loginWithFormat }</td>
+	</tr>
+</table>
+
+
+<hr width="700px" align="center" color="#1482e0"  class="hr1">
+
+<table class="tab2">
+
+        <tr>
+		<th>Phone  :</th>
+		<td>${mylist.phoneWithFormat }</td>
+		</tr>
+		<tr>
+		<th>Address :</th>		
+		<td>${mylist.total_addr }</td>	
+		</tr>
+		<tr>
+		<th>Email :</th>
+		<td>${mylist.email }</td>
+		</tr>
+		<tr>
+		<th>Pets :</th>
+		<td>${mylistpet.size() }마리</td>
+	</tr>
+	<tr>
+		<th>Point :</th>
+		<td>${mylist.point}점</td>
+	</tr>
+</table>
+
+<h2>About</h2>
+<h1>Pet</h1>
+
+<hr width="700px" align="center" color="#1482e0" class="hr2">
+<div align="left">
+<c:if test="${mylist.pets eq '예'}">
+	<c:forEach var="pet"  items="${mylistpet }">
+	
+	
+	<c:choose>
+					<c:when test="${pet.pet_image_no<1 }">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 90px; height: 90px;" class="img2">
+					</c:when>
+					<c:otherwise>
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 90px; height: 90px;" class="img2">			
+					</c:otherwise>
+				</c:choose>		
+			<table class="tab3">
+			
+		<tr>
+			<th width="50%">Name :&emsp;</th>
 			<td width="50%">${pet.name }</td>
 		</tr>
 		<tr>
-			<th>펫프로필사진&emsp;</th>
-			<td>
-				<c:choose>
-					<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 20%; height: auto;">
-					</c:when>
-					<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 20%; height: auto;">			
-					</c:otherwise>
-				</c:choose>
-			</td>
+			<th>Age :&emsp;</th>
+			<td>${pet.age } 살</td>
 		</tr>
 		<tr>
-			<th>나이&emsp;</th>
-			<td>${pet.age }</td>
-		</tr>
-		<tr>
-			<th>동물종&emsp;</th>
+			<th>Type :&emsp;</th>
 			<td>${pet.type }</td>
 		</tr>
 		<tr>
-			<th>소개&emsp;</th>
+			<th>Etc :&emsp;</th>
 			<td>${pet.ect }</td>
 		</tr>
 	</table>
 	<br>
-		<a href="petchange?pet_no=${pet.pet_no }"><button>펫정보수정</button></a>
-		<a href="pet_delete?pet_no=${pet.pet_no }"><button>삭제</button></a>
+	<a href="petchange?pet_no=${pet.pet_no }"><button >수정</button></a>
+		<a href="pet_delete?pet_no=${pet.pet_no }"><button >삭제</button></a>
 	<br>
 	</c:forEach>
+	</c:if>
 </div>
-</c:if>
+
+
+
 <br>
-<hr>
 <br>
 <button id="add_btn">펫 추가</button>
-<div id="add_content">
+<div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
 	<input type="hidden" name="member_id" value="${mylist.id }">
-	<table>
+	<table class="tab4">
 		<tr>
-			<th width="50%">이미지&emsp;</th>
+			<th width="50%">Image :</th>
 			<td width="50%">
-				<input type="file" name="pet_image" multiple accept="image/*">
+			   
+				<input type="file" name="pet_image" multiple accept="image/*" >
 			</td>
 		</tr>
 		<tr>
-			<th>이름&emsp;</th>
+			<th>Name :</th>
 			<td>
 				<input type="text" name="name" required>
 			</td>
 		</tr>
 		<tr>
-			<th>나이&emsp;</th>
+			<th>Age :</th>
 			<td>
 				<input type="number" name="age" >
 			</td>
 		</tr>
 		<tr>
-			<th>동물종&emsp;</th>
+			<th>Type :</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
@@ -164,16 +298,21 @@ function no_image2(){
 			</td>
 		</tr>
 		<tr>
-			<th>소개&emsp;</th>
+			<th>Etc :</th>
 			<td>
 				<textarea name="ect"></textarea>
 			</td>
 		</tr>
-	</table>
-				<input type="submit" value="펫추가">
+		<tr>
+		    <th></th>
+			<td><input type="submit" value="펫추가" id="updatebtn">
 				<input type="reset" value="취소" id="cancel">
+			</td>
+			</tr>
+	</table>
 </form>
 </div>
 <br><br><br>
 
 </div>
+</body>

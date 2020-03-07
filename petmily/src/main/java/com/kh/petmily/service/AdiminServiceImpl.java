@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.kh.petmily.entity.AccountDto;
 import com.kh.petmily.entity.BankImageDto;
 import com.kh.petmily.entity.BlackListContentDto;
 import com.kh.petmily.entity.BlackListDto;
@@ -28,6 +29,7 @@ import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
 import com.kh.petmily.vo.AccountVO;
+import com.kh.petmily.vo.CalculateVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.QnaVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
@@ -556,6 +558,23 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public int paymentcanclecheck(int reservation_no) {
 		return adminDao.paymentcanclecheck(reservation_no);
+	}
+
+	// 정산 페이지 기본 정보
+	@Override
+	public CalculateVO getCalculateAllinfor(int type) {		
+		return adminDao.getCalculateAllinfor(type);
+	}
+
+	// 정산 페이징 리스트
+	@Override
+	public List<AccountDto> getAccountList(int start, int end, String searchOption, String keyword) {
+		return adminDao.getAccountList(start, end, searchOption, keyword) ;
+	}
+	// 정산 페이징 카운트
+	@Override
+	public int countAricleAccount(String searchOption, String keyword) {
+		return adminDao.countAricleAccount(searchOption, keyword);
 	}
 
 

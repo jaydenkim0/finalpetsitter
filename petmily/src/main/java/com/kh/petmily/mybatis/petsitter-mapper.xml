@@ -248,7 +248,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			TO_DATE(#{matching_time},'YY/MM/DD'),
 			#{pet_name},
 			#{ect},
-			'대기')
+			'대기',
+			sysdate)
 	</insert>	
 	
 	<!-- 금액/시간 등록 -->
@@ -311,7 +312,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		            )V on r.reservation_no = v.pay_reservation_no
 		            inner join pet P on r.member_id = p.member_id
 		            inner join pet_image PI on p.pet_no = pi.pet_image_pet_no
-		where r.reservation_sitter_no = 61 order by r.reservation_no desc
+		where r.reservation_sitter_no = #{reservation_sitter_no} order by r.reservation_no desc
 	</select>
 	
 	<select id="getReservationMap" resultType="reservationAllVO" parameterType="int">

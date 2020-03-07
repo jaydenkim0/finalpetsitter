@@ -9,15 +9,49 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	
 <style>
-.page-navigator li {
-	display: inline-block;
+
+li{
+   display: inline-block;
+   margin-left: 10px;
+    padding: 5px 10px; 
+   font-size:15px;
+   font-weight: 600;	
+  	list-style-type:none;
+   	margin-left:20px;
 }
 
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color : #BDBDBD;
+
+.qnatab {
+   width: 72%;
+   border-top: 1px solid #444444;
+   border-collapse: collapse;
+   border-color: #BDBDBD;
+}
+
+
+
+
+
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+
+ button{
+   display: white;
+   width: 80px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+
 }
 
 th, td {
@@ -33,7 +67,7 @@ a {
 }
 
 .right_mar {
-	margin-right: 10%;
+	margin-right: 15%;
 }
 
 .page-navigator li {
@@ -44,50 +78,9 @@ a {
 	color: #1482e0;
 }
 
-.btn {
-	display: white;
-	width: 80px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
 
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-
-input {
-	width: 150px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
-
-select {
-	width: 80px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-	}
 </style>
+
 
 </head>
 
@@ -96,11 +89,18 @@ select {
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <div align="center">
-<br>
-<h1>내 문의/신고 글</h1>
-<br>
+
+<br><br>
+<h1>나의 신고 문의 내역</h1>
+<br><br>
 <section>
-<table class="notice_table">
+<table CLASS="qnatab">
+
+
+
+
+
+
 	<tr>
 		<td>글번호</td>
 		<td>제목</td>
@@ -138,7 +138,7 @@ select {
 	<div align="right" class="right_mar">
 		<c:if test="${not empty sessionScope.id}">
 			<a href="${context}/board/qna/write">
-				<button type="button" id="btnwrite" class="btn hover3">글쓰기</button>
+				<button type="button" id="btnwrite" >글쓰기</button>
 			</a>
 		</c:if>
 	</div>
@@ -156,6 +156,7 @@ select {
 </div>
 
 </section>
+
 </div>
 
 </body>

@@ -127,7 +127,7 @@ public class MemberDaoImpl implements MemberDao {
 	//회원이미지 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicalmember_image(String savename) throws IOException{
-		File file = new File("C:/upload/member_image",savename);
+		File file = new File("D:/upload/kh2c/member_image",savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
@@ -147,7 +147,7 @@ public class MemberDaoImpl implements MemberDao {
 	//펫이미지 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicalpet_image(String savename) throws IOException {
-		File file = new File("C:/upload/pet_image",savename);
+		File file = new File("D:/upload/kh2c/pet_image",savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
