@@ -139,6 +139,29 @@ div#side_left {
 	bottom:260px;
 }
 
+
+#mid_content4 {
+	position: relative;
+	width: 700px;
+	height: 200px;
+	background-color: white;
+	float: right;
+	left:250px;
+	bottom:30px;
+}
+
+
+
+#mid_content5 {
+	position: relative;
+	width: 700px;
+	height: 200px;
+	background-color: white;
+	float: right;
+	right:450px;
+	bottom:10px;
+}
+
 #side_content_box {
 position: relative;
 	display: inline;
@@ -168,9 +191,33 @@ position: relative;
 	margin: 50px;
 	float: left;
 	left:90px;
-	bottom:36px;
+	top:22px;
 	right:100px;
+	font-size:16px;
+	}
+	#side_content_box4 {
+position: relative;
+	display: inline;
+	background-color: white;
+	margin: 50px;
+	float: left;
+	left:90px;
+	top:22px;
+	right:100px;
+	font-size:16px;
+	}
 	
+	#side_content_box5 {
+position: relative;
+	display: inline;
+	background-color: white;
+	margin: 50px;
+	float: left;
+	left:90px;
+	top:22px;
+	right:100px;
+	font-size:16px;
+	}
 	
 }
 
@@ -211,11 +258,11 @@ th,td{
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
 		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
-		
+		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
 				style="width: 170px; height: 170px;" onerror="no_image2()" id="2">
-		
+	
 	<br><Br><br>
 		<table>
 	<tr>
@@ -240,7 +287,8 @@ th,td{
 	<a href="mylist">
 				<button>GO</button>
 			</a>
-</div>
+	</div>
+
 		</div>
 	</div>
 	
@@ -265,19 +313,32 @@ th,td{
 	</div>
 	<div id="mid_content3" style="border:1px solid #A4A4A4;">
 <div id="side_content_box3">
-   <h5> 나의 돌봄방 &nbsp;&nbsp;&nbsp;&nbsp;
+ <h2>돌봄방 조회</h2>
+ 나의 돌봄방으로 이동 합니다. &nbsp;&nbsp;&nbsp;
   		<a href="mycareboard">
 			<button>GO</button>
-		</a></h5><br>
-		 <h5>나의 문의 내역  
+		</a>
+</div>
+</div>
+
+<div id="mid_content4" style="border:1px solid #A4A4A4;">
+<div id="side_content_box4">
+ <h2>신고 / 문의</h2>
+ 나의 신고 및 문의 내역으로 이동 합니다.&nbsp;&nbsp;
 		 <a href="myqnaboard">
 			<button>GO</button>
-		</a></h5> <br>
-		    <h5>세이브 더 펫 &nbsp;&nbsp;&nbsp;
-		<a href="mystrayboard">
-			<button>GO</button>
-		</a></h5>
+		</a>
 </div>
+</div>
+<div id="mid_content5" style="border:1px solid #A4A4A4;">
+		<div id="side_content_box5">
+ <h2>세이브 더 펫</h2>
+나의 세이브 더 펫으로 이동합니다. &nbsp;&nbsp;&nbsp;
+			<a href="mystrayboard">
+			<button>GO</button>
+		</a>
+</div>
+	
 	</div>
 
 </section>
