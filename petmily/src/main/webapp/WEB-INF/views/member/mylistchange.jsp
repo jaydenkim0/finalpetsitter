@@ -110,6 +110,7 @@
 	}
 	
 	button {
+	position:relative;
 	display: white;
    width: 70px;
    height: 30px;
@@ -122,6 +123,7 @@
    color: #1482e0;
    transition: all 0.9s, color 0.3;
    border-radius:10px;
+   left:20px;
    }
   .out{
    padding-left:1100px;
@@ -190,7 +192,7 @@
 					
 					<tr>
 						<th colspan="2">
-							<button type="submit" >수정</button>
+							<button type="submit" >수정</button>&nbsp;&nbsp;&nbsp;
 								<a href="mylist">
 				<button type="button">취소</button>
 			</a>
