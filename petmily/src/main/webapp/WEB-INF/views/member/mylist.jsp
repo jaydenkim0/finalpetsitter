@@ -221,7 +221,7 @@ select{
 	<c:forEach var="pet"  items="${mylistpet }">
 	
 	
-	<c:choose>
+				<c:choose>
 					<c:when test="${pet.pet_image_no<1 }">
 						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 90px; height: 90px;" class="img2">
 					</c:when>

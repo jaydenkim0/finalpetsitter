@@ -261,6 +261,12 @@ function no_image1(){
 }
 function no_image2(){
 	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+	window.alert(document.getElementById(test.getAttribute('id')).getAttribute('id'));
+}
+
+function testfunc(test) {
+	var errorid = document.getElementById(test.getAttribute('id')).getAttribute('id');
+	
 }
 </script>
 <style>
@@ -374,7 +380,7 @@ function no_image2(){
 			<c:choose>
 				<c:when test="${not empty replyimagelist.care_reply_writer }">
 					<th align="left">
-						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;"  onerror="testfunc(this)" id=" ${replyimagelist.care_reply_writer }">
 						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
 					</th>
 				</c:when>
