@@ -7,6 +7,9 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/write.css">
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -65,61 +68,7 @@ FOOTER 이용 시 넣어야할 요소
  <!-- 네이버 토스트에디터 종료 -->
     
 <style>
-.tabl {
-	width: 60%;
-	margin: auto;
-}
-a {
-	text-decoration: none;
-	color: black;
-}
-.btn {
-	display: white;
-	width: 80px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
 
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-
-input {
-	width: 150px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
-.input-file{
-	width: 100%;
-	height: 35px;
-	border-style : none;
-}
-
-select {
-	width: 100%;
-	height: 35px;
-	font-size: 14px;
-	vertical-align: middle;
-	border-color: #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-}
 <!-- header style -->
 	#masthead:after {
 	  content: '';
@@ -173,7 +122,7 @@ select {
 
 <div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2>문의사항 작성</h2>
+		<h2>QnA</h2>
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
 		</c:if>
