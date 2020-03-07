@@ -10,7 +10,10 @@ function no_image() {
 </head>
 <style>
 
+ body{
  
+ 
+ }
 
 	#petchbtn{
 	display: white;
@@ -27,10 +30,26 @@ function no_image() {
    border-radius:10px;
 	
 	}
+	
+		input{
+	width:180px;
+	height:35px;
+	BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+	
+	
 	}
+	
 </style>
 <body>
-<div class="chtab">
+<div class="chtab" align="center">
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
 	<table >
@@ -39,17 +58,17 @@ function no_image() {
 			<td>
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100px; height: 100px;">
+					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;"><Br><br>
 				</c:when>
 				<c:otherwise>	
-					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100px; height: 100px;" onerror="no_image()" id="pet_image">
+					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" onerror="no_image()" id="pet_image"><br><Br>
 				</c:otherwise>
 			</c:choose>
 				<input type="file" name="pet_image" accept="image/*">
 			</td>
 		</tr>
 		<tr>
-			<th>Image</th>
+			<th>Name</th>
 			<td>
 				<input type="text" name="name" value=${pet.name }>
 			</td>
