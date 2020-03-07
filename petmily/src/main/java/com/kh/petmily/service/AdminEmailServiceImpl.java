@@ -96,6 +96,7 @@ public class AdminEmailServiceImpl implements AdminEmailService{
 	// step1 회원이 펫시터에게 예약에 대한 견적요청을 진행 
 	// (String id, String email, int sitter_no, String result)
 	// 회원 -> 펫시터 (펫시터 이메일로 전송)
+	// ※ 펫시터가 승인 거절을 하고 다시 해당 url로 접속할 경우
 	//////////////////////////////////////////////////////////////////////////////////////////	
 
 	@Override
