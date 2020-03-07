@@ -4,9 +4,11 @@
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
-
+<!-- jquery js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/view.css">
  
 
 	<!-- 
@@ -208,95 +210,9 @@
 
 
 <style>
-* {
-	box-sizing: border-box;
-}
-
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-.tr1 {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
-}
-
-.td2 {
-	text-align: right;
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	border-color: #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-hr {
-	width: 80%;
-}
-
-.no_inputline {
-	border: none;
-	border-right: 0px;
-	border-top: 0px;
-	boder-left: 0px;
-	boder-bottom: 0px;
-	width:100px;
-	text-align: left;
-}
-
-.btn {
-	display: white;
-	width: 120px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size: 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-
-textarea {
-	width: 1250px;
-	height: 50px;
-	padding: 10px;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
-	font-size: 16px;
-	resize: both;
-	margin: 0px; 
-	vertical-align: middle;
-}
-.con{
-height: 400px;
-}
-
 <!--
-header style -->#masthead:after {
+header style -->
+#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -359,13 +275,11 @@ header style -->#masthead:after {
 		
 		<tr class="tr1">
 			<td><c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<div class="con">
 							<div class="naver-viewer"></div>
 							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
 						</div>
-						</c:if>
 					</c:when>
 					<c:otherwise>
 					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
@@ -377,10 +291,10 @@ header style -->#masthead:after {
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${qnaVO.qna_title ne '신고합니다'}">
-					<div class="con">
-					<div class="naver-viewer"></div>
-					<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
-					</div>
+				<div class="con">
+							<div class="naver-viewer"></div>
+							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
+						</div>
 				</c:if>
 				</td>
 		</tr>
@@ -405,21 +319,19 @@ header style -->#masthead:after {
 			
 			<tr class="reply_view">
 				<c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-						<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 							<th class="content" colspan="2" align="left">${reply.content}</th>
-						</c:if>
 					</c:when>
 				<c:otherwise>
-					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
+				<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
 					<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
 					</c:if>
 				</c:otherwise>
 		</c:choose>
-	<c:if test="${qnaVO.qna_title ne '신고합니다'}">
+		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
 			<th class="content" colspan="2" align="left">${reply.content}</th>
 		</c:if>
-			</tr>
+		</tr>
 		
 		<!-- 댓글 수정 -->	
 			<tr class="reply_edit">
@@ -456,8 +368,7 @@ header style -->#masthead:after {
 <tr>
 <td align="right">
 	<c:choose>
-		<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-		<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+		<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 			<div align="left">
@@ -468,11 +379,10 @@ header style -->#masthead:after {
 				<br><br>
 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 		</form>
-		</c:if>
 				</c:when>
+				
 					<c:otherwise>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'}">
-					<c:if test="${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
+					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
 				<div align="left">
 					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
 				<br>
@@ -482,8 +392,8 @@ header style -->#masthead:after {
 			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 					<br>
 					</c:if>
-					</c:when>
 				</c:otherwise>
+				
 		</c:choose>
 		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
 		<form action="replywrite" method="post" class="reply_submit">
