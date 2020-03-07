@@ -124,7 +124,9 @@
    border-radius:10px;
    }
   .out{
-   padding-left:913px;
+   padding-left:1100px;
+   background-color:white;
+   color: red;
    }
   
   
@@ -185,6 +187,7 @@
 							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}">
 						</td>
 					</tr>
+					
 					<tr>
 						<th colspan="2">
 							<button type="submit" >수정</button>
@@ -193,6 +196,7 @@
 			</a>
 						</th>
 					</tr>
+				
 			    </table>
 			</form>
 			</div>

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
@@ -30,6 +31,36 @@
           })
       });
     </script>
+        <!-- header style -->
+    <style>
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:200px;
+	}
+	.section-content::after{
+      content:"";
+      display:block;
+      clear:both;
+     
+      }
+ 
+}
+	</style>
+    
     <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -47,26 +78,7 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     
-      <style>
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+
      
 <style>
 
@@ -77,15 +89,23 @@ div#side_left {
 	background-color: white;
 	left: 330px;
 	top: 80px;
+	padding:8pt;
 	
 }
 
 #side_left_box {
+	position:relative;
 	width: 250px;
 	height: 400px;
 	background-color: white;
 	float:left;
 	margin-left: 80px;
+	top:30px;
+}
+#side_left_box2{
+	position:relative;
+	left:140px;
+    
 }
 
 #mid_content {
@@ -104,7 +124,7 @@ div#side_left {
 	height: 200px;
 	background-color: white;
 	float: right;
-	bottom: 300px;
+	bottom: 295px;
 	left:250px;
 	
 }
@@ -148,8 +168,10 @@ position: relative;
 	margin: 50px;
 	float: left;
 	left:90px;
-	bottom:40px;
+	bottom:36px;
 	right:100px;
+	
+	
 }
 
 
@@ -162,7 +184,7 @@ img {
     border-radius: 100pt;
 }
 button{
-	width: 70px;
+	width: 60px;
 		height: 35px;
 		border: none;
 		background-color: #1482e0;
@@ -174,34 +196,36 @@ button{
 		border-radius:7px;
 		left:20px;
 }
+th,td{
+ padding: 10px;
 
+}
 
-
-.section-content::after{
-      content:"";
-      display:block;
-      clear:both;
-   }
 
 
 </style>
 
-
+<!-- header 불러오기  -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <section class="section-content">
-
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
-		<h2>&nbsp;내 정보 조회</h2>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
+		
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
 				style="width: 170px; height: 170px;" onerror="no_image2()" id="2">
-
-			<a href="mylist">
-				<button>이동</button>
-			</a>
+		
 	<br><Br><br>
-		<table >
+		<table>
+	<tr>
+	<th>Pets :</th>
+		<td>${mylistpet.size() }</td>
+	</tr>
+	<tr>
+		<th>Point :</th>
+		<td>${mylist.point}</td>
+	</tr>
 	<tr>
 		<th>JoinDate :</th>		
 		<td>${mylist.total_joindateWithFormat }</td>
@@ -211,45 +235,53 @@ button{
 			<td>${mylist.final_loginWithFormat }</td>
 	</tr>
 </table>
+<div id="side_left_box2">
+
+	<a href="mylist">
+				<button>GO</button>
+			</a>
+</div>
 		</div>
 	</div>
+	
 
 	<div id="mid_content" style="border:1px solid #A4A4A4;">
 		<div id="side_content_box">
-		<h1>예약 조회</h1>
+		<h2>예약 조회</h2>
 		예약 조회 및 이용 후 리뷰 작성을 합니다.  &nbsp;
 			<a href="myreservation">
-				<button>이동</button>
+				<button>GO</button>
 			</a>
 		</div>
 </div>
 		<div id="mid_content2" style="border:1px solid #A4A4A4;">
 		<div id="side_content_box2">
-		<h1>리뷰 조회</h1>
+		<h2>리뷰 조회</h2>
 		내가 작성한 리뷰를 조회 합니다.   &nbsp;&nbsp;
 			<a href="myreview">
-				<button>이동</button>
+				<button>GO</button>
 			</a>
 		</div>
 	</div>
 	<div id="mid_content3" style="border:1px solid #A4A4A4;">
 <div id="side_content_box3">
-   <h4> 나의 돌봄 방 &nbsp;&nbsp;&nbsp;
+   <h5> 나의 돌봄방 &nbsp;&nbsp;&nbsp;&nbsp;
   		<a href="mycareboard">
-			<button> 이동</button>
-		</a></h4><br>
-		 <h4>신고/문의 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button>GO</button>
+		</a></h5><br>
+		 <h5>나의 문의 내역  
 		 <a href="myqnaboard">
-			<button> 이동</button>
-		</a></h4> <br>
-		    <h4>Save the Pets!
+			<button>GO</button>
+		</a></h5> <br>
+		    <h5>세이브 더 펫 &nbsp;&nbsp;&nbsp;
 		<a href="mystrayboard">
-			<button>이동</button>
-		</a></h4>
+			<button>GO</button>
+		</a></h5>
 </div>
 	</div>
 
 </section>
+<!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
 
 </html>
