@@ -240,7 +240,7 @@ select{
 }
 
 .regist label:hover {
-  background-color: gray;
+  background-color: #E6E6E6;
 }
 
 .regist label:active {
