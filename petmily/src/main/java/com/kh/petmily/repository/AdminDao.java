@@ -251,6 +251,17 @@ public interface AdminDao {
 	
 	//스케쥴러 : account 인서트
 	void setaccountPetsitter(AccountDto accountDto);
+	// 1. 펫시터 아이디 구해오기(전월에 결제금액이 있는 펫시터만 구해오기)
+	List<AccountVO> findpetsitteraccount();
+	// 2. 펫시터 넘버로 아이디 구해오기
+	String getSitter_id(int sitter_no);
+	// 3. 펫시터 결제건수 구해오기
+	int getCount(int sitter_no);
+	// 4. 펫시터 최종 매출 금액 구해오기 (완료된 금액에 취소된 금액 더하기)	
+	int getPaymentPlus(int sitter_no);
+	int getPaymentMin(int sitter_no);
+	// 5. 펫시터 수수료 구해오기
+	double getFees();
 
 
 
