@@ -135,7 +135,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 돌봄댓글&이미지 목록 -->
 	<select id="replyimagelist" parameterType="map" resultType="careReplyImageDto">
-		select*from (
+		select * from (
 			select rownum as rn, A.* from(
 				select
 				 	I.care_image_no,
@@ -147,14 +147,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 	R.care_reply_board_no,
 				 	R.care_reply_content,
 				 	R.wdate,
-				 	R.care_reply_writer
+				 	R.care_reply_writer,
 				 	MI.member_image_no
 				from
 				 	care_reply R
-				 		left outer join care_image I
-				 		on R.care_reply_no=I.care_reply_no
-				 		inner join member_image MI
-				 		on R.care_reply_writer=MI.member_image_member_id
+				 		left outer join care_image I on R.care_reply_no=I.care_reply_no
+				 		left outer join member_image MI on R.care_reply_writer=MI.member_image_member_id
 				where
 					R.care_reply_board_no=#{care_board_no}
 				order by R.wdate desc
