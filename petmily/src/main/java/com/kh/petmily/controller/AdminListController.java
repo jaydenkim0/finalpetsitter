@@ -169,6 +169,8 @@ public class AdminListController {
 		return "admin/petsitter/blacklistsitterlist";
 	}
 	
+	//////////////////////////////////////////////////////////////////
+	
 	// 문의 게시판에서 신고게시물만 불러오기
 	@RequestMapping("/blackreport")
 	public String blackreport(@RequestParam(defaultValue = "qna_writer", required = false) String searchOption,

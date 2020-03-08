@@ -31,26 +31,7 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
-   
-    
-    <!-- 
-FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
--->
-  	<!-- footer css -->
-    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
-    <!-- Required meta tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-    <style>
+     <style>
 	#masthead:after {
 	  content: '';
 	  position: absolute;
@@ -70,9 +51,23 @@ FOOTER 이용 시 넣어야할 요소
 	padding-top:150px;
 	}
 	</style>
-
-
-
+    
+    <!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
@@ -402,10 +397,9 @@ select {
 
 </section>
 
-<br><!-- footer 불러오기 -->
+<br><br><!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 	
-
 
 </html>
 

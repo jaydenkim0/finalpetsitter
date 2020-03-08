@@ -75,12 +75,10 @@
     </style>   
     
     
-   <div class="box-container first">    
-		<h3> 회원 관리 </h3>
-		
+   <div class="box-container first">   
 		<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 리스트로 이동</button></a>
-		
-		<h3>	회원	정보</h3>		
+		<br><br>
+		<h4>	회원	정보</h4>		
 	</div>	
 	
 	<div class="box-container">

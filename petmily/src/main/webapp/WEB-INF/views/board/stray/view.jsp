@@ -6,6 +6,8 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/view.css">
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -180,82 +182,27 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
 }
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
+#masthead.is-active {
+	background-color: #fff;
 }
 
-.td2 {
-	text-align: right;
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	border-color: #BDBDBD;
+.section-content {
+	padding-top: 150px;
 }
-
-a {
-	text-decoration: none;
-	color: black;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-
-hr {
-	width: 80%;
-}
-
-.btn {
-	display: white;
-	width: 120px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -266,46 +213,45 @@ hr {
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
-		<td>글번호 : ${strayVO.stray_no}</td>
+		<td>No : ${strayVO.stray_no}</td>
 	</tr>
 
 	<tr>
-		<td>게시일자 : ${strayVO.writedateWithFormat}</td>
+		<td>Date : ${strayVO.writedateWithFormat}</td>
 	</tr>
 
 	<tr>
 		<c:choose>
 			<c:when test="${not empty row.stray_writer}">
-				<td>작성자 : ${strayVO.stray_writer}</td>
+				<td>Name : ${strayVO.stray_writer}</td>
 			</c:when>
 			<c:otherwise>
-				<td>작성자 : 비회원</td>
+				<td>Name :  비회원</td>
 			</c:otherwise>
 		</c:choose>
 	</tr>
 
-	<tr>
+	<tr class="tr1">
+		<td>Subject : 
 		<c:choose>
 			<c:when test="${strayVO.stray_title ne '완료글'}">
-				<font color="#1482e0"> [${row.stray_title}] </font>
+				<font color="#1482e0">[${strayVO.stray_title}]</font>
 			</c:when>
 			<c:otherwise>
-				<td style="color: red">말머리 : ${strayVO.stray_title}</td>
+				<td style="color: red">[${strayVO.stray_title}]</td>
 			</c:otherwise>
 		</c:choose> 
+		${strayVO.stray_head}</td>
 	</tr>
 
-	<tr>
-		<td>제목 : ${strayVO.stray_head}</td>
-	</tr>
-
-	<tr>
+	<tr class="tr1">
 		<c:forEach var="strayImage" items="${strayImageList}">
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
-					<td><img
-						src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
-						width="200" height="100"></td>
+					<td class="td1">
+					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
+						width="200" height="100">
+						</td>
 				</tr>
 			</c:if>
 		</c:forEach>
@@ -313,16 +259,19 @@ hr {
 
 
 
-		<tr>
+		<tr class="tr1">
 		<td>
-					<div class="naver-viewer"></div>  
-					<input type="hidden" name="stray_content"
-			value="${strayVO.stray_content}">  
+			<div class="con">
+					<div class="naver-viewer"></div>
+					<input type="hidden" name="stray_content" value="${strayVO.stray_content}">  
+			</div>
 				</td>
-			</tr><!-- 댓글화면 -->
+			</tr>
+			
+			<!-- 댓글화면 -->
 		<c:forEach items="${replyList}" var="reply">
 			<c:if test="${reply.content ne null}">
-				<tr>
+				<tr class="tr1">
 					<td>
 						<div class="grandmother">
 							<table width="100%" class="mother">
@@ -338,15 +287,14 @@ hr {
 										<c:if test="${strayVO.stray_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>
 										</c:if>
-										</th>
-
-									<th align="left">작성일 : ${reply.writedateWithFormat}</th>
+									<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
 								</tr>
 
 								<tr class="reply_view">
 									<th class="content" colspan="2" align="left">${reply.content}</th>
 								</tr>
 
+				<!-- 댓글 수정 -->
 								<tr class="reply_edit">
 									<td align="right">
 									<th colspan="2" align="left">
@@ -359,9 +307,8 @@ hr {
 										</form>
 									</th>
 
-									<!-- 댓글 수정 -->
-									<c:if
-										test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+
+									<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
 										<tr>
 											<th colspan="2" align="right">
 												<button class="reply_view_btn">수정</button>
@@ -381,16 +328,17 @@ hr {
 
 		<!-- 댓글 등록 -->
 	<tr>
-			<td align="right">
+			<td align="right" class="td2">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin"
-					value="${strayVO.stray_no}"><br> 
-					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}"
-					readonly>
-					<textarea name="content" requistray placeholder="내용 입력" rows="4"
-					cols="100"></textarea>
-				<br><br>
-					<input type="submit" value="등록" class="btn hover3">
+					value="${strayVO.stray_no}"><br>
+					<div align="left">
+					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
+					<br>
+					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
+					<input type="submit" value="등록" class="btn hover3" align="right">
+					<br><br>
+					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 				</form>
 			</td>
 		</tr>

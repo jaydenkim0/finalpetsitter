@@ -102,7 +102,7 @@
 	                      <div class="col">
 	                        <h4>관리자</h4>
 	                        <ul>
-	                          <li><a href="${context}/admin/registInfo">등록 현황</a></li>
+	                          <li><a href="${context}/admin/">관리자</a></li>
 	                          <li><a href="${context}/admin/list/reservationstatus">예약 현황</a></li>
 	                          <li><a href="${context}/admin/account">정산 관리</a></li>
 	                          <li><a href="${context}/board/review/list">리뷰 관리</a></li>

@@ -107,7 +107,7 @@ FOOTER 이용 시 넣어야할 요소
 							console.log(resp);
 							if(resp == "success"){
 								alert("이메일 발송 완료");
-								location.reload();
+								location.href = '${pageContext.request.contextPath}/';
 							}
 							else{
 								alert("이메일 발송 실패");								
@@ -141,7 +141,7 @@ FOOTER 이용 시 넣어야할 요소
 						console.log(resp);
 						if(resp == "success"){
 							alert("이메일 발송 완료");
-							location.reload();
+							location.href = '${pageContext.request.contextPath}/';
 						}
 						else{
 							alert("이메일 발송 실패");								

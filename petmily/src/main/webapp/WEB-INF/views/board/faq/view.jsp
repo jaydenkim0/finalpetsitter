@@ -7,6 +7,8 @@
 <!-- jquery js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/view.css">
 
 <!-- 
 HEADER 이용 시 넣어야할 요소 
@@ -89,89 +91,28 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
- *{
-            box-sizing: border-box;
-        }
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top : 50px;
-}
 
-th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
-}
-
-.td2 {
-	text-align: right;
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	border-color: #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-/* div { */
-/* 	padding: 30px; */
-/* } */
-
-hr {
-	width: 80%;
-}
-
-.btn {
-	display: white;
-	width: 120px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-<!-- header style -->
+<!--
+header style -->
 #masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -181,7 +122,7 @@ hr {
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
-				<td>No.&nbsp;&nbsp;${faqVO.faq_no}</td>
+				<td>No : &nbsp;&nbsp;${faqVO.faq_no}</td>
 			</tr>
 
 			<tr>
@@ -192,24 +133,27 @@ hr {
 				<td>Name : ${faqVO.member_id}</td>
 			</tr>
 			
-			<tr>
+			<tr class="tr1">
 				<td>Subject : <font color="#1482e0">[${faqVO.faq_title}]</font>
 				${faqVO.faq_head}</td>
 			</tr>
 
+		<tr class="tr1">
 			<c:forEach var="faqImage" items="${faqImageList}">
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
 				<tr>
-					<td>
+					<td class="td1">
 					<img src="${context}/board/faq/view/file_view?faq_file_no=${faqImage.faq_file_no}" width="200" height="100">
 					</td>
 				</tr>
 			</c:if>
 		</c:forEach>
-			<tr>
+			<tr class="tr1">
 				<td>
+				<div class="con">
 					<div class="naver-viewer"></div>  
 					<input type="hidden" name="faq_content" value="${faqVO.faq_content}">  
+				</div>
 				</td>
 			</tr>
 	
