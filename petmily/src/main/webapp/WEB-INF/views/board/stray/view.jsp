@@ -6,6 +6,8 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<!-- css -->
+  <link rel="stylesheet" href="${context}/resources/css/view.css">
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -180,95 +182,9 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
-* {
-	box-sizing: border-box;
-}
-
-.notice_table {
-	width: 80%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-	border-color: #BDBDBD;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-.tr1 {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: left;
-	border-color: #BDBDBD;
-}
-
-.td2 {
-	text-align: right;
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	border-color: #BDBDBD;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-hr {
-	width: 80%;
-}
-
-.no_inputline {
-	border: none;
-	border-right: 0px;
-	border-top: 0px;
-	boder-left: 0px;
-	boder-bottom: 0px;
-	width:100px;
-	text-align: left;
-}
-
-.btn {
-	display: white;
-	width: 120px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size: 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-
-textarea {
-	width: 1250px;
-	height: 50px;
-	padding: 10px;
-	box-sizing: border-box;
-	border: solid 2px #1E90FF;
-	border-radius: 5px;
-	font-size: 16px;
-	resize: both;
-	margin: 0px; 
-	vertical-align: middle;
-}
-.con{
-height: 400px;
-}
-
 <!--
-header style -->#masthead:after {
+header style -->
+#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;

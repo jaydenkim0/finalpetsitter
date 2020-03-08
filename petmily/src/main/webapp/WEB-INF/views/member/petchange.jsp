@@ -9,43 +9,78 @@ function no_image() {
 </script>
 </head>
 <style>
- .chtab{
- width:35%;
+
+ body{
+ 
+ 
  }
+
+	#petchbtn{
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+	
+	}
+	
+		input{
+	width:180px;
+	height:35px;
+	BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+	
+	
+	}
+	
 </style>
 <body>
-
+<div class="chtab" align="center">
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
-	<table border="1" class="chtab" align="center">
+	<table >
 		<tr>
 			<th>이미지</th>
 			<td>
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100px; height: 100px;">
+					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;"><Br><br>
 				</c:when>
 				<c:otherwise>	
-					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100px; height: 100px;" onerror="no_image()" id="pet_image">
+					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" onerror="no_image()" id="pet_image"><br><Br>
 				</c:otherwise>
 			</c:choose>
 				<input type="file" name="pet_image" accept="image/*">
 			</td>
 		</tr>
 		<tr>
-			<th>이름</th>
+			<th>Name</th>
 			<td>
 				<input type="text" name="name" value=${pet.name }>
 			</td>
 		</tr>
 		<tr>
-			<th>나이</th>
+			<th>Age</th>
 			<td>
 				<input type="number" name="age" value=${pet.age }>
 			</td>
 		</tr>
 		<tr>
-			<th>동물 종류</th>
+			<th>Type</th>
 			<td>
 				<select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
@@ -59,17 +94,19 @@ function no_image() {
 			</td>
 		</tr>
 		<tr>
-			<th>설명</th>
+			<th>etc</th>
 			<td>
 				<textarea name="ect">${pet.ect }</textarea>
 			</td>
 		</tr>
+		
 		<tr>
+		
 			<th colspan="2">
-				<input type="submit" value="펫정보수정">
+				<input type="submit" value="수정" id="petchbtn">
 			</th>
 		</tr>
 	</table>
 </form>
-
+</div>
 </body>

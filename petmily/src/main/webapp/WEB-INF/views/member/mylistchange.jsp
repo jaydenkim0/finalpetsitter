@@ -90,6 +90,16 @@
 	input{
 	width:180px;
 	height:35px;
+	BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+	
 	
 	}
 	table{
@@ -100,17 +110,27 @@
 	}
 	
 	button {
-	width: 60px;
-	height: 30px;
+	position:relative;
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
    text-align: center;
-   
+   font-size: 12px;
    cursor: pointer;
-   
-    font:13px;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+   left:20px;
    }
   .out{
-   padding-left:923px;
+   padding-left:1100px;
+   background-color:white;
+   color: red;
    }
+  
   
 	</style>
 
@@ -120,9 +140,16 @@
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
 			    <table>
 			    	<tr>
-			    		<th>Image</th>
+			    		<th>Image</th> 	
 			    		<td>
-			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="2">
+			    			<c:choose>
+			    				<c:when test="${member_image_no>0 }">
+			    					<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="member_image">
+			    				</c:when>
+								<c:otherwise>
+									<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
+								</c:otherwise>		    			
+			    			</c:choose>	
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
@@ -167,11 +194,16 @@
 							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}">
 						</td>
 					</tr>
+					
 					<tr>
 						<th colspan="2">
-							<button type="submit" >수정</button>
+							<button type="submit" >수정</button>&nbsp;&nbsp;&nbsp;
+								<a href="mylist">
+				<button type="button">취소</button>
+			</a>
 						</th>
 					</tr>
+				
 			    </table>
 			</form>
 			</div>
@@ -184,9 +216,7 @@
 			</c:if>
 
 			
-			<a href="mylist">
-				<button type="button">취소</button>
-			</a>
+		
 			</div>
 	</body>
 	

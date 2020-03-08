@@ -231,35 +231,38 @@ public class PetsitterController {
 	//예약(견적)확인 페이지
 	@GetMapping("/confirm")
 	public String confirm(@RequestParam int reservation_no,
-							Model model) {
-		//예약 정보  단일 조회
-		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);
-		
-		//1시간 당 금액 구하기
-		int hourPayment = payService.getHourPayment();
-		
-		//최종 결제 금액 구하기
-		int payMent = 0;
-			List<ReservationAllVO> all = reservationList.getList();
-			
-			int totalTime = all.get(0).getUsage_time();
-			int startTime = all.get(0).getStart_time();
-			
-			for(ReservationAllVO allVO : all) {
+							Model model) {		
+		try {
+			//예약 정보  단일 조회
+			ReservationListVO reservationList = petsitterService.getReservation(reservation_no);			
+			//1시간 당 금액 구하기
+			int hourPayment = payService.getHourPayment();			
+			//거절시 결제금액 구하지 않고 진행 
+			//최종 결제 금액 구하기
+			int payMent = 0;
+				List<ReservationAllVO> all = reservationList.getList();
 				
-				int usagetime = allVO.getUsage_time();
+				int totalTime = all.get(0).getUsage_time();
+				int startTime = all.get(0).getStart_time();
 				
-				int oneHour = usagetime * hourPayment;
-				int payment = allVO.getPayment();
-				
-				payMent = oneHour + payment;			
-			}
-		
-		model.addAttribute("reservationList", reservationList)
-			.addAttribute("payMent", payMent)
-			.addAttribute("usageTime", totalTime)
-			.addAttribute("startTime", startTime);
-		return "petsitter/confirm";
+				for(ReservationAllVO allVO : all) {
+					
+					int usagetime = allVO.getUsage_time();
+					
+					int oneHour = usagetime * hourPayment;
+					int payment = allVO.getPayment();
+					
+					payMent = oneHour + payment;			
+				}			
+			model.addAttribute("reservationList", reservationList)
+				.addAttribute("payMent", payMent)
+				.addAttribute("usageTime", totalTime)
+				.addAttribute("startTime", startTime);
+			return "petsitter/confirm";
+		}catch (Exception e){
+			e.printStackTrace();	
+			return "petsitter/confirm_cancel";
+		}
 	}
 	
 	// 펫시터가 견적신청서를 확인하고 승인 및 반려를 하는 내용
@@ -270,22 +273,22 @@ public class PetsitterController {
 									    @RequestParam int sitter_no,
 									    @RequestParam String check,
 									    @RequestParam int reservation_no
-			) throws MessagingException {	
-		int pet_sitter_no = sitter_no; 
-		PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
-		String sitter_id = petsitterVO.getId();
-		MemberVO memberVO = adminService.getMemberdetail(id);
-		String memberemail = memberVO.getEmail();
-		String result;
-		if(check.equals("승인")) {	//승인(회원에게 결제 주소 전달)
-				result = aemailService.PaymentReqEMail(id, memberemail, sitter_no, reservation_no);
-				// 예약 상태 승인으로 변경
-				petsitterService.reservationStatusUpdate(reservation_no);
-		}else {	// 거절(content 포함해서 이메일 전송)
-				result = aemailService.NoestimateEMail(id, memberemail, content, sitter_id);
-				// 예약 내용 삭제
-				petsitterService.reservationDelete(reservation_no);
-		}
+			) throws MessagingException {					
+			int pet_sitter_no = sitter_no; 
+			PetsitterVO petsitterVO = adminService.petsitterdetail(pet_sitter_no);		
+			String sitter_id = petsitterVO.getId();
+			MemberVO memberVO = adminService.getMemberdetail(id);
+			String memberemail = memberVO.getEmail();
+			String result;
+			if(check.equals("승인")) {	//승인(회원에게 결제 주소 전달)
+					result = aemailService.PaymentReqEMail(id, memberemail, sitter_no, reservation_no);
+					// 예약 상태 승인으로 변경
+					petsitterService.reservationStatusUpdate(reservation_no);
+			}else {	// 거절(content 포함해서 이메일 전송)
+					result = aemailService.NoestimateEMail(id, memberemail, content, sitter_id);
+					// 예약 내용 삭제
+					petsitterService.reservationDelete(reservation_no);
+			}
 		return result;
 	}
 	
