@@ -64,11 +64,11 @@ div#side_left {
 
 #side_left_box {
 	position:relative;
-	width: 250px;
+	width: 280px;
 	height: 400px;
 	background-color: white;
 	float:left;
-	margin-left: 80px;
+	margin-left: 30px;
 	top:30px;
 }
 #side_left_box2{
@@ -194,6 +194,8 @@ body {
 
 img {
     border-radius: 100pt;
+    position:relative;
+    left:50px;
 }
 button{
 	width: 60px;
@@ -206,10 +208,13 @@ button{
 		position: relative;
 		top: 1px;
 		border-radius:7px;
-		left:20px;
+		left:69px;
+		
+		
 }
 th,td{
  padding: 10px;
+ font-size: 10pt;
 
 }
 
@@ -246,7 +251,7 @@ th,td{
 
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }&nbsp; 님</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
@@ -255,20 +260,20 @@ th,td{
 	<br><Br><br>
 		<table>
 	<tr>
-	<th>Pets :</th>
-		<td>${mylistpet.size() }</td>
+	<th>Pets </th>
+		<td>${mylistpet.size() } 마리</td>
 	</tr>
 	<tr>
-		<th>Point :</th>
-		<td>${mylist.point}</td>
+		<th>Point </th>
+		<td>${mypage.point}</td>
 	</tr>
 	<tr>
-		<th>JoinDate :</th>		
-		<td>${mylist.total_joindateWithFormat }</td>
+		<th>JoinDate </th>		
+		<td>${mypage.total_joindateWithFormat }</td>
 		</tr>
 		<tr>
-			<th>LastLogin :</th>		
-			<td>${mylist.final_loginWithFormat }</td>
+			<th>LastLogin </th>		
+			<td>${mypage.final_loginWithFormat }</td>
 	</tr>
 </table>
 <div id="side_left_box2">

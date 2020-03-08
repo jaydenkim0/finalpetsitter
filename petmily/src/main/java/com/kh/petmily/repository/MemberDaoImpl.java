@@ -46,6 +46,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.mylist",id);
 	}
 	
+	//내정보조회 마이페이지
+		@Override
+		public MemberDto mypage(String id) {
+			return sqlSession.selectOne("member.mypage",id);
+		}
+		
 	//반려동물조회
 	@Override
 	public List<PetImagePetDto> mylistpet(String id){
@@ -340,5 +346,7 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("id", id);
 		return sqlSession.selectOne("member.passwordfind", map);
 	}
+	
+
 
 }
