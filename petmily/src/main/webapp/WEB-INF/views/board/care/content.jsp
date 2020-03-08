@@ -259,6 +259,7 @@
 function no_image1(){
 	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 }
+
 function no_image2(){
 	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 	window.alert(document.getElementById(test.getAttribute('id')).getAttribute('id'));
@@ -266,7 +267,11 @@ function no_image2(){
 
 function testfunc(test) {
 	var errorid = document.getElementById(test.getAttribute('id')).getAttribute('id');
-	
+	var erroridreal = "#"+errorid;
+// 	window.alert(erroridreal);
+	document.querySelectorAll("'"+erroridreal+"'").forEach(function(tag){
+		$(tag).attr("src", "/petmily/resources/img/기본프로필.jpeg");
+	});
 }
 </script>
 <style>
@@ -380,7 +385,14 @@ function testfunc(test) {
 			<c:choose>
 				<c:when test="${not empty replyimagelist.care_reply_writer }">
 					<th align="left">
-						<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${replyimagelist.care_reply_writer }" style="max-width: 15%; height: auto;"  onerror="testfunc(this)" id=" ${replyimagelist.care_reply_writer }">
+					<c:choose>
+						<c:when test="${replyimagelist.member_image_no>0}">
+							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
+						</c:when>
+						<c:otherwise>
+							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
+						</c:otherwise>
+					</c:choose>
 						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
 					</th>
 				</c:when>
@@ -409,13 +421,13 @@ function testfunc(test) {
 				</form>				
 			</th>
 		</tr>
-		<tr>
-			<th align="left">
-					<c:if test="${replyimagelist.care_image_no>0 }">
-						<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
-					</c:if>
-			</th>
-		</tr>
+		<c:if test="${replyimagelist.care_image_no>0 }">
+			<tr>
+				<th align="left">
+					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
+				</th>
+			</tr>
+		</c:if>
 		
 		
 		<!-- 댓글 관리 -->

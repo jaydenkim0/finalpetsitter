@@ -122,7 +122,7 @@
 			    	<tr>
 			    		<th>Image</th>
 			    		<td>
-			    				<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="2">
+			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="2">
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
