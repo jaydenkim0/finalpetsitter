@@ -118,7 +118,20 @@
 						<td> 결제 금액 :  ${payMent} </td>					
 					</tr>
 					<tr>			
-						<td> 견적 신청 상태 : ${acountOne.status}</td>					
+						<td> 
+							<span style="display: flex; align-items:center;">
+								견적 신청 상태 : ${acountOne.status}
+								<c:if test="${acountOne.status eq '대기' and status eq 0}">
+									<!-- 견적 승인을 볼 수 있는  -->	
+									<form action="${pageContext.request.contextPath}/petsitter/confirm" method="get" style="margin: 0; margin-left: 10px;">
+										<input type="hidden" name="reservation_no" value="${acountOne.reservation_no}">
+										<input type="hidden" name="id" value="${acountOne.member_id}">
+										<input type="hidden" name="pet_sitter_no" value="${acountOne.reservation_sitter_no}">
+										<button> 견적페이지 </button>
+									</form>
+								</c:if>
+							</span>
+						</td>										
 					</tr>
 						<c:if test="${payinfo != null }">				
 							
@@ -126,7 +139,7 @@
 								<tr>
 									<td>
 										<span style="display: flex; align-items:center;">
-										결제 신청 상태 : ${pay.status}
+											결제 신청 상태 : ${pay.status}
 											<c:if test="${pay.status eq '완료' and status eq 0}">							
 												<!-- 결제 취소 버튼 -->
 												<form action="${pageContext.request.contextPath}/admin/revoke" method="get" style="margin: 0; margin-left: 10px;">
