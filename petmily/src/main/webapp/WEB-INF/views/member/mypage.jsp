@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-<script>
-	function no_image2() {
-		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
-	}
-</script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  <!-- header css -->
   <link rel="stylesheet" href="${context}/resources/css/header.css">
    <!-- header script -->
@@ -31,35 +24,11 @@
           })
       });
     </script>
-        <!-- header style -->
-    <style>
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
+   <script>
+	function no_image2() {
+		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:200px;
-	}
-	.section-content::after{
-      content:"";
-      display:block;
-      clear:both;
-     
-      }
- 
-}
-	</style>
+</script>
     
     <!-- 
 FOOTER 이용 시 넣어야할 요소 
@@ -219,10 +188,6 @@ position: relative;
 	font-size:16px;
 	}
 	
-}
-
-
-
 body {
 	background-color: #FAFAFA;
 }
@@ -248,13 +213,37 @@ th,td{
 
 }
 
-
+#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	.section-content{
+	padding-top:200px;
+	padding-bottom:100px;
+	}
+	.section-content::after{
+      content:"";
+      display:block;
+      clear:both;
+}
 
 </style>
 
 <!-- header 불러오기  -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <section class="section-content">
+
+
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
 		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
@@ -345,4 +334,4 @@ th,td{
 <!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
 
-</html>
+
