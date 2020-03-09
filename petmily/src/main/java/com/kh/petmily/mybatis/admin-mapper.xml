@@ -856,7 +856,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 	<!-- 1. 펫시터 중에서 결제 있는 사람 리스트 -->
 	<select id="findpetsitteraccount" resultType="accountVO">
-		select * from accountlist where kakaopaystatus='완료'					
+		select DISTINCT reservation_sitter_no from accountlist where kakaopaystatus='완료'					
 	    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
 	    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')    
 	</select>
@@ -893,7 +893,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select payment from payinfo where payname='중계 수수료'
 	</select>
 
-
 	<!-- account 테이블 정산 계산 후 인서트 -->
 	<insert id="setaccountPetsitter" parameterType="accountDto">
 		insert into account values(
@@ -907,6 +906,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			'입금대기'		
 		)
 	</insert>
+	
+	<!-- 입금대기 인원 수 -->
+	<select id="accountWcount" resultType="int">
+		select count(*) from account where account_status='입금대기'
+	</select>
+	
+	<!-- 개별 정산 입금 버튼 기능 -->
+	<update id="IndividualAccount" parameterType="String">
+		update account set account_status = '입금완료'
+		where account_sitter_id=#{sitter_id}
+	</update>
+	
+	<!-- 일괄 정산 입금 버튼 기능 -->
+	<update id="batchAccount">
+		update account set account_status = '입금완료'
+	</update>
 
 </mapper>
 

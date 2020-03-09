@@ -576,6 +576,21 @@ public class AdiminServiceImpl implements AdminService {
 	public int countAricleAccount(String searchOption, String keyword) {
 		return adminDao.countAricleAccount(searchOption, keyword);
 	}
+	// 개별 정산 입금 버튼
+	@Override
+	public void IndividualAccount(String sitter_id) {
+		adminDao.IndividualAccount(sitter_id);
+	}
+	// 일괄 정산 입금 버튼
+	@Override
+	public void batchAccount() {
+		adminDao.batchAccount();
+	}
+	// 입금대기 인원수
+	@Override
+	public int accountWcount() {	
+		return adminDao.accountWcount();
+	}
 
 
 

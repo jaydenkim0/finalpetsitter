@@ -262,6 +262,12 @@ public interface AdminDao {
 	int getPaymentMin(int sitter_no);
 	// 5. 펫시터 수수료 구해오기
 	double getFees();
+	// 개별 정산 입금 버튼
+	void IndividualAccount(String sitter_id);
+	// 일괄 정산 입금 버튼
+	void batchAccount();
+	// 입금대기 인원수
+	int accountWcount();
 
 
 
