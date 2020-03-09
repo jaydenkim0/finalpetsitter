@@ -140,16 +140,16 @@ th {
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
   
 <section class="section-content">
-<div style="float: left; width: 20%; margin-top: 80px">
- <img src="${context}/resources/img/board.png"  align="right" width="60%" height="20%"> 
-</div>
-<div style="float: left; width: 70%;">
+<!-- <div style="float: left; width: 20%; margin-top: 80px"> -->
+<%--  <img src="${context}/resources/img/board.png"  align="right" width="60%" height="20%">  --%>
+<!-- </div> -->
+<!-- <div style="float: left; width: 70%;"> -->
 <form action=account method="post">
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
 	
-	<h1 align="left" style="margin-left:70px;'">Check Please !</h1>
-	<section>
+<!-- 	<section> -->
+	<h1 align="left" style="margin-left:15%;'">Check Please !</h1>
 	<hr>
 	<table class="notice_table" >
 		<tr>
@@ -188,8 +188,7 @@ th {
 			<td>
 			<br>
 			<h4 align="center">
-			<input type="hidden" name="total_amount" value="${payMent}"
-				readonly> Total : ${payMent}원</h4>
+			<input type="hidden" name="total_amount" value="${payMent}" readonly> Total : ${payMent}원</h4>
 				<br>
 			</td>
 		</tr>
@@ -222,11 +221,10 @@ th {
 	</div>
 </div>
 </div>
-</section>
+<!-- </section> -->
 </form>
 
 <br>
-</div>
 
 </section>
 

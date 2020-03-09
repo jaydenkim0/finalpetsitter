@@ -215,11 +215,9 @@ FOOTER 이용 시 넣어야할 요소
 								<br>
 							
 								<c:forEach var="location" items="${petsitter.list}">
-									<span id="petsitter_city">#${location.city}</span> 
-									<span id="petsitter_area">#${location.area}</span>
-									<br><br>
+									<span id="petsitter_city">#${location.city} ${location.area}</span>
 								</c:forEach>
-	
+								<br>
 								<hr>
 							</a>
 						</div>

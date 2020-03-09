@@ -333,7 +333,6 @@ header style -->
 					<input type="hidden" id="origin" name="origin"
 					value="${strayVO.stray_no}"><br>
 					<div align="left">
-					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
 					<br>
 					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
 					<input type="submit" value="등록" class="btn hover3" align="right">
