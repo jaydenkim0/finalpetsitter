@@ -45,7 +45,7 @@
 
 .regist-wrap input[type="checkbox"] + label {
   /* display: block; */
-  position: relative;
+/*   position: relative; */
   padding-left: 35px;
   margin-bottom: 20px;
   font: 14px/20px 'Open Sans', Arial, sans-serif;
