@@ -152,4 +152,9 @@ public interface MemberService {
 	// 이메일 변경전에 아이디와 이메일이 있는지 확인
 	MemberDto passwordfind(String email, String id);
 
+	//마이페이지 로딩시에 찍어줄 정보
+	MemberDto mypage(String id);
+
+	int size(String id);
+
 }

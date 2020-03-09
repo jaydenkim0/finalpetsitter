@@ -341,4 +341,14 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.passwordfind", map);
 	}
 
+	//마이페이지 로딩시에 찍어줄 정보
+	@Override
+	public MemberDto mypage(String id) {
+		return sqlSession.selectOne("member.mypage",id);
+	}
+	@Override
+	public int size(String id) {
+		return sqlSession.selectOne("member.size",id);
+	}
+
 }

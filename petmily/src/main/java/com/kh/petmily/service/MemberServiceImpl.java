@@ -397,5 +397,15 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto passwordfind(String email, String id) {	
 		return memberDao.passwordfind(email, id);
 	}
+
+	//마이페이지 로딩시에 찍어줄 정보
+	@Override
+	public MemberDto mypage(String id) {
+		return memberDao.mypage(id);
+	}
+	@Override
+	public int size(String id) {
+		return memberDao.size(id);
+	}
 	}
 

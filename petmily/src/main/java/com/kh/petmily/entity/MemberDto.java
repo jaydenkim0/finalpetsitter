@@ -31,6 +31,8 @@ public class MemberDto {
 	private String lastlogin;
 	private String Privacy_agree; // 회원가입 개인정보 동의, 무조건 'true' 일때 만 가입가능
 	private String terms_agree; // 회원 이용약관 동의, 무조건 'true' 일때 만 가입가능
+	
+	private int size;//펫 마리수
 
 	public String getPhoneWithFormat() {
 		if(phone != null) {
@@ -49,6 +51,14 @@ public class MemberDto {
 		return time;	
 	}
 	
+	public String getMypage_joindateWithFormat() throws ParseException {
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(joindate);
+		SimpleDateFormat write = new SimpleDateFormat("y. M. d");
+		String time = write.format(date);
+		return time;	
+	}
+	
 	public String getFinal_loginWithFormat() throws ParseException {
 		if(lastlogin == null) {
 			return "";
@@ -58,6 +68,20 @@ public class MemberDto {
 	            Date date = read.parse(lastlogin);
 	            //변환한 형식을 다시 원하는 형식의 문자열로 변환
 	            SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일 E요일 HH시 mm분 ss초");
+	            String time = write.format(date);
+	            return time;
+	    }
+	}
+	
+	public String getMypage_loginWithFormat() throws ParseException {
+		if(lastlogin == null) {
+			return "";
+		}
+		else{
+			  SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	            Date date = read.parse(lastlogin);
+	            //변환한 형식을 다시 원하는 형식의 문자열로 변환
+	            SimpleDateFormat write = new SimpleDateFormat("y. M. d (E) HH:mm:ss");
 	            String time = write.format(date);
 	            return time;
 	    }

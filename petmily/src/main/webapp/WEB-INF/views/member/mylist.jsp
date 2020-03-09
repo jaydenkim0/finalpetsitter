@@ -144,13 +144,21 @@ select{
 	border: 1px solid #999;
 	font-family : inherit;
 	}
+	 .box {
+    width: 350px;
+    height: 350px; 
+    border-radius: 30%;
+    overflow: hidden;
+}
 
 </style>
 <body>
 <div align="left">
 
 <br>
-<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 350px; height: 350px;" onerror="no_image2()" id="2">
+<div class="box" style="background: #BDBDBD;">
+<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: auto;" onerror="no_image2()" id="2">
+</div>
 <br><br>
 <table class="tab0">
 	<tr>

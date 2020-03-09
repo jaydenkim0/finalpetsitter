@@ -419,7 +419,16 @@ public class MemberController {
 
 	// 마이페이지 연결
 	@GetMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		
+		String id = (String) session.getAttribute("id");
+		
+		MemberDto mypage = memberService.mypage(id);
+		model.addAttribute("mypage",mypage);
+		
+		int size = memberService.size(id);
+		model.addAttribute("size",size);
+		
 		return "member/mypage";
 	}
 

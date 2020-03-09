@@ -64,6 +64,12 @@ $(function(){
 	td{
 	width:40%;
 	}
+	.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
 
 
 </style>
@@ -74,26 +80,28 @@ $(function(){
 
 <div align="center">
 
-	<table border="1" >
+	<table>
 		<tr>
-			<th>리뷰 번호</th>
+			<th>No</th>
 			<td>${review.review_no }</td>
 		</tr>
 		<tr>
-			<th rowspan="2">펫시터</th>
+			<th rowspan="2">Petsitter</th>
 			<td>
-				<img src = "petmily/board/care/member/image?member_image_member_id=${review.sitter_id }" style="max-width: 15%; height: auto;"onerror="this.onerror=null; this.src='/petmily/resources/img/기본프로필.jpeg';">
+				<div class="box">
+					<img src = "petmily/board/care/member/image?member_image_member_id=${review.sitter_id }" style="width: 100%; height: auto;"onerror="this.onerror=null; this.src='/petmily/resources/img/기본프로필.jpeg';">		
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td>${review.sitter_id }</td>
 		</tr>
 		<tr>
-			<th>제목</th>
+			<th>Title</th>
 			<td>${review.review_title }</td>
 		</tr>
 		<tr>
-			<th>별점</th>
+			<th>Star</th>
 			<td>
 				<c:choose>
 					<c:when test="${review.review_star==3 }">
@@ -109,11 +117,11 @@ $(function(){
 			</td>
 		</tr>
 		<tr>
-			<th>작성일자</th>
+			<th>Writedate</th>
 			<td>${review.writedateWithFormat }</td>
 		</tr>
 		<tr>
-			<th>내용</th>
+			<th>Content</th>
 			<td>${review.review_content }</td>
 		</tr>
 	</table>
