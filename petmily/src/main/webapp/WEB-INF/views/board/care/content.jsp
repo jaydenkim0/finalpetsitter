@@ -431,7 +431,7 @@ function no_image2(){
 	</table>
 </div>
 </c:forEach>
-<div class="row" >
+<!-- <div class="row" > -->
 	<!-- 네비게이터(navigator) -->
 	<jsp:include page="/WEB-INF/views/board/care/navigator_content.jsp">
 		<jsp:param name="pno" value="${pno}"/>
@@ -440,6 +440,6 @@ function no_image2(){
 		<jsp:param name="pagesize" value="${pagesize}"/>
 		<jsp:param name="care_board_no" value="${care_board_no }"/>
 	</jsp:include>
-</div><br><br><br><br>
+<!-- </div><br><br><br><br> -->
 
 </body>

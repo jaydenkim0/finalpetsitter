@@ -210,6 +210,27 @@
 
 
 <style>
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!--
 header style -->
 #masthead:after {
@@ -237,11 +258,11 @@ header style -->
 
 <section class="section-content">
 
-	<h2 align="center">QnA</h2>
+	<h1 align="center">QnA</h1>
 		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
-				<td>No : ${qnaVO.qna_no}</td>
+				<td>No :${qnaVO.qna_no}</td>
 			</tr>
 
 			<tr>
@@ -252,13 +273,8 @@ header style -->
 				<td>Name : ${qnaVO.qna_writer}</td>
 			</tr>
 
-			<tr>
-				<td>말머리 : ${qnaVO.qna_title}</td>
-			</tr>
-
 			<tr class="tr1">
-				<td>Subject : 
-				<font color="#1482e0">[${qnaVO.qna_title}]</font>
+				<td>Subject : <font color="#1482e0">[${qnaVO.qna_title}]</font>
 				${qnaVO.qna_head}</td>
 			</tr>
 
@@ -266,181 +282,108 @@ header style -->
 			<c:forEach var="qnaImage" items="${qnaImageList}">
 				<c:if test="${qnafileDto.qna_file_no ne 0}">
 					<tr>
-						<td class="td1"><img
-							src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}"
+						<td class="td1">
+						<br>
+						<img src="${context}/board/qna/view/file_view?qna_file_no=${qnaImage.qna_file_no}"
 							width="200" height="100"></td>
 					</tr>
 				</c:if>
 			</c:forEach>
-		
-		<tr class="tr1">
-			<td><c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-							<div class="con">
-							<div class="naver-viewer"></div>
-							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
-						</div>
-					</c:when>
-					<c:otherwise>
-					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
-						<div class="con">
-							<div class="naver-viewer"></div>
-							<input type="hidden" name="qna_content" value="게시글 권한이 없습니다.">
-						</div>
-					</c:if>
-					</c:otherwise>
-				</c:choose>
-				<c:if test="${qnaVO.qna_title ne '신고합니다'}">
-				<div class="con">
-							<div class="naver-viewer"></div>
-							<input type="hidden" name="faq_content" value="${qnaVO.qna_content}">
-						</div>
-				</c:if>
-				</td>
-		</tr>
 
-<!-- 댓글화면 -->
 
-<c:forEach items="${replyList}" var="reply">
-<c:if test="${reply.content ne null}">
-<tr class="tr1">
-	<td>
-	<div class="grandmother">
-		<table width="100%" class="mother">
-			<tr>
-				<th align="left"> 
-				<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">${reply.reply_writer}
-				<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
-					<font color="red">(작성자)</font>
-				</c:if>
-				<br>
-				<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
-			</tr>
 			
-			<tr class="reply_view">
-				<c:choose>
-					<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-							<th class="content" colspan="2" align="left">${reply.content}</th>
-					</c:when>
-				<c:otherwise>
-				<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
-					<th class="content" colspan="2" align="left">댓글을 볼 수 있는 권한이 없습니다.</th>
-					</c:if>
-				</c:otherwise>
-		</c:choose>
-		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
-			<th class="content" colspan="2" align="left">${reply.content}</th>
-		</c:if>
+		<tr class="tr1"><td>
+				<div class="con">
+					<div class="naver-viewer"></div>
+					<input type="hidden" name="qna_content" value="${qnaVO.qna_content}">
+				</div>
+			</td>
 		</tr>
-		
-		<!-- 댓글 수정 -->	
-			<tr class="reply_edit">
-				<td align="right">
-				<th colspan="2" align="left">
-					<form action="replyUpdate" method="post"
-						class="reply_change_submit">
-						<input type="hidden" name="reply_no" value="${reply.reply_no}">
-						<input type="hidden" name="origin" value="${reply.origin}">
-						<textarea name="content" required class="val">${reply.content}</textarea>
-					</form>
-				</th>
 
-			<c:if test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
-				<tr>
-					<th colspan="2" align="right">
-						<button class="reply_view_btn">수정</button>
-						<button class="reply_edit_btn">완료</button> 
-						<a href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">
-							<button class="replyDelete_submit">삭제</button>
-						</a>						
-						</th>
+
+
+
+			<!-- 댓글화면 -->
+			<c:forEach items="${replyList}" var="reply">
+				<c:if test="${reply.content ne null}">
+					<tr class="no-tr">
+						<td>
+							<div class="grandmother">
+								<table width="100%" class="mother">
+									<tr>
+										<th align="left">
+											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+										${reply.reply_writer}
+										<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
+											<font color="red">(작성자)</font>
+										</c:if>
+											<font size="1px">작성일 : ${reply.writedateWithFormat}</font></th>
+									</tr>
+
+									<tr class="reply_view">
+										<br>
+										<th class="content" colspan="2" align="left">${reply.content}</th>
+									</tr>
+
+									<tr class="reply_edit">
+										<td align="right">
+										<th colspan="2" align="left">
+											<form action="replyUpdate" method="post"
+												class="reply_change_submit">
+												<input type="hidden" name="reply_no"
+													value="${reply.reply_no}"> <input type="hidden"
+													name="origin" value="${reply.origin}">
+												<textarea name="content" required class="val">${reply.content}</textarea>
+											</form>
+										</th>
+
+										<!-- 댓글 수정 -->
+										<c:if
+											test="${sessionScope.id eq reply.reply_writer || grade eq 'admin'}">
+											<tr>
+												<th colspan="2" align="right">
+													<button class="reply_view_btn">수정</button>
+													<button class="reply_edit_btn">완료</button> <a
+													href="replyDelete?reply_no=${reply.reply_no}&origin=${qnaVO.qna_no}">
+														<button class="replyDelete_submit">삭제</button>
+												</a>
+												</th>
+											</tr>
+										</c:if>
+									</tr>
+								</table>
+							</div>
+						</td>
 					</tr>
 				</c:if>
-			</tr>
-		</table>
-	</div>
-	</td>
-</tr>
-</c:if>
-</c:forEach>
+			</c:forEach>
 
-<!-- 댓글 등록 -->
-<tr>
-<td align="right">
-	<c:choose>
-		<c:when test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-	<form action="replywrite" method="post" class="reply_submit">
+			<!-- 댓글 등록 -->
+		<tr>
+<td align="right" class="td3">
+<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-			<div align="left">
-			<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
-			<br>
-				<textarea align="left"  name="content" required placeholder="내용 입력" rows="4" cols="150" ></textarea>
+		<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
+		<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
 				 <input type="submit" value="등록" class="btn hover3">
-				<br><br>
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 		</form>
-				</c:when>
-				
-					<c:otherwise>
-					<c:if test="${qnaVO.qna_title eq '신고합니다'} && ${sessionScope.id ne qnaVO.qna_writer || grade ne 'admin'}">
-				<div align="left">
-					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
-				<br>
-				<textarea align="left"  name="content"  readonly placeholder="작성 권한이 없습니다." rows="4" cols="150" ></textarea>
-			 <input type="submit" value="등록" class="btn hover3">
-					<br><br>
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
-					<br>
-					</c:if>
-				</c:otherwise>
-				
-		</c:choose>
-		<c:if test="${qnaVO.qna_title ne '신고합니다'}">
-		<form action="replywrite" method="post" class="reply_submit">
-		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
-			<div align="left">
-			<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
-			<br>
-				<textarea align="left"  name="content" required placeholder="내용 입력" rows="4" cols="150" ></textarea>
-				 <input type="submit" value="등록" class="btn hover3">
-				<br><br>
-			<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
-		</form>
-		</c:if>
 		</td>
 	</tr>
 
 <tr>
 	<td class="td2">
-			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-				<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-				<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-				<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
-				<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-				<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
-			</c:if>
+	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+		<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
+		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
+	</c:if>
 	
-			<a href="${context}/board/qna/list">
-			<button type="button" class="btn hover3">문의게시판 목록</button></a>
-			<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
-			<button type="button" class="btn hover3">답글쓰기</button></a>
-			
-			<!-- 신고 버튼 -->
-			<c:if test="${sessionScope.grade eq 'admin'}">
-				<br><br>
-				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
-				<form action="${context}/admin/declaration" method="get">
-					<select name="grade" required>
-						<option value="" selected disabled hidden>선택하세요</option>
-						<option value="petsitter"> 펫시터 </option>			
-						<option value="member"> 회원 </option>
-					</select>
-					<input id="id" type="text"  name="id" placeholder="아이디" required> 
-					<input  id="bbb"  type="submit" value="경고 등록" disabled>
-				</form>
-				<div id="id_check"></div>
-			</c:if>
-			
+	<a href="${context}/board/qna/list">
+	<button type="button" class="btn hover3">문의게시판 목록</button></a>
+	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+	<button type="button" class="btn hover3">답글쓰기</button></a>
 		</td>
 	</tr>
 </table>
@@ -448,4 +391,4 @@ header style -->
 <br>
       <!-- footer 불러오기 -->
      <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
- 
+	
