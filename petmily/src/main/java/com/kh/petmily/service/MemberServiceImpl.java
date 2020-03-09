@@ -403,6 +403,26 @@ public class MemberServiceImpl implements MemberService {
 		return memberDao.passwordfind(email, id);
 	}
 
-	
+	//마이페이지 로딩시에 찍어줄 정보
+	@Override
+	public MemberDto mypage2(String id) {
+		return memberDao.mypage2(id);
+	}
+	@Override
+	public int size(String id) {
+		return memberDao.size(id);
+	}
+
+	//멤버이미지개수
+	@Override
+	public int imagecount(String id) {
+		return memberDao.imagecount(id);
+	}
+
+	//펫이미지개수
+	@Override
+	public int petimagecount(int pet_image_pet_no) {
+		return memberDao.petimagecount(pet_image_pet_no);
+	}
 	}
 

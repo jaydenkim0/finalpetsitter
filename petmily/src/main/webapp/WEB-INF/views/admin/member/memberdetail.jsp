@@ -75,9 +75,8 @@
     </style>   
     
     
-   <div class="box-container first">   
-		<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 리스트로 이동</button></a>
-		<br><br>
+	<a href="${pageContext.request.contextPath}/admin/list/member"><button>멤버 리스트로 이동</button></a>
+	<div class="box-container first">   
 		<h4>	회원	정보</h4>		
 	</div>	
 	
