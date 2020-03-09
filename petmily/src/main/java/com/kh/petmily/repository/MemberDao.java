@@ -24,6 +24,9 @@ public interface MemberDao {
 
 	//내정보조회
 	MemberDto mylist(String id);
+	
+	//내정보조회 마이페이지
+	MemberDto mypage(String id);
 
 	//반려동물조회
 	List<PetImagePetDto> mylistpet(String id);
@@ -156,6 +159,8 @@ public interface MemberDao {
 
 	// 이메일 변경전에 아이디와 이메일이 있는지 확인
 	MemberDto passwordfind(String email, String id);
+
+	
 
 
 }

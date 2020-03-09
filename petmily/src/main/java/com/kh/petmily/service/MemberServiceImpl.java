@@ -56,6 +56,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto mylist(String id) {		
 		return memberDao.mylist(id);
 	}
+	//내 정보 조회 마이페이지
+	@Override
+	public MemberDto mypage(String id) {
+		return memberDao.mypage(id);
+	}
 	
 	//반려동물조회
 	@Override
@@ -397,5 +402,7 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto passwordfind(String email, String id) {	
 		return memberDao.passwordfind(email, id);
 	}
+
+	
 	}
 

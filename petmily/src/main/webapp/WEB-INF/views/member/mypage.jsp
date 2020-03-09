@@ -246,7 +246,7 @@ th,td{
 
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
@@ -260,15 +260,15 @@ th,td{
 	</tr>
 	<tr>
 		<th>Point :</th>
-		<td>${mylist.point}</td>
+		<td>${mypage.point}</td>
 	</tr>
 	<tr>
 		<th>JoinDate :</th>		
-		<td>${mylist.total_joindateWithFormat }</td>
+		<td>${mypage.total_joindateWithFormat }</td>
 		</tr>
 		<tr>
 			<th>LastLogin :</th>		
-			<td>${mylist.final_loginWithFormat }</td>
+			<td>${mypage.final_loginWithFormat }</td>
 	</tr>
 </table>
 <div id="side_left_box2">
