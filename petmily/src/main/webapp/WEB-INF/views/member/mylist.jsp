@@ -11,7 +11,7 @@
 		
 		//펫 추가 버튼 눌렀을 시
 		$("#add_btn").click(function(){
-			$(this).hide();
+			$("#add_div").hide();
 			$("#add_content").show();
 		});
 		
@@ -144,13 +144,12 @@ select{
 	border: 1px solid #999;
 	font-family : inherit;
 	}
-	 .box {
+	.box {
     width: 350px;
     height: 350px; 
     border-radius: 30%;
     overflow: hidden;
 }
-
 </style>
 <body>
 <div align="left">
@@ -227,17 +226,17 @@ select{
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
 	<c:forEach var="pet"  items="${mylistpet }">
-	
-	
-				<c:choose>
-					<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 90px; height: 90px;" class="img2">
-					</c:when>
-					<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 90px; height: 90px;" class="img2">			
-					</c:otherwise>
-				</c:choose>		
-			<table class="tab3">
+	<table class="tab3">
+		<tr>	
+			<c:choose>
+				<c:when test="${pet.pet_image_no<1 }">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: auto;" class="img2">
+				</c:when>
+				<c:otherwise>
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: auto;" class="img2">				
+				</c:otherwise>
+			</c:choose>
+		</tr>	
 			
 		<tr>
 			<th width="50%">Name :&emsp;</th>
@@ -257,7 +256,7 @@ select{
 		</tr>
 	</table>
 	<br>
-	<a href="petchange?pet_no=${pet.pet_no }"><button >수정</button></a>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button >수정</button></a>
 		<a href="pet_delete?pet_no=${pet.pet_no }"><button >삭제</button></a>
 	<br>
 	</c:forEach>
@@ -268,7 +267,9 @@ select{
 
 <br>
 <br>
-<button id="add_btn">펫 추가</button>
+<div id="add_div">
+	<button id="add_btn">펫 추가</button>
+</div>
 <div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
 	<input type="hidden" name="member_id" value="${mylist.id }">
@@ -323,4 +324,5 @@ select{
 <br><br><br>
 
 </div>
+
 </body>
