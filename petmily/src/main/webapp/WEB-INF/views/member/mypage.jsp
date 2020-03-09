@@ -4,141 +4,181 @@
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
- 
+ <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
    <script>
 	function no_image2() {
 		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 	}
 </script>
     
+    <!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     
 
      
 <style>
-
 div#side_left {
-	position:absolute;
+	position: relative;
 	width: 350px;
 	height:550px;
 	background-color: white;
+	left: 330px;
+	top: 80px;
 	padding:8pt;
-	left:375px;
-	top:100px;
 	
 }
-
 #side_left_box {
-
+	position:relative;
 	width: 250px;
 	height: 400px;
 	background-color: white;
+	float:left;
 	margin-left: 80px;
-	
+	top:30px;
 }
-
-
+#side_left_box2{
+	position:relative;
+	left:140px;
+    
+}
 #mid_content {
-
-	position:absolute;
-	width: 350px;
-	height: 180px;
+	position: relative;
+	width: 700px;
+	height: 200px;
 	background-color: white;
-	left:800px;
-	top:100px;
-	
+	float: right;
+	bottom: 530px;
+	right: 450px;
 }
-
 #mid_content2 {
-	position:absolute;
-	width: 350px;
-	height: 180px;
+	position: relative;
+	width: 700px;
+	height: 200px;
 	background-color: white;
-	left:1200px;
-	top:100px;
+	float: right;
+	bottom: 295px;
+	left:250px;
+	
 }
-
 #mid_content3 {
-	position:absolute;
-	width: 350px;
-	height: 180px;
+	position: relative;
+	width: 700px;
+	height: 200px;
 	background-color: white;
-	left:800px;
-	bottom: 420px;
-	
+	float: right;
+	right:450px;
+	bottom:260px;
 }
-
-
 #mid_content4 {
-	position:absolute;
-	width: 350px;
-	height: 180px;
+	position: relative;
+	width: 700px;
+	height: 200px;
 	background-color: white;
- 	bottom: 420px;
-	left:1200px;
-	
-
+	float: right;
+	left:250px;
+	bottom:30px;
 }
-
-
-
 #mid_content5 {
-	position:absolute;
-	width: 350px;
-	height: 180px;
+	position: relative;
+	width: 700px;
+	height: 200px;
 	background-color: white;
-	bottom: 200px;
-	left:800px;
+	float: right;
+	right:450px;
+	bottom:10px;
 }
-
 #side_content_box {
-
+position: relative;
 	display: inline;
 	background-color: white;
 	margin: 40px;
-	
+	float: left;
+	left:100px;
+	top:20px;
+	right:50px;
 }
-
 #side_content_box2 {
-
+position: relative;
 	display: inline;
 	background-color: white;
 	margin: 40px;
-
+	float: left;
+	left:100px;
+	top:20px;
+	right:100px;
 }
-
 #side_content_box3 {
-
+position: relative;
 	display: inline;
 	background-color: white;
 	margin: 50px;
-	
+	float: left;
+	left:90px;
+	top:22px;
+	right:100px;
 	font-size:16px;
 	}
 	#side_content_box4 {
-
+position: relative;
 	display: inline;
 	background-color: white;
 	margin: 50px;
-
+	float: left;
+	left:90px;
+	top:22px;
+	right:100px;
 	font-size:16px;
 	}
 	
 	#side_content_box5 {
-
+position: relative;
 	display: inline;
 	background-color: white;
 	margin: 50px;
-
+	float: left;
+	left:90px;
+	top:22px;
+	right:100px;
 	font-size:16px;
 	}
 	
 body {
-	background-color: #F2F2F2;
+	background-color: #FAFAFA;
 }
-
 img {
     border-radius: 100pt;
-    
 }
 button{
 	width: 60px;
@@ -148,27 +188,50 @@ button{
 		color: #fff;
 		font-size: 11px;
 		font-weight: bold;
-		position: absolute;
+		position: relative;
+		top: 1px;
 		border-radius:7px;
-		right:20px;
-		bottom:10px;
-}
-th,td{
- padding: 10px;
- font-size:12px;
-
+		left:20px;
 }
 
-
-
-
+th{
+font-size:12pt;
+padding:10px;
+}
+#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	.section-content{
+	padding-top:200px;
+	padding-bottom:100px;
+	}
+	.section-content::after{
+      content:"";
+      display:block;
+      clear:both;
+}
 
 </style>
 
+<!-- header 불러오기  -->
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<section class="section-content">
 
-	<div id="side_left" style="border:1px solid #A4A4A4;">
+
+	<div id="side_left" >
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }&nbsp; 님</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
@@ -178,7 +241,7 @@ th,td{
 		<table>
 	<tr>
 	<th>Pets </th>
-		<td>${mylistpet.size() } 마리</td>
+		<td>${mylistpet.size() }</td>
 	</tr>
 	<tr>
 		<th>Point </th>
@@ -204,7 +267,7 @@ th,td{
 	</div>
 	
 
-	<div id="mid_content" style="border:1px solid #A4A4A4;">
+	<div id="mid_content" >
 		<div id="side_content_box">
 		<h2>예약 조회</h2>
 		예약 조회 및 이용 후 리뷰 작성을 합니다.  &nbsp;
@@ -213,7 +276,7 @@ th,td{
 			</a>
 		</div>
 </div>
-		<div id="mid_content2" style="border:1px solid #A4A4A4;">
+		<div id="mid_content2" >
 		<div id="side_content_box2">
 		<h2>리뷰 조회</h2>
 		내가 작성한 리뷰를 조회 합니다.   &nbsp;&nbsp;
@@ -222,7 +285,7 @@ th,td{
 			</a>
 		</div>
 	</div>
-	<div id="mid_content3" style="border:1px solid #A4A4A4;">
+	<div id="mid_content3" >
 <div id="side_content_box3">
  <h2>돌봄방 조회</h2>
  나의 돌봄방으로 이동 합니다. &nbsp;&nbsp;&nbsp;
@@ -232,7 +295,7 @@ th,td{
 </div>
 </div>
 
-<div id="mid_content4" style="border:1px solid #A4A4A4;">
+<div id="mid_content4" >
 <div id="side_content_box4">
  <h2>신고 / 문의</h2>
  나의 신고 및 문의 내역으로 이동 합니다.&nbsp;&nbsp;
@@ -241,7 +304,7 @@ th,td{
 		</a>
 </div>
 </div>
-<div id="mid_content5" style="border:1px solid #A4A4A4;">
+<div id="mid_content5" >
 		<div id="side_content_box5">
  <h2>세이브 더 펫</h2>
 나의 세이브 더 펫으로 이동합니다. &nbsp;&nbsp;&nbsp;
@@ -253,6 +316,5 @@ th,td{
 	</div>
 
 </section>
- 
-
-
+<!-- footer 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
