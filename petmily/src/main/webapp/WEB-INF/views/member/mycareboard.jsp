@@ -50,17 +50,10 @@ li{
 }
 
 
-    .caretab {
-   width: 72%;
-   border-top: 1px solid #444444;
-   border-collapse: collapse;
-   border-color: #BDBDBD;
-}
-
-button{
-  display: white;
-   width: 90px;
-   height: 40px;
+ button{
+    display: white;
+   width: 80px;
+   height: 30px;
    line-height: 20px;
    border: 1px #3399dd solid;
    background-color: white;
@@ -70,12 +63,14 @@ button{
    color: #1482e0;
    transition: all 0.9s, color 0.3;
    
- 
 }
 
+.right_mar {
+	margin-right: 15%;
+}
 
 .care_table {
-	width: 80%;
+	width: 75%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color : #BDBDBD;
@@ -132,16 +127,13 @@ a:hover{
 
 <div align="center">
 
-<Br>
+<Br><br>
 <h1>나의 돌봄방</h1>
 
-<br><br>
-<c:if test="${not empty id}">
-<a href="${context }/board/care/write"><button>방 만들기</button></a><br><br>
-</c:if>
+<br>
 
 <section>
-<table class="caretab" >
+<table class="care_table" >
 
 
 
@@ -203,6 +195,13 @@ a:hover{
 </table>
 
 <br>
+
+
+	<div align="right" class="right_mar">
+		<a href="${context }/board/care/write">
+			<button type="button" id="btnwrite">방 만들기</button>
+		</a>
+	</div>
 
 
 <br>

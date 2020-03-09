@@ -181,7 +181,7 @@ public class CareController {
 		String grade = (String) session.getAttribute("grade");
 		model.addAttribute("grade",grade);
 
-		int pagesize = 10;
+		int pagesize = 5;
 		int navsize = 10;
 		int pno;
 		try {

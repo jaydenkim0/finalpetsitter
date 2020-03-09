@@ -29,6 +29,9 @@ public class CareReplyImageDto {
 	private String wdate; // 댓글 작성 시간
 	private String care_reply_writer;//댓글 작성자(member 테이블의 id)
 	
+	//MemberImageDto
+	private int member_image_no;
+	
 	public String getWdateWithFormat() throws ParseException {
 			SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
 			Date date = read.parse(wdate);
@@ -39,3 +42,4 @@ public class CareReplyImageDto {
 	}
 	
 }
+
