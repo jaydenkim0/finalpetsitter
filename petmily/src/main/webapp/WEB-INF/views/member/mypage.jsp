@@ -246,7 +246,7 @@ th,td{
 
 	<div id="side_left" style="border:1px solid #A4A4A4;">
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"

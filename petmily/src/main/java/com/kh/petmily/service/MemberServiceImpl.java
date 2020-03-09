@@ -56,6 +56,11 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto mylist(String id) {		
 		return memberDao.mylist(id);
 	}
+	//내 정보 조회 마이페이지
+	@Override
+	public MemberDto mypage(String id) {
+		return memberDao.mypage(id);
+	}
 	
 	//반려동물조회
 	@Override
@@ -400,8 +405,8 @@ public class MemberServiceImpl implements MemberService {
 
 	//마이페이지 로딩시에 찍어줄 정보
 	@Override
-	public MemberDto mypage(String id) {
-		return memberDao.mypage(id);
+	public MemberDto mypage2(String id) {
+		return memberDao.mypage2(id);
 	}
 	@Override
 	public int size(String id) {

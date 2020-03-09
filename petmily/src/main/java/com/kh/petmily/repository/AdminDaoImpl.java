@@ -508,6 +508,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 경고 펫시트 카운트
 	@Override
 	public int countAricleBlackPetsitter(String searchOption, String keyword) {
+		System.out.println("searchOption = "+searchOption);
 		Map<String, Object> param = new HashMap<>();
 		param.put("searchOption", searchOption);
 		param.put("keyword", keyword);
