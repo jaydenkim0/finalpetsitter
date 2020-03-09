@@ -6,7 +6,7 @@
      <script>
 		// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 생성
 		function list(page){
-			location.href="${pageContext.request.contextPath}/admin/list/blacklistsitter?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
+			location.href="${pageContext.request.contextPath}/admin/account?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
 			}
 	</script>
     
@@ -190,15 +190,18 @@
 	
 	${count}개의 게시물이 있습니다.	
 	
+	<a href="#"><button> 일괄 정산 </button></a>
 	 
 	<table>
    		<tr>
    			<th> 펫시터 아이디 </th>
    			<th> 정산 건수 </th>
-   			<th> 정산 금액 </th>
+   			<th> 매출 금액 </th>
    			<th> 적용 수수료 </th>
    			<th> 정산 일자 </th>
-   		
+   			<th> 정산 금액 </th>
+   			<th> 정산 상태 </th>
+   			<th> 정산 버튼 </th>   		
    		</tr>
 	    <c:forEach var="account" items="${list}" >
 	    	<tr>
@@ -207,6 +210,9 @@
 				<td> ${account.account_total_pay} </td>	
 				<td> ${account.account_fees} </td>	
 				<td> ${account.account_date} </td>	
+				<td> ${account.account_pay}</td>	
+				<td> ${account.account_status}</td>	
+				<td> <a href="#"><button> 개별 정산 </button></a></td>	
 			</tr>    
 	    </c:forEach>
     </table>
