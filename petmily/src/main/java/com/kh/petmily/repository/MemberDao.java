@@ -164,5 +164,11 @@ public interface MemberDao {
 	MemberDto mypage2(String id);
 	int size(String id);
 
+	//멤버이미지개수
+	int imagecount(String id);
+
+	//펫이미지개수
+	int petimagecount(int pet_image_pet_no);
+
 
 }

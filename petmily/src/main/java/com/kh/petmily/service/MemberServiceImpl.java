@@ -412,5 +412,17 @@ public class MemberServiceImpl implements MemberService {
 	public int size(String id) {
 		return memberDao.size(id);
 	}
+
+	//멤버이미지개수
+	@Override
+	public int imagecount(String id) {
+		return memberDao.imagecount(id);
+	}
+
+	//펫이미지개수
+	@Override
+	public int petimagecount(int pet_image_pet_no) {
+		return memberDao.petimagecount(pet_image_pet_no);
+	}
 	}
 

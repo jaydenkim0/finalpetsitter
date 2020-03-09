@@ -345,11 +345,19 @@ public class MemberController {
 	// 회원정보 수정 제출
 	@PostMapping("/mylistchange")
 	public String edit(@ModelAttribute MemberDto memberDto, @RequestParam MultipartFile member_image,
-			@RequestParam int member_image_no) throws IllegalStateException, IOException {
+			@RequestParam int member_image_no,
+			HttpSession session) throws IllegalStateException, IOException {
 
+		String id = (String) session.getAttribute("id");
+		int imagecount = memberService.imagecount(id);
+		
 		if (member_image.isEmpty() == false) {
-			MemberImageDto memberImageDto = memberService.getImageInfo(member_image_no);
-			memberService.member_image_change(memberImageDto, member_image);
+			if(imagecount==1) {
+				MemberImageDto memberImageDto = memberService.getImageInfo(member_image_no);
+				memberService.member_image_change(memberImageDto, member_image);			
+			}else {
+				memberService.member_image_regist(id, member_image);
+			}
 		}
 
 		memberService.mylistchange(memberDto);
@@ -364,10 +372,15 @@ public class MemberController {
 		memberService.petchange(petDto);
 
 		int pet_image_pet_no = Integer.parseInt(pet_no);
-
+		int petimagecount = memberService.petimagecount(pet_image_pet_no);
+		
 		if (pet_image.isEmpty() == false) {
-			PetImageDto petImageDto = memberService.getPetImageInfo(pet_image_pet_no);
-			memberService.pet_image_change(petImageDto, pet_image);
+			if(petimagecount==1) {			
+				PetImageDto petImageDto = memberService.getPetImageInfo(pet_image_pet_no);
+				memberService.pet_image_change(petImageDto, pet_image);
+			}else {
+				memberService.pet_image_regist(Integer.parseInt(pet_no), pet_image);
+			}
 		}
 
 		return "redirect:mylist";
