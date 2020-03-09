@@ -897,12 +897,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- account 테이블 정산 계산 후 인서트 -->
 	<insert id="setaccountPetsitter" parameterType="accountDto">
 		insert into account values(
-		account_no_seq.nextval, 
-		#{account_sitter_id},
-		#{account_count},
-		#{account_total_pay},
-		#{account_fees},
-		sysdate		
+			acoount_no_seq.nextval, 
+			#{account_sitter_id},
+			#{account_count},
+			#{account_total_pay},
+			#{account_fees},
+			#{account_pay},
+			sysdate,
+			'입금대기'		
 		)
 	</insert>
 

@@ -32,19 +32,16 @@ public class SchedulerServiceImpl implements SchedulerService{
 				int paymentM = adminDao.getPaymentMin(sitter_no);
 				int total_pay = paymentP + paymentM;
 				// 5. 펫시터 수수료 구해오기
-				double fees = adminDao.getFees();		
-				// 견적건수 20회 이상이면 수수료 인하 조건(슈퍼펫시터 일 경우)
-//					if(count >20) {
-//						
-//					}else {
-//						
-//					}
+				double fees = adminDao.getFees();	
+				//6. 입금금액 정하기
+				int pay =  (total_pay * ((int)fees * 100));
 				// 펫시터 별로 저장
 				AccountDto accountDto = AccountDto.builder()
 						.account_sitter_id(sitter_id)
 						.account_count(count)
 						.account_total_pay(total_pay)
-						.account_fees(fees)
+						.account_fees(fees)	
+						.account_pay(pay)					
 						.build();			
 				// account에 저장하기
 				adminDao.setaccountPetsitter(accountDto);
