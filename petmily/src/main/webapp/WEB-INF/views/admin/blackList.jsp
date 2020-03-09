@@ -99,9 +99,11 @@
     		
     	-> 일반회원, 펫시터 블랙리스트에 등록된 (아이디, 이름, )
      -->
-    <br>
-    <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
-    <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
+    <div>
+	    <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+	    <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
+    </div>
+    
     <br>
     
     <br>
@@ -122,7 +124,7 @@
 				<tr>
 					<td>     
 				        <a href="blackListdetail?id=${memberblacklist.black_id}" style="color:#ff8d00;"> 	    
-				    		${memberblacklist.black_id},    	
+				    		${memberblacklist.black_id}    	
 					    </a> 
 				    </td> 	
 				   	<td style="color:#ff8d00;"> ${memberblacklist.black_name} </td> 		
@@ -134,8 +136,8 @@
 		</table>
 	</div>
     
-
-    
+    <br>
+    <br>
     
 	<a href="${pageContext.request.contextPath}/admin/list/blacklistsitter"><button> 경고 펫시터 관리 (리스트) </button></a>
 	※경고 페시터의 경우 회원과 펫시터 리스트에서  <span style="color:red;">붉은색</span>으로 표시
@@ -154,7 +156,7 @@
 		    	<tr>
 		    		<td>
 				    	<a href="blackListdetail?id=${petblacklist.black_id}" style="color:red;">		    	
-				    		${petblacklist.black_id},    	
+				    		${petblacklist.black_id}    	
 						 </a>
 					 </td>
 					 <td style="color:red;"> ${petblacklist.black_name}  </td>   	

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
      <script>
 		// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 생성
 		function list(page){
-			location.href="${pageContext.request.contextPath}/admin/list/blacklistsitter?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
+			location.href="${pageContext.request.contextPath}/admin/account?curPage="+page+"&searchOption=${searchOption}"+"&keyword=${keyword}";
 			}
 	</script>
     
@@ -168,45 +168,77 @@
 		</tr>
 	</table>
 	
+
+	
+
+	<br>
 	※매달 1일 오전 9시 정산기능 실행 (스케쥴러) : 
 	<br><br>
 	※ 펫시터 정산리스트 (높은 금액 순으로 정렬)
 	<br><br>
+	※ 정산건수 10회 이상 : 7.0 %
+	<br><br>
+	※ 정산건수 10회 이하 : 10.0 %
+	<br><br>
 	
-
-
-	펫시터 정산 확인
+	<hr>
 	
-		<!-- 검색 기능 -->
-	<form method="post" action="${pageContext.request.contextPath}/admin/list/blacklistsitter">
+	<br>
+
+	
+	<!-- 검색 기능 -->
+	<form method="post" action="${pageContext.request.contextPath}/admin/account">
 		<select name="searchOption" >		
-			<option value="black_id"  >아이디</option>
-			<option value="black_name"  >이름</option>
+			<option value="account_sitter_id"  >아이디</option>		
 		</select>		
 		<input  name="keyword" value="${keyword}" id="keyword">
 		<input type="submit" value="검색">
-	</form>
+	</form>	
+
 	
+	<div>
+		${count} 건의 게시물이 있습니다.	
+	</div>
 	
-	${count}개의 게시물이 있습니다.	
+	<br>
 	
+	<div>
+		${wcount} 건의 정산처리가 남아있습니다. 
+		<a href="${pageContext.request.contextPath}/admin/batchAccount"><button> 일괄 정산 </button></a>
+	</div>
 	 
 	<table>
    		<tr>
    			<th> 펫시터 아이디 </th>
    			<th> 정산 건수 </th>
-   			<th> 정산 금액 </th>
+   			<th> 매출 금액 </th>
    			<th> 적용 수수료 </th>
    			<th> 정산 일자 </th>
-   		
+   			<th> 정산 금액 </th>
+   			<th> 정산 상태 </th>
+   			<th> 정산 버튼 </th>   		
    		</tr>
 	    <c:forEach var="account" items="${list}" >
 	    	<tr>
 	    		<td>	${account.account_sitter_id}	</td>
-				<td> ${account.account_count} </td>   					
-				<td> ${account.account_total_pay} </td>	
-				<td> ${account.account_fees} </td>	
+				<td> ${account.account_count} 회 </td>   					
+				<td> ${account.account_total_pay} 원 </td>	
+				<td> ${account.account_fees} % </td>	
 				<td> ${account.account_date} </td>	
+				<td> ${account.account_pay} 원</td>	
+				<td> ${account.account_status}</td>	
+				<td> 
+					<c:choose>
+						<c:when test="${account.account_status == '입금대기' }">
+							<a href="${pageContext.request.contextPath}/admin/IndividualAccount?sitter_id=${account.account_sitter_id}">
+							<button> 개별 정산 </button>
+							</a>
+						</c:when>
+						<c:otherwise>
+							정산 완료
+						</c:otherwise>	
+					</c:choose>	
+				</td>	
 			</tr>    
 	    </c:forEach>
     </table>

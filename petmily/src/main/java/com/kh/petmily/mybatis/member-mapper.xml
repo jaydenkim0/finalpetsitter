@@ -54,6 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where id=#{id}
 	</select>
 	
+	<!-- 내정보조회 마이페이지-->
+	<select id="mypage" parameterType="String"  resultType="memberDto">
+		select * from member where id=#{id}
+	</select>
+	
 	<!-- 반려동물조회 -->
 	<select id="mylistpet" parameterType="String" resultType="petImagePetDto">
 		select 
@@ -454,6 +459,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 비밀번호 변경시  아이디와 이메일이 있는지 검색 -->
 	<select id="passwordfind" parameterType="Map" resultType="memberDto">
 		select * from member where id = #{id} and email = #{email}
+	</select>
+	
+	<!-- 마이페이지 로딩시에 찍어줄 정보 -->
+	<select id="mypage2" parameterType="String" resultType="memberDto">
+		select 
+			point,
+			joindate,
+			lastlogin
+		from
+			member
+		where id=#{id}
+	</select>
+	<select id="size" parameterType="String" resultType="int">
+		select count(*) from pet where member_id=#{id}
+	</select>
+	
+	<!-- 멤버이미지개수 -->
+	<select id="imagecount" parameterType="String" resultType="int">
+		select count(*) from member_image where member_image_member_id=#{id}
+	</select>
+	
+	<!-- 펫이미지개수 -->
+	<select id="petimagecount" parameterType="int" resultType="int">
+		select count(*) from pet_image where pet_image_pet_no=#{pet_image_pet_no}
 	</select>
 	
 </mapper>

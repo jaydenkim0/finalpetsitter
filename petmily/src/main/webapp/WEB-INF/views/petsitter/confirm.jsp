@@ -241,18 +241,16 @@ FOOTER 이용 시 넣어야할 요소
 				</form>
 				<!-- 거절 -->
 				<form class="confirm_refusal" action="confirm" method="post">
-					<input type="submit" id="sendEmail"  value="거절">	
-					
-						
+					<input type="submit" id="sendEmail"  value="거절">							
 						<input type="hidden" name="id" value="${reservationList.member_id}">
 						<input type="hidden" name="sitter_no" value="${reservationList.reservation_sitter_no}">
 						<input type="hidden" name="check" value="거절">	
 						<input type="hidden" name="reservation_no" value="${reservationList.reservation_no}">	
 						
 						<br>
-						<button type="button" id="refusal_btn">거절 사유 작성</button>
 	
 						<!-- 숨겨진 페이지 -->					
+						<button type="button" id="refusal_btn">거절 사유 작성</button>
 						<div class="modalfade">			                    							  
 							<input id="refusal_text" type="text" name="content" placeholder="  거절 사유" required>
 						</div>

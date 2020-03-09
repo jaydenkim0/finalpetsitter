@@ -15,7 +15,6 @@
           var $hamburger = $('.hamburger'),
               $nav = $('#site-nav'),
               $masthead = $('#masthead');
-
           $hamburger.click(function() {
             $(this).toggleClass('is-active');
             $nav.toggleClass('is-active');
@@ -50,7 +49,6 @@ FOOTER 이용 시 넣어야할 요소
 
      
 <style>
-
 div#side_left {
 	position: relative;
 	width: 350px;
@@ -61,7 +59,6 @@ div#side_left {
 	padding:8pt;
 	
 }
-
 #side_left_box {
 	position:relative;
 	width: 250px;
@@ -76,7 +73,6 @@ div#side_left {
 	left:140px;
     
 }
-
 #mid_content {
 	position: relative;
 	width: 700px;
@@ -86,7 +82,6 @@ div#side_left {
 	bottom: 530px;
 	right: 450px;
 }
-
 #mid_content2 {
 	position: relative;
 	width: 700px;
@@ -97,7 +92,6 @@ div#side_left {
 	left:250px;
 	
 }
-
 #mid_content3 {
 	position: relative;
 	width: 700px;
@@ -107,8 +101,6 @@ div#side_left {
 	right:450px;
 	bottom:260px;
 }
-
-
 #mid_content4 {
 	position: relative;
 	width: 700px;
@@ -118,9 +110,6 @@ div#side_left {
 	left:250px;
 	bottom:30px;
 }
-
-
-
 #mid_content5 {
 	position: relative;
 	width: 700px;
@@ -130,7 +119,6 @@ div#side_left {
 	right:450px;
 	bottom:10px;
 }
-
 #side_content_box {
 position: relative;
 	display: inline;
@@ -141,7 +129,6 @@ position: relative;
 	top:20px;
 	right:50px;
 }
-
 #side_content_box2 {
 position: relative;
 	display: inline;
@@ -152,7 +139,6 @@ position: relative;
 	top:20px;
 	right:100px;
 }
-
 #side_content_box3 {
 position: relative;
 	display: inline;
@@ -184,14 +170,13 @@ position: relative;
 	float: left;
 	left:90px;
 	top:22px;
-	right:100px;
+	right:90px;
 	font-size:16px;
 	}
 	
 body {
 	background-color: #FAFAFA;
 }
-
 img {
     border-radius: 100pt;
 }
@@ -208,11 +193,16 @@ button{
 		border-radius:7px;
 		left:20px;
 }
-th,td{
- padding: 10px;
 
+th{
+position:relative;
+right:15px;
+font-size:12pt;
+padding:10px;
 }
-
+td{
+font-size:10pt;
+}
 #masthead:after {
 	  content: '';
 	  position: absolute;
@@ -244,31 +234,30 @@ th,td{
 <section class="section-content">
 
 
-	<div id="side_left" style="border:1px solid #A4A4A4;">
+	<div id="side_left" >
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;내 정보</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
 				style="width: 170px; height: 170px;" onerror="no_image2()" id="2">
-	
-	<br><Br><br>
+	<br>
 		<table>
 	<tr>
-	<th>Pets :</th>
-		<td>${mylistpet.size() }</td>
+	<th>Pets</th>
+		<td>${size }마리</td>
 	</tr>
 	<tr>
-		<th>Point :</th>
-		<td>${mylist.point}</td>
+		<th>Point</th>
+		<td>${mypage2.point}</td>
 	</tr>
 	<tr>
-		<th>JoinDate :</th>		
-		<td>${mylist.total_joindateWithFormat }</td>
+		<th>JoinDate</th>		
+		<td>${mypage2.mypage_joindateWithFormat }</td>
 		</tr>
 		<tr>
-			<th>LastLogin :</th>		
-			<td>${mylist.final_loginWithFormat }</td>
+			<th>LastLogin</th>		
+			<td>${mypage2.mypage_loginWithFormat }</td>
 	</tr>
 </table>
 <div id="side_left_box2">
@@ -282,7 +271,7 @@ th,td{
 	</div>
 	
 
-	<div id="mid_content" style="border:1px solid #A4A4A4;">
+	<div id="mid_content" >
 		<div id="side_content_box">
 		<h2>예약 조회</h2>
 		예약 조회 및 이용 후 리뷰 작성을 합니다.  &nbsp;
@@ -291,7 +280,7 @@ th,td{
 			</a>
 		</div>
 </div>
-		<div id="mid_content2" style="border:1px solid #A4A4A4;">
+		<div id="mid_content2" >
 		<div id="side_content_box2">
 		<h2>리뷰 조회</h2>
 		내가 작성한 리뷰를 조회 합니다.   &nbsp;&nbsp;
@@ -300,7 +289,7 @@ th,td{
 			</a>
 		</div>
 	</div>
-	<div id="mid_content3" style="border:1px solid #A4A4A4;">
+	<div id="mid_content3" >
 <div id="side_content_box3">
  <h2>돌봄방 조회</h2>
  나의 돌봄방으로 이동 합니다. &nbsp;&nbsp;&nbsp;
@@ -310,16 +299,16 @@ th,td{
 </div>
 </div>
 
-<div id="mid_content4" style="border:1px solid #A4A4A4;">
+<div id="mid_content4" >
 <div id="side_content_box4">
  <h2>신고 / 문의</h2>
  나의 신고 및 문의 내역으로 이동 합니다.&nbsp;&nbsp;
-		 <a href="myqnaboard">
-			<button>GO</button>
-		</a>
+<a href="myqnaboard">
+	<button>GO</button>
+</a>
 </div>
 </div>
-<div id="mid_content5" style="border:1px solid #A4A4A4;">
+<div id="mid_content5" >
 		<div id="side_content_box5">
  <h2>세이브 더 펫</h2>
 나의 세이브 더 펫으로 이동합니다. &nbsp;&nbsp;&nbsp;
@@ -333,5 +322,3 @@ th,td{
 </section>
 <!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
-
-
