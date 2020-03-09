@@ -520,10 +520,23 @@ public class AdminController {
 					  .addAttribute("count", count)
 					  .addAttribute("searchOption", searchOption)
 					  .addAttribute("keyword", keyword)
+					  .addAttribute("wcount", adminService.accountWcount())
 					  .addAttribute("navi", navi);		
 		return "admin/account";		
 	}
-
+	// 개별 정산 입금 버튼
+	@GetMapping("/IndividualAccount")
+	public String IndividualAccount(String sitter_id) {
+		adminService.IndividualAccount(sitter_id);
+		return "redirect:/admin/account";
+	}
+		
+	// 일괄 정산 입금 버튼
+	@GetMapping("/batchAccount")
+	public String batchAccount() {
+		adminService.batchAccount();
+		return "redirect:/admin/account";
+	}
 	
 	// 가격 정보 페이지 연결
 	@GetMapping("/accountoption")

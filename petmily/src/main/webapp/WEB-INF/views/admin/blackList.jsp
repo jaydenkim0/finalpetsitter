@@ -99,10 +99,10 @@
     		
     	-> 일반회원, 펫시터 블랙리스트에 등록된 (아이디, 이름, )
      -->
-    <br>
-    <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
-    <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
-    <br>
+    <div>
+	    <a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+	    <a href="${pageContext.request.contextPath}/admin/list/blackreport"><button>신고게시판</button></a>
+    </div>
     
     <br>
     
