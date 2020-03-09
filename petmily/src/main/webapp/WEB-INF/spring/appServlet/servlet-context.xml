@@ -74,6 +74,7 @@
 	 		<exclude-mapping path="/member/input*"/>
 	 		<exclude-mapping path="/member/login*"/>
 	 		<exclude-mapping path="/member/result*"/>
+	 		<exclude-mapping path="/member/regist*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
 	 	</interceptor>
 	 </interceptors>
