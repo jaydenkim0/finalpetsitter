@@ -140,10 +140,10 @@
 	 </style>
     
 	
-	<br>
-	<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
-	<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
-	
+	<div>
+		<a href="${pageContext.request.contextPath}/admin/"><button>메인으로</button></a>
+		<a href="${pageContext.request.contextPath}/admin/petsitter/option"><button>펫시터 옵션 등록하기</button></a>
+	</div>
 	<h4>펫시터 관리페이지</h4>
 
 

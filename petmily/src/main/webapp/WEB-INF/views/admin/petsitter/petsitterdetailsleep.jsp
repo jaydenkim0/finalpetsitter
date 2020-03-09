@@ -107,15 +107,15 @@
 	}
     </style>    
      
-    <div class="box-container first">    
-		<h3> 펫시터 휴면 디테일페이지 </h3>
+	<a href="${pageContext.request.contextPath}/admin/petsitter"><button>펫시터페이지로 이동</button></a>
+    <div class="box-container first">   
+		<h4> 펫시터 휴면 디테일페이지 </h4>
 		<!-- 
 			휴면이 되는 사유
 			1. 본인이 쉬기위해 검색 노출을 잠시 내려놓기
 			2. 경고 펫시터일경우 일단 강제로 휴면으로 전환됨(경고 받을 때마다 강제 휴면)
 				- 경고 받은 휴면일 경우는 펫시터가 휴면을 풀지 못함
 		-->		
-		<a href="${pageContext.request.contextPath}/admin/petsitter"><button>펫시터페이지로 이동</button></a>
 	</div>	
 	
 	<table>

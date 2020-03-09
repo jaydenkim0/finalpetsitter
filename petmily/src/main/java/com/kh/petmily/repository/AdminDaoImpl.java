@@ -669,6 +669,10 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public double getFees() {		
 		return sqlSession.selectOne("admin.getFees");
+	}	
+	@Override
+	public double getFees2() {
+		return sqlSession.selectOne("admin.getFees2");
 	}
 	// 개별 정산 입금 버튼
 	@Override
@@ -685,6 +689,7 @@ public class AdminDaoImpl implements AdminDao {
 	public int accountWcount() {		
 		return sqlSession.selectOne("admin.accountWcount");
 	}
+
 
 
 

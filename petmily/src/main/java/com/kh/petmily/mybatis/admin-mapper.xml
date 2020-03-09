@@ -838,7 +838,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 						<if test="searchOption != null and keyword != null">
 							where ${searchOption} like '%'||#{keyword}||'%'
 						</if>
-					order by ACCOUNT_TOTAL_PAY, ACCOUNT_DATE desc
+					order by ACCOUNT_TOTAL_PAY desc
 					)A
 				) where rn between #{start} and #{end}	
 		</select>
@@ -848,7 +848,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				<if test="searchOption != null and keyword != null">
 					where ${searchOption} like '%'||#{keyword}||'%'
 				</if>			
-			order by ACCOUNT_TOTAL_PAY, ACCOUNT_DATE desc
+			order by ACCOUNT_TOTAL_PAY desc
 		</select>	
 		
 	
@@ -891,6 +891,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 적용 수수료 구해오기 1 -->
 	<select id="getFees" resultType="double">
 		select payment from payinfo where payname='중계 수수료'
+	</select>
+		<!-- 적용 수수료 구해오기 1 -->
+	<select id="getFees2" resultType="double">
+		select payment from payinfo where payname='중계 수수료2'
 	</select>
 
 	<!-- account 테이블 정산 계산 후 인서트 -->
