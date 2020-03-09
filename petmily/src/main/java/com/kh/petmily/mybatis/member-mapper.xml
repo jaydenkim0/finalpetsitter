@@ -462,7 +462,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 마이페이지 로딩시에 찍어줄 정보 -->
-	<select id="mypage" parameterType="String" resultType="memberDto">
+	<select id="mypage2" parameterType="String" resultType="memberDto">
 		select 
 			point,
 			joindate,

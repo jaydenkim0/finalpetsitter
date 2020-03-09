@@ -348,7 +348,7 @@ public class MemberDaoImpl implements MemberDao {
 	//마이페이지 로딩시에 찍어줄 정보
 	@Override
 	public MemberDto mypage2(String id) {
-		return sqlSession.selectOne("member.mypage",id);
+		return sqlSession.selectOne("member.mypage2",id);
 	}
 	@Override
 	public int size(String id) {

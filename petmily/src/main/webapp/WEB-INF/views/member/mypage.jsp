@@ -251,7 +251,6 @@ th,td{
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
 				style="width: 170px; height: 170px;" onerror="no_image2()" id="2">
-	
 	<br>
 		<table>
 	<tr>
@@ -260,15 +259,15 @@ th,td{
 	</tr>
 	<tr>
 		<th>Point</th>
-		<td>${mypage.point}</td>
+		<td>${mypage2.point}</td>
 	</tr>
 	<tr>
 		<th>JoinDate</th>		
-		<td>${mypage.mypage_joindateWithFormat }</td>
+		<td>${mypage2.mypage_joindateWithFormat }</td>
 		</tr>
 		<tr>
 			<th>LastLogin</th>		
-			<td>${mypage.mypage_loginWithFormat }</td>
+			<td>${mypage2.mypage_loginWithFormat }</td>
 	</tr>
 </table>
 <div id="side_left_box2">

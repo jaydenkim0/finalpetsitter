@@ -417,21 +417,6 @@ public class MemberController {
 		return "redirect:mylist";
 	}
 
-	// 마이페이지 연결
-	@GetMapping("/mypage")
-	public String mypage1(HttpSession session, Model model) {
-		
-		String id = (String) session.getAttribute("id");
-		
-		MemberDto mypage = memberService.mypage2(id);
-		model.addAttribute("mypage",mypage);
-		
-		int size = memberService.size(id);
-		model.addAttribute("size",size);
-		
-		return "member/mypage";
-	}
-
 	// 내정보보기
 	@GetMapping("/mylist")
 	public String mylist(HttpSession session, Model model) {
@@ -456,6 +441,12 @@ public class MemberController {
 	public String mypage(HttpSession session, Model model) {
 
 		String id = (String) session.getAttribute("id");
+		
+		MemberDto mypage2 = memberService.mypage2(id);
+		model.addAttribute("mypage2",mypage2);
+		
+		int size = memberService.size(id);
+		model.addAttribute("size",size);
 
 		MemberDto list = memberService.mypage(id);
 		model.addAttribute("mypage", list);
