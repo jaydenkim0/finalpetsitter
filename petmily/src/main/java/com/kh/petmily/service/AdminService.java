@@ -235,6 +235,13 @@ public interface AdminService {
 	List<AccountDto> getAccountList(int start, int end, String searchOption, String keyword);
 	// 정산 페이징 카운트
 	int countAricleAccount(String searchOption, String keyword);
+	// 개별 정산 입금 버튼
+	void IndividualAccount(String sitter_id);
+	// 일괄 정산 입금 버튼
+	void batchAccount();
+	// 입금대기 인원수
+	int accountWcount();
+	
 
 
 
