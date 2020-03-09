@@ -168,15 +168,25 @@
 		</tr>
 	</table>
 	
+
+	
+
+	<br>
 	※매달 1일 오전 9시 정산기능 실행 (스케쥴러) : 
 	<br><br>
 	※ 펫시터 정산리스트 (높은 금액 순으로 정렬)
 	<br><br>
+	※ 정산건수 10회 이상 : 7 %
+	<br><br>
+	※ 정산건수 10회 이하 : 10 %
+	<br><br>
 	
-
+	<hr>
+	
+	<br>
 
 	
-		<!-- 검색 기능 -->
+	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/account">
 		<select name="searchOption" >		
 			<option value="account_sitter_id"  >아이디</option>		
