@@ -27,8 +27,7 @@
             <div id="masthead-login">
                 <c:choose>
 	                <c:when test="${empty id}">
-	                	<button id="login_btn"><a href="${context}/member/login">로그인</a></button>                
-	                	<button id="login_btn"><a href="${context}">HOME</a></button>           
+	                	<button id="login_btn"><a href="${context}/member/login">로그인</a></button>                        
 	                </c:when>
 					<c:otherwise>
 					   <!-- 프로필 이미지 -->
@@ -38,13 +37,23 @@
 		
 		                <!-- 회원 닉네임 -->
 		                <a id="member" href="${context}/member/mypage">${id}</a>
-		                <a id="member" href="${context}" style="margin-left:8px;">HOME</a>
 					</c:otherwise>
                 </c:choose>
             </div>
                     
             <!-- 네비게이션 시작 -->
-                    <nav id="site-nav" role="navigation">	                     
+                    <nav id="site-nav" role="navigation">	 
+                    
+                    <div class="col">
+						  <h4>펫밀리 둘러보기</h4>
+						  <ul>
+							<li><a href="${context}">홈으로 돌아가기</a></li>
+						<c:if test="${not empty id}">
+						    <li><a href="${context}/member/logout">로그아웃</a></li>
+						</c:if>
+						  </ul>               
+						</div>
+						                    
                     <c:choose>
                     	<c:when test="${grade!='petsitter'}">
                     		<div class="col">
@@ -81,7 +90,7 @@
                       </div>
                       
                       <div class="col">
-                        <h4>게시판</h4>
+                        <h4>펫밀리 게시판</h4>
                         <ul>
                           <li><a href="${context}/board/faq/list">공지사항</a></li>
                           <li><a href="${context}/board/qna/list">문의사항</a></li>
@@ -98,22 +107,13 @@
 	                          <li><a href="${context}/admin/account">정산 관리</a></li>
 	                          <li><a href="${context}/board/review/list">리뷰 관리</a></li>
 	                          <li><a href="${context}/admin/list/member">회원 관리</a></li>
-	                          <li><a href="${context}/admin/petsitter">펫시터 (모아보기)</a></li>
-	                          <li><a href="${context}/admin/list/petsitter">펫시터 관리</a></li>
-	                          <li><a href="${context}/admin/list/petsitterapply">펫시터 신청</a></li>
-	                          <li><a href="${context}/adminlist/petsittersleep">펫시터 휴면</a></li>
+	                          <li><a href="${context}/admin/petsitter">펫시터 관리</a></li>
+<%-- 	                          <li><a href="${context}/admin/list/petsitter">펫시터 관리</a></li> --%>
+<%-- 	                          <li><a href="${context}/admin/list/petsitterapply">펫시터 신청</a></li> --%>
+<%-- 	                          <li><a href="${context}/adminlist/petsittersleep">펫시터 휴면</a></li> --%>
                          	  <li><a href="${context}/admin/blackList">경고 게시판</a></li>	                                
 	                        </ul>               
 	                      </div>
-					</c:if>
-					
-						<c:if test="${not empty id}">
-						<div class="col">
-						  <h4></h4>
-						  <ul>
-						    <li><a href="${context}/member/logout">로그아웃</a></li>
-						  </ul>               
-						</div>
 					</c:if>
 					
                   </nav>

@@ -1,0 +1,127 @@
+/*list.css*/
+.list-wrap {
+    font-family: NotosanL;
+}
+.list-wrap  #align-left{
+    text-align: left;
+    margin-left: 50px;
+}
+/*h5 style*/
+.list-wrap h5{
+	font-family: NotosanM;
+}
+
+/*A style*/
+.list-wrap #petsitter_info a{
+    text-decoration: none;
+    color: black;
+}
+
+.list-wrap #petsitter_info:hover {
+    padding-top: 25px;
+    background-color: #f5f5f5;
+}
+
+/*page-nav style*/
+.list-wrap #page-nav a{
+    text-decoration: none;
+    color: black;
+}
+.list-wrap #page-nav a:hover{
+    text-decoration: none;
+    color: #4edec5;
+}
+
+/*Location style*/
+.list-wrap .petsitter-location{
+	margin-top: 50px;
+}
+.list-wrap #petsitter_city {
+        padding-left: 7px;
+        padding-right: 7px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+
+        font-size: 11pt;
+        font-family: NotosanL;
+        color: white;
+        text-align: center;
+        background: #1482e0;
+        border: solid 2px #1482e0;
+        border-radius: 30px;
+}
+
+.list-wrap #petsitter_area {
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    font-size: 11pt;
+    font-family: NotosanL;
+    color: white;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 30px;
+}
+.list-wrap #nick{
+    font-family: NotosanB;
+}
+/*Img-box style*/
+.list-wrap .img_box {
+    width: 60px;
+    height: 60px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 15px;
+    margin-top: 0px;
+    
+/*  이미지와 닉네임 나란히 배치  */
+    float: left;
+    clear: both;
+}
+
+.list-wrap .profile {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/*SelectBox style*/
+.list-wrap select{
+    border: 1px solid #b1b1b1;
+    height: 30px;
+    width: 150px;
+}
+
+/*input style*/
+.list-wrap #search_input {
+    border: 1px solid #b1b1b1;
+    height: 28px;
+    width: 200px;
+}
+.list-wrap #search_input::placeholder{
+    font-family: NotosanL;
+}
+
+
+/*btn style*/
+.list-wrap #search_btn {
+    width: 60px;
+    height: 30px;
+    font-size: 10pt;
+    font-family: NotosanR;
+    color: black;
+    text-align: center;
+    background: #b1b1b1;
+    border: solid 2px #b1b1b1;
+    border-radius: 6px;
+}
+
+.list-wrap #search_btn:hover {
+    background: #4edec5;
+    border: solid 2px #4edec5;
+    color:white;
+ 
+}

@@ -637,6 +637,37 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public void setaccountPetsitter(AccountDto accountDto) {	
 		sqlSession.insert("admin.setaccountPetsitter", accountDto);
+	}	
+	// 1. 펫시터 아이디 구해오기(전월에 결제금액이 있는 펫시터만 구해오기)
+	@Override
+	public List<AccountVO> findpetsitteraccount() {
+		return sqlSession.selectList("admin.findpetsitteraccount");
+		
+	}
+	// 2. 펫시터 넘버로 아이디 구해오기
+	@Override
+	public String getSitter_id(int sitter_no) {
+		return sqlSession.selectOne("admin.getSitter_id", sitter_no);	
+		
+	}
+	// 3. 펫시터 결제건수 구해오기
+	@Override
+	public int getCount(int sitter_no) {	
+		return sqlSession.selectOne("admin.getCount",sitter_no);
+	}
+	// 4. 펫시터 최종 매출 금액 구해오기 (완료된 금액에 취소된 금액 더하기)	
+	@Override
+	public int getPaymentPlus(int sitter_no) {		
+		return sqlSession.selectOne("admin.getPaymentPlus",sitter_no);
+	}
+	@Override
+	public int getPaymentMin(int sitter_no) {
+		return sqlSession.selectOne("admin.getPaymentMin",sitter_no);
+	}
+
+	@Override
+	public double getFees() {		
+		return sqlSession.selectOne("admin.getFees");
 	}
 
 

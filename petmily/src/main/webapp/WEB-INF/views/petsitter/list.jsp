@@ -13,6 +13,10 @@
 -->
     <!-- font css -->
     <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+     
+    <!-- list css -->
+	<link rel="stylesheet" href="${context}/resources/css/list.css"/>   
+
 
 <!-- 
 HEADER 이용 시 넣어야할 요소 
@@ -58,7 +62,7 @@ HEADER 이용 시 넣어야할 요소
 	}
 	
 	.section-content{
-	padding-top:150px;
+		padding-top:165px;
 	}
 	</style>
 
@@ -171,93 +175,111 @@ FOOTER 이용 시 넣어야할 요소
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 	<section class="section-content">
-	<h1>펫시터 정보 조회</h1>
-	<!-- 기존 지역으로 검색  -->
-		<form method="post" action="${pageContext.request.contextPath}/petsitter/list">
-			 <div class="location">
-			    <div class="template">
-			        <select class="region" name="cityKeyword">
-			            <option>지역을 선택하세요</option>			          
-			        </select>
-			        
-			        <select class="section" name="areaKeyword">
-			            <option>구를 선택하세요</option>
-			        </select>
-			
-			    	<input type="submit" value="검색">
-			    </div>
-			    <div id="result"></div>
-			</div>
-		</form>	
-		
-	<!-- 아이디 닉네임으로 검색 -->				
-		<form method="post" action="${pageContext.request.contextPath}/petsitter/searchlist">
-			<select name="searchOption">
-				<option value="nick">닉네임</option>
-				<option value="sitter_id">펫시터아이디</option>
-			</select>
-			<input type="text" name="keyword" placeholder="검색명을 입력해주세요">
-			<input type="submit" value="검색">		
-		</form>
+		<div class="list-wrap" align="center">
+			<div id="align-left">
+				<!-- 기존 지역으로 검색  -->
+				<form method="post" action="${pageContext.request.contextPath}/petsitter/list">
+					<div class="location">
+						<div class="template">
+							<select class="region" name="cityKeyword">
+								<option>지역</option>			          
+							</select>
+							
+							<select class="section" name="areaKeyword">
+								<option>구</option>
+							</select>
+					
+							<input id="search_btn" type="submit" value="검색">
+						</div>
+						<div id="result"></div>
+					</div>
+				</form>
+				<br><br>	
 	
-		<h4>${count}개의 게시물이 있습니다.</h4>
-	
-		<c:forEach var="petsitter" items="${list}">					
-			<!-- 펫시터 정보 -->			
-					<c:if test="${petsitter.member_image_no > 0}">
-						<img src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" style="width: 20%; height: auto;" onerror="no_image2()" id="member_image"><br>
-					</c:if>	
+				<h5>${count}명의 펫밀리가 있습니다.</h5>
+				<br>
+				<c:forEach var="petsitter" items="${list}">					
+					<div id="petsitter_info">
 						<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
-						<span>닉네임 : ${petsitter.nick}</span></a>
-						<br>
-					<div class="naver-viewer"></div> 
-					<input type="hidden" value="${petsitter.info}"><br>
-					<c:forEach var="location" items="${petsitter.list}">
-						<span>지역 : ${location.city} ${location.area}</span><br>
-					</c:forEach>
-					<hr>
-		</c:forEach>
+							<!-- 펫시터 정보 -->			
+							<c:if test="${petsitter.member_image_no > 0}">
+								<div class="img_box" style="background: #f5f5f5">
+		                            <img class="profile" src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" onerror="no_image2()" id="member_image">
+		                        </div>
+							</c:if>	
+								<span id="nick">닉네임 : ${petsitter.nick}</span>
+								<br>
+								
+								<div class="naver-viewer"></div> 
+								<input id="naver-viewer-text" type="hidden" value="${petsitter.info}">
+								<br>
+							
+								<c:forEach var="location" items="${petsitter.list}">
+									<span id="petsitter_city">#${location.city}</span> 
+									<span id="petsitter_area">#${location.area}</span>
+									<br><br>
+								</c:forEach>
 	
-		<!-- 페이징 -->
-		<table>
-			<tr>
-				<td colspan="5">
-					<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
-					<c:if test="${navi.curBlock > 1}">
-						<a href="javascript:list('1')">[처음]</a>
-					</c:if>
-					
-					<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
-					<c:if test="${navi.curBlock > 1}">
-						<a href="javascript:list('${navi.prevPage}')">[이전]</a>
-					</c:if>
-					
-					<!-- **하나의 블럭 시작페이지부터 끝페이지까지 반복문 실행 -->
-					<c:forEach var="num" begin="${navi.blockBegin}" end="${navi.blockEnd}">
-						<!-- 현재페이지이면 하이퍼링크 제거 -->
-						<c:choose>
-							<c:when test="${num == navi.curPage}">
-								<span style="color: red">${num}</span>&nbsp;
-							</c:when>
-							<c:otherwise>
-								<a href="javascript:list('${num}')">${num}</a>&nbsp;
-							</c:otherwise>
-						</c:choose>
+								<hr>
+							</a>
+						</div>
 					</c:forEach>
-					
-					<!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
-					<c:if test="${navi.curBlock <= navi.totBlock}">
-						<a href="javascript:list('${navi.nextPage}')">[다음]</a>
-					</c:if>
-					
-					<!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
-					<c:if test="${navi.curPage <= navi.totPage}">
-						<a href="javascript:list('${navi.totPage}')">[끝]</a>
-					</c:if>
-				</td>
-			</tr>
-		</table>
-	</section><br>
+			</div>
+			
+			<br><br>			
+			<!-- 아이디 닉네임으로 검색 -->				
+			<form method="post" action="${pageContext.request.contextPath}/petsitter/searchlist">
+				<select name="searchOption">
+					<option value="nick">닉네임</option>
+					<option value="sitter_id">펫시터아이디</option>
+				</select>
+				<input id="search_input" type="text" name="keyword" placeholder="검색명을 입력해주세요">
+				<input id="search_btn" type="submit" value="검색">		
+			</form>
 	
+			<br>
+			<!-- 페이징 -->
+			<table id="page-nav">
+				<tr>
+					<td colspan="5">
+						<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
+						<c:if test="${navi.curBlock > 1}">
+							<a href="javascript:list('1')">[처음]</a>
+						</c:if>
+						
+						<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
+						<c:if test="${navi.curBlock > 1}">
+							<a href="javascript:list('${navi.prevPage}')">[이전]</a>
+						</c:if>
+						
+						<!-- **하나의 블럭 시작페이지부터 끝페이지까지 반복문 실행 -->
+						<c:forEach var="num" begin="${navi.blockBegin}" end="${navi.blockEnd}">
+							<!-- 현재페이지이면 하이퍼링크 제거 -->
+							<c:choose>
+								<c:when test="${num == navi.curPage}">
+									<span style="color: #1482e0">${num}</span>&nbsp;
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:list('${num}')">${num}</a>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+						<c:if test="${navi.curBlock <= navi.totBlock}">
+							<a href="javascript:list('${navi.nextPage}')">[다음]</a>
+						</c:if>
+						
+						<!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
+						<c:if test="${navi.curPage <= navi.totPage}">
+							<a href="javascript:list('${navi.totPage}')">[끝]</a>
+						</c:if>
+					</td>
+				</tr>
+			</table>
+		</div>	
+	</section>
+	
+	<br><br>
 		 <!-- footer 불러오기 -->
          <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>      
