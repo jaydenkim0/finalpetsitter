@@ -417,11 +417,7 @@ public class MemberController {
 		return "redirect:mylist";
 	}
 
-	// 마이페이지 연결
-	@GetMapping("/mypage")
-	public String mypage() {
-		return "member/mypage";
-	}
+	
 
 	// 내정보보기
 	@GetMapping("/mylist")
@@ -441,6 +437,26 @@ public class MemberController {
 
 		return "member/mylist";
 	}
+	
+	// 내정보보기
+	@GetMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+
+		String id = (String) session.getAttribute("id");
+
+		MemberDto list = memberService.mypage(id);
+		model.addAttribute("mypage", list);
+
+		// 해당 회원의 회원 이미지 번호 구해오기
+		Integer member_image_no = memberService.member_image_no(id);
+		model.addAttribute("member_image_no", member_image_no);
+
+		List<PetImagePetDto> petlist = memberService.mylistpet(id);
+		model.addAttribute("mylistpet", petlist);
+
+		return "member/mypage";
+	}
+
 
 	// 내 리뷰 상세보기 페이지 연결
 	@GetMapping("/myreview_content")
