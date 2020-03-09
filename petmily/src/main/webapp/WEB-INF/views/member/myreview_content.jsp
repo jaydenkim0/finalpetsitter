@@ -54,15 +54,17 @@ $(function(){
 	}
 	
 	.section-content{
-	padding-top:250px;
+	padding-top:100px;
 	padding-bottom:100px;
 		
 	}
-	th{
-	width:6%;	
-	}
-	td{
-	width:40%;
+	
+	img{
+	position:relative;
+	left:140pt;
+	border-radius: 100pt;	
+	
+	
 	}
 	.box {
     width: 150px;
@@ -71,7 +73,22 @@ $(function(){
     overflow: hidden;
 }
 
-
+	
+	}
+	body{
+	background-color:#FAFAFA;
+	
+	}
+	.tab1{
+	position:relative;
+	width:28%;
+	
+	}
+	.id{
+	position:relative;
+	top:230px;
+	right:80px;
+	}
 </style>
 
 
@@ -79,31 +96,12 @@ $(function(){
 <section class="section-content">
 
 <div align="center">
-
-	<table>
-		<tr>
-			<th>No</th>
-			<td>${review.review_no }</td>
-		</tr>
-		<tr>
-			<th rowspan="2">Petsitter</th>
-			<td>
-				<div class="box">
-					<img src = "petmily/board/care/member/image?member_image_member_id=${review.sitter_id }" style="width: 100%; height: auto;"onerror="this.onerror=null; this.src='/petmily/resources/img/기본프로필.jpeg';">		
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>${review.sitter_id }</td>
-		</tr>
-		<tr>
-			<th>Title</th>
-			<td>${review.review_title }</td>
-		</tr>
-		<tr>
-			<th>Star</th>
-			<td>
-				<c:choose>
+<table>
+<tr>
+			<th  height="400" width="600">
+			<img src = "petmily/board/care/member/image?member_image_member_id=${review.sitter_id }" style="max-width: 200px; height: 200px"onerror="this.onerror=null; this.src='/petmily/resources/img/기본프로필.jpeg';">
+			 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <c:choose>
 					<c:when test="${review.review_star==3 }">
 						<img src="/petmily/resources/img/3.png" style="width: auto; height: 20px;">
 					</c:when>
@@ -114,16 +112,25 @@ $(function(){
 						<img src="/petmily/resources/img/1.png" style="width: auto; height: 20px;">
 					</c:otherwise>
 				</c:choose>
-			</td>
+			 
+			 </th>
+			
+			 </tr>
+			 
+</table>
+
+	<table class="tab1">
+					<tr>
+			<th  style="border-bottom:2px solid #1482e0;">${review.review_title }</th>
+						
+			</tr>
+		 <tr>
+			<td colspan="4" height="300" style="border-bottom:2px solid #1482e0;">${review.review_content }</td>
 		</tr>
-		<tr>
-			<th>Writedate</th>
-			<td>${review.writedateWithFormat }</td>
-		</tr>
-		<tr>
-			<th>Content</th>
-			<td>${review.review_content }</td>
-		</tr>
+			<tr>
+				<th>No :${review.review_no }<br>Date:${review.writedateWithFormat }<br>Sitter ID:${review.sitter_id }</th>
+</tr>
+
 	</table>
 
 </div>

@@ -52,14 +52,20 @@
 	<!-- 웹소켓 서버 등록 -->
 	
 	<!-- 인터셉터 등록 및 설정 -->
-<!--  <interceptors> -->
-<!--  	<interceptor> -->
-<!--  		<mapping path="/**"/> -->
-<!--  		<exclude-mapping path="/test*"/> -->
-<!--  		<beans:bean class="com.kh.petmily.interceptor.ReviewInterceptor"></beans:bean> -->
-<!--  	</interceptor> -->
- 
-<!--  </interceptors> -->
+	 <interceptors> 
+	 	<interceptor>
+	 		<!-- 접속 거부 주소 -->
+	 		<mapping path="/admin/**"/>
+	 		<!-- 접속 거부중 접속 허용 하게하는 예외 허용 -->
+	 		<!-- <exclude-mapping path="/admin/**"/> -->
+	 		<beans:bean class="com.kh.petmily.interceptor.AdminInterceptor"></beans:bean>
+	 	</interceptor>
+	 	<interceptor>
+	 		<mapping path="/petsitter/**"/>
+	 		<exclude-mapping path="/petsitter/list*"/>
+	 		<beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
+	 	</interceptor>
+	 </interceptors>
  
   
 </beans:beans>

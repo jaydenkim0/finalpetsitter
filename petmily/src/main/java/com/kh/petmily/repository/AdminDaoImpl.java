@@ -669,7 +669,27 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public double getFees() {		
 		return sqlSession.selectOne("admin.getFees");
+	}	
+	@Override
+	public double getFees2() {
+		return sqlSession.selectOne("admin.getFees2");
 	}
+	// 개별 정산 입금 버튼
+	@Override
+	public void IndividualAccount(String sitter_id) {	
+		sqlSession.update("admin.IndividualAccount", sitter_id);
+	}
+	// 일괄 정산 입금 버튼
+	@Override
+	public void batchAccount() {
+		sqlSession.update("admin.batchAccount");
+	}
+	// 입금 대기 인원 수	
+	@Override
+	public int accountWcount() {		
+		return sqlSession.selectOne("admin.accountWcount");
+	}
+
 
 
 
