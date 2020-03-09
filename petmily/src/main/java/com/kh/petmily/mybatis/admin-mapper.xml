@@ -855,7 +855,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 		
 	<!-- 1. 펫시터 중에서 결제 있는 사람 리스트 -->
-	<select id="findpetsitteraccount" resultType="accoutVO">
+	<select id="findpetsitteraccount" resultType="accountVO">
 		select * from accountlist where kakaopaystatus='완료'					
 	    and process_time between to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymm')||'01000000', 'yyyymmddhh24miss')
 	    and to_date(to_Char(to_date(to_char(sysdate, 'yyyymm')||'01', 'yyyymmdd')-1, 'yyyymmdd')||'235959', 'yyyymmddhh24miss')    
