@@ -4,7 +4,7 @@
 }
 
 .notice_table {
-	width: 90%;
+	width: 70%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color: #BDBDBD;
@@ -12,7 +12,7 @@
 	margin-right: auto;
 }
 .account_table {
-	width: 90%;
+	width: 70%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color: transparent;

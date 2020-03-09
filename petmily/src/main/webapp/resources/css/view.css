@@ -13,6 +13,12 @@
 	margin-right: auto;
 	margin-top: 50px;
 }
+.no-tr {
+	border-bottom: none;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
 
 .tr1 {
 	border-bottom: 1px solid #444444;
@@ -26,6 +32,18 @@
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	border-color: #BDBDBD;
+}
+.td3 {
+	text-align: left;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+.no-td{
+	border: none;
+}
+.mar-td{
+	margin-top: 10px;
 }
 
 a {
@@ -72,11 +90,11 @@ hr {
 }
 
 textarea {
-	width: 1250px;
+	width: 91.72%;
 	height: 50px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: solid 2px #1E90FF;
+	border: solid 2px #1482e0;
 	border-radius: 5px;
 	font-size: 16px;
 	resize: both;
