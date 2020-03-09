@@ -170,7 +170,7 @@ position: relative;
 	float: left;
 	left:90px;
 	top:22px;
-	right:100px;
+	right:90px;
 	font-size:16px;
 	}
 	
@@ -195,8 +195,13 @@ button{
 }
 
 th{
+position:relative;
+right:15px;
 font-size:12pt;
 padding:10px;
+}
+td{
+font-size:10pt;
 }
 #masthead:after {
 	  content: '';
@@ -231,7 +236,7 @@ padding:10px;
 
 	<div id="side_left" >
 		<div id="side_left_box">
-		<h3>&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${mypage.name }</h3>
 		<br>
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
@@ -299,9 +304,9 @@ padding:10px;
 <div id="side_content_box4">
  <h2>신고 / 문의</h2>
  나의 신고 및 문의 내역으로 이동 합니다.&nbsp;&nbsp;
-		 <a href="myqnaboard">
-			<button>GO</button>
-		</a>
+<a href="myqnaboard">
+	<button>GO</button>
+</a>
 </div>
 </div>
 <div id="mid_content5" >
