@@ -18,7 +18,9 @@ public class AccountDto {
 	private int account_count; // 전월 결제 건 수 
 	private int account_total_pay; // 전월 토탈 금액
 	private double account_fees; // 전월 적용 수수료
+	private int account_pay;  // 정산해서 입금할 금액
 	private String account_date; // 전월 정산 일자
+	private String account_status; // 정산 상태 '입금대기', '입금완료'
 
 
 }
