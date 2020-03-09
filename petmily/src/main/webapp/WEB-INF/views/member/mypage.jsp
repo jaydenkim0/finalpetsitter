@@ -241,24 +241,23 @@ font-size:10pt;
 			<img
 				src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"
 				style="width: 170px; height: 170px;" onerror="no_image2()" id="2">
-	
-	<br><Br><br>
+	<br>
 		<table>
 	<tr>
-	<th>Pets </th>
-		<td>${mylistpet.size() }</td>
+	<th>Pets</th>
+		<td>${size }마리</td>
 	</tr>
 	<tr>
-		<th>Point </th>
-		<td>${mypage.point}</td>
+		<th>Point</th>
+		<td>${mypage2.point}</td>
 	</tr>
 	<tr>
-		<th>JoinDate </th>		
-		<td>${mypage.total_joindateWithFormat }</td>
+		<th>JoinDate</th>		
+		<td>${mypage2.mypage_joindateWithFormat }</td>
 		</tr>
 		<tr>
-			<th>LastLogin </th>		
-			<td>${mypage.final_loginWithFormat }</td>
+			<th>LastLogin</th>		
+			<td>${mypage2.mypage_loginWithFormat }</td>
 	</tr>
 </table>
 <div id="side_left_box2">
