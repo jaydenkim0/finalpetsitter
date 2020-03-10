@@ -64,6 +64,7 @@
 	 	<interceptor>
 	 		<mapping path="/petsitter/**"/>
 	 		<exclude-mapping path="/petsitter/list*"/>
+	 		<exclude-mapping path="/petsitter/regist*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<!-- 회원 접속 권한 거부  -->
