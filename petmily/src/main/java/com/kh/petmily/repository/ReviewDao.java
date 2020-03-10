@@ -39,6 +39,9 @@ public interface ReviewDao {
 	
 	
 	ReservationDto getReviewInfo(int reservation_no);
+	
+	// 메인페이지 찍어줄 리스트
+	List<ReviewDto> reviewlist();
 
 	
 	

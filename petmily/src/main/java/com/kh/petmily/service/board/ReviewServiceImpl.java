@@ -69,6 +69,10 @@ public class ReviewServiceImpl implements ReviewService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	@Override
+	public List<ReviewDto> reviewlist() {
+		return reviewDao.reviewlist() ;
+	}
 	
 
 
