@@ -249,7 +249,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 100px;
 }
 </style>
 
