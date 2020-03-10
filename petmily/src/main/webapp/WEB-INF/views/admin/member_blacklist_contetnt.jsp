@@ -13,7 +13,7 @@
 				e.preventDefault();				
 				// 버튼 속성 및 내용 변경
 				$("#nega-btn").prop("disabled", true);
-				$("#nega-btn").val("경고회원 등록중");				
+				$("#nega-btn").text("경고회원 등록중");				
 				
 				var url = $(this).attr("action"); 
 				var method = $(this).attr("method");
@@ -32,7 +32,7 @@
 							else{
 								alert("이메일 발송 실패");								
 								$("#nega-btn").prop("disabled", false);
-								$("#nega-btn").val("등록하기");
+								$("#nega-btn").text("등록하기");
 							}
 						}
 					});
@@ -68,5 +68,5 @@
 	<form class="petnegative" action="member_blackListpage" method="post">				
 		<input type="hidden" name="id" value="${id}">
 		<textarea cols="150" rows="20" name="black_content"></textarea>
-		<button style="display: block;"> 등록하기 </button>
+		<button style="display: block;" id="nega-btn"> 등록하기 </button>
 	</form>

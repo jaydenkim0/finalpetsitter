@@ -91,6 +91,9 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+.ta{
+	padding-top:70px;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -130,7 +133,13 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
+}
+#masthead:after{
+	opacity: 100;
+	}
+	.title {
+	font-size: 50px;
 }
 </style>
 
@@ -139,6 +148,8 @@ header style -->
 
 <section class="section-content">
 <div align="center">
+	<section class="ta">
+		<h1 class="title" align="center">Notice</h1>
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -196,6 +207,7 @@ header style -->
 	</td>
 </tr>
 </table>
+</section>
 </div>
 </section>
 <br>

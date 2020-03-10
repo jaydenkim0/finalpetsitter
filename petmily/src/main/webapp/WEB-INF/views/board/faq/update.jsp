@@ -75,7 +75,7 @@ FOOTER 이용 시 넣어야할 요소
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -88,61 +88,78 @@ FOOTER 이용 시 넣어야할 요소
 .hover3:hover {
 	background-color: #1482e0;
 }
-<!-- header style -->
+
+<!--
+header style -->
 #masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 115px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+.title {
+	font-size: 50px;
+}
+</style>
 
 <script>
-        $(function(){
-            //생성은 항상 옵션 먼저 + 나중에 생성
-            var options = {
-                //대상
-                el:document.querySelector(".naver-editor"),
-                //미리보기 스타일(vertical / horizontal)
-                previewStyle:"horizontal",
-                //입력 스타일
-                initialEditType:"wysiwyg",
-                //높이
-                height:"300px",
-                
-                hooks: {
-                    'addImageBlobHook': function(blob, callback) {
-                        //이미지 블롭을 이용해 서버 연동 후 콜백실행
-                        //callback('이미지URL');
-                        console.log("이미지 업로드");
-                    }
-                }
-            };
+	$(function() {
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			//대상
+			el : document.querySelector(".naver-editor"),
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px",
 
-            var editor = tui.Editor.factory(options);
+			hooks : {
+				'addImageBlobHook' : function(blob, callback) {
+					//이미지 블롭을 이용해 서버 연동 후 콜백실행
+					//callback('이미지URL');
+					console.log("이미지 업로드");
+				}
+			}
+		};
 
-            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
-            editor.on("change", function(){
-                var text = editor.getValue();//에디터에 입력된 값을 불러온다
-                document.querySelector(".naver-editor + input[type=hidden]").value = text;  
-            });
-          //에디터에서 불러온 값 변경
-            var text = document.querySelector(".naver-editor + input[type=hidden]").value;
-            editor.setValue(text);//값 설정
-        });
-    </script>
+		var editor = tui.Editor.factory(options);
+
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[type=hidden]").value = text;
+						});
+		//에디터에서 불러온 값 변경
+		var text = document.querySelector(".naver-editor + input[type=hidden]").value;
+		editor.setValue(text);//값 설정
+	});
+</script>
     
 
 <!-- header 불러오기 -->
@@ -152,8 +169,9 @@ FOOTER 이용 시 넣어야할 요소
 <section class="section-content">
 
 <div align="left" class="tabl">
+<section class="ta">
 <form name="update" method="post" action="${context}/board/faq/update">
-	<h2 align="center">공지글 수정</h2>
+<h1 class="title" align="center">Notice</h1>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 
@@ -184,6 +202,7 @@ FOOTER 이용 시 넣어야할 요소
 			<input type="button" value="목록으로" class="btn hover3" ></a>
 	</div>
 </form>
+</section>
 </div>
 </section>
 <br>

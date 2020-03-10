@@ -7,6 +7,7 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+  
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -65,16 +66,22 @@ FOOTER 이용 시 넣어야할 요소
 </script>
 
 <style>
+ *{
+            box-sizing: border-box;
+        }
+
 .page-navigator li {
 	display: inline-block;
 }
-
 
 .notice_table {
 	width: 60%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color : #BDBDBD;
+}
+.ta{
+	padding-top:70px;
 }
 
 th, td {
@@ -101,7 +108,7 @@ a {
 	color: #1482e0;
 }
 
-.btn {
+.custom-btn {
 	display: white;
 	width: 80px;
 	height: 10x;
@@ -109,12 +116,13 @@ a {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
+	font-size : 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
 }
 
-.btn:hover {
+.custom-btn:hover {
 	color: white;
 }
 
@@ -142,9 +150,10 @@ select {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
-}
-<!-- header style -->
-	#masthead:after {
+	}
+	
+ <!-- header style -->
+#masthead:after {
 	  content: '';
 	  position: absolute;
 	  top: 0;
@@ -160,9 +169,15 @@ select {
 	}
 	
 	.section-content{
-	padding-top:150px;
+		padding-top:115px;
 	}
-	</style>
+	#masthead:after{
+	opacity: 100;
+	}
+	.title{
+	font-size: 50px;
+	}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -170,10 +185,9 @@ select {
 <section class="section-content">
 
 <div align="center">
-	<h1>Save the Pets !</h1>
-
-
-	<section>
+	<section class="ta">
+	<h1 class="title" align="center">Save the Pets !</h1>
+	<br>
 		<table class="notice_table">
 			<tr>
 				<th>글번호</th>
@@ -224,7 +238,7 @@ select {
 
 		<div align="right" class="right_mar">
 			<a href="${context}/board/stray/write">
-				<button type="button" class="btn hover3" id="btnwrite">글쓰기</button>
+				<input type="button" class="custom-btn hover3" id="btnwrite" value="글쓰기">
 			</a>
 		</div>
 
@@ -245,7 +259,7 @@ select {
 				<option value="stray_head">제목</option>
 			</select> 
 			<input class="input-item" name="keyword" placeholder="검색어" requierd>
-			<input type="submit" value="조회" class="btn hover3" >
+			<input type="submit" value="조회" class="custom-btn hover3" >
 		</form>
 		</div>
 	</section>

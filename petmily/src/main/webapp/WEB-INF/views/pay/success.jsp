@@ -4,7 +4,7 @@
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -31,7 +31,13 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
-
+    
+	<!-- 메일전송 -->
+	<script>
+      $(document).ready(function() {      
+		   $("#gosendemail").submit();
+      });  
+   </script> 
 	
 
 <!-- 
@@ -99,12 +105,7 @@ FOOTER 이용 시 넣어야할 요소
 	}
 	</style>
 
-<!-- 메일전송 -->
-    <script>
-       $(document).ready(function() {      
-          $("#gosendemail").submit();         
-       });
-   </script> 
+
 	
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -123,9 +124,10 @@ FOOTER 이용 시 넣어야할 요소
 			<input type="hidden" name="sitter_id" value="${sitter_id}">
 			<input type="hidden" name="sitter_email" value="${sitter_email}">
 			<input type="hidden" name="reservation_no" value="${reservation_no}">
-		</form>
+		</form> 
 	</section>
 	<br>
+	
       <!-- footer 불러오기 -->
      <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
  

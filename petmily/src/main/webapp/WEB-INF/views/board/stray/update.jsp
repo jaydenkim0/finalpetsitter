@@ -87,7 +87,7 @@ FOOTER 이용 시 넣어야할 요소
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -100,26 +100,39 @@ FOOTER 이용 시 넣어야할 요소
 .hover3:hover {
 	background-color: #1482e0;
 }
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
+
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+.title{
+	font-size: 50px;
 	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+</style>
 
 <!-- 네이버 에디터 설정 -->
 <script>
@@ -166,8 +179,9 @@ FOOTER 이용 시 넣어야할 요소
 <section class="section-content">
 
 <div align="left" class="tabl">
+	<section class="ta">
 	<form name="update" method="post" action="${context}/board/stray/update">
-		<h2 align="center">게시글 수정</h2>
+		<h1 class="title" align="center">Save the Pets !</h1>
 		<input type="hidden" name="member_id" value="${sessionScope.id}">
 		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 
@@ -196,10 +210,12 @@ FOOTER 이용 시 넣어야할 요소
 
 		<div class="form-group" align="center">
 			<input type="submit" value="수정" class="btn hover3" > 
-			<input type="reset" value="초기화"> <a href="${context}/board/stray/list"> 
+			<input type="reset" value="초기화" class="btn hover3" > 
+			<a href="${context}/board/stray/list"> 
 			<input type="button" value="목록으로" class="btn hover3" ></a>
 		</div>
 	</form>
+	</section>
 </div>
 </section>
 <br>

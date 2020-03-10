@@ -1,9 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+
+	<!-- jquery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- 
+기본 CSS
+:	font css
+-->
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+     
+    <!-- list css -->
+	<link rel="stylesheet" href="${context}/resources/css/list.css"/>   
+
+
+<!-- 
+HEADER 이용 시 넣어야할 요소 
+:	jquery js,
+	header css, 
+	header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
+
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+    <!-- header style -->
+    <style>
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+		padding-top:165px;
+	}
+	</style>
+
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:	jquery js,
+	footer css, 
+	Required meta tags, 
+	Bootstrap CSS,
+	아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+  	<!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
 
 <script>
 	$(function(){
@@ -29,18 +109,17 @@ function no_image2(){
 </script>
 <style>
 	
-	th{
+.mylistwrap th{
 		width:135px;
 		text-align: left;
 		}
-	td{
+.mylistwrap td{
 	width:400px;
 	text-align:left;
 	color:gray;
 	font-weight:bold;
 	}
-
-  button, #updatebtn,#cancel{
+button, #updatebtn,#cancel{
    display: white;
    width: 70px;
    height: 30px;
@@ -63,7 +142,7 @@ function no_image2(){
 	background-color: #1482e0;
 	}
       
-body{
+.mylistwrap {
 background-color:#FAFAFA;
 padding-left:10%;
 padding-top:3%;
@@ -71,92 +150,110 @@ padding-top:3%;
 .tab0{
  font-size:15pt;
 }
-.tab1{
+.mylistwrap .tab1{
 height:70px;
 font-size:9pt;
 
 }
-.tab2{
+.mylistwrap .tab2{
    padding-left:20%;
    position: relative;
-   left: 100px;
+   left: 500px;
    bottom:515px;
    height:200px;
 }
-.tab3{
+.mylistwrap .tab3{
 padding-left:20%;
    position: relative;
-   left: 100px;
-   bottom:485px;
-   height:170px;
+   left: 500px;
+   bottom:500px;
+   height:100px;
 }
-.tab4{
+.mylistwrap .tab4{
 padding-left:20%;
    position: relative;
    left: 100px;
    bottom:535px;
    height:150px;
 }
-.hr1{
+.mylistwrap .hr1{
 padding-left:20%;
    position: relative;
    left: 100px;
    bottom:515px;
    }
-.hr2{
+.mylistwrap .hr2{
 padding-left:20%;
    position: relative;
    left: 100px;
    bottom:505px;
 }
-.img2{
-padding-left:20%;
-   position: relative;
-   left: 100px;
-   bottom:495px;
-}
-a{
+
+.mylistwrap a{
 
    position: relative;
    left: 550px;
-   bottom:715px;
+   bottom:660px;
 }
-#add_btn{
+.mylistwrap #add_btn{
 position: relative;
    left: 1400px;
-   bottom:900px;
+   bottom:923px;
 }
-h2{
+.mylistwrap h2{
 padding-left:20%;
    position: relative;
    left: 100px;
    bottom:780px;
 }
-h1{
+.mylistwrap h1{
 padding-left:20%;
    position: relative;
    left: 100px;
    bottom:485px;
 }
-select{
+.mylistwrap select{
 	width:100px;
 	padding: .4em .4em;
 	border: 1px solid #999;
 	font-family : inherit;
 	}
-	.box {
+	
+.box {
     width: 350px;
     height: 350px; 
-    border-radius: 30%;
-    overflow: hidden;
+   
+    
+}
+
+.mylistwrap h3{
+position:relative;
+bottom:750px;
+left:800px;
+}
+
+.mylistwrap .img2{
+  position: relative;
+   left: 490px;
+   bottom:495px;
+}
+
+.mylistwrap .add_content{
+position: relative;
+left:400px;
 }
 </style>
-<body>
-<div align="left">
+
+    
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<section class="section-content">
+
+	
+<div class="mylistwrap" align="left">
 
 <br>
 <div class="box" style="background: #BDBDBD;">
-<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: auto;" onerror="no_image2()" id="2">
+<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 350px; height: 350px;" onerror="no_image2()" id="2">
 </div>
 <br><br>
 <table class="tab0">
@@ -230,10 +327,10 @@ select{
 		<tr>	
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: auto;" class="img2">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="mylistwrap.img2">
 				</c:when>
 				<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: auto;" class="img2">				
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2">				
 				</c:otherwise>
 			</c:choose>
 		</tr>	
@@ -254,6 +351,7 @@ select{
 			<th>Etc :&emsp;</th>
 			<td>${pet.ect }</td>
 		</tr>
+		
 	</table>
 	<br>
 	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button >수정</button></a>
@@ -269,6 +367,8 @@ select{
 <br>
 <div id="add_div">
 	<button id="add_btn">펫 추가</button>
+	<a href="${context}"><button id="add_btn">홈으로</button></a>
+	
 </div>
 <div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
@@ -325,4 +425,6 @@ select{
 
 </div>
 
-</body>
+</section>
+<br>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>   
