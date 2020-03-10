@@ -8,7 +8,7 @@ import com.kh.petmily.entity.ReviewDto;
 
 public interface ReviewDao {
    //게시글 작성
-	void insert(ReviewDto reviewDto)throws Exception;
+	void insert(ReviewDto reviewDto);
    //게시글 조회
 	List<ReviewDto> list();
 	List<ReviewDto> listSearch(int review_sitter_no);
@@ -39,6 +39,10 @@ public interface ReviewDao {
 	
 	
 	ReservationDto getReviewInfo(int reservation_no);
+	
+	// 리뷰가 있는지확인
+	int isReview(int review_reservation_no);
+
 
 	
 	
