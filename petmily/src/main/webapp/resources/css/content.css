@@ -11,7 +11,7 @@
 
 .content-wrap .petsitter-info{
     margin-top: 20px;
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 /*review(write-date/star) style*/
@@ -67,36 +67,25 @@
 }
 
 /*Location style*/
+.content-wrap .location-wrap{
+	margin-left:25px;
+}
 .content-wrap #petsitter_city {
-        margin: 10px;
-        padding-left: 7px;
-        padding-right: 7px;
-        padding-top: 3px;
-        padding-bottom: 3px;
-
-        font-size: 11pt;
-        font-family: NotosanL;
-        color: white;
-        text-align: center;
-        background: #1482e0;
-        border: solid 2px #1482e0;
-        border-radius: 30px;
+	margin: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	
+	font-size: 11pt;
+	font-family: NotosanL;
+	color: white;
+	text-align: center;
+	background: #1482e0;
+	border: solid 2px #1482e0;
+	border-radius: 30px;
 }
 
-.content-wrap #petsitter_area {
-    padding-left: 7px;
-    padding-right: 7px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-
-    font-size: 11pt;
-    font-family: NotosanL;
-    color: white;
-    text-align: center;
-    background: #1482e0;
-    border: solid 2px #1482e0;
-    border-radius: 30px;
-}
 
 /*pet-check style*/
 .content-wrap #pet-check{
@@ -139,7 +128,9 @@
     margin-right: 300px;
 }
 
-
+.content-wrap .petsitter-skill-wrap{
+	margin-left: 25px;
+}
 .content-wrap .petsitter-skill-wrap img{
 	width:150px;
 	margin:10px
@@ -154,3 +145,32 @@
 	font-family: NotosanM;
 	margin-left: 98px;
 }
+
+.content-wrap #large-text{
+    font-family: NotosanB;
+    font-size: 19px;
+}
+.content-wrap #medium-text{
+	font-family: NotosanM;
+    font-size: 16px;
+}
+.content-wrap .text-box{
+	margin: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    font-size: 11pt;
+    font-family: NotosanR;
+    color: white;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 30px;
+}
+
+.content-wrap .petsitter-pet-wrap{
+	margin-left: 25px;
+}
+

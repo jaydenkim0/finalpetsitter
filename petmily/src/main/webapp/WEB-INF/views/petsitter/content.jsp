@@ -188,92 +188,117 @@ FOOTER 이용 시 넣어야할 요소
 	
 				<br><br>
 				<!-- 펫시터 지역 정보 -->
-				<c:forEach var="location" items="${petsitterGetList.locationDto}">
-					<span id="petsitter_city">#${location.city} ${location.area}</span>		
-				</c:forEach>
-				<br><br>
+				<div class="location-wrap">
+					<c:forEach var="location" items="${petsitterGetList.locationDto}">
+							<span id="petsitter_city">#${location.city} ${location.area}</span>		
+					</c:forEach>
+				</div>
+				<br><br><br><br>
 				
 				<div class="petsitter-skill-wrap">
-					<!-- 펫시터 매칭 정보 -->
+					<!-- 펫시터 매칭 정보 -->				
+					<h5 id="large-text">펫밀리 가능한 돌봄 서비스 종류</h5>
+					<hr>
 					<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
 <%-- 						<span>매칭 종류 : ${petsitter.sitter_matching_type}</span> --%>
-						
-						<c:choose>
-							<c:when test="${petsitter.sitter_matching_type eq '방문서비스'}">
+												
+						<c:if test="${petsitter.sitter_matching_type eq '방문서비스'}">
 								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
 								<img src="${context}/resources/img/petsitter-skill-icon/no-leave.png" alt="위탁서비스 안함">
 								<br>
 								<span id="visit-text">방문서비스</span>
 								<span id="leave-text">위탁서비스</span>
-							</c:when>
-							
-							<c:when test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+						</c:if>
+						<c:if test="${petsitter.sitter_matching_type eq '위탁서비스'}">
 								<img src="${context}/resources/img/petsitter-skill-icon/no-visit.png" alt="방문서비스 안함">
 								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
 								<br>
 								<span id="visit-text">방문서비스</span>
 								<span id="leave-text">위탁서비스</span>
-							</c:when>
-							
-							<c:otherwise>
+						</c:if>
+						<c:if test="${petsitter.sitter_matching_type eq '둘다'}">
 								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
 								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
 								<br>
 								<span id="visit-text">방문서비스</span>
 								<span id="leave-text">위탁서비스</span>
-							</c:otherwise>					
-						</c:choose>
-						
-						<hr>
-						<br>
+						</c:if>
 					</c:forEach>		
 						
+					<br><br>	
 					<!-- 펫시터 능력 정보 -->
-					<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
+					<h5 id="large-text">펫밀리 가능한 돌봄 서비스</h5>
+					<hr>
+					<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">						
+						<c:if test="${skillName.skill_name eq '투약'}">
+							<div class="1">
+								<img src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
+								<h5 id="medium-text">투약 서비스</h5>
+							</div>
+						</c:if>
 						
-						<c:choose>
-							<c:when test="${skillName.skill_name eq '투약'}">
-								<img id="no-inject" src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
-							</c:when>
-							<c:when test="${skillName.skill_name eq '도그워킹'}">
-								<img id="no-dogwalking" src="${context}/resources/img/petsitter-skill-icon/dogwalking.png" alt="도그워킹서비스">
-							</c:when>
-							<c:when test="${skillName.skill_name eq '키튼케어'}">
-								<img id="no-kitten" src="${context}/resources/img/petsitter-skill-icon/kitten.png" alt="키튼케어서비스">
-							</c:when>
-							<c:when test="${skillName.skill_name eq '퍼피케어'}">
-								<img id="no-puppy" src="${context}/resources/img/petsitter-skill-icon/puppy.png" alt="퍼피케어서비스">
-							</c:when>
-							<c:when test="${skillName.skill_name eq '노령동물케어'}">
+						<c:if test="${skillName.skill_name eq '도그워킹'}">
+							<div class="2">
+								<img src="${context}/resources/img/petsitter-skill-icon/dogwalking.png" alt="도그워킹서비스">
+								<h5 id="medium-text">도그워킹</h5>
+							</div>
+						</c:if>
+						
+						<c:if test="${skillName.skill_name eq '키튼케어'}">
+							<div class="3">
+								<img src="${context}/resources/img/petsitter-skill-icon/kitten.png" alt="키튼케어서비스">
+								<h5 id="medium-text">키튼케어 서비스</h5>
+							</div>
+						</c:if>
+						
+						<c:if test="${skillName.skill_name eq '퍼피케어'}">
+							<div class="4">
+								<img src="${context}/resources/img/petsitter-skill-icon/puppy.png" alt="퍼피케어서비스">
+								<h5 id="medium-text">퍼피케어 서비스</h5>
+							</div>
+						</c:if>
+						
+						<c:if test="${skillName.skill_name eq '노령동물케어'}">
+							<div class="5">
 								<img id="no-old" src="${context}/resources/img/petsitter-skill-icon/old.png" alt="노령동물케어서비스">
-							</c:when>
-							
-							<br>
-							<span id="have">${skillName.skill_name}</span>	
-						</c:choose>					
+								<h5 id="medium-text">노령동물케어 서비스</h5>
+							</div>
+						</c:if>
+						
 					</c:forEach>
 					
+					<br><br>	
+					<!-- 펫시터 돌봄 환경 -->
+					<h5 id="large-text">펫밀리 돌봄 환경</h5>
+					<hr>
 					<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
-						<span>돌봄 환경 : ${careConditionName.care_condition_name}</span>
-						<br>
+						<span class="text-box">#${careConditionName.care_condition_name}</span>
 					</c:forEach>
 					
+					<br><br>	
+					<!-- 펫시터 돌봄 가능한 동물 -->
+					<h5 id="large-text">펫밀리 돌봄 가능한 동물 종류</h5>
+					<hr>
 					<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
-						<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span>
-						<br>
+						<span class="text-box">#${carePetTypeName.care_type}</span>
 					</c:forEach>
 				</div>
 				
-				
+				<br><br>	
 				<!-- 펫시터 반려동물 정보 -->
+				<div class="petsitter-pet-wrap">
+				<h5 id="large-text">펫밀리  반려동물 정보</h5>
+				<hr>
 				<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
 					<c:if test="${petsitterPets.pets eq '예'}">
-						<span>반려동물 이름 : ${petsitterPets.pet_name}</span>
+						<span id="medium-text">${petsitterPets.pet_name}</span>
+						<span id="medium-text">(${petsitterPets.pet_age}살)</span>
 						<br>
-						<span>반려동물 나이 : ${petsitterPets.pet_age}</span>
+						<span>${petsitterPets.pet_ect}</span>
 						<br><br>
 					</c:if>
 				</c:forEach>
+				</div>
 	</c:forEach>
 	
 	
@@ -281,7 +306,8 @@ FOOTER 이용 시 넣어야할 요소
 			<div class="review-wrap">
 				<c:choose>
 					<c:when test="${list.size() > 0}">		
-						<h3>펫밀리 리뷰</h3>	
+						<h3 id="large-text">펫밀리 리뷰</h3>	
+						<hr>
 						<c:forEach var="reviewDto" items="${list}">
 							
 							<div class="img_box" style="background: #f5f5f5">
@@ -307,7 +333,7 @@ FOOTER 이용 시 넣어야할 요소
 					</c:otherwise>
 				</c:choose>
 			</div>
-	
+			<br><br>
 	
 			<!-- Swiper JS -->
 			<script src="swiper.min.js"></script>
