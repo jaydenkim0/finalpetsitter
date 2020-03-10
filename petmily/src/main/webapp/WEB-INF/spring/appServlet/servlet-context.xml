@@ -64,8 +64,7 @@
 	 	<interceptor>
 	 		<mapping path="/petsitter/**"/>
 	 		<exclude-mapping path="/petsitter/list*"/>
-	 		<exclude-mapping path="/petsitter/regist*"/>
-	 		<exclude-mapping path="/petsitter/content"/>
+	 		<exclude-mapping path="/petsitter/regist*"/>	 	
 	 		<exclude-mapping path="/petsitter/estimate"/>
 	 		<exclude-mapping path="/petsitter/confirm"/>
 	 		<exclude-mapping path="/petsitter/searchlist"/>
