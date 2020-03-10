@@ -182,6 +182,18 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+textarea {
+	width: 90%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 1px #1482e0;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -223,13 +235,20 @@ header style -->
 .section-content {
 	padding-top: 150px;
 }
+	#masthead:after{
+	opacity: 100;
+}
+.ta{
+	padding-top:70px;
+}
 </style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
+<div align="center">
+	<section class="ta">
 	<h1 align="center">Save the Pets !</h1>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
@@ -383,6 +402,8 @@ header style -->
 			</td>
 	</tr>
 </table>
+</section>
+</div>
 </section>
 <br>
       <!-- footer 불러오기 -->
