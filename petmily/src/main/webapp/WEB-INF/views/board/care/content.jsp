@@ -511,7 +511,7 @@ padding:0;
 <table class="mother">
 <c:choose>
 
-<!-- 댓글 작성자와 session(id)값이 일치할 경우 -->
+
 <c:when test="${replyimagelist.care_reply_writer==id && care_reply_writer!=null && id!=null}">
 		<tr>
 			<c:choose>
@@ -578,7 +578,7 @@ padding:0;
 		</c:if>
 </c:when>
 
-<!-- 댓글 작성자와 session(id)값이 일치하지 않거나 null인 경우 -->
+
 <c:otherwise>
 		<tr>
 			<c:choose>
@@ -634,12 +634,12 @@ padding:0;
 		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
 		<tr>
 			<th colspan="2" align="right">
-				<button class="reply_edit_btn">완료</button>
-				<button class="reply_view_btn">수정</button>
+				<button class="reply_edit_btn btn hover3">완료</button>
+				<button class="reply_view_btn btn hover3">수정</button>
 				<form action="reply_delete" method="post" class="reply_delete_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
 				</form>
-				<button class="reply_delete_btn">삭제</button>
+				<button class="reply_delete_btn btn hover3">삭제</button>
 			</th>
 		</tr>
 		</c:if>

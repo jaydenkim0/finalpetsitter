@@ -275,6 +275,7 @@ public class MemberController {
 	@RequestMapping(value = "idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String user_id) {
+		System.out.println(user_id);
 		return memberService.userIdCheck(user_id);
 	}
 
