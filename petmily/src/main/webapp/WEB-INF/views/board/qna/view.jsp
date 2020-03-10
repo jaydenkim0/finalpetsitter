@@ -294,8 +294,9 @@ header style -->
 }
 </style>
 
-<!-- header 불러오기 -->
-		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+	<!-- header 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 
 <section class="section-content">
 <div align="center">
@@ -402,8 +403,8 @@ header style -->
 
 			<!-- 댓글 등록 -->
 		<tr>
-<td align="right" class="td3">
-<form action="replywrite" method="post" class="reply_submit">
+	<td align="right" class="td3">
+	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 		<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 		<textarea name="content" required placeholder="내용 입력" rows="4" cols="80" ></textarea>
@@ -412,7 +413,7 @@ header style -->
 		</td>
 	</tr>
 
-<tr>
+	<tr>
 	<td class="td2">
 	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
@@ -432,17 +433,13 @@ header style -->
 				<br><br>
 				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
 				<form action="${context}/admin/declaration" method="get">
-					<select name="grade" required>
-						<option value="" selected disabled hidden>선택하세요</option>
-						<option value="petsitter"> 펫시터 </option>			
-						<option value="member"> 회원 </option>
-					</select>
 					<input id="id" type="text"  name="id" placeholder="아이디" required> 
 					<input  id="bbb"  type="submit" value="경고 등록" disabled>
 				</form>
 				<div id="id_check"></div>
 			</c:if>
 			
+
 		</td>
 	</tr>
 </table>
