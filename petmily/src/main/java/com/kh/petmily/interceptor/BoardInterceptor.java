@@ -31,11 +31,14 @@ public class BoardInterceptor extends HandlerInterceptorAdapter {
 		if(qna_title.equals("신고합니다")) { //신고합니다 게시물이면 아래 조건 실행
 			// 로그인한 id
 			HttpSession session = request.getSession();
-			String id = (String) session.getAttribute("id");		
+			String id = (String) session.getAttribute("id");
 			// 관리자가 맞는지 확인
 			String grade = (String) session.getAttribute("grade");			
 			// 로그인한 사람이 작성자이거나, 관리자만 true 
-			if(id.equals(qnaVO.getQna_writer()) || grade.equals("admin")  ) {
+			if(id == null) { 
+				response.sendRedirect(request.getContextPath()+"/member/login");
+				return false;
+			}else if(id.equals(qnaVO.getQna_writer()) || grade.equals("admin")  ) {
 				return true;		
 			}else {
 				response.sendError(403);
