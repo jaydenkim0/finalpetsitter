@@ -90,11 +90,11 @@ hr {
 }
 
 textarea {
-	width: 88.7%;
+	width: 87.7%;
 	height: 50px;
 	padding: 10px;
 	box-sizing: border-box;
-	border: solid 2px #1482e0;
+	border: solid 1px #1482e0;
 	border-radius: 5px;
 	font-size: 16px;
 	resize: both;
