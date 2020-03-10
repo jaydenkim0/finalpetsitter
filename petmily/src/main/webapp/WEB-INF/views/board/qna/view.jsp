@@ -253,10 +253,10 @@ header style -->
 }
 </style>
 
-<!-- header 불러오기 -->
-		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+	<!-- header 불러오기 -->
+	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-<section class="section-content">
+	<section class="section-content">
 
 	<h1 align="center">QnA</h1>
 		<table class="notice_table">
@@ -360,8 +360,8 @@ header style -->
 
 			<!-- 댓글 등록 -->
 		<tr>
-<td align="right" class="td3">
-<form action="replywrite" method="post" class="reply_submit">
+	<td align="right" class="td3">
+	<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 		<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 		<textarea name="content" required placeholder="내용 입력" rows="4" cols="80" ></textarea>
@@ -370,20 +370,20 @@ header style -->
 		</td>
 	</tr>
 
-<tr>
+	<tr>
 	<td class="td2">
-	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-		<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-		<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
-		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-		<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
-	</c:if>
-	
-	<a href="${context}/board/qna/list">
-	<button type="button" class="btn hover3">문의게시판 목록</button></a>
-	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
-	<button type="button" class="btn hover3">답글쓰기</button></a>
+			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+				<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+				<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+				<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
+				<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+				<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
+			</c:if>
+			
+			<a href="${context}/board/qna/list">
+			<button type="button" class="btn hover3">문의게시판 목록</button></a>
+			<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+			<button type="button" class="btn hover3">답글쓰기</button></a>
 		</td>
 	</tr>
 </table>
