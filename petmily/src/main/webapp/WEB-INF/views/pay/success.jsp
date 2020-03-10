@@ -102,7 +102,7 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 메일전송 -->
     <script>
        $(document).ready(function() {      
-          $("#gosendemail").submit();
+          $("#gosendemail").submit();         
        });
    </script> 
 	
