@@ -66,53 +66,65 @@ FOOTER 이용 시 넣어야할 요소
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
  <!-- 네이버 토스트에디터 종료 -->
-    
+
 <style>
 
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
 
-    <script>
-        $(function(){
-            //생성은 항상 옵션 먼저 + 나중에 생성
-            var options = {
-                //대상
-                el:document.querySelector(".naver-editor"),
-                //미리보기 스타일(vertical / horizontal)
-                previewStyle:"horizontal",
-                //입력 스타일
-                initialEditType:"wysiwyg",
-                //높이
-                height:"300px"
-            };
+#masthead.is-active {
+	background-color: #fff;
+}
 
-            var editor = tui.Editor.factory(options);
+.section-content {
+	padding-top: 150px;
+}
 
-            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
-            editor.on("change", function(){
-                var text = editor.getValue();//에디터에 입력된 값을 불러온다
-                document.querySelector(".naver-editor + input[type=hidden]").value = text;
-            });
-        });
-    </script>
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
+
+<script>
+	$(function() {
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			//대상
+			el : document.querySelector(".naver-editor"),
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px"
+		};
+
+		var editor = tui.Editor.factory(options);
+
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[type=hidden]").value = text;
+						});
+	});
+</script>
 
 
 <!-- header 불러오기 -->
@@ -121,15 +133,16 @@ FOOTER 이용 시 넣어야할 요소
 <section class="section-content">
 
 <div align="left" class="tabl">
+<section class="ta">
 	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2>QnA</h2>
+		<h1 align="center" >문의 사항</h1>
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
 		</c:if>
 
 		<input type="hidden" name="qna_writer" value="${sessionScope.id}">
 		<div class="form-group">
-			<label for="qna_title">말머리</label> <select name="qna_title">
+			<label for="qna_title"  class="label_1">Title</label> <select name="qna_title">
 				<option>펫시터 질문</option>
 				<option>유저 질문</option>
 				<option>기타 질문</option>
@@ -138,7 +151,7 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="qna_head">제목</label>
+			<label for="qna_head" >Subject</label>
 			<c:choose>
 				<c:when test="${param.superno > 0}">
 					<input class="form-control" type="text" name="qna_head" value="RE:"
@@ -152,21 +165,22 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="qna_content">내용</label>
+			<label for="qna_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="qna_content" value="">
 		</div>
 
 		<div class="form-group">
-			<label for="qna_file">이미지 첨부</label> 
+			<label for="qna_file" >Image</label> 
 			<input class="input-file" type="file" id="qna_file" name="qna_file" multiple accept="image/*">
 		</div>
 
 		<div class="form-group" align="center">
-			<input type="submit" value="확인" class="btn hover3"> 
-			<input type="reset" value="초기화" class="btn hover3">
+			<input type="submit" value="확인" class="custom-btn hover3"> 
+			<input type="reset" value="초기화" class="custom-btn hover3">
 		</div>
 	</form>
+	</section>
 </div>
 </section>
 <br>

@@ -4,19 +4,8 @@
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
  <!-- 
-기본 CSS
-:	index css,
-	font css
--->
-    <!-- index css -->
-    <link rel="stylesheet" href="${context}/resources/css/index.css" />
-    <!-- font css -->
-    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
-    
-<!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
 	header css, 
@@ -42,8 +31,15 @@ HEADER 이용 시 넣어야할 요소
           })
       });
     </script>
- 
-  
+    
+	<!-- 메일전송 -->
+	<script>
+      $(document).ready(function() {      
+		   $("#gosendemail").submit();
+      });  
+   </script> 
+	
+
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -60,10 +56,36 @@ FOOTER 이용 시 넣어야할 요소
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
+	
+	
 <style>
-<!-- header style -->
-	#masthead:after {
+ *{
+            box-sizing: border-box;
+        }
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+	
+ <!-- header style -->
+#masthead:after {
 	  content: '';
 	  position: absolute;
 	  top: 0;
@@ -78,24 +100,19 @@ FOOTER 이용 시 넣어야할 요소
 	 background-color: #fff;
 	}
 	
-	.section001{
+	.section-content{
 	padding-top:150px;
 	}
-</style>
+	</style>
 
-<!-- 메일전송 -->
-    <script>
-       $(document).ready(function() {      
-          $("#gosendemail").submit();
-       });
-   </script> 
+
 	
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
  
   <section class="section-content">
 		<div align="center">
-		<h2>결제 완료 !</h2>
+		<h1>결제가 완료되었습니다 !</h1>
 		<a href="${context}/member/myreservation">
 		<button type="button">내 예약 목록</button></a>
 		</div>
@@ -107,9 +124,10 @@ FOOTER 이용 시 넣어야할 요소
 			<input type="hidden" name="sitter_id" value="${sitter_id}">
 			<input type="hidden" name="sitter_email" value="${sitter_email}">
 			<input type="hidden" name="reservation_no" value="${reservation_no}">
-		</form>
+		</form> 
 	</section>
 	<br>
+	
       <!-- footer 불러오기 -->
      <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>            
  

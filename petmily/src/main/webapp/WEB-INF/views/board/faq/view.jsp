@@ -91,7 +91,30 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+.ta{
+	padding-top:70px;
+}
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
 
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!--
 header style -->
 #masthead:after {
@@ -110,8 +133,11 @@ header style -->
 }
 
 .section-content {
-	padding-top: 100px;
+	padding-top: 115px;
 }
+#masthead:after{
+	opacity: 100;
+	}
 </style>
 
 <!-- header 불러오기 -->
@@ -119,6 +145,8 @@ header style -->
 
 <section class="section-content">
 <div align="center">
+	<section class="ta">
+		<h1 align="center">Notice</h1>
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -143,6 +171,7 @@ header style -->
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
 				<tr>
 					<td class="td1">
+					<br>
 					<img src="${context}/board/faq/view/file_view?faq_file_no=${faqImage.faq_file_no}" width="200" height="100">
 					</td>
 				</tr>
@@ -175,6 +204,7 @@ header style -->
 	</td>
 </tr>
 </table>
+</section>
 </div>
 </section>
 <br>

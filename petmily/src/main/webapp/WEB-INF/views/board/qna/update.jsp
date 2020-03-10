@@ -65,27 +65,57 @@ FOOTER 이용 시 넣어야할 요소
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
 
 <style>
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
 
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
 
 
 <!-- 네이버 에디터 설정 -->
@@ -129,13 +159,14 @@ FOOTER 이용 시 넣어야할 요소
 <section class="section-content">
 
 <div align="left" class="tabl">
+<section class="ta">
 <form name="update" method="post" action="${context}/board/qna/update">
-	<h2 align="center">문의글 수정</h2>
+	<h1 align="center">문의사항 수정</h1>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
 
 	<div class="form-group">
-		<label for="qna_title">말머리</label>
+		<label for="qna_title">Title</label>
 		<select name="qna_title" value="${qnaVO.qna_title}">
 			<option>펫시터 질문</option>
 			<option>유저 질문</option>
@@ -144,22 +175,24 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 	<div class="form-group">
-		<label for="qna_head">제목</label>
+		<label for="qna_head">Subject</label>
 		<input class="form-control" name="qna_head" id="qna_head" placeholder="${qnaVO.qna_head}">
 	</div>
 
 	<div class="form-group">
-	<div class="naver-editor"></div>
-	 <input type="hidden" name="qna_content" value="${qnaVO.qna_content}">
+	<label for="faq_content">Content</label>
+		<div class="naver-editor"></div>
+			 <input type="hidden" name="qna_content" value="${qnaVO.qna_content}">
 	 </div>
 
 		<div class="form-group" align="center">
-		<input type="submit" value="수정"  class="btn hover3" > 
-		<input type="reset"value="초기화"  class="btn hover3" >
-		<a href="${context}/board/qna/list"> 
+			<input type="submit" value="수정"  class="btn hover3" > 
+				<input type="reset"value="초기화"  class="btn hover3" >
+				<a href="${context}/board/qna/list"> 
 		<input type="button" value="목록으로"  class="btn hover3" ></a>
 	</div>
 </form>
+</section>
 </div>
 </section>
 <br>

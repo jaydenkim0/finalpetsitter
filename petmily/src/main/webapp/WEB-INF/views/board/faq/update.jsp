@@ -67,62 +67,96 @@ FOOTER 이용 시 넣어야할 요소
     <script src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
 
 <style>
- 
-<!-- header style -->
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+
+<!--
+header style -->
 #masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
 
 <script>
-        $(function(){
-            //생성은 항상 옵션 먼저 + 나중에 생성
-            var options = {
-                //대상
-                el:document.querySelector(".naver-editor"),
-                //미리보기 스타일(vertical / horizontal)
-                previewStyle:"horizontal",
-                //입력 스타일
-                initialEditType:"wysiwyg",
-                //높이
-                height:"300px",
-                
-                hooks: {
-                    'addImageBlobHook': function(blob, callback) {
-                        //이미지 블롭을 이용해 서버 연동 후 콜백실행
-                        //callback('이미지URL');
-                        console.log("이미지 업로드");
-                    }
-                }
-            };
+	$(function() {
+		//생성은 항상 옵션 먼저 + 나중에 생성
+		var options = {
+			//대상
+			el : document.querySelector(".naver-editor"),
+			//미리보기 스타일(vertical / horizontal)
+			previewStyle : "horizontal",
+			//입력 스타일
+			initialEditType : "wysiwyg",
+			//높이
+			height : "300px",
 
-            var editor = tui.Editor.factory(options);
+			hooks : {
+				'addImageBlobHook' : function(blob, callback) {
+					//이미지 블롭을 이용해 서버 연동 후 콜백실행
+					//callback('이미지URL');
+					console.log("이미지 업로드");
+				}
+			}
+		};
 
-            //에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
-            editor.on("change", function(){
-                var text = editor.getValue();//에디터에 입력된 값을 불러온다
-                document.querySelector(".naver-editor + input[type=hidden]").value = text;  
-            });
-          //에디터에서 불러온 값 변경
-            var text = document.querySelector(".naver-editor + input[type=hidden]").value;
-            editor.setValue(text);//값 설정
-        });
-    </script>
+		var editor = tui.Editor.factory(options);
+
+		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+		editor
+				.on(
+						"change",
+						function() {
+							var text = editor.getValue();//에디터에 입력된 값을 불러온다
+							document
+									.querySelector(".naver-editor + input[type=hidden]").value = text;
+						});
+		//에디터에서 불러온 값 변경
+		var text = document.querySelector(".naver-editor + input[type=hidden]").value;
+		editor.setValue(text);//값 설정
+	});
+</script>
     
 
 <!-- header 불러오기 -->
@@ -132,13 +166,14 @@ FOOTER 이용 시 넣어야할 요소
 <section class="section-content">
 
 <div align="left" class="tabl">
+<section class="ta">
 <form name="update" method="post" action="${context}/board/faq/update">
-	<h2 align="center">공지글 수정</h2>
+	<h1 align="center">Notice</h1>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 
 	<div class="form-group">
-		<label for="faq_title">말머리</label>
+		<label for="faq_title">Title</label>
 		<select name="faq_title" value="${faqVO.faq_title}">
 			<option>전체공지</option>
 			<option>펫시터공지</option>
@@ -147,22 +182,24 @@ FOOTER 이용 시 넣어야할 요소
 	</div>
 
 	<div class="form-group">
-		<label for="faq_head">제목</label>
-		<input class="form-control" name="faq_head" id="faq_head" placeholder="${faqVO.faq_head}">
+		<label for="faq_head">Subject</label>
+			<input class="form-control" name="faq_head" id="faq_head" placeholder="${faqVO.faq_head}">
 	</div>
 
 	<div class="form-group">
-	<div class="naver-editor"></div>
-	 <input type="hidden" name="faq_content" value="${faqVO.faq_content}">
+		<label for="faq_content">Content</label>
+		<div class="naver-editor"></div>
+			 <input type="hidden" name="faq_content" value="${faqVO.faq_content}">
 	 </div>
 
 	<div class="form-group" align="center">
-		<input type="submit" value="수정" class="btn hover3" > 
-		<input type="reset"value="초기화" class="btn hover3" >
-		<a href="${context}/board/faq/list"> 
-		<input type="button" value="목록으로" class="btn hover3" ></a>
+			<input type="submit" value="수정" class="btn hover3" > 
+			<input type="reset"value="초기화" class="btn hover3" >
+				<a href="${context}/board/faq/list"> 
+			<input type="button" value="목록으로" class="btn hover3" ></a>
 	</div>
 </form>
+</section>
 </div>
 </section>
 <br>

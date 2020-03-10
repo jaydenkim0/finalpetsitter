@@ -73,26 +73,35 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 150px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
 
 <script>
 	$(function() {
@@ -126,10 +135,10 @@ FOOTER 이용 시 넣어야할 요소
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
 <div align="left" class="tabl">
-	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2>Save the Pets !</h2>
+	<section class="ta">
+		<form method="post" action="insert" enctype="multipart/form-data">
+		<h1 align="center">Save the Pets !</h1>
 
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
@@ -137,7 +146,7 @@ FOOTER 이용 시 넣어야할 요소
 
 		<input type="hidden" name="stray_writer" value="${sessionScope.id}">
 			<div class="form-group">
-				<label for="stray_title">말머리</label> 
+				<label for="stray_title">Title</label> 
 				<select name="stray_title">
 					<option>임시보호</option>
 					<option>입양관련</option>
@@ -148,7 +157,7 @@ FOOTER 이용 시 넣어야할 요소
 			</div>
 
 			<div class="form-group">
-				<label for="stray_head">제목</label>
+				<label for="stray_head">Subject</label>
 				<c:choose>
 					<c:when test="${param.superno > 0}">
 						<input class="form-control" type="text" name="stray_head"
@@ -162,22 +171,23 @@ FOOTER 이용 시 넣어야할 요소
 			</div>
 
 		<div class="form-group">
-			<label for="stray_content">내용</label>
+			<label for="stray_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="stray_content" value="">
 		</div>
 
 		<div class="form-group">
-			<label for="stray_file">이미지 첨부</label> 
+			<label for="stray_file">Image</label> 
 			<input class="input-file" type="file" id="stray_file" name="stray_file" multiple accept="image/*">
 		</div>
 
 
 	<div class="form-group" align="center">
-			<input type="submit" value="확인" class="btn hover3"> 
-			<input type="reset" value="초기화" class="btn hover3">
+			<input type="submit" value="확인" class="custom-btn hover3"> 
+			<input type="reset" value="초기화" class="custom-btn hover3">
 		</div>
 	</form>
+	</section>
 </div>
 </section>
 <br>

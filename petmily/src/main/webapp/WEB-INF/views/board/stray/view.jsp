@@ -182,6 +182,18 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+textarea {
+	width: 90%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 1px #1482e0;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -221,7 +233,13 @@ header style -->
 }
 
 .section-content {
-	padding-top: 100px;
+	padding-top: 150px;
+}
+	#masthead:after{
+	opacity: 100;
+}
+.ta{
+	padding-top:70px;
 }
 </style>
 
@@ -229,7 +247,8 @@ header style -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
+<div align="center">
+	<section class="ta">
 	<h1 align="center">Save the Pets !</h1>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
@@ -270,6 +289,7 @@ header style -->
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
 					<td class="td1">
+					<br>
 					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
 						width="200" height="100">
 						</td>
@@ -292,7 +312,7 @@ header style -->
 			<!-- 댓글화면 -->
 		<c:forEach items="${replyList}" var="reply">
 			<c:if test="${reply.content ne null}">
-				<tr class="tr1">
+				<tr class="no-tr">
 					<td>
 						<div class="grandmother">
 							<table width="100%" class="mother">
@@ -354,7 +374,7 @@ header style -->
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br>
 					<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
+					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="80"></textarea>
 					<input type="submit" value="등록" class="btn hover3" align="right">
 				</form>
 			</td>
@@ -382,6 +402,8 @@ header style -->
 			</td>
 	</tr>
 </table>
+</section>
+</div>
 </section>
 <br>
       <!-- footer 불러오기 -->
