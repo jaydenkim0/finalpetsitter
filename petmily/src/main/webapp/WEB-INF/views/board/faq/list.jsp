@@ -70,9 +70,9 @@ FOOTER 이용 시 넣어야할 요소
 	}
 </script>
 <style>
- *{
-            box-sizing: border-box;
-        }
+* {
+	box-sizing: border-box;
+}
 
 .page-navigator li {
 	display: inline-block;
@@ -82,14 +82,18 @@ FOOTER 이용 시 넣어야할 요소
 	width: 60%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
-	border-color : #BDBDBD;
+	border-color: #BDBDBD;
+}
+
+.ta {
+	padding-top: 70px;
 }
 
 th, td {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
-	border-color : #BDBDBD;
+	border-color: #BDBDBD;
 }
 
 a {
@@ -109,7 +113,7 @@ a {
 	color: #1482e0;
 }
 
-.btn {
+.custom-btn {
 	display: white;
 	width: 80px;
 	height: 10x;
@@ -117,13 +121,13 @@ a {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
 }
 
-.btn:hover {
+.custom-btn:hover {
 	color: white;
 }
 
@@ -135,8 +139,8 @@ input {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
+	vertical-align: middle;
+	border-color: #BDBDBD;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
@@ -146,47 +150,49 @@ select {
 	width: 80px;
 	height: 35px;
 	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
+	vertical-align: middle;
+	border-color: #BDBDBD;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
-	}
-	
- <!-- header style -->
-#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-		padding-top:150px;
-	}
-	#masthead:after{
-	opacity: 100;
-	}
-	</style>
+}
 
-		<!-- header 불러오기 -->
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 115px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+</style>
+
+<!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 
 
 <section class="section-content">
 <div align="center" >
-<h1>공지사항</h1>
 
-<section>
+<section class="ta">
+	<h1>Notice</h1>
 	<table class="notice_table" >
 		<tr>
 			<th>글번호</th>
@@ -217,7 +223,7 @@ select {
 	<div align="right" class="right_mar">
 		<c:if test="${sessionScope.grade eq 'admin'}">
 			<a href="${context}/board/faq/write">
-				<button type="button" id="btnwrite" class="btn hover3" >글쓰기</button>
+				<input type="button" class="custom-btn hover3" id="btnwrite" value="글쓰기">
 			</a>
 		</c:if>
 	</div>	
@@ -239,7 +245,7 @@ select {
 		<option value="faq_head">제목</option>
 	</select> 
 	<input class="input-item" name="keyword" placeholder="검색어" requierd>
-	<input type="submit" value="조회" class="btn hover3" >
+	<input type="submit" value="조회" class="custom-btn hover3" >
 	</form>
 	</div>
 </section>

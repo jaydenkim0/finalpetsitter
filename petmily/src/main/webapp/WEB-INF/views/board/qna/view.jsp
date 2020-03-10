@@ -61,6 +61,29 @@
 	  });
 	</script>
 	
+	<script type="text/javascript">
+	/*  관리자 신고 아이디 검사 */
+	$(function(){			
+		$("#id").blur(function(){
+			var user_id = $("#id").val();				
+				$.ajax({
+					url:'${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
+					type:'get',
+					success : function(data){
+						if(data == 0) {
+							$("#id_check").text("존재하지 않는 아이디입니다");
+							$('#id_check').css('color', 'red');
+						}else{
+							$("#id_check").text("신고가능한 아이디입니다");
+							$('#id_check').css('color', 'red');
+							$("#bbb").attr("disabled", false);
+						}
+ 					}
+ 				});   
+			});    
+	  });
+	</script>
+	
 	<!-- 
 	FOOTER 이용 시 넣어야할 요소 
 	:	jquery js,
@@ -210,6 +233,21 @@
 
 
 <style>
+textarea {
+	width: 90%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 1px #1482e0;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.ta{
+	padding-top:70px;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -249,16 +287,21 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
+}
+	#masthead:after{
+	opacity: 100;
 }
 </style>
 
 	<!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
-	<section class="section-content">
 
-	<h1 align="center">QnA</h1>
+<section class="section-content">
+<div align="center">
+	<section class="ta">
+	<h1 align="center">문의 사항</h1>
 		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -372,21 +415,36 @@ header style -->
 
 	<tr>
 	<td class="td2">
-			<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
-				<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
-				<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
-				<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
-				<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
-				<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
+	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
+		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
+		<a href="${context}/board/qna/update?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btnupdate" class="btn hover3">게시글 수정</button></a>
+		<a href="${context}/board/qna/delete?qna_no=${qnaVO.qna_no}">
+		<button type="button" id="btndelete" class="btn hover3">게시글 삭제</button></a>
+	</c:if>
+	
+	<a href="${context}/board/qna/list">
+	<button type="button" class="btn hover3">문의게시판 목록</button></a>
+	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
+	<button type="button" class="btn hover3">답글쓰기</button></a>
+	
+	<!-- 신고 버튼 -->
+			<c:if test="${sessionScope.grade eq 'admin'}">
+				<br><br>
+				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
+				<form action="${context}/admin/declaration" method="get">
+					<input id="id" type="text"  name="id" placeholder="아이디" required> 
+					<input  id="bbb"  type="submit" value="경고 등록" disabled>
+				</form>
+				<div id="id_check"></div>
 			</c:if>
 			
-			<a href="${context}/board/qna/list">
-			<button type="button" class="btn hover3">문의게시판 목록</button></a>
-			<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
-			<button type="button" class="btn hover3">답글쓰기</button></a>
+
 		</td>
 	</tr>
 </table>
+</section>
+</div>
 </section>
 <br>
       <!-- footer 불러오기 -->

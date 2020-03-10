@@ -83,32 +83,6 @@ th {
 	font-size: 15px;
 	border-color: #BDBDBD;
 }
-.btn {
-	display: white;
-	width: 150px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size: 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.btn:hover {
-	color: white;
-}
-
-.hover3:hover {
-	background-color: #1482e0;
-}
-.hover1:hover {
-	background-color: #1482e0;
-}
 <!-- header style -->
 #masthead:after {
 	  content: '';
@@ -217,7 +191,7 @@ th {
 	</div>
 	<hr>
 	<div align="center">
-		<button id="submit" disabled class="btn hover3">약관에 동의해주세요.</button>
+		<button id="submit" disabled class="custom-btn hover3">약관에 동의해주세요.</button>
 	</div>
 </div>
 </div>
