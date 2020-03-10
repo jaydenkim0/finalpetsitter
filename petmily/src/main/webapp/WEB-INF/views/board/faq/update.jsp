@@ -117,6 +117,9 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
+.title {
+	font-size: 50px;
+}
 </style>
 
 <script>
@@ -168,7 +171,7 @@ header style -->
 <div align="left" class="tabl">
 <section class="ta">
 <form name="update" method="post" action="${context}/board/faq/update">
-	<h1 align="center">Notice</h1>
+<h1 class="title" align="center">Notice</h1>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="faq_no" value="${faqVO.faq_no}">
 
