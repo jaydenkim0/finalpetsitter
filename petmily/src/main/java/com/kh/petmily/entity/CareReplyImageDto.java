@@ -41,5 +41,14 @@ public class CareReplyImageDto {
 			return time;
 	}
 	
+	public String getWdateWithFormat2() throws ParseException {
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(wdate);
+		//변환한 형식을 다시 원하는 형식의 문자열로 변환
+		SimpleDateFormat write = new SimpleDateFormat("y. M. d HH:mm");
+		String time = write.format(date);
+		return time;
+}
+	
 }
 
