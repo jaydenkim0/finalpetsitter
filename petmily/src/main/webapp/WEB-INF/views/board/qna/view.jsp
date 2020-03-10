@@ -61,6 +61,29 @@
 	  });
 	</script>
 	
+	<script type="text/javascript">
+	/*  관리자 신고 아이디 검사 */
+	$(function(){			
+		$("#id").blur(function(){
+			var user_id = $("#id").val();				
+				$.ajax({
+					url:'${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
+					type:'get',
+					success : function(data){
+						if(data == 0) {
+							$("#id_check").text("존재하지 않는 아이디입니다");
+							$('#id_check').css('color', 'red');
+						}else{
+							$("#id_check").text("신고가능한 아이디입니다");
+							$('#id_check').css('color', 'red');
+							$("#bbb").attr("disabled", false);
+						}
+ 					}
+ 				});   
+			});    
+	  });
+	</script>
+	
 	<!-- 
 	FOOTER 이용 시 넣어야할 요소 
 	:	jquery js,
@@ -403,6 +426,23 @@ header style -->
 	<button type="button" class="btn hover3">문의게시판 목록</button></a>
 	<a href ="${context}/board/qna/write?superno=${qnaVO.qna_no}">
 	<button type="button" class="btn hover3">답글쓰기</button></a>
+	
+	<!-- 신고 버튼 -->
+			<c:if test="${sessionScope.grade eq 'admin'}">
+				<br><br>
+				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
+				<form action="${context}/admin/declaration" method="get">
+					<select name="grade" required>
+						<option value="" selected disabled hidden>선택하세요</option>
+						<option value="petsitter"> 펫시터 </option>			
+						<option value="member"> 회원 </option>
+					</select>
+					<input id="id" type="text"  name="id" placeholder="아이디" required> 
+					<input  id="bbb"  type="submit" value="경고 등록" disabled>
+				</form>
+				<div id="id_check"></div>
+			</c:if>
+			
 		</td>
 	</tr>
 </table>
