@@ -14,8 +14,8 @@ public class PetsitterInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();		
 		String id = (String) session.getAttribute("id");
-		String grade = (String) session.getAttribute("grade");
 		if(id != null) {		
+			String grade = (String) session.getAttribute("grade");
 			if(grade.equals("petsitter")) {
 				return true;	
 			}else {
