@@ -174,6 +174,9 @@ select {
 	#masthead:after{
 	opacity: 100;
 	}
+	.title{
+	font-size: 50px;
+	}
 	</style>
 
 <!-- header 불러오기 -->
@@ -183,7 +186,8 @@ select {
 <div align="center">
 
 	<section class="ta">
-		<h1>문의사항</h1>
+		<h1 class="title" align="center">Question</h1>
+		<br>
 		<table class="notice_table" >
 			<tr>
 				<th>글번호</th>

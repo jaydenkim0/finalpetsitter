@@ -158,8 +158,7 @@ select {
 }
 
 <!--
-header style -->
-#masthead:after {
+header style -->#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -181,6 +180,10 @@ header style -->
 #masthead:after {
 	opacity: 100;
 }
+
+.title {
+	font-size: 50px;
+}
 </style>
 
 <!-- header 불러오기 -->
@@ -192,7 +195,8 @@ header style -->
 <div align="center" >
 
 <section class="ta">
-	<h1>Notice</h1>
+	<h1 class="title" align="center">Notice</h1>
+	<br>
 	<table class="notice_table" >
 		<tr>
 			<th>글번호</th>

@@ -105,7 +105,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
 }
 
 #masthead:after {
@@ -115,6 +115,9 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
+.title{
+	font-size: 50px;
+	}
 </style>
 
 
@@ -161,7 +164,7 @@ header style -->
 <div align="left" class="tabl">
 <section class="ta">
 <form name="update" method="post" action="${context}/board/qna/update">
-	<h1 align="center">문의사항 수정</h1>
+	<h1 class="title" align="center">Question</h1>
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
 
