@@ -296,9 +296,6 @@ hr {
 	width:100px;
 	text-align: left;
 }
-.ta{
-	padding-top:70px;
-}
 textarea {
 	width: 88.7%;
 	height: 50px;
@@ -358,6 +355,8 @@ header style -->
 	font-size: 50px;
 	}
 .con{
+margin-top : 20px;
+margin-bottom : 20px;
 height: auto;
 }
 </style>
