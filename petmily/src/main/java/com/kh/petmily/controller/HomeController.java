@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.petmily.entity.ReviewDto;
-
+import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.board.ReviewService;
 
 @Controller
@@ -25,6 +25,8 @@ public class HomeController {
 	@Autowired
 	ReviewService reviewService;
 
+	@Autowired
+	MemberService memberService;
 	@GetMapping("/")
 	public String home() {
 		return "home";
@@ -73,5 +75,15 @@ public class HomeController {
 		model.addAttribute("pagesize", pagesize);
 		model.addAttribute("navsize", navsize);
 		return "home";
+		
+		
 	}
+	@GetMapping("/member/image")
+	public ResponseEntity<ByteArrayResource> member_image(
+			@RequestParam int member_image_no) throws UnsupportedEncodingException,IOException{
+		return memberService.member_image(member_image_no);
+	}
+	
+	
+	
 }
