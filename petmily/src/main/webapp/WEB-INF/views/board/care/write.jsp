@@ -100,6 +100,66 @@ FOOTER 이용 시 넣어야할 요소
 	.section-content{
 	padding-top:150px;
 	}
+	  .regist{
+		font-weight:bold;
+		font-size:14pt;
+}
+	body{
+		background-color:#FAFAFA;
+}
+#submit {
+		width: 220px;
+		height: 60px;
+		border: none;
+		background-color: #1482e0;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+		position: relative;
+		top: 1px;
+		left: 50%;
+		margin-left:-110px;
+	}
+	    input{
+		width:400px;
+		BORDER-BOTTOM: teal 1px solid;
+		BORDER-LEFT: medium none;
+		BORDER-RIGHT: medium none;
+		BORDER-TOP: medium none;
+		FONT-SIZE: 9pt;
+		BORDER-STYLE:none;     
+		border-bottom:solid 1px #cacaca;
+		border-collapse:collapse;
+		HEIGHT:40PX;
+		background-color:#FAFAFA;
+}
+td{
+	font-weight:bold;
+	}
+		.regist label {
+  display: inline-block;
+  padding: .5em .75em;
+  color: #1C1C1C;
+  font-size: 9pt;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #BDBDBD;
+  cursor: pointer;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.regist label:hover {
+  background-color: #E6E6E6;
+}
+.regist label:active {
+  background-color: #FAFAFA;
+}
+p{
+  color:#FE2E64;
+  font-size:12px;
+}
 	</style>
 
 </head>
@@ -109,40 +169,49 @@ FOOTER 이용 시 넣어야할 요소
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 <section class="section-content">
-<h1>돌봄방 생성</h1>
+<div align="center" class="regist">
+<h1>돌봄방 만들기</h1><br><br>
 <form action="write" method="post">
-<table border="1">
+<table>
 		<tr>
-			<th>작성자 아이디</th>
-			<td><input type="text" readonly value=${id } name="care_member_id"></td>
+		
+			<td>작성자 아이디<br>
+				<input type="text" readonly value=${id } name="care_member_id"><br><br>
+			</td>
 		</tr>
 		<tr>
-			<th>펫시터 아이디</th>
-			<td>
+			<td>펫시터 아이디<br>
 				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()" required>
 				<datalist id="depList">
 					<c:forEach var="data" items="${list }">
 						<option value="${data }">${data }</option>
 					</c:forEach>
-				</datalist>
-				<div class="id_check"></div>
+				</datalist><br><br>
+				<div class="id_check"><br></div>
 			</td>
 		</tr>
+		
 		<tr>
-			<th>방 제목</th>
-			<td><input type="text" name="care_board_content" required></td>
+			<td>방 제목<br>
+				<input type="text" name="care_board_content" required><br><br>
+			</td>
 		</tr>
+		
 		<tr>
-			<th>방 비밀번호</th>
-			<td><input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required></td>
+			<td>방 비밀번호<br>
+				<input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required><br><br>
+			</td>
 		</tr>
+		
 		<tr>
 			<th colspan="2">
+			<br><br>
 				<input type="submit" value="생성" id="submit">
 			</th>
 		</tr>
 </table>
 </form>
+</div>
 </section>
 
 <br><!-- footer 불러오기 -->
