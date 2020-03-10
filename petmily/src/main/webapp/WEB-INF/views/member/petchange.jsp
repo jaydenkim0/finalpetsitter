@@ -38,7 +38,7 @@ function no_image() {
 	
 	}
 	
-	button {
+	#petchbtn {
 	position:relative;
 	display: white;
    width: 70px;
@@ -67,19 +67,23 @@ function no_image() {
 }
 </style>
 <body>
-<div class="chtab" align="center">
+<div class="mychange" align="center">
 <form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
 <input type="hidden" name="pet_no" value=${pet.pet_no }>
 	<table >
 		<tr>
-			<th>이미지</th>
+			<th>Image</th>
 			<td>
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-					<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;"><Br><br>
+					<div class="box" style="background: #BDBDBD;">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height: auto;"><Br><br>
+					</div>
 				</c:when>
 				<c:otherwise>	
-					<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" onerror="no_image()" id="pet_image"><br><Br>
+					<div class="box" style="background: #BDBDBD;">
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: auto;" onerror="no_image()" id="pet_image"><br><Br>
+					</div>
 				</c:otherwise>
 			</c:choose>
 				<input type="file" name="pet_image" accept="image/*">
@@ -121,7 +125,7 @@ function no_image() {
 		<tr>
 		
 			<th colspan="2">
-				<input type="submit" value="수정" id="petchbtn">
+				<input type="submit" value="수정" id="petchbtn">&nbsp;&nbsp;&nbsp;
 			</th>
 		</tr>
 	</table>
