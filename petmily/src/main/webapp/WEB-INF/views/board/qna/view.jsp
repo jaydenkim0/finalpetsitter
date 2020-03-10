@@ -234,7 +234,7 @@
 
 <style>
 textarea {
-	width: 90%;
+	width: 88.7%;
 	height: 50px;
 	padding: 10px;
 	box-sizing: border-box;
