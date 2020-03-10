@@ -328,7 +328,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 소개이미지 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicalInfoImage(String savename) throws IOException {		
-		File file = new File("D:/upload/info", savename);
+		File file = new File("D:/upload/kh2c/info", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
@@ -347,7 +347,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 신분증 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicalidcardimage(String savename) throws IOException {		
-		File file = new File("D:/upload/idCard", savename);
+		File file = new File("D:/upload/kh2c/idCard", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
@@ -366,7 +366,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 신분증 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicallicenseimage(String savename) throws IOException {		
-		File file = new File("D:/upload/license", savename);
+		File file = new File("D:/upload/kh2c/license", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
@@ -384,7 +384,7 @@ public class AdminDaoImpl implements AdminDao {
 	// 펫시터 통장사본 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicallbankimage(String savename) throws IOException {
-		File file = new File("D:/upload/bank", savename);
+		File file = new File("D:/upload/kh2c/bank", savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;
 	}
