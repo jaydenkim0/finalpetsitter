@@ -107,7 +107,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
 }
 
 #masthead:after {

@@ -292,6 +292,9 @@ header style -->
 	#masthead:after{
 	opacity: 100;
 }
+.title{
+	font-size: 50px;
+	}
 </style>
 
 <!-- header 불러오기 -->
@@ -300,7 +303,7 @@ header style -->
 <section class="section-content">
 <div align="center">
 	<section class="ta">
-	<h1 align="center">문의 사항</h1>
+	<h1 align="center" class="title">Question</h1>
 		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -432,13 +435,8 @@ header style -->
 				<br><br>
 				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
 				<form action="${context}/admin/declaration" method="get">
-					<select name="grade" required>
-						<option value="" selected disabled hidden>선택하세요</option>
-						<option value="petsitter"> 펫시터 </option>			
-						<option value="member"> 회원 </option>
-					</select>
 					<input id="id" type="text"  name="id" placeholder="아이디" required> 
-					<input  id="bbb"  type="submit" value="경고 등록" disabled>
+					<input  id="bbb"  type="submit" value="경고 등록" disabled class="btn hover3">
 				</form>
 				<div id="id_check"></div>
 			</c:if>
