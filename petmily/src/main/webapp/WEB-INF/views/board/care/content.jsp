@@ -134,6 +134,7 @@ FOOTER 이용 시 넣어야할 요소
         
 
         $(".reply_edit_btn").click(function(e){
+        	location.reload();
         	var text = $(this).parentsUntil(".mother").find("textarea").val();
         	console.log(text);
         	
@@ -417,7 +418,16 @@ padding:0;
 		padding-right: 10%;
 		padding-left:10%;
 	}
-
+	.textright{
+		text-align: right;
+	}
+	.textleft{
+		text-align:left;
+	}
+	.mymother{
+		width: 70%;
+		align:right;
+	}
 </style>
 </head>
 
@@ -507,37 +517,18 @@ padding:0;
 
 
 <c:forEach var="replyimagelist" items="${replyimagelist }">
-<div class="grandmother">
-<table class="mother">
 <c:choose>
 
-
-<c:when test="${replyimagelist.care_reply_writer==id && care_reply_writer!=null && id!=null}">
-		<tr>
-			<c:choose>
-				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th align="left">
-					<c:choose>
-						<c:when test="${replyimagelist.member_image_no>0}">
-							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
-						</c:when>
-						<c:otherwise>
-							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
-						</c:otherwise>
-					</c:choose>
-						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
-					</th>
-				</c:when>
-				<c:otherwise>
-					<th>탈퇴회원</th>
-				</c:otherwise>
-			</c:choose>
-			<th align="right">${replyimagelist.wdateWithFormat }</th>
+<c:when test="${replyimagelist.care_reply_writer==id && id!=null}">
+<div class="grandmother" align="right">
+<table class="mother mymother">
+		<tr align="right">
+			<th>${replyimagelist.wdateWithFormat }</th>
 		</tr>
 		
 		<!-- 댓글 수정전 보여주는 tr -->
 		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">
+			<th class="content textright">
 				<div class="naver-viewer"></div>  
 				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
 			</th>
@@ -545,10 +536,10 @@ padding:0;
 		
 		<!-- 댓글 수정중 보여주는 tr -->
 		<tr class="reply_edit">
-			<th colspan="2" align="left">
+			<th class="textright">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<div class="naver-editor"></div>
+                	<div class="naver-editor textleft"></div>
 					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
 				</form>				
 			</th>
@@ -566,74 +557,7 @@ padding:0;
 		
 		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
 		<tr>
-			<th colspan="2" align="right">
-				<button class="reply_edit_btn">완료</button>
-				<button class="reply_view_btn">수정</button>
-				<form action="reply_delete" method="post" class="reply_delete_submit">
-					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-				</form>
-				<button class="reply_delete_btn">삭제</button>
-			</th>
-		</tr>
-		</c:if>
-</c:when>
-
-
-<c:otherwise>
-		<tr>
-			<c:choose>
-				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th align="left">
-					<c:choose>
-						<c:when test="${replyimagelist.member_image_no>0}">
-							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
-						</c:when>
-						<c:otherwise>
-							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
-						</c:otherwise>
-					</c:choose>
-						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
-					</th>
-				</c:when>
-				<c:otherwise>
-					<th>탈퇴회원</th>
-				</c:otherwise>
-			</c:choose>
-			<th align="right">${replyimagelist.wdateWithFormat }</th>
-		</tr>
-		
-		<!-- 댓글 수정전 보여주는 tr -->
-		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">
-				<div class="naver-viewer"></div>  
-				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
-			</th>
-		</tr>
-		
-		<!-- 댓글 수정중 보여주는 tr -->
-		<tr class="reply_edit">
-			<th colspan="2" align="left">
-				<form action="reply_change" method="post" class="reply_change_submit">
-					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<div class="naver-editor"></div>
-					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
-				</form>				
-			</th>
-		</tr>
-		<c:if test="${replyimagelist.care_image_no>0 }">
-			<tr>
-				<th align="left">
-					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
-				</th>
-			</tr>
-		</c:if>
-		
-		
-		<!-- 댓글 관리 -->
-		
-		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
-		<tr>
-			<th colspan="2" align="right">
+			<th class="textright">
 				<button class="reply_edit_btn btn hover3">완료</button>
 				<button class="reply_view_btn btn hover3">수정</button>
 				<form action="reply_delete" method="post" class="reply_delete_submit">
@@ -643,13 +567,84 @@ padding:0;
 			</th>
 		</tr>
 		</c:if>
+	</table>
+</div>
+</c:when>
+
+
+<c:otherwise>
+<div class="grandmother">
+<table class="mother">
+		<tr>
+			<c:choose>
+				<c:when test="${not empty replyimagelist.care_reply_writer }">
+					<th align="left">
+					<c:choose>
+						<c:when test="${replyimagelist.member_image_no>0}">
+							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
+						</c:when>
+						<c:otherwise>
+							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
+						</c:otherwise>
+					</c:choose>
+						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
+					</th>
+				</c:when>
+				<c:otherwise>
+					<th>탈퇴회원</th>
+				</c:otherwise>
+			</c:choose>
+			<th align="right">${replyimagelist.wdateWithFormat }</th>
+		</tr>
+		
+		<!-- 댓글 수정전 보여주는 tr -->
+		<tr class="reply_view">
+			<th class="content" colspan="2" align="left">
+				<div class="naver-viewer"></div>  
+				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
+			</th>
+		</tr>
+		
+		<!-- 댓글 수정중 보여주는 tr -->
+		<tr class="reply_edit">
+			<th colspan="2" align="left">
+				<form action="reply_change" method="post" class="reply_change_submit">
+					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
+                	<div class="naver-editor"></div>
+					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
+				</form>				
+			</th>
+		</tr>
+		<c:if test="${replyimagelist.care_image_no>0 }">
+			<tr>
+				<th align="left">
+					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
+				</th>
+			</tr>
+		</c:if>
+		
+		
+		<!-- 댓글 관리 -->
+		
+		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
+		<tr align="right">
+			<th>
+				<button class="reply_edit_btn btn hover3">완료</button>
+				<button class="reply_view_btn btn hover3">수정</button>
+				<form action="reply_delete" method="post" class="reply_delete_submit">
+					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
+				</form>
+				<button class="reply_delete_btn btn hover3">삭제</button>
+			</th>
+		</tr>
+		</c:if>
+	</table>
+	</div>
 </c:otherwise>
 
 
 
 </c:choose>
-	</table>
-</div>
 </c:forEach>
 
 
