@@ -16,7 +16,7 @@ public class PetsitterInterceptor extends HandlerInterceptorAdapter {
 		String id = (String) session.getAttribute("id");
 		if(id != null) {		
 			String grade = (String) session.getAttribute("grade");
-			if(grade.equals("petsitter")) {
+			if(grade.equals("petsitter") || grade.equals("member") || grade.equals("admin")) {
 				return true;	
 			}else {
 				response.sendError(403);
