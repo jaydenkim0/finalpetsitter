@@ -183,7 +183,7 @@ FOOTER 이용 시 넣어야할 요소
 
 <style>
 textarea {
-	width: 90%;
+	width: 88.7%;
 	height: 50px;
 	padding: 10px;
 	box-sizing: border-box;
@@ -233,7 +233,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
 }
 	#masthead:after{
 	opacity: 100;
@@ -241,6 +241,9 @@ header style -->
 .ta{
 	padding-top:70px;
 }
+.title{
+	font-size: 50px;
+	}
 </style>
 
 <!-- header 불러오기 -->
@@ -249,7 +252,7 @@ header style -->
 <section class="section-content">
 <div align="center">
 	<section class="ta">
-	<h1 align="center">Save the Pets !</h1>
+	<h1 class="title" align="center">Save the Pets !</h1>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
@@ -370,7 +373,7 @@ header style -->
 
 		<!-- 댓글 등록 -->
 	<tr>
-			<td align="right" class="td2">
+			<td align="right" class="td3">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br>
 					<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>

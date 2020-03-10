@@ -91,7 +91,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
 }
 
 #masthead:after {
@@ -101,6 +101,9 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
+.title{
+	font-size: 50px;
+	}
 </style>
 
 <script>
@@ -138,7 +141,7 @@ header style -->
 <div align="left" class="tabl">
 	<section class="ta">
 		<form method="post" action="insert" enctype="multipart/form-data">
-		<h1 align="center">Save the Pets !</h1>
+		<h1 align="center" class="title">Save the Pets !</h1>
 
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
