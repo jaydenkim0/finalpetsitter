@@ -52,17 +52,16 @@
 	.section-content{
 	padding-top:150px;
 	}
-		.section-content::after{
-      content:"";
-      display:block;
-      clear:both;
+	
 	</style>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <section class="section-content">
 
-<h1>이메일이 전송되었습니다</h1>
+
+<br><br><br><br><br><br>
+<h1 align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일이 전송되었습니다.</h1>
 
 
 </section>
-
+<br>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
