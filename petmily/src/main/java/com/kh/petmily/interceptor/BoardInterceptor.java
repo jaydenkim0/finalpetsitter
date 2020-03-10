@@ -24,12 +24,8 @@ public class BoardInterceptor extends HandlerInterceptorAdapter {
 											   )throws Exception {
 		// 신고합니다 머리글만 인터셉터해서 검사		
 		// 파라미터로 전달된 Qna_no 로 작성자와 맞는지 확인
-		int qna_no = Integer.parseInt(request.getParameter("qna_no"));	
-		
-		// 테스트
-		System.out.println("qna_no = "+ qna_no);
-		
-		QnaVO qnaVO = qnaService.read(qna_no);			
+		int qna_no = Integer.parseInt(request.getParameter("qna_no"));			
+		QnaVO qnaVO = qnaService.read(qna_no);		
 		// 문의게시판 타이블 확인
 		String qna_title = qnaVO.getQna_title();				
 		if(qna_title.equals("신고합니다")) { //신고합니다 게시물이면 아래 조건 실행
@@ -37,12 +33,7 @@ public class BoardInterceptor extends HandlerInterceptorAdapter {
 			HttpSession session = request.getSession();
 			String id = (String) session.getAttribute("id");		
 			// 관리자가 맞는지 확인
-			String grade = (String) session.getAttribute("grade");
-			
-			// 테스트
-			System.out.println("로그인 id = "+ id);
-			System.out.println("작성자 id = "+ qnaVO.getQna_writer());
-			System.out.println("관리자 등급 = "+ grade);
+			String grade = (String) session.getAttribute("grade");			
 			// 로그인한 사람이 작성자이거나, 관리자만 true 
 			if(id.equals(qnaVO.getQna_writer()) || grade.equals("admin")  ) {
 				return true;		
