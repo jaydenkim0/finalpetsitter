@@ -71,7 +71,7 @@ FOOTER 이용 시 넣어야할 요소
 
 
 .notice_table {
-	width: 80%;
+	width: 60%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
 	border-color : #BDBDBD;
@@ -90,7 +90,7 @@ a {
 }
 
 .right_mar {
-	margin-right: 10%;
+	margin-right: 20%;
 }
 
 .page-navigator li {
