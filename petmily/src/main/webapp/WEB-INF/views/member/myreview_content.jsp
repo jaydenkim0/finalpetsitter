@@ -121,7 +121,7 @@ $(function(){
 
 	<table class="tab1">
 					<tr>
-			<th  style="border-bottom:2px solid #1482e0;">${review.review_title }</th>
+			<th  style="border-bottom:2px solid #1482e0;">Title &nbsp;${review.review_title }</th>
 						
 			</tr>
 		 <tr>

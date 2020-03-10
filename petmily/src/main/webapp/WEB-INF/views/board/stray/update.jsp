@@ -79,7 +79,27 @@ FOOTER 이용 시 넣어야할 요소
 	src="${context}/resources/lib/toast/dist/tui-editor-Editor-full.min.js"></script>
 
 <style>
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
 
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!-- header style -->
 	#masthead:after {
 	  content: '';
@@ -152,7 +172,7 @@ FOOTER 이용 시 넣어야할 요소
 		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 
 		<div class="form-group">
-			<label for="stray_title">말머리</label> 
+			<label for="stray_title">Title</label> 
 			<select name="stray_title" value="${strayVO.stray_title}">
 				<option>임시보호</option>
 				<option>입양관련</option>
@@ -162,12 +182,13 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="stray_head">제목</label> <input class="form-control"
+			<label for="stray_head">Subject</label> <input class="form-control"
 				name="stray_head" id="stray_head"
 				placeholder="${strayVO.stray_head}">
 		</div>
 
 		<div class="form-group">
+		<label for="faq_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="stray_content"
 				value="${strayVO.stray_content}">

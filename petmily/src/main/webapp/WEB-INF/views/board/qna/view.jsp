@@ -364,8 +364,8 @@ header style -->
 <form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 		<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-		<textarea name="content" required placeholder="내용 입력" rows="4" cols="100" ></textarea>
-				 <input type="submit" value="등록" class="btn hover3">
+		<textarea name="content" required placeholder="내용 입력" rows="4" cols="80" ></textarea>
+		<input type="submit" value="등록" class="btn hover3">
 		</form>
 		</td>
 	</tr>

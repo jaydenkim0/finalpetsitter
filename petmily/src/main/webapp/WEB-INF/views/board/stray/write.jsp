@@ -73,6 +73,27 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!-- header style -->
 	#masthead:after {
 	  content: '';
@@ -129,7 +150,7 @@ FOOTER 이용 시 넣어야할 요소
 
 <div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2>Save the Pets !</h2>
+		<h1 align="center">Save the Pets !</h1>
 
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
@@ -137,7 +158,7 @@ FOOTER 이용 시 넣어야할 요소
 
 		<input type="hidden" name="stray_writer" value="${sessionScope.id}">
 			<div class="form-group">
-				<label for="stray_title">말머리</label> 
+				<label for="stray_title">Title</label> 
 				<select name="stray_title">
 					<option>임시보호</option>
 					<option>입양관련</option>
@@ -148,7 +169,7 @@ FOOTER 이용 시 넣어야할 요소
 			</div>
 
 			<div class="form-group">
-				<label for="stray_head">제목</label>
+				<label for="stray_head">Subject</label>
 				<c:choose>
 					<c:when test="${param.superno > 0}">
 						<input class="form-control" type="text" name="stray_head"
@@ -162,13 +183,13 @@ FOOTER 이용 시 넣어야할 요소
 			</div>
 
 		<div class="form-group">
-			<label for="stray_content">내용</label>
+			<label for="stray_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="stray_content" value="">
 		</div>
 
 		<div class="form-group">
-			<label for="stray_file">이미지 첨부</label> 
+			<label for="stray_file">Image</label> 
 			<input class="input-file" type="file" id="stray_file" name="stray_file" multiple accept="image/*">
 		</div>
 

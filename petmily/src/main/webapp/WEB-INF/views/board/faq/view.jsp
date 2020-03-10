@@ -91,7 +91,27 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
 
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!--
 header style -->
 #masthead:after {
@@ -143,6 +163,7 @@ header style -->
 			<c:if test="${faqfileDto.faq_file_no ne 0}">
 				<tr>
 					<td class="td1">
+					<br>
 					<img src="${context}/board/faq/view/file_view?faq_file_no=${faqImage.faq_file_no}" width="200" height="100">
 					</td>
 				</tr>
