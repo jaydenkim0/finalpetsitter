@@ -73,7 +73,70 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
-<!--
+*{
+            box-sizing: border-box;
+        }
+        
+.tabl {
+	width: 60%;
+	margin: auto;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.custom-btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.custom-btn:hover {
+	color: white;
+}
+
+.custom-hover3:hover {
+	background-color: #1482e0;
+}
+
+input {
+	width: 150px;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.input-file{
+	width: 100%;
+	height: 35px;
+	border-style : none;
+}
+
+select {
+	width: 100%;
+	height: 35px;
+	font-size: 14px;
+	vertical-align: middle;
+	border-color: #BDBDBD;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+label{
+font-style: bold;
+font-size: 20px;
+}
 header style -->
 #masthead:after {
 	content: '';
@@ -82,7 +145,7 @@ header style -->
 	width: 100%;
 	height: 130px;
 	background-color: #fff;
-	opacity: 100;
+	opacity: 1;
 	transition: opacity 0.3s ease;
 }
 
