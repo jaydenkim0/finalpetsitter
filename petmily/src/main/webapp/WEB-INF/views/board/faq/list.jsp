@@ -170,7 +170,10 @@ select {
 	}
 	
 	.section-content{
-	padding-top:150px;
+		padding-top:150px;
+	}
+	#masthead:after{
+	opacity: 100;
 	}
 	</style>
 

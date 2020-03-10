@@ -270,6 +270,7 @@ header style -->
 			<c:if test="${strayfileDto.stray_file_no ne 0}">
 				<tr>
 					<td class="td1">
+					<br>
 					<img src="${context}/board/stray/view/file_view?stray_file_no=${strayImage.stray_file_no}"
 						width="200" height="100">
 						</td>
@@ -292,7 +293,7 @@ header style -->
 			<!-- 댓글화면 -->
 		<c:forEach items="${replyList}" var="reply">
 			<c:if test="${reply.content ne null}">
-				<tr class="tr1">
+				<tr class="no-tr">
 					<td>
 						<div class="grandmother">
 							<table width="100%" class="mother">
@@ -354,7 +355,7 @@ header style -->
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br>
 					<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
-					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
+					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="80"></textarea>
 					<input type="submit" value="등록" class="btn hover3" align="right">
 				</form>
 			</td>
