@@ -138,6 +138,9 @@ header style -->
 #masthead:after{
 	opacity: 100;
 	}
+	.title {
+	font-size: 50px;
+}
 </style>
 
 <!-- header 불러오기 -->
@@ -146,7 +149,7 @@ header style -->
 <section class="section-content">
 <div align="center">
 	<section class="ta">
-		<h1 align="center">Notice</h1>
+		<h1 class="title" align="center">Notice</h1>
 		<table class="notice_table">
 			<!--FaqVO 안에 있는 정보 불러오기 -->
 			<tr>
