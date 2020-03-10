@@ -180,8 +180,9 @@
 				<!-- 서비스 가능지역  -->
 				<h4>서비스 가능지역</h4>
 				<c:forEach var="petlocation" items="${petlocation}">					
-					광역시 : ${petlocation.city}, 
-					지역 : ${petlocation.area}			
+					광역시 : ${petlocation.city}
+					지역 : ${petlocation.area}
+					<br>						
 				</c:forEach>
 		</div>			
 		
@@ -190,6 +191,7 @@
 				<h4>돌봄 가능 동물 종류</h4>
 				<c:forEach var="pettypename" items="${pettypename}">
 					 ${pettypename.care_type}
+					 <br>	
 				</c:forEach>
 		</div>		
 		
@@ -198,6 +200,7 @@
 				<h4> 서비스 가능 스킬 </h4>
 				<c:forEach var="petskill" items="${petskill}">
 					${petskill.skill_name}
+					<br>	
 				</c:forEach>
 		</div>		
 		
@@ -206,6 +209,7 @@
 				<h4>펫시터 돌봄 가능 환경</h4>
 				<c:forEach var="petcondition" items="${petcondition}">
 					${petcondition.care_condition_name}
+					<br>	
 				</c:forEach>				
 		</div>
 		</tbody>	

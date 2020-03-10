@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set> 
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
    <!-- 헤더 시작 -->
             <div class="hero">
@@ -102,16 +102,7 @@
 	                      <div class="col">
 	                        <h4>관리자</h4>
 	                        <ul>
-	                          <li><a href="${context}/admin/">관리자</a></li>
-	                          <li><a href="${context}/admin/list/reservationstatus">예약 현황</a></li>
-	                          <li><a href="${context}/admin/account">정산 관리</a></li>
-	                          <li><a href="${context}/board/review/list">리뷰 관리</a></li>
-	                          <li><a href="${context}/admin/list/member">회원 관리</a></li>
-	                          <li><a href="${context}/admin/petsitter">펫시터 관리</a></li>
-<%-- 	                          <li><a href="${context}/admin/list/petsitter">펫시터 관리</a></li> --%>
-<%-- 	                          <li><a href="${context}/admin/list/petsitterapply">펫시터 신청</a></li> --%>
-<%-- 	                          <li><a href="${context}/adminlist/petsittersleep">펫시터 휴면</a></li> --%>
-                         	  <li><a href="${context}/admin/blackList">경고 게시판</a></li>	                                
+	                          <li><a href="${context}/admin/">관리자</a></li>                                                   
 	                        </ul>               
 	                      </div>
 					</c:if>

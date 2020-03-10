@@ -74,9 +74,9 @@
 		});
 	</script>
 	<script>
-	 function no_image2(){
-		 $("#member_image").hide();
-	 }
+	function no_image2(){
+		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+	}
 	</script>
 	</head>
 	<style>
@@ -126,10 +126,16 @@
    left:20px;
    }
   .out{
-   padding-left:1100px;
    background-color:white;
    color: red;
+   width:65%;
    }
+   .box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 30%;
+    overflow: hidden;
+}
   
   
 	</style>
@@ -140,11 +146,11 @@
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
 			    <table>
 			    	<tr>
-			    		<th>Image</th>
-			    	
-			    		<td>	<c:if test="${member_image_no>0 }">
-			    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" style="max-width: 200px; height: 200px;" onerror="no_image2()" id="member_image">
-			    	</c:if>
+			    		<th>Image</th> 	
+			    		<td>
+				    		<div class="box" style="background: #BDBDBD;">
+				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: auto;" onerror="no_image2()" id="2">
+							</div>
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>
@@ -193,17 +199,18 @@
 					<tr>
 						<th colspan="2">
 							<button type="submit" >수정</button>&nbsp;&nbsp;&nbsp;
-								<a href="mylist">
-				<button type="button">취소</button>
-			</a>
+							<a href="mylist">
+								<button type="button">취소</button>
+							</a>
 						</th>
 					</tr>
 				
 			    </table>
 			</form>
 			</div>
-
-			<div class="out" >
+<hr width="50%">
+<br>
+			<div class="out" align="right">
 			<a href="memberdelete?id=${member.id}"><button>탈퇴</button></a>
  
 			<c:if test="${not empty fail }">

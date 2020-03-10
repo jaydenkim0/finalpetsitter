@@ -182,6 +182,27 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+.btn {
+	display: white;
+	width: 120px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!--
 header style -->
 #masthead:after {
@@ -200,7 +221,7 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 100px;
 }
 </style>
 
@@ -209,7 +230,7 @@ header style -->
 
 <section class="section-content">
 
-	<h2 align="center">Save the Pets !</h2>
+	<h1 align="center">Save the Pets !</h1>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
@@ -291,6 +312,7 @@ header style -->
 								</tr>
 
 								<tr class="reply_view">
+								<br>
 									<th class="content" colspan="2" align="left">${reply.content}</th>
 								</tr>
 
@@ -330,15 +352,10 @@ header style -->
 	<tr>
 			<td align="right" class="td2">
 				<form action="replywrite" method="post" class="reply_submit">
-					<input type="hidden" id="origin" name="origin"
-					value="${strayVO.stray_no}"><br>
-					<div align="left">
-					<img src="${context}/resources/img/board.png" width="100px" height="80px" align="left">
-					<br>
+					<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br>
+					<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 					<textarea align="left" name="content" required placeholder="내용 입력" rows="4" cols="150"></textarea>
 					<input type="submit" value="등록" class="btn hover3" align="right">
-					<br><br>
-					<input type="text" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly class="no_inputline"></div>
 				</form>
 			</td>
 		</tr>

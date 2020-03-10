@@ -66,6 +66,12 @@ $(function(){
 	
 	
 	}
+	.box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 70%;
+    overflow: hidden;
+}
 
 	
 	}
@@ -121,14 +127,9 @@ $(function(){
 		 <tr>
 			<td colspan="4" height="300" style="border-bottom:2px solid #1482e0;">${review.review_content }</td>
 		</tr>
-	
 			<tr>
 				<th>No :${review.review_no }<br>Date:${review.writedateWithFormat }<br>Sitter ID:${review.sitter_id }</th>
 </tr>
-			
-		
-		
-		
 
 	</table>
 

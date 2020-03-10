@@ -461,6 +461,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where id = #{id} and email = #{email}
 	</select>
 	
+	<!-- 마이페이지 로딩시에 찍어줄 정보 -->
+	<select id="mypage2" parameterType="String" resultType="memberDto">
+		select 
+			point,
+			joindate,
+			lastlogin
+		from
+			member
+		where id=#{id}
+	</select>
+	<select id="size" parameterType="String" resultType="int">
+		select count(*) from pet where member_id=#{id}
+	</select>
+	
+	<!-- 멤버이미지개수 -->
+	<select id="imagecount" parameterType="String" resultType="int">
+		select count(*) from member_image where member_image_member_id=#{id}
+	</select>
+	
+	<!-- 펫이미지개수 -->
+	<select id="petimagecount" parameterType="int" resultType="int">
+		select count(*) from pet_image where pet_image_pet_no=#{pet_image_pet_no}
+	</select>
+	
 </mapper>
 
 
