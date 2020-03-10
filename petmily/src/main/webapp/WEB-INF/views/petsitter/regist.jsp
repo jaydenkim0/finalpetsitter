@@ -427,11 +427,11 @@ FOOTER 이용 시 넣어야할 요소
 	            <label for="mt" id="large-text">펫밀리 활동 지역</label><br>
 	            <hr>
 	            <div class="template">
-	                <select class="region" name="location_name[0].city">
+	                <select class="region" name="location_name[0].city" required>
 	                    <option>지역을 선택하세요</option>
 	                </select>
 	                
-	                <select class="section" name="location_name[0].area">
+	                <select class="section" name="location_name[0].area" required>
 	                    <option>구를 선택하세요</option>
 	                </select>
 	            <button id="add-btn">추가</button>
