@@ -68,7 +68,27 @@ FOOTER 이용 시 넣어야할 요소
  <!-- 네이버 토스트에디터 종료 -->
     
 <style>
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
 
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!-- header style -->
 	#masthead:after {
 	  content: '';
@@ -122,14 +142,14 @@ FOOTER 이용 시 넣어야할 요소
 
 <div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2>QnA</h2>
+		<h1 align="center">QnA</h1>
 		<c:if test="${param.superno>0}">
 			<input type="hidden" name="superno" value="${param.superno}">
 		</c:if>
 
 		<input type="hidden" name="qna_writer" value="${sessionScope.id}">
 		<div class="form-group">
-			<label for="qna_title">말머리</label> <select name="qna_title">
+			<label for="qna_title">Title</label> <select name="qna_title">
 				<option>펫시터 질문</option>
 				<option>유저 질문</option>
 				<option>기타 질문</option>
@@ -138,7 +158,7 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="qna_head">제목</label>
+			<label for="qna_head">Subject</label>
 			<c:choose>
 				<c:when test="${param.superno > 0}">
 					<input class="form-control" type="text" name="qna_head" value="RE:"
@@ -152,13 +172,13 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="qna_content">내용</label>
+			<label for="qna_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="qna_content" value="">
 		</div>
 
 		<div class="form-group">
-			<label for="qna_file">이미지 첨부</label> 
+			<label for="qna_file">Image</label> 
 			<input class="input-file" type="file" id="qna_file" name="qna_file" multiple accept="image/*">
 		</div>
 

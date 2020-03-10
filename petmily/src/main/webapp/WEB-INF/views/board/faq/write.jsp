@@ -74,6 +74,27 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 네이버 토스트에디터 종료 -->
 
 <style>
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
 <!-- header style -->
 #masthead:after {
 	  content: '';
@@ -129,10 +150,10 @@ FOOTER 이용 시 넣어야할 요소
 
 <div align="left" class="tabl">
 	<form method="post" action="insert" enctype="multipart/form-data">
-		<h2 align="center">FAQ</h2>
+		<h1 align="center">공지사항</h1>
 		<input type="hidden" name="member_id" value="${sessionScope.id}">
 		<div class="form-group">
-			<label for="faq_title">말머리</label> 
+			<label for="faq_title">Title</label> 
 			<select name="faq_title">
 				<option>전체공지</option>
 				<option>펫시터공지</option>
@@ -141,20 +162,20 @@ FOOTER 이용 시 넣어야할 요소
 		</div>
 
 		<div class="form-group">
-			<label for="faq_head">제목</label> 
+			<label for="faq_head">Subject</label> 
 			<input class="form-control"
 				name="faq_head" id="faq_head" placeholder="글 제목 입력">
 		</div>
 
 
 		<div class="form-group">
-			<label for="faq_content">내용</label>
+			<label for="faq_content">Content</label>
 			<div class="naver-editor"></div>
 			<input type="hidden" name="faq_content" value="">
 		</div>
 
 		<div class="form-group">
-			<label for="faq_file">이미지 첨부</label> 
+			<label for="faq_file">Image</label> 
 			<input class="input-file" type="file" id="faq_file" name="faq_file" multiple accept="image/*">
 		</div>
 
