@@ -68,5 +68,5 @@
 	<form class="petnegative" action="member_blackListpage" method="post">				
 		<input type="hidden" name="id" value="${id}">
 		<textarea cols="150" rows="20" name="black_content"></textarea>
-		<button style="display: block;"> 등록하기 </button>
+		<button style="display: block;" id="nega-btn"> 등록하기 </button>
 	</form>
