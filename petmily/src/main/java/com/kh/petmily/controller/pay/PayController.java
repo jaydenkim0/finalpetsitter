@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.ReservationDto;
@@ -130,8 +131,7 @@ public class PayController {
 		int pet_sitter_no =  reservation.getReservation_sitter_no();		
 		PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
 		String sitter_id = petsitter.getSitter_id(); // 펫시터 아이디
-		String sitter_email = petsitter.getEmail(); // 펫시터 이메일
-		
+		String sitter_email = petsitter.getEmail(); // 펫시터 이메일		
 		model.addAttribute("id",id)
 				  .addAttribute("email", email)
 				  .addAttribute("total_amount", total_amount)
@@ -142,6 +142,7 @@ public class PayController {
 	}
 	
 	@PostMapping("/paysuccessSendEmail")
+	@ResponseBody
 	public void paysuccessSendEmail(@RequestParam String id, 
 			@RequestParam String email,
 			@RequestParam int total_amount, 
