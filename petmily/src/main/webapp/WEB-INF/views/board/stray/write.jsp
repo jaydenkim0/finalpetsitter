@@ -73,47 +73,35 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
-.btn {
-	display: white;
-	width: 80px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
+<!--
+header style -->
+#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
 }
 
-.btn:hover {
-	color: white;
+#masthead.is-active {
+	background-color: #fff;
 }
 
-.hover3:hover {
-	background-color: #1482e0;
+.section-content {
+	padding-top: 150px;
 }
-<!-- header style -->
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+
+#masthead:after {
+	opacity: 100;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
 
 <script>
 	$(function() {
@@ -147,9 +135,9 @@ FOOTER 이용 시 넣어야할 요소
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
 <div align="left" class="tabl">
-	<form method="post" action="insert" enctype="multipart/form-data">
+	<section class="ta">
+		<form method="post" action="insert" enctype="multipart/form-data">
 		<h1 align="center">Save the Pets !</h1>
 
 		<c:if test="${param.superno>0}">
@@ -195,10 +183,11 @@ FOOTER 이용 시 넣어야할 요소
 
 
 	<div class="form-group" align="center">
-			<input type="submit" value="확인" class="btn hover3"> 
-			<input type="reset" value="초기화" class="btn hover3">
+			<input type="submit" value="확인" class="custom-btn hover3"> 
+			<input type="reset" value="초기화" class="custom-btn hover3">
 		</div>
 	</form>
+	</section>
 </div>
 </section>
 <br>

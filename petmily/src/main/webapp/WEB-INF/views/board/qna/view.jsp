@@ -210,6 +210,21 @@
 
 
 <style>
+textarea {
+	width: 90%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 1px #1482e0;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
+.ta{
+	padding-top:70px;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -249,7 +264,10 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
+}
+	#masthead:after{
+	opacity: 100;
 }
 </style>
 
@@ -257,8 +275,9 @@ header style -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
-	<h1 align="center">QnA</h1>
+<div align="center">
+	<section class="ta">
+	<h1 align="center">문의 사항</h1>
 		<table class="notice_table">
 			<!--qnaVO 안에 있는 정보 불러오기 -->
 			<tr>
@@ -387,6 +406,8 @@ header style -->
 		</td>
 	</tr>
 </table>
+</section>
+</div>
 </section>
 <br>
       <!-- footer 불러오기 -->
