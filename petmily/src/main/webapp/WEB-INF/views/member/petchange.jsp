@@ -9,29 +9,14 @@ function no_image() {
 </script>
 </head>
 <style>
-
- body{
- 
- 
- }
-
-	#petchbtn{
-	display: white;
-   width: 70px;
-   height: 30px;
-   line-height: 20px;
-   border: 1px #3399dd solid;
-   background-color: white;
-   text-align: center;
-   font-size: 12px;
-   cursor: pointer;
-   color: #1482e0;
-   transition: all 0.9s, color 0.3;
-   border-radius:10px;
 	
+	th ,td{
+	
+	padding: 10px;
+	text-align: center;
+	width:300px;
 	}
-	
-		input{
+	input{
 	width:180px;
 	height:35px;
 	BORDER-BOTTOM: teal 1px solid;
@@ -46,7 +31,40 @@ function no_image() {
 	
 	
 	}
+	table{
+   padding-top:50px;
+	width:410px;
+	border-color : #BDBDBD;
 	
+	}
+	
+	button {
+	position:relative;
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+   left:20px;
+   }
+  .out{
+   background-color:white;
+   color: red;
+   width:65%;
+   }
+   .box {
+    width: 150px;
+    height: 150px; 
+    border-radius: 30%;
+    overflow: hidden;
+}
 </style>
 <body>
 <div class="chtab" align="center">
