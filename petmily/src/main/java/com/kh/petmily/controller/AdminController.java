@@ -474,10 +474,11 @@ public class AdminController {
 	// 신고게시판에서 신고하기
 	@GetMapping("declaration")
 	public String declaration(
-			@RequestParam String grade,
 			@RequestParam String id,
 			Model model) {
-		// 신고하려는 내용이
+		// 신고하려는 아이디가
+		MemberVO member = adminService.getMemberdetail(id);
+		String grade = member.getGrade();
 		if(grade.equals("member")) {// 회원이라면
 			model.addAttribute("id", id);			
 			return "admin/member_blacklist_contetnt";
