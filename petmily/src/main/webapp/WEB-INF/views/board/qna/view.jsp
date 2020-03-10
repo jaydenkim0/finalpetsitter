@@ -234,7 +234,7 @@
 
 <style>
 textarea {
-	width: 90%;
+	width: 88.7%;
 	height: 50px;
 	padding: 10px;
 	box-sizing: border-box;
@@ -297,9 +297,8 @@ header style -->
 	}
 </style>
 
-	<!-- header 불러오기 -->
-	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-
+<!-- header 불러오기 -->
+		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
 <div align="center">
@@ -406,8 +405,8 @@ header style -->
 
 			<!-- 댓글 등록 -->
 		<tr>
-	<td align="right" class="td3">
-	<form action="replywrite" method="post" class="reply_submit">
+<td align="right" class="td3">
+<form action="replywrite" method="post" class="reply_submit">
 		<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br> 
 		<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
 		<textarea name="content" required placeholder="내용 입력" rows="4" cols="80" ></textarea>
@@ -416,7 +415,7 @@ header style -->
 		</td>
 	</tr>
 
-	<tr>
+<tr>
 	<td class="td2">
 	<c:if test="${sessionScope.id eq qnaVO.qna_writer || grade eq 'admin'}">
 		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}">
@@ -442,7 +441,6 @@ header style -->
 				<div id="id_check"></div>
 			</c:if>
 			
-
 		</td>
 	</tr>
 </table>

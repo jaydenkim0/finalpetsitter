@@ -129,6 +129,9 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
+.title{
+	font-size: 50px;
+	}
 </style>
 
 <!-- 네이버 에디터 설정 -->
@@ -178,7 +181,7 @@ header style -->
 <div align="left" class="tabl">
 	<section class="ta">
 	<form name="update" method="post" action="${context}/board/stray/update">
-		<h1 align="center">Save the Pets !</h1>
+		<h1 class="title" align="center">Save the Pets !</h1>
 		<input type="hidden" name="member_id" value="${sessionScope.id}">
 		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 
@@ -207,7 +210,8 @@ header style -->
 
 		<div class="form-group" align="center">
 			<input type="submit" value="수정" class="btn hover3" > 
-			<input type="reset" value="초기화"> <a href="${context}/board/stray/list"> 
+			<input type="reset" value="초기화" class="btn hover3" > 
+			<a href="${context}/board/stray/list"> 
 			<input type="button" value="목록으로" class="btn hover3" ></a>
 		</div>
 	</form>
