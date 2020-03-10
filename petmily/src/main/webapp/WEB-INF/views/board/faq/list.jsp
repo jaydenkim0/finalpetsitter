@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+
 <!-- jquery js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -170,7 +173,7 @@ select {
 	}
 	
 	.section-content{
-		padding-top:150px;
+		padding-top:200px;
 	}
 	#masthead:after{
 	opacity: 100;

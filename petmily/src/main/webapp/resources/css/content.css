@@ -138,3 +138,19 @@
     clear: both;
     margin-right: 300px;
 }
+
+
+.content-wrap .petsitter-skill-wrap img{
+	width:150px;
+	margin:10px
+}
+
+.content-wrap .petsitter-skill-wrap #visit-text{
+	font-family: NotosanM;
+	margin-left: 45px;
+		
+}
+.content-wrap .petsitter-skill-wrap #leave-text{
+	font-family: NotosanM;
+	margin-left: 98px;
+}

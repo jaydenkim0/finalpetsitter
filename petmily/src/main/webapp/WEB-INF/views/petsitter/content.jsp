@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
-   
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>  
 <!-- 에디터와 동일한 의존성 라이브러리 설정을 한다 -->
     <!-- naver toast ui editor를 쓰기 위해 필요한 준비물 -->
     <link rel="stylesheet" type="text/css" href="${context}/resources/lib/toast/css/codemirror.min.css">
@@ -131,7 +130,8 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">   
     
-  
+ 
+    
 	<!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
@@ -193,29 +193,77 @@ FOOTER 이용 시 넣어야할 요소
 				</c:forEach>
 				<br><br>
 				
+				<div class="petsitter-skill-wrap">
+					<!-- 펫시터 매칭 정보 -->
+					<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+<%-- 						<span>매칭 종류 : ${petsitter.sitter_matching_type}</span> --%>
+						
+						<c:choose>
+							<c:when test="${petsitter.sitter_matching_type eq '방문서비스'}">
+								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+								<img src="${context}/resources/img/petsitter-skill-icon/no-leave.png" alt="위탁서비스 안함">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+							</c:when>
+							
+							<c:when test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+								<img src="${context}/resources/img/petsitter-skill-icon/no-visit.png" alt="방문서비스 안함">
+								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+							</c:when>
+							
+							<c:otherwise>
+								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+							</c:otherwise>					
+						</c:choose>
+						
+						<hr>
+						<br>
+					</c:forEach>		
+						
+					<!-- 펫시터 능력 정보 -->
+					<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
+						
+						<c:choose>
+							<c:when test="${skillName.skill_name eq '투약'}">
+								<img id="no-inject" src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
+							</c:when>
+							<c:when test="${skillName.skill_name eq '도그워킹'}">
+								<img id="no-dogwalking" src="${context}/resources/img/petsitter-skill-icon/dogwalking.png" alt="도그워킹서비스">
+							</c:when>
+							<c:when test="${skillName.skill_name eq '키튼케어'}">
+								<img id="no-kitten" src="${context}/resources/img/petsitter-skill-icon/kitten.png" alt="키튼케어서비스">
+							</c:when>
+							<c:when test="${skillName.skill_name eq '퍼피케어'}">
+								<img id="no-puppy" src="${context}/resources/img/petsitter-skill-icon/puppy.png" alt="퍼피케어서비스">
+							</c:when>
+							<c:when test="${skillName.skill_name eq '노령동물케어'}">
+								<img id="no-old" src="${context}/resources/img/petsitter-skill-icon/old.png" alt="노령동물케어서비스">
+							</c:when>
+							
+							<br>
+							<span id="have">${skillName.skill_name}</span>	
+						</c:choose>					
+					</c:forEach>
+					
+					<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
+						<span>돌봄 환경 : ${careConditionName.care_condition_name}</span>
+						<br>
+					</c:forEach>
+					
+					<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
+						<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span>
+						<br>
+					</c:forEach>
+				</div>
 				
-				<!-- 펫시터 매칭 정보 -->
-				<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" ></c:forEach>
-					<span>매칭 종류 : ${petsitter.sitter_matching_type}</span>
-					<br>
-				</c:forEach>
-	
-				
-				<!-- 펫시터 능력 정보 -->
-				<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
-					<span>보유 스킬 : ${skillName.skill_name}</span>
-					<br>
-				</c:forEach>
-				
-				<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
-					<span>돌봄 환경 : ${careConditionName.care_condition_name}</span>
-					<br>
-				</c:forEach>
-				
-				<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
-					<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span>
-					<br>
-				</c:forEach>
 				
 				<!-- 펫시터 반려동물 정보 -->
 				<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
@@ -226,7 +274,8 @@ FOOTER 이용 시 넣어야할 요소
 						<br><br>
 					</c:if>
 				</c:forEach>
-			
+	</c:forEach>
+	
 	
 			<!-- 펫시터 리뷰 목록 -->
 			<div class="review-wrap">
