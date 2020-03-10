@@ -47,13 +47,7 @@ public class ReviewController {
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ReviewDto reviewDto) throws Exception {
-		reviewDao.insert(reviewDto);
-		int review_no = reviewDto.getReview_no();
-		
-		int isReview =  reviewService.isReview(review_no);
-		if (isReview == 0) {
-			reviewService.pointplus(reviewDto);
-		}
+		reviewService.insert(reviewDto);		
 		return "redirect:/board/review/list";
 	}
 

@@ -16,7 +16,7 @@ public class ReviewDaoImpl implements ReviewDao{
 	private SqlSession sqlSession;
 	//게시글 작성----------------------------------------------------------------------------	
 	@Override
-	public void insert(ReviewDto reviewDto) {
+	public void insert(ReviewDto reviewDto) {		
 	 	sqlSession.insert("review.reviewinsert",reviewDto);
 	}
 	//리스트----------------------------------------------------------------------------	
@@ -93,6 +93,12 @@ public class ReviewDaoImpl implements ReviewDao{
 	@Override
 	public ReservationDto getReviewInfo(int reservation_no) {
 		return sqlSession.selectOne("review.getReviewInfo", reservation_no);
+	}
+	
+	// 별점이 있는지 확인
+	@Override
+	public int isReview(int review_reservation_no) {		
+		return sqlSession.selectOne("review.isReview", review_reservation_no);
 	}
 	
 	

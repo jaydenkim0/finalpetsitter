@@ -6,9 +6,6 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <!-- jquery js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
-
-<!-- css -->
-  <link rel="stylesheet" href="${context}/resources/css/view.css">
  
 
 	<!-- 
@@ -233,6 +230,72 @@
 
 
 <style>
+* {
+	box-sizing: border-box;
+}
+
+.notice_table {
+	width: 60%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: #BDBDBD;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.no-tr {
+	border-bottom: none;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.tr1 {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.td2 {
+	text-align: right;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+.td3 {
+	text-align: left;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+.no-td{
+	border: none;
+}
+.mar-td{
+	margin-top: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+hr {
+	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
+}
 textarea {
 	width: 88.7%;
 	height: 50px;
@@ -261,11 +324,9 @@ textarea {
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
 }
-
 .btn:hover {
 	color: white;
 }
-
 .hover3:hover {
 	background-color: #1482e0;
 }
@@ -281,11 +342,9 @@ header style -->
 	opacity: 100;
 	transition: opacity 0.3s ease;
 }
-
 #masthead.is-active {
 	background-color: #fff;
 }
-
 .section-content {
 	padding-top: 115px;
 }
@@ -295,6 +354,11 @@ header style -->
 .title{
 	font-size: 50px;
 	}
+.con{
+margin-top : 20px;
+margin-bottom : 20px;
+height: auto;
+}
 </style>
 
 <!-- header 불러오기 -->
@@ -344,10 +408,6 @@ header style -->
 				</div>
 			</td>
 		</tr>
-
-
-
-
 			<!-- 댓글화면 -->
 			<c:forEach items="${replyList}" var="reply">
 				<c:if test="${reply.content ne null}">

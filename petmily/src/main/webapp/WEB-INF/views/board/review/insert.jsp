@@ -167,8 +167,8 @@ select {
 	<div class="form-group">
 	<label for="review_content">내용</label>
 	<div class="naver-editor"></div>
-	 <input type="hidden" name="review_content" value="review_content" required></div>
-   <input type="hidden" name="review_writer" value="${id}">
+	 	<input type="hidden" name="review_content" value="review_content" required></div>
+   		<input type="hidden" name="review_writer" value="${id}">
 		<div class="form-group" align="right">
 		<label for="review_writer" >작성자 ID : ${id}</label> 
 	  	</div>
@@ -178,8 +178,7 @@ select {
 		${sitter_id}
 	</div>
     <div class="form-group" align="right">
-		<label for="review_reservation_no" >예약번호 : ${reservation.reservation_no}</label> 
-	  
+		<label for="review_reservation_no" >예약번호 : ${reservation.reservation_no}</label> 	  
 	</div>
 	
 

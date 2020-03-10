@@ -31,11 +31,18 @@ public class ReviewServiceImpl implements ReviewService{
 //		System.out.println("service"+review_sitter_no);
 		return reviewDao.listSearch(review_sitter_no);
 	}
-	// 리뷰 작성시 포인트 업
+	// 리뷰작성
 	@Override
-	public void pointplus(ReviewDto reviewDto) {
-		reviewDao.pointplus(reviewDto);	
+	public void insert(ReviewDto reviewDto) {	
+		int review_reservation_no = reviewDto.getReview_reservation_no();
+		int isReview = reviewDao.isReview(review_reservation_no);	
+		if (isReview == 0) {
+			reviewDao.insert(reviewDto);		
+			reviewDao.pointplus(reviewDto);
+		}
 	}
+
+
     // 리뷰 평균별점
 	@Override
 	public double star(int pet_sitter_no){
@@ -62,14 +69,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public ReservationDto getReviewInfo(int reservation_no) {	
 		return reviewDao.getReviewInfo(reservation_no);
 	}
-	
-	// 리뷰작
-	@Override
-	public int isReview(int review_no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
+		
 
 
 
