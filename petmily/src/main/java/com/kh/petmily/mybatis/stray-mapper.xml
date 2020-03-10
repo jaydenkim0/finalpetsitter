@@ -142,28 +142,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="StrayVO" parameterType="map">
-	select*from (
-		select rownum as rn, A.* from(
-			select
-				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
-				depth, count(reply_no) replycount
-			from
-				(
+	select * from (
+		select rownum rn, A.* from(
+			select * from (
 				select
-					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
-					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
-				from stray_pet S
-					left outer join stray_reply SR on S.stray_no = SR.origin
-				connect by prior stray_no = superno
-				start with superno=0
-				order siblings by groupno desc, stray_no desc, wdate desc
-				)
-			group by 
-			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
-			    groupno, superno, depth
-			) A
-		)
-	where rn between #{start} and #{finish}
+					S.stray_no,
+					S.stray_writer,
+					S.stray_title,
+					S.stray_head,
+					S.stray_content,
+					S.wdate,
+					S.superno,
+					S.groupno,
+					S.depth,
+				count(SR.reply_no) replycount
+					from
+			stray_pet S left outer join stray_reply SR on S.stray_no = SR.origin
+				group by
+					S.stray_no,S.stray_writer,S.stray_title,S.stray_head,
+						S.stray_content,S.wdate,S.superno, S.groupno,S.depth
+								)
+					connect by prior stray_no=superno
+				start with superno = 0
+			order siblings by groupno desc, stray_no asc
+		)A
+	)where rn between #{start} and #{finish}
 	</select>
 
 

@@ -146,7 +146,7 @@ header style -->
 		<input type="hidden" name="qna_writer" value="${sessionScope.id}">
 		<div class="form-group">
 			<label for="qna_title"  class="label_1">Title</label> <select name="qna_title">
-				<option>펫시터 질문</option>
+				<option>펫밀리 질문</option>
 				<option>유저 질문</option>
 				<option>기타 질문</option>
 				<option>신고합니다</option>

@@ -6,8 +6,6 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<!-- css -->
-  <link rel="stylesheet" href="${context}/resources/css/view.css">
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -182,6 +180,75 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+* {
+	box-sizing: border-box;
+}
+
+.notice_table {
+	width: 60%;
+	border-top: 1px solid #444444;
+	border-collapse: collapse;
+	border-color: #BDBDBD;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+.no-tr {
+	border-bottom: none;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.tr1 {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: left;
+	border-color: #BDBDBD;
+}
+
+.td2 {
+	text-align: right;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+.td3 {
+	text-align: left;
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	border-color: #BDBDBD;
+}
+.no-td{
+	border: none;
+}
+.mar-td{
+	margin-top: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+hr {
+	width: 80%;
+}
+
+.no_inputline {
+	border: none;
+	border-right: 0px;
+	border-top: 0px;
+	boder-left: 0px;
+	boder-bottom: 0px;
+	width:100px;
+	text-align: left;
+}
+.ta{
+	padding-top:70px;
+}
 textarea {
 	width: 88.7%;
 	height: 50px;
@@ -193,6 +260,9 @@ textarea {
 	resize: both;
 	margin: 0px; 
 	vertical-align: middle;
+}
+.ta{
+	padding-top:70px;
 }
 .btn {
 	display: white;
@@ -207,11 +277,9 @@ textarea {
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
 }
-
 .btn:hover {
 	color: white;
 }
-
 .hover3:hover {
 	background-color: #1482e0;
 }
@@ -227,23 +295,21 @@ header style -->
 	opacity: 100;
 	transition: opacity 0.3s ease;
 }
-
 #masthead.is-active {
 	background-color: #fff;
 }
-
 .section-content {
 	padding-top: 115px;
 }
 	#masthead:after{
 	opacity: 100;
 }
-.ta{
-	padding-top:70px;
-}
 .title{
 	font-size: 50px;
 	}
+.con{
+height: auto;
+}
 </style>
 
 <!-- header 불러오기 -->
