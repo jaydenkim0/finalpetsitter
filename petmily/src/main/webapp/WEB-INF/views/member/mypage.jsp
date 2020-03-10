@@ -15,6 +15,7 @@
           var $hamburger = $('.hamburger'),
               $nav = $('#site-nav'),
               $masthead = $('#masthead');
+
           $hamburger.click(function() {
             $(this).toggleClass('is-active');
             $nav.toggleClass('is-active');
@@ -23,21 +24,8 @@
           })
       });
     </script>
-   <script>
-	function no_image2() {
-		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
-	}
-</script>
     
-    <!-- 
-FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
--->
-  	<!-- footer css -->
+    <!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -321,4 +309,5 @@ font-size:10pt;
 
 </section>
 <!-- footer 불러오기 -->
+<br>
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    

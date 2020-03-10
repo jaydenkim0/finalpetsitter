@@ -141,9 +141,8 @@ public class PayController {
 		return "pay/success";
 	}
 	
-	@PostMapping("/paysuccessSendEmail")
-	@ResponseBody
-	public void paysuccessSendEmail(@RequestParam String id, 
+	@PostMapping("/paysuccessSendEmail")	
+	public String paysuccessSendEmail(@RequestParam String id, 
 			@RequestParam String email,
 			@RequestParam int total_amount, 
 			@RequestParam  String sitter_id, 
@@ -152,6 +151,7 @@ public class PayController {
 		 List<PayinfoDto> list = adminService.payinfoName(reservation_no);
 		aemailService.paymentApplymemberEMail(id, email, total_amount);
 		aemailService.paymentApplypetsitterEMail(id, sitter_id, sitter_email, list);
+		return "success";
 	}
 	
 	

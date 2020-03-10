@@ -182,6 +182,18 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 댓글 영역 끝 -->
 
 <style>
+textarea {
+	width: 88.7%;
+	height: 50px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 1px #1482e0;
+	border-radius: 5px;
+	font-size: 16px;
+	resize: both;
+	margin: 0px; 
+	vertical-align: middle;
+}
 .btn {
 	display: white;
 	width: 120px;
@@ -221,16 +233,26 @@ header style -->
 }
 
 .section-content {
-	padding-top: 150px;
+	padding-top: 115px;
 }
+	#masthead:after{
+	opacity: 100;
+}
+.ta{
+	padding-top:70px;
+}
+.title{
+	font-size: 50px;
+	}
 </style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">
-
-	<h1 align="center">Save the Pets !</h1>
+<div align="center">
+	<section class="ta">
+	<h1 class="title" align="center">Save the Pets !</h1>
 	<table class="notice_table">
 	<!--strayVO 안에 있는 정보 불러오기 -->
 	<tr>
@@ -351,7 +373,7 @@ header style -->
 
 		<!-- 댓글 등록 -->
 	<tr>
-			<td align="right" class="td2">
+			<td align="right" class="td3">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin" value="${strayVO.stray_no}"><br>
 					<input class="no_inputline" type="hidden" id="reply_writer" name="reply_writer" value="${sessionScope.id}" readonly>
@@ -383,6 +405,8 @@ header style -->
 			</td>
 	</tr>
 </table>
+</section>
+</div>
 </section>
 <br>
       <!-- footer 불러오기 -->
