@@ -14,9 +14,9 @@
 
 	<div class="error-wrap">
 		<img alt="펫밀리_로고 " src="${pageContext.request.contextPath}/resources/img/logo_gradation.png">
-		<h3>404</h3>
+		<h3>500</h3>
 		<h4>
-			심각한 내부 오류입니다.
+			내부 오류입니다.
 			-관리자에게 문의해주세요.-
 		</h4>
 		<a href="${pageContext.request.contextPath}"><button id="main_btn"> 메인페이지로 이동</button></a>	

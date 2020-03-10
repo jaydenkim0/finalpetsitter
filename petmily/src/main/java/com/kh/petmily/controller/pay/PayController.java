@@ -141,8 +141,7 @@ public class PayController {
 		return "pay/success";
 	}
 	
-	@PostMapping("/paysuccessSendEmail")
-	@ResponseBody
+	@PostMapping("/paysuccessSendEmail")	
 	public String paysuccessSendEmail(@RequestParam String id, 
 			@RequestParam String email,
 			@RequestParam int total_amount, 

@@ -14,7 +14,10 @@ public class AdminInterceptor  extends HandlerInterceptorAdapter{
 			throws Exception {
 		HttpSession session = request.getSession();
 		String grade = (String) session.getAttribute("grade");
-		if(grade.equals("admin")) {
+		if(grade == null) {
+			response.sendRedirect(request.getContextPath()+"/member/login");
+			return false;
+		}else if(grade.equals("admin")) {
 			return true;		
 		}else {
 			response.sendError(403);
