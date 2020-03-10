@@ -132,9 +132,7 @@
    }
    .box {
     width: 150px;
-    height: 150px; 
-    border-radius: 30%;
-    overflow: hidden;
+    
 }
   
   
@@ -149,7 +147,7 @@
 			    		<th>Image</th> 	
 			    		<td>
 				    		<div class="box" style="background: #BDBDBD;">
-				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: auto;" onerror="no_image2()" id="2">
+				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 150px; height: 150px;" onerror="no_image2()" id="2">
 							</div>
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>

@@ -209,7 +209,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		          left outer join member_image M on petsitter.id = m.member_image_member_id			
 		         )B		         
             	)A         
-			where sitter_status = '정상' order by pet_sitter_no desc)
+			where sitter_status = '정상' and grade='petsitter' order by pet_sitter_no desc)
         where rn between #{start} and #{end} order by rn
 	</select>
 	
@@ -229,7 +229,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	                        and area = #{areaKeyword}
 	            		</if>            		     
 	            )L on petsitter.pet_sitter_no = L.location_sitter_no) 
-	    where sitter_status = '정상') 	
+	    where sitter_status = '정상' and grade='petsitter') 	
 	</select>	
 		
 		

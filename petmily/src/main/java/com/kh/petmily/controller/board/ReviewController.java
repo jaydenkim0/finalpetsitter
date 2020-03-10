@@ -47,19 +47,18 @@ public class ReviewController {
 
 	@PostMapping("/insert")
 	public String insert(@ModelAttribute ReviewDto reviewDto) throws Exception {
-		System.out.println("무엇이 들어왔나 = "+reviewDto);
 		reviewDao.insert(reviewDto);
-		reviewService.pointplus(reviewDto);
+		int review_no = reviewDto.getReview_no();
+		
+		int isReview =  reviewService.isReview(review_no);
+		if (isReview == 0) {
+			reviewService.pointplus(reviewDto);
+		}
 		return "redirect:/board/review/list";
 	}
 
-////-리뷰 목록----------------------------------------------------------------------------	
-//	@GetMapping("/list")
-//	public String list(Model model) {
-//		List<ReviewDto>list = reviewService.list();
-//		model.addAttribute("list",list);	
-//		return "board/review/list";     	
-//}
+//-리뷰 목록----------------------------------------------------------------------------	
+
 	@RequestMapping("/list")
 	public String list (HttpServletRequest req, HttpServletResponse resp,Model model) throws Exception{
 		int pagesize = 10;
@@ -116,15 +115,13 @@ public class ReviewController {
 	public String select(@RequestParam int review_no,Model model) throws Exception {
 		 ReviewDto reviewDto= reviewDao.get(review_no);
 		 model.addAttribute("reviewDto",reviewDto);
-		 System.out.println("inset = " + reviewDto);
 	 	return "board/review/update";
 	}
 		
 	
 	@PostMapping("/update")
 	public String update(@ModelAttribute ReviewDto reviewDto) throws Exception{
-		 reviewDao.update(reviewDto);
-		 System.out.println("리뷰 = "+reviewDto);
+		 reviewDao.update(reviewDto);	
 		return "redirect:/board/review/list";
 	}
 	

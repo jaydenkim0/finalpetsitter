@@ -12,14 +12,21 @@ public class PetsitterInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession();		
 		String id = (String) session.getAttribute("id");
-		if(id != null) {
-			return true;		
+		if(id != null) {		
+			String grade = (String) session.getAttribute("grade");
+			if(grade.equals("petsitter") || grade.equals("member") || grade.equals("admin")) {
+				return true;	
+			}else {
+				response.sendError(403);
+				return false;
+			}
 		}else {
 			response.sendRedirect(request.getContextPath()+"/member/login");
 			return false;
 		}	
+		
 	}
 	
 }
