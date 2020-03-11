@@ -70,11 +70,12 @@ function no_image() {
     overflow: hidden;
 }
 </style>
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
-:   jquery js,
-   header css, 
-   header script
+:	jquery js,
+	header css, 
+	header script
 -->
   <!-- header css -->
   <link rel="stylesheet" href="${context}/resources/css/header.css">
@@ -98,25 +99,25 @@ HEADER 이용 시 넣어야할 요소
     </script>
     <!-- header style -->
     <style>
-   #masthead:after {
-     content: '';
-     position: absolute;
-     top: 0;
-     width: 100%;
-     height: 130px;
-     background-color: #fff;
-     opacity: 100;
-     transition: opacity 0.3s ease;
-   }
-   
-   #masthead.is-active{
-    background-color: #fff;
-   }
-   
-   .section-content{
-   padding-top:150px;
-   }
-   </style>
+	#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:150px;
+	}
+	</style>
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :   jquery js,
