@@ -136,6 +136,26 @@
     border-radius: 30%;
     overflow: hidden;
 }  
+	.petchbtn {
+	position:relative;
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+   left:20px;
+   }
+   .petchbtn:hover{
+   	background-color: #3399dd;
+   	color: white;
+   }
   
   
 	</style>
@@ -217,7 +237,7 @@ FOOTER 이용 시 넣어야할 요소
 			    		<th>Image</th> 	
 			    		<td>
 							<div class="box" style="background: #BDBDBD;">
-				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 150px; height: 150px;" onerror="no_image2()" id="2" class="imagecss">
+				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: 100%;" onerror="no_image2()" id="2" class="imagecss">
 							</div>
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
@@ -266,9 +286,9 @@ FOOTER 이용 시 넣어야할 요소
 					
 					<tr>
 						<th colspan="2">
-							<button type="submit" >수정</button>&nbsp;&nbsp;&nbsp;
+							<button type="submit" class="petchbtn" >수정</button>&nbsp;&nbsp;&nbsp;
 							<a href="mylist">
-								<button type="button">취소</button>
+								<button type="button" class="petchbtn">취소</button>
 							</a>
 						</th>
 					</tr>
@@ -279,7 +299,7 @@ FOOTER 이용 시 넣어야할 요소
 <hr width="50%">
 <br>
 			<div class="out" align="right">
-			<a href="memberdelete?id=${member.id}"><button>탈퇴</button></a>
+			<a href="memberdelete?id=${member.id}"><button class="petchbtn">탈퇴</button></a>
  
 			<c:if test="${not empty fail }">
 				<p>탈퇴 실패</p>

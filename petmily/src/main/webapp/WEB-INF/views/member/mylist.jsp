@@ -119,7 +119,7 @@ function no_image2(){
 	color:gray;
 	font-weight:bold;
 	}
-button, #updatebtn,#cancel{
+	.mylistbtn{
    display: white;
    width: 70px;
    height: 30px;
@@ -132,6 +132,11 @@ button, #updatebtn,#cancel{
    color: #1482e0;
    transition: all 0.9s, color 0.3;
    border-radius:10px;
+   }
+   
+   .mylistbtn:hover{
+   	background-color: #3399dd;
+   	color: white;
    }
 
    .button:hover{
@@ -267,7 +272,7 @@ left:400px;
 <!-- 정보수정 -->
 <form action="mylistchange" method="get">
 	<input type="hidden" name="id" value="${mylist.id}">
-<input type="submit" value="수정" id="updatebtn" >
+<input type="submit" value="수정" id="updatebtn" class="mylistbtn">
 </form>
 
 <!-- 	<tr> -->
@@ -321,7 +326,7 @@ left:400px;
 <h1>Pet</h1>
 
 <hr width="700px" align="center" color="#1482e0" class="hr2">
-	<button id="add_btn">펫 추가</button>
+	<button id="add_btn" class="mylistbtn">펫 추가</button>
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
 	<c:forEach var="pet"  items="${mylistpet }">
@@ -329,7 +334,7 @@ left:400px;
 		<tr>	
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="mylistwrap.img2 imagecss">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="img2 imagecss">
 				</c:when>
 				<c:otherwise>
 						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2 imagecss">				
@@ -357,8 +362,8 @@ left:400px;
 		
 	</table>
 	<br>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button >수정</button></a>
-		<a href="pet_delete?pet_no=${pet.pet_no }"><button >삭제</button></a>
+	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button class="mylistbtn">수정</button></a>
+		<a href="pet_delete?pet_no=${pet.pet_no }"><button  class="mylistbtn">삭제</button></a>
 	<br>
 	</c:forEach>
 	</c:if>
@@ -412,8 +417,8 @@ left:400px;
 		</tr>
 		<tr>
 		    <th></th>
-			<td><br><input type="submit" value="펫추가" id="updatebtn">
-				<input type="reset" value="취소" id="cancel">
+			<td><br><input type="submit" value="펫추가" id="updatebtn" class="mylistbtn">
+				<input type="reset" value="취소" id="cancel" class="mylistbtn">
 			</td>
 			</tr>
 	</table>

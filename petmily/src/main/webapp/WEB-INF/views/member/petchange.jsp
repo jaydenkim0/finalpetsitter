@@ -54,6 +54,10 @@ function no_image() {
    border-radius:10px;
    left:20px;
    }
+   #petchbtn:hover{
+   	background-color: #3399dd;
+   	color: white;
+   }
   .out{
    background-color:white;
    color: red;
@@ -145,12 +149,12 @@ FOOTER 이용 시 넣어야할 요소
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
 					<div class="box" style="background: #BDBDBD;">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height: auto;"><Br><br>
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height:100%;"><Br><br>
 					</div>
 				</c:when>
 				<c:otherwise>	
 					<div class="box" style="background: #BDBDBD;">
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: auto;" onerror="no_image()" id="pet_image"><br><Br>
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: 100%;" onerror="no_image()" id="pet_image"><br><Br>
 					</div>
 				</c:otherwise>
 			</c:choose>
