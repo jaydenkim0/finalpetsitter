@@ -319,16 +319,16 @@ left:400px;
 
 <h2>About</h2>
 <h1>Pet</h1>
-
+	
 <hr width="700px" align="center" color="#1482e0" class="hr2">
 	<button id="add_btn">펫 추가</button>
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
-	<c:forEach var="pet"  items="${mylistpet }">
+	<c:forEach var="pet"  items="${mylistpet}">
 	<table class="tab3">
-		<tr>	
+		<tr>		
 			<c:choose>
-				<c:when test="${pet.pet_image_no<1 }">
+				<c:when test="${pet.pet_image_no < 1 }">
 						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="mylistwrap.img2 imagecss">
 				</c:when>
 				<c:otherwise>
