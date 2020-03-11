@@ -222,9 +222,10 @@ padding-left:20%;
 .box {
     width: 350px;
     height: 350px; 
-   
-    
-}
+    }
+    .imagecss{
+   	  border-radius: 14px;
+   }  
 
 .mylistwrap h3{
 position:relative;
@@ -253,7 +254,7 @@ left:400px;
 
 <br>
 <div class="box" style="background: #BDBDBD;">
-<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 350px; height: 350px;" onerror="no_image2()" id="2">
+<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 350px; height: 350px;" onerror="no_image2()" id="2" class="imagecss">
 </div>
 <br><br>
 <table class="tab0">
@@ -320,6 +321,7 @@ left:400px;
 <h1>Pet</h1>
 
 <hr width="700px" align="center" color="#1482e0" class="hr2">
+	<button id="add_btn">펫 추가</button>
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
 	<c:forEach var="pet"  items="${mylistpet }">
@@ -327,12 +329,13 @@ left:400px;
 		<tr>	
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="mylistwrap.img2">
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="mylistwrap.img2 imagecss">
 				</c:when>
 				<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2">				
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2 imagecss">				
 				</c:otherwise>
 			</c:choose>
+			<br>&emsp;
 		</tr>	
 			
 		<tr>
@@ -365,11 +368,7 @@ left:400px;
 
 <br>
 <br>
-<div id="add_div">
-	<button id="add_btn">펫 추가</button>
-	<a href="${context}"><button id="add_btn">홈으로</button></a>
-	
-</div>
+
 <div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
 	<input type="hidden" name="member_id" value="${mylist.id }">
