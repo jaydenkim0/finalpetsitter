@@ -27,5 +27,8 @@ public interface PayDao {
 	int check(int reservation_no);
 	// 취소가 있는 지 확인
 	int check1(int reservation_no);
+	
+	// 인터셉트 접속자 확인
+	String getReservation_id(int reservation_no);
 
 }

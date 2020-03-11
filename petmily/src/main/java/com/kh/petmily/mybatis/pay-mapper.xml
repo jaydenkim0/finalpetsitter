@@ -136,4 +136,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="check1" parameterType="int" resultType="int">
 		select count(*) from pay where status = '취소' and partner_order_id = #{reservation_no}
 	</select>
+	
+	<!-- 인터셉터에서 account.jsp 우회접속 방지 -->
+	<select id="getReservation_id" resultType="String" parameterType="int">
+		select member_id from reservation where reservation_no = #{reservation_no}
+	</select>
 </mapper>

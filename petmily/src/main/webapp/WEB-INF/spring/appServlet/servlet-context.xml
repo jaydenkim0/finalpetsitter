@@ -88,6 +88,10 @@
 	 		<mapping path="/board/qna/view**" />	 	 		
 	 		<beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
 	 	</interceptor>
+	 	<interceptor>
+	 		<mapping path="/pay/account*"/>
+	 		<beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
+	 	</interceptor>
 	 </interceptors>
  
   

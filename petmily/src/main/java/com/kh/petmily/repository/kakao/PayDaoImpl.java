@@ -60,4 +60,9 @@ public class PayDaoImpl implements PayDao {
 		return sqlSession.selectOne("pay.check1", reservation_no);
 	}
 
+	@Override
+	public String getReservation_id(int reservation_no) {			
+		return sqlSession.selectOne("pay.getReservation_id", reservation_no);
+	}
+
 }
