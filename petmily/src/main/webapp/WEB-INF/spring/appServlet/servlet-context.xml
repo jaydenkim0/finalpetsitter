@@ -84,6 +84,8 @@
 	 		<exclude-mapping path="/member/regist*"/>
 	 		<exclude-mapping path="/member/idCheck*"/>
 	 		<exclude-mapping path="/member/emailCheck*"/>
+ 			<exclude-mapping path="/member/member/image*"/>
+			<exclude-mapping path="/member/pet/image*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<interceptor>
