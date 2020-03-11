@@ -93,7 +93,7 @@
 	 		<mapping path="/board/qna/view**" />	 	 		
 	 		<beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
 	 	</interceptor>
- 		<!-- 돌봄 계시판 -->
+ 		<!-- 돌봄 게시판 -->
 	 	<interceptor>
 	 		<mapping path="/pay/account*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>

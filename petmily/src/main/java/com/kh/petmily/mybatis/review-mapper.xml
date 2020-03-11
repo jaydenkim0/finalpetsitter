@@ -129,10 +129,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 	리뷰 리스트 -->
 	<select id="reviewlist"  resultType="reviewDto"> 
-	select * from review R
-	left outer join member_image MI
-	on R.review_writer = mi.member_image_member_id
-	order by review_no desc
+			select * from (
+				select rownum rn, A.* from(					
+					select * from review R
+                    left outer join member_image MI
+                    on R.review_writer = mi.member_image_member_id					
+					order by review_no desc
+					)A
+				) where rn between 1 and 10
  	</select>
 	
 
