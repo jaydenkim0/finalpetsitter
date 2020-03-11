@@ -660,8 +660,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select count(*) from pay where status='취소' and  
 			partner_order_id = #{reservation_no}
 		</select>
-		
-				
+		<!-- 1시간당 요금 -->
+		<select id="hourPayment" resultType="int">
+			select payment from payinfo where payname = '1시간 금액'
+		</select>
+		<!-- 총 사용시간  -->
+		<select id="totalTime" resultType="int" parameterType="int">
+			select DISTINCT usage_time from reservationpay 
+			where pay_reservation_no = #{reservation_no}
+		</select>
+		<!-- 시작 시간 -->
+		<select id="startTime" resultType="int" parameterType="int">
+			select DISTINCT start_time from reservationpay 
+			where pay_reservation_no = #{reservation_no}
+		</select>
 		
 		
 	<!-- 정산관리 -->

@@ -125,23 +125,15 @@ public class AdminController {
 		 		  .addAttribute("payinfo", list)		 	
 		 		  .addAttribute("sitter_id", sitter_id);		
 		//예약 정보  단일 조회 (금액정보만 확인하기 위해 가지고 온 구문)
-		ReservationListVO reservationList = petsitterService.getReservation(reservation_no);				
+					
 		//1시간 당 금액 구하기
-		int hourPayment = payService.getHourPayment();		
+		int hourPayment = adminService.hourPayment();
 		//최종 결제 금액 구하기
-		int payMent = 0;
-			List<ReservationAllVO> all = reservationList.getList();
-			// 이용시간
-			int totalTime = all.get(0).getUsage_time();
-			// 이용 시작 시간
-			int startTime = all.get(0).getStart_time();
-			
-			for(ReservationAllVO allVO : all) {				
-				int usagetime = allVO.getUsage_time();				
-				int oneHour = usagetime * hourPayment;
-				int payment = allVO.getPayment();				
-				payMent = oneHour + payment;			
-			}
+		int totalTime = adminService.totalTime(reservation_no);
+		int startTime = adminService.startTime(reservation_no);
+		
+		int payMent = hourPayment * totalTime;
+
 			model.addAttribute("payMent", payMent)
 			.addAttribute("usageTime", totalTime)
 			.addAttribute("startTime", startTime);

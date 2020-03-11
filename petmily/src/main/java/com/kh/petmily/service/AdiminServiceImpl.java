@@ -591,6 +591,22 @@ public class AdiminServiceImpl implements AdminService {
 		return adminDao.accountWcount();
 	}
 
+	// 1시간당 금액
+	@Override
+	public int hourPayment() {		
+		return adminDao.hourPayment();
+	}
+	// 사용시간
+	@Override
+	public int totalTime(int reservation_no) {	
+		return adminDao.totalTime(reservation_no);
+	}
+	// 시작 시간
+	@Override
+	public int startTime(int reservation_no) {	
+		return adminDao.startTime(reservation_no);
+	}
+
 
 
 

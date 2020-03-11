@@ -128,6 +128,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reservation where reservation_no = #{reservation_no}
 	</select>
 
+	<!-- 리뷰가 작성되어있는지 확인 -->
+	<select id="isReview"  parameterType="int" resultType="int">
+		select NVL(count(*), 0) from review where review_reservation_no = #{review_reservation_no}
+	</select>
 </mapper>
 
 
