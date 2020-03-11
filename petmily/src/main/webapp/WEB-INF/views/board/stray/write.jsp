@@ -164,9 +164,15 @@ font-size: 20px;
 .ta {
 	padding-top: 70px;
 }
-.title{
+.title {
 	font-size: 50px;
-	}
+}
+
+.con {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: auto;
+}
 </style>
 
 <script>

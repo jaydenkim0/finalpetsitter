@@ -90,8 +90,7 @@ FOOTER 이용 시 넣어야할 요소
 }
 
 <!--
-header style -->
-#masthead:after {
+header style -->#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -117,8 +116,15 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
+
 .title {
 	font-size: 50px;
+}
+
+.con {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: auto;
 }
 </style>
 
