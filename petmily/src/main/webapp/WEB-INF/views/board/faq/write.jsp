@@ -72,18 +72,20 @@ FOOTER 이용 시 넣어야할 요소
 <!-- 네이버 토스트에디터 종료 -->
 
 <style>
-*{
-            box-sizing: border-box;
-        }
-        
+* {
+	box-sizing: border-box;
+}
+
 .tabl {
 	width: 60%;
 	margin: auto;
 }
+
 a {
 	text-decoration: none;
 	color: black;
 }
+
 .custom-btn {
 	display: white;
 	width: 80px;
@@ -92,7 +94,7 @@ a {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -116,10 +118,11 @@ input {
 	border-width: 1px;
 	border-radius: 4px;
 }
-.input-file{
+
+.input-file {
 	width: 100%;
 	height: 35px;
-	border-style : none;
+	border-style: none;
 }
 
 select {
@@ -132,12 +135,13 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 }
-label{
-font-style: bold;
-font-size: 20px;
+
+label {
+	font-style: bold;
+	font-size: 20px;
 }
-header style -->
-#masthead:after {
+
+header style -->#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -163,9 +167,14 @@ header style -->
 .ta {
 	padding-top: 70px;
 }
-.title{
+
+.title {
 	font-size: 50px;
-	}
+}
+
+.con {
+	height: auto;
+}
 </style>
 
 <script>

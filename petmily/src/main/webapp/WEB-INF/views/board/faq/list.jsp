@@ -158,32 +158,40 @@ select {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
-<<<<<<< HEAD
-	}
-	
- <!-- header style -->
-#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-		padding-top:200px;
-	}
-	#masthead:after{
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
 	opacity: 100;
-	}
-	</style>
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 115px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.title {
+	font-size: 50px;
+}
+
+.con {
+	height: auto;
+}
+</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>

@@ -102,6 +102,7 @@ FOOTER 이용 시 넣어야할 요소
 	margin-right: auto;
 	margin-top: 50px;
 }
+
 .no-tr {
 	border-bottom: none;
 	padding: 10px;
@@ -122,16 +123,19 @@ FOOTER 이용 시 넣어야할 요소
 	padding: 10px;
 	border-color: #BDBDBD;
 }
+
 .td3 {
 	text-align: left;
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	border-color: #BDBDBD;
 }
-.no-td{
+
+.no-td {
 	border: none;
 }
-.mar-td{
+
+.mar-td {
 	margin-top: 10px;
 }
 
@@ -152,12 +156,14 @@ hr {
 	border-top: 0px;
 	boder-left: 0px;
 	boder-bottom: 0px;
-	width:100px;
+	width: 100px;
 	text-align: left;
 }
-.ta{
-	padding-top:70px;
+
+.ta {
+	padding-top: 70px;
 }
+
 .btn {
 	display: white;
 	width: 120px;
@@ -179,9 +185,9 @@ hr {
 .hover3:hover {
 	background-color: #1482e0;
 }
+
 <!--
-header style -->
-#masthead:after {
+header style -->#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -199,14 +205,17 @@ header style -->
 .section-content {
 	padding-top: 115px;
 }
-#masthead:after{
+
+#masthead:after {
 	opacity: 100;
-	}
-	.title {
+}
+
+.title {
 	font-size: 50px;
 }
-.con{
-height: auto;
+
+.con {
+	height: auto;
 }
 </style>
 
