@@ -25,5 +25,7 @@ public interface PayDao {
 
 	// 결제 완료되었는지 확인
 	int check(int reservation_no);
+	// 취소가 있는 지 확인
+	int check1(int reservation_no);
 
 }

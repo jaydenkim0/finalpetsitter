@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="fmf" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <c:set var="context" value="${pageContext.request.contextPath}"></c:set>      
 
 
@@ -115,7 +116,9 @@
 						<td> 사용 시간 : ${usageTime} 시간</td>											
 					</tr>
 					<tr>			
-						<td> 결제 금액 :  ${payMent} 원</td>					
+						<td> 결제 금액 :  
+						<fmf:formatNumber type="number"  maxFractionDigits="3" value="${payMent}" />
+						 원</td>					
 					</tr>
 					<tr>			
 						<td> 

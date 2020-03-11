@@ -80,7 +80,8 @@ public class PayController {
 		         .addAttribute("payMent", payMent)
 		         .addAttribute("usageTime", totalTime)
 		         .addAttribute("startTime", startTime)
-		         .addAttribute("check", (int) payService.check(reservation_no));
+		         .addAttribute("check", (int) payService.check(reservation_no))
+		         .addAttribute("check1", (int) payService.check1(reservation_no));		      
 			return "pay/account";
 	}
 	
