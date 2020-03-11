@@ -56,8 +56,10 @@
 	 	<interceptor>
 	 		<!-- 관리자 접속 권한 거부 -->
 	 		<mapping path="/admin/**"/>
-	 		<!-- 접속 거부중 접속 허용 하게하는 예외 허용 -->
-	 		<!-- <exclude-mapping path="/admin/**"/> -->
+			<exclude-mapping path="/adminpetsitter/sitterInfoimage*"/>
+			<exclude-mapping path="/adminpetsitter/sitteridcardimage*"/>
+			<exclude-mapping path="/adminpetsitter/sitterlicenseimage*"/>
+			<exclude-mapping path="/adminpetsitter/sitterbankimage*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.AdminInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<!-- 펫시터 접속 권한 거부-->
