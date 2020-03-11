@@ -56,8 +56,10 @@
 	 	<interceptor>
 	 		<!-- 관리자 접속 권한 거부 -->
 	 		<mapping path="/admin/**"/>
-	 		<!-- 접속 거부중 접속 허용 하게하는 예외 허용 -->
-	 		<!-- <exclude-mapping path="/admin/**"/> -->
+			<exclude-mapping path="/admin/petsitter/sitterInfoimage*"/>
+			<exclude-mapping path="/admin/petsitter/sitteridcardimage*"/>
+			<exclude-mapping path="/admin/petsitter/sitterlicenseimage*"/>
+			<exclude-mapping path="/admin/petsitter/sitterbankimage*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.AdminInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<!-- 펫시터 접속 권한 거부-->
@@ -82,11 +84,17 @@
 	 		<exclude-mapping path="/member/regist*"/>
 	 		<exclude-mapping path="/member/idCheck*"/>
 	 		<exclude-mapping path="/member/emailCheck*"/>
+ 			<exclude-mapping path="/member/member/image*"/>
+			<exclude-mapping path="/member/pet/image*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<interceptor>
 	 		<mapping path="/board/qna/view**" />	 	 		
 	 		<beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
+	 	</interceptor>
+	 	<interceptor>
+	 		<mapping path="/pay/account*"/>
+	 		<beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
 	 	</interceptor>
 	 </interceptors>
  

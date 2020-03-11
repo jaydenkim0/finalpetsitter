@@ -189,4 +189,22 @@ public class PayServiceImpl implements PayService{
 	public int getHourPayment() {
 		return payDao.getHourPayment();
 	}
+
+	// 결제완료 되었는지 확인
+	@Override
+	public int check(int reservation_no) {	
+		return payDao.check(reservation_no);
+	}
+
+	// 취소가 있는지 확인
+	@Override
+	public int check1(int reservation_no) {	
+		return payDao.check1(reservation_no);
+	}
+	// 인터셉트 에서 확인
+	@Override
+	public String getReservation_id(int reservation_no) {
+		return payDao.getReservation_id(reservation_no);
+	}
+	
 }

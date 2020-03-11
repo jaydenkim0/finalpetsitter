@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmf" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
      <script>
 		// 원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해 생성
@@ -158,8 +159,12 @@
 			<th>결제 취소 수</th>
 		</tr>
 		<tr>
-			<td> ${totalInfo.totalPayment} 원 </td>		
-			<td> ${totalInfo.totalCancelPayment} 원 </td>	
+			<td>
+				<fmf:formatNumber type="number"  maxFractionDigits="3" value="${totalInfo.totalPayment}" /> 			
+			원 </td>		
+			<td> 
+				<fmf:formatNumber type="number"  maxFractionDigits="3" value="${totalInfo.totalCancelPayment}" />		
+			원 </td>	
 			<td> ${totalInfo.reservatToTalCount} 회 </td>
 				<td> ${totalInfo.reservatApplyToTalCount} 회 </td>
 				<td> ${totalInfo.reservatWaitToTalCount} 회 </td>	
@@ -172,7 +177,7 @@
 	
 
 	<br>
-	※매달 1일 오전 9시 정산기능 실행 (스케쥴러) : 
+	※매달 1일 오전 9시 정산기능 실행 (스케쥴러) 
 	<br><br>
 	※ 펫시터 정산리스트 (높은 금액 순으로 정렬)
 	<br><br>
@@ -180,12 +185,7 @@
 	<br><br>
 	※ 정산건수 10회 이하 : 10.0 %
 	<br><br>
-	
-	<hr>
-	
-	<br>
-
-	
+		
 	<!-- 검색 기능 -->
 	<form method="post" action="${pageContext.request.contextPath}/admin/account">
 		<select name="searchOption" >		
@@ -222,10 +222,16 @@
 	    	<tr>
 	    		<td>	${account.account_sitter_id}	</td>
 				<td> ${account.account_count} 회 </td>   					
-				<td> ${account.account_total_pay} 원 </td>	
+				<td> 
+					<fmf:formatNumber type="number"  maxFractionDigits="3" value="${account.account_total_pay}"/> 
+				원 </td>	
 				<td> ${account.account_fees} % </td>	
-				<td> ${account.account_date} </td>	
-				<td> ${account.account_pay} 원</td>	
+				<td>				
+					${account.account_date}		 
+				</td>	
+				<td> 
+					<fmf:formatNumber type="number"  maxFractionDigits="3" value="${account.account_pay}"/> 
+				원</td>	
 				<td> ${account.account_status}</td>	
 				<td> 
 					<c:choose>
@@ -238,11 +244,11 @@
 							정산 완료
 						</c:otherwise>	
 					</c:choose>	
-				</td>	
-			</tr>    
-	    </c:forEach>
-    </table>
-
+				</td>
+			</tr>
+		</c:forEach>	
+	</table>
+		
 	<!-- 페이징 -->
 		<div class="page-nivi-container">	
 			<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
