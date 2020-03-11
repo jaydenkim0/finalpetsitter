@@ -174,3 +174,12 @@
 	margin-left: 25px;
 }
 
+.content-wrap .skill-align {
+	display:inline-flex;
+	text-align: center;
+	vertical-align: top;
+}
+
+.content-wrap .skill-align #skill-item {
+	margin-right: 15px;	
+}

@@ -308,6 +308,8 @@ header style -->
 	font-size: 50px;
 	}
 .con{
+margin-top : 20px;
+margin-bottom : 20px;
 height: auto;
 }
 </style>

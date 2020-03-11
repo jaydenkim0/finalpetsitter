@@ -203,8 +203,7 @@ header style -->
 		<div class="form-group">
 		<label for="faq_content">Content</label>
 			<div class="naver-editor"></div>
-			<input type="hidden" name="stray_content"
-				value="${strayVO.stray_content}">
+			<input type="hidden" name="stray_content" value="${strayVO.stray_content}">
 		</div>
 
 		<div class="form-group" align="center">
