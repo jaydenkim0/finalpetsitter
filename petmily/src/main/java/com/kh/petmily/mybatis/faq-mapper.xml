@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				from FAQ
 				where
 					${type} like '%'||#{keyword}||'%'
-				order by faq_no desc, wdate desc
+				order by faq_no asc, wdate desc
 				) A
 			)
 		where rn between #{start} and #{finish}
