@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+
 <!-- jquery js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -155,36 +158,32 @@ select {
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
-}
-
-<!--
-header style -->#masthead:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 130px;
-	background-color: #fff;
-	opacity: 100;
-	transition: opacity 0.3s ease;
-}
-
-#masthead.is-active {
-	background-color: #fff;
-}
-
-.section-content {
-	padding-top: 115px;
-}
-
+<<<<<<< HEAD
+	}
+	
+ <!-- header style -->
 #masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+		padding-top:200px;
+	}
+	#masthead:after{
 	opacity: 100;
-}
-
-.title {
-	font-size: 50px;
-}
-</style>
+	}
+	</style>
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>

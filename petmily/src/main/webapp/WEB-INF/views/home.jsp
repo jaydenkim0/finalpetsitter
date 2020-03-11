@@ -131,7 +131,7 @@ FOOTER 이용 시 넣어야할 요소
                 	가족 여행을 떠날때, 나의 또다른 가족이 혼자인가요?<br>
                 	그렇다면 펫밀리에게 맡겨보세요.<br>
                 	<br>
-                	전문적인 기술을 가진 신원 보장 펫밀러에게 당신의 가족을 맡겨보세요!                
+                	전문적인 기술을 가진 신원 보장 펫밀리에게 당신의 가족을 맡겨보세요!                
             </h3><br>
             <a href="petsitter/list"><button id="reservation_btn">펫밀리 예약하기</button></a>
         </div>
@@ -140,14 +140,14 @@ FOOTER 이용 시 넣어야할 요소
             <h2 id="ti">Review</h2>
             <h3 id="co">펫밀리와 함께한 추억들을 공유해요.</h3>
             
-            <div class="owl-carousel owl-theme">
-            
+           <div class="owl-carousel owl-theme">
            <c:forEach  var="review" items="${list}">
-                 <!--리뷰 아이템01-->
+                 <!-- 리뷰 아이템 -->
                         <div class="item">
                             <br>
+                            
                             <!-- 프로필 이미지 -->
-                          <div class="img_box" style="background: #f5f5f5">
+                          	<div class="img_box" style="background: #f5f5f5">
                                 <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
                             </div> 
                             
@@ -165,7 +165,8 @@ FOOTER 이용 시 넣어야할 요소
                             <p>${review.review_content}</p>                            
                         </div>
             </c:forEach> 
-        </div>
+        	</div>
+       	</div>
                          
         
         <div class="section s2">

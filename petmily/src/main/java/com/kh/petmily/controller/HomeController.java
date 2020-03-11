@@ -24,7 +24,6 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model) {
 		List<ReviewDto>list = reviewService.reviewlist();
-		System.out.println("리스트 = "+list);
 		model.addAttribute("list", list);		
 		return "home";
 	}
