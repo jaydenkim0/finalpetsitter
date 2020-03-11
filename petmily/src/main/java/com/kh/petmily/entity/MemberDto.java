@@ -36,7 +36,7 @@ public class MemberDto {
 
 	public String getPhoneWithFormat() {
 		if(phone != null) {
-			return phone.substring(0,3)+"-"+phone.substring(3,7)+"-"+phone.substring(7,11);
+			return phone.substring(0,3)+"-"+phone.substring(3,7)+"-"+phone.substring(7);
 		}
 		else {
 			return"";

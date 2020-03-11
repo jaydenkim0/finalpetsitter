@@ -394,8 +394,8 @@ p{
 					<tr>
 						
 						<td>반려동물 사진<br><br>
-						 <label for="ex_file">파일 선택</label>
-							<input type="file" name="pet_image" accept="image/*" id="ex_file"><Br><Br>
+						 <label for="ex2_file">파일 선택</label>
+							<input type="file" name="pet_image" accept="image/*" id="ex2_file"><Br><Br>
 						</td>
 					</tr>
 				</table>

@@ -54,6 +54,10 @@ function no_image() {
    border-radius:10px;
    left:20px;
    }
+   #petchbtn:hover{
+   	background-color: #3399dd;
+   	color: white;
+   }
   .out{
    background-color:white;
    color: red;
@@ -66,6 +70,7 @@ function no_image() {
     overflow: hidden;
 }
 </style>
+
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -115,13 +120,13 @@ HEADER 이용 시 넣어야할 요소
 	</style>
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
+:   jquery js,
+   footer css, 
+   Required meta tags, 
+   Bootstrap CSS,
+   아이콘을 사용하기 위해 추가로 불러오는 CSS
 -->
-  	<!-- footer css -->
+     <!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -145,12 +150,12 @@ FOOTER 이용 시 넣어야할 요소
 			<c:choose>
 				<c:when test="${pet.pet_image_no<1 }">
 					<div class="box" style="background: #BDBDBD;">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height: auto;"><Br><br>
+						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height:100%;"><Br><br>
 					</div>
 				</c:when>
 				<c:otherwise>	
 					<div class="box" style="background: #BDBDBD;">
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: auto;" onerror="no_image()" id="pet_image"><br><Br>
+						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: 100%;" onerror="no_image()" id="pet_image"><br><Br>
 					</div>
 				</c:otherwise>
 			</c:choose>
@@ -199,8 +204,8 @@ FOOTER 이용 시 넣어야할 요소
 	</table>
 </form>
 </div>
+</section>
 
 <br><!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  
-</section>
 </body>
