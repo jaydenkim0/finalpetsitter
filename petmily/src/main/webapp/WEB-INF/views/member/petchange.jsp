@@ -72,9 +72,9 @@ function no_image() {
 </style>
 <!-- 
 HEADER 이용 시 넣어야할 요소 
-:	jquery js,
-	header css, 
-	header script
+:   jquery js,
+   header css, 
+   header script
 -->
   <!-- header css -->
   <link rel="stylesheet" href="${context}/resources/css/header.css">
@@ -98,34 +98,34 @@ HEADER 이용 시 넣어야할 요소
     </script>
     <!-- header style -->
     <style>
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	</style>
+   #masthead:after {
+     content: '';
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 130px;
+     background-color: #fff;
+     opacity: 100;
+     transition: opacity 0.3s ease;
+   }
+   
+   #masthead.is-active{
+    background-color: #fff;
+   }
+   
+   .section-content{
+   padding-top:150px;
+   }
+   </style>
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
+:   jquery js,
+   footer css, 
+   Required meta tags, 
+   Bootstrap CSS,
+   아이콘을 사용하기 위해 추가로 불러오는 CSS
 -->
-  	<!-- footer css -->
+     <!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -203,8 +203,8 @@ FOOTER 이용 시 넣어야할 요소
 	</table>
 </form>
 </div>
+</section>
 
 <br><!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  
-</section>
 </body>
