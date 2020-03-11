@@ -69,7 +69,19 @@ public class ReviewServiceImpl implements ReviewService{
 	public ReservationDto getReviewInfo(int reservation_no) {	
 		return reviewDao.getReviewInfo(reservation_no);
 	}
-		
+
+	// 리뷰작
+	@Override
+	public int isReview(int review_no) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public List<ReviewDto> reviewlist() {
+		return reviewDao.reviewlist() ;
+	}
+	
+
 
 
 

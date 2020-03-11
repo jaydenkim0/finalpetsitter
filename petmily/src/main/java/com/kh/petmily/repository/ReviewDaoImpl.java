@@ -94,6 +94,10 @@ public class ReviewDaoImpl implements ReviewDao{
 	public ReservationDto getReviewInfo(int reservation_no) {
 		return sqlSession.selectOne("review.getReviewInfo", reservation_no);
 	}
+	@Override
+	public List<ReviewDto> reviewlist() {	
+		return sqlSession.selectList("review.reviewlist") ;
+	}
 	
 	// 별점이 있는지 확인
 	@Override
