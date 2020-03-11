@@ -321,6 +321,7 @@ left:400px;
 <h1>Pet</h1>
 
 <hr width="700px" align="center" color="#1482e0" class="hr2">
+	<button id="add_btn">펫 추가</button>
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
 	<c:forEach var="pet"  items="${mylistpet }">
@@ -367,11 +368,7 @@ left:400px;
 
 <br>
 <br>
-<div id="add_div">
-	<button id="add_btn">펫 추가</button>
-	<a href="${context}"><button id="add_btn">홈으로</button></a>
-	
-</div>
+
 <div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
 	<input type="hidden" name="member_id" value="${mylist.id }">
