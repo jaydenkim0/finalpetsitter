@@ -43,7 +43,7 @@
    margin-left: 10px;
     padding: 5px 10px; 
    font-size:15px;
-   font-weight: 600;	
+   font-weight: 600;   
 }
 
 .restab {
@@ -84,107 +84,107 @@ button{
    color: #1482e0;
    transition: all 0.9s, color 0.3;
    
-	}
+   }
 
-	.button:hover{
-	color: white;
-	}
+   .button:hover{
+   color: white;
+   }
 
-	
-	.hover:hover{
-	background-color: #1482e0;
-	}
+   
+   .hover:hover{
+   background-color: #1482e0;
+   }
   
 
 
 
 
 th, td {
-	border-bottom: 1px solid #444444;
-	padding: 10px;
-	text-align: center;
-	border-color : #BDBDBD;
+   border-bottom: 1px solid #444444;
+   padding: 10px;
+   text-align: center;
+   border-color : #BDBDBD;
 }
 
 a {
-	text-decoration: none;
-	color: #1482e0;
+   text-decoration: none;
+   color: #1482e0;
 }
 
 a:hover{
-	color: black;
+   color: black;
 }
 .right_mar {
-	margin-right: 10%;
+   margin-right: 10%;
 }
 
 
 
 .page-navigator li.active>a {
-	color: #1482e0;
+   color: #1482e0;
 }
 
 .btn {
-	display: white;
-	width: 80px;
-	height: 10x;
-	line-height: 20px;
-	border: 1px #3399dd solid;
-	background-color: white;
-	text-align: center;
-	font-size : 12px;
-	cursor: pointer;
-	color: #1482e0;
-	transition: all 0.9s, color 0.3;
+   display: white;
+   width: 80px;
+   height: 10x;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size : 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
 }
 
 .btn:hover {
-	color: white;
+   color: white;
 }
 
 .hover3:hover {
-	background-color: #1482e0;
+   background-color: #1482e0;
 }
 
 input {
-	width: 150px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
+   width: 150px;
+   height: 35px;
+   font-size: 14px;
+   vertical-align:middle; 
+   border-color : #BDBDBD;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 4px;
 }
 
 select {
-	width: 80px;
-	height: 35px;
-	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 4px;
-	}
+   width: 80px;
+   height: 35px;
+   font-size: 14px;
+   vertical-align:middle; 
+   border-color : #BDBDBD;
+   border-style: solid;
+   border-width: 1px;
+   border-radius: 4px;
+   }
 #masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
+     content: '';
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 130px;
+     background-color: #fff;
+     opacity: 100;
+     transition: opacity 0.3s ease;
+   }
+   
+   #masthead.is-active{
+    background-color: #fff;
+   }
+   
+   .section-content{
+   padding-top:150px;
+   }
 </style>
 <!-- header 불러오기  -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -193,83 +193,83 @@ select {
 
 <div align="center">
 <br>
-	<h1>예약 조회</h1>
-	
-	<br>
-	<p>리뷰는 결제 후 이용날짜 다음날부터 작성 가능합니다.</p>
-	<p>리뷰 작성 시 500p 지급</p>
-	<section>
-	
+   <h1>예약 조회</h1>
+   
+   <br>
+   <p>리뷰는 결제 후 이용날짜 다음날부터 작성 가능합니다.</p>
+   <p>리뷰 작성 시 500p 지급</p>
+   <section>
+   
 
-	<table  class="restab">
+   <table  class="restab">
 
-	
+   
 
-		<tr>
-			<td>예약번호</td>
-			<td>예약일자</td>
-			<td>펫시터</td>
-			<td>결제상태</td>
-			<td>리뷰작성</td>
-		</tr>
-		<c:forEach var="reservation" items="${reservation_list }">
-			<tr>
-				<td>${reservation.reservation_no }</td>
-				<td>${reservation.totalMatchingTime }</td>
-				<td>
-					<c:choose>
-						<c:when test="${not empty reservation.sitter_id }">
-							${reservation.sitter_id }
-						</c:when>
-						<c:otherwise>
-							탈퇴회원
-						</c:otherwise>
-					</c:choose>					
-				</td>
-				<td>
-					<c:choose>
-						<c:when test="${reservation.pay_status =='완료' }">
-							완료
-						</c:when>
-						<c:when test="${reservation.pay_status =='준비' }">
-							준비
-						</c:when>
-						<c:otherwise>
-							취소
-						</c:otherwise>
-						
-					</c:choose>									
-				</td>
-				<td>
-					<c:choose>
-						<c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
-							<a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">
-							<button class="button hover">리뷰 작성</button></a>
-						</c:when>
-						<c:otherwise>
-							작성불가
-						</c:otherwise>
-					</c:choose>		
-					
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+      <tr>
+         <td>예약번호</td>
+         <td>예약일자</td>
+         <td>펫시터</td>
+         <td>결제상태</td>
+         <td>리뷰작성</td>
+      </tr>
+      <c:forEach var="reservation" items="${reservation_list }">
+         <tr>
+            <td>${reservation.reservation_no }</td>
+            <td>${reservation.totalMatchingTime }</td>
+            <td>
+               <c:choose>
+                  <c:when test="${not empty reservation.sitter_id }">
+                     ${reservation.sitter_id }
+                  </c:when>
+                  <c:otherwise>
+                     탈퇴회원
+                  </c:otherwise>
+               </c:choose>               
+            </td>
+            <td>
+               <c:choose>
+                  <c:when test="${reservation.pay_status =='완료' }">
+                     완료
+                  </c:when>
+                  <c:when test="${reservation.pay_status =='준비' }">
+                     준비
+                  </c:when>
+                  <c:otherwise>
+                     취소
+                  </c:otherwise>
+                  
+               </c:choose>                           
+            </td>
+            <td>
+               <c:choose>
+                  <c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
+                     <a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">
+                     <button class="button hover">리뷰 작성</button></a>
+                  </c:when>
+                  <c:otherwise>
+                     작성불가
+                  </c:otherwise>
+               </c:choose>      
+               
+            </td>
+         </tr>
+      </c:forEach>
+   </table>
 
 <br>
 
-	<!-- 네비게이터(navigator) -->
-	<jsp:include page="/WEB-INF/views/member/navigator_myreservation.jsp">
-		<jsp:param name="pno" value="${pno}"/>
-		<jsp:param name="count" value="${count}"/>
-		<jsp:param name="navsize" value="${navsize}"/>
-		<jsp:param name="pagesize" value="${pagesize}"/>
-		<jsp:param name="care_board_no" value="${care_board_no }"/>
-	</jsp:include>
+   <!-- 네비게이터(navigator) -->
+   <jsp:include page="/WEB-INF/views/member/navigator_myreservation.jsp">
+      <jsp:param name="pno" value="${pno}"/>
+      <jsp:param name="count" value="${count}"/>
+      <jsp:param name="navsize" value="${navsize}"/>
+      <jsp:param name="pagesize" value="${pagesize}"/>
+      <jsp:param name="care_board_no" value="${care_board_no }"/>
+   </jsp:include>
 
-	
+   
 </section>
 </div>
 
 </section>
-	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
+   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    

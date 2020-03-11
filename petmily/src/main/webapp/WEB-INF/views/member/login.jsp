@@ -49,18 +49,33 @@
 	
 }
 
-
-.btnwrap a {
-	
-	width:300px;
+.aa{
+	width: 420px;
 	border-top: 1px solid #eee;
 	padding-top:10px;
 	text-decoration:none;
 	color: #fff;
 	font-size: 12px;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+/* .btnwrap a { */
+/* 	width:300px; */
+/* 	border-top: 1px solid #eee; */
+/* 	padding-top:10px; */
+/* 	text-decoration:none; */
+/* 	color: #fff; */
+/* 	font-size: 12px; */
 	
 	
 	
+/* } */
+
+.font2{
+color : white;
+font-weight: bold;
+text-decoration: none;
 }
 
 #loginbtn {
@@ -89,6 +104,12 @@ width:90px;
 height:140px;
 float:center;
 }
+.left_tag{
+margin-left : 90px;
+}
+.right_tag{
+margin-right : 90px;
+}
 
 </style>
 </head>
@@ -112,11 +133,23 @@ float:center;
 	
 	
 </div>
+
 		<br>
-		<div class="btnwrap">
-			 <input class="btn" type="submit" value="로그인" id="loginbtn"><br><br><br><br>
-			 <a href="findid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a><a href="input">&nbsp;비밀번호 변경&nbsp;</a><a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> 
+		<div class="btnwrap" align="center">
+			 <input class="btn" type="submit" value="로그인" id="loginbtn">
+			 <br><br><br>
+			<div class="aa"  align="center">
+<!-- 			<a href="findid"> -->
+<!-- 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a> -->
+<!-- 					<a href="input"> -->
+<!-- 					&nbsp;비밀번호 변경&nbsp; -->
+<!-- 					</a> -->
+<!-- 					<a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
+			  <a href="findid"  class="font2">아이디찾기&nbsp;|</a>
+			 <a href="input" class="font2">&nbsp;비밀번호 변경&nbsp;</a>
+			 <a href="regist" class="font2">|&nbsp;회원가입</a> 
+			</div>
 		</div>
 	</form>
 	<c:if test="${param.error!=null }">
