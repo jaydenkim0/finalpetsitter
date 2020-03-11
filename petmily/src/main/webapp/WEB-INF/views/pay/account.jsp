@@ -314,11 +314,14 @@ input[type="checkbox"]:checked+label::before {
 	<hr>
 	<div align="center">
 		<c:choose>
-			<c:when test="${check eq 0}">
-				<button id="submit" disabled class="btn hover3">약관에 동의해주세요.</button>
+			<c:when test="${ check1 > 0}">
+				결제 취소하신 신청입니다
 			</c:when>
-			<c:otherwise>			
-				이미 결제하신 신청입니다.
+			<c:when test="${check > 0}">
+				이미 결제하신 신청입니다
+			</c:when>
+			<c:otherwise>
+				<button id="submit" disabled class="btn hover3">약관에 동의해주세요.</button>
 			</c:otherwise>
 		</c:choose>
 	</div>
