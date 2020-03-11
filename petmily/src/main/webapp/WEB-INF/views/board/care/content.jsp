@@ -125,7 +125,7 @@ FOOTER 이용 시 넣어야할 요소
         $(".reply_view_btn").click(function(){
             $(this).hide();
             $(this).parentsUntil(".mother").find(".reply_view").hide();
-            $(this).prev(".reply_edit_btn").show();
+            $(this).parentsUntil(".mother").find(".reply_edit_btn").show();
             $(this).parentsUntil(".mother").find(".reply_edit").show();
         });
         
@@ -134,6 +134,7 @@ FOOTER 이용 시 넣어야할 요소
         
 
         $(".reply_edit_btn").click(function(e){
+        	location.reload();
         	var text = $(this).parentsUntil(".mother").find("textarea").val();
         	console.log(text);
         	
@@ -245,7 +246,7 @@ FOOTER 이용 시 넣어야할 요소
 			//입력 스타일
 			initialEditType : "wysiwyg",
 			//높이
-			height : "300px"
+			height : "200px"
 		};
 
 		var editor = tui.Editor.factory(options);
@@ -253,14 +254,18 @@ FOOTER 이용 시 넣어야할 요소
 		 var first = $(tag).next("input[target=_blank]").val();
          editor.setValue(first);//값 설정
          
+//          window.alert(first);//있는 애들 값 다나옴
+         
 		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
 		editor
 				.on(
 						"change",
 						function() {
 							var text = editor.getValue();//에디터에 입력된 값을 불러온다
-							document
-									.querySelector(".naver-editor + input[target=_blank]").value = text;
+							var div = editor.options.el;
+							$(div).next("input[target=_blank]").val(text);
+// 							document
+// 									.querySelector(".naver-editor + input[target=_blank]").value = text;
 						});
 		});
 	});
@@ -336,7 +341,7 @@ function testfunc(test) {
 }
   .mother {
     width: 100%;
-    border: 1px solid #444444;
+    border: none;
   }
   
    textarea{
@@ -417,7 +422,78 @@ padding:0;
 		padding-right: 10%;
 		padding-left:10%;
 	}
-
+	.textright{
+		text-align: right;
+	}
+	.textleft{
+		text-align:left;
+	}
+	.mymother{
+		width: 60%;
+		align:right;
+		background-color: #bcbcbc;
+		opacity: 0.95;
+		border-radius: 80px 80px 80px 80px;
+	}
+	.othersmother{
+		width: 60%;
+		align:left;
+		background-color: #dedede;
+		opacity: 0.95;
+		border-radius: 80px 80px 80px 80px;
+	}
+	.mybtn{
+		width: 60px;
+		height: 20px;
+		border: none;
+		background-color:#bcbcbc;
+		text-align: center;
+		font-size : 17px;
+		color: white;
+	}
+	.othersbtn{
+		width: 60px;
+		height: 20px;
+		border: none;
+		background-color:#dedede;
+		text-align: center;
+		font-size : 17px;
+		color: black;
+	}
+	.othersbtn:hover{
+		background-color: #dedede;
+		color:white;
+	}
+	.mybtn:hover {
+		background-color: #bcbcbc;
+		color:black;
+	}
+	.mybtndiv{
+		display: inline;
+	}
+	.replyeditor{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:20px;
+		margin-bottom: 10px;
+	}
+	.replyviewer{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:50px;
+		margin-bottom: 10px;		
+	}
+	.othersreplyviewer{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:50px;
+		margin-bottom: 10px;		
+	}
+	.test{
+		height: 200px;
+		background-color: black;
+		border-radius: 30%;
+	}
 </style>
 </head>
 
@@ -458,48 +534,6 @@ padding:0;
 		<a href="delete?care_board_no=${care_board_no }"><button class="btn hover3 roomdelete">방 삭제</button></a><br><br>
 		</c:if>
 	</div>
-<!-- <table border="1" width="100%"> -->
-<!-- 	<tr> -->
-<!-- 		<th rowspan="2">생성자</th> -->
-<%-- 			<c:choose> --%>
-<%-- 				<c:when test="${not empty list.care_member_id }"> --%>
-<%-- 					<td>${list.care_member_id }</td> --%>
-<%-- 				</c:when> --%>
-<%-- 				<c:otherwise> --%>
-<!-- 					<td>탈퇴회원</td> -->
-<%-- 				</c:otherwise> --%>
-<%-- 			</c:choose> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<td> -->
-<%-- 			<img src = "${pageContext.request.contextPath }/board/care/member/image?member_image_member_id=${list.care_member_id }" style="max-width: 15%; height: auto;" onerror="no_image1()" id="1"/> --%>
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<th>펫시터</th> -->
-<%-- 		<td>${sitter_id }</td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<th>방 제목</th> -->
-<!-- 		<td class="content_view"> -->
-<%-- 			${list.care_board_content } --%>
-<%-- 			<c:if test="${(list.care_member_id==id && id!=null) || grade=='admin'}"> --%>
-<!-- 			<button class="content_change">변경</button> -->
-<%-- 			</c:if> --%>
-<!-- 		</td> -->
-<!-- 		<td class="content_edit"> -->
-<!--             <form class="content_submit" action="content_edit" method="get"> -->
-<%--                 <input type="hidden" name="board_no" value="${list.care_board_no }"> --%>
-<%--                 <input type="text" name="care_board_content" value="${list.care_board_content }"> --%>
-<!--                 <input type="submit" value="완료"> -->
-<!--              </form>			 -->
-<!-- 		</td> -->
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<th>생성일</th> -->
-<%-- 		<td>${list.writedateWithFormat }</td> --%>
-<!-- 	</tr> -->
-<!-- </table> -->
 
 
 
@@ -507,105 +541,78 @@ padding:0;
 
 
 <c:forEach var="replyimagelist" items="${replyimagelist }">
-<div class="grandmother">
-<table class="mother">
 <c:choose>
 
-<!-- 댓글 작성자와 session(id)값이 일치할 경우 -->
-<c:when test="${replyimagelist.care_reply_writer==id && care_reply_writer!=null && id!=null}">
-		<tr>
-			<c:choose>
-				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th align="left">
-					<c:choose>
-						<c:when test="${replyimagelist.member_image_no>0}">
-							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
-						</c:when>
-						<c:otherwise>
-							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
-						</c:otherwise>
-					</c:choose>
-						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
-					</th>
-				</c:when>
-				<c:otherwise>
-					<th>탈퇴회원</th>
-				</c:otherwise>
-			</c:choose>
-			<th align="right">${replyimagelist.wdateWithFormat }</th>
-		</tr>
+<c:when test="${replyimagelist.care_reply_writer==id && id!=null}">
+		<c:if test="${replyimagelist.care_image_no>0 }">
+			<div align="right" class="test">
+					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="width: 100%; height: auto;">
+			</div>
+		</c:if>
+<div class="grandmother" align="right">
+<table class="mother mymother">
 		
 		<!-- 댓글 수정전 보여주는 tr -->
 		<tr class="reply_view">
-			<th class="content" colspan="2" align="left">
-				<div class="naver-viewer"></div>  
+			<th class="content textleft">
+				<div class="naver-viewer replyviewer"></div>  
 				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
 			</th>
 		</tr>
 		
 		<!-- 댓글 수정중 보여주는 tr -->
 		<tr class="reply_edit">
-			<th colspan="2" align="left">
+			<th class="textright">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<div class="naver-editor"></div>
+                	<div class="naver-editor textleft replyeditor"></div>
 					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
 				</form>				
 			</th>
 		</tr>
-		<c:if test="${replyimagelist.care_image_no>0 }">
-			<tr>
-				<th align="left">
-					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
-				</th>
-			</tr>
-		</c:if>
+
 		
 		
 		<!-- 댓글 관리 -->
 		
 		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
 		<tr>
-			<th colspan="2" align="right">
-				<button class="reply_edit_btn">완료</button>
-				<button class="reply_view_btn">수정</button>
+			<th class="textright">
+				<div class="mybtndiv">
+					<button class="reply_edit_btn mybtn">완료</button>
+				</div>
+				<div class="mybtndiv">
+					<button class="reply_view_btn mybtn">수정</button>
+				</div>
+				<div class="mybtndiv">
+					<button class="reply_delete_btn mybtn">삭제</button>
+				</div>&emsp;&emsp;&emsp;
 				<form action="reply_delete" method="post" class="reply_delete_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
 				</form>
-				<button class="reply_delete_btn">삭제</button>
+				<br>
 			</th>
 		</tr>
 		</c:if>
+	</table>
+	${replyimagelist.wdateWithFormat2 }
+</div>
 </c:when>
 
-<!-- 댓글 작성자와 session(id)값이 일치하지 않거나 null인 경우 -->
+
 <c:otherwise>
-		<tr>
-			<c:choose>
-				<c:when test="${not empty replyimagelist.care_reply_writer }">
-					<th align="left">
-					<c:choose>
-						<c:when test="${replyimagelist.member_image_no>0}">
-							<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${replyimagelist.member_image_no}" style="max-width: 200px; height: 200px;">
-						</c:when>
-						<c:otherwise>
-							<img src="/petmily/resources/img/기본프로필.jpeg" style="max-width: 200px; height: 200px;">
-						</c:otherwise>
-					</c:choose>
-						<p>작성자 : ${replyimagelist.care_reply_writer }</p>
-					</th>
-				</c:when>
-				<c:otherwise>
-					<th>탈퇴회원</th>
-				</c:otherwise>
-			</c:choose>
-			<th align="right">${replyimagelist.wdateWithFormat }</th>
-		</tr>
+		<c:if test="${replyimagelist.care_image_no>0 }">
+			<div align="right" class="test">
+					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="width: 100%; height: auto;">
+			</div>
+		</c:if>
+<div class="grandmother" align="left">
+<table class="mother othersmother">
 		
 		<!-- 댓글 수정전 보여주는 tr -->
 		<tr class="reply_view">
 			<th class="content" colspan="2" align="left">
-				<div class="naver-viewer"></div>  
+				<div class="naver-viewer othersreplyviewer"></div>  
 				<input type="hidden" name="reply_content" value="${replyimagelist.care_reply_content }">  
 			</th>
 		</tr>
@@ -615,41 +622,37 @@ padding:0;
 			<th colspan="2" align="left">
 				<form action="reply_change" method="post" class="reply_change_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
-                	<div class="naver-editor"></div>
+                	<div class="naver-editor replyeditor"></div>
 					<input type="hidden" name="care_reply_content" value="${replyimagelist.care_reply_content }" required class="change" target="_blank">
 				</form>				
 			</th>
 		</tr>
-		<c:if test="${replyimagelist.care_image_no>0 }">
-			<tr>
-				<th align="left">
-					<img src = "${pageContext.request.contextPath }/board/care/image?care_image_no=${replyimagelist.care_image_no }" style="max-width: 40%; height: auto;">
-				</th>
-			</tr>
-		</c:if>
 		
 		
 		<!-- 댓글 관리 -->
 		
 		<c:if test="${(replyimagelist.care_reply_writer==id && id!=null) || grade=='admin'}">
-		<tr>
-			<th colspan="2" align="right">
-				<button class="reply_edit_btn">완료</button>
-				<button class="reply_view_btn">수정</button>
+		<tr align="right">
+			<th>
+				<button class="reply_edit_btn othersbtn">완료</button>
+				<button class="reply_view_btn othersbtn">수정</button>
+				<button class="reply_delete_btn othersbtn">삭제</button>&emsp;&emsp;&emsp;
 				<form action="reply_delete" method="post" class="reply_delete_submit">
 					<input type="hidden" name="care_reply_no" value="${replyimagelist.care_reply_no }">
 				</form>
-				<button class="reply_delete_btn">삭제</button>
+				<br>
 			</th>
 		</tr>
 		</c:if>
+	</table>
+	${replyimagelist.wdateWithFormat2 }
+	</div>
 </c:otherwise>
 
 
 
 </c:choose>
-	</table>
-</div>
+<br>
 </c:forEach>
 
 

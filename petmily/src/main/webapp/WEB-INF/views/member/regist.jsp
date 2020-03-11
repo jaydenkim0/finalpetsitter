@@ -92,7 +92,7 @@
         	$(".email").blur(function(){
         		$("#submit").attr("disabled",true);
         		var email = $(".email").val();
-        		var regex = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
+        		var regex = /^([a-z0-9_\.-]+)@([\a-z\.-]+)\.([a-z\.]{2,6})$/
         		var c = regex.test(email);
         		if(!c){
         			$(".emailcheck").show();
