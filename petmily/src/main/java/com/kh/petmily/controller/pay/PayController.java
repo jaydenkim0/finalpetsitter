@@ -79,7 +79,8 @@ public class PayController {
 		      model.addAttribute("reservationList", reservationList)
 		         .addAttribute("payMent", payMent)
 		         .addAttribute("usageTime", totalTime)
-		      .addAttribute("startTime", startTime);
+		         .addAttribute("startTime", startTime)
+		         .addAttribute("check", (int) payService.check(reservation_no));
 			return "pay/account";
 	}
 	

@@ -189,4 +189,10 @@ public class PayServiceImpl implements PayService{
 	public int getHourPayment() {
 		return payDao.getHourPayment();
 	}
+
+	// 결제완료 되었는지 확인
+	@Override
+	public int check(int reservation_no) {	
+		return payDao.check(reservation_no);
+	}
 }
