@@ -213,7 +213,8 @@ font-size:10pt;
       content:"";
       display:block;
       clear:both;
-}
+    }
+
 
 </style>
 
