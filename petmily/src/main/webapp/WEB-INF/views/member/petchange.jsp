@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
+<!-- jquery js -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <head>
 <script>
 function no_image() {
@@ -17,7 +19,7 @@ function no_image() {
 	width:300px;
 	}
 	input{
-	width:180px;
+	width:260px;
 	height:35px;
 	BORDER-BOTTOM: teal 1px solid;
 		BORDER-LEFT: medium none;
@@ -193,15 +195,9 @@ FOOTER 이용 시 넣어야할 요소
 			<td>
 				<textarea name="ect">${pet.ect }</textarea>
 			</td>
-		</tr>
-		
-		<tr>
-		
-			<th colspan="2">
-				<input type="submit" value="수정" id="petchbtn">&nbsp;&nbsp;&nbsp;
-			</th>
-		</tr>
+		</tr>	
 	</table>
+	<input type="submit" value="수정" id="petchbtn">
 </form>
 </div>
 </section>

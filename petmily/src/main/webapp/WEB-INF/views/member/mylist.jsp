@@ -114,12 +114,21 @@ function no_image2(){
       text-align: left;
       }
 .mylistwrap td{
+<<<<<<< HEAD
+	width:400px;
+	text-align:left;
+	color:gray;
+	font-weight:bold;
+	}
+.mylistbtn{
+=======
    width:400px;
    text-align:left;
    color:gray;
    font-weight:bold;
    }
    .mylistbtn{
+>>>>>>> refs/remotes/origin/master
    display: white;
    width: 70px;
    height: 30px;
