@@ -4,6 +4,16 @@
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>    
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 
+<!-- 
+기본 CSS
+:	font css
+	regist css
+-->
+	<!-- regist css -->
+    <link rel="stylesheet" href="${context}/resources/css/regist.css"/>   
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+    
 
 <!-- 
 HEADER 이용 시 넣어야할 요소 
@@ -114,23 +124,28 @@ FOOTER 이용 시 넣어야할 요소
              $(conditionCheck).each(function(i){ //돌봄환경
                  careConditionArray.push($(this).data("condition"));
              });
-
+				
+             
+             
                  $("#skills_text").empty();
                  for (var i in skillArray)
                  {
-                     $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+skillArray[i]).appendTo("#skills_text");
                  }
   
                  $("#care_pet_type_text").empty();
                  for (var i in carePetTypeArray)
                  {
-                     $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+carePetTypeArray[i]).appendTo("#care_pet_type_text");
                  }
 
                  $("#care_condition_text").empty();
                  for (var i in careConditionArray)
                  {
-                     $("<span>").text(careConditionArray[i]+"/").appendTo("#care_condition_text");
+                	 var choose = $("<span>").addClass('choose-item');
+                	 choose.text("# "+careConditionArray[i]).appendTo("#care_condition_text");
                  }               
          });
          
@@ -179,7 +194,7 @@ FOOTER 이용 시 넣어야할 요소
              var section_len = $(".region").length; 
              console.log(section_len);
 
-             var test = $("<div>");
+             var test = $("<div>").addClass('location-div');
 
              var region = $("<select>");
                  region.addClass("region");
@@ -189,13 +204,7 @@ FOOTER 이용 시 넣어야할 요소
                  section.addClass("section");
                  section.attr("name","location_name["+section_len+"].area");
 
-                 var test11 = region.attr("name");
-                 console.log(test11);
-                 var test22 = section.attr("name");
-                 console.log(test22);
-
-
-             var button = $("<button>").text("삭제");  
+             var button = $("<button>").text("삭제").addClass('delete-btn');  
                    
              $.ajax({
                  url:"../resources/json/petmily_location.json",   
@@ -203,7 +212,6 @@ FOOTER 이용 시 넣어야할 요소
                  dataType:"json",       
                  success:function(resp){ 
                  for(var n in resp){
-                     // console.log(n);
                      $("<option>").text(n).appendTo(region);
                      region.appendTo(test);   
                  }
@@ -285,64 +293,121 @@ FOOTER 이용 시 넣어야할 요소
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 <section class="section-content"> 	
-	<form action="update" method="post" enctype="multipart/form-data">
-	
-	<!-- 회원 아이디 -->
-		<input type="hidden" name="sitter_id" value="${id}">
-	<!-- 펫시터 번호 -->
-		<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}">
-		
-	<!-- 소개 이미지 파일 -->	
-		<label for="info_image">소개 이미지</label>
-		<input type="file" id="info_image" name="info_image" multiple accept="image/*">
-		
-	<!-- 통장 사본 이미지 파일 -->	
-		<label for="id_card_file">통장 사본 이미지</label>
-		<input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
-	
-	<!-- 통장 계좌 -->
-	<c:forEach var="rlist" items="${petsitterList}">
+	<div class="regist-wrap" align="center">
+	   <form action="regist" method="post" enctype="multipart/form-data">
+	   <div id="align-left">
+	   <c:forEach var="rlist" items="${petsitterList}">
 		<c:forEach var="list" items="${rlist.petsitterVO}">	
-			<div>
-				<span>계좌번호는 - 제외한 번호만 입력해주세요.</span>
-				<label for="bankName">은행</label>
-					<select id="bankName" name="sitter_bankname"> 
-						<option value="${list.sitter_bankname}">${list.sitter_bankname}</option>
-						<option>기업은행</option>
-						<option>국민은행</option>
-						<option>우리은행</option>
-						<option>신한은행</option>
-						<option>KEB하나은행</option>
-						<option>농협은행</option>
-						<option>SC제일은행</option>
-						<option>한국씨티은행</option>
-						<option>우체국</option>
-						<option>경남은행</option>
-						<option>광주은행</option>
-						<option>대구은행</option>
-						<option>산업은행</option>
-						<option>새마을금고</option>
-						<option>수협</option>
-						<option>신협</option>
-						<option>전북은행</option>
-						<option>제주은행</option>
-						<option>카카오뱅크</option>
-						<option>케이뱅크</option>
-					</select>	
-					<label for="bank_account">계좌 번호</label>
-					<input type="text" id="bank_account" name="sitter_bank_account" value="${list.sitter_bank_account}">	
-			</div>
-			
-		<!-- 펫시터 소개글 -->	
-			<div>
-				<label for="info-text">펫밀리 기본 정보</label>
-				<div class="naver-editor"></div>
-				<input type="hidden" id="info-text" name="info" value="${list.info}">
-			</div>
-		<!--반려동물 경험 -->
-			<div>
-				<label for="yn">반려동물 키워본 경험 유무</label>
-				<select id="yn" name="sitter_pets">
+	    <h1>펫밀리 정보 수정</h1>
+	    <!-- 회원 아이디 -->
+			<input type="hidden" name="sitter_id" value="${id}">
+		<!-- 펫시터 번호 -->
+			<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}">
+	        
+	        <!-- 펫시터 소개글 -->	
+	        <div>
+	            <table width="60%">
+	                <tr>
+	                    <td><label for="info-text" id="large-text">펫밀리 소개</label></td>
+	                    
+	                <tr>
+	                    <td>
+	                        <span id="medium-text">*본인에 대해 소개해 주세요</span>
+	                        <span id="small-text">-본인 자랑 및 경험 환영</span>
+	                    </td>
+	                </tr>    
+	                <tr>
+	                    <td><hr></td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <div class="naver-editor"></div>
+	                        <input type="hidden" id="info-text" name="info" value="${list.info}">
+	                    </td>
+	                </tr>
+	            </table>
+	        </div>
+	
+	        <br><br>
+	        <!-- 스킬 -->
+	        <div class="skill">
+	            <label id="large-text">펫밀리 스킬</label><br>
+	             <span id="medium-text" style="color:#1482e0;">*기존의 스킬에 상관 없이 지금 가능한 스킬을 선택해주세요.</span>
+	            <hr>
+	            <c:forEach var="skillnames" items="${skillname}">
+		            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
+		            <label for="${skillnames.skill_name}">${skillnames.skill_name}</label>
+	            </c:forEach>   	        
+		        <div id="skills_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 돌봄 가능 동물 종류 -->
+	        <div class="type">
+	            <label id="large-text">펫밀리 돌봄가능 동물 종류</label><br>
+	            <span id="medium-text" style="color:#1482e0;">*기존의 돌봄 가능 동물에 상관 없이 지금 돌봄 가능한 동물을 선택해주세요.</span>
+	            <hr>
+	            <c:forEach var="carepettypes" items="${carepettype}">
+	                <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
+	                <label for="${carepettypes.care_type}">${carepettypes.care_type}</label>
+	            </c:forEach>        
+	            <div id="care_pet_type_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 돌봄 환경 -->
+	        <div class="condition">
+	            <label id="large-text">펫밀리 돌봄 환경</label><br>
+	            <span id="medium-text" style="color:#1482e0;">*기존의 돌봄 환경에 상관 없이 지금 가능한 돌봄 환경을 선택해주세요.</span>
+	            <hr>
+	            <c:forEach var="c" items="${careconname}">    		
+	                <input id="${c.care_condition_name}" type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
+	                <label for="${c.care_condition_name}">${c.care_condition_name}</label>
+	            </c:forEach>        
+	            <div id="care_condition_text"></div>
+	        </div>
+	
+	        <br><br>
+	        <!-- 통장 계좌 -->
+	        <div>
+	            <label for="bankName">
+	                <span id="large-text">펫밀리 입금 은행 계좌</span><br>
+	                <span id="medium-text">*은행 계좌 번호는 -제외한 숫자만 입력해주세요.</span>
+	            </label><br>
+	            <hr>
+	
+	                <select id="bankName" name="sitter_bankname"> 
+	                    <option value="${list.sitter_bankname}">${list.sitter_bankname}</option>
+	                    <option>기업은행</option>
+	                    <option>국민은행</option>
+	                    <option>우리은행</option>
+	                    <option>신한은행</option>
+	                    <option>KEB하나은행</option>
+	                    <option>농협은행</option>
+	                    <option>SC제일은행</option>
+	                    <option>한국씨티은행</option>
+	                    <option>우체국</option>
+	                    <option>경남은행</option>
+	                    <option>광주은행</option>
+	                    <option>대구은행</option>
+	                    <option>산업은행</option>
+	                    <option>새마을금고</option>
+	                    <option>수협</option>
+	                    <option>신협</option>
+	                    <option>전북은행</option>
+	                    <option>제주은행</option>
+	                    <option>카카오뱅크</option>
+	                    <option>케이뱅크</option>
+	                </select>	
+	                <input type="text" id="bank_account" name="sitter_bank_account" value="${list.sitter_bank_account}">
+	        </div>
+	        
+	        <br><br>
+	        <!--반려동물 경험 -->
+	        <div>
+	            <label for="yn" id="large-text">펫밀리 동물 경험 여부</label><br>
+	            <hr>
+	            <select id="yn" name="sitter_pets">
 					<c:if test="${list.sitter_pets eq '예'}">
 							<option>${list.sitter_pets}</option>
 							<option>아니오</option>
@@ -352,12 +417,14 @@ FOOTER 이용 시 넣어야할 요소
 						<option>예</option>								
 					</c:if>
 				</select>
-			</div>
-			
-		<!-- 매칭(돌봄) 종류 -->
-			<div>
-				<label for="mt">가능한 돌봄 종류</label>
-				<select id="mt" name="sitter_matching_type">
+	        </div>
+	        
+	        <br><br>
+	        <!-- 매칭(돌봄) 종류 -->
+	        <div>
+	            <label for="mt" id="large-text">펫밀리 돌봄 가능한 종류</label><br>
+	            <hr>
+	            <select id="mt" name="sitter_matching_type">
 					<c:choose>
 						<c:when test="${list.sitter_matching_type eq '방문서비스'}">
 							<option>${list.sitter_matching_type}</option>
@@ -378,57 +445,51 @@ FOOTER 이용 시 넣어야할 요소
 						</c:otherwise>
 					</c:choose>
 				</select>
-			</div>
-			
-		<!-- 스킬 -->
-			<div class="skill">
-				<c:forEach var="skillnames" items="${skillname}">
-			        <input  type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
-			        <label  >${skillnames.skill_name}</label>
-		        </c:forEach>   	        
-			        <div id="skills_text"></div>
-		    </div>
-		
-		<!-- 돌봄 가능 동물 종류 -->
-		    <div class="type">  
-		    	<c:forEach var="carepettypes" items="${carepettype}">
-			        <input type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
-			        <label>${carepettypes.care_type}</label>
-		        </c:forEach>        
-		        <div id="care_pet_type_text"></div>
-		    </div>
-		
-		<!-- 돌봄 환경 -->
-		    <div class="condition">
-		    	<c:forEach var="c" items="${careconname}">    		
-			        <input type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
-			        <label >${c.care_condition_name}</label>
-		        </c:forEach>        
-		        <div id="care_condition_text"></div>
-		    </div>
-			
-		<!-- 활동 지역 -->
-			<div class="location">
-			    <h5>기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</h5>
-			    <div class="template">
-			        <select class="region" name="location_name[0].city">
-			            <option>지역을 선택하세요</option>
-			        </select>
-			        
-			        <select class="section" name="location_name[0].area">
-			            <option>구를 선택하세요</option>
-			        </select>
-				<button id="add-btn">추가</button>
-			    </div>
-			    <div id="result"></div>
-			</div>
-				
-			<div>
-				<input type="submit" value="수정">
-			</div>
-		</c:forEach>
+	        </div>
+	        
+	        <br><br>
+	        <!-- 활동 지역 -->
+	        <div class="location">
+	            <label for="mt" id="large-text">펫밀리 활동 지역</label><br>
+	            <span id="medium-text" style="color:#1482e0;">*기존의 활동 지역에 상관 없이 지금 활동 지역을 선택해주세요.</span>
+	            <hr>
+	            <div class="template">
+	                <select class="region" name="location_name[0].city" required>
+	                    <option>지역을 선택하세요</option>
+	                </select>
+	                
+	                <select class="section" name="location_name[0].area" required>
+	                    <option>구를 선택하세요</option>
+	                </select>
+	            <button id="add-btn">추가</button>
+	            </div>
+	            <div id="result"></div>
+	        </div>
+	        <br>
+    	</c:forEach>
 	</c:forEach>
+	        
+	        <div class="file_input">
+	        <!-- 소개 이미지 파일 -->	
+	        <label for="info_image" id="large-text">펫밀리 소개 이미지</label><br>
+	        <hr>      
+	            <input type="file" id="info_image" name="info_image" multiple accept="image/*">
+	        </div>
+	        <br><br>
+	
+	        <!-- 통장 사본 이미지 파일 -->	
+	        <label for="id_card_file" id="large-text">펫밀리 통장 사본 이미지</label><br>
+	         <span id="medium-text" style="color:#1482e0;">*계좌번호 변경 시 통장 사본 이미지도 변경해주세요.</span>
+	        <hr>
+	        <input type="file" id="bank_image" name="bank_image" multiple accept="image/*" >
+	        <br><br> <br><br>
+	    </div>
+	
+	        <div align="center">
+				<input id="regist_btn" type="submit" value="수정">
+			</div>
 	</form>
+	</div>
 </section>
 
 	<br><!-- footer 불러오기 -->
