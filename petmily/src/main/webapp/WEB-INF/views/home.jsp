@@ -140,14 +140,14 @@ FOOTER 이용 시 넣어야할 요소
             <h2 id="ti">Review</h2>
             <h3 id="co">펫밀리와 함께한 추억들을 공유해요.</h3>
             
-            <div class="owl-carousel owl-theme">
-            
+           <div class="owl-carousel owl-theme">
            <c:forEach  var="review" items="${list}">
-                 <!--리뷰 아이템01-->
+                 <!-- 리뷰 아이템 -->
                         <div class="item">
                             <br>
+                            
                             <!-- 프로필 이미지 -->
-                          <div class="img_box" style="background: #f5f5f5">
+                          	<div class="img_box" style="background: #f5f5f5">
                                 <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
                             </div> 
                             
@@ -165,7 +165,8 @@ FOOTER 이용 시 넣어야할 요소
                             <p>${review.review_content}</p>                            
                         </div>
             </c:forEach> 
-        </div>
+        	</div>
+       	</div>
                          
         
         <div class="section s2">
