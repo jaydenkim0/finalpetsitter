@@ -38,6 +38,25 @@
 <!-- 네이버 에디터 영역 종료 -->
 
 <!-- 
+기본 CSS
+:	font css
+-->
+    <!-- font css -->
+    <link rel="stylesheet" href="${context}/resources/css/font.css"/>
+    <!-- content css -->
+    <link rel="stylesheet" href="${context}/resources/css/info.css">
+    <!-- slider css -->
+	<link rel="stylesheet" href="${context}/resources/css/slider.css">
+
+	<!-- slider -->
+	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+	
+	<script src="https://unpkg.com/swiper/js/swiper.js"></script>
+	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+  
+
+<!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
 	header css, 
@@ -107,67 +126,208 @@ FOOTER 이용 시 넣어야할 요소
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
 <section class="section-content">
-	<h1>펫시터 정보 페이지</h1>
+<div class="info-wrap">
+	<!-- 소개 이미지 출력 -->
+		<!-- Swiper -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
+			 			<img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
+					</c:forEach>
+				</div>
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+			</div>
 	
-	<h3>소개이미지</h3>
-		<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
-			 <img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
-		</c:forEach>
-	
+	<!-- 펫시터 정보 -->
 	<c:forEach var="petsitterGetList" items="${petsitterList}">
-		<!-- 펫시터 정보 -->
-		<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}"><br>
+		<div class="petsitter-info">
+			<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}"><br>		
+				<!-- 펫시터 번호 변수 등록 -->
+				<c:set var="pet_sitter_no" value="${petsitter.pet_sitter_no}"></c:set>
+				<!-- 펫시터 상태 변수 등록 -->
+				<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>		
+					<span>펫시터 번호 : ${petsitter.pet_sitter_no}</span><br>
+					<span>아이디 : ${petsitter.sitter_id}</span><br>
+					<span>닉네임 : ${petsitter.nick}</span><br>
+					<span>이름 : ${petsitter.name}</span><br>	
+					<span>이메일 : ${petsitter.email}</span><br>	
+					<span>핸드폰 : ${petsitter.phone}</span><br>	
+					<span>주소 : ${petsitter.total_addr}</span><br>	
+					<span>포인트 : ${petsitter.point}</span><br>	
+					<span>반려동물 여부 : ${petsitter.pets}</span><br>	
+					<span>가입일 : ${petsitter.petsitterdateWithFormat}</span><br>
+					<div class="naver-viewer"></div> 
+					<input type="hidden" value="${petsitter.info}"><br>
+					<span>반려동물 경험 여부 : ${petsitter.sitter_pets}</span><br>
+					<span>상태 : ${petsitter.sitter_status}</span><br>
+					<span>은행 및 계좌 : ${petsitter.total_account}</span><br><br>
+			</c:forEach>
+		</div>
 		
-			<!-- 펫시터 번호 변수 등록 -->
-			<c:set var="pet_sitter_no" value="${petsitter.pet_sitter_no}"></c:set>
-			<!-- 펫시터 상태 변수 등록 -->
-			<c:set var="sitter_status" value="${petsitter.sitter_status}"></c:set>		
-				<span>펫시터 번호 : ${petsitter.pet_sitter_no}</span><br>
-				<span>아이디 : ${petsitter.sitter_id}</span><br>
-				<span>닉네임 : ${petsitter.nick}</span><br>
-				<span>이름 : ${petsitter.name}</span><br>	
-				<span>이메일 : ${petsitter.email}</span><br>	
-				<span>핸드폰 : ${petsitter.phone}</span><br>	
-				<span>주소 : ${petsitter.total_addr}</span><br>	
-				<span>포인트 : ${petsitter.point}</span><br>	
-				<span>반려동물 여부 : ${petsitter.pets}</span><br>	
-				<span>가입일 : ${petsitter.petsitterdateWithFormat}</span><br>
-				<div class="naver-viewer"></div> 
-				<input type="hidden" value="${petsitter.info}"><br>
-				<span>반려동물 경험 여부 : ${petsitter.sitter_pets}</span><br>
-				<span>상태 : ${petsitter.sitter_status}</span><br>
-				<span>매칭 종류 : ${petsitter.sitter_matching_type}</span><br>
-				<span>은행 및 계좌 : ${petsitter.total_account}</span><br><br>
-		</c:forEach>
-		
-		<!-- 펫시터 반려동물 정보 -->
-		<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
-			<c:if test="${petsitterPets.pets eq '예'}">
-			<c:if test="${petsitterPets.pet_no > 0}">
-			<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image"><br>
+	<div class="petsitter-skill-wrap">
+					<!-- 펫시터 매칭 정보 -->				
+					<h5 id="large-text">펫밀리 가능한 돌봄 서비스 종류</h5>
+					<hr>
+					<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+<%-- 						<span>매칭 종류 : ${petsitter.sitter_matching_type}</span> --%>
+												
+						<c:if test="${petsitter.sitter_matching_type eq '방문서비스'}">
+								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+								<img src="${context}/resources/img/petsitter-skill-icon/no-leave.png" alt="위탁서비스 안함">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+						</c:if>
+						<c:if test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+								<img src="${context}/resources/img/petsitter-skill-icon/no-visit.png" alt="방문서비스 안함">
+								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+						</c:if>
+						<c:if test="${petsitter.sitter_matching_type eq '둘다'}">
+								<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+								<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+								<br>
+								<span id="visit-text">방문서비스</span>
+								<span id="leave-text">위탁서비스</span>
+						</c:if>
+					</c:forEach>
+		<!-- 펫시터 매칭 정보 -->				
+		<h5 id="large-text">펫밀리 가능한 돌봄 서비스 종류</h5>
+		<hr>
+		<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+<%-- 						<span>매칭 종류 : ${petsitter.sitter_matching_type}</span> --%>
+									
+			<c:if test="${petsitter.sitter_matching_type eq '방문서비스'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+					<img src="${context}/resources/img/petsitter-skill-icon/no-leave.png" alt="위탁서비스 안함">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
 			</c:if>
-				<span>반려동물 이름 : ${petsitterPets.pet_name}</span><br>
-				<span>반려동물 나이 : ${petsitterPets.pet_age}</span><br>
-				<span>반려동물 종류 : ${petsitterPets.pet_type}</span><br>
-				<span>반려동물 기타 : ${petsitterPets.pet_ect}</span><br>
+			<c:if test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/no-visit.png" alt="방문서비스 안함">
+					<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
+			</c:if>
+			<c:if test="${petsitter.sitter_matching_type eq '둘다'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+					<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
+			</c:if>
+		</c:forEach>
+		<!-- 펫시터 매칭 정보 -->				
+		<h5 id="large-text">펫밀리 가능한 돌봄 서비스 종류</h5>
+		<hr>
+		<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+<%-- 						<span>매칭 종류 : ${petsitter.sitter_matching_type}</span> --%>
+									
+			<c:if test="${petsitter.sitter_matching_type eq '방문서비스'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+					<img src="${context}/resources/img/petsitter-skill-icon/no-leave.png" alt="위탁서비스 안함">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
+			</c:if>
+			<c:if test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/no-visit.png" alt="방문서비스 안함">
+					<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
+			</c:if>
+			<c:if test="${petsitter.sitter_matching_type eq '둘다'}">
+					<img src="${context}/resources/img/petsitter-skill-icon/visit.png" alt="방문서비스">
+					<img src="${context}/resources/img/petsitter-skill-icon/leave.png" alt="위탁서비스">
+					<br>
+					<span id="visit-text">방문서비스</span>
+					<span id="leave-text">위탁서비스</span>
 			</c:if>
 		</c:forEach>
 		
 		<!-- 펫시터 능력 정보 -->
-		<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">
-			<span>보유 스킬 : ${skillName.skill_name}</span><br>
+		<h5 id="large-text">펫밀리 가능한 돌봄 서비스</h5>
+		<hr>
+		<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">						
+			<c:if test="${skillName.skill_name eq '투약'}">
+				<div class="1">
+					<img src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
+					<h5 id="medium-text">투약 서비스</h5>
+				</div>
+			</c:if>
+			
+			<c:if test="${skillName.skill_name eq '도그워킹'}">
+				<div class="2">
+					<img src="${context}/resources/img/petsitter-skill-icon/dogwalking.png" alt="도그워킹서비스">
+					<h5 id="medium-text">도그워킹</h5>
+				</div>
+			</c:if>
+			
+			<c:if test="${skillName.skill_name eq '키튼케어'}">
+				<div class="3">
+					<img src="${context}/resources/img/petsitter-skill-icon/kitten.png" alt="키튼케어서비스">
+					<h5 id="medium-text">키튼케어 서비스</h5>
+				</div>
+			</c:if>
+			
+			<c:if test="${skillName.skill_name eq '퍼피케어'}">
+				<div class="4">
+					<img src="${context}/resources/img/petsitter-skill-icon/puppy.png" alt="퍼피케어서비스">
+					<h5 id="medium-text">퍼피케어 서비스</h5>
+				</div>
+			</c:if>
+			
+			<c:if test="${skillName.skill_name eq '노령동물케어'}">
+				<div class="5">
+					<img id="no-old" src="${context}/resources/img/petsitter-skill-icon/old.png" alt="노령동물케어서비스">
+					<h5 id="medium-text">노령동물케어 서비스</h5>
+				</div>
+			</c:if>
 		</c:forEach>
+		
+		<!-- 펫시터 돌봄 환경 -->
+		<h5 id="large-text">펫밀리 돌봄 환경</h5>
+		<hr>
 		<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
-			<span>돌봄 환경 : ${careConditionName.care_condition_name}</span><br>
+			<span class="text-box">#${careConditionName.care_condition_name}</span>
 		</c:forEach>
+		
+		<!-- 펫시터 돌봄 가능한 동물 -->
+		<h5 id="large-text">펫밀리 돌봄 가능한 동물 종류</h5>
+		<hr>
 		<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
-			<span>돌봄 가능한 동물 : ${carePetTypeName.care_type}</span><br>
+			<span class="text-box">#${carePetTypeName.care_type}</span>
 		</c:forEach>
-		<c:forEach var="location" items="${petsitterGetList.locationDto}">
-			<span>${location.city} ${location.area}</span><br><br>
-		</c:forEach>
+		
+		<!-- 펫시터 지역 정보 -->
+		<div class="location-wrap">
+			<c:forEach var="location" items="${petsitterGetList.locationDto}">
+					<span id="petsitter_city">#${location.city} ${location.area}</span>		
+			</c:forEach>
+		</div>
+	</div>
 	</c:forEach>
-	
+
+
+
+	<!-- 펫시터 반려동물 정보 -->
+	<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
+		<c:if test="${petsitterPets.pets eq '예'}">
+		<c:if test="${petsitterPets.pet_no > 0}">
+		<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image"><br>
+		</c:if>
+			<span>반려동물 이름 : ${petsitterPets.pet_name}</span><br>
+			<span>반려동물 나이 : ${petsitterPets.pet_age}</span><br>
+			<span>반려동물 종류 : ${petsitterPets.pet_type}</span><br>
+			<span>반려동물 기타 : ${petsitterPets.pet_ect}</span><br>
+		</c:if>
+	</c:forEach>
 	
 	<form action="info" method="post">
 	<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}"> 
@@ -192,6 +352,7 @@ FOOTER 이용 시 넣어야할 요소
 	</form>
 	
 	<a href="update?pet_sitter_no=${pet_sitter_no}"><button id="updateInfo_btn">정보 수정</button></a>
+</div>
 </section>
 
 	<br><!-- footer 불러오기 -->

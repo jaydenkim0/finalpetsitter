@@ -1,53 +1,23 @@
+@charset "UTF-8";
 /*content.css*/
 
-.content-wrap {
+.info-wrap {
     font-family: NotosanL;
 }
 
-.content-wrap #nick{
+.info-wrap #nick{
     font-family: NotosanB;
     font-size: 25px;
 }
 
-.content-wrap .petsitter-info{
+.info-wrap .petsitter-info{
     margin-top: 20px;
     margin-left: 25px;
 }
 
-/*review(write-date/star) style*/
-/*상단*/
-.content-wrap .star-wrap{
-    display: inline-block;
-    margin-left: 10px;
-}
-.content-wrap #star{
-    margin-left: 3px;
-}
-/*하단*/
-.content-wrap .review-wrap{
-    margin-top: 20px;
-    margin-left: 20px;
-}
-.content-wrap .review-wrap #star-under{
-    margin-left: 10px;
-}
-.content-wrap .review-wrap #write-date{
-    font-family: NotosanL;
-    color: #cccccc;
-    margin-left: 20px;
-}
-.content-wrap .review-wrap #writer{
-    font-family: NotosanB;
-}
-.content-wrap .review-wrap #title{
-    font-family: NotosanR;
-}
-.content-wrap .review-wrap #content{
-    font-family: NotosanL;
-}
 
 /*Img-box style*/
-.content-wrap .img_box {
+.info-wrap .img_box {
     width: 60px;
     height: 60px; 
     border-radius: 70%;
@@ -60,17 +30,17 @@
     clear: both;
 }
 
-.content-wrap .profile {
+.info-wrap .profile {
     /* max-width: 100%; */
     max-height: 100%;
     object-fit: cover;
 }
 
 /*Location style*/
-.content-wrap .location-wrap{
+.info-wrap .location-wrap{
 	margin-left:25px;
 }
-.content-wrap #petsitter_city {
+.info-wrap #petsitter_city {
 	margin: 3px;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -88,7 +58,7 @@
 
 
 /*pet-check style*/
-.content-wrap #pet-check{
+.info-wrap #pet-check{
     padding-top: 20px;
     padding-bottom: 20px;
     margin-left: 200px;
@@ -104,57 +74,35 @@
     font-family: NotosanM; 
 }
 
-/*btn style*/
-.content-wrap #estimate-btn{
-    width: 190px;
-    height: 50px;
-    font-size: 10pt;
-    font-family: NotosanR;
-    color: white;
-    text-align: center;
-    background: #1482e0;
-    border: solid 2px #1482e0;
-    border-radius: 6px;
-}
-.content-wrap #estimate-btn:hover {
-    background: #4edec5;
-    border: solid 2px #4edec5;
 
-}
 
-.content-wrap .estimate-wrap{
-    float: right;
-    clear: both;
-    margin-right: 300px;
-}
-
-.content-wrap .petsitter-skill-wrap{
+.info-wrap .petsitter-skill-wrap{
 	margin-left: 25px;
 }
-.content-wrap .petsitter-skill-wrap img{
+.info-wrap .petsitter-skill-wrap img{
 	width:150px;
 	margin:10px
 }
 
-.content-wrap .petsitter-skill-wrap #visit-text{
+.info-wrap .petsitter-skill-wrap #visit-text{
 	font-family: NotosanM;
 	margin-left: 45px;
 		
 }
-.content-wrap .petsitter-skill-wrap #leave-text{
+.info-wrap .petsitter-skill-wrap #leave-text{
 	font-family: NotosanM;
 	margin-left: 98px;
 }
 
-.content-wrap #large-text{
+.info-wrap #large-text{
     font-family: NotosanB;
     font-size: 19px;
 }
-.content-wrap #medium-text{
+.info-wrap #medium-text{
 	font-family: NotosanM;
     font-size: 16px;
 }
-.content-wrap .text-box{
+.info-wrap .text-box{
 	margin: 3px;
     padding-left: 7px;
     padding-right: 7px;
@@ -170,7 +118,6 @@
     border-radius: 30px;
 }
 
-.content-wrap .petsitter-pet-wrap{
+.info-wrap .petsitter-pet-wrap{
 	margin-left: 25px;
 }
-

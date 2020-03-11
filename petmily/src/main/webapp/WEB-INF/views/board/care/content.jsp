@@ -388,7 +388,8 @@ function testfunc(test) {
 }
 .page-navigator{
 padding:0;
-}
+
+
 	.section-content{
 	padding-top:150px;
 	}
