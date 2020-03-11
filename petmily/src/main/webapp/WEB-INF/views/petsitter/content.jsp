@@ -63,8 +63,6 @@
 	<script src="https://unpkg.com/swiper/js/swiper.js"></script>
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
   
-	<!-- Link Swiper's CSS -->
-<!-- 	<link rel="stylesheet" href="../package/css/swiper.min.css"> -->
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,

@@ -1,0 +1,123 @@
+@charset "UTF-8";
+/*content.css*/
+
+.info-wrap {
+    font-family: NotosanL;
+}
+
+.info-wrap #nick{
+    font-family: NotosanB;
+    font-size: 25px;
+}
+
+.info-wrap .petsitter-info{
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+
+/*Img-box style*/
+.info-wrap .img_box {
+    width: 60px;
+    height: 60px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 15px;
+    margin-top: 0px;
+    
+/*  이미지와 닉네임 나란히 배치  */
+    float: left;
+    clear: both;
+}
+
+.info-wrap .profile {
+    /* max-width: 100%; */
+    max-height: 100%;
+    object-fit: cover;
+}
+
+/*Location style*/
+.info-wrap .location-wrap{
+	margin-left:25px;
+}
+.info-wrap #petsitter_city {
+	margin: 3px;
+	padding-left: 7px;
+	padding-right: 7px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	
+	font-size: 11pt;
+	font-family: NotosanL;
+	color: white;
+	text-align: center;
+	background: #1482e0;
+	border: solid 2px #1482e0;
+	border-radius: 30px;
+}
+
+
+/*pet-check style*/
+.info-wrap #pet-check{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+
+    text-align: center;
+    
+
+    
+    background-color: #f5f5f5;
+    color: #1482e0;
+
+    font-family: NotosanM; 
+}
+
+
+
+.info-wrap .petsitter-skill-wrap{
+	margin-left: 25px;
+}
+.info-wrap .petsitter-skill-wrap img{
+	width:150px;
+	margin:10px
+}
+
+.info-wrap .petsitter-skill-wrap #visit-text{
+	font-family: NotosanM;
+	margin-left: 45px;
+		
+}
+.info-wrap .petsitter-skill-wrap #leave-text{
+	font-family: NotosanM;
+	margin-left: 98px;
+}
+
+.info-wrap #large-text{
+    font-family: NotosanB;
+    font-size: 19px;
+}
+.info-wrap #medium-text{
+	font-family: NotosanM;
+    font-size: 16px;
+}
+.info-wrap .text-box{
+	margin: 3px;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    font-size: 11pt;
+    font-family: NotosanR;
+    color: white;
+    text-align: center;
+    background: #1482e0;
+    border: solid 2px #1482e0;
+    border-radius: 30px;
+}
+
+.info-wrap .petsitter-pet-wrap{
+	margin-left: 25px;
+}
