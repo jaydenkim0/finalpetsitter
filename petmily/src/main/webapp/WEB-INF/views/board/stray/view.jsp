@@ -331,7 +331,7 @@ height: auto;
 
 	<tr>
 		<c:choose>
-			<c:when test="${not empty row.stray_writer}">
+			<c:when test="${not empty strayVO.stray_writer}">
 				<td>Name : ${strayVO.stray_writer}</td>
 			</c:when>
 			<c:otherwise>

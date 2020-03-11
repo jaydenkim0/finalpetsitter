@@ -198,29 +198,33 @@ FOOTER 이용 시 넣어야할 요소
 	
 				<h5>${count}명의 펫밀리가 있습니다.</h5>
 				<br>
-				<c:forEach var="petsitter" items="${list}">					
-					<div id="petsitter_info">
-						<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
-							<!-- 펫시터 정보 -->			
-							<c:if test="${petsitter.member_image_no > 0}">
-								<div class="img_box" style="background: #f5f5f5">
-		                            <img class="profile" src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" onerror="no_image2()" id="member_image">
-		                        </div>
-							</c:if>	
-								<span id="nick">닉네임 : ${petsitter.nick}</span>
-								<br>
-								
-								<div class="naver-viewer"></div> 
-								<input id="naver-viewer-text" type="hidden" value="${petsitter.info}">
-								<br>
-							
-								<c:forEach var="location" items="${petsitter.list}">
-									<span id="petsitter_city">#${location.city} ${location.area}</span>
-								</c:forEach>
-								<br>
-								<hr>
-							</a>
-						</div>
+				<c:forEach var="petsitter" items="${list}">			
+					<c:choose>	
+						<c:when test="${sessionScope.id != petsitter.sitter_id}">
+							<div id="petsitter_info">
+								<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
+									<!-- 펫시터 정보 -->			
+									<c:if test="${petsitter.member_image_no > 0}">
+										<div class="img_box" style="background: #f5f5f5">
+				                            <img class="profile" src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" onerror="no_image2()" id="member_image">
+				                        </div>
+									</c:if>	
+										<span id="nick">닉네임 : ${petsitter.nick}</span>
+										<br>
+										
+										<div class="naver-viewer"></div> 
+										<input id="naver-viewer-text" type="hidden" value="${petsitter.info}">
+										<br>
+									
+										<c:forEach var="location" items="${petsitter.list}">
+											<span id="petsitter_city">#${location.city} ${location.area}</span>
+										</c:forEach>
+										<br>
+										<hr>
+									</a>
+								</div>
+							</c:when>				
+						</c:choose>	
 					</c:forEach>
 			</div>
 			

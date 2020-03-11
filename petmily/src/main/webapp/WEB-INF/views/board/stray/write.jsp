@@ -137,7 +137,7 @@ label{
 font-style: bold;
 font-size: 20px;
 }
-header style -->
+<!--header style -->
 #masthead:after {
 	content: '';
 	position: absolute;

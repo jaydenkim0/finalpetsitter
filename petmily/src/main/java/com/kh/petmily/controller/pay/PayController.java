@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.PayinfoDto;
-import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.repository.kakao.PayDao;
 import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.AdminService;
@@ -79,7 +77,9 @@ public class PayController {
 		      model.addAttribute("reservationList", reservationList)
 		         .addAttribute("payMent", payMent)
 		         .addAttribute("usageTime", totalTime)
-		      .addAttribute("startTime", startTime);
+		         .addAttribute("startTime", startTime)
+		         .addAttribute("check", (int) payService.check(reservation_no))
+		         .addAttribute("check1", (int) payService.check1(reservation_no));		      
 			return "pay/account";
 	}
 	

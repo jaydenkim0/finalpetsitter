@@ -182,7 +182,7 @@ header style -->
 	<section class="ta">
 	<form name="update" method="post" action="${context}/board/stray/update">
 		<h1 class="title" align="center">Save the Pets !</h1>
-		<input type="hidden" name="member_id" value="${sessionScope.id}">
+<%-- 		<input type="hidden" name="member_id" value="${sessionScope.id}"> --%>
 		<input type="hidden" name="stray_no" value="${strayVO.stray_no}">
 
 		<div class="form-group">
@@ -196,9 +196,8 @@ header style -->
 		</div>
 
 		<div class="form-group">
-			<label for="stray_head">Subject</label> <input class="form-control"
-				name="stray_head" id="stray_head"
-				placeholder="${strayVO.stray_head}">
+			<label for="stray_head">Subject</label> 
+			<input class="form-control" name="stray_head" id="stray_head"placeholder="${strayVO.stray_head}" value="${strayVO.stray_head}">
 		</div>
 
 		<div class="form-group">

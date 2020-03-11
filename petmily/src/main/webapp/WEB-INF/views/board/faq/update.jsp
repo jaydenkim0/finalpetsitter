@@ -186,7 +186,7 @@ header style -->
 
 	<div class="form-group">
 		<label for="faq_head">Subject</label>
-			<input class="form-control" name="faq_head" id="faq_head" placeholder="${faqVO.faq_head}">
+			<input class="form-control" name="faq_head" id="faq_head" placeholder="${faqVO.faq_head}" value="${faqVO.faq_head}">
 	</div>
 
 	<div class="form-group">
