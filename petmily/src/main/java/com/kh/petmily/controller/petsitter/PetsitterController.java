@@ -136,7 +136,11 @@ public class PetsitterController {
 		String id = (String) session.getAttribute("id");
 		int count = petsitterService.petscheck(id);
 		
+		// 리뷰 리스트 갖고 오는 것
 		List<ReviewDto>list = reviewService.listSearch(pet_sitter_no);
+		
+		System.out.println("펫시터 넘버가 나오는가 ? = "+list);
+		
 		double star = reviewService.star(pet_sitter_no);
 		
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);

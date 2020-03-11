@@ -158,7 +158,7 @@ public class MemberController {
 			@RequestParam String id, @RequestParam String pet_name, @RequestParam String pet_age,
 			@RequestParam String pet_type, @RequestParam String pet_ect, @RequestParam MultipartFile member_image,
 			@RequestParam MultipartFile pet_image) throws IllegalStateException, IOException {
-
+		
 		// 비밀번호 암호화 후 다시 저장
 		String orgin = memberDto.getPw();
 		String result = encoder.encode(orgin);

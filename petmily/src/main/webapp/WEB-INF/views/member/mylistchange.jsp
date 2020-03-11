@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 	<head>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -78,7 +79,6 @@
 		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 	}
 	</script>
-	</head>
 	<style>
 	
 	th ,td{
@@ -132,13 +132,103 @@
    }
    .box {
     width: 150px;
-    
-}
+    height: 150px; 
+    border-radius: 30%;
+    overflow: hidden;
+}  
+	.petchbtn {
+	position:relative;
+	display: white;
+   width: 70px;
+   height: 30px;
+   line-height: 20px;
+   border: 1px #3399dd solid;
+   background-color: white;
+   text-align: center;
+   font-size: 12px;
+   cursor: pointer;
+   color: #1482e0;
+   transition: all 0.9s, color 0.3;
+   border-radius:10px;
+   left:20px;
+   }
+   .petchbtn:hover{
+   	background-color: #3399dd;
+   	color: white;
+   }
   
   
 	</style>
+	<!-- 
+HEADER 이용 시 넣어야할 요소 
+:   jquery js,
+   header css, 
+   header script
+-->
+  <!-- header css -->
+  <link rel="stylesheet" href="${context}/resources/css/header.css">
+   <!-- header script -->
+   <script>
+      $(function() {
+          $('body').addClass('js');
+          $('#masthead').addClass('color');
+          
+          var $hamburger = $('.hamburger'),
+              $nav = $('#site-nav'),
+              $masthead = $('#masthead');
 
+          $hamburger.click(function() {
+            $(this).toggleClass('is-active');
+            $nav.toggleClass('is-active');
+            $masthead.toggleClass('is-active');
+            return false; 
+          })
+      });
+    </script>
+    <!-- header style -->
+    <style>
+   #masthead:after {
+     content: '';
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 130px;
+     background-color: #fff;
+     opacity: 100;
+     transition: opacity 0.3s ease;
+   }
+   
+   #masthead.is-active{
+    background-color: #fff;
+   }
+   
+   .section-content{
+   padding-top:150px;
+   }
+   </style>
+<!-- 
+FOOTER 이용 시 넣어야할 요소 
+:   jquery js,
+   footer css, 
+   Required meta tags, 
+   Bootstrap CSS,
+   아이콘을 사용하기 위해 추가로 불러오는 CSS
+-->
+     <!-- footer css -->
+    <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	</head>
+	
 	<body>
+	<!-- header 불러오기 -->
+   <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+   
+	<section class="section-content">
 		<div class="mychange" align="center">
 			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
@@ -146,8 +236,8 @@
 			    	<tr>
 			    		<th>Image</th> 	
 			    		<td>
-				    		<div class="box" style="background: #BDBDBD;">
-				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 150px; height: 150px;" onerror="no_image2()" id="2">
+							<div class="box" style="background: #BDBDBD;">
+				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: 100%;" onerror="no_image2()" id="2" class="imagecss">
 							</div>
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
@@ -196,9 +286,9 @@
 					
 					<tr>
 						<th colspan="2">
-							<button type="submit" >수정</button>&nbsp;&nbsp;&nbsp;
+							<button type="submit" class="petchbtn" >수정</button>&nbsp;&nbsp;&nbsp;
 							<a href="mylist">
-								<button type="button">취소</button>
+								<button type="button" class="petchbtn">취소</button>
 							</a>
 						</th>
 					</tr>
@@ -209,7 +299,7 @@
 <hr width="50%">
 <br>
 			<div class="out" align="right">
-			<a href="memberdelete?id=${member.id}"><button>탈퇴</button></a>
+			<a href="memberdelete?id=${member.id}"><button class="petchbtn">탈퇴</button></a>
  
 			<c:if test="${not empty fail }">
 				<p>탈퇴 실패</p>
@@ -218,6 +308,10 @@
 			
 		
 			</div>
+	</section>
+	
+	  <br><!-- footer 불러오기 -->
+   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include> 
 	</body>
 	
 </html>

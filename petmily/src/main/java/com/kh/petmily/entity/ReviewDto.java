@@ -26,7 +26,9 @@ public class ReviewDto {
 	private String review_wdate;//리뷰 작성시간
 	private int review_reservation_no;//reservation table의 reservation_no
 	
-	private String sitter_id; // 추가적으로 가지고와야할 시터 id(추가내용)
+	private String sitter_id; // 추가적으로 가지고와야할 시터 id(추가내용)	
+	
+	private String member_image_no;
 	
 	public String getwritedateWithFormat()throws Exception{
 		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");

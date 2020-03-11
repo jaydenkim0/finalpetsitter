@@ -151,6 +151,7 @@ public class MemberDaoImpl implements MemberDao {
 	//펫이미지 실제로 가지고오기(1장씩 요청)
 	@Override
 	public byte[] physicalpet_image(String savename) throws IOException {
+		System.out.println("savename = "+savename);
 		File file = new File("D:/upload/kh2c/pet_image",savename);
 		byte[] data = FileUtils.readFileToByteArray(file);
 		return data;

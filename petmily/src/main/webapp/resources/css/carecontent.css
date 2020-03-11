@@ -1,0 +1,167 @@
+@charset "EUC-KR";
+ *{
+       box-sizing: border-box;
+}
+.page-navigator li {
+	display: inline-block;
+	font-size:22px;
+}
+.page-navigator li.active>a {
+	color: #1482e0;
+}
+  .mother {
+    width: 100%;
+    border: none;
+  }
+  
+   textarea{
+        width:100%;
+        height:150px;
+    }
+.btn {
+	display: white;
+	width: 80px;
+	height: 10x;
+	line-height: 20px;
+	border: 1px #3399dd solid;
+	background-color: white;
+	text-align: center;
+	font-size : 12px;
+	cursor: pointer;
+	color: #1482e0;
+	transition: all 0.9s, color 0.3;
+}
+.reply_regist_btn{
+	height:50px;
+	width:150px;
+	font-size:20px;
+}
+
+.btn:hover {
+	color: white;
+}
+
+.hover3:hover {
+	background-color: #1482e0;
+}
+.head{
+	background-color: #1482e0;
+	height: 50px;
+}
+.roomdelete{
+	margin-right:80px;
+}
+.headcontent{
+	font-size:29px;
+	color: white;
+	margin-top:30px;
+}
+.page-navigator{
+padding:0;
+
+
+	.section-content{
+	padding-top:150px;
+	}
+		#masthead:after {
+	  content: '';
+	  position: absolute;
+	  top: 0;
+	  width: 100%;
+	  height: 130px;
+	  background-color: #fff;
+	  opacity: 100;
+	  transition: opacity 0.3s ease;
+	}
+	
+	#masthead.is-active{
+	 background-color: #fff;
+	}
+	
+	.section-content{
+	padding-top:150px;
+	}
+	.replyregist{
+/* 		 background-color: #e0e0e0; */
+		 width:90%;
+		 border-radius: 50px;
+	}
+	.writedate{
+		 opacity: 0.8;
+	}
+	.grandmother{
+		padding-right: 10%;
+		padding-left:10%;
+	}
+	.textright{
+		text-align: right;
+	}
+	.textleft{
+		text-align:left;
+	}
+	.mymother{
+		width: 60%;
+		align:right;
+		background-color: #bcbcbc;
+		opacity: 0.95;
+		border-radius: 80px 80px 80px 80px;
+	}
+	.othersmother{
+		width: 60%;
+		align:left;
+		background-color: #dedede;
+		opacity: 0.95;
+		border-radius: 80px 80px 80px 80px;
+	}
+	.mybtn{
+		width: 60px;
+		height: 20px;
+		border: none;
+		background-color:#bcbcbc;
+		text-align: center;
+		font-size : 17px;
+		color: white;
+	}
+	.othersbtn{
+		width: 60px;
+		height: 20px;
+		border: none;
+		background-color:#dedede;
+		text-align: center;
+		font-size : 17px;
+		color: black;
+	}
+	.othersbtn:hover{
+		background-color: #dedede;
+		color:white;
+	}
+	.mybtn:hover {
+		background-color: #bcbcbc;
+		color:black;
+	}
+	.mybtndiv{
+		display: inline;
+	}
+	.replyeditor{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:20px;
+		margin-bottom: 10px;
+	}
+	.replyviewer{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:50px;
+		margin-bottom: 10px;		
+	}
+	.othersreplyviewer{
+		margin-top:50px;
+		margin-right:20px;
+		margin-left:50px;
+		margin-bottom: 10px;		
+	}
+	.test{
+		height: 200px;
+		background-color: black;
+		border-radius: 30%;
+	}

@@ -27,25 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</insert>
 	
-	<!-- 	리뷰 리스트 -->
-	<select id="reviewlist"  resultType="reviewDto"> 
-		select
-		*
-		from
-		REVIEW
-		order by
-		review_no desc		
- 	</select>
-	
-	<!-- 리뷰 리스트 조회 -->
-	<select id="reviewlistSearch" parameterType="int" resultType="reviewDto">
-		select
-		*
-		from
-		reviewallinfo
-	    where review_sitter_no=#{review_sitter_no}
-		order by review_no desc
-	</select>
+
+
 	
 	<!-- 리뷰 수정 -->
 <!-- 	<update id="reviewupdate" parameterType="reviewDto" > -->
@@ -132,10 +115,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="isReview"  parameterType="int" resultType="int">
 		select NVL(count(*), 0) from review where review_reservation_no = #{review_reservation_no}
 	</select>
+
+
+	<!-- 리뷰 리스트 조회 -->
+	<select id="reviewlistSearch" parameterType="int" resultType="reviewDto">
+		select
+		*
+		from
+		reviewallinfo
+	    where review_sitter_no=#{review_sitter_no}
+		order by review_no desc
+	</select>
+
+	<!-- 	리뷰 리스트 -->
+	<select id="reviewlist"  resultType="reviewDto"> 
+	select * from review R
+	left outer join member_image MI
+	on R.review_writer = mi.member_image_member_id
+	order by review_no desc
+ 	</select>
+	
+
 </mapper>
-
-
-
-
 
 
