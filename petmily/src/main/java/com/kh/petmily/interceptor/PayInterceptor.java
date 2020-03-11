@@ -17,7 +17,8 @@ public class PayInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {		
-		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
 		int reservation_no = Integer.parseInt(request.getParameter("reservation_no"));
 		String reservation_id = payService.getReservation_id(reservation_no);		
 		if(id.equals(reservation_id)) {
