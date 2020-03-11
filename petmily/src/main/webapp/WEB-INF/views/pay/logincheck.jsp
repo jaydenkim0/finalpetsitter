@@ -130,6 +130,7 @@ float:center;
 		<br>
 			<div class="btnwrap" align="center">
 			 <input class="btn" type="submit" value="로그인" id="loginbtn"><br><br><br><br>
+			<br><br><br>
 			<div class="aa"  align="center">
 <!-- 			<a href="findid"> -->
 <!-- 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
