@@ -189,6 +189,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<resultMap type="petsitterLocationSearchVO" id="sitter">
 		<result column="pet_sitter_no" property="pet_sitter_no"/>
 		<result column="nick" property="nick"/>
+		<result column="sitter_id" property="sitter_id"/>
 		<result column="info" property="info"/>
 		<result column="member_image_no" property="member_image_no"/>
 		<result column="member_image_member_id" property="member_image_member_id"/>	
@@ -421,6 +422,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<resultMap type="petsitterLocationSearchVO" id="sitter2">
 			<result column="pet_sitter_no" property="pet_sitter_no"/>
 			<result column="nick" property="nick"/>
+			<result column="sitter_id" property="sitter_id"/>
 			<result column="info" property="info"/>
 			<result column="member_image_no" property="member_image_no"/>
 			<result column="member_image_member_id" property="member_image_member_id"/>

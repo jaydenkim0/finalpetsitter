@@ -109,13 +109,13 @@
 						<td> 예약 시간 : ${acountOne.matching_time}</td>					
 					</tr>
 					<tr>			
-						<td> 이용 시작 시간 : ${startTime}</td>					
+						<td> 이용 시작 시간 : ${startTime} 시 부터 ~ ${lastTime} 시 까지 </td>					
 					</tr>
 					<tr>			
-						<td> 사용 시간 : ${usageTime}</td>											
+						<td> 사용 시간 : ${usageTime} 시간</td>											
 					</tr>
 					<tr>			
-						<td> 결제 금액 :  ${payMent} </td>					
+						<td> 결제 금액 :  ${payMent} 원</td>					
 					</tr>
 					<tr>			
 						<td> 

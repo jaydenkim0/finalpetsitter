@@ -14,10 +14,13 @@ import lombok.NoArgsConstructor;
 public class PetsitterLocationSearchVO {
 	private int pet_sitter_no;
 	private String nick;
+	private String sitter_id;
 	private String info;
 	//회원 프로필 이미지
 	private int member_image_no;
 	private String member_image_member_id;
+	
+	
 	
 	private List<LocationDto> list;
 }

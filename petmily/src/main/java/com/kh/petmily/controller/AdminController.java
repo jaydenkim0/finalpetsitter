@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.List;
 
-import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +43,6 @@ import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.kakao.KakaoPayRevokeReturnVO;
 import com.kh.petmily.vo.petsitter.PetsitterVO;
-import com.kh.petmily.vo.petsitter.ReservationAllVO;
-import com.kh.petmily.vo.petsitter.ReservationListVO;
 
 
 @Controller
@@ -131,12 +128,14 @@ public class AdminController {
 		//최종 결제 금액 구하기
 		int totalTime = adminService.totalTime(reservation_no);
 		int startTime = adminService.startTime(reservation_no);
+		int lastTime = startTime + totalTime;
 		
 		int payMent = hourPayment * totalTime;
 
 			model.addAttribute("payMent", payMent)
 			.addAttribute("usageTime", totalTime)
-			.addAttribute("startTime", startTime);
+			.addAttribute("startTime", startTime)
+			.addAttribute("lastTime", lastTime);
 		// 결제 취소 버튼 유무 확인
 			model.addAttribute("status", adminService.paymentcanclecheck(reservation_no));		
 		return "admin/reservationstatusdetail";		
