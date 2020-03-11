@@ -324,7 +324,7 @@ FOOTER 이용 시 넣어야할 요소
 						<br>
 							<div>
 								<div class="img_box" style="background: #f5f5f5">
-									<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" onerror="no_image2()" id="2" > 
+									<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${reviewDto.member_image_no}" onerror="no_image2()" id="2" > 
 								</div>
 								
 								<span id="writer">${reviewDto.review_writer}</span>

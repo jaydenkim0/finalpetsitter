@@ -148,7 +148,7 @@ FOOTER 이용 시 넣어야할 요소
                             
                             <!-- 프로필 이미지 -->
                           	<div class="img_box" style="background: #f5f5f5">
-                                <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
+                                	<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}" onerror="no_image2()" id="2" > 
                             </div> 
                             
                     		<h3 id="nick">${review.review_writer}</h3> 

@@ -67,9 +67,9 @@
 	 		<mapping path="/petsitter/**"/>
 	 		<exclude-mapping path="/petsitter/list*"/>
 	 		<exclude-mapping path="/petsitter/regist*"/>	 	
-	 		<exclude-mapping path="/petsitter/estimate"/>
-	 		<exclude-mapping path="/petsitter/confirm"/>	 		
-	 		<exclude-mapping path="/petsitter/searchlist"/>
+	 		<exclude-mapping path="/petsitter/estimate*"/>
+	 		<exclude-mapping path="/petsitter/confirm*"/>	 		
+	 		<exclude-mapping path="/petsitter/searchlist*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
 	 	</interceptor>
 	 	<!-- 회원 접속 권한 거부  -->
@@ -81,17 +81,19 @@
 	 		<exclude-mapping path="/member/input*"/>
 	 		<exclude-mapping path="/member/login*"/>
 	 		<exclude-mapping path="/member/result*"/>
-	 		<exclude-mapping path="/member/regist*"/>
+	 		<exclude-mapping path="/member/regist**"/>
 	 		<exclude-mapping path="/member/idCheck*"/>
 	 		<exclude-mapping path="/member/emailCheck*"/>
  			<exclude-mapping path="/member/member/image*"/>
 			<exclude-mapping path="/member/pet/image*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
 	 	</interceptor>
+	 	<!-- 돌봄 계시판 -->
 	 	<interceptor>
 	 		<mapping path="/board/qna/view**" />	 	 		
 	 		<beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
 	 	</interceptor>
+ 		<!-- 돌봄 계시판 -->
 	 	<interceptor>
 	 		<mapping path="/pay/account*"/>
 	 		<beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
