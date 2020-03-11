@@ -119,7 +119,7 @@ function no_image2(){
 	color:gray;
 	font-weight:bold;
 	}
-	.mylistbtn{
+.mylistbtn{
    display: white;
    width: 70px;
    height: 30px;

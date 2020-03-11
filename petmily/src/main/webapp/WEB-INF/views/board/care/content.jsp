@@ -189,7 +189,7 @@ FOOTER 이용 시 넣어야할 요소
         //else{검정색으로 표시}
 
         if(!a.value){
-            window.alert("글을 작성해주세요");
+            window.alert("메시지를 작성해주세요");
         }else{
         	var form = document.querySelector(".reply_submit");
         	form.submit();   	

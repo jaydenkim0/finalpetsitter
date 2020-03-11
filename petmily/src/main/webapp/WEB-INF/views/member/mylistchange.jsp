@@ -85,10 +85,10 @@
 	
 	padding: 10px;
 	text-align: center;
-	width:300px;
+	width:600px;
 	}
 	input{
-	width:180px;
+	width:400px;
 	height:35px;
 	BORDER-BOTTOM: teal 1px solid;
 		BORDER-LEFT: medium none;
@@ -155,6 +155,10 @@
    .petchbtn:hover{
    	background-color: #3399dd;
    	color: white;
+   }
+   .fail{
+   	font-size:15px;
+   	color:red;
    }
   
   
@@ -229,6 +233,11 @@ FOOTER 이용 시 넣어야할 요소
    <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
    
 	<section class="section-content">
+		<div align="center">
+			<c:if test="${not empty param.fail }">
+				<p class="fail">비밀번호 불일치 - 탈퇴 실패</p>
+			</c:if>
+		</div>
 		<div class="mychange" align="center">
 			<form action="mylistchange?id=${member.id}" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_image_no" value="${member_image_no }">
@@ -283,30 +292,18 @@ FOOTER 이용 시 넣어야할 요소
 							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}">
 						</td>
 					</tr>
-					
-					<tr>
-						<th colspan="2">
-							<button type="submit" class="petchbtn" >수정</button>&nbsp;&nbsp;&nbsp;
-							<a href="mylist">
-								<button type="button" class="petchbtn">취소</button>
-							</a>
-						</th>
-					</tr>
-				
 			    </table>
+			 	<br>
+				<button type="submit" class="petchbtn" >수정</button>&nbsp;&nbsp;&nbsp;
+				<a href="mylist">
+					<button type="button" class="petchbtn">취소</button>
+				</a>
 			</form>
 			</div>
-<hr width="50%">
-<br>
+			<hr width="50%">
+			<br>
 			<div class="out" align="right">
-			<a href="memberdelete?id=${member.id}"><button class="petchbtn">탈퇴</button></a>
- 
-			<c:if test="${not empty fail }">
-				<p>탈퇴 실패</p>
-			</c:if>
-
-			
-		
+				<a href="memberdelete?id=${member.id}"><button class="petchbtn">탈퇴</button></a>	
 			</div>
 	</section>
 	
