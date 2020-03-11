@@ -134,8 +134,10 @@ FOOTER 이용 시 넣어야할 요소
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
-			 			<img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}" width="20%" height="20%"> 
-					</c:forEach>
+						<div class="swiper-slide">
+			             	<img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"> 
+						</div>
+			        </c:forEach>
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
@@ -286,7 +288,7 @@ FOOTER 이용 시 넣어야할 요소
 			<c:if test="${petsitterPets.pets eq '예'}">
 				<c:if test="${petsitterPets.pet_no > 0}">
 					<div class="img_box" style="background: #f5f5f5">
-					<img class="profile" src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+					<img class="profile" src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${petsitterPets.pet_no}" onerror="no_image()" id="pet_image">
 		            </div>
 				</c:if>
 				<span>반려동물 이름 : ${petsitterPets.pet_name}</span><br>
@@ -326,17 +328,17 @@ FOOTER 이용 시 넣어야할 요소
 </div>
 
 
-<!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-
-<!-- Initialize Swiper -->
-<script>
-var swiper = new Swiper('.swiper-container', {
-	pagination: {
-	el: '.swiper-pagination',
-	},
-});
-</script>
+			<!-- Swiper JS -->
+			<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+	
+			<!-- Initialize Swiper -->
+			<script>
+			var swiper = new Swiper('.swiper-container', {
+				pagination: {
+				el: '.swiper-pagination',
+				},
+			});
+			</script>
 
 </section>
 	<br><br>

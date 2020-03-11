@@ -284,16 +284,13 @@ FOOTER 이용 시 넣어야할 요소
 <!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
-<section class="section-content"> 
-	<h1>펫시터 정보 수정</h1>
-	
+<section class="section-content"> 	
 	<form action="update" method="post" enctype="multipart/form-data">
 	
 	<!-- 회원 아이디 -->
 		<input type="hidden" name="sitter_id" value="${id}">
 	<!-- 펫시터 번호 -->
 		<input type="hidden" name="pet_sitter_no" value="${pet_sitter_no}">
-		<h1>${pet_sitter_no}</h1>
 		
 	<!-- 소개 이미지 파일 -->	
 		<label for="info_image">소개 이미지</label>
