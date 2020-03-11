@@ -217,6 +217,11 @@ font-size:10pt;
 
 
 </style>
+<script>
+function no_image2(){
+	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
+</script>
 
 <!-- header 불러오기  -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
