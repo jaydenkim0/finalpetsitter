@@ -48,6 +48,8 @@
 <!-- 
 기본 CSS
 :	font css
+	content css
+	slider css
 -->
     <!-- font css -->
     <link rel="stylesheet" href="${context}/resources/css/font.css"/>
@@ -141,8 +143,10 @@ FOOTER 이용 시 넣어야할 요소
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<c:forEach var="sitterinfoimg" items="${sitterInfoimageList}">
-						<div class="swiper-slide"><img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"></div>
-					</c:forEach>
+						<div class="swiper-slide">
+			             	<img src="${pageContext.request.contextPath}/admin/petsitter/sitterInfoimage?info_image_no=${sitterinfoimg.info_image_no}"> 
+						</div>
+			        </c:forEach>
 				</div>
 				<!-- Add Pagination -->
 				<div class="swiper-pagination"></div>
@@ -227,43 +231,45 @@ FOOTER 이용 시 넣어야할 요소
 					<!-- 펫시터 능력 정보 -->
 					<h5 id="large-text">펫밀리 가능한 돌봄 서비스</h5>
 					<hr>
+					<div class="skill-align">
 					<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">						
 						<c:if test="${skillName.skill_name eq '투약'}">
-							<div class="1">
+							<div id="skill-item">
 								<img src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
 								<h5 id="medium-text">투약 서비스</h5>
 							</div>
 						</c:if>
 						
 						<c:if test="${skillName.skill_name eq '도그워킹'}">
-							<div class="2">
+							<div id="skill-item">
 								<img src="${context}/resources/img/petsitter-skill-icon/dogwalking.png" alt="도그워킹서비스">
 								<h5 id="medium-text">도그워킹</h5>
 							</div>
 						</c:if>
 						
 						<c:if test="${skillName.skill_name eq '키튼케어'}">
-							<div class="3">
+							<div id="skill-item">
 								<img src="${context}/resources/img/petsitter-skill-icon/kitten.png" alt="키튼케어서비스">
 								<h5 id="medium-text">키튼케어 서비스</h5>
 							</div>
 						</c:if>
 						
 						<c:if test="${skillName.skill_name eq '퍼피케어'}">
-							<div class="4">
+							<div id="skill-item">
 								<img src="${context}/resources/img/petsitter-skill-icon/puppy.png" alt="퍼피케어서비스">
 								<h5 id="medium-text">퍼피케어 서비스</h5>
 							</div>
 						</c:if>
 						
 						<c:if test="${skillName.skill_name eq '노령동물케어'}">
-							<div class="5">
+							<div id="skill-item">
 								<img id="no-old" src="${context}/resources/img/petsitter-skill-icon/old.png" alt="노령동물케어서비스">
 								<h5 id="medium-text">노령동물케어 서비스</h5>
 							</div>
-						</c:if>
-						
+						</c:if>						
 					</c:forEach>
+					</div>
+					
 					
 					<br><br>	
 					<!-- 펫시터 돌봄 환경 -->
@@ -285,18 +291,26 @@ FOOTER 이용 시 넣어야할 요소
 				<br><br>	
 				<!-- 펫시터 반려동물 정보 -->
 				<div class="petsitter-pet-wrap">
-				<h5 id="large-text">펫밀리  반려동물 정보</h5>
-				<hr>
-				<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
-					<c:if test="${petsitterPets.pets eq '예'}">
-						<span id="medium-text">${petsitterPets.pet_name}</span>
-						<span id="medium-text">(${petsitterPets.pet_age}살)</span>
-						<br>
-						<span>${petsitterPets.pet_ect}</span>
-						<br><br>
-					</c:if>
-				</c:forEach>
+					<h5 id="large-text">펫밀리  반려동물 정보</h5>
+					<hr>
+					<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}">
+						<c:if test="${petsitter.pets eq '아니오'}">
+							<span id="medium-text">등록된 반려동물이 없습니다.</span>
+							<br>
+						</c:if>
+					</c:forEach>
+					
+					<c:forEach var="petsitterPets" items="${petsitterGetList.petsitterPetsVO}">
+						<c:if test="${petsitterPets.pets eq '예'}">
+							<span id="medium-text">${petsitterPets.pet_name}</span>
+							<span id="medium-text">(${petsitterPets.pet_age}살)</span>
+							<br>
+							<span>${petsitterPets.pet_ect}</span>
+							<br><br>
+						</c:if>				
+					</c:forEach>
 				</div>
+				
 	</c:forEach>
 	
 	
@@ -306,20 +320,21 @@ FOOTER 이용 시 넣어야할 요소
 					<c:when test="${list.size() > 0}">		
 						<h3 id="large-text">펫밀리 리뷰</h3>	
 						<hr>
-						<c:forEach var="reviewDto" items="${list}">
-							
-							<div class="img_box" style="background: #f5f5f5">
-								<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" onerror="no_image2()" id="2" > 
-							</div>
-	
-							<span id="writer">${reviewDto.review_writer}</span>
-							<span id="star-under">${reviewDto.review_star}</span>
-							<span id="write-date">${reviewDto.review_wdate}</span>
-							<br>
-							<span id="title">${reviewDto.review_title}</span>
-							<br>
-							<span id="content">${reviewDto.review_content}</span>
-							
+						<c:forEach var="reviewDto" items="${list}">							
+						<br>
+							<div>
+								<div class="img_box" style="background: #f5f5f5">
+									<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" onerror="no_image2()" id="2" > 
+								</div>
+								
+								<span id="writer">${reviewDto.review_writer}</span>
+								<span id="star-under">${reviewDto.review_star}</span>
+								<span id="write-date">${reviewDto.review_wdate}</span>
+								<br>
+								<span id="title">${reviewDto.review_title}</span>
+								<br>
+								<span id="content">${reviewDto.review_content}</span>
+							</div>							
 						</c:forEach>
 					</c:when>
 					
@@ -334,7 +349,7 @@ FOOTER 이용 시 넣어야할 요소
 			<br><br>
 	
 			<!-- Swiper JS -->
-			<script src="swiper.min.js"></script>
+			<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 	
 			<!-- Initialize Swiper -->
 			<script>

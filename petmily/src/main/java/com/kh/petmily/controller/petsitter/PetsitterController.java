@@ -82,7 +82,7 @@ public class PetsitterController {
 		return "redirect:../";
 	}
 	
-	//회원이미지 가져오기(src로 주소)
+		//회원이미지 가져오기(src로 주소)
 		@GetMapping("/member/image")
 		public ResponseEntity<ByteArrayResource> member_image(
 				@RequestParam int member_image_no) throws UnsupportedEncodingException,IOException{
@@ -96,7 +96,7 @@ public class PetsitterController {
 			int pet_image_no = memberService.pet_image_no(pet_no);
 			return memberService.pet_image(pet_image_no);
 		}
-	
+		
 		
 	//펫시터 지역 검색(조회) 리스트 페이지
 	@RequestMapping("/list")
