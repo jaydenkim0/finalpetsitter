@@ -28,9 +28,6 @@ public interface ReviewService {
 	
 	// 리뷰 작성시 펫시터 Id 보여주기
 	ReservationDto getReviewInfo(int reservation_no);
-
-	// 리뷰 작성했는지 확인
-	int isReview(int review_no);
 	
 	List<ReviewDto> reviewlist();
 

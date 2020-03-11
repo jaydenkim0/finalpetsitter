@@ -4,25 +4,25 @@
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
-	<!-- jquery js -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <!-- jquery js -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <!-- 
 기본 CSS
-:	font css
+:   font css
 -->
     <!-- font css -->
     <link rel="stylesheet" href="${context}/resources/css/font.css"/>
      
     <!-- list css -->
-	<link rel="stylesheet" href="${context}/resources/css/list.css"/>   
+   <link rel="stylesheet" href="${context}/resources/css/list.css"/>   
 
 
 <!-- 
 HEADER 이용 시 넣어야할 요소 
-:	jquery js,
-	header css, 
-	header script
+:   jquery js,
+   header css, 
+   header script
 -->
   <!-- header css -->
   <link rel="stylesheet" href="${context}/resources/css/header.css">
@@ -46,35 +46,35 @@ HEADER 이용 시 넣어야할 요소
     </script>
     <!-- header style -->
     <style>
-	#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-		padding-top:165px;
-	}
-	</style>
+   #masthead:after {
+     content: '';
+     position: absolute;
+     top: 0;
+     width: 100%;
+     height: 130px;
+     background-color: #fff;
+     opacity: 100;
+     transition: opacity 0.3s ease;
+   }
+   
+   #masthead.is-active{
+    background-color: #fff;
+   }
+   
+   .section-content{
+      padding-top:165px;
+   }
+   </style>
 
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
-:	jquery js,
-	footer css, 
-	Required meta tags, 
-	Bootstrap CSS,
-	아이콘을 사용하기 위해 추가로 불러오는 CSS
+:   jquery js,
+   footer css, 
+   Required meta tags, 
+   Bootstrap CSS,
+   아이콘을 사용하기 위해 추가로 불러오는 CSS
 -->
-  	<!-- footer css -->
+     <!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -86,40 +86,49 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <script>
-	$(function(){
-		$("#add_content").hide();
-		
-		//펫 추가 버튼 눌렀을 시
-		$("#add_btn").click(function(){
-			$("#add_div").hide();
-			$("#add_content").show();
-		});
-		
-		//취소 버튼 눌렀을 시
-		$("#cancel").click(function(){
-			$("#add_content").hide();
-			$("#add_btn").show();
-		});
-	});
+   $(function(){
+      $("#add_content").hide();
+      
+      //펫 추가 버튼 눌렀을 시
+      $("#add_btn").click(function(){
+         $("#add_div").hide();
+         $("#add_content").show();
+      });
+      
+      //취소 버튼 눌렀을 시
+      $("#cancel").click(function(){
+         $("#add_content").hide();
+         $("#add_btn").show();
+      });
+   });
 </script>
 <script>
 function no_image2(){
-	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+   $("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 }
 </script>
 <style>
-	
+   
 .mylistwrap th{
-		width:135px;
-		text-align: left;
-		}
+      width:135px;
+      text-align: left;
+      }
 .mylistwrap td{
+<<<<<<< HEAD
 	width:400px;
 	text-align:left;
 	color:gray;
 	font-weight:bold;
 	}
-	.mylistbtn{
+.mylistbtn{
+=======
+   width:400px;
+   text-align:left;
+   color:gray;
+   font-weight:bold;
+   }
+   .mylistbtn{
+>>>>>>> refs/remotes/origin/master
    display: white;
    width: 70px;
    height: 30px;
@@ -135,23 +144,23 @@ function no_image2(){
    }
    
    .mylistbtn:hover{
-   	background-color: #3399dd;
-   	color: white;
+      background-color: #3399dd;
+      color: white;
    }
 
    .button:hover{
-	color: white;
-	}
-	
-	.hover:hover{
-	background-color: #1482e0;
-	}
+   color: white;
+   }
+   
+   .hover:hover{
+   background-color: #1482e0;
+   }
       
 .mylistwrap {
 background-color:#FAFAFA;
 padding-left:10%;
 padding-top:3%;
-} 	
+}    
 .tab0{
  font-size:15pt;
 }
@@ -218,18 +227,18 @@ padding-left:20%;
    bottom:485px;
 }
 .mylistwrap select{
-	width:100px;
-	padding: .4em .4em;
-	border: 1px solid #999;
-	font-family : inherit;
-	}
-	
+   width:100px;
+   padding: .4em .4em;
+   border: 1px solid #999;
+   font-family : inherit;
+   }
+   
 .box {
     width: 350px;
     height: 350px; 
     }
     .imagecss{
-   	  border-radius: 14px;
+        border-radius: 14px;
    }  
 
 .mylistwrap h3{
@@ -254,7 +263,7 @@ left:400px;
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <section class="section-content">
 
-	
+   
 <div class="mylistwrap" align="left">
 
 <br>
@@ -263,36 +272,36 @@ left:400px;
 </div>
 <br><br>
 <table class="tab0">
-	<tr>
-		<th>${mylist.nick }</th>
-		<td>${mylist.id }</td>
-	</tr>
+   <tr>
+      <th>${mylist.nick }</th>
+      <td>${mylist.id }</td>
+   </tr>
 </table>
 <hr width="350px" align="left" style="border: solid #dedede; border-width: 1px 0 0;">
 <!-- 정보수정 -->
 <form action="mylistchange" method="get">
-	<input type="hidden" name="id" value="${mylist.id}">
+   <input type="hidden" name="id" value="${mylist.id}">
 <input type="submit" value="수정" id="updatebtn" class="mylistbtn">
 </form>
 
-<!-- 	<tr> -->
-<!-- 		<th>아이디&emsp;</th> -->
-<%-- 		<td >${mylist.id }</td> --%>
-<!-- 	</tr> -->
-<!-- 	<tr> -->
-<!-- 		<th>이름&emsp;</th> -->
-<%-- 		<td>${mylist.name }</td> --%>
-<!-- 	</tr> -->
+<!--    <tr> -->
+<!--       <th>아이디&emsp;</th> -->
+<%--       <td >${mylist.id }</td> --%>
+<!--    </tr> -->
+<!--    <tr> -->
+<!--       <th>이름&emsp;</th> -->
+<%--       <td>${mylist.name }</td> --%>
+<!--    </tr> -->
 <table class="tab1">
-	
-	<tr>
-		<th>JoinDate :</th>		
-		<td>${mylist.total_joindateWithFormat }</td>
-		</tr>
-		<tr>
-			<th>LastLogin :</th>		
-			<td>${mylist.final_loginWithFormat }</td>
-	</tr>
+   
+   <tr>
+      <th>JoinDate :</th>      
+      <td>${mylist.total_joindateWithFormat }</td>
+      </tr>
+      <tr>
+         <th>LastLogin :</th>      
+         <td>${mylist.final_loginWithFormat }</td>
+   </tr>
 </table>
 
 
@@ -301,72 +310,72 @@ left:400px;
 <table class="tab2">
 
         <tr>
-		<th>Phone  :</th>
-		<td>${mylist.phoneWithFormat }</td>
-		</tr>
-		<tr>
-		<th>Address :</th>		
-		<td>${mylist.total_addr }</td>	
-		</tr>
-		<tr>
-		<th>Email :</th>
-		<td>${mylist.email }</td>
-		</tr>
-		<tr>
-		<th>Pets :</th>
-		<td>${mylistpet.size() }마리</td>
-	</tr>
-	<tr>
-		<th>Point :</th>
-		<td>${mylist.point}점</td>
-	</tr>
+      <th>Phone  :</th>
+      <td>${mylist.phoneWithFormat }</td>
+      </tr>
+      <tr>
+      <th>Address :</th>      
+      <td>${mylist.total_addr }</td>   
+      </tr>
+      <tr>
+      <th>Email :</th>
+      <td>${mylist.email }</td>
+      </tr>
+      <tr>
+      <th>Pets :</th>
+      <td>${mylistpet.size() }마리</td>
+   </tr>
+   <tr>
+      <th>Point :</th>
+      <td>${mylist.point}점</td>
+   </tr>
 </table>
 
 <h2>About</h2>
 <h1>Pet</h1>
 
 <hr width="700px" align="center" color="#1482e0" class="hr2">
-	<button id="add_btn" class="mylistbtn">펫 추가</button>
+   <button id="add_btn" class="mylistbtn">펫 추가</button>
 <div align="left">
 <c:if test="${mylist.pets eq '예'}">
-	<c:forEach var="pet"  items="${mylistpet }">
-	<table class="tab3">
-		<tr>	
-			<c:choose>
-				<c:when test="${pet.pet_image_no<1 }">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="img2 imagecss">
-				</c:when>
-				<c:otherwise>
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2 imagecss">				
-				</c:otherwise>
-			</c:choose>
-			<br>&emsp;
-		</tr>	
-			
-		<tr>
-			<th width="50%">Name :&emsp;</th>
-			<td width="50%">${pet.name }</td>
-		</tr>
-		<tr>
-			<th>Age :&emsp;</th>
-			<td>${pet.age } 살</td>
-		</tr>
-		<tr>
-			<th>Type :&emsp;</th>
-			<td>${pet.type }</td>
-		</tr>
-		<tr>
-			<th>Etc :&emsp;</th>
-			<td>${pet.ect }</td>
-		</tr>
-		
-	</table>
-	<br>
-	&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button class="mylistbtn">수정</button></a>
-		<a href="pet_delete?pet_no=${pet.pet_no }"><button  class="mylistbtn">삭제</button></a>
-	<br>
-	</c:forEach>
-	</c:if>
+   <c:forEach var="pet"  items="${mylistpet }">
+   <table class="tab3">
+      <tr>   
+         <c:choose>
+            <c:when test="${pet.pet_image_no<1 }">
+                  <img src="/petmily/resources/img/기본프로필.jpeg" style="width: 150px; height: 150px;" class="img2 imagecss">
+            </c:when>
+            <c:otherwise>
+                  <img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 150px; height: 150px;" class="img2 imagecss">            
+            </c:otherwise>
+         </c:choose>
+         <br>&emsp;
+      </tr>   
+         
+      <tr>
+         <th width="50%">Name :&emsp;</th>
+         <td width="50%">${pet.name }</td>
+      </tr>
+      <tr>
+         <th>Age :&emsp;</th>
+         <td>${pet.age } 살</td>
+      </tr>
+      <tr>
+         <th>Type :&emsp;</th>
+         <td>${pet.type }</td>
+      </tr>
+      <tr>
+         <th>Etc :&emsp;</th>
+         <td>${pet.ect }</td>
+      </tr>
+      
+   </table>
+   <br>
+   &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href="petchange?pet_no=${pet.pet_no }"><button class="mylistbtn">수정</button></a>
+      <a href="pet_delete?pet_no=${pet.pet_no }"><button  class="mylistbtn">삭제</button></a>
+   <br>
+   </c:forEach>
+   </c:if>
 </div>
 
 
@@ -376,52 +385,52 @@ left:400px;
 
 <div id="add_content" class="add_content">
 <form action="pet_regist" method="post" name="test" enctype="multipart/form-data">
-	<input type="hidden" name="member_id" value="${mylist.id }">
-	<table class="tab4">
-		<tr>
-			<th width="50%">Image :</th>
-			<td width="50%">
-				<input type="file" name="pet_image" multiple accept="image/*" >
-			</td>
-		</tr>
-		<tr>
-			<th><p>&emsp;</p>Name :</th>
-			<td>
-				<p>&emsp;</p><input type="text" name="name" required>
-			</td>
-		</tr>
-		<tr>
-			<th><p>&emsp;</p>Age :</th>
-			<td>
-				<p>&emsp;</p><input type="number" name="age" >
-			</td>
-		</tr>
-		<tr>
-			<th><p>&emsp;</p>Type :</th>
-			<td>
-				<p>&emsp;</p><select name="type" id="select">
-			 		<option value="강아지">강아지</option>			 		
-			 		<option value="고양이">고양이</option>
-			 		<option value="물고기">물고기</option>			 		
-			 		<option value="토끼">토끼</option>
-			 		<option value="햄스터">햄스터</option>			 		
-			 		<option value="파충류">파충류</option>
-			 	</select>
-			</td>
-		</tr>
-		<tr>
-			<th><p>&emsp;</p>Etc :</th>
-			<td>
-				<p>&emsp;</p><textarea name="ect"></textarea>
-			</td>
-		</tr>
-		<tr>
-		    <th></th>
-			<td><br><input type="submit" value="펫추가" id="updatebtn" class="mylistbtn">
-				<input type="reset" value="취소" id="cancel" class="mylistbtn">
-			</td>
-			</tr>
-	</table>
+   <input type="hidden" name="member_id" value="${mylist.id }">
+   <table class="tab4">
+      <tr>
+         <th width="50%">Image :</th>
+         <td width="50%">
+            <input type="file" name="pet_image" multiple accept="image/*" >
+         </td>
+      </tr>
+      <tr>
+         <th><p>&emsp;</p>Name :</th>
+         <td>
+            <p>&emsp;</p><input type="text" name="name" required>
+         </td>
+      </tr>
+      <tr>
+         <th><p>&emsp;</p>Age :</th>
+         <td>
+            <p>&emsp;</p><input type="number" name="age" >
+         </td>
+      </tr>
+      <tr>
+         <th><p>&emsp;</p>Type :</th>
+         <td>
+            <p>&emsp;</p><select name="type" id="select">
+                <option value="강아지">강아지</option>                
+                <option value="고양이">고양이</option>
+                <option value="물고기">물고기</option>                
+                <option value="토끼">토끼</option>
+                <option value="햄스터">햄스터</option>                
+                <option value="파충류">파충류</option>
+             </select>
+         </td>
+      </tr>
+      <tr>
+         <th><p>&emsp;</p>Etc :</th>
+         <td>
+            <p>&emsp;</p><textarea name="ect"></textarea>
+         </td>
+      </tr>
+      <tr>
+          <th></th>
+         <td><br><input type="submit" value="펫추가" id="updatebtn" class="mylistbtn">
+            <input type="reset" value="취소" id="cancel" class="mylistbtn">
+         </td>
+         </tr>
+   </table>
 </form>
 </div>
 <br><br><br>

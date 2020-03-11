@@ -1,102 +1,105 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans:beans 
-	xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/mvc 
-		https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/beans 
-		https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context 
-		https://www.springframework.org/schema/context/spring-context.xsd">
+   xmlns="http://www.springframework.org/schema/mvc"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+      http://www.springframework.org/schema/mvc 
+      https://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/beans 
+      https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context 
+      https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- 
-		이 설정파일은 DispatcherServlet이 알아야하는 내용들을 설정
-		- 요청을 처리하기 위한 설정이나 도구들을 등록하는 공간
-	 -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+   <!-- 
+      이 설정파일은 DispatcherServlet이 알아야하는 내용들을 설정
+      - 요청을 처리하기 위한 설정이나 도구들을 등록하는 공간
+    -->
+   
+   <!-- Enables the Spring MVC @Controller programming model -->
+   <annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+   <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+   <resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jsp" />
-	</beans:bean>
-	
-	<!-- 
-		자동 스캔 설정 
-		- 강사님 자동 스캔 설정 
-	<context:component-scan base-package="com.kh.petmily" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
-	-->	
-	<context:component-scan base-package="com.kh.petmily" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+   <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+   <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <beans:property name="prefix" value="/WEB-INF/views/" />
+      <beans:property name="suffix" value=".jsp" />
+   </beans:bean>
+   
+   <!-- 
+      자동 스캔 설정 
+      - 강사님 자동 스캔 설정 
+   <context:component-scan base-package="com.kh.petmily" use-default-filters="false">
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
+   -->   
+   <context:component-scan base-package="com.kh.petmily" use-default-filters="false">
+      <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+   </context:component-scan>
 
-	
-	<!-- 파일 업로드를 위해 스프링이 사용할 도구를 등록 -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
-		<beans:property name="maxUploadSize" value="10000000"></beans:property>
-		<beans:property name="maxUploadSizePerFile" value="1000000"></beans:property>
-	</beans:bean>
+   
+   <!-- 파일 업로드를 위해 스프링이 사용할 도구를 등록 -->
+   <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+      <beans:property name="defaultEncoding" value="UTF-8"></beans:property>
+      <beans:property name="maxUploadSize" value="10000000"></beans:property>
+      <beans:property name="maxUploadSizePerFile" value="1000000"></beans:property>
+   </beans:bean>
 
 
-	<!-- 웹소켓 서버 등록 -->
-	
-	<!-- 인터셉터 등록 및 설정 -->
-	 <interceptors> 
-	 	<interceptor>
-	 		<!-- 관리자 접속 권한 거부 -->
-	 		<mapping path="/admin/**"/>
-			<exclude-mapping path="/admin/petsitter/sitterInfoimage*"/>
-			<exclude-mapping path="/admin/petsitter/sitteridcardimage*"/>
-			<exclude-mapping path="/admin/petsitter/sitterlicenseimage*"/>
-			<exclude-mapping path="/admin/petsitter/sitterbankimage*"/>
-	 		<beans:bean class="com.kh.petmily.interceptor.AdminInterceptor"></beans:bean>
-	 	</interceptor>
-	 	<!-- 펫시터 접속 권한 거부-->
-	 	<interceptor>
-	 		<mapping path="/petsitter/**"/>
-	 		<exclude-mapping path="/petsitter/list*"/>
-	 		<exclude-mapping path="/petsitter/regist*"/>	 	
-	 		<exclude-mapping path="/petsitter/estimate"/>
-	 		<exclude-mapping path="/petsitter/confirm"/>	 		
-	 		<exclude-mapping path="/petsitter/searchlist"/>
-	 		<beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
-	 	</interceptor>
-	 	<!-- 회원 접속 권한 거부  -->
-	 	<interceptor>
-	 		<mapping path="/member/**"/>
-	 		<exclude-mapping path="/member/change*"/>
-	 		<exclude-mapping path="/member/findid_result*"/>
-	 		<exclude-mapping path="/member/findid*"/>
-	 		<exclude-mapping path="/member/input*"/>
-	 		<exclude-mapping path="/member/login*"/>
-	 		<exclude-mapping path="/member/result*"/>
-	 		<exclude-mapping path="/member/regist*"/>
-	 		<exclude-mapping path="/member/idCheck*"/>
-	 		<exclude-mapping path="/member/emailCheck*"/>
- 			<exclude-mapping path="/member/member/image*"/>
-			<exclude-mapping path="/member/pet/image*"/>
-	 		<beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
-	 	</interceptor>
-	 	<interceptor>
-	 		<mapping path="/board/qna/view**" />	 	 		
-	 		<beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
-	 	</interceptor>
-	 	<interceptor>
-	 		<mapping path="/pay/account*"/>
-	 		<beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
-	 	</interceptor>
-	 </interceptors>
+   <!-- 웹소켓 서버 등록 -->
+   
+   <!-- 인터셉터 등록 및 설정 -->
+    <interceptors> 
+       <interceptor>
+          <!-- 관리자 접속 권한 거부 -->
+          <mapping path="/admin/**"/>
+         <exclude-mapping path="/admin/petsitter/sitterInfoimage*"/>
+         <exclude-mapping path="/admin/petsitter/sitteridcardimage*"/>
+         <exclude-mapping path="/admin/petsitter/sitterlicenseimage*"/>
+         <exclude-mapping path="/admin/petsitter/sitterbankimage*"/>
+          <beans:bean class="com.kh.petmily.interceptor.AdminInterceptor"></beans:bean>
+       </interceptor>
+       <!-- 펫시터 접속 권한 거부-->
+       <interceptor>
+          <mapping path="/petsitter/**"/>
+          <exclude-mapping path="/petsitter/list*"/>
+          <exclude-mapping path="/petsitter/regist*"/>       
+          <exclude-mapping path="/petsitter/estimate*"/>
+          <exclude-mapping path="/petsitter/confirm*"/>          
+          <exclude-mapping path="/petsitter/searchlist*"/>
+          <beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
+       </interceptor>
+       <!-- 회원 접속 권한 거부  -->
+       <interceptor>
+          <mapping path="/member/**"/>
+          <exclude-mapping path="/member/change*"/>
+          <exclude-mapping path="/member/findid_result*"/>
+          <exclude-mapping path="/member/findid*"/>
+          <exclude-mapping path="/member/input*"/>
+          <exclude-mapping path="/member/login*"/>
+          <exclude-mapping path="/member/result*"/>
+          <exclude-mapping path="/member/regist**"/>
+          <exclude-mapping path="/member/idCheck*"/>
+          <exclude-mapping path="/member/emailCheck*"/>
+          <exclude-mapping path="/member/member/image*"/>
+         <exclude-mapping path="/member/pet/image*"/>
+          <beans:bean class="com.kh.petmily.interceptor.MemberInterceptor"></beans:bean>
+       </interceptor>
+       <!-- 돌봄 계시판 -->
+       <interceptor>
+          <mapping path="/board/qna/view**" />              
+          <beans:bean class="com.kh.petmily.interceptor.BoardInterceptor"></beans:bean>
+       </interceptor>
+       <!-- 돌봄 게시판 -->
+       <interceptor>
+          <mapping path="/pay/account*"/>
+          <beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
+       </interceptor>
+    </interceptors>
+
  
   
 </beans:beans>

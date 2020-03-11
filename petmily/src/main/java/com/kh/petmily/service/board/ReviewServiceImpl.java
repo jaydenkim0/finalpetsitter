@@ -53,10 +53,7 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewDto> listAll(String type, String keyword, int start, int finish) throws Exception {
 		return reviewDao.listAll(type,keyword,start,finish);
 	}
-//	@Override
-//	public List<ReviewDto> getList(int start, int finish) {
-//	
-//	}
+
 	@Override
 	public int getCount(String type, String keyword) throws Exception {
 		return reviewDao.getCount(type,keyword);
@@ -70,16 +67,11 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewDao.getReviewInfo(reservation_no);
 	}
 
-	// 리뷰작
-	@Override
-	public int isReview(int review_no) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	@Override
 	public List<ReviewDto> reviewlist() {
 		return reviewDao.reviewlist() ;
 	}
+
 	
 
 
