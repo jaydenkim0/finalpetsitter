@@ -179,7 +179,7 @@ header style -->
 
 	<div class="form-group">
 		<label for="qna_head">Subject</label>
-		<input class="form-control" name="qna_head" id="qna_head" placeholder="${qnaVO.qna_head}">
+		<input class="form-control" name="qna_head" id="qna_head" placeholder="${qnaVO.qna_head}" value="${qnaVO.qna_head}">
 	</div>
 
 	<div class="form-group">
