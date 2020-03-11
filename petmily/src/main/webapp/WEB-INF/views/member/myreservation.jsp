@@ -229,10 +229,10 @@ select {
 				<td>
 					<c:choose>
 						<c:when test="${reservation.pay_status =='완료' }">
-							${reservation.pay_status }
+							완료
 						</c:when>
 						<c:when test="${reservation.pay_status =='준비' }">
-							결제 미완료
+							준비
 						</c:when>
 						<c:otherwise>
 							취소
