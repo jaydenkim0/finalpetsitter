@@ -127,4 +127,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getHourPayment" resultType="int">
 		select payment from payinfo where payname='1시간 금액'
 	</select>
+	
+	<select id="check" parameterType="int" resultType="int">
+		select count(*) from pay where status = '완료' and partner_order_id = #{reservation_no}
+	</select>
 </mapper>

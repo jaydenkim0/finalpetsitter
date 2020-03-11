@@ -23,4 +23,7 @@ public interface PayDao {
 	//1시간 당 금액 조회
 	int getHourPayment();
 
+	// 결제 완료되었는지 확인
+	int check(int reservation_no);
+
 }
