@@ -99,6 +99,7 @@
           <beans:bean class="com.kh.petmily.interceptor.PayInterceptor"></beans:bean>
        </interceptor>
     </interceptors>
+
  
   
 </beans:beans>
