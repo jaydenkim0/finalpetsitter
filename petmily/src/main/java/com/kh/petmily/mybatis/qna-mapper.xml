@@ -106,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 검색 목록 조회 -->
 	<select id="qnalistAll" parameterType="map" resultType="QnaVO">
-	select*from (
+		select*from (
 		select rownum as rn, A.* from(
 			select
 				qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,groupno, superno,
@@ -135,32 +135,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 게시글 목록 -->
 	<select id="getList" resultType="QnaVO" parameterType="map">
-		select*from (
-			select rownum as rn, A.* from(
+	select * from (
+		select rownum rn, A.* from(
+			select * from (
 				select
-					qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,groupno,
-					superno, depth
-					, count(reply_no) replycount
+					Q.qna_no,
+					Q.qna_writer,
+					Q.qna_title,
+					Q.qna_head,
+					Q.qna_content,
+					Q.wdate,
+					Q.superno,
+					Q.groupno,
+					Q.depth,
+			count(QR.reply_no) replycount
 				from
-					(
-					select
-						Q.qna_no,
-						Q.qna_writer, Q.qna_title, Q.qna_head, Q.qna_content,
-						Q.wdate,
-						Q.groupno, Q.superno, Q.depth, QR.reply_no
-					from qna Q
-					left outer join
-						qna_reply QR on Q.qna_no = QR.origin
-					connect by prior qna_no = superno
-					start with superno=0
-					order siblings by groupno desc, qna_no desc, wdate desc
-					)
-				group by
-					qna_no, qna_writer, qna_title, qna_head, qna_content, wdate,
-					groupno, superno, depth
-				) A
-			) where rn
-		between #{start} and #{finish}
+			qna Q left outer join qna_reply QR on Q.qna_no = QR.origin
+		group by
+			Q.qna_no,Q.qna_writer,Q.qna_title,Q.qna_head,
+			Q.qna_content,Q.wdate,Q.superno, Q.groupno,Q.depth
+			)
+		connect by prior qna_no=superno
+		start with superno = 0
+		order siblings by groupno desc, qna_no asc
+	)A
+		) where rn between #{start} and #{finish}
 	</select>
 
 

@@ -59,7 +59,8 @@
 
 
 <br><br><br><br><br><br>
-<h1 align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일이 전송되었습니다.</h1>
+<h1 align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일이 성공적으로 전송되었습니다</h1>
+<br><br><br><br><br><br>
 
 
 </section>

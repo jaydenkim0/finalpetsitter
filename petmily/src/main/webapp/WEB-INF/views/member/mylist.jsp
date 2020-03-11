@@ -377,26 +377,25 @@ left:400px;
 		<tr>
 			<th width="50%">Image :</th>
 			<td width="50%">
-			   
 				<input type="file" name="pet_image" multiple accept="image/*" >
 			</td>
 		</tr>
 		<tr>
-			<th>Name :</th>
+			<th><p>&emsp;</p>Name :</th>
 			<td>
-				<input type="text" name="name" required>
+				<p>&emsp;</p><input type="text" name="name" required>
 			</td>
 		</tr>
 		<tr>
-			<th>Age :</th>
+			<th><p>&emsp;</p>Age :</th>
 			<td>
-				<input type="number" name="age" >
+				<p>&emsp;</p><input type="number" name="age" >
 			</td>
 		</tr>
 		<tr>
-			<th>Type :</th>
+			<th><p>&emsp;</p>Type :</th>
 			<td>
-				<select name="type" id="select">
+				<p>&emsp;</p><select name="type" id="select">
 			 		<option value="강아지">강아지</option>			 		
 			 		<option value="고양이">고양이</option>
 			 		<option value="물고기">물고기</option>			 		
@@ -407,14 +406,14 @@ left:400px;
 			</td>
 		</tr>
 		<tr>
-			<th>Etc :</th>
+			<th><p>&emsp;</p>Etc :</th>
 			<td>
-				<textarea name="ect"></textarea>
+				<p>&emsp;</p><textarea name="ect"></textarea>
 			</td>
 		</tr>
 		<tr>
 		    <th></th>
-			<td><input type="submit" value="펫추가" id="updatebtn">
+			<td><br><input type="submit" value="펫추가" id="updatebtn">
 				<input type="reset" value="취소" id="cancel">
 			</td>
 			</tr>

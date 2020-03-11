@@ -155,7 +155,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				 		left outer join member_image MI on R.care_reply_writer=MI.member_image_member_id
 				where
 					R.care_reply_board_no=#{care_board_no}
-				order by R.wdate desc
+				order by R.wdate asc
 			) A
 		) where rn between #{start} and #{finish}
 		

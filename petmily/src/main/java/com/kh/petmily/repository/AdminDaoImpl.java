@@ -690,6 +690,22 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.accountWcount");
 	}
 
+	// 1시간당 요금
+	@Override
+	public int hourPayment() {		
+		return sqlSession.selectOne("admin.hourPayment");
+	}
+	// 총 사용시간
+	@Override
+	public int totalTime(int reservation_no) {
+		return sqlSession.selectOne("admin.totalTime", reservation_no);
+	}
+	// 시작 시간
+	@Override
+	public int startTime(int reservation_no) {
+		return sqlSession.selectOne("admin.startTime", reservation_no);
+	}
+
 
 
 

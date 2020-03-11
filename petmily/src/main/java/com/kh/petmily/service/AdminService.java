@@ -242,6 +242,13 @@ public interface AdminService {
 	// 입금대기 인원수
 	int accountWcount();
 	
+	// 1시간당 금액
+	int hourPayment();
+	// 사용시간
+	int totalTime(int reservation_no);
+	// 시작시간
+	int startTime(int reservation_no);
+	
 
 
 
