@@ -117,12 +117,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select*from (
 		select rownum as rn, A.* from(
 			select
-				stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,groupno, superno,
+				stray_no, stray_writer, stray_title, stray_head, wdate,groupno, superno,
 				depth, count(reply_no) replycount
 			from
 				(
 				select
-					S.stray_no, S.stray_writer, S .stray_title, S.stray_head, S.stray_content,
+					S.stray_no, S.stray_writer, S .stray_title, S.stray_head,
 					S.wdate, S.groupno, S.superno, S.depth, SR.reply_no
 				from stray_pet S
 					left outer join stray_reply SR on S.stray_no = SR.origin
@@ -133,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where
 				${type} like '%'||#{keyword}||'%'
 			group by 
-			    stray_no, stray_writer, stray_title, stray_head, stray_content, wdate,
+			    stray_no, stray_writer, stray_title, stray_head, wdate,
 			    groupno, superno, depth
 			) A
 		)
@@ -150,7 +150,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					S.stray_writer,
 					S.stray_title,
 					S.stray_head,
-					S.stray_content,
 					S.wdate,
 					S.superno,
 					S.groupno,
@@ -160,7 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			stray_pet S left outer join stray_reply SR on S.stray_no = SR.origin
 				group by
 					S.stray_no,S.stray_writer,S.stray_title,S.stray_head,
-						S.stray_content,S.wdate,S.superno, S.groupno,S.depth
+					S.wdate,S.superno, S.groupno,S.depth
 								)
 					connect by prior stray_no=superno
 				start with superno = 0

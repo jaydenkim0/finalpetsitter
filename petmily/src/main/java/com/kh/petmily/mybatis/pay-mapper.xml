@@ -128,7 +128,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select payment from payinfo where payname='1시간 금액'
 	</select>
 	
+	<!-- 결제 완료가 있는지 확인 -->
 	<select id="check" parameterType="int" resultType="int">
 		select count(*) from pay where status = '완료' and partner_order_id = #{reservation_no}
+	</select>
+	<!-- 결제 취소가 있는지 확인 -->
+	<select id="check1" parameterType="int" resultType="int">
+		select count(*) from pay where status = '취소' and partner_order_id = #{reservation_no}
+	</select>
+	
+	<!-- 인터셉터에서 account.jsp 우회접속 방지 -->
+	<select id="getReservation_id" resultType="String" parameterType="int">
+		select member_id from reservation where reservation_no = #{reservation_no}
 	</select>
 </mapper>

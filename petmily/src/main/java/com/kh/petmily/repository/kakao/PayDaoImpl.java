@@ -49,10 +49,20 @@ public class PayDaoImpl implements PayDao {
 	public int getHourPayment() {
 		return sqlSession.selectOne("pay.getHourPayment");
 	}
-
+	// 결제 완료가 있는지 확인
 	@Override
 	public int check(int reservation_no) {		
 		return sqlSession.selectOne("pay.check", reservation_no);
+	}
+	// 결제 취소가 있는지 확인
+	@Override
+	public int check1(int reservation_no) {		
+		return sqlSession.selectOne("pay.check1", reservation_no);
+	}
+
+	@Override
+	public String getReservation_id(int reservation_no) {			
+		return sqlSession.selectOne("pay.getReservation_id", reservation_no);
 	}
 
 }

@@ -23,5 +23,9 @@ public interface PayService {
 	
 	// 결제 완료 되었는지 확인
 	int check(int reservation_no);
+	// 취소가 있는지 확인
+	int check1(int reservation_no);
+	// 인터셉트 에서 확인
+	String getReservation_id(int reservation_no);
 
 }
