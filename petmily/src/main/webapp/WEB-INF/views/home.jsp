@@ -141,123 +141,32 @@ FOOTER 이용 시 넣어야할 요소
             <h3 id="co">펫밀리와 함께한 추억들을 공유해요.</h3>
             
             <div class="owl-carousel owl-theme">
-                <!--리뷰 아이템01-->
+            
+           <c:forEach  var="review" items="${list}">
+                 <!--리뷰 아이템01-->
                         <div class="item">
                             <br>
                             <!-- 프로필 이미지 -->
-                            <div class="img_box" style="background: #f5f5f5">
+                          <div class="img_box" style="background: #f5f5f5">
                                 <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
-                            </div>
+                            </div> 
                             
-                            <h3 id="nick">닉네임01</h3>
-                            <span>점수:☆☆☆</span>
+                    		<h3 id="nick">${review.review_writer}</h3> 
+                            <span>${review.review_star}</span>
                             
                             <div style="clear: both"></div>
                                
                                 
                             <!-- 제목 -->
                             <div class="review_title">
-                               <h3>review01</h3> 
+                               <h3>${review.review_title}</h3> 
                             </div>
                             <!-- 내용 -->
-                            <p>Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
-                            
+                            <p>${review.review_content}</p>                            
                         </div>
-                        
-                        <!--리뷰 아이템02-->
-                        <div class="item">
-                            <br>
-                            <!-- 프로필 이미지 -->
-                            <div class="img_box" style="background: #f5f5f5">
-                                <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
-                            </div>
-                            
-                            <h3 id="nick">닉네임02</h3>
-                            <span>점수:☆☆☆</span>
-                            
-                            <div style="clear: both"></div>
-                               
-                                
-                            <!-- 제목 -->
-                            <div class="review_title">
-                               <h3>review02</h3> 
-                            </div>
-                            <!-- 내용 -->
-                            <p>Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
-                            
-                        </div>
-                        
-                        <!--리뷰 아이템03-->
-                        <div class="item">
-                            <br>
-                            <!-- 프로필 이미지 -->
-                            <div class="img_box" style="background: #f5f5f5">
-                                <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
-                            </div>
-                            
-                            <h3 id="nick">닉네임03</h3>
-                            <span>점수:☆☆☆</span>
-                            
-                            <div style="clear: both"></div>
-                               
-                                
-                            <!-- 제목 -->
-                            <div class="review_title">
-                               <h3>review03</h3> 
-                            </div>
-                            <!-- 내용 -->
-                            <p>Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
-                            
-                        </div>
-                        
-                        <!--리뷰 아이템04-->
-                        <div class="item">
-                            <br>
-                            <!-- 프로필 이미지 -->
-                            <div class="img_box" style="background: #f5f5f5">
-                                <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
-                            </div>
-                            
-                            <h3 id="nick">닉네임04</h3>
-                            <span>점수:☆☆☆</span>
-                            
-                            <div style="clear: both"></div>
-                               
-                                
-                            <!-- 제목 -->
-                            <div class="review_title">
-                               <h3>review04</h3> 
-                            </div>
-                            <!-- 내용 -->
-                            <p>Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
-                            
-                        </div>
-                        
-                        <!--리뷰 아이템05-->
-                        <div class="item">
-                            <br>
-                            <!-- 프로필 이미지 -->
-                            <div class="img_box" style="background: #f5f5f5">
-                                <img class="profile" src="${context}/resources/img/logo_b_back01.jpg" alt="프로필 이미지"> 
-                            </div>
-                            
-                            <h3 id="nick">닉네임05</h3>
-                            <span>점수:☆☆☆</span>
-                            
-                            <div style="clear: both"></div>
-                               
-                                
-                            <!-- 제목 -->
-                            <div class="review_title">
-                               <h3>review05</h3> 
-                            </div>
-                            <!-- 내용 -->
-                            <p>Natus totam voluptatibus animi aspernatur ducimus quas obcaecati mollitia quibusdam temporibus culpa dolore molestias blanditiis consequuntur sunt nisi.</p>
-                            
-                        </div>
-                    </div>
-
+            </c:forEach> 
         </div>
+                         
         
         <div class="section s2">
             <h2>믿고 맡길 수 있는 <br> 
