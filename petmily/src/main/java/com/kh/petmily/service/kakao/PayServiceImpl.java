@@ -201,4 +201,10 @@ public class PayServiceImpl implements PayService{
 	public int check1(int reservation_no) {	
 		return payDao.check1(reservation_no);
 	}
+	// 인터셉트 에서 확인
+	@Override
+	public String getReservation_id(int reservation_no) {
+		return payDao.getReservation_id(reservation_no);
+	}
+	
 }
