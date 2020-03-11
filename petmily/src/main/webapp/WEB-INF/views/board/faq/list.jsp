@@ -187,8 +187,9 @@ header style -->#masthead:after {
 .title {
 	font-size: 50px;
 }
-
 .con {
+	margin-top: 50px;
+	margin-bottom: 50px;
 	height: auto;
 }
 </style>

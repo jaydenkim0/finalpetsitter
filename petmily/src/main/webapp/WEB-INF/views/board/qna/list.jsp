@@ -66,9 +66,9 @@ FOOTER 이용 시 넣어야할 요소
 </script>
 
 <style>
- *{
-            box-sizing: border-box;
-        }
+* {
+	box-sizing: border-box;
+}
 
 .page-navigator li {
 	display: inline-block;
@@ -78,17 +78,18 @@ FOOTER 이용 시 넣어야할 요소
 	width: 60%;
 	border-top: 1px solid #444444;
 	border-collapse: collapse;
-	border-color : #BDBDBD;
+	border-color: #BDBDBD;
 }
-.ta{
-	padding-top:70px;
+
+.ta {
+	padding-top: 70px;
 }
 
 th, td {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
-	border-color : #BDBDBD;
+	border-color: #BDBDBD;
 }
 
 a {
@@ -116,7 +117,7 @@ a {
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
-	font-size : 12px;
+	font-size: 12px;
 	cursor: pointer;
 	color: #1482e0;
 	transition: all 0.9s, color 0.3;
@@ -134,8 +135,8 @@ input {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
+	vertical-align: middle;
+	border-color: #BDBDBD;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
@@ -145,39 +146,47 @@ select {
 	width: 80px;
 	height: 35px;
 	font-size: 14px;
-	vertical-align:middle; 
-	border-color : #BDBDBD;
+	vertical-align: middle;
+	border-color: #BDBDBD;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 4px;
-	}
-	
- <!-- header style -->
-#masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-		padding-top:115px;
-	}
-	#masthead:after{
+}
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
 	opacity: 100;
-	}
-	.title{
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 115px;
+}
+
+#masthead:after {
+	opacity: 100;
+}
+
+.title {
 	font-size: 50px;
-	}
-	</style>
+}
+
+.con {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: auto;
+}
+</style>
 
 <!-- header 불러오기 -->
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -203,10 +212,12 @@ select {
 						<!-- 제목을 depth번 만큼 띄어쓰기 후 출력 --> 
 						<c:forEach var="i" begin="1" end="${row.depth}">
 							&nbsp;&nbsp;&nbsp;&nbsp;
-						</c:forEach> <!-- 답글은 이미지를 추가 --> <c:if test="${row.depth > 0}">
+						</c:forEach> <!-- 답글은 이미지를 추가 --> 
+						<c:if test="${row.depth > 0}">
 							<img src="${context}/resources/img/reply.png" width="20"
 								height="10">
-						</c:if> <font color="#1482e0"> [${row.qna_title}] </font> <a
+						</c:if> 
+						<font color="#1482e0"> [${row.qna_title}] </font> <a
 						href="view?qna_no=${row.qna_no}"> <!-- 제목 출력 -->
 							${row.qna_head}
 					</a> 

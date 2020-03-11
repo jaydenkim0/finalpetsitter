@@ -215,6 +215,8 @@ header style -->#masthead:after {
 }
 
 .con {
+	margin-top: 50px;
+	margin-bottom: 50px;
 	height: auto;
 }
 </style>

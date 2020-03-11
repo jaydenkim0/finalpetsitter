@@ -226,8 +226,26 @@
 		});
 	</script>
 
+<!-- 댓글 기본 이미지 작성 -->
+<script>
+function no_image1(){
+	$("#1").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+}
 
+function no_image2(){
+	$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+	window.alert(document.getElementById(test.getAttribute('id')).getAttribute('id'));
+}
 
+function testfunc(test) {
+	var errorid = document.getElementById(test.getAttribute('id')).getAttribute('id');
+	var erroridreal = "#"+errorid;
+// 	window.alert(erroridreal);
+	document.querySelectorAll("'"+erroridreal+"'").forEach(function(tag){
+		$(tag).attr("src", "/petmily/resources/img/기본프로필.jpeg");
+	});
+}
+</script>
 
 <style>
 * {
@@ -351,13 +369,19 @@ header style -->
 	#masthead:after{
 	opacity: 100;
 }
-.title{
+.title {
 	font-size: 50px;
-	}
-.con{
-margin-top : 20px;
-margin-bottom : 20px;
-height: auto;
+}
+
+.con {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: auto;
+}
+.profile{
+	width : 50px;
+	height: 50px;
+	border-radius: 50%;
 }
 </style>
 
@@ -417,7 +441,7 @@ height: auto;
 								<table width="100%" class="mother">
 									<tr>
 										<th align="left">
-											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" style="max-width: 15%; height: auto;"  onerror="no_image2()" id="2">
+											<img src = "${context}/board/stray/member/image?member_image_member_id=${reply.reply_writer}" class="profile"  onerror="no_image2()" id="2">
 										${reply.reply_writer}
 										<c:if test="${qnaVO.qna_writer == reply.reply_writer}">
 											<font color="red">(작성자)</font>

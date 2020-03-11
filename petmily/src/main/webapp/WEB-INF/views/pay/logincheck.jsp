@@ -49,18 +49,33 @@
 	
 }
 
-
-.btnwrap a {
-	
-	width:300px;
+.aa{
+	width: 420px;
 	border-top: 1px solid #eee;
 	padding-top:10px;
 	text-decoration:none;
 	color: #fff;
 	font-size: 12px;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+/* .btnwrap a { */
+/* 	width:300px; */
+/* 	border-top: 1px solid #eee; */
+/* 	padding-top:10px; */
+/* 	text-decoration:none; */
+/* 	color: #fff; */
+/* 	font-size: 12px; */
 	
 	
 	
+/* } */
+
+.font2{
+color : white;
+font-weight: bold;
+text-decoration: none;
 }
 
 #loginbtn {
@@ -113,19 +128,21 @@ float:center;
 			<input type="hidden" name="back" value="/check/login">
 	<div class="search"></div>
 		<br>
-			<div class="btnwrap">
-				<input class="btn" type="submit" value="로그인" id="loginbtn"><br>
-				<br>
-				<br>
-				<br> 
-				<a href="findid">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a>
-					<a href="input">
-					&nbsp;비밀번호 변경&nbsp;
-					</a>
-					<a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+			<div class="btnwrap" align="center">
+			 <input class="btn" type="submit" value="로그인" id="loginbtn"><br><br><br><br>
+			<div class="aa"  align="center">
+<!-- 			<a href="findid"> -->
+<!-- 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+<!-- 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;아이디찾기&nbsp;|</a> -->
+<!-- 					<a href="input"> -->
+<!-- 					&nbsp;비밀번호 변경&nbsp; -->
+<!-- 					</a> -->
+<!-- 					<a href="regist">|&nbsp;회원가입&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> -->
+			  <a href="findid"  class="font2">아이디찾기&nbsp;|</a>
+			 <a href="input" class="font2">&nbsp;비밀번호 변경&nbsp;</a>
+			 <a href="regist" class="font2">|&nbsp;회원가입</a> 
 			</div>
+		</div>
 		</form>
 		<c:if test="${param.error!=null }">
 			<h5>입력하신 정보가 일치하지 않습니다</h5>
