@@ -38,7 +38,7 @@
 
 /*Location style*/
 .info-wrap .location-wrap{
-	margin-left:25px;
+/* 	margin-left:25px; */
 }
 .info-wrap #petsitter_city {
 	margin: 3px;
@@ -73,7 +73,6 @@
 
     font-family: NotosanM; 
 }
-
 
 
 .info-wrap .petsitter-skill-wrap{
@@ -120,4 +119,45 @@
 
 .info-wrap .petsitter-pet-wrap{
 	margin-left: 25px;
+}
+
+.info-wrap .skill-align {
+	display:inline-flex;
+	text-align: center;
+	vertical-align: top;
+}
+
+.info-wrap .skill-align #skill-item {
+	margin-right: 15px;	
+}
+
+
+/*btn style*/
+.info-wrap #rest_btn,
+.info-wrap #updateInfo_btn {
+    width: 190px;
+    height: 50px;
+    font-size: 10pt;
+    font-family: NotosanR;
+    color: #1482e0;
+    text-align: center;
+    background: white;
+    border: solid 1px #1482e0;
+    border-radius: 6px;
+}
+.info-wrap #rest_btn:hover,
+.info-wrap #updateInfo_btn:hover {
+	    background: #1482e0;
+	    color: white;
+}
+
+.info-wrap #rest_btn{
+	margin-left: 25px;
+}
+
+.info-wrap #updateInfo_btn {
+	float: right;
+	clear: both;
+	margin-top: -50px;
+	margin-right: 25px;
 }
