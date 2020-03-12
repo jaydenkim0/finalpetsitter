@@ -246,7 +246,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{reservation_no},
 			#{member_id},
 			#{reservation_sitter_no},
-			TO_DATE(#{matching_time},'YY/MM/DD'),
+			TO_DATE(#{matching_time},'YYYY-MM-DD'),
 			#{pet_name},
 			#{ect},
 			'대기',
