@@ -132,7 +132,7 @@ FOOTER 이용 시 넣어야할 요소
     
 	<script>
 		function no_image2(){
-			$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+			$(".2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
 		}
 	</script>
     
@@ -182,7 +182,7 @@ FOOTER 이용 시 넣어야할 요소
 						</c:otherwise>			
 					</c:choose>
 					
-					<span id="nick">${petsitter.nick}</span>
+					<span id="nick">${petsitter.nick}[${petsitter.sitter_id}]</span>
 					<div class="star-wrap" data-limit="3" data-unitsize="40" data-point="${reviewstar}" data-image="http://www.sysout.co.kr/file/image/288" data-readonly></div>
 					<span id="star"><fmt:formatNumber value="${reviewstar}" pattern=".00"/></span>
 					<br>
@@ -328,11 +328,24 @@ FOOTER 이용 시 넣어야할 요소
 						<br>
 							<div>
 								<div>
-									<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" onerror="no_image2()" id="2" > 
+									<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${reviewDto.member_image_no}" onerror="no_image2()"  class="2" > 
 								</div>
 								
 								<span id="writer">${reviewDto.review_writer}</span>
-								<span id="star-under">${reviewDto.review_star}점</span>
+								<span id="star-under">
+									<c:choose>
+					                     <c:when test="${reviewDto.review_star eq 1}">
+					                        <img src="${context}/resources/img/1.png" height="15px" >
+					                     </c:when>
+					                     <c:when test="${reviewDto.review_star eq 2}">
+					                        <img src="${context}/resources/img/2.png"  height="15px" >
+					                     </c:when>
+					                     <c:when test="${reviewDto.review_star eq 3}">
+					                        <img src="${context}/resources/img/3.png"  height="15px"  >
+					                     </c:when>
+					                 </c:choose>    
+								
+								</span>
 								<span id="write-date">${reviewDto.review_wdate}</span>
 								<br>
 								<span id="title">${reviewDto.review_title}</span>

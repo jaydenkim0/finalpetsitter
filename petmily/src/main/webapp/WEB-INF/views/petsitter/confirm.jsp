@@ -188,10 +188,10 @@ FOOTER 이용 시 넣어야할 요소
 					<span>${startTime}시</span>
 					
 					<br><br>
-					<c:forEach var="skill" items="${reservationList.list}">
 						<span id="large-text">예약 스킬</span><br> 
 						<hr>	
-						<span>${skill.payname}</span>
+					<c:forEach var="skill" items="${reservationList.list}">
+						<span>${skill.payname}</span><br>
 					</c:forEach>
 					
 					<br><br>

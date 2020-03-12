@@ -294,7 +294,7 @@ FOOTER 이용 시 넣어야할 요소
 	
 <section class="section-content"> 	
 	<div class="regist-wrap" align="center">
-	   <form action="regist" method="post" enctype="multipart/form-data">
+	   <form action="update" method="post" enctype="multipart/form-data">
 	   <div id="align-left">
 	   <c:forEach var="rlist" items="${petsitterList}">
 		<c:forEach var="list" items="${rlist.petsitterVO}">	

@@ -155,7 +155,6 @@ public class PetsitterServiceImpl implements PetsitterService {
 														.ect(reservationVO.getEct())
 														.build();
 		
-		System.out.println(reservationVO.getMatching_time());
 		//예약 금액 Dto
 		ReservationPayDto reservationPayDto = ReservationPayDto.builder()
 																.pay_reservation_no(reservation_no)
