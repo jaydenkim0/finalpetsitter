@@ -332,7 +332,20 @@ FOOTER 이용 시 넣어야할 요소
 								</div>
 								
 								<span id="writer">${reviewDto.review_writer}</span>
-								<span id="star-under">${reviewDto.review_star}점</span>
+								<span id="star-under">
+									<c:choose>
+					                     <c:when test="${reviewDto.review_star eq 1}">
+					                        <img src="${context}/resources/img/1.png" height="15px" >
+					                     </c:when>
+					                     <c:when test="${reviewDto.review_star eq 2}">
+					                        <img src="${context}/resources/img/2.png"  height="15px" >
+					                     </c:when>
+					                     <c:when test="${reviewDto.review_star eq 3}">
+					                        <img src="${context}/resources/img/3.png"  height="15px"  >
+					                     </c:when>
+					                 </c:choose>    
+								
+								</span>
 								<span id="write-date">${reviewDto.review_wdate}</span>
 								<br>
 								<span id="title">${reviewDto.review_title}</span>
