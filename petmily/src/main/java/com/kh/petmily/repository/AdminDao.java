@@ -16,6 +16,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -279,6 +280,9 @@ public interface AdminDao {
 
 	// 인터셉터  경고 5회 이상 펫시터 기능 접근 금지 및 예약 금지
 	int blackListc(String id);
+
+	// 펫 이미지 정보 가지고 오기
+	List<PetDto> getPetImge(String member_id);
 
 
 
