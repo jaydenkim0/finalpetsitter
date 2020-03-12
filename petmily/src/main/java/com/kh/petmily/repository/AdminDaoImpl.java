@@ -706,6 +706,12 @@ public class AdminDaoImpl implements AdminDao {
 		return sqlSession.selectOne("admin.startTime", reservation_no);
 	}
 
+	// 인터셉터  경고 5회 이상 펫시터 기능 접근 금지 및 예약 금지
+	@Override
+	public int blackListc(String id) {
+		return sqlSession.selectOne("admin.blackListc11", id);
+	}
+
 
 
 
