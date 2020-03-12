@@ -92,12 +92,21 @@ FOOTER 이용 시 넣어야할 요소
 	padding-top: 70px;
 }
 
-th, td {
+th {
+	border-bottom: 1px solid #444444;
+	padding: 10px;
+	text-align: center;
+	border-color: #BDBDBD;
+	font-weight: bold;
+}
+
+td {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
 	border-color: #BDBDBD;
 }
+
 
 a {
 	text-decoration: none;
