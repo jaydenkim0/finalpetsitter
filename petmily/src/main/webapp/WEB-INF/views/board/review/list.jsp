@@ -347,7 +347,7 @@ select {
                      <c:when test="${reviewDto.review_star eq 3}">
                         <img src="${context}/resources/img/3.png">
                      </c:when>
-                 </c:choose>
+                 </c:choose>               
                </td>
 
                <td>${reviewDto.getwritedateWithFormat()}</td>
