@@ -169,8 +169,7 @@ FOOTER 이용 시 넣어야할 요소
 			                        <img src="${context}/resources/img/3.png"  height="15px" style="width: 45px" >
 			                     </c:when>
 			                 </c:choose>
-                      <%--       <span>${review.review_star} 점</span> --%>
-                       이미지 번호 테스트: ${review.member_image_no}
+                    		<%--       <span>${review.review_star} 점</span> --%>            
                             <div style="clear: both"></div>
                                
                                 

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.petmily.entity.ReservationDto;
 import com.kh.petmily.entity.ReviewDto;
@@ -39,9 +41,10 @@ public class ReviewController {
 									@RequestParam String sitter_id,
 								Model model) {
 		ReservationDto reservationinfo = reviewService.getReviewInfo(reservation_no);
-		
+		int review_reservation_no = reservation_no;
 		model.addAttribute("reservation",reservationinfo)
-				  .addAttribute("sitter_id", sitter_id);
+				  .addAttribute("sitter_id", sitter_id)
+				  .addAttribute("reviewEmpty", (int) reviewService.isReview(review_reservation_no));
 		return"board/review/insert";
 	}
 
@@ -138,6 +141,13 @@ public class ReviewController {
 //		
 //		return "board/review/content";
 		
+	@GetMapping("/isReview")
+//	@RequestMapping(value = "isReview", method = RequestMethod.GET)
+	@ResponseBody
+	public int isReview(@RequestParam int review_reservation_no) {		
+		return reviewService.isReview(review_reservation_no);
+	}
+	
 		
 	}
 	
