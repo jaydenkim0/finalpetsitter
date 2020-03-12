@@ -130,7 +130,11 @@ FOOTER 이용 시 넣어야할 요소
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">   
     
- 
+	<script>
+		function no_image2(){
+			$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+		}
+	</script>
     
 	<!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
@@ -323,23 +327,12 @@ FOOTER 이용 시 넣어야할 요소
 						<c:forEach var="reviewDto" items="${list}">							
 						<br>
 							<div>
-								<div class="img_box" style="background: #f5f5f5">
-									<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${reviewDto.member_image_no}" onerror="no_image2()" id="2" > 
+								<div>
+									<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}" onerror="no_image2()" id="2" > 
 								</div>
 								
 								<span id="writer">${reviewDto.review_writer}</span>
-								<%-- 	<span id="star-under">${reviewDto.review_star}</span>  --%>
-								 <c:choose>
-			                     <c:when test="${reviewDto.review_star eq 1}">
-			                        <img src="${context}/resources/img/1.png" height="10px">
-			                     </c:when>
-			                     <c:when test="${reviewDto.review_star eq 2}">
-			                        <img src="${context}/resources/img/2.png"  height="10px">
-			                     </c:when>
-			                     <c:when test="${reviewDto.review_star eq 3}">
-			                        <img src="${context}/resources/img/3.png"  height="10px">
-			                     </c:when>
-			                 	 </c:choose>
+								<span id="star-under">${reviewDto.review_star}점</span>
 								<span id="write-date">${reviewDto.review_wdate}</span>
 								<br>
 								<span id="title">${reviewDto.review_title}</span>
@@ -375,3 +368,4 @@ FOOTER 이용 시 넣어야할 요소
 <br><br>
 	<!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  
+
