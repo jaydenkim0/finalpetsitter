@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kh.petmily.controller.AdminController" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/controller/AdminController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="339" x="724" y="80"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="com.kh.petmily.repository.AdminDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/AdminDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="338" x="162" y="442"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="com.kh.petmily.repository.AdminDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/AdminDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="338" x="161" y="537"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.kh.petmily.service.AdiminServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/AdiminServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="338" x="160" y="340"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="com.kh.petmily.service.AdminService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/AdminService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="338" x="160" y="252"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" name="com.kh.petmily.controller.AdminListController" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/controller/AdminListController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="355" x="352" y="81"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" language="java" name="com.kh.petmily.service.AdminEmailService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/AdminEmailService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="354" x="572" y="251"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="com.kh.petmily.service.AdminEmailServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/AdminEmailServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="355" x="573" y="339"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="com.kh.petmily.service.SchedulerService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/SchedulerService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="329" x="996" y="249"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="com.kh.petmily.service.SchedulerServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/SchedulerServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="331" x="998" y="442"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="11">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="12" name="adminService">        
+        <position height="18" width="73" x="899" y="751"/>      
+      </attribute>      
+      <multiplicity id="13" minimum="0" maximum="1">        
+        <position height="16" width="23" x="933" y="710"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="14">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="15">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="18">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="19" name="adminDao">        
+        <position height="18" width="55" x="1010" y="743"/>      
+      </attribute>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="16" width="23" x="882" y="720"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="21">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="22" name="adminService">        
+        <position height="18" width="73" x="-335" y="878"/>      
+      </attribute>      
+      <multiplicity id="23" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-340" y="885"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="24">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="25" name="amailService">        
+        <position height="18" width="69" x="777" y="742"/>      
+      </attribute>      
+      <multiplicity id="26" minimum="0" maximum="1">        
+        <position height="16" width="23" x="994" y="721"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="28" name="adminDao">        
+        <position height="18" width="55" x="70" y="1012"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="16" width="23" x="89" y="997"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

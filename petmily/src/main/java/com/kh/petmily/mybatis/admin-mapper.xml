@@ -577,6 +577,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>			
 			order by qna_no desc
 		</select>	
+		<!-- 경고 5회 이상인 회원은 펫시터 기능 및 예약 접근 방지 -->
+		<select id="blackListc11" parameterType="String" resultType="int">
+			    select NVL(n.black_count, 0) from member M 
+                left outer join blacklist N 
+                on m.id = n.black_id                
+                where id = #{id}
+		</select>
 		
 		
 		

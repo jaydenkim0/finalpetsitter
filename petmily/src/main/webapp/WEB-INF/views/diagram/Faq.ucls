@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.kh.petmily.controller.board.FaqController" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/controller/board/FaqController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="53" width="307" x="426" y="37"/>    
+    <position height="53" width="148" x="665" y="38"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +13,7 @@
   </class>  
   <interface id="2" language="java" name="com.kh.petmily.repository.FaqDao" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/repository/FaqDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="212" x="323" y="189"/>    
+    <position height="53" width="119" x="542" y="149"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -22,7 +22,7 @@
   </interface>  
   <interface id="3" language="java" name="com.kh.petmily.repository.FaqFileDao" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/repository/FaqFileDao.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="188" x="478" y="510"/>    
+    <position height="53" width="119" x="721" y="368"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -31,7 +31,7 @@
   </interface>  
   <class id="4" language="java" name="com.kh.petmily.service.board.FaqServiceImpl" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/service/board/FaqServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="270" x="437" y="366"/>    
+    <position height="53" width="140" x="711" y="268"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +40,7 @@
   </class>  
   <interface id="5" language="java" name="com.kh.petmily.service.board.FaqService" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/service/board/FaqService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="270" x="618" y="185"/>    
+    <position height="53" width="134" x="801" y="149"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +49,7 @@
   </interface>  
   <class id="6" language="java" name="com.kh.petmily.repository.FaqDaoImpl" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/repository/FaqDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="54" width="212" x="85" y="361"/>    
+    <position height="54" width="119" x="481" y="268"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -58,7 +58,7 @@
   </class>  
   <class id="7" language="java" name="com.kh.petmily.repository.FaqFileDaoImpl" project="petmily" 
     file="/petmily/src/main/java/com/kh/petmily/repository/FaqFileDaoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="53" width="188" x="759" y="514"/>    
+    <position height="53" width="119" x="721" y="486"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -68,10 +68,10 @@
   <association id="8">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="9" name="faqDao">        
-        <position height="18" width="45" x="109" y="817"/>      
+        <position height="18" width="45" x="328" y="777"/>      
       </attribute>      
       <multiplicity id="10" minimum="0" maximum="1">        
-        <position height="16" width="23" x="131" y="842"/>      
+        <position height="16" width="23" x="350" y="802"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -84,10 +84,10 @@
   <association id="12">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="13" name="faqService">        
-        <position height="18" width="63" x="192" y="783"/>      
+        <position height="18" width="63" x="597" y="744"/>      
       </attribute>      
       <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="16" width="23" x="229" y="805"/>      
+        <position height="16" width="23" x="634" y="766"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
@@ -96,10 +96,10 @@
   <association id="15">    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="16" name="faqDao">        
-        <position height="18" width="43" x="131" y="829"/>      
+        <position height="18" width="43" x="350" y="789"/>      
       </attribute>      
       <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="16" width="23" x="153" y="817"/>      
+        <position height="16" width="23" x="372" y="777"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
@@ -112,10 +112,10 @@
   <association id="19">    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="20" name="faqfileDao">        
-        <position height="18" width="57" x="442" y="1185"/>      
+        <position height="18" width="57" x="685" y="1039"/>      
       </attribute>      
       <multiplicity id="21" minimum="0" maximum="1">        
-        <position height="16" width="23" x="444" y="1167"/>      
+        <position height="16" width="23" x="687" y="1021"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    

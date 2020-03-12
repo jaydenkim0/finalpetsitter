@@ -606,6 +606,11 @@ public class AdiminServiceImpl implements AdminService {
 	public int startTime(int reservation_no) {	
 		return adminDao.startTime(reservation_no);
 	}
+	// 인터셉터  경고 5회 이상 펫시터 기능 접근 금지 및 예약 금지
+	@Override
+	public int blackListc(String id) {	
+		return 	adminDao.blackListc(id);
+	}
 
 
 
