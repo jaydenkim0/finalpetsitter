@@ -116,7 +116,13 @@ FOOTER 이용 시 넣어야할 요소
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
+	
+	<script>
+		function no_image2(){
+			$("#2").attr("src", "/petmily/resources/img/logo_b_back01.jpg");
+		}
+	</script>
+	
 </head>
 <body>
 	  <div id="full-page">
@@ -147,13 +153,23 @@ FOOTER 이용 시 넣어야할 요소
                             <br>
                             
                             <!-- 프로필 이미지 -->
-                          	<div class="img_box" style="background: #f5f5f5">
-                                	<img class="profile" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}" onerror="no_image2()" id="2" > 
+                          	<div>
+                                	<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}" onerror="no_image2()" id="2" > 
                             </div> 
                             
                     		<h3 id="nick">${review.review_writer}</h3> 
-                            <span>${review.review_star}</span>
-                            
+                            <c:choose>
+			                     <c:when test="${review.review_star eq 1}">
+			                        <img src="${context}/resources/img/1.png" height="15px" style="width: 45px">
+			                     </c:when>
+			                     <c:when test="${review.review_star eq 2}">
+			                        <img src="${context}/resources/img/2.png"  height="15px" style="width: 45px">
+			                     </c:when>
+			                     <c:when test="${review.review_star eq 3}">
+			                        <img src="${context}/resources/img/3.png"  height="15px" style="width: 45px" >
+			                     </c:when>
+			                 </c:choose>
+                      <%--       <span>${review.review_star} 점</span> --%>
                             <div style="clear: both"></div>
                                
                                 

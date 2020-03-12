@@ -110,7 +110,8 @@ $(function(){
      $("#skills_text").empty();
          for (var i in skillArray)
          {
-             $("<span>").text(skillArray[i]+"/").appendTo("#skills_text");
+        	 var choose = $("<span>").addClass('choose-item');
+        	 choose.text("# "+skillArray[i]).appendTo("#skills_text");
          }
    });
    $(".type").change(function(){
@@ -127,7 +128,8 @@ $(function(){
 	       $("#care_pet_type_text").empty();
            for (var i in carePetTypeArray)
            {
-               $("<span>").text(carePetTypeArray[i]+"/").appendTo("#care_pet_type_text");
+        	   	var choose = $("<span>").addClass('choose-item');
+          	 	choose.text("# "+carePetTypeArray[i]).appendTo("#care_pet_type_text");
            }
 	   });
 
@@ -203,6 +205,8 @@ $(function(){
 	<div class="estimate-wrap" align="center">    
 		<form class="estimate1" action="estimate" method="post" enctype="multipart/form-data">
 	    	<div id="align-left">
+	    		<c:forEach var="petsitterGetList" items="${petsitterList}">
+					<c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
 			    <h1>펫시터 견적 신청 페이지</h1>
 			    <div id="step1">
 			        <img src="${context}/resources/img/estimate_step.png" alt="step1">
@@ -216,13 +220,25 @@ $(function(){
 					<input type="hidden" name="member_id" value="${id}">
 				<!-- 돌봄 종류 -->	
 					<div>
-			            <label for="mt">돌봄 종류</label><br>
+			            <label for="mt" id="large-text">돌봄 종류</label><br>
 			            <hr>
-						<select id="mt" name="payinfo_no">
-				            <option value="">돌봄 종류</option>
-							<option value="3">방문서비스</option>
-							<option value="2">위탁서비스</option>
-						</select>
+			            <c:forEach var="petsitter" items="${petsitterGetList.petsitterVO}" >
+							<select id="mt" name="payinfo_no">
+					            <c:if test="${petsitter.sitter_matching_type eq '방문서비스'}">
+									<option value="3">방문서비스</option>
+								</c:if>
+								
+								<c:if test="${petsitter.sitter_matching_type eq '위탁서비스'}">
+									<option value="2">위탁서비스</option>
+								</c:if>
+								
+								<c:if test="${petsitter.sitter_matching_type eq '둘다'}">
+									<option value="">돌봄 종류</option>
+									<option value="3">방문서비스</option>
+									<option value="2">위탁서비스</option>
+								</c:if>
+							</select>
+						</c:forEach>
 			        </div>
 			        
 				<br><br>
@@ -230,7 +246,7 @@ $(function(){
 					<input type="hidden" name="usage_time" id="usage_time">
 					<!-- 나중에 달력 api가져오기 -->
 					<div>
-			            <label>돌봄 예약일시</label><br>
+			            <label id="large-text">돌봄 예약일시</label><br>
 			            <hr>
 						<input type="text" name="matching_time" placeholder="날짜">
 			        </div>	
@@ -238,7 +254,7 @@ $(function(){
 			        <br><br>
 			        <!-- 돌봄 시간 -->
 			        <div>
-			            <label for="time_start">돌봄 시간</label><br>
+			            <label for="time_start" id="large-text">돌봄 시간</label><br>
 			            <hr>
 						<select id="time_start" name="start_time" >
 				            <option value="">시작 시간</option>
@@ -288,20 +304,9 @@ $(function(){
 				    <div class="skill">
 			            <label id="large-text">돌봄 시 이용할 스킬</label><br>
 			            <hr>
-<!-- 				        <input type="checkbox" id="sick" value="5" name="payinfo_no" data-skills="투약">
-				        <label for="sick">투약</label>
-				        
-				        <input type="checkbox" id="old" value="6" name="payinfo_no" data-skills="노령견테어">
-				        <label for="old">노령견케어</label>
-				        
-				        <input type="checkbox" id="kitten" value="7" name="payinfo_no" data-skills="키튼케어">
-				        <label for="kitten" >키튼케어</label>
-				        
-				        <input type="checkbox" id="walking"  value="4" name="payinfo_no" data-skills="도그워킹">
-				        <label for="walking" >도그워킹</label> -->
-			            <c:forEach var="skillnames" items="${skillname}">
-				            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
-				            <label for="${skillnames.skill_name}">${skillnames.skill_name}</label>
+			            <c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">	
+				            <input id="${skillName.skill_name}" type="checkbox"  value="${skillName.skill_no}" name="skills_name" data-skills="${skillName.skill_name}">
+				            <label for="${skillName.skill_name}">${skillName.skill_name}</label>
 			            </c:forEach>   	 				        
 				        <div id="skills_text"></div>
 			        </div>
@@ -311,32 +316,18 @@ $(function(){
 				    <div class="type">
 			            <label id="large-text">돌봄 반려동물 종류</label><br>
 			            <hr>
-<!-- 				        <input type="checkbox" id="dog" value="1" name="care_name" data-animal="강아지">
-				        <label for="dog">강아지</label>
-				        
-				        <input type="checkbox" id="cat" value="2" name="care_name" data-animal="고양이">
-				        <label for="cat">고양이</label>
-				        
-				        <input type="checkbox" id="fish"  value="3" name="care_name" data-animal="물고기">
-				        <label for="fish">물고기</label>
-				        
-				        <input type="checkbox" id="rabbit"  value="4" name="care_name" data-animal="토끼">
-				        <label for="rabbit">토끼</label>
-				        
-				        <input type="checkbox" id="hamster" value="5" name="care_name" data-animal="햄스터">
-				        <label for="hamster">햄스터</label>
-				        
-				        <input type="checkbox" id="reptiles" value="6" name="care_name" data-animal="파충류">
-				        <label for="reptiles">파충류</label>       -->
-				      <c:forEach var="carepettypes" items="${carepettype}">
-		             	  <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
-		           	      <label for="${carepettypes.care_type}">${carepettypes.care_type}</label>
+				      <c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
+		             	  <input id="${carePetTypeName.care_type}" type="checkbox"  value="${carePetTypeName.care_type_no}" name="care_name" data-animal="${carePetTypeName.care_type}">
+		           	      <label for="${carePetTypeName.care_type}">${carePetTypeName.care_type}</label>
 	          		  </c:forEach>      
 				        
 				        <div id="care_pet_type_text"></div>
 				    </div><br>
 				
 				    <div id="payment"></div><br>
+
+				</c:forEach>
+			</c:forEach>
 				    
 				    <br><br>
 				    <!-- 회원 반려동물 정보 -->
