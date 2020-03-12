@@ -33,7 +33,9 @@ public interface ReviewService {
 
 	// 리뷰 작성
 	void insert(ReviewDto reviewDto);
-
+	
+	int isReview(int review_reservation_no);
+	
 
 
 
