@@ -158,8 +158,18 @@ FOOTER 이용 시 넣어야할 요소
                             </div> 
                             
                     		<h3 id="nick">${review.review_writer}</h3> 
-                            <span>${review.review_star}</span>
-                            
+                            <c:choose>
+			                     <c:when test="${review.review_star eq 1}">
+			                        <img src="${context}/resources/img/1.png" height="15px" style="width: 45px">
+			                     </c:when>
+			                     <c:when test="${review.review_star eq 2}">
+			                        <img src="${context}/resources/img/2.png"  height="15px" style="width: 45px">
+			                     </c:when>
+			                     <c:when test="${review.review_star eq 3}">
+			                        <img src="${context}/resources/img/3.png"  height="15px" style="width: 45px" >
+			                     </c:when>
+			                 </c:choose>
+                      <%--       <span>${review.review_star} 점</span> --%>
                             <div style="clear: both"></div>
                                
                                 

@@ -336,7 +336,8 @@ select {
                   <div class="naver-viewer"></div> <input type="hidden"
                   name="review_content" value="${reviewDto.review_content}" >
                </td>
-               <td><c:choose>
+               <td>
+               	<c:choose>
                      <c:when test="${reviewDto.review_star eq 1}">
                         <img src="${context}/resources/img/1.png">
                      </c:when>
@@ -346,7 +347,8 @@ select {
                      <c:when test="${reviewDto.review_star eq 3}">
                         <img src="${context}/resources/img/3.png">
                      </c:when>
-                  </c:choose></td>
+                 </c:choose>               
+               </td>
 
                <td>${reviewDto.getwritedateWithFormat()}</td>
                
