@@ -23,7 +23,7 @@ public class PetsitterInterceptor extends HandlerInterceptorAdapter {
 		if(id != null) {		
 			int blackListc = adminService.blackListc(id);		
 			String grade = (String) session.getAttribute("grade");
-			if(grade.equals("member") && blackListc < 6 || grade.equals("member") && blackListc < 6 || grade.equals("admin")) {
+			if(grade.equals("member") && blackListc < 6 || grade.equals("petsitter") && blackListc < 6 || grade.equals("admin")) {
 				return true;	
 			}else {
 				response.sendError(403);
