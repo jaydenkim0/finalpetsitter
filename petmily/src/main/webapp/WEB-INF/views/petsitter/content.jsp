@@ -182,7 +182,7 @@ FOOTER 이용 시 넣어야할 요소
 						</c:otherwise>			
 					</c:choose>
 					
-					<span id="nick">${petsitter.nick}</span>
+					<span id="nick">${petsitter.nick}[${petsitter.sitter_id}]</span>
 					<div class="star-wrap" data-limit="3" data-unitsize="40" data-point="${reviewstar}" data-image="http://www.sysout.co.kr/file/image/288" data-readonly></div>
 					<span id="star"><fmt:formatNumber value="${reviewstar}" pattern=".00"/></span>
 					<br>
