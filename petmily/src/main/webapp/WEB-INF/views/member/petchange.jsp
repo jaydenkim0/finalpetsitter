@@ -5,7 +5,7 @@
 
 <!-- jquery js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<head>
+
 
 <script>
 function no_image() {
@@ -19,7 +19,7 @@ function no_image() {
 	text-align: center;
 	width:300px;
 	}
-	input{
+	.input{
 	width:260px;
 	height:35px;
 	BORDER-BOTTOM: teal 1px solid;
@@ -175,13 +175,13 @@ FOOTER 이용 시 넣어야할 요소
 				<tr>
 					<th>Name</th>
 					<td>
-						<input type="text" name="name" value=${pet.name }>
+						<input type="text" name="name" value=${pet.name } class="input">
 					</td>
 				</tr>
 				<tr>
 					<th>Age</th>
 					<td>
-						<input type="number" name="age" value=${pet.age }>
+						<input type="number" name="age" value=${pet.age } class="input">
 					</td>
 				</tr>
 				<tr>
@@ -214,75 +214,9 @@ FOOTER 이용 시 넣어야할 요소
 			</table>
 		</form>
 		</div>
+	<br>
 	</section>
 
-<<<<<<< HEAD
-	<br>
 	<!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
-=======
-<section class="section-content">
-<div class="mychange" align="center">
-<form action="petchange?pet_no=${pet.pet_no }" method="post" name="test" enctype="multipart/form-data">
-<input type="hidden" name="pet_no" value=${pet.pet_no }>
-	<table>
-		<tr>
-			<th>Image</th>
-			<td>
-			<c:choose>
-				<c:when test="${pet.pet_image_no<1 }">
-					<div class="box" style="background: #BDBDBD;">
-						<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height:100%;"><Br><br>
-					</div>
-				</c:when>
-				<c:otherwise>	
-					<div class="box" style="background: #BDBDBD;">
-						<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: 100%;" onerror="no_image()" id="pet_image"><br><Br>
-					</div>
-				</c:otherwise>
-			</c:choose>
-				<input type="file" name="pet_image" accept="image/*">
-			</td>
-		</tr>
-		<tr>
-			<th>Name</th>
-			<td>
-				<input type="text" name="name" value=${pet.name }>
-			</td>
-		</tr>
-		<tr>
-			<th>Age</th>
-			<td>
-				<input type="number" name="age" value=${pet.age }>
-			</td>
-		</tr>
-		<tr>
-			<th>Type</th>
-			<td>
-				<select name="type" id="select">
-			 		<option value="강아지">강아지</option>			 		
-			 		<option value="고양이">고양이</option>
-			 		<option value="물고기">물고기</option>			 		
-			 		<option value="토끼">토끼</option>
-			 		<option value="햄스터">햄스터</option>			 		
-			 		<option value="파충류">파충류</option>
-			 	</select>
-			 	<script>document.test.type.value='${pet.type}';</script>
-			</td>
-		</tr>
-		<tr>
-			<th>etc</th>
-			<td>
-				<textarea name="ect">${pet.ect }</textarea>
-			</td>
-		</tr>	
-	</table>
-	<input type="submit" value="수정" id="petchbtn">
-</form>
-</div>
-</section>
 
-<br><!-- footer 불러오기 -->
-	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  
-</body>
->>>>>>> refs/remotes/dahye/master

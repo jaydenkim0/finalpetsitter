@@ -65,7 +65,6 @@ public class CheckPwController {
 				model.addAttribute("reservation_no", reservation_no)
 						  .addAttribute("id", id);
 				memberService.updatelastlogin(id);
-				System.out.println(go);
 				return "redirect:"+go;
 			}else {
 				return"redirect:"+back+"?id="+id+"&reservation_no="+reservation_no+"&sitter_no="+sitter_no+"&error"; 
