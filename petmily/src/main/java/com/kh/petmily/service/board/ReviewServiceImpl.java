@@ -71,6 +71,11 @@ public class ReviewServiceImpl implements ReviewService{
 	public List<ReviewDto> reviewlist() {
 		return reviewDao.reviewlist() ;
 	}
+	@Override
+	public int isReview(int review_reservation_no) {		
+		return  reviewDao.isReview(review_reservation_no);	
+	}
+	
 
 	
 

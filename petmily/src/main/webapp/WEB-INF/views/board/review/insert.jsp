@@ -10,13 +10,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/gh/hiphop5782/js/star/hakademy-star.min.js"></script>
     
-    <title>Document</title>
-    <style></style>
-    <script>
-        window.addEventListener("load", function(){
-            Hakademy.PointManager.factory(".star-wrap");
-        });
-    </script>
+    <title>리뷰작성</title>
+
+   	<script>
+   	$(document).ready(function(){      	
+			var reviewis = $(".reservation1").val();
+			$.ajax({
+					url:'${pageContext.request.contextPath}/board/review/isReview?review_reservation_no='+reviewis,
+					type:'get',
+					success : function(data){						
+						if(data == 1) {
+							$("#20").text("이미 등록하신 리뷰입니다");
+							$("#20").css('color', 'red');
+							$("#21").css('color', 'white');
+							$("#21").css('background-color', 'red');
+							$("#21").attr("disabled",true);
+						}else{							
+							$("#21").attr("disabled",false);
+						}
+					}
+				});
+			}); 
+ 
+	</script>
     
     
     <!-- 에디터 불러오기 -->
@@ -107,40 +123,35 @@ select {
 </style>  
 
 
-<script>
-	$(function() {
-		//생성은 항상 옵션 먼저 + 나중에 생성
-		var options = {
-			//대상
-			el : document.querySelector(".naver-editor"),
-			//미리보기 스타일(vertical / horizontal)
-			previewStyle : "horizontal",
-			//입력 스타일
-			initialEditType : "wysiwyg",
-			//높이
-			height : "300px"
-		};
-
-		var editor = tui.Editor.factory(options);
-
-		//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
-		editor
-				.on(
-						"change",
-						function() {
-							var text = editor.getValue();//에디터에 입력된 값을 불러온다
-							document
-									.querySelector(".naver-editor + input[type=hidden]").value = text;
-						});
-	});
-</script>
-<script>
-	function hamsu() {
-		alert("500포인트가 적립되었습니다.")
+	<script>
+		$(function() {
+			//생성은 항상 옵션 먼저 + 나중에 생성
+			var options = {
+				//대상
+				el : document.querySelector(".naver-editor"),
+				//미리보기 스타일(vertical / horizontal)
+				previewStyle : "horizontal",
+				//입력 스타일
+				initialEditType : "wysiwyg",
+				//높이
+				height : "300px"
+			};
 	
-}
+			var editor = tui.Editor.factory(options);
+	
+			//에디터의 값이 변하면 뒤에 있는 input[type=hidden]의 값이 변경되도록 처리
+			editor
+					.on(
+							"change",
+							function() {
+								var text = editor.getValue();//에디터에 입력된 값을 불러온다
+								document
+										.querySelector(".naver-editor + input[type=hidden]").value = text;
+							});
+		});
+	</script>
 
-</script>
+	
    
     <div align ="left" class="tabl">
     <form method="post" action="insert" enctype="multipart/form-data">
@@ -158,7 +169,7 @@ select {
 	</div>
 	
 
-	<input type="hidden" name="review_reservation_no" value="${reservation.reservation_no}">
+	<input type="hidden" name="review_reservation_no" value="${reservation.reservation_no}" class="reservation1">
 	<div class="form-group">
 		<label for="review_title">제목</label> 
 		<input class="form-control" name="review_title" id="review_title" placeholder="글 제목 입력" required>
@@ -181,10 +192,11 @@ select {
 		<label for="review_reservation_no" >예약번호 : ${reservation.reservation_no}</label> 	  
 	</div>
 	
+			<div class="form-group" align="center"> 
+			<div id="20"></div>
+					<input type="submit" value="확인" class="btn hover3" id="21" onclick="hamsu()">		
+					<input type="reset" value="초기화" class="btn hover3">
+			</div>
 
-<div class="form-group" align="center">
-		<input type="submit" value="확인" class="btn hover3" onclick="hamsu()">
-		<input type="reset" value="초기화" class="btn hover3">
-</div>
 </form>
 </div>

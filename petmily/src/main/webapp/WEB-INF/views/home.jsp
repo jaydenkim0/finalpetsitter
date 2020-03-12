@@ -119,7 +119,7 @@ FOOTER 이용 시 넣어야할 요소
 	
 	<script>
 		function no_image2(){
-			$("#2").attr("src", "/petmily/resources/img/logo_b_back01.jpg");
+			$(".noImg").attr("src", "/petmily/resources/img/logo_b_back01.jpg");
 		}
 	</script>
 	
@@ -154,7 +154,7 @@ FOOTER 이용 시 넣어야할 요소
                             
                             <!-- 프로필 이미지 -->
                           	<div>
-                                	<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}" onerror="no_image2()" id="2" > 
+                                	<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}"  class="noImg"  onerror="no_image2()" > 
                             </div> 
                             
                     		<h3 id="nick">${review.review_writer}</h3> 
@@ -169,7 +169,7 @@ FOOTER 이용 시 넣어야할 요소
 			                        <img src="${context}/resources/img/3.png"  height="15px" style="width: 45px" >
 			                     </c:when>
 			                 </c:choose>
-                      <%--       <span>${review.review_star} 점</span> --%>
+                    		<%--       <span>${review.review_star} 점</span> --%>            
                             <div style="clear: both"></div>
                                
                                 
