@@ -25,6 +25,23 @@
       });
     </script>
     
+    <script>
+   	$(document).ready(function(){   
+			var reviewis = $(".reservation1").val();
+			$.ajax({
+					url:'${pageContext.request.contextPath}/board/review/isReview?review_reservation_no='+reviewis,
+					type:'get',
+					success : function(data){					
+						if(data == 1) {
+							$(".20").text("완료");										
+						}else{							
+							$(".20").text("대기");
+						}
+					}
+				});
+			});    		
+	</script>
+    
     <!-- footer css -->
     <link rel="stylesheet" href="${context}/resources/css/footer.css"/>  
     <!-- Required meta tags -->
@@ -146,7 +163,7 @@ a:hover{
    background-color: #1482e0;
 }
 
-input {
+.input {
    width: 150px;
    height: 35px;
    font-size: 14px;
@@ -199,11 +216,11 @@ select {
    <p>리뷰는 결제 후 이용날짜 다음날부터 작성 가능합니다.</p>
    <p>리뷰 작성 시 500p 지급</p>
    <section>
-   
+  
+  	<!-- 리뷰 작성 및 완료표시 위한내용 --> 
 
    <table  class="restab">
-
-   
+ 
 
       <tr>
          <td>예약번호</td>
@@ -214,6 +231,7 @@ select {
       </tr>
       <c:forEach var="reservation" items="${reservation_list }">
          <tr>
+	    	
             <td>${reservation.reservation_no }</td>
             <td>${reservation.totalMatchingTime }</td>
             <td>
@@ -244,10 +262,11 @@ select {
                <c:choose>
                   <c:when test="${reservation.review_no<1 &&reservation.pay_status =='완료' &&reservation.gap<0}">
                      <a href="${context }/board/review/insert?reservation_no=${reservation.reservation_no}&sitter_id=${reservation.sitter_id}">
-                     <button class="button hover">리뷰 작성</button></a>
+                     <button class="button hover">작성</button></a>
                   </c:when>
                   <c:otherwise>
-                     작성불가
+                  	 <input type="hidden" name="review_reservation_no" class="reservation1" value="${reservation.reservation_no}">	
+                     <small class="20"></small>
                   </c:otherwise>
                </c:choose>      
                

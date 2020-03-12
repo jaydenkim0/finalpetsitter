@@ -98,8 +98,17 @@ HEADER 이용 시 넣어야할 요소
       });
     </script>
   
-  
-  
+  	<style>
+	.non:hover {
+  		text-decoration: none;
+  		color:black;
+  	}
+  	
+	 a:link { color: red; text-decoration: none;}
+	 a:visited { color: black; text-decoration: none;}
+/* 	 a:hover { color: blue; text-decoration: none;} */
+	</style>
+
 <!-- 
 FOOTER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -147,16 +156,14 @@ FOOTER 이용 시 넣어야할 요소
             <h3 id="co">펫밀리와 함께한 추억들을 공유해요.</h3>
             
            <div class="owl-carousel owl-theme">
-           <c:forEach  var="review" items="${list}">
-                 <!-- 리뷰 아이템 -->
+           <c:forEach  var="review" items="${list}">          			
+                 	<a class="non" href="${pageContext.request.contextPath}/board/review/list">
                         <div class="item">
-                            <br>
-                            
+                            <br>                            
                             <!-- 프로필 이미지 -->
                           	<div>
                                 	<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${review.member_image_no}"  class="noImg"  onerror="no_image2()" > 
-                            </div> 
-                            
+                            </div>                             
                     		<h3 id="nick">${review.review_writer}</h3> 
                             <c:choose>
 			                     <c:when test="${review.review_star eq 1}">
@@ -168,11 +175,8 @@ FOOTER 이용 시 넣어야할 요소
 			                     <c:when test="${review.review_star eq 3}">
 			                        <img src="${context}/resources/img/3.png"  height="15px" style="width: 45px" >
 			                     </c:when>
-			                 </c:choose>
-                    		<%--       <span>${review.review_star} 점</span> --%>            
-                            <div style="clear: both"></div>
-                               
-                                
+			                 </c:choose>                    	        
+                            <div style="clear: both"></div>   
                             <!-- 제목 -->
                             <div class="review_title">
                                <h3>${review.review_title}</h3> 
@@ -180,6 +184,7 @@ FOOTER 이용 시 넣어야할 요소
                             <!-- 내용 -->
                             <p>${review.review_content}</p>                            
                         </div>
+                  	</a>
             </c:forEach> 
         	</div>
        	</div>

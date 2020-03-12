@@ -29,7 +29,7 @@
 	color:#FAFAFA;
 }
 
-input{
+.input{
 	width:400px;
 	BORDER-BOTTOM: teal 1px solid;
 	BORDER-LEFT: medium none;
@@ -123,11 +123,11 @@ FOOTER 이용 시 넣어야할 요소
 <br>
 <form action="findid" method="post">
 	<br>
-	<input type="text" name="name" required placeholder="이름 입력"><br><br>
+	<input type="text" name="name" required placeholder="이름 입력 " class="input"><br><br>
 	<br>
-	<input type="email" name="email" required placeholder="회원가입시 사용했던 이메일을 입력"><br><br>
+	<input type="email" name="email" required placeholder="회원가입시 사용했던 이메일을 입력" class="input"><br><br>
 	<br>
-	<input type="tel" name="phone" required placeholder="-를 제외한 휴대폰번호 숫자 입력"><br><br><br>
+	<input type="tel" name="phone" required placeholder="-를 제외한 휴대폰번호 숫자 입력" class="input"><br><br><br>
 	<input type="submit" value="확인" class="findidbtn" id="loginbtn">
 </form>
 </div>

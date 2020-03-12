@@ -135,7 +135,7 @@ a:hover{
 	background-color: #1482e0;
 }
 
-input {
+.input {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
@@ -257,9 +257,14 @@ $(function(){
 			</td>
 			<td>${listitem.writedateWithFormat }</td>
 			<td>
-			<c:if test="${(listitem.care_member_id==id && id!=null) || grade=='admin'}">
-				<a href="delete?care_board_no=${listitem.care_board_no }"><button class="btn hover3">방 삭제</button></a>
-			</c:if>
+			<c:choose>
+				<c:when test="${(listitem.care_member_id==id && id!=null) || grade=='admin'}">
+					<a href="delete?care_board_no=${listitem.care_board_no }"><button class="btn hover3">방 삭제</button></a>
+				</c:when>
+				<c:otherwise>
+					권한 없음
+				</c:otherwise>
+			</c:choose>
 			</td>
 		</tr>
 	</c:forEach>
@@ -308,7 +313,7 @@ $(function(){
 		<option value="sitter_id">펫시터 아이디</option>
 		<option value="care_board_content">방 제목</option>
 	</select>
-	<input name="keyword" placeholder="검색어" required>
+	<input name="keyword" placeholder="검색어" required class="input">
 	<input type="submit" value="조회" class="btn hover3">
 </form>
 </div>

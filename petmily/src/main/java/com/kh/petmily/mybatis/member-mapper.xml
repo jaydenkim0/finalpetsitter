@@ -352,6 +352,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							left outer join pay P on RS.reservation_no=P.partner_order_id
 							left outer join Review R on RS.reservation_no=R.review_reservation_no 
 				) where member_id=#{id} and reservation_status='승인' and rank = 1
+				order by reservation_no desc
 			) A
 		) where rn between #{start} and #{finish}
 	</select>

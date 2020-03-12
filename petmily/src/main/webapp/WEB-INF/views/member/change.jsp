@@ -21,7 +21,7 @@ width: 100px;
 	font-size: 14px;
 	font-weight: bold;
 }
-input{
+.input{
 width:400px;
 	BORDER-BOTTOM: teal 1px solid;
 	BORDER-LEFT: medium none;
@@ -114,7 +114,7 @@ FOOTER 이용 시 넣어야할 요소
 		<form action="${pageContext.request.contextPath}/member/change" class="secure-form"  method="post" >
 			<input type="hidden"  name="email" value ="${email}" >
 			<input type="hidden" name="id" value="${id}">
-	 		<input type="password" name="pw" placeholder="비밀번호 입력" required><br><br>
+	 		<input type="password" name="pw" placeholder="비밀번호 입력" required class="input"><br><br>
 			<input type="submit"  value="변경" id="changebtn">
 		</form>	
 	<br><br><br>

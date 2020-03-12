@@ -87,7 +87,7 @@
 	text-align: center;
 	width:600px;
 	}
-	input{
+	.input{
 	width:400px;
 	height:35px;
 	BORDER-BOTTOM: teal 1px solid;
@@ -254,42 +254,42 @@ FOOTER 이용 시 넣어야할 요소
 			    	<tr>
 			    		<th>Name</th>
 			    		<td>
-			    			<input type="text"  name="name" value="${member.name}">
+			    			<input type="text"  name="name" value="${member.name}" class="input">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>NickName</th>
 			    		<td>
-			    			<input type="text"  name="nick" value="${member.nick}">
+			    			<input type="text"  name="nick" value="${member.nick}" class="input">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Email</th>
 			    		<td>
-			    			<input type="text" name="email" value="${member.email}">
+			    			<input type="text" name="email" value="${member.email}" class="input">
 			    		</td>
 			    	</tr>
 			    	<tr>
 			    		<th>Phone</th>
 			    		<td>
-			    			<input type="text"  name="phone" value="${member.phone}">
+			    			<input type="text"  name="phone" value="${member.phone}" class="input">
 			    		</td>
 			    	</tr>
 					<tr>
 						<th rowspan="3">Address</th>
 						<td>
-							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value="${member.post}">
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
+							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value="${member.post}" class="input">
+							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="input"><br> 
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소" value="${member.basic_addr}">
+							<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소" value="${member.basic_addr}" class="input">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}">
+							<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"value="${member.extra_addr}" class="input">
 						</td>
 					</tr>
 			    </table>
