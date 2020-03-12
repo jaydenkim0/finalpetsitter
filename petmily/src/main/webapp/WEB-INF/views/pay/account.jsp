@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jquery js -->
@@ -74,6 +76,13 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
+#step3 img{
+    margin-top: 10px;
+    height : 6rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .page-navigator li {
 	display: inline-block;
 }
@@ -236,16 +245,14 @@ input[type="checkbox"]:checked+label::before {
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
   
 <section class="section-content">
-<!-- <div style="float: left; width: 20%; margin-top: 80px"> -->
-<%--  <img src="${context}/resources/img/board.png"  align="right" width="60%" height="20%">  --%>
-<!-- </div> -->
-<!-- <div style="float: left; width: 70%;"> -->
 <form action=account method="post">
 	<input type="hidden" name="member_id" value="${sessionScope.id}">
 	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
 	
 <!-- 	<section> -->
-	<h1 align="left" style="margin-left:15%;'">Check Please !</h1>
+	 <div id="step3" align="center">
+	      <img src="${context}/resources/img/step3.png" alt="step3">
+	  </div>
 	<hr>
 	<table class="notice_table" >
 		<tr>
@@ -284,7 +291,8 @@ input[type="checkbox"]:checked+label::before {
 			<td>
 			<br>
 			<h4 align="center">
-			<input type="hidden" name="total_amount" value="${payMent}" readonly> Total : ${payMent}원</h4>
+			<input type="hidden" name="total_amount" value="${payMent}" readonly> ₩ 
+			<fmt:formatNumber maxFractionDigits="3" type="number" value="${payMent}"/></h4>
 				<br>
 			</td>
 		</tr>
