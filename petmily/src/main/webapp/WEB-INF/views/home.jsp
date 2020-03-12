@@ -157,8 +157,8 @@ FOOTER 이용 시 넣어야할 요소
             
            <div class="owl-carousel owl-theme">
            <c:forEach  var="review" items="${list}">          			
+                 	<a class="non" href="${pageContext.request.contextPath}/board/review/list">
                         <div class="item">
-                 			<a class="non" href="${pageContext.request.contextPath}/board/review/list">
                             <br>                            
                             <!-- 프로필 이미지 -->
                           	<div>
@@ -183,8 +183,8 @@ FOOTER 이용 시 넣어야할 요소
                             </div>
                             <!-- 내용 -->
                             <p>${review.review_content}</p>                            
-                  			</a>
                         </div>
+                  	</a>
             </c:forEach> 
         	</div>
        	</div>
