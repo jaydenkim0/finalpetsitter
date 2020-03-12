@@ -180,7 +180,7 @@ FOOTER 이용 시 넣어야할 요소
 					<br><br>
 					<span id="large-text">예약 날짜</span><br>
 					<hr>
-					<span>${reservationList.matching_time}</span>
+					<span>${reservationList.totalMatchingTimeWithFormat}</span>
 
 					<br><br>
 					<span id="large-text">시작 시간</span><br>
