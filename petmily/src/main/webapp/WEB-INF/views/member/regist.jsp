@@ -22,8 +22,7 @@
         	});
         	
         	$("#user_id").blur(function(){
- 				var user_id = $("#user_id").val();
- 				
+ 				var user_id = $("#user_id").val(); 				
  				$.ajax({
  					url:'${pageContext.request.contextPath}/member/idCheck?userId='+user_id,
  					type:'get',
