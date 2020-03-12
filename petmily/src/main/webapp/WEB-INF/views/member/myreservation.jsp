@@ -252,8 +252,11 @@ select {
                   <c:when test="${reservation.pay_status =='준비' }">
                      준비
                   </c:when>
+                  <c:when test="${reservation.pay_status =='취소' }">
+                  	취소
+                  </c:when>
                   <c:otherwise>
-                     취소
+                     미진행
                   </c:otherwise>
                   
                </c:choose>                           

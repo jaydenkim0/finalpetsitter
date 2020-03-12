@@ -151,7 +151,7 @@ a:hover{
 			
 			<td>
 			<c:choose>
-				<c:when test="${not empty listitem.sitter_id }">
+				<c:when test="${not empty careboard.sitter_id }">
 					${careboard.sitter_id }
 				</c:when>
 				<c:otherwise>
