@@ -279,7 +279,7 @@ FOOTER 이용 시 넣어야할 요소
 						<th rowspan="3">Address</th>
 						<td>
 							<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" value="${member.post}" class="input">
-							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br> 
+							<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="input"><br> 
 						</td>
 					</tr>
 					<tr>
