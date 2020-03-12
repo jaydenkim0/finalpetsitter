@@ -4,6 +4,78 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
+
+<!-- Content 날자 지정 API  -->
+    <link rel="stylesheet" type="text/css" href="${context}/resources/css/datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="${context}/resources/js/datepicker.js"></script>
+
+<!-- 스크립트 시작 -->
+    <script>
+	    function loadPicker(){
+	    	var minDate;
+	    	var maxDate;
+	    	
+	    	var startDate = moment("${time1}");
+	    	var finishDate = moment("${HCdto.getHost_content_start_date().substring(0, 10)}")
+	//             	console.log(startDate);
+	//             	console.log(startDate.isValid());
+	//             	console.log(finishDate);
+	//             	console.log(finishDate.isValid());
+	//             	console.log(startDate.diff(finishDate));//-나오면 startDate가 finishDate 이전이란 뜻
+	            	
+	//             	var duration = moment.duration(finishDate.diff(startDate));
+	//             	console.log(duration);
+	//             	console.log(duration.asDays());
+	            	//날짜 지정
+	                if(startDate.diff(finishDate) > 0){
+	                	minDate = moment(new Date()).add(0, 'days');
+	                	maxDate = moment('${HCdto.getHost_content_last_date().substring(0, 10)}');
+	        }
+	        else{
+	        	minDate = moment('${HCdto.getHost_content_start_date().substring(0, 10)}');
+	        	maxDate = moment('${HCdto.getHost_content_last_date().substring(0, 10)}');
+	        }
+	    	
+	    	
+	        var options = {
+	           //날짜가 입력될 첫 번째 칸 설정
+	           field:document.querySelector(".start_date"),
+	           //표시될 월의 개수를 설정
+	           numberOfMonths:1,
+	           //날짜 선택이 아닌 범위 선택으로 설정
+	           singleDate:true,
+	           //최초 선택일 이후로만 종료일을 선택하도록 설정
+	           selectForward:true,
+	           //날짜 구분자 설정
+	           seperator:'-',
+	               
+	           minDate : minDate,
+	           maxDate : maxDate,
+	       		
+	           //날짜형식설정
+	            format:'YYYY-MM-DD'
+	            };
+	            var picker = new Lightpick(options);
+	        }
+	    	
+	   	 	function addLoadEvent(func) {
+	        	var oldonload = window.onload;
+	           	 if(typeof window.onload != 'function') {
+	                window.onload = func;
+	           	 } else {
+	                window.onload = function() {
+	                    oldonload();
+	                    func();
+	            			}
+	        			}	
+	    		}
+	
+	   	 		
+	    		addLoadEvent(loadPicker);	   	
+	</script>            	
+<!-- 스크립트 종료 -->
+
 <!-- 
 기본 CSS
 :	font css
@@ -248,7 +320,11 @@ $(function(){
 					<div>
 			            <label id="large-text">돌봄 예약일시</label><br>
 			            <hr>
-						<input type="text" name="matching_time" placeholder="날짜">
+			            <!-- jsp 부분 : form 안에 위치 --> 
+							<div style="font-size: 14px; margin-bottom: 5px;">날짜 선택</div>
+							<input id="callender" type="text" name="start_date" class="start_date" required="required"> 
+						<!-- 날짜 -->
+<!-- 						<input type="text" name="matching_time" placeholder="날짜"> -->
 			        </div>	
 			
 			        <br><br>

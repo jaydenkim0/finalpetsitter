@@ -312,8 +312,8 @@ FOOTER 이용 시 넣어야할 요소
 	<!-- 펫시터 상태 변경 (휴면 -> 정상 / 정상 -> 휴면) -->
 		<c:choose >
 			<c:when test="${black_petsitter_count > 0}">
-						<h4 style="color: red;">펫시터 경고를 받아 휴면 상태 조정이 불가합니다</h4>
-						<h4 style="color: red;">자세한 내용은 문의 게시판 및 상담센터로 연락 부탁드립니다</h4>
+						<h4 id="warning" style="color: red;">※펫시터 경고를 받아 휴면 상태 조정이 불가합니다.</h4>
+						<h4 id="warning" style="color: red;">자세한 내용은 문의 게시판 및 상담센터로 연락 부탁드립니다.※</h4>
 			</c:when>
 			<c:otherwise>
 						<c:choose>	
