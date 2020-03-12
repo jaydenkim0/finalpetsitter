@@ -322,7 +322,7 @@ $(function(){
 			            <hr>
 			            <!-- jsp 부분 : form 안에 위치 --> 
 							<div style="font-size: 14px; margin-bottom: 5px;">날짜 선택</div>
-							<input id="callender" type="text" name="start_date" class="start_date" required="required"> 
+							<input id="callender" type="text" name="matching_time" class="start_date" required="required"> 
 						<!-- 날짜 -->
 <!-- 						<input type="text" name="matching_time" placeholder="날짜"> -->
 			        </div>	

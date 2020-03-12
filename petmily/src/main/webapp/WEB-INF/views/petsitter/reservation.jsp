@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 
 <!-- jquery js -->
@@ -87,47 +88,48 @@ FOOTER 이용 시 넣어야할 요소
 }
         
 
-.page-navigator li {
+.reservation-wrap .page-navigator li {
 	display: inline-block;
 }
 
-.reservation_table {
+.reservation-wrap .reservation_table {
 	width: 80%;
 	border-top: 1px solid #444444;
-	border-collapse: collapse;
+	border-collapse: inherit;
 	border-color : #BDBDBD;
 }
 
-h1{
+.reservation-wrap h1{
 	font-family:NotosanBlack
 }
 
 
-th, td {
-	border-bottom: 1px solid #444444;
+.reservation-wrap th, 
+.reservation-wrap td {
 	padding: 10px;
 	text-align: center;
 	border-color : #BDBDBD;
 }
 
-a {
+
+.reservation-wrap a {
 	text-decoration: none;
 	color: black;
 }
 
-.right_mar {
+.reservation-wrap .right_mar {
 	margin-right: 10%;
 }
 
-.page-navigator li {
+.reservation-wrap .page-navigator li {
 	display: inline-block;
 }
 
-.page-navigator li.active>a {
+.reservation-wrap .page-navigator li.active>a {
 	color: #1482e0;
 }
 
-.btn {
+.reservation-wrap .btn {
 	display: white;
 	width: 80px;
 	height: 10x;
@@ -141,15 +143,15 @@ a {
 	transition: all 0.9s, color 0.3;
 }
 
-.btn:hover {
+.reservation-wrap .btn:hover {
 	color: white;
 }
 
-.hover3:hover {
+.reservation-wrap .hover3:hover {
 	background-color: #1482e0;
 }
 
-input {
+.reservation-wrap input {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
@@ -160,7 +162,7 @@ input {
 	border-radius: 4px;
 }
 
-select {
+.reservation-wrap select {
 	width: 80px;
 	height: 35px;
 	font-size: 14px;
@@ -171,7 +173,7 @@ select {
 	border-radius: 4px;
 	}
 
-.site-footer{
+.reservation-wrap .site-footer{
 	position:fixed;
 	bottom:0;
 }
@@ -183,7 +185,7 @@ select {
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
 <section class="section-content">   
-	<div align="center" >
+	<div class="reservation-wrap" align="center" >
 		<h1>펫시터 예약 조회</h1>
 		<br>
 		<table class="reservation_table" >
@@ -193,28 +195,28 @@ select {
 						<th>예약 번호</th>
 						<th>예약 회원</th>
 						<th>예약 날짜</th>
-						<th>예약 이용 시간</th>
+						<th>예약 이용 시간</th>		
+						<th colspan="${fn:length(rlist.list)}">예약 스킬</th>
 						<th>시작 시간</th>
-						<c:forEach var="skill" items="${rlist.list}">
-							<th>예약 스킬</th>
-						</c:forEach>
 					</tr>
+					
+	
 					<tr>
 						<td>${rlist.reservation_no}</td>
 						<td>${rlist.member_id}</td>
 						<td>${rlist.totalMatchingTimeWithFormat}</td>
 						<td>${usageTime}시간</td>
-						<td>${startTime}시</td>
 						<c:forEach var="skill" items="${rlist.list}">
 							<td>${skill.payname}</td>
 						</c:forEach>
+						<td>${startTime}시</td>
 					</tr>
 				
 			</c:forEach>
 		</table>
 	</div>	
 </section>
-
+	<br><br><br><br>
 	<br><!-- footer 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>    
 	
