@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kh.petmily.controller.petsitter.PetsitterController" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/controller/petsitter/PetsitterController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="304" x="547" y="26"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="com.kh.petmily.service.petsitter.PetsitterFileService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/petsitter/PetsitterFileService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="206" x="596" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="com.kh.petmily.service.petsitter.PetsitterFileServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/petsitter/PetsitterFileServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="206" x="596" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="com.kh.petmily.service.petsitter.PetsitterService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/petsitter/PetsitterService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="297" x="550" y="120"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="com.kh.petmily.service.petsitter.PetsitterServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/petsitter/PetsitterServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="297" x="550" y="216"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="6" language="java" name="com.kh.petmily.repository.petsitter.BankImageDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/BankImageDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="160" x="386" y="554"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.kh.petmily.repository.petsitter.BankImageDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/BankImageDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="387" y="661"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="8" language="java" name="com.kh.petmily.repository.petsitter.CareConditionDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/CareConditionDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="1019" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="9" language="java" name="com.kh.petmily.repository.petsitter.CareConditionDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/CareConditionDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="1040" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="10" language="java" name="com.kh.petmily.repository.petsitter.CarePetTypeDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/CarePetTypeDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="23" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="com.kh.petmily.repository.petsitter.CarePetTypeDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/CarePetTypeDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="165" x="-5" y="431"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="12" language="java" name="com.kh.petmily.repository.petsitter.IdCardFileDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/IdCardFileDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="546" y="554"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="13" language="java" name="com.kh.petmily.repository.petsitter.IdCardFileDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/IdCardFileDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="543" y="661"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="14" language="java" name="com.kh.petmily.repository.petsitter.InfoImageDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/InfoImageDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="701" y="554"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="15" language="java" name="com.kh.petmily.repository.petsitter.InfoImageDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/InfoImageDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="698" y="661"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="16" language="java" name="com.kh.petmily.repository.petsitter.LicenseFileDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/LicenseFileDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="855" y="554"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="17" language="java" name="com.kh.petmily.repository.petsitter.LicenseFileDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/LicenseFileDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="849" y="661"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="com.kh.petmily.repository.petsitter.LocationDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/LocationDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="210" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="com.kh.petmily.repository.petsitter.LocationDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/LocationDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="199" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="com.kh.petmily.repository.petsitter.PetsitterDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/PetsitterDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="1199" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="21" language="java" name="com.kh.petmily.repository.petsitter.PetsitterDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/PetsitterDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="1230" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="22" language="java" name="com.kh.petmily.repository.petsitter.ReservationDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/ReservationDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="846" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="23" language="java" name="com.kh.petmily.repository.petsitter.ReservationDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/ReservationDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="843" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="24" language="java" name="com.kh.petmily.repository.petsitter.SkillsDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/SkillsDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="400" y="330"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="25" language="java" name="com.kh.petmily.repository.petsitter.SkillsDaoImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/petsitter/SkillsDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="402" y="444"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="26">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="27">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="14"/>  
+  </realization>  
+  <association id="28">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="29" name="petSitterFileService">        
+        <position height="18" width="101" x="57" y="988"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="16" width="23" x="80" y="1002"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="31">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="32">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="33" name="careConditionDao">        
+        <position height="18" width="93" x="-36" y="1003"/>      
+      </attribute>      
+      <multiplicity id="34" minimum="0" maximum="1">        
+        <position height="16" width="23" x="24" y="984"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="36" name="carePetTypeDao">        
+        <position height="18" width="87" x="-1372" y="956"/>      
+      </attribute>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-1357" y="975"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="39" name="petsitterService">        
+        <position height="18" width="84" x="222" y="1070"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="16" width="23" x="233" y="1056"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="41">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="42">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="43" name="skillsDao">        
+        <position height="18" width="50" x="-1078" y="577"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-1053" y="577"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="45">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="46">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="47" name="idCardFileDao">        
+        <position height="18" width="74" x="-458" y="796"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-435" y="798"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="49">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="50">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="22"/>  
+  </realization>  
+  <association id="51">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="52" name="reservationDao">        
+        <position height="18" width="82" x="-866" y="1065"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-801" y="1057"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="54">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <realization id="55">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="56">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="57" name="licenseFileDao">        
+        <position height="18" width="77" x="5" y="986"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="16" width="23" x="53" y="1000"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="60" name="locationDao">        
+        <position height="18" width="64" x="-978" y="870"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-969" y="867"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="62">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <realization id="63">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <realization id="64">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="12"/>  
+  </realization>  
+  <association id="65">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="66" name="bankImageDao">        
+        <position height="18" width="78" x="-395" y="1034"/>      
+      </attribute>      
+      <multiplicity id="67" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-392" y="1032"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="69" name="infoImageDao">        
+        <position height="18" width="73" x="73" y="1060"/>      
+      </attribute>      
+      <multiplicity id="70" minimum="0" maximum="1">        
+        <position height="16" width="23" x="81" y="1061"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="72" name="petsitterDao">        
+        <position height="18" width="66" x="-224" y="921"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="1">        
+        <position height="16" width="23" x="-212" y="921"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
