@@ -109,7 +109,7 @@ a {
 	color: #1482e0;
 }
 
-.custom-btn {
+.btn {
 	display: white;
 	width: 80px;
 	height: 10x;
@@ -123,7 +123,7 @@ a {
 	transition: all 0.9s, color 0.3;
 }
 
-.custom-btn:hover {
+.btn:hover {
 	color: white;
 }
 
@@ -131,7 +131,7 @@ a {
 	background-color: #1482e0;
 }
 
-input {
+.inpt {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
@@ -154,7 +154,8 @@ select {
 }
 
 <!--
-header style -->#masthead:after {
+header style -->
+#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -247,7 +248,7 @@ header style -->#masthead:after {
 
 		<div align="right" class="right_mar">
 			<a href="${context}/board/stray/write">
-				<input type="button" class="custom-btn hover3" id="btnwrite" value="글쓰기">
+				<input type="button" class="btn hover3" id="btnwrite" value="글쓰기">
 			</a>
 		</div>
 
@@ -263,12 +264,12 @@ header style -->#masthead:after {
 
 	<div align="center">
 		<form method="get" action="${context}/board/stray/list">
-			<select name="type" class="input-item">
+			<select name="type" class="inpt">
 				<option value="stray_writer">작성자</option>
 				<option value="stray_head">제목</option>
 			</select> 
-			<input class="input-item" name="keyword" placeholder="검색어" requierd>
-			<input type="submit" value="조회" class="custom-btn hover3" >
+			<input class="inpt" name="keyword" placeholder="검색어" requierd>
+			<input type="submit" value="조회" class="btn hover3" >
 		</form>
 		</div>
 	</section>
