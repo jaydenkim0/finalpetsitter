@@ -290,7 +290,7 @@ textarea {
 	display: white;
 	width: 120px;
 	height: 10x;
-	line-height: 20px;
+	line-height: 35px;
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
@@ -317,15 +317,19 @@ header style -->
 	opacity: 100;
 	transition: opacity 0.3s ease;
 }
+
 #masthead.is-active {
 	background-color: #fff;
 }
+
 .section-content {
 	padding-top: 115px;
 }
-	#masthead:after{
+
+#masthead:after {
 	opacity: 100;
 }
+
 .title {
 	font-size: 50px;
 }
