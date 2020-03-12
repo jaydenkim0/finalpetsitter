@@ -169,6 +169,12 @@ FOOTER 이용 시 넣어야할 요소
          });  
 	}); 
     </script>
+    
+    <script>
+		function no_image2(){
+			$("#member_image").attr("src", "/petmily/resources/img/기본프로필.jpeg");
+		}
+	</script>
 	
 	
 	<!-- header 불러오기 -->
@@ -205,8 +211,8 @@ FOOTER 이용 시 넣어야할 요소
 								<a href="content?pet_sitter_no=${petsitter.pet_sitter_no}">
 									<!-- 펫시터 정보 -->			
 									<c:if test="${petsitter.member_image_no > 0}">
-										<div class="img_box" style="background: #f5f5f5">
-				                            <img class="profile" src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" onerror="no_image2()" id="member_image">
+										<div>
+				                            <img class="img_box" src="${pageContext.request.contextPath}/petsitter/member/image?member_image_no=${petsitter.member_image_no}" onerror="no_image2()" id="member_image">
 				                        </div>
 									</c:if>	
 										<span id="nick">닉네임 : ${petsitter.nick}</span>
@@ -216,10 +222,12 @@ FOOTER 이용 시 넣어야할 요소
 										<input id="naver-viewer-text" type="hidden" value="${petsitter.info}">
 										<br>
 									
-										<c:forEach var="location" items="${petsitter.list}">
-											<span id="petsitter_city">#${location.city} ${location.area}</span>
-										</c:forEach>
-										<br>
+										<div class="petsitter-location">
+											<c:forEach var="location" items="${petsitter.list}">
+												<span id="petsitter_city">#${location.city} ${location.area}</span>
+											</c:forEach>
+										</div>
+										
 										<hr>
 									</a>
 								</div>
