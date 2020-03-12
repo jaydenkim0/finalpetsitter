@@ -164,7 +164,7 @@ FOOTER 이용 시 넣어야할 요소
 			<div id="align-left">
 				<h1>펫시터 견적확인 페이지</h1>
 					<div id="step1">
-						<img src="img/estimate_step2.png" alt="step1">
+						<img src="${context}/resources/img/estimate_step2.png" alt="step1">
 					</div>
 					
 					<br><br>
