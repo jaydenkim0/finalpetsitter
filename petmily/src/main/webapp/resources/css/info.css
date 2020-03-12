@@ -161,3 +161,9 @@
 	margin-top: -50px;
 	margin-right: 25px;
 }
+
+.info-wrap #warning {
+	font-size: 13pt;
+    font-family: NotosanB;
+    text-align: center;
+	}
