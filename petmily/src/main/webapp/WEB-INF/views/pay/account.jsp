@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -76,11 +77,11 @@ FOOTER 이용 시 넣어야할 요소
 
 
 <style>
-#step3 img{
-    margin-top: 10px;
-    height : 6rem;
-    margin-left: auto;
-    margin-right: auto;
+#step3 img {
+	margin-top: 10px;
+	height: 6rem;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .page-navigator li {
@@ -94,7 +95,9 @@ FOOTER 이용 시 넣어야할 요소
 	border-color: #BDBDBD;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 2rem;
 }
+
 .account_table {
 	width: 70%;
 	border-top: 1px solid #444444;
@@ -104,20 +107,26 @@ FOOTER 이용 시 넣어야할 요소
 	margin-right: auto;
 }
 
-
 th {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
-	font-size: 15px;
+	font-size: 16px;
+	font-weight : bold;
 	border-color: #BDBDBD;
 }
+
 td {
 	border-bottom: 1px solid #444444;
 	padding: 10px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 13px;
+	font-style: bold;
 	border-color: #BDBDBD;
+}
+
+hr {
+	width: 70%;
 }
 
 a {
@@ -160,10 +169,12 @@ a {
 .hover3:hover {
 	background-color: #1482e0;
 }
+
 .hover1:hover {
 	background-color: #1482e0;
 }
-.check1{
+
+.check1 {
 	width: 20px;
 	height: 20px;
 	font-size: 15px;
@@ -173,7 +184,8 @@ a {
 	border-width: 1px;
 	border-radius: 4px;
 }
-.pay{
+
+.pay {
 	width: 15px;
 	height: 15px;
 	font-size: 15px;
@@ -183,6 +195,7 @@ a {
 	border-width: 1px;
 	border-radius: 4px;
 }
+
 select {
 	width: 80px;
 	height: 35px;
@@ -193,76 +206,94 @@ select {
 	border-width: 1px;
 	border-radius: 4px;
 }
+label{
+font-size: 13px;
+}
+
 input[type="checkbox"] {
-  display:none;
-  vertical-align: middle;
+	display: none;
+	vertical-align: middle;
 }
-input[type="checkbox"] + label::before {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
-  border: 2px solid #BDBDBD;
-  background-color: #fff;
-  display: block;
-  content: "";
-  float: left;
-  margin-right: 5px;
-  vertical-align: middle;
+
+input[type="checkbox"]+label::before {
+	width: 20px;
+	height: 20px;
+	border-radius: 5px;
+	border: 2px solid #BDBDBD;
+	background-color: #fff;
+	display: block;
+	content: "";
+	float: left;
+	margin-right: 5px;
+	vertical-align: middle;
 }
+
 input[type="checkbox"]:checked+label::before {
-  box-shadow: inset 0px 0px 0px 3px #fff;
-  background-color: #BDBDBD;
-  vertical-align: middle;
+	box-shadow: inset 0px 0px 0px 3px #fff;
+	background-color: #BDBDBD;
+	vertical-align: middle;
 }
-<!-- header style -->
+
+<!--
+header style -->#masthead:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 130px;
+	background-color: #fff;
+	opacity: 100;
+	transition: opacity 0.3s ease;
+}
+
+#masthead.is-active {
+	background-color: #fff;
+}
+
+.section-content {
+	padding-top: 115px;
+}
+
 #masthead:after {
-	  content: '';
-	  position: absolute;
-	  top: 0;
-	  width: 100%;
-	  height: 130px;
-	  background-color: #fff;
-	  opacity: 100;
-	  transition: opacity 0.3s ease;
-	}
-	
-	#masthead.is-active{
-	 background-color: #fff;
-	}
-	
-	.section-content{
-	padding-top:150px;
-	}
-	.section-content::after{
-		content:"";
-		display:block;
-		clear:both;
-	}
-	</style>
+	opacity: 100;
+}
+
+.title {
+	font-size: 50px;
+}
+
+.con {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	height: auto;
+}
+
+.ta {
+	padding-top: 70px;
+}
+</style>
 
 
 <!-- header 불러오기 -->
 		<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
   
 <section class="section-content">
-<form action=account method="post">
-	<input type="hidden" name="member_id" value="${sessionScope.id}">
-	<input type="hidden" name="reservation_no" value="${param.reservation_no}">
+
+	<form action=account method="post">
+		<input type="hidden" name="member_id" value="${sessionScope.id}">
+			<input type="hidden" name="reservation_no" value="${param.reservation_no}">
 	
-<!-- 	<section> -->
+<div class="ta">
 	 <div id="step3" align="center">
 	      <img src="${context}/resources/img/step3.png" alt="step3">
 	  </div>
-	<hr>
 	<table class="notice_table" >
 		<tr>
 			<th>예약 번호</th>
 			<th>예약 날짜</th>
 			<th>예약 회원</th>
 			<th>펫시터번호</th>
-			<c:forEach var="skill" items="${reservationList.list}">
-				<th>예약 스킬</th>
-			</c:forEach>
+			<th colspan="${fn:length(reservationList.list)}">예약 스킬</th>
 			<th>예약 시작 시간</th>
 			<th>이용 시간</th>
 		</tr>
@@ -274,7 +305,8 @@ input[type="checkbox"]:checked+label::before {
 			<td><input type="hidden" name="partner_user_id"
 				value="${reservationList.member_id}" readonly>
 				${reservationList.member_id}</td>
-			<td><input type="hidden" name="item_name"
+			<td>
+			<input type="hidden" name="item_name"
 				value="${reservationList.reservation_sitter_no}" readonly>
 				${reservationList.reservation_sitter_no}</td>
 			<c:forEach var="skill" items="${reservationList.list}">
@@ -290,16 +322,16 @@ input[type="checkbox"]:checked+label::before {
 		<tr>
 			<td>
 			<br>
-			<h4 align="center">
+			<h3 align="center">
 			<input type="hidden" name="total_amount" value="${payMent}" readonly> ₩ 
-			<fmt:formatNumber maxFractionDigits="3" type="number" value="${payMent}"/></h4>
+			<fmt:formatNumber maxFractionDigits="3" type="number" value="${payMent}"/></h3>
 				<br>
 			</td>
 		</tr>
 	</table>
 	<br>
 	<div align="center">
-	<h2 style="font-size: 20px;'">About Payment</h2>
+	<h3 style="font-size: 20px;'">About Payment</h3>
 	<div align="center" onclick="pay()" name="account">
 	       	  <input type="checkbox"  id="credit" name="account">
 	       	  <label for="credit">체크/신용카드&emsp;</label>
@@ -335,7 +367,7 @@ input[type="checkbox"]:checked+label::before {
 	</div>
 </div>
 </div>
-<!-- </section> -->
+</div>
 </form>
 
 <br>

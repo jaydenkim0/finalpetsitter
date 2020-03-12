@@ -138,6 +138,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					)A
 				) where rn between 1 and 10
  	</select>
+ 	
+ 	<select id="reviewEmpty" parameterType="int" resultType="int">
+ 		select count(*) from review where review_no= #{reservation_no}
+ 	</select>
 	
 
 </mapper>

@@ -7,7 +7,6 @@
 <!-- jquery js -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-  
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -52,7 +51,7 @@ FOOTER 이용 시 넣어야할 요소
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- 아이콘을 사용하기 위해 추가로 불러오는 CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-	
+
 <script>
 	$(document).ready(function() {
 		$("#btnWrite").click(function() {
@@ -109,7 +108,7 @@ a {
 	color: #1482e0;
 }
 
-.custom-btn {
+.btn {
 	display: white;
 	width: 80px;
 	height: 10x;
@@ -123,7 +122,7 @@ a {
 	transition: all 0.9s, color 0.3;
 }
 
-.custom-btn:hover {
+.btn:hover {
 	color: white;
 }
 
@@ -131,7 +130,7 @@ a {
 	background-color: #1482e0;
 }
 
-input {
+.inpt {
 	width: 150px;
 	height: 35px;
 	font-size: 14px;
@@ -154,7 +153,8 @@ select {
 }
 
 <!--
-header style -->#masthead:after {
+header style -->
+#masthead:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -238,7 +238,7 @@ header style -->#masthead:after {
 	<div align="right" class="right_mar">
 		<c:if test="${not empty sessionScope.id}">
 			<a href="${context}/board/qna/write">
-				<input type="button" class="custom-btn hover3" id="btnwrite" value="글쓰기">
+				<input type="button" class="btn hover3" id="btnwrite" value="글쓰기">
 			</a>
 		</c:if>
 	</div>	
@@ -256,12 +256,12 @@ header style -->#masthead:after {
 		
 		<div align="center">
 		<form method="get" action="${context}/board/qna/list">
-			<select name="type" class="input-item">
+			<select name="type" class="inpt">
 				<option value="qna_writer">작성자</option>
 				<option value="qna_head">제목</option>
 			</select> 
-			<input class="input-item" name="keyword" placeholder="검색어" requierd>
-			<input type="submit" value="조회" class="custom-btn hover3" >
+			<input class="inpt" name="keyword" placeholder="검색어" requierd>
+			<input type="submit" value="조회" class="btn hover3" >
 		</form>
 		</div>
 	</section>
