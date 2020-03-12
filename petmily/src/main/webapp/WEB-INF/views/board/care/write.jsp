@@ -121,7 +121,7 @@ FOOTER 이용 시 넣어야할 요소
 		left: 50%;
 		margin-left:-110px;
 	}
-	    input{
+	.input{
 		width:400px;
 		BORDER-BOTTOM: teal 1px solid;
 		BORDER-LEFT: medium none;
@@ -176,12 +176,12 @@ p{
 		<tr>
 		
 			<td>작성자 아이디<br>
-				<input type="text" readonly value=${id } name="care_member_id"><br><br>
+				<input type="text" readonly value=${id } name="care_member_id" class="input"><br><br>
 			</td>
 		</tr>
 		<tr>
 			<td>펫시터 아이디<br>
-				<input type="text" name="care_sitter_id" class="sitter_id_check" id="user_id" list="depList" oninput="checkId()" required>
+				<input type="text" name="care_sitter_id" class="sitter_id_check input" id="user_id" list="depList" oninput="checkId()" required>
 				<datalist id="depList">
 					<c:forEach var="data" items="${list }">
 						<option value="${data }">${data }</option>
@@ -193,13 +193,13 @@ p{
 		
 		<tr>
 			<td>방 제목<br>
-				<input type="text" name="care_board_content" required><br><br>
+				<input type="text" name="care_board_content" required class="input"><br><br>
 			</td>
 		</tr>
 		
 		<tr>
 			<td>방 비밀번호<br>
-				<input class="password" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required><br><br>
+				<input class="password input" oninput="prevent();" type="number" name="care_pw" placeholder="4자리 숫자" required><br><br>
 			</td>
 		</tr>
 		

@@ -146,7 +146,7 @@ a:hover{
    background-color: #1482e0;
 }
 
-input {
+.input {
    width: 150px;
    height: 35px;
    font-size: 14px;

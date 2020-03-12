@@ -48,7 +48,7 @@
     </script>
 
 <style>
-input{
+.input{
 	width:400px;
 	BORDER-BOTTOM: teal 1px solid;
 	BORDER-LEFT: medium none;
@@ -157,8 +157,8 @@ FOOTER 이용 시 넣어야할 요소
 <br><br>
 
 <form class="emailsend"  action="input" method="post">
-	<input type="text" name="id" placeholder="아이디 입력" required><br><br><br>
-	<input type="email" name="email" placeholder="이메일 입력" required><br><br><br>
+	<input type="text" name="id" placeholder="아이디 입력" required class="input"><br><br><br>
+	<input type="email" name="email" placeholder="이메일 입력" required class="input"><br><br><br>
 	<input id="pwchange" type="submit" value="이메일 전송" >
 </form>
 

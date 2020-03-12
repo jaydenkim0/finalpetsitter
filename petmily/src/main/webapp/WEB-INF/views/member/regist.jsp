@@ -12,6 +12,9 @@
 	
     <script>
         $(function(){
+ 			$("#registbtn").show();
+ 			$("#fakeregistbtn").hide();
+        	
         	jQuery('#selectBox').change(function(){
         		var state = jQuery('#selectBox option:selected').val();
         		if(state=='예'){
@@ -30,11 +33,13 @@
  					success : function(data){
  						if(data == 0) {
  							$("#id_check").text("");
- 							$("#submit").attr("disabled",false);
+ 							$("#registbtn").show();
+ 							$("#fakeregistbtn").hide();
  						}else{
  							$("#id_check").text("사용중인 아이디입니다");
  							$('#id_check').css('color', 'red');
- 							$("#submit").attr("disabled",true);
+ 							$("#registbtn").hide();
+ 							$("#fakeregistbtn").show();
  						}
  					}
  				});
@@ -42,61 +47,74 @@
 
         	$("#selectBox").change(function(){	
         		$(".petnamecheck").hide();
-        		$(".petagecheck").hide();
+        		$(".petagecheck").show();
         		var select = $("select[name=pets]").val();
         		if(select=='예'){
-        			$("#submit").attr("disabled",true);
+        			$("#registbtn").hide();
+        			$("#fakeregistbtn").show();
         			$(".petname").blur(function(){
         				var petname = $(".petname").val();
         				if(petname==""){
         					$(".petnamecheck").show();
+                			$("#registbtn").hide();
+                			$("#fakeregistbtn").show();
         				}else{
         					$(".petnamecheck").hide();
-        					$("#submit").attr("disabled",false);
+                			$("#registbtn").show();
+                			$("#fakeregistbtn").hide();
         				}	
         			});
         			$(".petage").blur(function(){
-        				$("#submit").attr("disabled",true);
+            			$("#registbtn").hide();
+            			$("#fakeregistbtn").show();
         				var petage = $(".petage").val();
         				var regex =  /[0-9]+/g;
         				var a = regex.test(petage);
         				if(!a){
-        					$("#submit").attr("disabled",true);
+                			$("#registbtn").hide();
+                			$("#fakeregistbtn").show();
         					$(".petagecheck").show();
         				}else{
-        					$("#submit").attr("disabled",false);
+                			$("#registbtn").show();
+                			$("#fakeregistbtn").hide();
         					$(".petagecheck").hide();
         				}
         			});
         		}else{
-        			$("#submit").attr("disabled",false);
+        			$("#registbtn").show();
+        			$("#fakeregistbtn").hide();
         		}
         	});  
         	$(".phonecheck").hide();
         	$(".phone").blur(function(){
-        		$("#submit").attr("disabled",true);
+    			$("#registbtn").hide();
+    			$("#fakeregistbtn").show();
         		var phone = $(".phone").val();
         		var regex = /^[0-9]{9,11}$/
         		var b = regex.test(phone);
         		if(!b){
         			$(".phonecheck").show();
-        			$("#submit").attr("disabled",true);
+        			$("#registbtn").hide();
+        			$("#fakeregistbtn").show();
         		}else{
         			$(".phonecheck").hide();
-        			$("#submit").attr("disabled",false);
+        			$("#registbtn").show();
+        			$("#fakeregistbtn").hide();
         		}
         	});
         	
         	$(".emailcheck").hide();
         	$(".emailexist").hide();
         	$(".email").blur(function(){
-        		$("#submit").attr("disabled",true);
+    			$("#registbtn").hide();
+    			$("#fakeregistbtn").show();
         		var email = $(".email").val();
         		var regex = /^([a-z0-9_\.-]+)@([\a-z\.-]+)\.([a-z\.]{2,6})$/
         		var c = regex.test(email);
         		if(!c){
         			$(".emailcheck").show();
-        			$("#submit").attr("disabled",true);
+        			$("#registbtn").hide();
+        			$("#fakeregistbtn").show();
 	        			
         		}else{
         			$(".emailcheck").hide();
@@ -107,10 +125,12 @@
      					success : function(data){
      						if(data == 0) {
 								$(".emailexist").hide();
-     							$("#submit").attr("disabled",false);
+     		        			$("#registbtn").show();
+     		        			$("#fakeregistbtn").hide();
      						}else{
      							$(".emailexist").show();
-     							$("#submit").attr("disabled",true);
+     		        			$("#registbtn").hide();
+     		        			$("#fakeregistbtn").show();
      						}
      					}
      				});
@@ -173,7 +193,7 @@
   .pet{display:none;}
   .petnamecheck{display:none;}
 
-    input{
+    .input{
 		width:400px;
 		BORDER-BOTTOM: teal 1px solid;
 		BORDER-LEFT: medium none;
@@ -206,6 +226,18 @@
 		position: relative;
 		top: 1px;
 	}
+#fakeregistbtn{
+		width: 220px;
+		height: 60px;
+		border: none;
+		background-color: gray;
+		border-radius: 3px;
+		color: white;
+		font-size: 15px;
+		font-weight: bold;
+		position: relative;
+		top: 1px;	
+}
 #adrbtn {
 		width: 110px;
 		height: 40px;
@@ -276,34 +308,34 @@ p{
 		<tr>
 			
 			<td>아이디<br>
-				<input type="text" name="id" placeholder="영문 숫자 조합 4-12자리" required id="user_id"><Br><Br>
+				<input type="text" name="id" placeholder="영문 숫자 조합 4-12자리" required id="user_id" class="input"><Br><Br>
 				<div id="id_check"><br></div>
 			</td>
 		</tr>
 		<tr>
 			
 			<td>비밀번호<br>
-				<input type="password" name="pw" placeholder="영문 숫자 특수문자 조합 8-20자리" required><Br><Br>
+				<input type="password" name="pw" placeholder="영문 숫자 특수문자 조합 8-20자리" required class="input"><Br><Br>
 			</td>
 		</tr>
 		<tr>
 			
 			<td>이름<br>
-				<input type="text" name="name" placeholder="실명을 입력하세요" required><Br><Br>
+				<input type="text" name="name" placeholder="실명을 입력하세요" required class="input"><Br><Br>
 			</td>
 		</tr>
 		
 		<tr>
 			
 			<td>닉네임<br>
-				<input type="text" name="nick" placeholder="영문 최대 30글자 ,한글 최대 10글자" required><Br><Br>
+				<input type="text" name="nick" placeholder="영문 최대 30글자 ,한글 최대 10글자" required class="input"><Br><Br>
 			</td>
 		</tr>
 		
 		<tr>
 			
 			<td>이메일<br>
-				<input type="text" name="email" placeholder="이메일 주소 입력" required class="email">
+				<input type="text" name="email" placeholder="이메일 주소 입력" required class="email input">
 				<p class="emailcheck">이메일 형식이 잘못되었습니다</p>
 				<p class="emailexist">이미 존재하는 이메일입니다</p><Br><Br>
 			</td>
@@ -313,7 +345,7 @@ p{
 		<tr>
 			
 			<td>휴대폰번호<br>
-				<input type="tel" name="phone" placeholder="휴대폰번호 - 를 제외한 숫자 입력" required class="phone">
+				<input type="tel" name="phone" placeholder="휴대폰번호 - 를 제외한 숫자 입력" required class="phone input">
 				<p class="phonecheck">00000000000(숫자 11개) 형식으로 작성해주세요</p><br><br>
 			</td>
 		</tr>
@@ -321,18 +353,18 @@ p{
 		<tr>
 			
 			<td>주소<br>
-				<input type="text" id="sample6_postcode" name="post" placeholder="우편번호">
+				<input type="text" id="sample6_postcode" name="post" placeholder="우편번호" class="input">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 검색" id="adrbtn"><br>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소"><Br>
+				<input type="text" id="sample6_address" name="basic_addr" size="50" placeholder="기본주소" class="input"><Br>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소"><Br><Br>
+				<input type="text"  id="sample6_detailAddress" name="extra_addr" size="50" placeholder="상세주소" class="input"><Br><Br>
 			</td>
 		</tr>
 		
@@ -361,14 +393,14 @@ p{
 					<tr>
 						
 						<td>반려동물 이름<br>
-							<input type="text" name="pet_name" class="petname" placeholder="반려동물 이름 입력">
+							<input type="text" name="pet_name" class="petname input" placeholder="반려동물 이름 입력">
 							<p class="petnamecheck">이름은 필수 입력 항목입니다.</p><Br><Br>
 						</td>
 					</tr>
 					<tr>
 						
 						<td>반려동물 나이<br>
-							<input type="number" name="pet_age" class="petage" placeholder="반려동물 나이">
+							<input type="number" name="pet_age" class="petage input" placeholder="반려동물 나이">
 							<p class="petagecheck">숫자를 입력해주세요</p><Br><Br>
 						</td>
 					</tr>
@@ -406,6 +438,7 @@ p{
 			<th colspan="2">
 			<br><br>
 				<input type="submit" value="회원가입" id="registbtn">
+				<input type="button" id="fakeregistbtn" value="회원가입">
 			</th>
 		</tr>
 	</table>
