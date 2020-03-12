@@ -162,10 +162,10 @@ $(function(){
     $("#mt").change(function(){
         calcurate();
     });
-    $("#walking").change(function(){
+    $("#도그워킹").change(function(){
          calcurate();
     }); 
-    $("#sick").change(function(){
+    $("#투약").change(function(){
          calcurate();
     }); 
    $(".skill").change(function(){
@@ -217,17 +217,17 @@ $(function(){
      total = use_time_cal *10000;
 
      var matching = $("#mt option:selected").text();
-
+		
      //만약 위탁 서비스가 선택 되어 있다면
      if(matching == "위탁서비스"){
          total +=10000;
      }else{
          total +=20000;
      }
-     if($("#walking").is(":checked")){
+     if($("#도그워킹").is(":checked")){
          total += 10000;
      }
-     if($("#sick").is(":checked")){
+     if($("#투약").is(":checked")){
          total += 20000;
      }
      
@@ -320,7 +320,7 @@ $(function(){
 					<div>
 			            <label id="large-text">돌봄 예약일시</label><br>
 			            <hr>
-			            <!-- jsp 부분 : form 안에 위치 --> 
+			             <!-- jsp 부분 : form 안에 위치 --> 
 							<div style="font-size: 14px; margin-bottom: 5px;">날짜 선택</div>
 							<input id="callender" type="text" name="matching_time" class="start_date" required="required"> 
 						<!-- 날짜 -->
@@ -381,7 +381,22 @@ $(function(){
 			            <label id="large-text">돌봄 시 이용할 스킬</label><br>
 			            <hr>
 			            <c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">	
-				            <input id="${skillName.skill_name}" type="checkbox"  value="${skillName.skill_no}" name="skills_name" data-skills="${skillName.skill_name}">
+				           <c:if test="${skillName.skill_name eq '도그워킹'}">
+				            <input id="${skillName.skill_name}" type="checkbox"  value="4" name="payinfo_no" data-skills="${skillName.skill_name}">				           
+				           </c:if>
+				           <c:if test="${skillName.skill_name eq '투약'}">
+				            <input id="${skillName.skill_name}" type="checkbox"  value="5" name="payinfo_no" data-skills="${skillName.skill_name}">				           
+				           </c:if>
+				           <c:if test="${skillName.skill_name eq '퍼피케어'}">
+				            <input id="${skillName.skill_name}" type="checkbox"  value="42" name="payinfo_no" data-skills="${skillName.skill_name}">				           
+				           </c:if>
+				           <c:if test="${skillName.skill_name eq '키튼케어'}">
+				            <input id="${skillName.skill_name}" type="checkbox"  value="7" name="payinfo_no" data-skills="${skillName.skill_name}">				           
+				           </c:if>
+				           <c:if test="${skillName.skill_name eq '노령동물케어'}">
+				            <input id="${skillName.skill_name}" type="checkbox"  value="41" name="payinfo_no" data-skills="${skillName.skill_name}">				           
+				           </c:if>
+				           
 				            <label for="${skillName.skill_name}">${skillName.skill_name}</label>
 			            </c:forEach>   	 				        
 				        <div id="skills_text"></div>
