@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.kh.petmily.controller.board.CareController" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/controller/board/CareController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="53" width="422" x="278" y="-153"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="2" language="java" name="com.kh.petmily.service.board.CareService" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/board/CareService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="54" width="150" x="162" y="-53"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="com.kh.petmily.service.board.CareServiceImpl" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/service/board/CareServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="368" x="54" y="63"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="com.kh.petmily.repository.CareDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/CareDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="1" y="188"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="com.kh.petmily.repository.CarePetsitterDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/CarePetsitterDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="147" x="164" y="188"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.kh.petmily.repository.CareReplyImageDao" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/repository/CareReplyImageDao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="148" x="330" y="189"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.kh.petmily.entity.CareDto" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/entity/CareDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="152" x="328" y="-50"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.kh.petmily.entity.CareReplyDto" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/entity/CareReplyDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="150" x="497" y="-50"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.kh.petmily.entity.CareImageDto" project="petmily" 
+    file="/petmily/src/main/java/com/kh/petmily/entity/CareImageDto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="150" x="664" y="-50"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="10">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="11" name="careReplyDto">        
+        <position height="18" width="75" x="1074" y="256"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1013" y="254"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="14" name="careDto">        
+        <position height="18" width="48" x="1100" y="324"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1031" y="233"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="17" name="careDao">        
+        <position height="18" width="49" x="1028" y="297"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1110" y="286"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="20" name="careImageDto">        
+        <position height="18" width="76" x="1103" y="302"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1036" y="264"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="23" name="carePetsitterDao">        
+        <position height="18" width="88" x="1052" y="352"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1190" y="370"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="careService">        
+        <position height="18" width="69" x="1178" y="278"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1128" y="182"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="29">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="30" name="careReplyImageDao">        
+        <position height="18" width="104" x="1004" y="217"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1077" y="324"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
