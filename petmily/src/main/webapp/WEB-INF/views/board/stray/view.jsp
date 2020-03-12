@@ -441,7 +441,6 @@ header style -->
 
 				<!-- 댓글 수정 -->
 								<tr class="reply_edit">
-									<td align="right">
 									<th colspan="2" align="left">
 										<form action="replyUpdate" method="post"
 											class="reply_change_submit">
