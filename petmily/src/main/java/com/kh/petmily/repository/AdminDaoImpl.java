@@ -24,6 +24,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.QnaDto;
 import com.kh.petmily.entity.SkillNameDto;
@@ -710,6 +711,12 @@ public class AdminDaoImpl implements AdminDao {
 	@Override
 	public int blackListc(String id) {
 		return sqlSession.selectOne("admin.blackListc11", id);
+	}
+
+	// 펫 이미지 정보 가지고 오기
+	@Override
+	public List<PetDto> getPetImge(String member_id) {		
+		return sqlSession.selectList("admin.getPetImge", member_id);
 	}
 
 
