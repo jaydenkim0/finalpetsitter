@@ -301,7 +301,7 @@ header style -->#masthead:after {
 			<td><input type="hidden" name="partner_order_id"
 				value="${reservationList.reservation_no}" readonly>
 				${reservationList.reservation_no}</td>
-			<td>${reservationList.matching_time}</td>
+			<td>${reservationList.totalMatchingTimeWithFormat}</td>
 			<td><input type="hidden" name="partner_user_id"
 				value="${reservationList.member_id}" readonly>
 				${reservationList.member_id}</td>
