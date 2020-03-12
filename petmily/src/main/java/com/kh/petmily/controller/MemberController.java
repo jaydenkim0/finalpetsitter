@@ -86,7 +86,6 @@ public class MemberController {
 	@ResponseBody
 	public String input(@RequestParam String email, @RequestParam String id) throws MessagingException {
 		MemberDto find = memberService.passwordfind(email, id);
-		System.out.println("아이디 및 이메일로 찾는 아이디가 있는지?" + find);
 		if (find != null) {
 			emailService.sendChangePasswordMail(email, id);
 			return "success";
@@ -139,7 +138,6 @@ public class MemberController {
 		String result = encoder.encode(origin);
 		memberDto.setPw(result);
 		memberService.pwchange(memberDto);
-		System.out.println(memberDto);
 		return "redirect:/";
 	}
 
@@ -275,7 +273,6 @@ public class MemberController {
 	@RequestMapping(value = "idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int idCheck(@RequestParam("userId") String user_id) {
-		System.out.println(user_id);
 		return memberService.userIdCheck(user_id);
 	}
 
