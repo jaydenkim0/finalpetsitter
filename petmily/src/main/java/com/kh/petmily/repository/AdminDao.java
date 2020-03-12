@@ -277,6 +277,9 @@ public interface AdminDao {
 	// 시작 시간
 	int startTime(int reservation_no);
 
+	// 인터셉터  경고 5회 이상 펫시터 기능 접근 금지 및 예약 금지
+	int blackListc(String id);
+
 
 
 
