@@ -333,7 +333,7 @@ textarea {
 	display: white;
 	width: 120px;
 	height: 10x;
-	line-height: 20px;
+	line-height: 35px;
 	border: 1px #3399dd solid;
 	background-color: white;
 	text-align: center;
