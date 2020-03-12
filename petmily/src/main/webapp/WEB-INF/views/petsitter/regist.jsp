@@ -329,6 +329,7 @@ FOOTER 이용 시 넣어야할 요소
 	        <!-- 스킬 -->
 	        <div class="skill">
 	            <label id="large-text">펫밀리 스킬</label><br>
+	            <span id="medium-text">*스킬을 선택하지 않으시면, 예약을 받을 수 없습니다.</span>
 	            <hr>
 	            <c:forEach var="skillnames" items="${skillname}">
 		            <input id="${skillnames.skill_name}" type="checkbox"  value="${skillnames.skill_no}" name="skills_name" data-skills="${skillnames.skill_name}">
@@ -341,6 +342,7 @@ FOOTER 이용 시 넣어야할 요소
 	        <!-- 돌봄 가능 동물 종류 -->
 	        <div class="type">
 	            <label id="large-text">펫밀리 돌봄가능 동물 종류</label><br>
+	            <span id="medium-text">*돌봄가능 동물 종류를 선택하지 않으시면, 예약을 받을 수 없습니다.</span>
 	            <hr>
 	            <c:forEach var="carepettypes" items="${carepettype}">
 	                <input id="${carepettypes.care_type}" type="checkbox"  value="${carepettypes.care_type_no}" name="care_name" data-animal="${carepettypes.care_type}">
@@ -353,6 +355,7 @@ FOOTER 이용 시 넣어야할 요소
 	        <!-- 돌봄 환경 -->
 	        <div class="condition">
 	            <label id="large-text">펫밀리 돌봄 환경</label><br>
+	            <span id="medium-text">*돌봄 환경을 종류를 선택하지 않으시면, 예약을 받을 수 없습니다.</span>
 	            <hr>
 	            <c:forEach var="c" items="${careconname}">    		
 	                <input id="${c.care_condition_name}" type="checkbox"  value="${c.care_condition_no}" name="care_condition_name" data-condition="${c.care_condition_name}">	     
