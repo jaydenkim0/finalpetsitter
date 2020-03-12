@@ -29,8 +29,12 @@ HEADER 이용 시 넣어야할 요소
             $masthead.toggleClass('is-active');
             return false; 
           })
-      });
+      });  
+      
     </script>
+    
+
+    
      <style>
 	#masthead:after {
 	  content: '';
@@ -279,9 +283,10 @@ select {
 </style>
 
 
-<!-- header 불러오기 -->
+	<!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+	
 
 <section class="section-content" >
 
