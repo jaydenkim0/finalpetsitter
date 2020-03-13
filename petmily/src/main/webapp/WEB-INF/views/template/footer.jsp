@@ -30,7 +30,7 @@
           <div class="col-md-12">
             <div class="border-top pt-5">
             <p>
-                Copyright © Prtmily Crop. All right reserved.  
+                Copyright © Petmily Crop. All right reserved.  
             </p>
             </div>
             

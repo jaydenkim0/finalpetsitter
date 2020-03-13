@@ -117,8 +117,7 @@
 		border-color: #BDBDBD;
 		border-style: solid;
 		border-width: 1px;
-		border-radius: 4px;
-		
+		border-radius: 4px;		
 	}
 	</style>  
 
