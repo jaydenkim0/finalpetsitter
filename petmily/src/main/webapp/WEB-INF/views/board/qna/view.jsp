@@ -443,7 +443,7 @@ header style -->
 								<tr>
 									<th align="left">
 									<c:choose>
-											<c:when test="${not empty sessionScope.id}"> 
+											<c:when test="${not empty reply.reply_writer}"> 
 											<img src = "${context}/board/qna/member/image?member_image_member_id=${reply.reply_writer}" class="profile"  onerror="no_image2()" id="2">
 											${reply.reply_writer}
 											</c:when>
