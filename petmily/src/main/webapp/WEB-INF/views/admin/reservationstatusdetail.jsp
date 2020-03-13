@@ -107,14 +107,14 @@
 						</td>					
 					</tr>
 					<tr>			
-						<td> 예약 시간 : ${acountOne.matching_time}</td>					
+						<td> 매칭 시간 : ${acountOne.getTotalMatchingTimeWithFormat()}</td>					
 					</tr>
 					<tr>			
 						<td> 이용 시작 시간 : ${startTime} 시 부터 ~ ${lastTime} 시 까지 </td>					
 					</tr>
 					<tr>			
 						<td> 사용 시간 : ${usageTime} 시간</td>											
-					</tr>
+					</tr>			
 					<tr>			
 						<td> 결제 금액 :  
 						<fmf:formatNumber type="number"  maxFractionDigits="3" value="${payMent}" />
@@ -155,7 +155,7 @@
 									</td>		
 								</tr>						
 							<tr>			
-									<td> 승인 시간 : ${pay.process_time}</td>					
+									<td> 승인 시간 : ${pay.getTotalprocess_timeTimeWithFormat()}</td>					
 							</tr>							
 							</c:forEach>
 							

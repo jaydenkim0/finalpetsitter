@@ -253,6 +253,15 @@ function no_image2(){
 			<th>LastLogin</th>		
 			<td>${mypage2.mypage_loginWithFormat }</td>
 	</tr>
+	<tr>
+		<c:if test="${blackCount >= 5 }">		
+			<small style="color: red; text-align: center;" >
+			${mypage.name } 님은 ${blackCount} 회 경고를받았습니다<br>
+			※ 5회 이상 경고가 누적될 경우<br> 
+			서비스의 제한을 받을 수 있습니다.
+			 </small>
+		</c:if>
+	</tr>
 </table>
 <div id="side_left_box2">
 

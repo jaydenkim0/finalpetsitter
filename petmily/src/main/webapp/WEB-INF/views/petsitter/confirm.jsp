@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<c:set var="context" value="${pageContext.request.contextPath}"></c:set>
@@ -180,7 +181,7 @@ FOOTER 이용 시 넣어야할 요소
 					<br><br>
 					<span id="large-text">예약 날짜</span><br>
 					<hr>
-					<span>${reservationList.matching_time}</span>
+					<span>${reservationList.getTotalMatchingTimeWithFormat()}</span>
 
 					<br><br>
 					<span id="large-text">시작 시간 ~ 마지막 시간</span><br>
@@ -191,16 +192,24 @@ FOOTER 이용 시 넣어야할 요소
 					<span id="large-text">예약 이용 시간</span><br> 
 					<hr>
 					<span>${usageTime} 시간</span>					
+										
+					<br><br>
+					<span id="large-text">신청내용</span><br> 
+					<hr>
+					<span>${reservationList.ect}</span>
+					
+					
 					
 					<br><br>
 					<span id="large-text">견적 승인 펫시터</span><br>
 					<hr>
 					<span id="large-text">${sitter_id}</span>
-					
-					
+				
 					<br><br>
-						<span id="large-text">예약 스킬</span><br> 
-						<hr>	
+					<br><br>
+					<span id="large-text">예약 스킬</span><br> 
+					<hr>	
+						
 					<c:forEach var="skill" items="${payinfo}">
 						<span>${skill.payname}</span><br>
 					</c:forEach>
@@ -232,7 +241,7 @@ FOOTER 이용 시 넣어야할 요소
 						<span id="large-text">예약한 반려동물 특이사항</span><br> 
 						<hr>
 						<span>${pets.ect}</span>
-						<br><br>
+						<br><br>				
 					</c:forEach>
 					
 
@@ -240,7 +249,9 @@ FOOTER 이용 시 넣어야할 요소
 					<br><br>
 					<hr>
 					<div align="right">
-						<span id="extra-large-text">총 ${payMent} 원</span><br> 
+						<span id="extra-large-text">	총 
+						<fmt:formatNumber type="number" maxFractionDigits="3" value="${payMent}"/>
+						 원 </span><br> 
 					</div>
 			</div>
 			

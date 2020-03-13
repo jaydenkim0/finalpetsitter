@@ -151,7 +151,7 @@ public class PayController {
 		 List<PayinfoDto> list = adminService.payinfoName(reservation_no);
 		aemailService.paymentApplymemberEMail(id, email, total_amount);
 		aemailService.paymentApplypetsitterEMail(id, sitter_id, sitter_email, list);
-		return "success";
+		return "home";
 	}
 	
 	
