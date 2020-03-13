@@ -33,6 +33,7 @@ import com.kh.petmily.entity.PetImagePetDto;
 import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.CertDao;
+import com.kh.petmily.service.AdminEmailService;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
@@ -60,6 +61,26 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	//관리자 이메일 서비스
+	@Autowired
+	private AdminEmailService aemailService;
+	
+	@GetMapping("/email")
+	@ResponseBody
+	public String email(@RequestParam String userId) {
+		String email = memberService.get_email(userId);
+		return emailService.sendWriteMessage(email);
+	}
+	// 비밀번호 변경 이메일 발송
+	@GetMapping("/send")
+	@ResponseBody // 내가 반환하는 내용이 곧 결과물
+	public String send(@RequestParam String email, HttpSession session) {
+		// 인증번호를 세션이든 DB든 어디에 저장
+		String cert = randomService.generateCertificationNumber(6);
+		session.setAttribute("cert", cert);
+		return emailService.sendCertMessage(email, cert);
+	}
 
 	@GetMapping("/validate")
 	@ResponseBody
@@ -92,16 +113,6 @@ public class MemberController {
 		} else {
 			return "fail";
 		}
-	}
-
-	// 비밀번호 변경 이메일 발송
-	@GetMapping("/send")
-	@ResponseBody // 내가 반환하는 내용이 곧 결과물
-	public String send(@RequestParam String email, HttpSession session) {
-		// 인증번호를 세션이든 DB든 어디에 저장
-		String cert = randomService.generateCertificationNumber(6);
-		session.setAttribute("cert", cert);
-		return emailService.sendCertMessage(email, cert);
 	}
 
 	// 이메일 전달 완료후 이메일 확인해달라는 페이지

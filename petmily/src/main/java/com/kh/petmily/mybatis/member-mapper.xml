@@ -485,6 +485,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from pet_image where pet_image_pet_no=#{pet_image_pet_no}
 	</select>
 	
+	<select id="get_email" parameterType="String" resultType="String">
+		select email from member where id=#{userId}
+	</select>
+	
 </mapper>
 
 

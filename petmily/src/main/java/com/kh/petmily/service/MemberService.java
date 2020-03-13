@@ -165,4 +165,7 @@ public interface MemberService {
 	//펫이미지개수
 	int petimagecount(int pet_image_pet_no);
 
+	//이메일주소
+	String get_email(String userId);
+
 }

@@ -182,7 +182,7 @@ $(function(){
 
 <div align="center">
 <br>
-<h1>돌봄게시판</h1>
+<h1>펫밀리 토크</h1>
 <br>
 <c:set var="context" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="type" value="${param.type}"></c:set>
