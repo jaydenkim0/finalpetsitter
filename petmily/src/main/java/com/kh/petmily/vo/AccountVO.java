@@ -1,5 +1,7 @@
 package com.kh.petmily.vo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.kh.petmily.entity.PayDto;
@@ -48,5 +50,15 @@ public class AccountVO {
 	private int usage_time;
 
 	private List<PayDto> statuslist;
+	
+	//매칭타임 시간 합치기
+	public String getTotalMatchingTimeWithFormat()throws Exception{
+		SimpleDateFormat read = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+		Date date = read.parse(matching_time);
+		SimpleDateFormat write = new SimpleDateFormat("y년 M월 d일");
+		String time = write.format(date);
+		return time;
+		
+	}
 
 }

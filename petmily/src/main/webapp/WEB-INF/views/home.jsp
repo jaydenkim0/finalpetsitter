@@ -183,7 +183,7 @@ FOOTER 이용 시 넣어야할 요소
                             </div>
                             <!-- 내용 -->
                             <p>${review.review_content}</p>                            
-               			S   	</a>
+               			  	</a>
                         </div>
             </c:forEach> 
         	</div>

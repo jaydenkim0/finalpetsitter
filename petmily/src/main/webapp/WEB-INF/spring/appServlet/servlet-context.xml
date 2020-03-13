@@ -70,6 +70,7 @@
           <exclude-mapping path="/petsitter/estimate*"/>
           <exclude-mapping path="/petsitter/confirm*"/>          
           <exclude-mapping path="/petsitter/searchlist*"/>
+          <exclude-mapping path="/petsitter//member/image*"/>
           <beans:bean class="com.kh.petmily.interceptor.PetsitterInterceptor"></beans:bean>
        </interceptor>
        <!-- 회원 접속 권한 거부  -->
