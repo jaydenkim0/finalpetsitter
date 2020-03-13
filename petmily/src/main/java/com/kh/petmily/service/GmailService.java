@@ -26,22 +26,6 @@ public class GmailService implements EmailService{
 	@Autowired
 	private RandomService randomService;
 
-	@Override
-	public String sendCertMessage(String email, String cert) {
-		try {
-			SimpleMailMessage message = new SimpleMailMessage();
-			String[] to = {email};
-			message.setTo(to);
-			message.setSubject("[팻밀리] 인증을 위한 이메일입니다.");
-			message.setText("인증번호 : " + cert);
-			sender.send(message);
-			return "success";
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return "fail";
-		}
-	}
 
 //	@Transactional//이 표시가 붙은 메소드는 기능이 하나로 합쳐져서 실행관리
 	@Override
@@ -84,6 +68,40 @@ public class GmailService implements EmailService{
 		helper.setText(buffer.toString(), true);
 		
 		sender.send(message);
+	}
+
+	@Override
+	public String sendCertMessage(String email, String cert) {
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			String[] to = {email};
+			message.setTo(to);
+			message.setSubject("[팻밀리] 인증을 위한 이메일입니다.");
+			message.setText("인증번호 : " + cert);
+			sender.send(message);
+			return "success";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
+	}
+	
+	@Override
+	public String sendWriteMessage(String email) {
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			String[] to = {email};
+			message.setTo(to);
+			message.setSubject("[팻밀리] 돌봄방이 생성되었습니다.");
+			message.setText("생성된 돌봄방을 확인해주세요"+"");
+			sender.send(message);
+			return "success";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return "fail";
+		}
 	}
 	
 }

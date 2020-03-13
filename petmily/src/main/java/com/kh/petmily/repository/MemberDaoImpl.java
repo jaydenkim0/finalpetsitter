@@ -368,4 +368,9 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.petimagecount",pet_image_pet_no);
 	}
 
+	@Override
+	public String get_email(String userId) {
+		return sqlSession.selectOne("member.get_email",userId);
+	}
+
 }
