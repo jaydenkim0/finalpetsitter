@@ -170,5 +170,7 @@ public interface MemberDao {
 	//펫이미지개수
 	int petimagecount(int pet_image_pet_no);
 
+	String get_email(String userId);
+
 
 }

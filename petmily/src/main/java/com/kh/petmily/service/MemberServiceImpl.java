@@ -424,5 +424,11 @@ public class MemberServiceImpl implements MemberService {
 	public int petimagecount(int pet_image_pet_no) {
 		return memberDao.petimagecount(pet_image_pet_no);
 	}
+
+	//이메일주소
+	@Override
+	public String get_email(String userId) {
+		return memberDao.get_email(userId);
+	}
 	}
 

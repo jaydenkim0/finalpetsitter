@@ -37,6 +37,19 @@
 	    }
 	}
 </script>
+<script>
+$(function () {    		
+	// 펫시터 승인 버튼 클릭시 발생
+	$("#submit").click(function(e) {
+		var user_id = $("#user_id").val();	
+		
+		$.ajax({
+				url:'${pageContext.request.contextPath}/member/email?userId='+user_id,
+				type:'get'
+			});
+		});						
+	});
+</script>
 <!-- 
 HEADER 이용 시 넣어야할 요소 
 :	jquery js,
@@ -121,6 +134,20 @@ FOOTER 이용 시 넣어야할 요소
 		left: 50%;
 		margin-left:-110px;
 	}
+	#loading{
+	width: 220px;
+		height: 60px;
+		border: none;
+		background-color: #1482e0;
+		border-radius: 3px;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+		position: relative;
+		top: 1px;
+		left: 50%;
+		margin-left:-110px;
+	}
 	.input{
 		width:400px;
 		BORDER-BOTTOM: teal 1px solid;
@@ -184,7 +211,7 @@ p{
 				<input type="text" name="care_sitter_id" class="sitter_id_check input" id="user_id" list="depList" oninput="checkId()" required>
 				<datalist id="depList">
 					<c:forEach var="data" items="${list }">
-						<option value="${data }">${data }</option>
+						<option value="${data }" class="user_id">${data }</option>
 					</c:forEach>
 				</datalist><br><br>
 				<div class="id_check"><br></div>
