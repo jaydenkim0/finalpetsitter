@@ -34,6 +34,7 @@ import com.kh.petmily.entity.ReservationReviewPaySitterDto;
 import com.kh.petmily.entity.ReviewSitterDto;
 import com.kh.petmily.repository.CertDao;
 import com.kh.petmily.service.AdminEmailService;
+import com.kh.petmily.service.AdminService;
 import com.kh.petmily.service.EmailService;
 import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.RandomService;
@@ -61,6 +62,9 @@ public class MemberController {
 
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	//관리자 이메일 서비스
 	@Autowired
@@ -479,7 +483,10 @@ public class MemberController {
 
 		List<PetImagePetDto> petlist = memberService.mylistpet(id);
 		model.addAttribute("mylistpet", petlist);
-
+		
+		// 블랙리스트 인지 확인
+		int blackListc = adminService.blackListc(id);
+		model.addAttribute("blackCount", blackListc);
 		return "member/mypage";
 	}
 

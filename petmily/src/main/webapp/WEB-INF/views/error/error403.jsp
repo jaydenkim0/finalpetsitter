@@ -18,7 +18,7 @@
 		<h3>403</h3>		
 		<h4>권한이 없습니다.</h4>
 		
-		<c:if test="${blackCount < 6 }" >
+		<c:if test="${blackCount >= 5 }" >
 			<h5 style="color: red;"> ${sessionScope.id} 님의 경고가 ${blackCount}회이며
 			 5회 이상시 접근이 불가합니다 </h5>
 		</c:if>
