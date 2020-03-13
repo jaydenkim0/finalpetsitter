@@ -16,5 +16,6 @@ public class PetDto {
 	private String name; // 반려 동물 이름
 	private int age; // 반려동물 나이
 	private String type; // 반려동물의 종류
-	private String ect; // 반려동물의 기타 정보
+	private String ect; // 반려동물의 기타 정보	
+
  }

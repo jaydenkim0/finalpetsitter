@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.PayDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.ReviewDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.service.AdminEmailService;
@@ -32,6 +34,7 @@ import com.kh.petmily.service.MemberService;
 import com.kh.petmily.service.board.ReviewService;
 import com.kh.petmily.service.kakao.PayService;
 import com.kh.petmily.service.petsitter.PetsitterService;
+import com.kh.petmily.vo.AccountVO;
 import com.kh.petmily.vo.MemberVO;
 import com.kh.petmily.vo.NaviVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
@@ -240,31 +243,60 @@ public class PetsitterController {
 	public String confirm(@RequestParam int reservation_no,
 							Model model) {		
 		try {
-			//예약 정보  단일 조회
-			ReservationListVO reservationList = petsitterService.getReservation(reservation_no);			
+//			//예약 정보  단일 조회
+//			ReservationListVO reservationList = petsitterService.getReservation(reservation_no);			
+//			//1시간 당 금액 구하기
+//			int hourPayment = payService.getHourPayment();			
+//			//거절시 결제금액 구하지 않고 진행 
+//			//최종 결제 금액 구하기
+//			int payMent = 0;
+//				List<ReservationAllVO> all = reservationList.getList();
+//				
+//				int totalTime = all.get(0).getUsage_time();
+//				int startTime = all.get(0).getStart_time();
+//				
+//				for(ReservationAllVO allVO : all) {
+//					
+//					int usagetime = allVO.getUsage_time();
+//					
+//					int oneHour = usagetime * hourPayment;
+//					int payment = allVO.getPayment();
+//					
+//					payMent = oneHour + payment;			
+//				}			
+//			model.addAttribute("reservationList", reservationList)
+//				.addAttribute("payMent", payMent)
+//				.addAttribute("usageTime", totalTime)
+//				.addAttribute("startTime", startTime);
+////////////////////////////////////////////////////////////////////////
+			// 결제에 대한 단일 정보 : accountVO
+			AccountVO acountVO = adminService.reservationstatusdetail(reservation_no);		
+			// 결제 가격이름정보 : payifoDto
+			// 펫시터 이름 : petsitterVO
+			int pet_sitter_no = acountVO.getReservation_sitter_no();
+			PetsitterVO petsitter = adminService.petsitterdetail(pet_sitter_no);
+			String sitter_id = petsitter.getSitter_id();		
+			List<PayinfoDto> list =  adminService.payinfoName(reservation_no);
+			model.addAttribute("reservationList", acountVO)  // 예약정보 및 총 금액				 
+			 		  .addAttribute("payinfo", list)	// 금액	 이름, 서비스 이름	
+			 		  .addAttribute("sitter_id", sitter_id);	// 펫시터 아이디	
+			//	펫 정보 가지고 오기
+			String member_id = acountVO.getMember_id();			
+			// 회원이 펫 이미지정보 가지고 오기 PET_IMAGE_PET_NO
+			List<PetDto> petinfo = adminService.getPetImge(member_id);		
+			model.addAttribute("petinfo", petinfo); // 반려동물 정보 및 이미지정보
+			// 결제금액 구하기
 			//1시간 당 금액 구하기
-			int hourPayment = payService.getHourPayment();			
-			//거절시 결제금액 구하지 않고 진행 
+			int hourPayment = adminService.hourPayment();
 			//최종 결제 금액 구하기
-			int payMent = 0;
-				List<ReservationAllVO> all = reservationList.getList();
-				
-				int totalTime = all.get(0).getUsage_time();
-				int startTime = all.get(0).getStart_time();
-				
-				for(ReservationAllVO allVO : all) {
-					
-					int usagetime = allVO.getUsage_time();
-					
-					int oneHour = usagetime * hourPayment;
-					int payment = allVO.getPayment();
-					
-					payMent = oneHour + payment;			
-				}			
-			model.addAttribute("reservationList", reservationList)
-				.addAttribute("payMent", payMent)
-				.addAttribute("usageTime", totalTime)
-				.addAttribute("startTime", startTime);
+			int totalTime = adminService.totalTime(reservation_no);
+			int startTime = adminService.startTime(reservation_no);
+			int lastTime = startTime + totalTime;			
+			int payMent = hourPayment * totalTime;
+				model.addAttribute("payMent", payMent) // 총 금액
+				.addAttribute("usageTime", totalTime) // 사용시간
+				.addAttribute("startTime", startTime) // 시작시간
+				.addAttribute("lastTime", lastTime);	// 끝나는 시간	
 			return "petsitter/confirm";
 		}catch (Exception e){
 			e.printStackTrace();	

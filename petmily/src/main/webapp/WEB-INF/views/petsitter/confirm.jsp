@@ -180,52 +180,67 @@ FOOTER 이용 시 넣어야할 요소
 					<br><br>
 					<span id="large-text">예약 날짜</span><br>
 					<hr>
-					<span>${reservationList.totalMatchingTimeWithFormat}</span>
+					<span>${reservationList.matching_time}</span>
 
 					<br><br>
-					<span id="large-text">시작 시간</span><br>
+					<span id="large-text">시작 시간 ~ 마지막 시간</span><br>
 					<hr>
-					<span>${startTime}시</span>
+					<span>${startTime}시 ~ ${lastTime} 시까지</span>
+					
+					<br><br>
+					<span id="large-text">예약 이용 시간</span><br> 
+					<hr>
+					<span>${usageTime} 시간</span>					
+					
+					<br><br>
+					<span id="large-text">견적 승인 펫시터</span><br>
+					<hr>
+					<span id="large-text">${sitter_id}</span>
+					
 					
 					<br><br>
 						<span id="large-text">예약 스킬</span><br> 
 						<hr>	
-					<c:forEach var="skill" items="${reservationList.list}">
+					<c:forEach var="skill" items="${payinfo}">
 						<span>${skill.payname}</span><br>
 					</c:forEach>
 					
 					<br><br>
-					<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${reservationList.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
+					<c:forEach var="pets"  items="${petinfo}"  varStatus="status">
+					<hr>
+					<br><br>
+					<span id="large-text"> 반려동물  ${status.count} </span>
+					<br><br>
+						<img src="${pageContext.request.contextPath}/petsitter/pet/image?pet_no=${pets.pet_no}" style="width: 20%; height: auto;" onerror="no_image()" id="pet_image">
 					<br>
 
-					<span id="large-text">예약한 반려동물 이름</span><br> 
-					<hr>
-					<span>${reservationList.pet_name}</span>
+						<span id="large-text">예약한 반려동물 이름</span><br> 
+						<hr>
+						<span>${pets.name}</span>
+						
+						<br><br>
+						<span id="large-text">예약한 반려동물 나이</span><br> 
+						<hr>
+						<span>${pets.age}살</span>
+	
+						<br><br>
+						<span id="large-text">예약한 반려동물 종류</span><br> 
+						<hr>
+						<span>${pets.type}</span>
+						
+						<br><br>
+						<span id="large-text">예약한 반려동물 특이사항</span><br> 
+						<hr>
+						<span>${pets.ect}</span>
+						<br><br>
+					</c:forEach>
 					
-					<br><br>
-					<span id="large-text">예약한 반려동물 나이</span><br> 
-					<hr>
-					<span>${reservationList.age}살</span>
 
-					<br><br>
-					<span id="large-text">예약한 반려동물 종류</span><br> 
-					<hr>
-					<span>${reservationList.type}</span>
-					
-					<br><br>
-					<span id="large-text">예약한 반려동물 특이사항</span><br> 
-					<hr>
-					<span>${reservationList.pet_ect}</span>
-			
-					<br><br>
-					<span id="large-text">예약 이용 시간</span><br> 
-					<hr>
-					<span>${usageTime}시간</span>
 
 					<br><br>
 					<hr>
 					<div align="right">
-						<span id="extra-large-text">총 ${payMent}원</span><br> 
+						<span id="extra-large-text">총 ${payMent} 원</span><br> 
 					</div>
 			</div>
 			

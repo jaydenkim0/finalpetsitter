@@ -24,6 +24,7 @@ import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.PayDto;
 import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
+import com.kh.petmily.entity.PetImageDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.repository.AdminDao;
@@ -610,6 +611,12 @@ public class AdiminServiceImpl implements AdminService {
 	@Override
 	public int blackListc(String id) {	
 		return 	adminDao.blackListc(id);
+	}
+
+	// 펫 이미지 정보 가지고 오기
+	@Override
+	public List<PetDto> getPetImge(String member_id) {		
+		return adminDao.getPetImge(member_id);
 	}
 
 

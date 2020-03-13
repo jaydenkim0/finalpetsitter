@@ -681,6 +681,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			select DISTINCT start_time from reservationpay 
 			where pay_reservation_no = #{reservation_no}
 		</select>
+		<!-- 펫 정보 갖고 오기 -->
+		<select id="getPetImge" parameterType="String"
+		resultType="petDto">
+			select * from pet where member_id = #{member_id}
+		</select>
 		
 		
 	<!-- 정산관리 -->
