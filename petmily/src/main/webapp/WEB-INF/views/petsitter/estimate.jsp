@@ -44,14 +44,14 @@
 	           //표시될 월의 개수를 설정
 	           numberOfMonths:1,
 	           //날짜 선택이 아닌 범위 선택으로 설정
-	           singleDate:false,
+// 	           singleDate:true,
 	           //최초 선택일 이후로만 종료일을 선택하도록 설정
-	           selectForward:false,
+// 	           selectForward:true,
 	           //날짜 구분자 설정
-	           seperator:'-',
+// 	           seperator:'-',
 	               
-	           minDate : minDate,
-	           maxDate : maxDate,
+// 	           minDate : minDate,
+// 	           maxDate : maxDate,
 	       		
 	           //날짜형식설정
 	            format:'YYYY-MM-DD'
@@ -267,9 +267,7 @@ $(function(){
 		});					
  });
 </script>
-    
-    
-    
+
 <!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 	
@@ -373,6 +371,7 @@ $(function(){
 							<option value="21">오후 9시(21:00)</option>
 							<option value="22">오후 10시(22:00)</option>
 						</select>
+				    	<div id="select_text"></div>
 				    </div>
 			    
 			    <br><br>
