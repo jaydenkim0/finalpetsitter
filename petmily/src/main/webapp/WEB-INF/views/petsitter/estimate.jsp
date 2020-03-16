@@ -44,9 +44,9 @@
 	           //표시될 월의 개수를 설정
 	           numberOfMonths:1,
 	           //날짜 선택이 아닌 범위 선택으로 설정
-	           singleDate:true,
+	           singleDate:false,
 	           //최초 선택일 이후로만 종료일을 선택하도록 설정
-	           selectForward:true,
+	           selectForward:false,
 	           //날짜 구분자 설정
 	           seperator:'-',
 	               
