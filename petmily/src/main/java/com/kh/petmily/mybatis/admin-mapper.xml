@@ -625,8 +625,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				            order by reservation_no desc
 				     )A
 			    ) where rn between  #{start} and #{end}					
-			</select>
-			
+			</select>			
 			<!-- resultMap 에 추가되는 속성을 List 로 찾아서 넣어줌 -->
 			<select id="getPayStatusListMap"  resultType="payDto" parameterType="int">		
 				select * from pay where partner_order_id = #{partner_order_id}
