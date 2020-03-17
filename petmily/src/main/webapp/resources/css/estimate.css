@@ -118,5 +118,8 @@
 .warning{
 	font-size: 11pt;
     font-family: NotosanL;
-    color: #1482e0;
+    color: red;
+}
+.estimate-wrap .warning-box{
+    border: 2px solid red;
 }

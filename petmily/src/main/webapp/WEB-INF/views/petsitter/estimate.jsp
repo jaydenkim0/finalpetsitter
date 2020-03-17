@@ -267,6 +267,33 @@ $(function(){
 		});					
  });
 </script>
+<script>
+	$(function(){
+	    $("#time_end").change(function(){
+	            var start = $("#time_start").val();
+	            var end = $("#time_end").val();
+	            
+	            console.log("시작"+start);
+	            console.log("끝"+end);
+	
+	            $("#select_text").empty();
+	            $("#time_start").removeClass("warning-box");
+	            $("#time_end").removeClass("warning-box");
+	            $("#send_btn").removeAttr("disabled");
+	
+	        if(parseInt(start) >= parseInt(end)){
+	            var re = $("<span>").text("다시 선택하세요.").addClass("warning");
+	
+	            $("#time_start").addClass("warning-box");
+	            $("#time_end").addClass("warning-box");
+	           
+	            $("#select_text").append(re);
+	
+	            $("#send_btn").attr("disabled",true);
+	        }
+	    });
+	});
+</script>  
 
 <!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
