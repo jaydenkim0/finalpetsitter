@@ -282,6 +282,67 @@ FOOTER 이용 시 넣어야할 요소
      });
 	</script>
 	
+	<script>
+		$(function(){
+	        $("input[type=checkbox]").click(function(){
+	            calcurate();
+	        });
+	    });
+	
+	    function calcurate(){
+	        $("input[name=care_condition_name]").removeAttr("disabled");
+	
+	        if($("#아파트").is(":checked")){
+	                $("#빌라").attr("disabled",true);
+	                $("#빌라").attr("checked", false);
+	                $("#원룸").attr("disabled",true);
+	                $("#원룸").attr("checked", false);
+	                $("#주택").attr("disabled",true);
+	                $("#주택").attr("checked", false);
+	        }
+	        if($("#빌라").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#원룸").attr("disabled",true);
+                $("#원룸").attr("checked", false);
+                $("#주택").attr("disabled",true);
+                $("#주택").attr("checked", false);
+        	}
+	        if($("#원룸").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#빌라").attr("disabled",true);
+                $("#빌라").attr("checked", false);
+                $("#주택").attr("disabled",true);
+                $("#주택").attr("checked", false);
+        	}
+	        if($("#주택").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#빌라").attr("disabled",true);
+                $("#빌라").attr("checked", false);
+                $("#원룸").attr("disabled",true);
+                $("#원룸").attr("checked", false);
+        	}
+	
+	        if($("#해당사항없음").is(":checked")){
+	            $("#아파트").attr("disabled",true);
+	            $("#아파트").attr("checked", false);
+	            $("#빌라").attr("disabled",true);
+	            $("#빌라").attr("checked", false);
+	            $("#원룸").attr("disabled",true);
+	            $("#원룸").attr("checked", false);
+	            $("#주택").attr("disabled",true);
+	            $("#주택").attr("checked", false);
+	            $("#아기있음").attr("disabled",true);
+	            $("#아기있음").attr("checked", false);
+	            $("#흡연자").attr("disabled",true);
+	            $("#흡연자").attr("checked", false);
+	        }
+	    }
+    </script>
+	
+	
 <!-- 에디터 삽입 -->
 <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
 
@@ -431,11 +492,11 @@ FOOTER 이용 시 넣어야할 요소
 	            <hr>
 	            <div class="template">
 	                <select class="region" name="location_name[0].city" required>
-	                    <option>지역을 선택하세요</option>
+	                    <option value="" selected disabled hidden>지역을 선택하세요</option>
 	                </select>
 	                
 	                <select class="section" name="location_name[0].area" required>
-	                    <option>구를 선택하세요</option>
+	                    <option value="" selected disabled hidden>구를 선택하세요</option>
 	                </select>
 	            <button id="add-btn">추가</button>
 	            </div>
