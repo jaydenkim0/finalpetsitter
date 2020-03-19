@@ -333,4 +333,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select sitter_id from pet_sitter
 	</select>
 	
+	<!-- 작성자 아이디 갖고오기 -->
+	<select id="get_writer" parameterType="int" resultType="String">
+		select care_member_id from care_board where care_board_no=#{care_board_no}
+	</select>	
+	
+	<!-- 펫시터 아이디 갖고오기 -->
+	<select id="get_petsitter" parameterType="int" resultType="String">
+		select 
+			P.sitter_id 
+		from
+			care_board C
+				 	inner join pet_sitter P
+				 	on C.care_sitter_no=P.pet_sitter_no
+		where
+			C.care_board_no=#{care_board_no}
+	</select>
+	
 </mapper>
