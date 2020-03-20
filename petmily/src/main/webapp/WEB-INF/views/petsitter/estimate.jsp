@@ -410,6 +410,7 @@ $(function(){
 			            	<input id="${pay.payname}" type="checkbox"  value="${pay.payinfo_no}" name="payinfo_no" data-skills="${pay.payname}">				           
 				            <label for="${pay.payname}">${pay.payname}</label>
 			            </c:forEach>
+			             <div id="skills_text"></div>
 			          			            
 <%-- 			            <c:forEach var="skillName" items="${petsitterGetList.skillsVO}">	 --%>
 <%-- 				            <input id="${skillName.skill_name}" type="checkbox"  value="${skillName.skill_no}" name="payinfo_no" data-skills="${skillName.skill_name}">				            --%>
