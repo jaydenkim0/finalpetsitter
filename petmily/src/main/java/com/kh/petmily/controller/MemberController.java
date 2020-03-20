@@ -251,7 +251,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	// 회원이미지 가져오기(src로 주소)
+	//  회원이미지 가져오기(src로 주소)
 	@GetMapping("/member/image")
 	public ResponseEntity<ByteArrayResource> member_image(@RequestParam int member_image_no)
 			throws UnsupportedEncodingException, IOException {
@@ -359,6 +359,7 @@ public class MemberController {
 	@PostMapping("/mylistchange")
 	public String edit(@ModelAttribute MemberDto memberDto, @RequestParam MultipartFile member_image,
 			@RequestParam int member_image_no,
+			@RequestParam int member_noimage,
 			HttpSession session) throws IllegalStateException, IOException {
 
 		String id = (String) session.getAttribute("id");
@@ -372,6 +373,9 @@ public class MemberController {
 				memberService.member_image_regist(id, member_image);
 			}
 		}
+		if(member_noimage>0) {
+			memberService.member_noimage(member_noimage);
+		}
 
 		memberService.mylistchange(memberDto);
 
@@ -381,7 +385,8 @@ public class MemberController {
 	// 반려동물 정보수정 제출 후 연결
 	@PostMapping("/petchange")
 	public String petchange(@RequestParam String pet_no, @ModelAttribute PetDto petDto,
-			@RequestParam MultipartFile pet_image) throws IllegalStateException, IOException {
+			@RequestParam MultipartFile pet_image,
+			@RequestParam int pet_noimage) throws IllegalStateException, IOException {
 		memberService.petchange(petDto);
 
 		int pet_image_pet_no = Integer.parseInt(pet_no);
@@ -394,6 +399,9 @@ public class MemberController {
 			}else {
 				memberService.pet_image_regist(Integer.parseInt(pet_no), pet_image);
 			}
+		}
+		if(pet_noimage>0) {
+			memberService.pet_noimage(pet_noimage);
 		}
 
 		return "redirect:mylist";

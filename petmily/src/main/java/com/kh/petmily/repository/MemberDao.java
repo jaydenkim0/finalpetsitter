@@ -170,7 +170,14 @@ public interface MemberDao {
 	//펫이미지개수
 	int petimagecount(int pet_image_pet_no);
 
+	//사용자 이메일 가져오기
 	String get_email(String userId);
+
+	//회원 프로필이미지삭제
+	void member_noimage(int member_noimage);
+
+	//펫프로필이미지 삭제
+	void pet_noimage(int pet_noimage);
 
 
 }

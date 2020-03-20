@@ -185,5 +185,17 @@ public class CareDaoImpl implements CareDao{
 		return sqlSession.selectList("care.offer_id");
 	}
 
+	//작성자 아이디 갖고오기
+	@Override
+	public String get_writer(int care_board_no) {
+		return sqlSession.selectOne("care.get_writer",care_board_no);
+	}
+
+	//펫시터 아이디 갖고오기
+	@Override
+	public String get_petsitter(int care_board_no) {
+		return sqlSession.selectOne("care.get_petsitter",care_board_no);
+	}
+
 
 }
