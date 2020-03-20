@@ -77,7 +77,7 @@
 	<script>
 	function no_image2(){
 		$("#2").attr("src", "/petmily/resources/img/기본프로필.jpeg");
-		$(".member_noimage").hide();
+// 		$(".member_noimage").hide();
 	}
 	</script>
 	<style>
@@ -249,10 +249,10 @@ FOOTER 이용 시 넣어야할 요소
 							<div class="box" style="background: #BDBDBD;">
 				    			<img src="${pageContext.request.contextPath }/member/member/image?member_image_no=${member_image_no}"  style="width: 100%; height: 100%;" onerror="no_image2()" id="2" class="imagecss">
 							</div>
-			    			<p class="member_noimage" align="left">
-			    				<input type="checkbox" name="member_noimage" value="${member_image_no}">
-			    				기본이미지로 변경
-			    			</p>
+<!-- 			    			<p class="member_noimage" align="left"> -->
+<!-- 			    				<input type="checkbox" name="member_noimage" value="true"> -->
+<!-- 			    				기본이미지로 변경 -->
+<!-- 			    			</p> -->
 			    			<input type="file" name="member_image" accept="image/*">
 			    		</td>
 			    	</tr>

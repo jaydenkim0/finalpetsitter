@@ -433,8 +433,8 @@ public class MemberServiceImpl implements MemberService {
 
 	//회원 프로필이미지삭제
 	@Override
-	public void member_noimage(int member_noimage) {
-		memberDao.member_noimage(member_noimage);
+	public void member_noimage(String id) {
+		memberDao.member_noimage(id);
 	}
 
 	//펫프로필이미지삭제
