@@ -368,9 +368,22 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("member.petimagecount",pet_image_pet_no);
 	}
 
+	//사용자 이메일 구해오기
 	@Override
 	public String get_email(String userId) {
 		return sqlSession.selectOne("member.get_email",userId);
+	}
+
+	//회원 프로필이미지 삭제
+	@Override
+	public void member_noimage(int member_noimage) {
+		sqlSession.delete("member.member_noimage",member_noimage);
+	}
+
+	//펫 프로필이미지 삭제
+	@Override
+	public void pet_noimage(int pet_noimage) {
+		sqlSession.delete("member.pet_noimage",pet_noimage);
 	}
 
 }

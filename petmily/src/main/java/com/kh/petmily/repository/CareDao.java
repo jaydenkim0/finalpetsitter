@@ -90,4 +90,10 @@ public interface CareDao {
 	//펫시터 아이디 제공
 	List<String> offer_id();
 
+	//작성자 아이디 갖고오기
+	String get_writer(int care_board_no);
+
+	//펫시터 아이디 갖고오기
+	String get_petsitter(int care_board_no);
+
 }
