@@ -326,11 +326,11 @@ FOOTER 이용 시 넣어야할 요소
 						<hr>
 						<c:forEach var="reviewDto" items="${list}">							
 						<br>
-							<div>
+							<div class="review-box">
 								<div>
 									<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${reviewDto.member_image_no}" onerror="no_image2()"  class="2" > 
 								</div>
-								
+							
 								<span id="writer">${reviewDto.review_writer}</span>
 								<span id="star-under">
 									<c:choose>
@@ -350,7 +350,9 @@ FOOTER 이용 시 넣어야할 요소
 								<br>
 								<span id="title">${reviewDto.review_title}</span>
 								<br>
-								<span id="content">${reviewDto.review_content}</span>
+								<div id="review-content-box">
+									<span id="content">${reviewDto.review_content}</span>
+								</div>
 							</div>							
 						</c:forEach>
 					</c:when>

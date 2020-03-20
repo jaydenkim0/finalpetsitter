@@ -47,6 +47,13 @@
     font-family: NotosanL;
 }
 
+.content-wrap .review-wrap .review-box{
+	padding-right:300px;
+}
+.content-wrap .review-wrap #review-content-box{
+	padding-left:87px;
+}
+
 /*Img-box style*/
 .content-wrap .img_box {
     width: 60px;
