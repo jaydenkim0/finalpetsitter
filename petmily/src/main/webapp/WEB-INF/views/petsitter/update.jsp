@@ -288,6 +288,67 @@ FOOTER 이용 시 넣어야할 요소
         });
     </script>
 <!-- 네이버 토스트 에디터 스크립트 종료 -->	
+<script>
+		$(function(){
+	        $("input[type=checkbox]").click(function(){
+	            calcurate();
+	        });
+	    });
+	
+	    function calcurate(){
+	        $("input[name=care_condition_name]").removeAttr("disabled");
+	
+	        if($("#아파트").is(":checked")){
+	                $("#빌라").attr("disabled",true);
+	                $("#빌라").attr("checked", false);
+	                $("#원룸").attr("disabled",true);
+	                $("#원룸").attr("checked", false);
+	                $("#주택").attr("disabled",true);
+	                $("#주택").attr("checked", false);
+	        }
+	        if($("#빌라").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#원룸").attr("disabled",true);
+                $("#원룸").attr("checked", false);
+                $("#주택").attr("disabled",true);
+                $("#주택").attr("checked", false);
+        	}
+	        if($("#원룸").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#빌라").attr("disabled",true);
+                $("#빌라").attr("checked", false);
+                $("#주택").attr("disabled",true);
+                $("#주택").attr("checked", false);
+        	}
+	        if($("#주택").is(":checked")){
+                $("#아파트").attr("disabled",true);
+                $("#아파트").attr("checked", false);
+                $("#빌라").attr("disabled",true);
+                $("#빌라").attr("checked", false);
+                $("#원룸").attr("disabled",true);
+                $("#원룸").attr("checked", false);
+        	}
+	
+	        if($("#해당사항없음").is(":checked")){
+	            $("#아파트").attr("disabled",true);
+	            $("#아파트").attr("checked", false);
+	            $("#빌라").attr("disabled",true);
+	            $("#빌라").attr("checked", false);
+	            $("#원룸").attr("disabled",true);
+	            $("#원룸").attr("checked", false);
+	            $("#주택").attr("disabled",true);
+	            $("#주택").attr("checked", false);
+	            $("#아기있음").attr("disabled",true);
+	            $("#아기있음").attr("checked", false);
+	            $("#흡연자").attr("disabled",true);
+	            $("#흡연자").attr("checked", false);
+	        }
+	    }
+    </script>
+
+
 
 <!-- header 불러오기 -->
 	<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>

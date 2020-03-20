@@ -4,6 +4,7 @@
 }
 
 .estimate-wrap {
+	box-sizing:border-box;
     text-align: left;
     font-family: NotosanL;
 }
