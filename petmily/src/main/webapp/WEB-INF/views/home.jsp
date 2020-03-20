@@ -104,7 +104,7 @@ HEADER 이용 시 넣어야할 요소
   		color:black;
   	}
   	
-	 a:link { color: red; text-decoration: none;}
+	 a:link { color: black; text-decoration: none;}
 	 a:visited { color: black; text-decoration: none;}
 /* 	 a:hover { color: blue; text-decoration: none;} */
 	</style>
