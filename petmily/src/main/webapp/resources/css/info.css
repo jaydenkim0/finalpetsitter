@@ -2,6 +2,7 @@
 /*content.css*/
 
 .info-wrap {
+	box-sizing:border-box;
     font-family: NotosanL;
 }
 

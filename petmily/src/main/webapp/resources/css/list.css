@@ -1,5 +1,6 @@
 /*list.css*/
 .list-wrap {
+	box-sizing:border-box;
     font-family: NotosanL;
 }
 .list-wrap  #align-left{
@@ -89,6 +90,12 @@
 }
 .list-wrap #search_input::placeholder{
     font-family: NotosanL;
+}
+
+
+.list-wrap #list-content{
+	margin-left:85px;
+	margin-right:300px;
 }
 
 

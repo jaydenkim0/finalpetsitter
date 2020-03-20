@@ -236,7 +236,7 @@ FOOTER 이용 시 넣어야할 요소
 					<h5 id="large-text">펫밀리 가능한 돌봄 서비스</h5>
 					<hr>
 					<div class="skill-align">
-					<c:forEach var="skillName" items="${petsitterGetList.skillNameDto}">						
+					<c:forEach var="skillName" items="${petsitterGetList.skillsVO}">						
 						<c:if test="${skillName.skill_name eq '투약'}">
 							<div id="skill-item">
 								<img src="${context}/resources/img/petsitter-skill-icon/inject.png" alt="투약서비스">
@@ -279,7 +279,7 @@ FOOTER 이용 시 넣어야할 요소
 					<!-- 펫시터 돌봄 환경 -->
 					<h5 id="large-text">펫밀리 돌봄 환경</h5>
 					<hr>
-					<c:forEach var="careConditionName" items="${petsitterGetList.careConditionNameDto}">
+					<c:forEach var="careConditionName" items="${petsitterGetList.careConditionVO}">
 						<span class="text-box">#${careConditionName.care_condition_name}</span>
 					</c:forEach>
 					
@@ -287,7 +287,7 @@ FOOTER 이용 시 넣어야할 요소
 					<!-- 펫시터 돌봄 가능한 동물 -->
 					<h5 id="large-text">펫밀리 돌봄 가능한 동물 종류</h5>
 					<hr>
-					<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeNameDto}">
+					<c:forEach var="carePetTypeName" items="${petsitterGetList.carePetTypeVO}">
 						<span class="text-box">#${carePetTypeName.care_type}</span>
 					</c:forEach>
 				</div>
@@ -326,11 +326,11 @@ FOOTER 이용 시 넣어야할 요소
 						<hr>
 						<c:forEach var="reviewDto" items="${list}">							
 						<br>
-							<div>
+							<div class="review-box">
 								<div>
 									<img class="img_box" src="${pageContext.request.contextPath }/member/member/image?member_image_no=${reviewDto.member_image_no}" onerror="no_image2()"  class="2" > 
 								</div>
-								
+							
 								<span id="writer">${reviewDto.review_writer}</span>
 								<span id="star-under">
 									<c:choose>
@@ -350,7 +350,9 @@ FOOTER 이용 시 넣어야할 요소
 								<br>
 								<span id="title">${reviewDto.review_title}</span>
 								<br>
-								<span id="content">${reviewDto.review_content}</span>
+								<div id="review-content-box">
+									<span id="content">${reviewDto.review_content}</span>
+								</div>
 							</div>							
 						</c:forEach>
 					</c:when>

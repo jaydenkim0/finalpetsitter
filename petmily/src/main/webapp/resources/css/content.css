@@ -1,6 +1,7 @@
 /*content.css*/
 
 .content-wrap {
+	box-sizing:border-box;
     font-family: NotosanL;
 }
 
@@ -44,6 +45,13 @@
 }
 .content-wrap .review-wrap #content{
     font-family: NotosanL;
+}
+
+.content-wrap .review-wrap .review-box{
+	padding-right:300px;
+}
+.content-wrap .review-wrap #review-content-box{
+	padding-left:87px;
 }
 
 /*Img-box style*/

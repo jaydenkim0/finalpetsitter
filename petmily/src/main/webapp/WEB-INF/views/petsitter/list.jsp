@@ -218,8 +218,10 @@ FOOTER 이용 시 넣어야할 요소
 										<span id="nick">닉네임 : ${petsitter.nick}</span>
 										<br>
 										
+										<div id="list-content">
 										<div class="naver-viewer"></div> 
 										<input id="naver-viewer-text" type="hidden" value="${petsitter.info}">
+										</div>
 										<br>
 									
 										<div class="petsitter-location">

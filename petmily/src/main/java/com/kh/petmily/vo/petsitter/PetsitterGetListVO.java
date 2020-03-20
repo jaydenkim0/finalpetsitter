@@ -2,12 +2,13 @@ package com.kh.petmily.vo.petsitter;
 
 import java.util.List;
 
+import com.kh.petmily.entity.CareConditionDto;
 import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
 import com.kh.petmily.entity.SkillNameDto;
-import com.kh.petmily.vo.MemberPetsVO;
-
+import com.kh.petmily.entity.SkillsDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -59,21 +60,26 @@ public class PetsitterGetListVO {
 		
 		//뷰 이름 : petsitter_skills
 		//스킬
-		private List<SkillNameDto> skillNameDto;
+		private List<SkillsVO> skillsVO;
 //		private int skill_no; // 해당 기능을 스킬넘버로 pet_sitter 와 연결
 //		private String skill_name; // 노령케어, 투약가능 등등
+//		private int skills_sitter_no; // pet_sitter 테이블의 pet_sitter_no
 		
 		//뷰 이름 : petsitter_care_condition
 		//돌봄환경
-		private List<CareConditionNameDto> careConditionNameDto;
+		private List<CareConditionVO> careConditionVO;
+		
 //		private int care_condition_no;
 //		private String care_condition_name;
+//		private int condition_sitter_no; // pet_sitter 테이블의 pet_sitter_no
+		
 		
 		//뷰 이름 : petsitter_care_pet_type
 		//돌봄 가능한 동물 종류
-		private List<CarePetTypeNameDto> carePetTypeNameDto;
+		private List<CarePetTypeVO> carePetTypeVO;
 //		private int care_type_no; // 해당 돌봄 가능한 동물을 no 로 pet_sitter 와 연결
 //		private String care_type; // 펫시터가 돌봄 가능한 동물들
+//		private int care_sitter_no; // pet_sitter 테이블의 pet_sitter_no
 		
 		//뷰 이름 : sitterlocation
 		//활동 지역

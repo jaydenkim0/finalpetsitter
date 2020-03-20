@@ -44,6 +44,7 @@ import com.kh.petmily.vo.petsitter.ReservationAllVO;
 import com.kh.petmily.vo.petsitter.ReservationListVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
+import com.kh.petmily.vo.petsitter.SkillsVO;
 
 @Controller
 @RequestMapping("/petsitter")
@@ -210,12 +211,33 @@ public class PetsitterController {
 		String id = (String) session.getAttribute("id");
 		List<PetsitterGetListVO> petsitterList = petsitterService.getList(pet_sitter_no);
 		
+		List<PayinfoDto> payInfoList = new ArrayList<>();
+		List<PayinfoDto> matchingList = new ArrayList<>();
+		for(PetsitterGetListVO vo : petsitterList) {
+			
+			List<PetsitterVO> plist = vo.getPetsitterVO();
+			List<SkillsVO> slist = vo.getSkillsVO();
+			
+			//매칭종류 ->payinfo 번호 구해오기 시도...('둘다가 없어서..')
+//			for(PetsitterVO pvo : plist) {
+//				String matching_type = pvo.getSitter_matching_type();
+//				matchingList.addAll(petsitterService.getPayList(matching_type));
+//			}
+			
+			//펫시터가 가진 스킬 -> 예약 이용 스킬(payinfo) 
+			for(SkillsVO svo : slist) {
+				String skill_name = svo.getSkill_name();
+				payInfoList.addAll(petsitterService.getPayList(skill_name));
+			}
+		}
+		
 		List<PetDto> petList = petsitterService.getPet(id);
 		model.addAttribute("petList", petList)
 				.addAttribute("reservation_sitter_no", pet_sitter_no)
 				.addAttribute("petsitterList", petsitterList)
 				.addAttribute("carepettype", (List<CarePetTypeNameDto>)petsitterService.getCarePetTypeList())
-				.addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList());;
+//				.addAttribute("skillname", (List<SkillNameDto>)petsitterService.getSkillNameList())
+				.addAttribute("payInfoList", payInfoList);
 		
 		return "petsitter/estimate";
 	}
