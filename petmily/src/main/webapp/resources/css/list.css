@@ -1,5 +1,6 @@
 /*list.css*/
 .list-wrap {
+	box-sizing:border-box;
     font-family: NotosanL;
 }
 .list-wrap  #align-left{

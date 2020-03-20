@@ -13,6 +13,7 @@ import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
 import com.kh.petmily.entity.LocationDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.ReservationDto;
@@ -24,6 +25,8 @@ import com.kh.petmily.repository.petsitter.LocationDao;
 import com.kh.petmily.repository.petsitter.PetsitterDao;
 import com.kh.petmily.repository.petsitter.ReservationDao;
 import com.kh.petmily.repository.petsitter.SkillsDao;
+import com.kh.petmily.vo.petsitter.CareConditionVO;
+import com.kh.petmily.vo.petsitter.CarePetTypeVO;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
 import com.kh.petmily.vo.petsitter.PetsitterPetsVO;
 import com.kh.petmily.vo.petsitter.PetsitterRegistVO;
@@ -32,6 +35,7 @@ import com.kh.petmily.vo.petsitter.ReservationAllVO;
 import com.kh.petmily.vo.petsitter.ReservationListVO;
 import com.kh.petmily.vo.petsitter.ReservationVO;
 import com.kh.petmily.vo.petsitter.SitterlocationVO;
+import com.kh.petmily.vo.petsitter.SkillsVO;
 
 @Service
 public class PetsitterServiceImpl implements PetsitterService {
@@ -103,9 +107,9 @@ public class PetsitterServiceImpl implements PetsitterService {
 		List<PetsitterPetsVO> petsitterPetsVO = petsitterDao.getPetList(pet_sitter_no);
 		
 		//펫시터 스킬,돌봄 가능 동물종류,돌봄 환경  조회
-		List<SkillNameDto> skillNameDto = skillsDao.getSkillList(pet_sitter_no);
-		List<CareConditionNameDto> careConditionNameDto =careConditionDao.getCareConditionList(pet_sitter_no);
-		List<CarePetTypeNameDto> carePetTypeNameDto = carePetTypeDao.getPetTypeList(pet_sitter_no);
+		List<SkillsVO> skillsVO = skillsDao.getSkillList(pet_sitter_no);
+		List<CareConditionVO> careConditionVO =careConditionDao.getCareConditionList(pet_sitter_no);
+		List<CarePetTypeVO> carePetTypeVO = carePetTypeDao.getPetTypeList(pet_sitter_no);
 		
 		//지역 정보 조회
 		List<LocationDto> locationDto = locationDao.getLocationList(pet_sitter_no);
@@ -114,9 +118,9 @@ public class PetsitterServiceImpl implements PetsitterService {
 		petsitterList.add(PetsitterGetListVO.builder()
 											.petsitterVO(petsitterVO)
 											.petsitterPetsVO(petsitterPetsVO)
-											.skillNameDto(skillNameDto)
-											.careConditionNameDto(careConditionNameDto)
-											.carePetTypeNameDto(carePetTypeNameDto)
+											.skillsVO(skillsVO)
+											.careConditionVO(careConditionVO)
+											.carePetTypeVO(carePetTypeVO)
 											.locationDto(locationDto)
 											.build());
 		
@@ -291,6 +295,11 @@ public class PetsitterServiceImpl implements PetsitterService {
 	@Override
 	public int countSearchList(String searchOption, String keyword) {		
 		return petsitterDao.countSearchList(searchOption, keyword);
+	}
+
+	@Override
+	public List<PayinfoDto> getPayList(String payname) {
+		return skillsDao.getPayList(payname);
 	}
 
 

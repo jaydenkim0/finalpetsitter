@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CareConditionDto;
 import com.kh.petmily.entity.CareConditionNameDto;
+import com.kh.petmily.vo.petsitter.CareConditionVO;
 
 @Repository
 public class CareConditionDaoImpl implements CareConditionDao{
@@ -34,8 +35,8 @@ public class CareConditionDaoImpl implements CareConditionDao{
 	
 	//돌봄 환경 목록 조회
 	@Override
-	public List<CareConditionNameDto> getCareConditionList(int pet_sitter_no) {
-		List<CareConditionNameDto> careConditionList = sqlSession.selectList("petsitter.getCareConditionList", pet_sitter_no);
+	public List<CareConditionVO> getCareConditionList(int pet_sitter_no) {
+		List<CareConditionVO> careConditionList = sqlSession.selectList("petsitter.getCareConditionList", pet_sitter_no);
 		return careConditionList;
 	}
 	//돌봄 환경 삭제

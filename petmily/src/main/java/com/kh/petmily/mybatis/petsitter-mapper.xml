@@ -161,17 +161,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 펫시터 스킬 -->
-	<select id="getSkillList" parameterType="int" resultType="skillNameDto">
+	<select id="getSkillList" parameterType="int" resultType="skillsVO">
 		select * from petsitter_skills where pet_sitter_no=#{pet_sitter_no}
 	</select>
 	
 	<!-- 펫시터 돌봄 가능 동물 -->
-	<select id="getPetTypeList" parameterType="int" resultType="CarePetTypeNameDto">
+	<select id="getPetTypeList" parameterType="int" resultType="carePetTypeVO">
 		select * from petsitter_care_pet_type where pet_sitter_no=#{pet_sitter_no}
 	</select>
 	
 	<!-- 펫시터 돌봄 환경 -->
-	<select id="getCareConditionList" parameterType="int" resultType="CareConditionNameDto">
+	<select id="getCareConditionList" parameterType="int" resultType="CareConditionVO">
 		select * from petsitter_care_condition where pet_sitter_no=#{pet_sitter_no}
 	</select>
 
@@ -325,6 +325,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select reservation_no from reservation where reservation_sitter_no = #{reservation_sitter_no}
 	</select>
 	
+	<!-- 펫시터 스킬 -> 예약 스킬 정보 조회 -->
+	<select id="getPayList" parameterType="String" resultType="payinfoDto">
+		select * from payinfo where payname=#{payname}
+	</select>	
+	
 	
 <!-- 견적 메일 발송 후 처리 -->
 	<!-- 견적 승인시 예약 상태	 '대기'->'승인'으로 변경  -->
@@ -467,7 +472,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    where sitter_status = '정상') 	
 	</select>	
 		
-		
+
 	
 </mapper>
 

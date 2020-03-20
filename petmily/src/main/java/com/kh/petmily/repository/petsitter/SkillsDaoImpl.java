@@ -9,9 +9,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetsitterDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.entity.SkillsDto;
+import com.kh.petmily.vo.petsitter.SkillsVO;
 
 
 
@@ -38,8 +40,8 @@ public class SkillsDaoImpl implements SkillsDao {
 	}
 
 	@Override
-	public List<SkillNameDto> getSkillList(int pet_sitter_no) {
-		List<SkillNameDto> skillsList = sqlSession.selectList("petsitter.getSkillList", pet_sitter_no);
+	public List<SkillsVO> getSkillList(int pet_sitter_no) {
+		List<SkillsVO> skillsList = sqlSession.selectList("petsitter.getSkillList", pet_sitter_no);
 		return skillsList;
 	}
 	
@@ -47,5 +49,11 @@ public class SkillsDaoImpl implements SkillsDao {
 	public void deleteSkills(int pet_sitter_no) {
 		sqlSession.delete("petsitter.deleteSkills", pet_sitter_no);
 		
+	}
+
+	@Override
+	public List<PayinfoDto> getPayList(String payname) {
+		List<PayinfoDto> getPayList = sqlSession.selectList("petsitter.getPayList", payname);
+		return getPayList;
 	}
 }

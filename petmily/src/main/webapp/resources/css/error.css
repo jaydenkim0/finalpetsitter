@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 .error-wrap{
+	box-sizing:border-box;
 	text-align:center;
 	margin-top:200px;
 }
