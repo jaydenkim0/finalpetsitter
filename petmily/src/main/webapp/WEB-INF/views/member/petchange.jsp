@@ -160,13 +160,18 @@ FOOTER 이용 시 넣어야할 요소
 					<c:choose>
 						<c:when test="${pet.pet_image_no<1 }">
 							<div class="box" style="background: #BDBDBD;">
-								<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height:100%;"><Br><br>
+								<img src="/petmily/resources/img/기본프로필.jpeg" style="width: 100%; height:100%;">
+			    				<Br><br>
 							</div>
 						</c:when>
 						<c:otherwise>	
 							<div class="box" style="background: #BDBDBD;">
 								<img src="${pageContext.request.contextPath }/member/pet/image?pet_no=${pet.pet_no}" style="width: 100%; height: 100%;" onerror="no_image()" id="pet_image"><br><Br>
 							</div>
+							<p class="pet_noimage" align="left">
+			    				<input type="checkbox" name="pet_noimage" value="${pet.pet_image_no}">
+			    				기본이미지로 변경
+			    			</p>
 						</c:otherwise>
 					</c:choose>
 						<input type="file" name="pet_image" accept="image/*">

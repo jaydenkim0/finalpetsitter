@@ -385,7 +385,8 @@ public class MemberController {
 	// 반려동물 정보수정 제출 후 연결
 	@PostMapping("/petchange")
 	public String petchange(@RequestParam String pet_no, @ModelAttribute PetDto petDto,
-			@RequestParam MultipartFile pet_image) throws IllegalStateException, IOException {
+			@RequestParam MultipartFile pet_image,
+			@RequestParam int pet_noimage) throws IllegalStateException, IOException {
 		memberService.petchange(petDto);
 
 		int pet_image_pet_no = Integer.parseInt(pet_no);
@@ -398,6 +399,9 @@ public class MemberController {
 			}else {
 				memberService.pet_image_regist(Integer.parseInt(pet_no), pet_image);
 			}
+		}
+		if(pet_noimage>0) {
+			memberService.pet_noimage(pet_noimage);
 		}
 
 		return "redirect:mylist";

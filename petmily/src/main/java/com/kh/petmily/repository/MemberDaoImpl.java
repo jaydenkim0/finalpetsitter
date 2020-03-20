@@ -380,4 +380,10 @@ public class MemberDaoImpl implements MemberDao {
 		sqlSession.delete("member.member_noimage",member_noimage);
 	}
 
+	//펫 프로필이미지 삭제
+	@Override
+	public void pet_noimage(int pet_noimage) {
+		sqlSession.delete("member.pet_noimage",pet_noimage);
+	}
+
 }

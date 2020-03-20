@@ -436,5 +436,11 @@ public class MemberServiceImpl implements MemberService {
 	public void member_noimage(int member_noimage) {
 		memberDao.member_noimage(member_noimage);
 	}
+
+	//펫프로필이미지삭제
+	@Override
+	public void pet_noimage(int pet_noimage) {
+		memberDao.pet_noimage(pet_noimage);
+	}
 	}
 

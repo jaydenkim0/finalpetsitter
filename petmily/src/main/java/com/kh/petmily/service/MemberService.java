@@ -171,4 +171,7 @@ public interface MemberService {
 	//회원프로필이미지삭제
 	void member_noimage(int member_noimage);
 
+	//펫프로필이미지삭제
+	void pet_noimage(int pet_noimage);
+
 }
