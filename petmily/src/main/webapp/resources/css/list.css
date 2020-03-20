@@ -93,6 +93,12 @@
 }
 
 
+.list-wrap #list-content{
+	margin-left:85px;
+	margin-right:300px;
+}
+
+
 /*btn style*/
 .list-wrap #search_btn {
     width: 60px;
