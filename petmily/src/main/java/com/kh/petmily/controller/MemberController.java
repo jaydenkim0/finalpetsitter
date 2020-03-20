@@ -359,12 +359,14 @@ public class MemberController {
 	@PostMapping("/mylistchange")
 	public String edit(@ModelAttribute MemberDto memberDto, @RequestParam MultipartFile member_image,
 			@RequestParam int member_image_no,
-			@RequestParam int member_noimage,
+//			@RequestParam String member_noimage,
 			HttpSession session) throws IllegalStateException, IOException {
 
 		String id = (String) session.getAttribute("id");
 		int imagecount = memberService.imagecount(id);
 		
+		memberService.mylistchange(memberDto);
+
 		if (member_image.isEmpty() == false) {
 			if(imagecount==1) {
 				MemberImageDto memberImageDto = memberService.getImageInfo(member_image_no);
@@ -372,13 +374,12 @@ public class MemberController {
 			}else {
 				memberService.member_image_regist(id, member_image);
 			}
-		}else {
-			if(member_noimage>0) {
-				memberService.member_noimage(member_noimage);
-			}			
 		}
-
-		memberService.mylistchange(memberDto);
+//		else if(member_noimage.equals("true")){
+//			if(imagecount==1) {
+//				memberService.member_noimage(id);			
+//			}
+//		}
 
 		return "redirect:mylist";
 	}
@@ -386,8 +387,9 @@ public class MemberController {
 	// 반려동물 정보수정 제출 후 연결
 	@PostMapping("/petchange")
 	public String petchange(@RequestParam String pet_no, @ModelAttribute PetDto petDto,
-			@RequestParam MultipartFile pet_image,
-			@RequestParam int pet_noimage) throws IllegalStateException, IOException {
+//			@RequestParam String pet_noimage,
+			@RequestParam MultipartFile pet_image
+			) throws IllegalStateException, IOException {
 		memberService.petchange(petDto);
 
 		int pet_image_pet_no = Integer.parseInt(pet_no);
@@ -400,11 +402,14 @@ public class MemberController {
 			}else {
 				memberService.pet_image_regist(Integer.parseInt(pet_no), pet_image);
 			}
-		}else {
-			if(pet_noimage>0) {
-				memberService.pet_noimage(pet_noimage);
-			}			
 		}
+//		else {
+//			if(petimagecount==1) {			
+//				if(Integer.parseInt(pet_noimage)>0) {
+//					memberService.pet_noimage(Integer.parseInt(pet_noimage));
+//				}			
+//			}
+//		}
 
 		return "redirect:mylist";
 	}

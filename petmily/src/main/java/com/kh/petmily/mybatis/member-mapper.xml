@@ -491,8 +491,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 회원 프로필이미지 삭제 -->
-	<delete id="member_noimage" parameterType="int">
-		delete from member_image where member_image_no=#{member_noimage}
+	<delete id="member_noimage" parameterType="String">
+		delete from member_image where member_image_member_id=#{id}
 	</delete>
 	
 	<!-- 펫 프로필이미지 삭제 -->

@@ -376,8 +376,8 @@ public class MemberDaoImpl implements MemberDao {
 
 	//회원 프로필이미지 삭제
 	@Override
-	public void member_noimage(int member_noimage) {
-		sqlSession.delete("member.member_noimage",member_noimage);
+	public void member_noimage(String id) {
+		sqlSession.delete("member.member_noimage",id);
 	}
 
 	//펫 프로필이미지 삭제
