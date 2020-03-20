@@ -359,6 +359,7 @@ public class MemberController {
 	@PostMapping("/mylistchange")
 	public String edit(@ModelAttribute MemberDto memberDto, @RequestParam MultipartFile member_image,
 			@RequestParam int member_image_no,
+			@RequestParam int member_noimage,
 			HttpSession session) throws IllegalStateException, IOException {
 
 		String id = (String) session.getAttribute("id");
@@ -371,6 +372,9 @@ public class MemberController {
 			}else {
 				memberService.member_image_regist(id, member_image);
 			}
+		}
+		if(member_noimage>0) {
+			memberService.member_noimage(member_noimage);
 		}
 
 		memberService.mylistchange(memberDto);

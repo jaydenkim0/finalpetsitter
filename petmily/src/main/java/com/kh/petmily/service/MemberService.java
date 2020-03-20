@@ -168,4 +168,7 @@ public interface MemberService {
 	//이메일주소
 	String get_email(String userId);
 
+	//회원프로필이미지삭제
+	void member_noimage(int member_noimage);
+
 }

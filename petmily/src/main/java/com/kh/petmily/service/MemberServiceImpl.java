@@ -430,5 +430,11 @@ public class MemberServiceImpl implements MemberService {
 	public String get_email(String userId) {
 		return memberDao.get_email(userId);
 	}
+
+	//회원 프로필이미지삭제
+	@Override
+	public void member_noimage(int member_noimage) {
+		memberDao.member_noimage(member_noimage);
+	}
 	}
 

@@ -485,9 +485,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from pet_image where pet_image_pet_no=#{pet_image_pet_no}
 	</select>
 	
+	<!-- 사용자 이메일 구해오기 -->
 	<select id="get_email" parameterType="String" resultType="String">
 		select email from member where id=#{userId}
 	</select>
+	
+	<!-- 회원 프로필이미지 삭제 -->
+	<delete id="member_noimage" parameterType="int">
+		delete from member_image where member_image_no=#{member_noimage}
+	</delete>
 	
 </mapper>
 
