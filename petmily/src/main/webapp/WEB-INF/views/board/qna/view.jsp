@@ -492,7 +492,7 @@ header style -->
 		</c:forEach>
 
 		<!-- 댓글 등록 -->
-	<tr>
+		<tr>
 			<td align="right" class="td3">
 				<form action="replywrite" method="post" class="reply_submit">
 					<input type="hidden" id="origin" name="origin" value="${qnaVO.qna_no}"><br>
@@ -522,6 +522,17 @@ header style -->
 		</a>
 				<a href="${context}/board/qna/write?superno=${qnaVO.qna_no}">
 				<button type="button" class="btn hover3">답글쓰기</button></a>
+			<!-- 신고 버튼 -->
+			<c:if test="${sessionScope.grade eq 'admin'}">
+				<br><br>
+				<p style="color: red;">※ 회원 및 펫시터 신고는 신중히 진행하시길 바랍니다</p>			
+				<form action="${context}/admin/declaration" method="get">
+					<input id="id" type="text"  name="id" placeholder="아이디" required> 
+					<input  id="bbb"  type="submit" value="경고 등록" disabled class="btn hover3">
+				</form>
+				<div id="id_check"></div>
+			</c:if>
+				
 			</td>
 	</tr>
 </table>
