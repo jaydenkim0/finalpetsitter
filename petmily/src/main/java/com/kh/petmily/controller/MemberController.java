@@ -372,9 +372,10 @@ public class MemberController {
 			}else {
 				memberService.member_image_regist(id, member_image);
 			}
-		}
-		if(member_noimage>0) {
-			memberService.member_noimage(member_noimage);
+		}else {
+			if(member_noimage>0) {
+				memberService.member_noimage(member_noimage);
+			}			
 		}
 
 		memberService.mylistchange(memberDto);
@@ -399,9 +400,10 @@ public class MemberController {
 			}else {
 				memberService.pet_image_regist(Integer.parseInt(pet_no), pet_image);
 			}
-		}
-		if(pet_noimage>0) {
-			memberService.pet_noimage(pet_noimage);
+		}else {
+			if(pet_noimage>0) {
+				memberService.pet_noimage(pet_noimage);
+			}			
 		}
 
 		return "redirect:mylist";
