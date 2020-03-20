@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.petmily.entity.CareConditionNameDto;
 import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.entity.PayinfoDto;
 import com.kh.petmily.entity.PetDto;
 import com.kh.petmily.entity.SkillNameDto;
 import com.kh.petmily.vo.petsitter.PetsitterGetListVO;
@@ -43,6 +44,8 @@ public interface PetsitterService {
 	//각각 펫시터 예약 번호로 각각 펫시터 예약 조회
 	List<ReservationListVO> getReservationSitter(int pet_sitter_no);
 	
+	//펫시터 스킬 -> 예약 스킬 정보 조회
+	List<PayinfoDto> getPayList(String payname);
 	
 //수정(U)	
 	// 예약 상태 승인으로 변경

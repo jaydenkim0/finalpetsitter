@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.petmily.entity.CarePetTypeDto;
 import com.kh.petmily.entity.CarePetTypeNameDto;
+import com.kh.petmily.vo.petsitter.CarePetTypeVO;
 
 @Repository
 public class CarePetTypeDaoImpl implements CarePetTypeDao {
@@ -32,8 +33,8 @@ public class CarePetTypeDaoImpl implements CarePetTypeDao {
 	
 	//돌봄 가능 동물 목록 조회
 	@Override
-	public List<CarePetTypeNameDto> getPetTypeList(int pet_sitter_no) {
-		List<CarePetTypeNameDto> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", pet_sitter_no);
+	public List<CarePetTypeVO> getPetTypeList(int pet_sitter_no) {
+		List<CarePetTypeVO> petTypeList = sqlSession.selectList("petsitter.getPetTypeList", pet_sitter_no);
 		return petTypeList;
 	}
 	//돌봄 가능 동물 삭제

@@ -1,6 +1,7 @@
 /*content.css*/
 
 .content-wrap {
+	box-sizing:border-box;
     font-family: NotosanL;
 }
 
